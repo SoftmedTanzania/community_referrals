@@ -144,10 +144,10 @@ public class NativeHomeActivity extends SecuredActivity {
 
     private void setupViews() {
         findViewById(R.id.btn_ec_register).setOnClickListener(onRegisterStartListener);
-        findViewById(R.id.btn_pnc_register).setOnClickListener(onRegisterStartListener);
+//        findViewById(R.id.btn_pnc_register).setOnClickListener(onRegisterStartListener);
         findViewById(R.id.btn_anc_register).setOnClickListener(onRegisterStartListener);
         findViewById(R.id.btn_fp_register).setOnClickListener(onRegisterStartListener);
-        findViewById(R.id.btn_child_register).setOnClickListener(onRegisterStartListener);
+//        findViewById(R.id.btn_child_register).setOnClickListener(onRegisterStartListener);
 
         findViewById(R.id.btn_reporting).setOnClickListener(onButtonsClickListener);
         findViewById(R.id.btn_videos).setOnClickListener(onButtonsClickListener);
@@ -165,11 +165,11 @@ public class NativeHomeActivity extends SecuredActivity {
         SYNC_COMPLETED.addListener(onSyncCompleteListener);
         FORM_SUBMITTED.addListener(onFormSubmittedListener);
         ACTION_HANDLED.addListener(updateANMDetailsListener);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setIcon(getResources().getDrawable(org.ei.opensrp.mcare.R.mipmap.logo));
-        getSupportActionBar().setLogo(org.ei.opensrp.mcare.R.mipmap.logo);
+//        getSupportActionBar().setIcon(getResources().getDrawable(org.ei.opensrp.mcare.R.mipmap.logo));
+//        getSupportActionBar().setLogo(org.ei.opensrp.mcare.R.mipmap.logo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("SoftMed");
         LoginActivity.setLanguage();
     }
 

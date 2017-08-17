@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -236,6 +237,7 @@ public class HouseHoldSmartRegisterFragment extends SecuredNativeSmartRegisterCu
 
     @Override
     public void startRegistration() {
+        Log.d("houseHoldTag","starting registrations");
         FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
         Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
         if (prev != null) {

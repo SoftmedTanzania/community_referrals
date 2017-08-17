@@ -1,5 +1,7 @@
 package org.ei.opensrp.domain.form;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -31,6 +33,7 @@ public class FormSubmission {
         this.syncStatus = syncStatus;
         this.formDataDefinitionVersion = formDataDefinitionVersion;
         this.serverVersion = serverVersion;
+        Log.d("FormSubmissionConstructor",instance);
         this.formInstance = new Gson().fromJson(instance, FormInstance.class);
     }
 

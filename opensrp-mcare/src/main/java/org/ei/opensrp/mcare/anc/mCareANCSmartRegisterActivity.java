@@ -94,7 +94,8 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
             }
         });
     }
-    private String[] buildFormNameList(){
+
+    private String[] buildFormNameList() {
         List<String> formNames = new ArrayList<String>();
         formNames.add("anc_reminder_visit_1");
         formNames.add("anc_reminder_visit_2");
@@ -103,15 +104,14 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
         formNames.add("birthnotificationpregnancystatusfollowup");
 
 
-
-
 //        DialogOption[] options = getEditOptions();
 //        for (int i = 0; i < options.length; i++){
 //            formNames.add(((OpenFormOption) options[i]).getFormName());
 //        }
         return formNames.toArray(new String[formNames.size()]);
     }
-    public void onPageChanged(int page){
+
+    public void onPageChanged(int page) {
         setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
@@ -119,32 +119,43 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
     protected SmartRegisterPaginatedAdapter adapter() {
         return new SmartRegisterPaginatedAdapter(clientsProvider());
     }
-    @Override
-    protected DefaultOptionsProvider getDefaultOptionsProvider() {return null;}
 
     @Override
-    protected void setupViews() {}
+    protected DefaultOptionsProvider getDefaultOptionsProvider() {
+        return null;
+    }
 
     @Override
-    protected void onResumption(){}
+    protected void setupViews() {
+    }
 
     @Override
-    protected NavBarOptionsProvider getNavBarOptionsProvider() {return null;}
+    protected void onResumption() {
+    }
 
     @Override
-    protected SmartRegisterClientsProvider clientsProvider() {return null;}
+    protected NavBarOptionsProvider getNavBarOptionsProvider() {
+        return null;
+    }
 
     @Override
-    protected void onInitialization() {}
+    protected SmartRegisterClientsProvider clientsProvider() {
+        return null;
+    }
+
+    @Override
+    protected void onInitialization() {
+    }
 
     @Override
     public void startRegistration() {
     }
+
     @Override
     public void showFragmentDialog(DialogOptionModel dialogOptionModel, Object tag) {
         try {
             LoginActivity.setLanguage();
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         super.showFragmentDialog(dialogOptionModel, tag);
@@ -157,32 +168,34 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
                 new OpenFormOption(getResources().getString(R.string.nbnf), "birthnotificationpregnancystatusfollowup", formController)
         };
     }
-    public DialogOption[] getEditOptionsforanc(String visittext,String alertstatus) {
+
+    public DialogOption[] getEditOptionsforanc(String visittext, String alertstatus) {
         String ancvisittext = "Not Synced";
         String ancalertstatus = alertstatus;
         ancvisittext = visittext;
 
-        HashMap<String,String> overridemap = new HashMap<String,String>();
+        HashMap<String, String> overridemap = new HashMap<String, String>();
 
 
         if (ancvisittext.contains("ANC4")) {
             overridemap.put("ANC4_current_formStatus", alertstatus);
-            return new DialogOption[]{new OpenFormOption(getResources().getString(R.string.anc4form), "anc_reminder_visit_4", formController,overridemap, OpenFormOption.ByColumnAndByDetails.bydefault)};
+            return new DialogOption[]{new OpenFormOption(getResources().getString(R.string.anc4form), "anc_reminder_visit_4", formController, overridemap, OpenFormOption.ByColumnAndByDetails.bydefault)};
         } else if (ancvisittext.contains("ANC3")) {
-            Log.v("anc3 form status",alertstatus);
+            Log.v("anc3 form status", alertstatus);
             overridemap.put("ANC3_current_formStatus", alertstatus);
-            return new DialogOption[]{new OpenFormOption(getResources().getString(R.string.anc3form), "anc_reminder_visit_3", formController,overridemap, OpenFormOption.ByColumnAndByDetails.bydefault)};
+            return new DialogOption[]{new OpenFormOption(getResources().getString(R.string.anc3form), "anc_reminder_visit_3", formController, overridemap, OpenFormOption.ByColumnAndByDetails.bydefault)};
         } else if (ancvisittext.contains("ANC2")) {
             overridemap.put("ANC2_current_formStatus", alertstatus);
-            return new DialogOption[]{new OpenFormOption(getResources().getString(R.string.anc2form), "anc_reminder_visit_2", formController,overridemap, OpenFormOption.ByColumnAndByDetails.bydefault)};
+            return new DialogOption[]{new OpenFormOption(getResources().getString(R.string.anc2form), "anc_reminder_visit_2", formController, overridemap, OpenFormOption.ByColumnAndByDetails.bydefault)};
         } else if (ancvisittext.contains("ANC1")) {
-            Log.v("anc1 form status",alertstatus);
+            Log.v("anc1 form status", alertstatus);
             overridemap.put("anc1_current_formStatus", alertstatus);
-            return new DialogOption[]{new OpenFormOption(getResources().getString(R.string.anc1form), "anc_reminder_visit_1", formController,overridemap, OpenFormOption.ByColumnAndByDetails.bydefault)};
-        }else {
+            return new DialogOption[]{new OpenFormOption(getResources().getString(R.string.anc1form), "anc_reminder_visit_1", formController, overridemap, OpenFormOption.ByColumnAndByDetails.bydefault)};
+        } else {
             return new DialogOption[]{};
         }
     }
+
     private class EditDialogOptionModelfornbnf implements DialogOptionModel {
         @Override
         public DialogOption[] getDialogOptions() {
@@ -194,17 +207,19 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
             onEditSelection((EditOption) option, (SmartRegisterClient) tag);
         }
     }
+
     private class EditDialogOptionModelForANC implements DialogOptionModel {
-        String ancvisittext ;
+        String ancvisittext;
         String ancvisitstatus;
-        public EditDialogOptionModelForANC(String text,String status) {
+
+        public EditDialogOptionModelForANC(String text, String status) {
             ancvisittext = text;
             ancvisitstatus = status;
         }
 
         @Override
         public DialogOption[] getDialogOptions() {
-            return getEditOptionsforanc(ancvisittext,ancvisitstatus);
+            return getEditOptionsforanc(ancvisittext, ancvisitstatus);
         }
 
         @Override
@@ -212,16 +227,17 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
             onEditSelection((EditOption) option, (SmartRegisterClient) tag);
         }
     }
+
     @Override
     public void startFormActivity(String formName, String entityId, String metaData) {
 //        Log.v("fieldoverride", metaData);
         try {
             int formIndex = FormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
-            if (entityId != null || metaData != null){
+            if (entityId != null || metaData != null) {
                 String data = null;
                 //check if there is previously saved data for the form
                 data = getPreviouslySavedDataForForm(formName, metaData, entityId);
-                if (data == null){
+                if (data == null) {
                     data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
@@ -233,14 +249,15 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
                 }
             }
 
-            mPager.setCurrentItem(formIndex, false); //Don't animate the view on orientation change the view disapears
+            mPager.setCurrentItem(formIndex, false); //Don't animate the view on orientation change the view disappears
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-    public void updateSearchView(){
+
+    public void updateSearchView() {
         getSearchView().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
@@ -292,9 +309,9 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
     }
 
     @Override
-    public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides){
+    public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
         // save the form
-        try{
+        try {
             FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
 
@@ -309,7 +326,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
             //switch to forms list fragmentstregi
             switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
 
-        }catch (Exception e){
+        } catch (Exception e) {
             DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
             if (displayFormFragment != null) {
                 displayFormFragment.hideTranslucentProgressDialog();
@@ -318,8 +335,8 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
         }
     }
 
-    public void switchToBaseFragment(final String data){
-        Log.v("we are here","switchtobasegragment");
+    public void switchToBaseFragment(final String data) {
+        Log.v("we are here", "switchtobasegragment");
         final int prevPageIndex = currentPage;
         runOnUiThread(new Runnable() {
             @Override
@@ -342,9 +359,10 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
         });
 
     }
+
     @Override
     public void onBackPressed() {
-        if (currentPage != 0){
+        if (currentPage != 0) {
             retrieveAndSaveUnsubmittedFormData();
             String BENGALI_LOCALE = "bn";
             AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
@@ -369,7 +387,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
                                     }
                                 })
                         .show();
-            }else{
+            } else {
                 new AlertDialog.Builder(this)
                         .setMessage(R.string.mcareform_back_confirm_dialog_message)
                         .setTitle(R.string.mcareform_back_confirm_dialog_title)
@@ -390,7 +408,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
                         .show();
             }
 
-        }else if (currentPage == 0) {
+        } else if (currentPage == 0) {
             super.onBackPressed(); // allow back key only if we are
         }
     }
@@ -401,33 +419,35 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
     }
 
     public DisplayFormFragment getDisplayFormFragmentAtIndex(int index) {
-        return  (DisplayFormFragment)findFragmentByPosition(index);
+        return (DisplayFormFragment) findFragmentByPosition(index);
     }
-    public void addChildToList(ArrayList<DialogOption> dialogOptionslist,Map<String,TreeNode<String, Location>> locationMap){
-        for(Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
 
-            if(entry.getValue().getChildren() != null) {
-                addChildToList(dialogOptionslist,entry.getValue().getChildren());
+    public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
+        for (Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
 
-            }else{
+            if (entry.getValue().getChildren() != null) {
+                addChildToList(dialogOptionslist, entry.getValue().getChildren());
+
+            } else {
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
-                dialogOptionslist.add(new ElcoMauzaCommonObjectFilterOption(name.replace(" ","_"),"existing_Mauzapara",name));
+                dialogOptionslist.add(new ElcoMauzaCommonObjectFilterOption(name.replace(" ", "_"), "existing_Mauzapara", name));
 
             }
         }
     }
 
-    public void retrieveAndSaveUnsubmittedFormData(){
-        if (currentActivityIsShowingForm()){
+    public void retrieveAndSaveUnsubmittedFormData() {
+        if (currentActivityIsShowingForm()) {
             DisplayFormFragment formFragment = getDisplayFormFragmentAtIndex(currentPage);
             formFragment.saveCurrentFormData();
         }
     }
 
-    private boolean currentActivityIsShowingForm(){
+    private boolean currentActivityIsShowingForm() {
         return currentPage != 0;
     }
+
     @Override
     protected void onPause() {
         super.onPause();

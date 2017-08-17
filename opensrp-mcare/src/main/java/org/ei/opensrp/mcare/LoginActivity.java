@@ -89,7 +89,7 @@ public class LoginActivity extends Activity {
         setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
         getActionBar().setTitle("");
-        getActionBar().setIcon(getResources().getDrawable(R.mipmap.login_header_logo));
+//        getActionBar().setIcon(getResources().getDrawable(R.mipmap.login_header_logo));
         getActionBar().setBackgroundDrawable(getResources().getDrawable(org.ei.opensrp.mcare.R.color.action_bar_background));
         setLanguage();
 

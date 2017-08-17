@@ -1,6 +1,7 @@
 package org.ei.opensrp.service;
 
 import android.content.Intent;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -49,7 +50,7 @@ public class FormSubmissionSyncService {
 
     public FetchStatus sync() {
         pushToServer();
-        Intent intent = new Intent(DrishtiApplication.getInstance().getApplicationContext(),ImageUploadSyncService.class);
+        Intent intent = new Intent(DrishtiApplication.getInstance().getApplicationContext(), ImageUploadSyncService.class);
         DrishtiApplication.getInstance().getApplicationContext().startService(intent);
         return pullFromServer();
     }
@@ -62,7 +63,7 @@ public class FormSubmissionSyncService {
                 return;
             }
 
-            if(pendingFormSubmissions.size() < 50){
+            if (pendingFormSubmissions.size() < 50) {
                 keepSyncing = false;
             }
             String jsonPayload = mapToFormSubmissionDTO(pendingFormSubmissions);
@@ -116,6 +117,10 @@ public class FormSubmissionSyncService {
                     pendingFormSubmission.entityId(), pendingFormSubmission.formName(), pendingFormSubmission.instance(), pendingFormSubmission.version(),
                     pendingFormSubmission.formDataDefinitionVersion()));
         }
-        return new Gson().toJson(formSubmissions);
+
+        String formSubmissionDTO = new Gson().toJson(formSubmissions);
+        Log.d("formSubmissionDTO", formSubmissionDTO);
+
+        return formSubmissionDTO;
     }
 }
