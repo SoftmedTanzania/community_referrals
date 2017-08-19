@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutWomanRegistration"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="16dp"
+    android:layout_marginTop="16dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:text="*"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="Woman Name"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextWomanName"
+            android:layout_width="192dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:hint="Enter woman's name"
+            android:inputType="textPersonName"
+            android:textColor="@color/primary_text"
+            android:textColorHint="@color/hint_text"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:text="*"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="Date of Birth"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="Item Subtitle"
+            android:textColorHint="@color/hint_text"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/editTextWomanDOB"
+            android:layout_width="192dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:hint="Hint text"
+            android:textColor="#424242"
+            android:textColorHint="@color/hint_text"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:text="*"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Still menstruating?"
+        android:textColor="@color/primary_text"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/radioGroupMenstr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp">
+
+            <RadioButton
+                android:id="@+id/radioYesStillMenstr"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:checked="false"
+                android:text="Yes" />
+
+            <RadioButton
+                android:id="@+id/radioNoMenstr"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:checked="false"
+                android:text="No" />
+
+            <RadioButton
+                android:id="@+id/radioDontKnowMenstr"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:checked="false"
+                android:text="Don't know" />
+        </RadioGroup>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layoutWSterilized"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:text="*"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="Are you sterilized?"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupWomanSterilized"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:id="@+id/radioYesWSterilized"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:checked="false"
+                android:text="Yes" />
+
+            <RadioButton
+                android:id="@+id/radioNoWSterilized"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:checked="false"
+                android:text="No" />
+
+            <RadioButton
+                android:id="@+id/radioDontKnowWSterilized"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:checked="false"
+                android:text="Don't know" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutWLiveWithHusband"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:text="*"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="Are you currently live with your husband?"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupWLiveWithHusband"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:id="@+id/radioYesLiveWithHusband"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:checked="false"
+                android:text="Yes" />
+
+            <RadioButton
+                android:id="@+id/radioNoLiveWithHusband"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:checked="false"
+                android:text="No" />
+
+            <RadioButton
+                android:id="@+id/radioDontKnow"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:checked="false"
+                android:text="Don't know" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutHusbandAlive"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:text="*"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="Is husband still alive?"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupHusbandAlive"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:id="@+id/radioYesHusbandAlive"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:checked="false"
+                android:text="Yes" />
+
+            <RadioButton
+                android:id="@+id/radioNoHusbandAlive"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:checked="false"
+                android:text="No" />
+
+            <RadioButton
+                android:id="@+id/radioDontKnowHusbandAlive"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:checked="false"
+                android:text="Don't know" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/buttonAddWoman"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:backgroundTint="?attr/colorAccent"
+            android:src="@drawable/ic_person_add"
+            android:tint="@android:color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add another unregistered woman, if any."
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+</LinearLayout>
