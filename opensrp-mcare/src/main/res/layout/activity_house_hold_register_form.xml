@@ -44,51 +44,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:text="Date of Interview"
-                    android:textColor="@color/primary_text"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="Item Subtitle"
-                    android:textColorHint="@color/hint_text"
-                    android:textSize="12sp"
-                    android:layout_marginLeft="4dp" />
-
-                <EditText
-                    android:id="@+id/editTextInterviewDate"
-                    android:layout_width="192dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:hint="Hint text"
-                    android:textColor="#424242"
-                    android:textColorHint="@color/hint_text"
-                    android:textSize="14sp"
-                    android:layout_marginLeft="0dp" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="16dp"
-                    android:text="*"
-                    android:textColor="@android:color/holo_red_light"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:text="GoB HHID"
                     android:textColor="@color/primary_text"
                     android:textSize="14sp"

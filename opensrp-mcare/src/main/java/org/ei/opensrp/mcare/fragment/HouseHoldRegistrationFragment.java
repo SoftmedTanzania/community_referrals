@@ -1,9 +1,14 @@
-package org.ei.opensrp.mcare.household;
+package org.ei.opensrp.mcare.fragment;
 
-import android.support.annotation.IdRes;
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -12,12 +17,9 @@ import org.ei.opensrp.mcare.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
-
-public class HouseHoldRegisterFormActivity extends ActionBarActivity {
-
-
+public class HouseHoldRegistrationFragment extends Fragment {
     EditText editTextHeadName, editTextInterviewDate, editTextGoBHHID,
-            editTextJvitaHHID, editTextLatitude, editTextLongitude,
+            editTextLatitude, editTextLongitude,
             editTextNumberPeople, editTextWomanName, editTextWomanDOB;
     View spaceBottom;
 
@@ -27,56 +29,51 @@ public class HouseHoldRegisterFormActivity extends ActionBarActivity {
     LinearLayout layoutWomanRegistration, layoutWSterilized, layoutHusbandAlive, layoutLiveWithHusband;
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
-    private static final String TAG = HouseHoldRegisterFormActivity.class.getSimpleName();
     private long today;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_house_hold_register_form);
-
-
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        today = System.currentTimeMillis();
-        // find views
-        findViews();
-
-        // set radio listeners
-        setRadioListeners();
+    public HouseHoldRegistrationFragment() {
+        // Required empty public constructor
     }
 
 
-    private void findViews() {
-        spaceBottom = findViewById(R.id.spaceBottom);
-        editTextInterviewDate = (EditText) findViewById(R.id.editTextInterviewDate);
-        editTextGoBHHID = (EditText) findViewById(R.id.editTextGoBHHID);
-//        editTextJvitaHHID = (EditText) findViewById(R.id.editTextJivitaHHID);
-        editTextHeadName = (EditText) findViewById(R.id.editTextHeadName);
-        editTextLatitude = (EditText) findViewById(R.id.editTextLatitude);
-        editTextLongitude = (EditText) findViewById(R.id.editTextLongitude);
-        editTextNumberPeople = (EditText) findViewById(R.id.editTextNumberPeople);
-        editTextWomanName = (EditText) findViewById(R.id.editTextWomanName);
-        editTextWomanDOB = (EditText) findViewById(R.id.editTextWomanDOB);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        today = System.currentTimeMillis();
+        View v = inflater.inflate(R.layout.activity_house_hold_register_form, container, false);
+        findViews(v);
+        setRadioListeners();
+        return v;
+    }
+
+    private void findViews(View view) {
+        spaceBottom = view.findViewById(R.id.spaceBottom);
+        editTextInterviewDate = (EditText) view.findViewById(R.id.editTextInterviewDate);
+        editTextGoBHHID = (EditText) view.findViewById(R.id.editTextGoBHHID);
+        editTextHeadName = (EditText) view.findViewById(R.id.editTextHeadName);
+        editTextLatitude = (EditText) view.findViewById(R.id.editTextLatitude);
+        editTextLongitude = (EditText) view.findViewById(R.id.editTextLongitude);
+        editTextNumberPeople = (EditText) view.findViewById(R.id.editTextNumberPeople);
+        editTextWomanName = (EditText) view.findViewById(R.id.editTextWomanName);
+        editTextWomanDOB = (EditText) view.findViewById(R.id.editTextWomanDOB);
 
         // default value for interview date
         editTextInterviewDate.setText(dateFormat.format(today));
 
-        radioGroupGenderHeadHH = (RadioGroup) findViewById(R.id.radioGroupHeadGender);
-        radioGroupAnyWomanBtn1349 = (RadioGroup) findViewById(R.id.radioGroupAnyWomanBtn1349);
-        radioGroupStillMenstr = (RadioGroup) findViewById(R.id.radioGroupMenstr);
-        radioGroupWSterilized = (RadioGroup) findViewById(R.id.radioGroupWomanSterilized);
-        radioGroupLiveWithHusband = (RadioGroup) findViewById(R.id.radioGroupWLiveWithHusband);
+        radioGroupGenderHeadHH = (RadioGroup) view.findViewById(R.id.radioGroupHeadGender);
+        radioGroupAnyWomanBtn1349 = (RadioGroup) view.findViewById(R.id.radioGroupAnyWomanBtn1349);
+        radioGroupStillMenstr = (RadioGroup) view.findViewById(R.id.radioGroupMenstr);
+        radioGroupWSterilized = (RadioGroup) view.findViewById(R.id.radioGroupWomanSterilized);
+        radioGroupLiveWithHusband = (RadioGroup) view.findViewById(R.id.radioGroupWLiveWithHusband);
 
 
-        layoutWomanRegistration = (LinearLayout) findViewById(R.id.layoutWomanRegistration);
+        layoutWomanRegistration = (LinearLayout) view.findViewById(R.id.layoutWomanRegistration);
         // by default it's hidden until we know there's a woman in household
         layoutWomanRegistration.setVisibility(View.GONE);
 
-        layoutWSterilized = (LinearLayout) findViewById(R.id.layoutWSterilized);
-        layoutHusbandAlive = (LinearLayout) findViewById(R.id.layoutHusbandAlive);
-        layoutLiveWithHusband = (LinearLayout) findViewById(R.id.layoutWLiveWithHusband);
+        layoutWSterilized = (LinearLayout) view.findViewById(R.id.layoutWSterilized);
+        layoutHusbandAlive = (LinearLayout) view.findViewById(R.id.layoutHusbandAlive);
+        layoutLiveWithHusband = (LinearLayout) view.findViewById(R.id.layoutWLiveWithHusband);
 
 
     }
@@ -157,5 +154,4 @@ public class HouseHoldRegisterFormActivity extends ActionBarActivity {
             }
         });
     }
-
 }
