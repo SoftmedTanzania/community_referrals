@@ -57,6 +57,7 @@ import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
+    private static final String TAG = mCareANCSmartRegisterActivity.class.getSimpleName();
 
     private SmartRegisterClientsProvider clientProvider = null;
     private CommonPersonObjectController controller;
@@ -230,7 +231,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
     @Override
     public void startFormActivity(String formName, String entityId, String metaData) {
-//        Log.v("fieldoverride", metaData);
+        Log.d(TAG, "startFormActivity");
         try {
             int formIndex = FormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
             if (entityId != null || metaData != null) {

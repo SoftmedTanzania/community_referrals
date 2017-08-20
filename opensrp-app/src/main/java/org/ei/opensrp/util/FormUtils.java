@@ -34,6 +34,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
  * Created by koros on 9/28/15.
  */
 public class FormUtils {
+    private static final String TAG = FormUtils.class.getSimpleName();
 
     static FormUtils instance;
     Context mContext;
@@ -145,6 +146,8 @@ public class FormUtils {
                 fieldOverrides = new JSONObject(overridesStr);
             }
 
+           android.util.Log.d(TAG,"fields json that overrides the map : "+fieldOverrides);
+
             // use the form_definition.json to get the form mappings
             String formDefinitionJson = readFileFromAssetsFolder("www/form/" + formName + "/form_definition.json");
             JSONObject formDefinition = new JSONObject(formDefinitionJson);
@@ -153,10 +156,14 @@ public class FormUtils {
             String sql = "select * from " + bindPath + " where id='" + entityId + "'";
             String dbEntity = theAppContext.formDataRepository().queryUniqueResult(sql);
 
+
+
             JSONObject entityJson = new JSONObject();
             if (dbEntity != null && !dbEntity.isEmpty()){
                 entityJson = new JSONObject(dbEntity);
             }
+
+            android.util.Log.d(TAG,"entityJson : "+entityJson.toString());
 
             //read the xml form model, the expected form model that is passed to the form mirrors it
             String formModelString = readFileFromAssetsFolder("www/form/" + formName + "/model.xml").replaceAll("\n"," ").replaceAll("\r", " ");

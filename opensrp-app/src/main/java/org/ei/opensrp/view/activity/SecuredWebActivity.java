@@ -2,6 +2,7 @@ package org.ei.opensrp.view.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.ConsoleMessage;
@@ -22,6 +23,7 @@ import static org.ei.opensrp.util.Log.logDebug;
 import static org.ei.opensrp.util.Log.logError;
 
 public abstract class SecuredWebActivity extends SecuredActivity {
+    private static final String TAG = SecuredActivity.class.getSimpleName();
     protected WebView webView;
     protected UpdateController updateController;
     protected boolean shouldDismissProgressBarOnProgressComplete = true;
@@ -29,6 +31,7 @@ public abstract class SecuredWebActivity extends SecuredActivity {
 
     @Override
     protected void onCreation() {
+        Log.d(TAG,"on create");
         setActivityLayout();
 
         progressDialogInitialization();

@@ -2,6 +2,7 @@ package org.ei.opensrp.mcare.fragment;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ import static org.ei.opensrp.util.StringUtil.humanize;
  * Created by koros on 2/25/16.
  */
 public class McareLocationSelectorDialogFragment extends DialogFragment {
-
+    private static final String TAG = McareLocationSelectorDialogFragment.class.getSimpleName();
     private final SecuredNativeSmartRegisterActivity parentActivity;
     private final DialogOption[] options;
     private final DialogOptionModel dialogOptionModel;
@@ -129,6 +130,7 @@ public class McareLocationSelectorDialogFragment extends DialogFragment {
 //        });
 //    }
     public void addselectlistener (TreeNode node,final String id){
+
         node.setClickListener(new TreeNode.TreeNodeClickListener() {
             @Override
             public void onClick(TreeNode node, Object value) {
@@ -138,7 +140,7 @@ public class McareLocationSelectorDialogFragment extends DialogFragment {
                         locationjson.put("location_name", node.getName().replace(" ","_"));
                         locationjson.put("existing_location", id);
                     }catch (Exception e){
-
+                        e.printStackTrace();
                     }
                     TreeNode traversingnode = node;
                     while(!traversingnode.isRoot()){
@@ -149,7 +151,9 @@ public class McareLocationSelectorDialogFragment extends DialogFragment {
                         }
                         traversingnode = traversingnode.getParent();
                     }
+
                     FieldOverrides fieldOverrides = new FieldOverrides(locationjson.toString());
+                    Log.d(TAG,"starting form "+formname);
                     parentActivity.startFormActivity(formname, null, fieldOverrides.getJSONString());
                     savestate = tView.getSaveState();
                     dismiss();

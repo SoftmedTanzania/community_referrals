@@ -3,6 +3,7 @@ package org.ei.opensrp.view.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -30,6 +31,7 @@ import static org.ei.opensrp.R.string.yes_button_label;
 import static org.ei.opensrp.util.Log.logError;
 
 public abstract class SecuredFormActivity extends SecuredWebActivity {
+    private static final String TAG = SecuredActivity.class.getSimpleName();
     public static final String ANDROID_CONTEXT_FIELD = "androidContext";
     private String model;
     private String form;
@@ -40,10 +42,12 @@ public abstract class SecuredFormActivity extends SecuredWebActivity {
     public SecuredFormActivity() {
         super();
         shouldDismissProgressBarOnProgressComplete = false;
+        Log.d(TAG,"SecuredFormActivity constructor");
     }
 
     @Override
     protected void onInitialization() {
+        Log.d(TAG,"onInitialization");
         try {
             getIntentData();
         } catch (IOException e) {
@@ -63,6 +67,7 @@ public abstract class SecuredFormActivity extends SecuredWebActivity {
     }
 
     private void webViewInitialization() {
+        Log.d(TAG,"webViewInitialization");
         WebSettings webViewSettings = webView.getSettings();
         webViewSettings.setJavaScriptEnabled(true);
         webViewSettings.setGeolocationEnabled(true);

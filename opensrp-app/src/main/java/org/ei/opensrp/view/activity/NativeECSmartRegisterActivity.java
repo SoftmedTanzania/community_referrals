@@ -2,6 +2,7 @@ package org.ei.opensrp.view.activity;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import org.ei.opensrp.R;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
@@ -132,6 +133,7 @@ public class NativeECSmartRegisterActivity extends SecuredNativeSmartRegisterAct
     @Override
     public void startRegistration() {
 
+        Log.d("softmed","starting house hold registration");
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         Fragment prev = getFragmentManager().findFragmentByTag(locationDialogTAG);
         if (prev != null) {

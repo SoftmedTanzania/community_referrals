@@ -330,6 +330,7 @@ public class DisplayFormFragment extends Fragment {
 
         @JavascriptInterface
         public void processFormSubmission(String formSubmission){
+            Log.d(TAG,"submitted data = "+formSubmission);
             showTranslucentProgressDialog();
             ((SecuredNativeSmartRegisterActivity)getActivity()).saveFormSubmission(formSubmission, recordId, formName, getFormFieldsOverrides());
         }

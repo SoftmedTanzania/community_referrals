@@ -1,8 +1,11 @@
 package org.ei.opensrp.view.controller;
 
+import android.util.Log;
+
 import org.ei.opensrp.view.activity.SecuredActivity;
 
 public class FormController {
+    private static final String TAG = FormController.class.getSimpleName();
     private SecuredActivity activity;
 
     public FormController(SecuredActivity activity) {
@@ -10,6 +13,7 @@ public class FormController {
     }
 
     public void startFormActivity(String formName, String entityId, String metaData) {
+        Log.d(TAG,"startFormActivity");
         activity.startFormActivity(formName, entityId, metaData);
     }
 

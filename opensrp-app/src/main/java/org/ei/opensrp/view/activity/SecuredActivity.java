@@ -28,6 +28,7 @@ import static org.ei.opensrp.event.Event.ON_LOGOUT;
 import static org.ei.opensrp.util.Log.logInfo;
 
 public abstract class SecuredActivity extends ActionBarActivity {
+    private static final String TAG = SecuredActivity.class.getSimpleName();
     protected Listener<Boolean> logoutListener;
     protected FormController formController;
     protected ANMController anmController;
@@ -38,6 +39,8 @@ public abstract class SecuredActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d(TAG,"oncreate called");
 
         logoutListener = new Listener<Boolean>() {
             public void onEvent(Boolean data) {
@@ -110,14 +113,19 @@ public abstract class SecuredActivity extends ActionBarActivity {
     protected abstract void onResumption();
 
     public void startFormActivity(String formName, String entityId, String metaData) {
+        Log.d(TAG,"startFormActivity");
         launchForm(formName, entityId, metaData, FormActivity.class);
     }
 
     public void startMicroFormActivity(String formName, String entityId, String metaData) {
+        Log.d(TAG,"startMicroFormActivity");
         launchForm(formName, entityId, metaData, MicroFormActivity.class);
     }
 
     private void launchForm(String formName, String entityId, String metaData, Class formType) {
+        Log.d(TAG,"formname = "+formName);
+        Log.d(TAG,"entity id = "+entityId);
+        Log.d(TAG,"meta data = "+metaData);
         this.metaData = metaData;
 
         Intent intent = new Intent(this, formType);

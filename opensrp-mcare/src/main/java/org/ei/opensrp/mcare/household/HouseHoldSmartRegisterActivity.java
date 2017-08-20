@@ -169,7 +169,9 @@ public class HouseHoldSmartRegisterActivity extends SecuredNativeSmartRegisterAc
 
     @Override
     public void startFormActivity(String formName, String entityId, String metaData) {
-        Log.v("fieldoverride", metaData);
+        Log.d("fieldoverride", metaData);
+        Log.d(TAG,"starting form "+formName);
+        Log.d(TAG,"Meta data "+metaData);
         try {
             int formIndex = FormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
             if (entityId != null || metaData != null){
@@ -180,6 +182,7 @@ public class HouseHoldSmartRegisterActivity extends SecuredNativeSmartRegisterAc
                     data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
+                Log.d(TAG,formName+" data = "+data);
                 DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
                 if (displayFormFragment != null) {
                     displayFormFragment.setFormData(data);

@@ -3,6 +3,7 @@ package org.ei.opensrp.view.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -116,6 +117,8 @@ public abstract class SecuredFragment extends Fragment {
 
     private void launchForm(String formName, String entityId, String metaData, Class formType) {
         this.metaData = metaData;
+
+        Log.d("softmed","opening form name = "+formName);
 
         Intent intent = new Intent(getActivity(), formType);
         intent.putExtra(FORM_NAME_PARAM, formName);

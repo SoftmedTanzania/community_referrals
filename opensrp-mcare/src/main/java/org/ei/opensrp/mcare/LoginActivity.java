@@ -134,8 +134,12 @@ public class LoginActivity extends Activity {
         hideKeyboard();
         view.setClickable(false);
 
-        final String userName = userNameEditText.getText().toString();
-        final String password = passwordEditText.getText().toString();
+        //TODO Coze Remove the hardcoded credentials
+//        final String userName = userNameEditText.getText().toString();
+//        final String password = passwordEditText.getText().toString();
+
+        final String userName = "jon";
+        final String password = "Code1234";
 
         if (context.userService().hasARegisteredUser()) {
             localLogin(view, userName, password);
