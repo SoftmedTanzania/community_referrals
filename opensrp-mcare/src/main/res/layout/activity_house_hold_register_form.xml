@@ -72,96 +72,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="GPS Location of HH"
-                    android:textColor="@color/primary_text"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="Item Subtitle"
-                    android:textColorHint="@color/hint_text"
-                    android:textSize="12sp"
-                    android:layout_marginLeft="4dp" />
-
-                <ImageButton
-                    android:id="@+id/buttonGPS"
-                    android:layout_width="128dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="8dp"
-                    android:src="@drawable/ic_gps" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_weight="1"
-                        android:text="Latitude (x.y&#xb0;)"
-                        android:textColorHint="@color/hint_text"
-                        android:textSize="12sp"
-                        android:layout_marginLeft="4dp" />
-
-                    <EditText
-                        android:id="@+id/editTextLatitude"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:hint="Edit latitude"
-                        android:textColor="#424242"
-                        android:textColorHint="@color/hint_text"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_weight="1"
-                        android:text="Longitude (x.y&#xb0;)"
-                        android:textColorHint="@color/hint_text"
-                        android:textSize="12sp"
-                        android:layout_marginLeft="4dp" />
-
-                    <EditText
-                        android:id="@+id/editTextLongitude"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="0dp"
-                        android:layout_weight="2"
-                        android:hint="Edit longitude"
-                        android:textColor="#424242"
-                        android:textColorHint="@color/hint_text"
-                        android:textSize="14sp"
-                        android:layout_marginLeft="0dp" />
-                </LinearLayout>
-            </LinearLayout>
-
-
-            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -245,7 +155,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -286,71 +195,12 @@
                     android:layout_marginLeft="0dp" />
             </LinearLayout>
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="16dp"
-                    android:text="*"
-                    android:textColor="@android:color/holo_red_light"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="Any married women between the ages of 13-49 in the household?"
-                    android:textColor="@color/primary_text"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="4dp" />
-
-                <LinearLayout
-                    android:layout_width="256dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:orientation="vertical">
-
-                    <RadioGroup
-                        android:id="@+id/radioGroupAnyWomanBtn1349"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <RadioButton
-                            android:id="@+id/radioYesWomanInHH"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:checked="false"
-                            android:text="Yes" />
-
-                        <RadioButton
-                            android:id="@+id/radioNoWomanInHH"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:checked="false"
-                            android:text="No" />
-
-                        <RadioButton
-                            android:id="@+id/radioDontKnowWomanInHH"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:checked="false"
-                            android:text="Don't know" />
-                    </RadioGroup>
-
-                    <View
-                        android:id="@+id/spaceBottom"
-                        android:layout_width="wrap_content"
-                        android:layout_height="128dp" />
-                </LinearLayout>
-            </LinearLayout>
-
             <include layout="@layout/layout_woman_registration" />
+            <Button
+                android:layout_marginBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"/>
         </LinearLayout>
 
     </ScrollView>

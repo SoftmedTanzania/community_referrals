@@ -16,15 +16,12 @@ import java.util.Locale;
 public class HouseHoldRegisterFormActivity extends ActionBarActivity {
 
 
-    EditText editTextHeadName, editTextInterviewDate, editTextGoBHHID,
-            editTextJvitaHHID, editTextLatitude, editTextLongitude,
+    EditText editTextHeadName, editTextGoBHHID,
             editTextNumberPeople, editTextWomanName, editTextWomanDOB;
-    View spaceBottom;
 
-    RadioGroup radioGroupGenderHeadHH, radioGroupStillMenstr,
-            radioGroupAnyWomanBtn1349, radioGroupWSterilized, radioGroupLiveWithHusband;
+    RadioGroup radioGroupGenderHeadHH,  radioGroupLiveWithHusband;
 
-    LinearLayout layoutWomanRegistration, layoutWSterilized, layoutHusbandAlive, layoutLiveWithHusband;
+    LinearLayout layoutWomanRegistration,  layoutHusbandAlive, layoutLiveWithHusband;
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
     private static final String TAG = HouseHoldRegisterFormActivity.class.getSimpleName();
@@ -49,24 +46,15 @@ public class HouseHoldRegisterFormActivity extends ActionBarActivity {
 
 
     private void findViews() {
-        spaceBottom = findViewById(R.id.spaceBottom);
-        editTextInterviewDate = (EditText) findViewById(R.id.editTextInterviewDate);
         editTextGoBHHID = (EditText) findViewById(R.id.editTextGoBHHID);
 //        editTextJvitaHHID = (EditText) findViewById(R.id.editTextJivitaHHID);
         editTextHeadName = (EditText) findViewById(R.id.editTextHeadName);
-        editTextLatitude = (EditText) findViewById(R.id.editTextLatitude);
-        editTextLongitude = (EditText) findViewById(R.id.editTextLongitude);
         editTextNumberPeople = (EditText) findViewById(R.id.editTextNumberPeople);
         editTextWomanName = (EditText) findViewById(R.id.editTextWomanName);
         editTextWomanDOB = (EditText) findViewById(R.id.editTextWomanDOB);
 
-        // default value for interview date
-        editTextInterviewDate.setText(dateFormat.format(today));
 
         radioGroupGenderHeadHH = (RadioGroup) findViewById(R.id.radioGroupHeadGender);
-        radioGroupAnyWomanBtn1349 = (RadioGroup) findViewById(R.id.radioGroupAnyWomanBtn1349);
-        radioGroupStillMenstr = (RadioGroup) findViewById(R.id.radioGroupMenstr);
-        radioGroupWSterilized = (RadioGroup) findViewById(R.id.radioGroupWomanSterilized);
         radioGroupLiveWithHusband = (RadioGroup) findViewById(R.id.radioGroupWLiveWithHusband);
 
 
@@ -74,7 +62,6 @@ public class HouseHoldRegisterFormActivity extends ActionBarActivity {
         // by default it's hidden until we know there's a woman in household
         layoutWomanRegistration.setVisibility(View.GONE);
 
-        layoutWSterilized = (LinearLayout) findViewById(R.id.layoutWSterilized);
         layoutHusbandAlive = (LinearLayout) findViewById(R.id.layoutHusbandAlive);
         layoutLiveWithHusband = (LinearLayout) findViewById(R.id.layoutWLiveWithHusband);
 
@@ -90,58 +77,7 @@ public class HouseHoldRegisterFormActivity extends ActionBarActivity {
             }
         });
 
-        radioGroupAnyWomanBtn1349.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                if (i == R.id.radioYesWomanInHH) {
-                    // show register woman layout
-                    spaceBottom.setVisibility(View.GONE);
-                    layoutWomanRegistration.setVisibility(View.VISIBLE);
-
-
-                } else if (layoutWomanRegistration.getVisibility() == View.VISIBLE) {
-                    // if choice is no/ don't know
-                    layoutWomanRegistration.setVisibility(View.GONE);
-                    spaceBottom.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-        radioGroupStillMenstr.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                switch (i) {
-                    case R.id.radioYesStillMenstr:
-                        // show additional fields
-                        layoutWSterilized.setVisibility(View.VISIBLE);
-                        break;
-
-//                    case R.id.radioNoMenstr:
-//                        break;
-//
-//                    case R.id.radioDontKnowMenstr:
-//                        break;
-                    default:
-                        // hide additional fields
-                        // registration is done
-                        layoutWSterilized.setVisibility(View.GONE);
-                }
-            }
-        });
-
-
-        radioGroupWSterilized.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                if (i == R.id.radioNoWSterilized) {
-                    // show additional fields
-                    layoutLiveWithHusband.setVisibility(View.VISIBLE);
-                } else {
-                    // hide additional fields
-                    layoutLiveWithHusband.setVisibility(View.GONE);
-                }
-            }
-        });
+        layoutWomanRegistration.setVisibility(View.VISIBLE);
 
         radioGroupLiveWithHusband.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
