@@ -40,7 +40,7 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class HouseHoldSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
 
-    public static final String TAG = "HouseHoldActivity";
+    public static final String TAG = HouseHoldSmartRegisterActivity.class.getSimpleName();
     @Bind(R.id.view_pager)
     OpenSRPViewPager mPager;
     private FragmentPagerAdapter mPagerAdapter;
@@ -143,7 +143,8 @@ public class HouseHoldSmartRegisterActivity extends SecuredNativeSmartRegisterAc
 
     @Override
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides){
-        Log.v("fieldoverride", fieldOverrides.toString());
+        Log.v(TAG,"field Overides = "+fieldOverrides.toString());
+        Log.v(TAG,"form submission = "+fieldOverrides.toString());
         // save the form
         try{
             FormUtils formUtils = FormUtils.getInstance(getApplicationContext());

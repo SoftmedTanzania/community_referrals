@@ -61,6 +61,8 @@ public class FormUtils {
 
     public FormSubmission generateFormSubmisionFromXMLString(String entity_id, String formData, String formName, JSONObject overrides) throws Exception{
         JSONObject formSubmission = XML.toJSONObject(formData);
+        android.util.Log.d(TAG, "formSubmission data json = "+formSubmission);
+
 
         FileUtilities fu = new FileUtilities();
         fu.write("xmlform.txt", formData);

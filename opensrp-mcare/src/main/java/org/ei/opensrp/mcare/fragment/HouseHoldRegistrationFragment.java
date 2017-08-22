@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -16,6 +17,9 @@ import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class HouseHoldRegistrationFragment extends Fragment {
@@ -27,11 +31,22 @@ public class HouseHoldRegistrationFragment extends Fragment {
 
     private LinearLayout layoutWomanRegistration, layoutHusbandAlive, layoutLiveWithHusband;
 
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
-    private long today;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+    private SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
     private String recordId;
     private String formName;
+    private Button submitButton;
     private JSONObject fieldOverides = new JSONObject();
+    private String currentLocation;
+    private Date start;
+
+    public String getCurrentLocation() {
+        return currentLocation;
+    }
+
+    public void setCurrentLocation(String currentLocation) {
+        this.currentLocation = currentLocation;
+    }
 
     public String getRecordId() {
         return recordId;
@@ -56,10 +71,10 @@ public class HouseHoldRegistrationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        today = System.currentTimeMillis();
         View v = inflater.inflate(R.layout.activity_house_hold_register_form, container, false);
         findViews(v);
-        setRadioListeners();
+        setListeners();
+        start =  Calendar.getInstance().getTime();
         return v;
     }
 
@@ -80,10 +95,12 @@ public class HouseHoldRegistrationFragment extends Fragment {
         layoutHusbandAlive = (LinearLayout) view.findViewById(R.id.layoutHusbandAlive);
         layoutLiveWithHusband = (LinearLayout) view.findViewById(R.id.layoutWLiveWithHusband);
 
+        submitButton = (Button)view.findViewById(R.id.submit);
+
 
     }
 
-    private void setRadioListeners() {
+    private void setListeners() {
         radioGroupGenderHeadHH.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
@@ -102,6 +119,34 @@ public class HouseHoldRegistrationFragment extends Fragment {
                     layoutHusbandAlive.setVisibility(View.VISIBLE);
                 }
 
+            }
+        });
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HashMap<String,String> dataHash = new HashMap<String, String>();
+                dataHash.put("id",recordId);
+                dataHash.put("existing_location",currentLocation);
+                dataHash.put("existing_Country","Tanzania");
+                dataHash.put("form_name",formName);
+                dataHash.put("today", dateFormat.format(Calendar.getInstance().getTime()));
+                dataHash.put("start", dateTimeFormat.format(start));
+                dataHash.put("end", dateTimeFormat.format(Calendar.getInstance().getTime()));
+                dataHash.put("FWNHREGDATE", dateFormat.format(Calendar.getInstance().getTime()));
+                dataHash.put("FWHOHFNAME", editTextHeadName.getText().toString().split(" ")[0]);
+                dataHash.put("FWHOHLNAME", editTextHeadName.getText().toString().split(" ")[1]);
+
+
+//                dataHash.put("FWHOHBIRTHDATE", );
+//                dataHash.put("FWHOHGENDER", );
+//                dataHash.put("FWNHHMBRNUM", );
+//                dataHash.put("FWNHHMWRA", );
+//                dataHash.put("ELCO", "1");
+//                dataHash.put("user_type", "1");
+
+
+                dataHash.put("id",editTextHeadName.getText().toString());
             }
         });
     }
