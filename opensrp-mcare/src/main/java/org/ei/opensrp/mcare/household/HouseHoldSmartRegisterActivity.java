@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -14,6 +15,7 @@ import org.ei.opensrp.domain.Alert;
 import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.mcare.LoginActivity;
 import org.ei.opensrp.mcare.R;
+import org.ei.opensrp.mcare.fragment.HouseHoldRegistrationFragment;
 import org.ei.opensrp.mcare.fragment.HouseHoldSmartRegisterFragment;
 import org.ei.opensrp.mcare.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
@@ -160,10 +162,12 @@ public class HouseHoldSmartRegisterActivity extends SecuredNativeSmartRegisterAc
 
         }catch (Exception e){
             // TODO: show error dialog on the formfragment if the submission fails
-            DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
-            if (displayFormFragment != null) {
-                displayFormFragment.hideTranslucentProgressDialog();
-            }
+
+
+//            DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
+//            if (displayFormFragment != null) {
+//                displayFormFragment.hideTranslucentProgressDialog();
+//            }
             e.printStackTrace();
         }
     }
@@ -184,7 +188,7 @@ public class HouseHoldSmartRegisterActivity extends SecuredNativeSmartRegisterAc
                 }
 
                 Log.d(TAG,formName+" data = "+data);
-                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
+                HouseHoldRegistrationFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
                 if (displayFormFragment != null) {
                     displayFormFragment.setFormData(data);
                     displayFormFragment.setRecordId(entityId);
@@ -212,9 +216,10 @@ public class HouseHoldSmartRegisterActivity extends SecuredNativeSmartRegisterAc
                 }
 
                 //hack reset the form
-                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(prevPageIndex);
+                HouseHoldRegistrationFragment displayFormFragment = getDisplayFormFragmentAtIndex(prevPageIndex);
                 if (displayFormFragment != null) {
-                    displayFormFragment.hideTranslucentProgressDialog();
+                    //TODO handle this to hide and show a progress bar
+//                    displayFormFragment.hideTranslucentProgressDialog();
                     displayFormFragment.setFormData(null);
                 }
 
@@ -229,8 +234,8 @@ public class HouseHoldSmartRegisterActivity extends SecuredNativeSmartRegisterAc
         return getSupportFragmentManager().findFragmentByTag("android:switcher:" + mPager.getId() + ":" + fragmentPagerAdapter.getItemId(position));
     }
 
-    public DisplayFormFragment getDisplayFormFragmentAtIndex(int index) {
-        return  (DisplayFormFragment)findFragmentByPosition(index);
+    public HouseHoldRegistrationFragment getDisplayFormFragmentAtIndex(int index) {
+        return  (HouseHoldRegistrationFragment)findFragmentByPosition(index);
     }
 
     @Override
@@ -305,7 +310,7 @@ public class HouseHoldSmartRegisterActivity extends SecuredNativeSmartRegisterAc
 
     public void retrieveAndSaveUnsubmittedFormData(){
         if (currentActivityIsShowingForm()){
-            DisplayFormFragment formFragment = getDisplayFormFragmentAtIndex(currentPage);
+            HouseHoldRegistrationFragment formFragment = getDisplayFormFragmentAtIndex(currentPage);
             formFragment.saveCurrentFormData();
         }
     }

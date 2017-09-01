@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 import org.ei.opensrp.mcare.fragment.HouseHoldRegistrationFragment;
 import org.ei.opensrp.mcare.fragment.HouseHoldSmartRegisterFragment;
@@ -13,6 +14,7 @@ import org.ei.opensrp.view.fragment.DisplayFormFragment;
  * Created by koros on 11/2/15.
  */
 public class BaseRegisterActivityPagerAdapter extends FragmentPagerAdapter {
+    private static final String TAG = BaseRegisterActivityPagerAdapter.class.getSimpleName();
     public static final String ARG_PAGE = "page";
     String[] dialogOptions;
     Fragment mBaseFragment;
@@ -42,6 +44,7 @@ public class BaseRegisterActivityPagerAdapter extends FragmentPagerAdapter {
                 fragment = mBaseFragment;
                 break;
             case 1:
+                Log.d(TAG,"setting HouseHoldRegistrationFragment");
                 fragment = new HouseHoldRegistrationFragment();
                         break;
 //            case 1:
@@ -49,17 +52,21 @@ public class BaseRegisterActivityPagerAdapter extends FragmentPagerAdapter {
 //                    fragment = mProfileFragment;
 //                    break;
 //                }
-//            default:
-//                String formName = dialogOptions[position - offset]; // account for the base fragment
-//                DisplayFormFragment f = new DisplayFormFragment();
-//                f.setFormName(formName);
-//                fragment = f;
-//                break;
+            default:
+                String formName = dialogOptions[position - offset]; // account for the base fragment
+                Log.d(TAG,"Form name  = "+formName);
+                DisplayFormFragment f = new DisplayFormFragment();
+                f.setFormName(formName);
+                fragment = f;
+                break;
         }
 
+        Log.d(TAG,"After setting house hold registration Fragment");
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, position);
-        fragment.setArguments(args);
+        if(fragment!=null) {
+            fragment.setArguments(args);
+        }
         return fragment;
     }
 

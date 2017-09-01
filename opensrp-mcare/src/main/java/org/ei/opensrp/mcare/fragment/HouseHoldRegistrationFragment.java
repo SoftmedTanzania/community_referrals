@@ -182,4 +182,14 @@ public class HouseHoldRegistrationFragment extends Fragment {
     public void savePartialFormData(String partialData) {
         ((SecuredNativeSmartRegisterActivity) getActivity()).savePartialFormData(partialData, recordId, formName, getFormFieldsOverrides());
     }
+
+    //TODO Implement this method to initialize a form data
+    public void setFormData(String data){
+        Log.d(TAG,"Setting form data");
+    }
+
+    //TODO Implement this method to save the current unsubmitted form data for future uses
+    public void saveCurrentFormData(){
+        Log.d(TAG,"Save the currentform data");
+    }
 }
