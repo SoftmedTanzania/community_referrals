@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import org.ei.opensrp.mcare.fragment.HouseHoldRegistrationFragment;
+import org.ei.opensrp.mcare.fragment.HouseHoldSmartRegisterFragment;
 import org.ei.opensrp.view.fragment.DisplayFormFragment;
 
 /**
@@ -40,16 +42,19 @@ public class BaseRegisterActivityPagerAdapter extends FragmentPagerAdapter {
                 fragment = mBaseFragment;
                 break;
             case 1:
-                if(mProfileFragment != null) {
-                    fragment = mProfileFragment;
-                    break;
-                }
-            default:
-                String formName = dialogOptions[position - offset]; // account for the base fragment
-                DisplayFormFragment f = new DisplayFormFragment();
-                f.setFormName(formName);
-                fragment = f;
-                break;
+                fragment = new HouseHoldRegistrationFragment();
+                        break;
+//            case 1:
+//                if(mProfileFragment != null) {
+//                    fragment = mProfileFragment;
+//                    break;
+//                }
+//            default:
+//                String formName = dialogOptions[position - offset]; // account for the base fragment
+//                DisplayFormFragment f = new DisplayFormFragment();
+//                f.setFormName(formName);
+//                fragment = f;
+//                break;
         }
 
         Bundle args = new Bundle();

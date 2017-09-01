@@ -144,7 +144,7 @@ public class HouseHoldSmartRegisterActivity extends SecuredNativeSmartRegisterAc
     @Override
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides){
         Log.v(TAG,"field Overides = "+fieldOverrides.toString());
-        Log.v(TAG,"form submission = "+fieldOverrides.toString());
+        Log.v(TAG,"form submission = "+formSubmission.toString());
         // save the form
         try{
             FormUtils formUtils = FormUtils.getInstance(getApplicationContext());

@@ -138,8 +138,8 @@ public class LoginActivity extends Activity {
 //        final String userName = userNameEditText.getText().toString();
 //        final String password = passwordEditText.getText().toString();
 
-        final String userName = "jon";
-        final String password = "Code1234";
+        final String userName = "sean";
+        final String password = "Admin123";
 
         if (context.userService().hasARegisteredUser()) {
             localLogin(view, userName, password);
