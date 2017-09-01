@@ -14,13 +14,22 @@ import android.widget.RadioGroup;
 
 import org.ei.opensrp.mcare.R;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.XML;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
+
+import static org.ei.opensrp.util.FormUtils.populateJSONWithData;
 
 public class HouseHoldRegistrationFragment extends Fragment {
     private static final String TAG = HouseHoldRegistrationFragment.class.getSimpleName();
@@ -137,18 +146,54 @@ public class HouseHoldRegistrationFragment extends Fragment {
                 dataHash.put("FWHOHFNAME", editTextHeadName.getText().toString().split(" ")[0]);
                 dataHash.put("FWHOHLNAME", editTextHeadName.getText().toString().split(" ")[1]);
 
+                //TODO Clean this data with the correct information from interface
+                dataHash.put("FWHOHBIRTHDATE","07-09-1990" );
+                dataHash.put("FWHOHGENDER", "1");
+                dataHash.put("FWNHHMBRNUM", "test");
+                dataHash.put("FWNHHMWRA", "test");
+                dataHash.put("ELCO", "1");
+                dataHash.put("user_type", "1");
 
-//                dataHash.put("FWHOHBIRTHDATE", );
-//                dataHash.put("FWHOHGENDER", );
-//                dataHash.put("FWNHHMBRNUM", );
-//                dataHash.put("FWNHHMWRA", );
-//                dataHash.put("ELCO", "1");
-//                dataHash.put("user_type", "1");
+                Log.d(TAG,"formname = "+formName);
+
+                //TODO set this name via setform name method
+                formName="new_household_registration";
+                String modelString = readFileAssets("www/form/" + formName + "/model.xml").replaceAll("\"", "'").replaceAll("\n", "").replaceAll("\r", "").replaceAll("/","/");
+
+                try {
+                    JSONObject formSubmission = XML.toJSONObject(modelString);
+
+                    for (Map.Entry<String, String> entry : dataHash.entrySet()) {
+                        String key = entry.getKey();
+                        String value = (String)entry.getValue();
+                        populateJSONWithData(formSubmission,key,value);
+                    }
+
+                    Log.d(TAG,"Results : "+formSubmission.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
 
-                dataHash.put("id",editTextHeadName.getText().toString());
             }
         });
+    }
+
+    public String readFileAssets(String fileName) {
+        String fileContents = null;
+        try {
+            InputStream is = getActivity().getAssets().open(fileName);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            fileContents = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        //Log.d("File", fileContents);
+        return fileContents;
     }
 
     // override this on tha child classes to override specific fields

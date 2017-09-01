@@ -24,6 +24,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -762,6 +763,38 @@ public class FormUtils {
             }
         }
         return -1;
+    }
+
+    public static JSONObject populateJSONWithData(JSONObject resobj, String searchKey, String value){
+        try {
+            Iterator<?> keys = resobj.keys();
+            while (keys.hasNext()) {
+                String key = (String) keys.next();
+                if(key.equals(searchKey)){
+                    if (resobj.get(key) instanceof JSONObject) {
+                        ((JSONObject)resobj.get(key)).put("content",value);
+                        return resobj;
+                    }else if(resobj.get(key) instanceof String){
+                        resobj.put(key,value);
+                    }
+                }else if(resobj.get(key) instanceof JSONObject) {
+                    populateJSONWithData((JSONObject) resobj.get(key),searchKey,value);
+                }else if(resobj.get(key) instanceof JSONArray) {
+                    JSONArray array = (JSONArray) resobj.get(key);
+                    int count = array.length();
+                    for(int i=0;i<count;i++){
+                        if(array.get(i) instanceof JSONObject){
+                            populateJSONWithData((JSONObject)array.get(i),searchKey,value);
+                        }
+                    }
+                }
+
+            }
+            return resobj;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return resobj;
     }
 
 }

@@ -32,6 +32,8 @@ dependencies {
 
     compile 'com.android.support:support-annotations:21.0.3'
     compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.github.smart-fun:XmlToJson:1.4.0'
+
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.1'
