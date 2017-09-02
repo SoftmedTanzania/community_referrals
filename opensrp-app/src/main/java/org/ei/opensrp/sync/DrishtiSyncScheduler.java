@@ -29,14 +29,14 @@ public class DrishtiSyncScheduler {
             return;
         }
 
-        PendingIntent syncBroadcastReceiverIntent = PendingIntent.getBroadcast(context, 0, new Intent(context, (Class)ReceiverClass), 0);
+//        PendingIntent syncBroadcastReceiverIntent = PendingIntent.getBroadcast(context, 0, new Intent(context, (Class)ReceiverClass), 0);
 
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(
-                AlarmManager.RTC,
-                System.currentTimeMillis() + SYNC_START_DELAY,
-                SYNC_INTERVAL,
-                syncBroadcastReceiverIntent);
+//        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+//        alarmManager.setRepeating(
+//                AlarmManager.RTC,
+//                System.currentTimeMillis() + SYNC_START_DELAY,
+//                SYNC_INTERVAL,
+//                syncBroadcastReceiverIntent);
 
         logInfo(format("Scheduled to sync from server every {0} seconds.", SYNC_INTERVAL / 1000));
 

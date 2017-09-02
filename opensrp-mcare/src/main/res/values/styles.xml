@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="CustomFontTextViewStyle" parent="@android:style/Widget.TextView">
         <item name="fontVariant">regular</item>
@@ -225,10 +225,22 @@
     </style>
 
 
-    <style name="AppTheme.Forms" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme.MaterialDesign" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
+
+
+    <style name="AppTheme.MaterialDesign.ANCRegister" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
     </style>
 
+    <style name="AppTheme.MaterialDesign.TranslucentStatus" parent="AppTheme.MaterialDesign">
+        <item name="android:windowTranslucentStatus" tools:targetApi="KITKAT">true</item>
+    </style>
 </resources>

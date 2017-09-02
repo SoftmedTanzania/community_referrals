@@ -1,0 +1,159 @@
+{
+    "form_data_definition_version": "4",
+    "form": {
+        "bind_type": "softmed_pregnant_mother",
+        "default_bind_path": "/model/instance/Pregnant_Mothers_Registration/",
+        "fields": [
+            {
+                "name": "id",
+                "shouldLoadValue": true
+            },
+            {
+                "name": "motherId",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/mother_id"
+            },
+            {
+                "name": "registrationDate",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/reg_date"
+            },
+            {
+                "name": "registrationPlace",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/reg_place"
+            },
+            {
+                "name": "wifeName",
+                "shouldLoadValue": true,
+                "bind": "/model/instance/Pregnant_Mothers_Registration/case_woman_name"
+            },
+            {
+                "name": "numberOfPregnancies",
+                "shouldLoadValue": true,
+                "bind": "/model/instance/Pregnant_Mothers_Registration/case_num_pregnancies"
+            },
+            {
+                "name": "wouldBeHighRisk",
+                "shouldLoadValue": true,
+                "bind": "/model/instance/Pregnant_Mothers_Registration/case_would_be_high_risk"
+            },
+            {
+                "name": "wouldBeHighRiskReason",
+                "shouldLoadValue": true,
+                "bind": "/model/instance/Pregnant_Mothers_Registration/case_would_be_high_risk_reason"
+            },
+            {
+                "name": "numberOfPregnancies",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/num_pregnancies"
+            },
+            {
+                "name": "thayiCardNumber",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/thayi_no"
+            },
+            {
+                "name": "ancNumber",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/anc_number"
+            },
+            {
+                "name": "isJSYBeneficiary",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/jsy_beneficiary"
+            },
+            {
+                "name": "ashaName",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/asha_name"
+            },
+            {
+                "name": "ashaPhoneNumber",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/asha_phone_number"
+            },
+            {
+                "name": "referenceDate",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/lmp_date"
+            },
+            {
+                "name": "edd"
+            },
+            {
+                "name": "linkedFacilityForDelivery",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/linked_facility_delivery"
+            },
+            {
+                "name": "facilityName",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/name_facility"
+            },
+            {
+                "name": "complications",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/complication"
+            },
+            {
+                "name": "medicalHistories",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/medical_histories"
+            },
+            {
+                "name": "bloodGroup",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/w_blood_group"
+            },
+            {
+                "name": "height"
+            },
+            {
+                "name": "weight",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/weight_startofpregnancy"
+            },
+            {
+                "name": "isHighRiskTillDelivery",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/is_high_risk_till_delivery"
+            },
+            {
+                "name": "highRiskTillDeliveryReason",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/is_high_risk_till_delivery_reason"
+            },
+            {
+                "name": "isHighRiskTillPNCClose",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/is_high_risk_till_pnc_close"
+            },
+            {
+                "name": "highRiskTillPNCCloseReason",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/is_high_risk_till_pnc_close_reason"
+            },
+            {
+                "name": "highRiskReason",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/high_risk_reason"
+            },
+            {
+                "name": "isHighRisk",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/is_high_risk"
+            },
+            {
+                "name": "submissionDate",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/today"
+            },
+            {
+                "name": "type",
+                "value": "ANC"
+            },
+            {
+                "name": "isClosed",
+                "value": "false"
+            },
+            {
+                "name": "currentMethod",
+                "value": ""
+            },
+            {
+                "name": "familyPlanningMethodChangeDate",
+                "value": ""
+            },{
+                "name": "current_formStatus",
+                "bind": "/model/instance/FWNewHH/current_formStatus"
+            },
+            {
+                "name": "user_type",
+                "bind": "/model/instance/FWNewHH/user_type"
+            },
+            {
+                "name": "external_user_ID",
+                "bind": "/model/instance/FWNewHH/external_user_ID"
+            }
+        ]
+    }
+}
+
