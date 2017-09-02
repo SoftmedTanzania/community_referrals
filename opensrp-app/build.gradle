@@ -51,7 +51,7 @@ android {
         // multiDexEnabled = true
         //applicationId "org.ei.opensrp"
         minSdkVersion 16
-        targetSdkVersion 21
+        targetSdkVersion 25
         versionCode 1
         versionName "3.0.1"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
@@ -108,10 +108,10 @@ configurations.all {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:appcompat-v7:25.3.1'
     compile "org.apache.httpcomponents:httpmime:4.2.3"
     compile 'commons-io:commons-io:2.1'
-    compile 'com.google.code.gson:gson:2.3'
+    compile 'com.google.code.gson:gson:2.7'
     compile 'org.apache.commons:commons-lang3:3.1'
     compile 'org.mozilla:rhino:1.7R4'
     compile 'com.ocpsoft:ocpsoft-pretty-time:1.0.7'
@@ -119,8 +119,12 @@ dependencies {
     compile 'com.github.bmelnychuk:atv:1.2.+'
     compile 'com.github.johnkil.print:print:1.2.3'
     compile 'ch.acra:acra:4.5.0'
-    compile 'com.google.guava:guava:18.0'
+    compile 'com.google.guava:guava:20.0'
     compile 'com.mcxiaoke.volley:library:1.0.+'
+
+    compile 'com.loopj.android:android-async-http:1.4.9'
+
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
 
 }

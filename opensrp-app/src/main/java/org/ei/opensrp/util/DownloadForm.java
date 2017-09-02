@@ -2,12 +2,10 @@ package org.ei.opensrp.util;
 
 import android.util.Log;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
+import com.loopj.android.http.FileAsyncHttpResponseHandler;
+import com.loopj.android.http.SyncHttpClient;
+
 import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.util.ByteArrayBuffer;
-import org.ei.opensrp.client.GZipEncodingHttpClient;
 import org.ei.opensrp.domain.DownloadStatus;
 import org.ei.opensrp.domain.Response;
 import org.ei.opensrp.domain.ResponseStatus;
@@ -19,14 +17,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import cz.msebera.android.httpclient.Header;
+
 /**
  * Created by Dimas Ciputra on 3/21/15.
  */
 public class DownloadForm {
-
+    private static int status;
+    private static File f;
     public static Response<DownloadStatus> DownloadFromURL(String downloadURL,
                                                            String fileName,
-                                                           final GZipEncodingHttpClient httpClient)
+                                                           final SyncHttpClient httpClient)
     {
 
         try {
@@ -44,47 +45,32 @@ public class DownloadForm {
             Log.d("DownloadFormService", "download url: " + downloadURL.toString());
             Log.d("DownloadFormService", "download file name: " + fileName);
 
-            /* Open connection to URL */
-            HttpResponse response = httpClient.execute(new HttpGet(downloadURL));
+
+            httpClient.get(downloadURL, new FileAsyncHttpResponseHandler(file) {
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, File file) {
+                    status = statusCode;
+                }
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, File file) {
+                    status = statusCode;
+                    f=file;
+                }
+            });
 
             /* expect HTTP 200 OK */
-            int statusCode = response.getStatusLine().getStatusCode();
-            if (statusCode != HttpStatus.SC_OK) {
-                Log.d("DownloadFormService", "Server returned HTTP " + statusCode);
+            if (status != HttpStatus.SC_OK) {
+                Log.d("DownloadFormService", "Server returned HTTP " + status);
                 return new Response<DownloadStatus>(ResponseStatus.failure, DownloadStatus.failedDownloaded);
             }
 
-            HttpEntity entity = response.getEntity();
-
-            /* Define InputStreams to read from the URLConnections */
-            InputStream is = entity.getContent();
-            BufferedInputStream bis = new BufferedInputStream(is);
-
-            /* This will be for count download percentage */
-            long fileLength = entity.getContentLength();
-
-            if(fileLength == 0) {
+            if(f == null || !f.exists()) {
                 return new Response<DownloadStatus>(ResponseStatus.success, DownloadStatus.nothingDownloaded);
             }
 
-            Log.d("DownloadFormService", "file length : " + fileLength);
 
-            /* Read bytes to the Buffer until there is nothing more to read */
-            ByteArrayBuffer baf = new ByteArrayBuffer(9999);
-            int current = 0;
-            while ((current = bis.read()) != -1) {
-                baf.append((byte) current);
-            }
-
-            /* Convert the bytes to String */
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(baf.toByteArray());
-            fos.flush();
-            fos.close();
-
-            Log.d("DownloadFormService", "download finished in " + ((System.currentTimeMillis()-startTime) / 1000) + " sec");
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             Log.d("DownloadFormService", "download error : " + e);
             return new Response<DownloadStatus>(ResponseStatus.success, DownloadStatus.failedDownloaded);
         }

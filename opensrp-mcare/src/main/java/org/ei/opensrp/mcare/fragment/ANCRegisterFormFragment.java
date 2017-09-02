@@ -47,7 +47,7 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
         fabDone = (FloatingActionButton) v.findViewById(R.id.fabDone);
 
         viewPager = (ViewPager) v.findViewById(R.id.viewPager);
-        pagerAdapter = new ANCRegisterPagerAdapter(((Context)getActivity()).getSupportFragmentManager());
+        pagerAdapter = new ANCRegisterPagerAdapter(getActivity().getSupportFragmentManager());
 
         viewPager.setAdapter(pagerAdapter);
 
@@ -82,8 +82,8 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
         tabs.getTabAt(0).setIcon(R.drawable.ic_account_circle);
         tabs.getTabAt(1).setIcon(R.drawable.ic_message_bulleted);
 
-        final int colorWhite = ContextCompat.getColor(getApplicationContext(), android.R.color.white);
-        final int colorPrimaryLight = ContextCompat.getColor(getApplicationContext(), R.color.primary_light);
+        final int colorWhite = ContextCompat.getColor(getActivity().getApplicationContext(), android.R.color.white);
+        final int colorPrimaryLight = ContextCompat.getColor(getActivity().getApplicationContext(), R.color.primary_light);
 
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

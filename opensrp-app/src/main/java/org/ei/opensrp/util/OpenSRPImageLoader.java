@@ -3,6 +3,7 @@ package org.ei.opensrp.util;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
 import android.content.res.Resources;
@@ -13,17 +14,14 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
-import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
+import com.android.volley.*;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HttpClientStack;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
@@ -69,7 +67,7 @@ public class OpenSRPImageLoader extends ImageLoader {
     /**
      * Creates an ImageLoader with Bitmap memory cache. No default placeholder image will be shown while the image is being fetched and loaded.
      */
-    public OpenSRPImageLoader(FragmentActivity activity) {
+    public OpenSRPImageLoader(Activity activity) {
         super(newRequestQueue(activity), DrishtiApplication.getMemoryCacheInstance());
         mResources = activity.getResources();
     }
@@ -97,7 +95,7 @@ public class OpenSRPImageLoader extends ImageLoader {
     /**
      * Creates an ImageLoader with Bitmap memory cache and a default placeholder image while the image is being fetched and loaded.
      */
-    public OpenSRPImageLoader(FragmentActivity activity, int defaultPlaceHolderResId) {
+    public OpenSRPImageLoader(Activity activity, int defaultPlaceHolderResId) {
         this(activity);
 
         mPlaceHolderDrawables = new ArrayList<Drawable>(1);
@@ -107,7 +105,7 @@ public class OpenSRPImageLoader extends ImageLoader {
     /**
      * Creates an ImageLoader with Bitmap memory cache and a list of default placeholder drawables.
      */
-    public OpenSRPImageLoader(FragmentActivity activity, ArrayList<Drawable> placeHolderDrawables) {
+    public OpenSRPImageLoader(Activity activity, ArrayList<Drawable> placeHolderDrawables) {
         this(activity);
         mPlaceHolderDrawables = placeHolderDrawables;
     }
@@ -359,19 +357,28 @@ public class OpenSRPImageLoader extends ImageLoader {
             requestQueue = Volley.newRequestQueue(context, stack);
 
         } else {
-            HttpClientStack stack = new HttpClientStack(AndroidHttpClient.newInstance(FileUtilities
-                    .getUserAgent(context))) {
-                @Override
-                public HttpResponse performRequest(Request<?> request, Map<String, String> headers)
-                        throws IOException, AuthFailureError {
+//            HttpClientStack stack = new HttpClientStack(AndroidHttpClient.newInstance(FileUtilities
+//                    .getUserAgent(context))) {
+//                @Override
+//                public HttpResponse performRequest(Request<?> request, Map<String, String> headers)
+//                        throws IOException, AuthFailureError {
+//
+//                     headers.putAll(org.ei.opensrp.Context.getInstance().allSettings().getAuthParams());
+//
+//                    return super.performRequest(request, headers);
+//                }
+//            };
 
-                     headers.putAll(org.ei.opensrp.Context.getInstance().allSettings().getAuthParams());
+            // Instantiate the cache
+            com.android.volley.Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
 
-                    return super.performRequest(request, headers);
-                }
-            };
+            // Set up the network to use HttpURLConnection as the HTTP client.
+            Network network = new BasicNetwork(new HurlStack());
 
-            requestQueue = Volley.newRequestQueue(context, stack);
+            // Instantiate the RequestQueue with the cache and network.
+            requestQueue = new RequestQueue(cache, network);
+
+//            requestQueue = Volley.newRequestQueue(context, stack);
         }
         return requestQueue;
     }

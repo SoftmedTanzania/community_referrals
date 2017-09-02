@@ -3,34 +3,20 @@ package org.ei.opensrp.service;
 import android.content.Context;
 import android.util.Log;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpResponse;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.SyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
+
 import org.apache.http.HttpStatus;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.scheme.PlainSocketFactory;
-import org.apache.http.conn.scheme.Scheme;
-import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.scheme.SocketFactory;
 import org.apache.http.conn.ssl.AbstractVerifier;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.conn.ssl.X509HostnameVerifier;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.ContentBody;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.SingleClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
 import org.ei.opensrp.DristhiConfiguration;
 import org.ei.opensrp.R;
-import org.ei.opensrp.client.GZipEncodingHttpClient;
 import org.ei.opensrp.domain.DownloadStatus;
 import org.ei.opensrp.domain.LoginResponse;
 import org.ei.opensrp.domain.ProfileImage;
@@ -39,32 +25,31 @@ import org.ei.opensrp.domain.ResponseStatus;
 import org.ei.opensrp.repository.AllSettings;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.util.DownloadForm;
-import org.ei.opensrp.util.FileUtilities;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyStore;
 
 import javax.net.ssl.SSLException;
 
-import static org.ei.opensrp.AllConstants.REALM;
-import static org.ei.opensrp.domain.LoginResponse.MALFORMED_URL;
+import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.entity.ByteArrayEntity;
+import cz.msebera.android.httpclient.message.BasicHeader;
+
 import static org.ei.opensrp.domain.LoginResponse.NO_INTERNET_CONNECTIVITY;
 import static org.ei.opensrp.domain.LoginResponse.SUCCESS;
 import static org.ei.opensrp.domain.LoginResponse.UNAUTHORIZED;
 import static org.ei.opensrp.domain.LoginResponse.UNKNOWN_RESPONSE;
-import static org.ei.opensrp.util.HttpResponseUtil.getResponseBody;
 import static org.ei.opensrp.util.Log.logError;
 import static org.ei.opensrp.util.Log.logWarn;
 
 public class HTTPAgent {
     private static final String TAG=HTTPAgent.class.getCanonicalName();
-    private final GZipEncodingHttpClient httpClient;
     private Context context;
     private AllSettings settings;
     private AllSharedPreferences allSharedPreferences;
     private DristhiConfiguration configuration;
+    SyncHttpClient httpClient = new SyncHttpClient();
 
 
     public HTTPAgent(Context context, AllSettings settings, AllSharedPreferences allSharedPreferences, DristhiConfiguration configuration) {
@@ -77,56 +62,97 @@ public class HTTPAgent {
         HttpConnectionParams.setConnectionTimeout(basicHttpParams, 30000);
         HttpConnectionParams.setSoTimeout(basicHttpParams, 60000);
 
-        SchemeRegistry registry = new SchemeRegistry();
-        registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-        registry.register(new Scheme("https", sslSocketFactoryWithopensrpCertificate(), 443));
-
-        SingleClientConnManager connectionManager = new SingleClientConnManager(basicHttpParams, registry);
-        httpClient = new GZipEncodingHttpClient(new DefaultHttpClient(connectionManager, basicHttpParams));
+        httpClient.setTimeout(60000);
     }
 
+    private String responseContent;
     public Response<String> fetch(String requestURLPath) {
+        responseContent=null;
         try {
             setCredentials(allSharedPreferences.fetchRegisteredANM(), settings.fetchANMPassword());
-            String responseContent = IOUtils.toString(httpClient.fetchContent(new HttpGet(requestURLPath)));
+
+            httpClient.get(requestURLPath, new TextHttpResponseHandler() {
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    responseContent = responseString;
+                }
+            });
+
+
             return new Response<String>(ResponseStatus.success, responseContent);
         } catch (Exception e) {
-            logWarn(e.toString());
             return new Response<String>(ResponseStatus.failure, null);
         }
     }
 
+    private ResponseStatus r;
     public Response<String> post(String postURLPath, String jsonPayload) {
         try {
+            responseContent = null;
             setCredentials(allSharedPreferences.fetchRegisteredANM(), settings.fetchANMPassword());
-            HttpPost httpPost = new HttpPost(postURLPath);
-            Log.v("jsonpayload", jsonPayload);
-            FileUtilities fu = new FileUtilities();
-            fu.write("jsonpayload.txt", jsonPayload);
 
-            StringEntity entity = new StringEntity(jsonPayload, HTTP.UTF_8);
-            entity.setContentType("application/json; charset=utf-8");
-            httpPost.setEntity(entity);
 
-            HttpResponse response = httpClient.postContent(httpPost);
+            ByteArrayEntity entity = new ByteArrayEntity(jsonPayload.toString().getBytes("UTF-8"));
+            entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-            ResponseStatus responseStatus = response.getStatusLine().getStatusCode() == HttpStatus.SC_CREATED ? ResponseStatus.success : ResponseStatus.failure;
-            response.getEntity().consumeContent();
-            return new Response<String>(responseStatus, null);
+
+            httpClient.post(context, postURLPath, entity, "application/json",
+                    new TextHttpResponseHandler() {
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                            throwable.printStackTrace();
+                            r = ResponseStatus.failure;
+                        }
+
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                            responseContent = responseString;
+                            r = ResponseStatus.success;
+
+                        }
+                    });
+
+
+
+            return new Response<String>(r, null);
         } catch (Exception e) {
             logWarn(e.toString());
             return new Response<String>(ResponseStatus.failure, null);
         }
     }
 
+
+    private int statusCode;
     public LoginResponse urlCanBeAccessWithGivenCredentials(String requestURL, String userName, String password) {
-        setCredentials(userName, password);
+        httpClient.setBasicAuth(userName,password);
+        responseContent=null;
+
         try {
             requestURL=requestURL.replaceAll("\\s+","");
-            HttpResponse response = httpClient.execute(new HttpGet(requestURL));
-            int statusCode = response.getStatusLine().getStatusCode();
+
+            httpClient.get(requestURL, new TextHttpResponseHandler() {
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    statusCode=statusCode;
+                }
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    statusCode=statusCode;
+                    responseContent = responseString;
+
+                }
+            });
+
+
+
             if (statusCode == HttpStatus.SC_OK) {
-                return SUCCESS.withPayload(getResponseBody(response));
+                return SUCCESS.withPayload(responseContent);
             } else if (statusCode == HttpStatus.SC_UNAUTHORIZED) {
                 logError("Invalid credentials for: " + userName + " using " + requestURL);
                 return UNAUTHORIZED;
@@ -134,13 +160,9 @@ public class HTTPAgent {
                 logError("Bad response from Dristhi. Status code:  " + statusCode + " username: " + userName + " using " + requestURL);
                 return UNKNOWN_RESPONSE;
             }
-        }catch (IOException e) {
+        }catch (Exception e) {
             logError("Failed to check credentials of: " + userName + " using " + requestURL + ". Error: " + e.toString());
             return NO_INTERNET_CONNECTIVITY;
-        }catch (IllegalArgumentException e){
-            logError(e.getMessage());
-            return MALFORMED_URL;
-
         }
     }
 
@@ -150,9 +172,11 @@ public class HTTPAgent {
         return status.payload();
     }
 
+
+
+
     private void setCredentials(String userName, String password) {
-        httpClient.getCredentialsProvider().setCredentials(new AuthScope(configuration.host(), configuration.port(), REALM),
-                new UsernamePasswordCredentials(userName, password));
+        httpClient.setBasicAuth(userName,password);
     }
 
     private SocketFactory sslSocketFactoryWithopensrpCertificate() {
@@ -184,49 +208,61 @@ public class HTTPAgent {
     }
     public Response<String> fetchWithCredentials(String uri, String username, String password) {
         setCredentials(username, password);
-        try {
-            String responseContent = IOUtils.toString(httpClient.fetchContent(new HttpGet(uri)));
-            return new Response<>(ResponseStatus.success, responseContent);
-        } catch (IOException e) {
-            logError("Failed to fetch unique id");
-            return new Response<>(ResponseStatus.failure, null);
-        }
+        return fetch(uri);
     }
 
+
+    private String responseS= null;
+    private int code;
     public String httpImagePost(String url,ProfileImage image){
 
-        String responseString = "";
+
         try {
             File uploadFile = new File(image.getFilepath());
             if(uploadFile.exists()) {
                 setCredentials(allSharedPreferences.fetchRegisteredANM(), settings.fetchANMPassword());
 
-                HttpPost httpost = new HttpPost(url);
 
-                httpost.setHeader("Accept", "multipart/form-data");
-                File filetoupload = new File(image.getFilepath());
-                Log.v("file to upload", "" + filetoupload.length());
-                MultipartEntity entity = new MultipartEntity();
-                entity.addPart("anm-id", new StringBody(image.getAnmId()));
-                entity.addPart("entity-id", new StringBody(image.getEntityID()));
-                entity.addPart("content-type", new StringBody(image.getContenttype() != null ? image.getContenttype() : "jpeg"));
-                entity.addPart("file-category", new StringBody(image.getFilecategory() != null ? image.getFilecategory() : "profilepic"));
-                ContentBody cbFile = new FileBody(uploadFile,"image/jpeg");
-                entity.addPart("file", cbFile);
-                httpost.setEntity(entity);
-                String authToken = null;
-                HttpResponse response = httpClient.postContent(httpost);
-                responseString = EntityUtils.toString(response.getEntity());
-                Log.v("response so many", responseString);
+
+                RequestParams params = new RequestParams();
+                try {
+                    params.put("file", uploadFile);
+                    params.put("anm-id", image.getAnmId());
+                    params.put("entity-id", image.getEntityID());
+                    params.put("content-type", image.getContenttype() != null ? image.getContenttype() : "jpeg");
+                    params.put("file-category", image.getFilecategory() != null ? image.getFilecategory() : "profilepic");
+
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
+
+                httpClient.post(url, params, new TextHttpResponseHandler() {
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        code = statusCode;
+                        throwable.printStackTrace();
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                        responseS=responseString;
+                        code = statusCode;
+                    }
+                });
+
+
+                Log.v("file to upload", "" + uploadFile.length());
+
+                Log.v("response so many", responseS);
                 int RESPONSE_OK = 200;
                 int RESPONSE_OK_ = 201;
 
-                if (response.getStatusLine().getStatusCode() != RESPONSE_OK_ && response.getStatusLine().getStatusCode() != RESPONSE_OK) {
+                if (code != RESPONSE_OK_ && code!= RESPONSE_OK) {
                 }
             }
         }catch (Exception e){
             Log.e(TAG, e.getMessage());
         }
-        return responseString;
+        return responseS;
     }
 }

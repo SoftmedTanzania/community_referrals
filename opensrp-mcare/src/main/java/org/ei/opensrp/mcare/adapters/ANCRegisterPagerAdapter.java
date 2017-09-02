@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import org.ei.opensrp.mcare.fragment.ANCRegister1stFragment;
 import org.ei.opensrp.mcare.fragment.ANCRegister2ndFragment;
 
+
 /**
  * Created by ali on 8/22/17.
  */
