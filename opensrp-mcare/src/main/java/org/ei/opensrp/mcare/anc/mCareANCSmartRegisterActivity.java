@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
@@ -242,15 +243,16 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
                     data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
-                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
-                if (displayFormFragment != null) {
-                    displayFormFragment.setFormData(data);
-                    displayFormFragment.setRecordId(entityId);
-                    displayFormFragment.setFieldOverides(metaData);
-                }
+                //TODO FIX this area to pass data to our new custom fragment
+//                DisplayFormFragment displayFormFragment = (DisplayFormFragment)getDisplayFormFragmentAtIndex(formIndex);
+//                if (displayFormFragment != null) {
+//                    displayFormFragment.setFormData(data);
+//                    displayFormFragment.setRecordId(entityId);
+//                    displayFormFragment.setFieldOverides(metaData);
+//                }
             }
 
-            mPager.setCurrentItem(formIndex, false); //Don't animate the view on orientation change the view disappears
+            mPager.setCurrentItem(2, false); //Don't animate the view on orientation change the view disappears
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -328,7 +330,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
             switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
 
         } catch (Exception e) {
-            DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
+            DisplayFormFragment displayFormFragment =(DisplayFormFragment) getDisplayFormFragmentAtIndex(currentPage);
             if (displayFormFragment != null) {
                 displayFormFragment.hideTranslucentProgressDialog();
             }
@@ -348,14 +350,18 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
                     registerFragment.refreshListView();
                 }
 
-                //hack reset the form
-                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(prevPageIndex);
-                if (displayFormFragment != null) {
-                    displayFormFragment.hideTranslucentProgressDialog();
-                    displayFormFragment.setFormData(null);
-                }
+                try {
+                    //TODO fix this hack reset the form
+                    DisplayFormFragment displayFormFragment = (DisplayFormFragment) getDisplayFormFragmentAtIndex(prevPageIndex);
+                    if (displayFormFragment != null) {
+                        displayFormFragment.hideTranslucentProgressDialog();
+                        displayFormFragment.setFormData(null);
+                    }
 
-                displayFormFragment.setRecordId(null);
+                    displayFormFragment.setRecordId(null);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -419,8 +425,14 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
         return getSupportFragmentManager().findFragmentByTag("android:switcher:" + mPager.getId() + ":" + fragmentPagerAdapter.getItemId(position));
     }
 
-    public DisplayFormFragment getDisplayFormFragmentAtIndex(int index) {
-        return (DisplayFormFragment) findFragmentByPosition(index);
+    public Fragment getDisplayFormFragmentAtIndex(int index) {
+
+        try {
+            return findFragmentByPosition(index);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return findFragmentByPosition(index);
     }
 
     public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
@@ -440,7 +452,8 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
     public void retrieveAndSaveUnsubmittedFormData() {
         if (currentActivityIsShowingForm()) {
-            DisplayFormFragment formFragment = getDisplayFormFragmentAtIndex(currentPage);
+            //TODO implement a hack to handle our custom forms
+            DisplayFormFragment formFragment = (DisplayFormFragment)getDisplayFormFragmentAtIndex(currentPage);
             formFragment.saveCurrentFormData();
         }
     }

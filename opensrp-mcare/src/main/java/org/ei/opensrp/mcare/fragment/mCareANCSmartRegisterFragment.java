@@ -1,5 +1,7 @@
 package org.ei.opensrp.mcare.fragment;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -31,6 +33,7 @@ import org.ei.opensrp.mcare.elco.ElcoMauzaCommonObjectFilterOption;
 import org.ei.opensrp.mcare.elco.ElcoPSRFDueDateSort;
 import org.ei.opensrp.mcare.elco.ElcoSmartRegisterActivity;
 import org.ei.opensrp.mcare.elco.PSRFHandler;
+import org.ei.opensrp.mcare.household.HouseHoldSmartRegisterActivity;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.util.StringUtil;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
@@ -62,11 +65,13 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  * Created by koros on 11/2/15.
  */
 public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+    private static final String TAG = mCareANCSmartRegisterFragment.class.getSimpleName();
 
     private SmartRegisterClientsProvider clientProvider = null;
     private CommonPersonObjectController controller;
     private VillageController villageController;
     private DialogOptionMapper dialogOptionMapper;
+    private String locationDialogTAG = "locationDialogTAG";
 
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
 
@@ -169,8 +174,18 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
     }
 
     @Override
-    protected void startRegistration() {
-        ((ElcoSmartRegisterActivity)getActivity()).startRegistration();
+    public void startRegistration() {
+        Log.d(TAG,"starting registrations");
+        FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
+        Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+        McareLocationSelectorDialogFragment
+                .newInstance((mCareANCSmartRegisterActivity) getActivity(), new EditDialogOptionModel(), context().anmLocationController().get(),
+                        "pregnant_mothers_registration")
+                .show(ft, locationDialogTAG);
     }
 
     @Override
@@ -199,7 +214,7 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
         view.findViewById(R.id.service_mode_selection).setVisibility(INVISIBLE);
 
         ImageButton startregister = (ImageButton)view.findViewById(org.ei.opensrp.R.id.register_client);
-        startregister.setVisibility(View.GONE);
+        startregister.setVisibility(View.VISIBLE);
         clientsView.setVisibility(View.VISIBLE);
         clientsProgressView.setVisibility(View.INVISIBLE);
 //        list.setBackgroundColor(Color.RED);
@@ -443,5 +458,17 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
         }
         CountExecute();
         filterandSortExecute();
+    }
+
+    private class EditDialogOptionModel implements DialogOptionModel {
+        @Override
+        public DialogOption[] getDialogOptions() {
+            return getEditOptions();
+        }
+
+        @Override
+        public void onDialogOptionSelection(DialogOption option, Object tag) {
+            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
+        }
     }
 }

@@ -1,7 +1,7 @@
 {
     "form_data_definition_version": "4",
     "form": {
-        "bind_type": "softmed_pregnant_mother",
+        "bind_type": "mcaremother",
         "default_bind_path": "/model/instance/Pregnant_Mothers_Registration/",
         "fields": [
             {

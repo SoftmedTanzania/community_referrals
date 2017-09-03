@@ -127,7 +127,7 @@ public class HTTPAgent {
     }
 
 
-    private int statusCode;
+    private int status;
     public LoginResponse urlCanBeAccessWithGivenCredentials(String requestURL, String userName, String password) {
         httpClient.setBasicAuth(userName,password);
         responseContent=null;
@@ -138,12 +138,12 @@ public class HTTPAgent {
             httpClient.get(requestURL, new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                    statusCode=statusCode;
+                    status=statusCode;
                 }
 
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                    statusCode=statusCode;
+                    status=statusCode;
                     responseContent = responseString;
 
                 }
@@ -151,13 +151,13 @@ public class HTTPAgent {
 
 
 
-            if (statusCode == HttpStatus.SC_OK) {
+            if (status == HttpStatus.SC_OK) {
                 return SUCCESS.withPayload(responseContent);
-            } else if (statusCode == HttpStatus.SC_UNAUTHORIZED) {
+            } else if (status == HttpStatus.SC_UNAUTHORIZED) {
                 logError("Invalid credentials for: " + userName + " using " + requestURL);
                 return UNAUTHORIZED;
             } else {
-                logError("Bad response from Dristhi. Status code:  " + statusCode + " username: " + userName + " using " + requestURL);
+                logError("Bad response from Dristhi. Status code:  " + status + " username: " + userName + " using " + requestURL);
                 return UNKNOWN_RESPONSE;
             }
         }catch (Exception e) {
