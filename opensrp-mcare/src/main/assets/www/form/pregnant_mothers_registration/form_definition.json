@@ -41,28 +41,12 @@
                 "bind": "/model/instance/Pregnant_Mothers_Registration/case_would_be_high_risk_reason"
             },
             {
-                "name": "numberOfPregnancies",
-                "bind": "/model/instance/Pregnant_Mothers_Registration/num_pregnancies"
-            },
-            {
-                "name": "thayiCardNumber",
-                "bind": "/model/instance/Pregnant_Mothers_Registration/thayi_no"
-            },
-            {
                 "name": "ancNumber",
                 "bind": "/model/instance/Pregnant_Mothers_Registration/anc_number"
             },
             {
-                "name": "isJSYBeneficiary",
-                "bind": "/model/instance/Pregnant_Mothers_Registration/jsy_beneficiary"
-            },
-            {
-                "name": "ashaName",
-                "bind": "/model/instance/Pregnant_Mothers_Registration/asha_name"
-            },
-            {
-                "name": "ashaPhoneNumber",
-                "bind": "/model/instance/Pregnant_Mothers_Registration/asha_phone_number"
+                "name": "phoneNumber",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/phone_number"
             },
             {
                 "name": "referenceDate",
