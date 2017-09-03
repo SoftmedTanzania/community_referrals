@@ -169,7 +169,7 @@ public class NativeHomeActivity extends SecuredActivity {
 //        getSupportActionBar().setLogo(org.ei.opensrp.mcare.R.mipmap.logo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("SoftMed");
+        getSupportActionBar().setTitle("UNFPA");
         LoginActivity.setLanguage();
     }
 
