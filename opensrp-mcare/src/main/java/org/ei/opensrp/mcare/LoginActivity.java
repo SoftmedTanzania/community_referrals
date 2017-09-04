@@ -10,10 +10,12 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -186,7 +188,9 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login(loginButton);
+                // check input fields first
+                if (isLoginInitiateOk())
+                    login(loginButton);
             }
         });
     }
@@ -197,7 +201,9 @@ public class LoginActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
 //                    login(findViewById(org.ei.opensrp.R.id.login_loginButton));
-                    login(loginButton);
+                    // check input fields first
+                    if (isLoginInitiateOk())
+                        login(loginButton);
                 }
                 return false;
             }
@@ -395,6 +401,19 @@ public class LoginActivity extends AppCompatActivity {
             res.updateConfiguration(conf, dm);
             return ENGLISH_LANGUAGE;
         }
+    }
+
+    private boolean isLoginInitiateOk() {
+        if (TextUtils.isEmpty(userNameEditText.getText())
+                || TextUtils.isEmpty(passwordEditText.getText())) {
+            // tell user to enter username and pwd
+            Snackbar.make(
+                    findViewById(R.id.coordinatorLogin),
+                    R.string.provide_username_password,
+                    Snackbar.LENGTH_SHORT).show();
+            return false;
+        } else
+            return true;
     }
 
 }
