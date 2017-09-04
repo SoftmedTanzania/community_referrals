@@ -51,7 +51,7 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
 
         viewPager.setAdapter(pagerAdapter);
 
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
@@ -85,7 +85,7 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
         final int colorWhite = ContextCompat.getColor(getActivity().getApplicationContext(), android.R.color.white);
         final int colorPrimaryLight = ContextCompat.getColor(getActivity().getApplicationContext(), R.color.primary_light);
 
-        tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getIcon() != null)
