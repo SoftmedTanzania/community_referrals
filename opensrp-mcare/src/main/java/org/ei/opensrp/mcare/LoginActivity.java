@@ -320,7 +320,8 @@ public class LoginActivity extends AppCompatActivity {
     private void fillUserIfExists() {
         if (context.userService().hasARegisteredUser()) {
             userNameEditText.setText(context.allSharedPreferences().fetchRegisteredANM());
-            userNameEditText.setEnabled(false);
+            // remove disable edit username
+            //  userNameEditText.setEnabled(false);
         }
     }
 
