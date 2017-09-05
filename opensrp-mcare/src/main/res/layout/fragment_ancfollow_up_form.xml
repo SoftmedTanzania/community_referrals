@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="16dp"
@@ -7,20 +8,22 @@
     android:background="@color/mdtp_white"
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
+
     <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
-        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_gravity="center"
         android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
         android:background="#e5e5e5"
         card_view:cardCornerRadius="0dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,8 +37,8 @@
                 android:textSize="14sp" />
 
 
-
             <CheckBox
+                android:id="@+id/checkbox_pressure"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
@@ -45,6 +48,7 @@
                 android:textSize="14sp" />
 
             <CheckBox
+                android:id="@+id/checkbox_hb_below_60"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
@@ -54,6 +58,7 @@
                 android:textSize="14sp" />
 
             <CheckBox
+                android:id="@+id/checkbox_albumin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
@@ -63,6 +68,7 @@
                 android:textSize="14sp" />
 
             <CheckBox
+                android:id="@+id/checkbox_sugar_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
@@ -72,6 +78,7 @@
                 android:textSize="14sp" />
 
             <CheckBox
+                android:id="@+id/checkbox_umri_wa_mimba"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
@@ -81,6 +88,7 @@
                 android:textSize="14sp" />
 
             <CheckBox
+                android:id="@+id/checkbox_baby_death"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
@@ -90,6 +98,7 @@
                 android:textSize="14sp" />
 
             <CheckBox
+                android:id="@+id/checkbox_mlalo_wa_mtotos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
@@ -97,7 +106,9 @@
                 android:text="mtoto amelala vibaya baada ya wiki 40"
                 android:textColor="@color/secondary_text"
                 android:textSize="14sp" />
+
             <CheckBox
+                android:id="@+id/checkbox_kimo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
@@ -105,6 +116,7 @@
                 android:text="kimo cha mimba kikubwa/kidogo zaidi kuliko umri wake"
                 android:textColor="@color/secondary_text"
                 android:textSize="14sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -115,17 +127,19 @@
                 android:textAllCaps="true"
                 android:textColor="@color/primary_text"
                 android:textSize="14sp" />
+
             <EditText
                 android:id="@+id/facility"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="jina la hospital"/>
+                android:hint="jina la hospital" />
+
             <Button
                 android:id="@+id/submit"
-                android:layout_marginBottom="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Submit"/>
+                android:layout_marginBottom="16dp"
+                android:text="Submit" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>

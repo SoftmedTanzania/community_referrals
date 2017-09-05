@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -43,6 +44,9 @@ public class ANCFollowUpFormFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private Button submitButton;
+    private CheckBox checkBoxPressure,checkboxHb,chechboxAlbumini, checkboxSugar, checkboxUmriWaMimba,
+                     checkboxChildDeath, chechkboxMlaloWaMtoto, checkboxKimo;
+    private String pressure,hb, albumini,sugar, umriWaMimba,childDeath,mlaloWaMtoto,kimo;
     private String formName;
     private EditText editTextFacilityName;
 
@@ -91,6 +95,14 @@ public class ANCFollowUpFormFragment extends Fragment {
 
     private void findViews(View view) {
         editTextFacilityName = (EditText) view.findViewById(R.id.editTextGoBHHID);
+        checkBoxPressure = (CheckBox) view.findViewById(R.id.checkbox_pressure);
+        chechboxAlbumini = (CheckBox) view.findViewById(R.id.checkbox_albumin);
+        checkboxHb = (CheckBox) view.findViewById(R.id.checkbox_hb_below_60);
+        chechkboxMlaloWaMtoto = (CheckBox) view.findViewById(R.id.checkbox_mlalo_wa_mtotos);
+        checkboxChildDeath = (CheckBox) view.findViewById(R.id.checkbox_baby_death);
+        checkboxKimo = (CheckBox) view.findViewById(R.id.checkbox_kimo);
+        checkboxSugar = (CheckBox) view.findViewById(R.id.checkbox_sugar_level);
+        checkboxUmriWaMimba = (CheckBox) view.findViewById(R.id.checkbox_umri_wa_mimba);
         submitButton = (Button)view.findViewById(R.id.submit);
 
 
@@ -98,6 +110,96 @@ public class ANCFollowUpFormFragment extends Fragment {
 
     private void setListeners() {
 
+        checkBoxPressure.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (checkBoxPressure.isChecked()) {
+                    pressure = "true";
+                } else {
+                    pressure = "false";
+                }
+            }
+                      });
+
+        chechboxAlbumini.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (chechboxAlbumini.isChecked()) {
+                    albumini = "true";
+                } else {
+                    albumini = "false";
+                }
+            }
+        });
+
+        checkboxHb.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (checkboxHb.isChecked()) {
+                    hb = "true";
+                } else {
+                    hb = "false";
+                }
+            }
+        });
+        chechkboxMlaloWaMtoto.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (chechkboxMlaloWaMtoto.isChecked()) {
+                    mlaloWaMtoto = "true";
+                } else {
+                    mlaloWaMtoto = "false";
+                }
+            }
+        });
+        checkboxChildDeath.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (checkboxChildDeath.isChecked()) {
+                    childDeath = "true";
+                } else {
+                    childDeath = "false";
+                }
+            }
+        });
+        checkboxKimo.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (checkboxKimo.isChecked()) {
+                    kimo = "true";
+                } else {
+                    kimo = "false";
+                }
+            }
+        });
+        checkboxSugar.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (checkboxSugar.isChecked()) {
+                    sugar = "true";
+                } else {
+                    sugar = "false";
+                }
+            }
+        });
+        checkboxUmriWaMimba.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (checkboxUmriWaMimba.isChecked()) {
+                    umriWaMimba = "true";
+                } else {
+                    umriWaMimba = "false";
+                }
+            }
+        });
 
 
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -105,11 +207,22 @@ public class ANCFollowUpFormFragment extends Fragment {
             public void onClick(View view) {
                 HashMap<String,String> dataHash = new HashMap<String, String>();
                 dataHash.put("facility_name",editTextFacilityName.toString());
-//                dataHash.put("existing_location",currentLocation);
+                dataHash.put("pressure", pressure);
+                dataHash.put("hb", hb);
+                dataHash.put("albumin", albumini);
+                dataHash.put("sugar", sugar);
+                dataHash.put("mlaloWaMtoto", mlaloWaMtoto);
+                dataHash.put("childDeath", childDeath);
+                dataHash.put("umriWaMimba", umriWaMimba);
+                dataHash.put("kimo", kimo);
 
-                         
 
-
+                String trial_one = dataHash.get(pressure);
+                String trial_two = dataHash.get(hb);
+                String trial_three = dataHash.get(kimo);
+                Log.d(TAG,"pressure = "+trial_one);
+                Log.d(TAG,"pressure_1 = "+trial_two);
+                Log.d(TAG,"pressure_2 = "+trial_three);
             }
         });
     }
