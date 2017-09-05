@@ -22,27 +22,6 @@
             <num_pregnancies/>
             <case_would_be_high_risk/>
             <case_would_be_high_risk_reason/>
-            <danger_signs>
-                <yn_dk_label/>
-                <FWANC1HEAD openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="139081AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
-                <FWDISPLAYTEXT6/>
-                <FWANC1BLRVIS openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="147104AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
-                <FWDISPLAYTEXT7/>
-                <FWANC1SWLNG openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="130428AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
-                <FWDISPLAYTEXT8/>
-                <FWANC1CONVL openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="113054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
-                <FWDISPLAYTEXT9/>
-                <FWANC1BLD openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="150802AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
-                <FWDISPLAYTEXT10/>
-                <FWDISPLAYTEXT11/>
-            </danger_signs>
-            <risk_group>
-                <yn_dk_label/>
-                <FWANC1ANM openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="148834AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
-                <FWANC1HBP openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="113859AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
-                <FWANC1DBT openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="119477AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
-                <FWANC1THY openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="124719AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
-            </risk_group>
             <psrf_schedule_logic/>
             <FWPSRSTS openmrs_entity="concept" openmrs_entity_id="163088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
             <start openmrs_entity="concept" openmrs_entity_id="163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
@@ -62,11 +41,8 @@
             <anc_number/>
             <case_would_be_high_risk/>
             <case_would_be_high_risk_reason/>
-
             <case_num_pregnancies/>
-
             <FWWOMVALID>1</FWWOMVALID>
-
             <FWSORTVALUE/>
             <relationalid/>
             <meta>

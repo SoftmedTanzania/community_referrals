@@ -2,7 +2,7 @@
     "form_data_definition_version": "4",
     "form": {
         "bind_type": "mcaremother",
-        "default_bind_path": "/model/instance/Pregnant_Mothers_Registration/",
+        "default_bind_path": "/model/instance/Pregnant_Mothers_Registration",
         "fields": [
             {
                 "name": "id",
@@ -10,8 +10,7 @@
             },
             {
                 "name": "FWWOMFNAME",
-                "bind": "/model/instance/Pregnant_Mothers_Registration/FWWOMFNAME",
-                "shouldLoadValue": true
+                "bind": "/model/instance/Pregnant_Mothers_Registration/FWWOMFNAME"
             },
             {
                 "name": "FWWOMLNAME",
@@ -51,17 +50,14 @@
             },
             {
                 "name": "numberOfPregnancies",
-                "shouldLoadValue": true,
                 "bind": "/model/instance/Pregnant_Mothers_Registration/case_num_pregnancies"
             },
             {
                 "name": "wouldBeHighRisk",
-                "shouldLoadValue": true,
                 "bind": "/model/instance/Pregnant_Mothers_Registration/case_would_be_high_risk"
             },
             {
                 "name": "wouldBeHighRiskReason",
-                "shouldLoadValue": true,
                 "bind": "/model/instance/Pregnant_Mothers_Registration/case_would_be_high_risk_reason"
             },
             {
@@ -74,13 +70,11 @@
             },
             {
                 "name": "mauza",
-                "bind": "/model/instance/Pregnant_Mothers_Registration/existing_location",
-                "shouldLoadValue": true
+                "bind": "/model/instance/Pregnant_Mothers_Registration/existing_location"
             },
             {
                 "name": "edd",
                 "bind": "/model/instance/Pregnant_Mothers_Registration/FWEDD"
-
             },
             {
                 "name": "medicalHistories",
@@ -92,13 +86,11 @@
             },
             {
                 "name": "height",
-                "bind": "/model/instance/Pregnant_Mothers_Registration/height",
-                "shouldLoadValue": true
+                "bind": "/model/instance/Pregnant_Mothers_Registration/height"
             },
             {
                 "name": "weight",
-                "bind": "/model/instance/Pregnant_Mothers_Registration/weight_startofpregnancy",
-                "shouldLoadValue": true
+                "bind": "/model/instance/Pregnant_Mothers_Registration/weight_startofpregnancy"
             },
             {
                 "name": "isHighRiskTillDelivery",
@@ -123,7 +115,8 @@
             {
                 "name": "type",
                 "value": "ANC"
-            },{
+            },
+            {
                 "name": "current_formStatus",
                 "bind": "/model/instance/Pregnant_Mothers_Registration/current_formStatus"
             },
@@ -161,10 +154,8 @@
             },
             {
                 "name": "GOBHHID",
-                "bind": "/model/instance/Pregnant_Mothers_Registration/existing_gobhhid",
-                "shouldLoadValue": true
+                "bind": "/model/instance/Pregnant_Mothers_Registration/existing_gobhhid"
             }
         ]
     }
 }
-

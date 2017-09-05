@@ -225,7 +225,7 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
         clientsProgressView.setVisibility(View.INVISIBLE);
 //        list.setBackgroundColor(Color.RED);
         initializeQueries();
-        processFormSubmission("");
+        //processFormSubmission("");
     }
 
     private DialogOption[] getEditOptions() {
@@ -500,14 +500,8 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
         return fileContents;
     }
 
-    public void savePartialFormData(String partialData) {
-        ((SecuredNativeSmartRegisterActivity) getActivity()).savePartialFormData(partialData, recordId, formName, getFormFieldsOverrides());
-    }
 
-    //TODO Implement this method to initialize a form data
-    public void setFormData(String data) {
-        Log.d(TAG, "Setting form data");
-    }
+
 
     //TODO Implement this method to save the current unsubmitted form data for future uses
     public void saveCurrentFormData() {

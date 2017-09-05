@@ -19,6 +19,7 @@ import org.ei.opensrp.mcare.LoginActivity;
 import org.ei.opensrp.mcare.R;
 import org.ei.opensrp.mcare.elco.ElcoMauzaCommonObjectFilterOption;
 import org.ei.opensrp.mcare.elco.ElcoSearchOption;
+import org.ei.opensrp.mcare.fragment.ANCRegisterFormFragment;
 import org.ei.opensrp.mcare.fragment.mCareANCSmartRegisterFragment;
 import org.ei.opensrp.mcare.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
@@ -99,6 +100,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
     private String[] buildFormNameList() {
         List<String> formNames = new ArrayList<String>();
+        formNames.add("pregnant_mothers_registration");
         formNames.add("anc_reminder_visit_1");
         formNames.add("anc_reminder_visit_2");
         formNames.add("anc_reminder_visit_3");
@@ -243,7 +245,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
                     data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
-                mCareANCSmartRegisterFragment displayFormFragment = (mCareANCSmartRegisterFragment)getDisplayFormFragmentAtIndex(formIndex);
+                ANCRegisterFormFragment displayFormFragment = (ANCRegisterFormFragment)getDisplayFormFragmentAtIndex(2);
                 if (displayFormFragment != null) {
                     Log.d(TAG,"form data = "+data);
                     displayFormFragment.setFormData(data);
@@ -259,6 +261,9 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
         }
 
     }
+
+
+
 
     public void updateSearchView() {
         getSearchView().addTextChangedListener(new TextWatcher() {
@@ -316,7 +321,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
         // save the form
         try {
             FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
-            FormSubmission submission = formUtils.generateFormSubmisionFromJSONString(id, formSubmission, formName, fieldOverrides);
+            FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
 
             org.ei.opensrp.Context context = org.ei.opensrp.Context.getInstance();
             ZiggyService ziggyService = context.ziggyService();
@@ -353,7 +358,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
                 try {
                     mCareANCSmartRegisterFragment displayFormFragment = (mCareANCSmartRegisterFragment) getDisplayFormFragmentAtIndex(prevPageIndex);
                     if (displayFormFragment != null) {
-                        displayFormFragment.setFormData(null);
+//                        displayFormFragment.setFormData(null);
                     }
 
                     displayFormFragment.setRecordId(null);

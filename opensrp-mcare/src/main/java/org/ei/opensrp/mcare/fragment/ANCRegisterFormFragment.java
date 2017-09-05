@@ -19,6 +19,8 @@ import com.google.gson.Gson;
 import org.ei.opensrp.mcare.R;
 import org.ei.opensrp.mcare.adapters.ANCRegisterPagerAdapter;
 import org.ei.opensrp.mcare.datamodels.PregnantMom;
+import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
+import org.json.JSONObject;
 
 public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
 
@@ -31,6 +33,10 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
 
     private PregnantMom pregnantMom;
     private Gson gson = new Gson();
+
+    private JSONObject fieldOverides = new JSONObject();
+    private String recordId;
+    private String formName = "pregnant_mothers_registration";
 
     private static final String TAG = ANCRegisterFormFragment.class.getSimpleName();
 
@@ -152,4 +158,40 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
         return v;
     }
 
+    //TODO Implement this method to initialize a form data
+    public void setFormData(String data) {
+        Log.d(TAG, "Setting form data");
+        ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(data, recordId, formName, getFormFieldsOverrides());
+
+    }
+
+    public void savePartialFormData(String partialData) {
+        ((SecuredNativeSmartRegisterActivity) getActivity()).savePartialFormData(partialData, recordId, formName, getFormFieldsOverrides());
+    }
+
+    public JSONObject getFormFieldsOverrides() {
+        return fieldOverides;
+    }
+
+    public JSONObject getFieldOverides() {
+        return fieldOverides;
+    }
+
+    public void setFieldOverides(String overrides) {
+        try {
+            //get the field overrides map
+            if (overrides != null) {
+                JSONObject json = new JSONObject(overrides);
+                String overridesStr = json.getString("fieldOverrides");
+                this.fieldOverides = new JSONObject(overridesStr);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void setRecordId(String recordId) {
+        this.recordId = recordId;
+    }
 }
