@@ -1,24 +1,24 @@
 package org.ei.opensrp.mcare.fragment;
 
-import android.app.ActionBar;
-import android.app.Fragment;
-import android.content.Context;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Toolbar;
+
+import com.google.gson.Gson;
 
 import org.ei.opensrp.mcare.R;
 import org.ei.opensrp.mcare.adapters.ANCRegisterPagerAdapter;
+import org.ei.opensrp.mcare.datamodels.PregnantMom;
 
 public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
 
@@ -28,6 +28,11 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
 
     private ANCRegisterPagerAdapter pagerAdapter;
     private TabLayout tabs;
+
+    private PregnantMom pregnantMom;
+    private Gson gson = new Gson();
+
+    private static final String TAG = ANCRegisterFormFragment.class.getSimpleName();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,7 +56,7 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
 
         viewPager.setAdapter(pagerAdapter);
 
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
@@ -85,7 +90,7 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
         final int colorWhite = ContextCompat.getColor(getActivity().getApplicationContext(), android.R.color.white);
         final int colorPrimaryLight = ContextCompat.getColor(getActivity().getApplicationContext(), R.color.primary_light);
 
-        tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getIcon() != null)
@@ -110,6 +115,39 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
             fabDone.startAnimation(animationFabHideSlow);
             fabDone.setEnabled(false);
         }
+
+
+        fabDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //todo collect data from forms
+                if (((ANCRegister1stFragment) pagerAdapter.getItem(0)).isFormSubmissionOk()) {
+                    // collect mother details from the 1st page
+                    pregnantMom = ((ANCRegister1stFragment) pagerAdapter.getItem(0)).getPregnantMom();
+
+                    //todo check for checkboxes on the 2nd page then submit form
+
+                    SparseBooleanArray indicatorsMap = ((ANCRegister2ndFragment) pagerAdapter.getItem(1))
+                            .getIndicatorsMap();
+
+                    pregnantMom.setAbove20WeeksPregnant(indicatorsMap.get(R.id.checkboxAgeBelow20));
+                    pregnantMom.setHas10YrsPassedSinceLastPreg(indicatorsMap.get(R.id.checkbox10YrsLastPreg));
+                    pregnantMom.setHasBabyDeath(indicatorsMap.get(R.id.checkboxBabyDeath));
+                    pregnantMom.setHas2orMoreBBA(indicatorsMap.get(R.id.checkbox2orMoreBBA));
+                    pregnantMom.setHasHeartProblem(indicatorsMap.get(R.id.checkboxHeartProb));
+                    pregnantMom.setHasDiabetes(indicatorsMap.get(R.id.checkboxDiabetes));
+                    pregnantMom.setHasTB(indicatorsMap.get(R.id.checkboxTB));
+
+                    // convert to json
+                    String gsonMom = gson.toJson(pregnantMom);
+                    Log.d(TAG, "mom = " + gsonMom);
+
+                    // todo start form submission
+
+                }
+
+            }
+        });
 
         return v;
     }

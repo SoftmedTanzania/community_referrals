@@ -25,10 +25,12 @@
             android:layout_gravity="center">
 
             <EditText
+                android:id="@+id/editTextMotherName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:hint="Andika Jina la Mama"
+                android:imeOptions="actionDone"
                 android:inputType="textPersonName|textFilter|textCapWords"
                 android:minWidth="80dp"
                 android:paddingLeft="32dp"
@@ -137,6 +139,8 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
             android:hint="No. ya Utambulisho"
+            android:imeOptions="actionNext"
+            android:inputType="text"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:textColor="@color/primary_text"
@@ -156,6 +160,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:hint="Umri wa Mama"
+                android:imeOptions="actionNext"
                 android:inputType="number"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
@@ -172,6 +177,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:hint="Urefu"
+                android:imeOptions="actionNext"
                 android:inputType="number"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
@@ -191,14 +197,14 @@
             android:textSize="14sp" />
 
         <RadioGroup
-            android:id="@+id/radioGroupPeriod"
+            android:id="@+id/radioGroupPregnancyAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
 
             <RadioButton
-                android:id="@+id/radioAbove150"
+                android:id="@+id/radioAbove20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="4dp"
@@ -207,7 +213,7 @@
                 android:textColor="@color/primary_text" />
 
             <RadioButton
-                android:id="@+id/radioBelow150"
+                android:id="@+id/radioBelow20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="4dp"

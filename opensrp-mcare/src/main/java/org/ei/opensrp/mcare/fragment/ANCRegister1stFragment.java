@@ -3,6 +3,7 @@ package org.ei.opensrp.mcare.fragment;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -13,11 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.mcare.R;
+import org.ei.opensrp.mcare.datamodels.PregnantMom;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,6 +36,9 @@ public class ANCRegister1stFragment extends Fragment {
     TextView textDate, textPhone, textDateLNMP;
     LinearLayout layoutDatePick, layoutEditPhone;
     CardView cardDatePickLNMP;
+    EditText editTextMotherName, editTextMotherId, editTextMotherAge,
+            editTextHeight, editTextPregCount, editTextBirthCount, editTextChildrenCount;
+    RadioGroup radioGroupPregnancyAge;
 
     private Calendar today;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
@@ -58,6 +65,16 @@ public class ANCRegister1stFragment extends Fragment {
         layoutDatePick = (LinearLayout) fragmentView.findViewById(R.id.layoutDatePick);
         layoutEditPhone = (LinearLayout) fragmentView.findViewById(R.id.layoutEditPhone);
         cardDatePickLNMP = (CardView) fragmentView.findViewById(R.id.cardPickDateLNMP);
+
+        editTextMotherName = (EditText) fragmentView.findViewById(R.id.editTextMotherName);
+        editTextMotherId = (EditText) fragmentView.findViewById(R.id.editTextMotherId);
+        editTextMotherAge = (EditText) fragmentView.findViewById(R.id.editTextMotherAge);
+        editTextHeight = (EditText) fragmentView.findViewById(R.id.editTextHeight);
+        editTextPregCount = (EditText) fragmentView.findViewById(R.id.editTextPregCount);
+        editTextBirthCount = (EditText) fragmentView.findViewById(R.id.editTextBirthCount);
+        editTextChildrenCount = (EditText) fragmentView.findViewById(R.id.editTextChildrenCount);
+
+        radioGroupPregnancyAge = (RadioGroup) fragmentView.findViewById(R.id.radioGroupPregnancyAge);
 
         // initialize date to today's date
         textDate.setText(dateFormat.format(today.getTimeInMillis()));
@@ -163,5 +180,45 @@ public class ANCRegister1stFragment extends Fragment {
                 dialog.dismiss();
             }
         });
+    }
+
+    public boolean isFormSubmissionOk() {
+        if (TextUtils.isEmpty(editTextMotherName.getText())
+                || TextUtils.isEmpty(editTextMotherId.getText())
+                || TextUtils.isEmpty(editTextMotherAge.getText())
+                || TextUtils.isEmpty(editTextHeight.getText())
+                || TextUtils.isEmpty(editTextPregCount.getText())
+                || TextUtils.isEmpty(editTextBirthCount.getText())
+                || TextUtils.isEmpty(editTextChildrenCount.getText())
+                || TextUtils.isEmpty(textPhone.getText())
+                || TextUtils.isEmpty(textDateLNMP.getText())) {
+
+            Toast.makeText(getContext(),
+                    "Please provide all required information.",
+                    Toast.LENGTH_LONG).show();
+            return false;
+
+        } else if (radioGroupPregnancyAge.getCheckedRadioButtonId() == -1)
+            // no radio checked
+            return false;
+        else
+            // all good
+            return true;
+    }
+
+    public PregnantMom getPregnantMom() {
+        PregnantMom mom = new PregnantMom();
+
+        mom.setName(editTextMotherName.getText().toString());
+        mom.setId(editTextMotherId.getText().toString());
+        mom.setPhone(textPhone.getText().toString());
+        mom.setAge(Integer.valueOf(editTextMotherAge.getText().toString()));
+        mom.setHeight(Integer.valueOf(editTextHeight.getText().toString()));
+        mom.setPregnancyCount(Integer.valueOf(editTextPregCount.getText().toString()));
+        mom.setBirthCount(Integer.valueOf(editTextBirthCount.getText().toString()));
+        mom.setChildrenCount(Integer.valueOf(editTextChildrenCount.getText().toString()));
+        mom.setAbove20WeeksPregnant(radioGroupPregnancyAge.getCheckedRadioButtonId() == R.id.radioAbove20);
+
+        return mom;
     }
 }
