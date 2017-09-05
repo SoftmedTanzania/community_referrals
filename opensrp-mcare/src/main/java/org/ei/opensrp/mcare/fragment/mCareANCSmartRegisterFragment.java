@@ -438,7 +438,7 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
 
     public void processFormSubmission(String formSubmission) {
         Log.d(TAG, "submitted data = " + formSubmission);
-
+        JSONObject formSubmissionJson = null;
         HashMap<String, String> dataHash = new HashMap<String, String>();
         dataHash.put("mother_id", "1");
         dataHash.put("reg_date", "2017-09-04");
@@ -466,7 +466,7 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
         String modelString = readFileAssets("www/form/" + formName + "/model.xml").replaceAll("\"", "'").replaceAll("\n", "").replaceAll("\r", "").replaceAll("/", "/");
 
         try {
-            JSONObject formSubmissionJson = XML.toJSONObject(modelString);
+            formSubmissionJson = XML.toJSONObject(modelString);
 
             for (Map.Entry<String, String> entry : dataHash.entrySet()) {
                 String key = entry.getKey();
@@ -474,13 +474,13 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
                 populateJSONWithData(formSubmissionJson, key, value);
             }
 
-            Log.d(TAG, "Results : " + formSubmission.toString());
+            Log.d(TAG, "Results : " + formSubmissionJson.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
-        ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(formSubmission, recordId, formName, getFormFieldsOverrides());
+        ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(formSubmissionJson.toString(), recordId, formName, getFormFieldsOverrides());
     }
 
     public String readFileAssets(String fileName) {

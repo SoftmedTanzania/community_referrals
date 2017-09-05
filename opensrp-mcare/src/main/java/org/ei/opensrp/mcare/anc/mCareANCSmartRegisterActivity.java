@@ -316,7 +316,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
         // save the form
         try {
             FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
-            FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
+            FormSubmission submission = formUtils.generateFormSubmisionFromJSONString(id, formSubmission, formName, fieldOverrides);
 
             org.ei.opensrp.Context context = org.ei.opensrp.Context.getInstance();
             ZiggyService ziggyService = context.ziggyService();
