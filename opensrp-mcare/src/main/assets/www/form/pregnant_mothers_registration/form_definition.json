@@ -79,7 +79,7 @@
             },
             {
                 "name": "edd",
-                "bind": "/model/instance/Pregnant_Mothers_Registration/FWEDD",
+                "bind": "/model/instance/Pregnant_Mothers_Registration/FWEDD"
 
             },
             {
