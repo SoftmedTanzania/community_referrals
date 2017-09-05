@@ -14,7 +14,14 @@ public class PregnantMom {
             has2orMoreBBA,
             hasHeartProblem,
             hasDiabetes,
-            hasTB;
+            hasTB,
+            fourOrMorePreg,
+            firstPregAbove35Yrs,
+            heightBelow150,
+            csDelivery,
+            kilemaChaNyonga,
+            bleedingOnDelivery,
+            kondoKukwama;
 
     public String getName() {
         return name;
@@ -158,5 +165,61 @@ public class PregnantMom {
 
     public void setHasTB(boolean hasTB) {
         this.hasTB = hasTB;
+    }
+
+    public boolean isFourOrMorePreg() {
+        return fourOrMorePreg;
+    }
+
+    public void setFourOrMorePreg(boolean fourOrMorePreg) {
+        this.fourOrMorePreg = fourOrMorePreg;
+    }
+
+    public boolean isFirstPregAbove35Yrs() {
+        return firstPregAbove35Yrs;
+    }
+
+    public void setFirstPregAbove35Yrs(boolean firstPregAbove35Yrs) {
+        this.firstPregAbove35Yrs = firstPregAbove35Yrs;
+    }
+
+    public boolean isHeightBelow150() {
+        return heightBelow150;
+    }
+
+    public void setHeightBelow150(boolean heightBelow150) {
+        this.heightBelow150 = heightBelow150;
+    }
+
+    public boolean isCsDelivery() {
+        return csDelivery;
+    }
+
+    public void setCsDelivery(boolean csDelivery) {
+        this.csDelivery = csDelivery;
+    }
+
+    public boolean isKilemaChaNyonga() {
+        return kilemaChaNyonga;
+    }
+
+    public void setKilemaChaNyonga(boolean kilemaChaNyonga) {
+        this.kilemaChaNyonga = kilemaChaNyonga;
+    }
+
+    public boolean isBleedingOnDelivery() {
+        return bleedingOnDelivery;
+    }
+
+    public void setBleedingOnDelivery(boolean bleedingOnDelivery) {
+        this.bleedingOnDelivery = bleedingOnDelivery;
+    }
+
+    public boolean isKondoKukwama() {
+        return kondoKukwama;
+    }
+
+    public void setKondoKukwama(boolean kondoKukwama) {
+        this.kondoKukwama = kondoKukwama;
     }
 }
