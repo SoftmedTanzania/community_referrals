@@ -1,10 +1,6 @@
 package org.ei.opensrp.mcare.fragment;
 
-import android.app.ActionBar;
-import android.app.Fragment;
-import android.content.Context;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.os.Bundle;
@@ -17,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Toolbar;
 
 import com.google.gson.Gson;
 
@@ -130,12 +125,25 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
                     // collect mother details from the 1st page
                     pregnantMom = ((ANCRegister1stFragment) pagerAdapter.getItem(0)).getPregnantMom();
 
-                    Log.d(TAG, "mom = " + gson.toJson(pregnantMom));
-
                     //todo check for checkboxes on the 2nd page then submit form
 
-                    SparseBooleanArray checkboxesMap = ((ANCRegister2ndFragment) pagerAdapter.getItem(1))
-                            .getCheckBoxMap();
+                    SparseBooleanArray indicatorsMap = ((ANCRegister2ndFragment) pagerAdapter.getItem(1))
+                            .getIndicatorsMap();
+
+                    pregnantMom.setAbove20WeeksPregnant(indicatorsMap.get(R.id.checkboxAgeBelow20));
+                    pregnantMom.setHas10YrsPassedSinceLastPreg(indicatorsMap.get(R.id.checkbox10YrsLastPreg));
+                    pregnantMom.setHasBabyDeath(indicatorsMap.get(R.id.checkboxBabyDeath));
+                    pregnantMom.setHas2orMoreBBA(indicatorsMap.get(R.id.checkbox2orMoreBBA));
+                    pregnantMom.setHasHeartProblem(indicatorsMap.get(R.id.checkboxHeartProb));
+                    pregnantMom.setHasDiabetes(indicatorsMap.get(R.id.checkboxDiabetes));
+                    pregnantMom.setHasTB(indicatorsMap.get(R.id.checkboxTB));
+
+                    // convert to json
+                    String gsonMom = gson.toJson(pregnantMom);
+                    Log.d(TAG, "mom = " + gsonMom);
+
+                    // todo start form submission
+
                 }
 
             }

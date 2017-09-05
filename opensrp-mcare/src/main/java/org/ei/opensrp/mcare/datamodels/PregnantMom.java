@@ -8,7 +8,13 @@ public class PregnantMom {
     private String name, id, phone;
     private long dateReg, dateLNMP, dateDeliveryPrediction;
     private int age, height, pregnancyCount, birthCount, childrenCount;
-    private boolean isAbove20WeeksPregnant;
+    private boolean isAbove20WeeksPregnant,
+            has10YrsPassedSinceLastPreg,
+            hasBabyDeath,
+            has2orMoreBBA,
+            hasHeartProblem,
+            hasDiabetes,
+            hasTB;
 
     public String getName() {
         return name;
@@ -104,5 +110,53 @@ public class PregnantMom {
 
     public void setAbove20WeeksPregnant(boolean above20WeeksPregnant) {
         isAbove20WeeksPregnant = above20WeeksPregnant;
+    }
+
+    public boolean isHas10YrsPassedSinceLastPreg() {
+        return has10YrsPassedSinceLastPreg;
+    }
+
+    public void setHas10YrsPassedSinceLastPreg(boolean has10YrsPassedSinceLastPreg) {
+        this.has10YrsPassedSinceLastPreg = has10YrsPassedSinceLastPreg;
+    }
+
+    public boolean isHasBabyDeath() {
+        return hasBabyDeath;
+    }
+
+    public void setHasBabyDeath(boolean hasBabyDeath) {
+        this.hasBabyDeath = hasBabyDeath;
+    }
+
+    public boolean isHas2orMoreBBA() {
+        return has2orMoreBBA;
+    }
+
+    public void setHas2orMoreBBA(boolean has2orMoreBBA) {
+        this.has2orMoreBBA = has2orMoreBBA;
+    }
+
+    public boolean isHasHeartProblem() {
+        return hasHeartProblem;
+    }
+
+    public void setHasHeartProblem(boolean hasHeartProblem) {
+        this.hasHeartProblem = hasHeartProblem;
+    }
+
+    public boolean isHasDiabetes() {
+        return hasDiabetes;
+    }
+
+    public void setHasDiabetes(boolean hasDiabetes) {
+        this.hasDiabetes = hasDiabetes;
+    }
+
+    public boolean isHasTB() {
+        return hasTB;
+    }
+
+    public void setHasTB(boolean hasTB) {
+        this.hasTB = hasTB;
     }
 }
