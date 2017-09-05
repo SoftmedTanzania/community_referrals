@@ -143,20 +143,20 @@ public class NativeHomeActivity extends SecuredActivity {
     }
 
     private void setupViews() {
-        findViewById(R.id.btn_ec_register).setOnClickListener(onRegisterStartListener);
+        findViewById(R.id.btn_chw_register).setOnClickListener(onRegisterStartListener);
 //        findViewById(R.id.btn_pnc_register).setOnClickListener(onRegisterStartListener);
         findViewById(R.id.btn_anc_register).setOnClickListener(onRegisterStartListener);
-        findViewById(R.id.btn_fp_register).setOnClickListener(onRegisterStartListener);
+        findViewById(R.id.btn_pnc_register).setOnClickListener(onRegisterStartListener);
 //        findViewById(R.id.btn_child_register).setOnClickListener(onRegisterStartListener);
 
         findViewById(R.id.btn_reporting).setOnClickListener(onButtonsClickListener);
-        findViewById(R.id.btn_videos).setOnClickListener(onButtonsClickListener);
+//        findViewById(R.id.btn_videos).setOnClickListener(onButtonsClickListener);
 
-        ecRegisterClientCountView = (TextView) findViewById(R.id.txt_ec_register_client_count);
-        pncRegisterClientCountView = (TextView) findViewById(R.id.txt_pnc_register_client_count);
-        ancRegisterClientCountView = (TextView) findViewById(R.id.txt_anc_register_client_count);
-        fpRegisterClientCountView = (TextView) findViewById(R.id.txt_fp_register_client_count);
-        childRegisterClientCountView = (TextView) findViewById(R.id.txt_child_register_client_count);
+//       onButtonsClickListener ecRegisterClientCountView = (TextView) findViewById(R.id.txt_ec_register_client_count);
+//        pncRegisterClientCountView = (TextView) findViewById(R.id.txt_pnc_register_client_count);
+//        ancRegisterClientCountView = (TextView) findViewById(R.id.txt_anc_register_client_count);
+//        fpRegisterClientCountView = (TextView) findViewById(R.id.txt_fp_register_client_count);
+//        childRegisterClientCountView = (TextView) findViewById(R.id.txt_child_register_client_count);
     }
 
     private void initialize() {
@@ -169,7 +169,7 @@ public class NativeHomeActivity extends SecuredActivity {
 //        getSupportActionBar().setLogo(org.ei.opensrp.mcare.R.mipmap.logo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("SoftMed");
+        getSupportActionBar().setTitle("UNFPA");
         LoginActivity.setLanguage();
     }
 
@@ -224,11 +224,11 @@ public class NativeHomeActivity extends SecuredActivity {
                 Runnable myRunnable = new Runnable() {
                     @Override
                     public void run() {
-                        pncRegisterClientCountView.setText(valueOf(pnccount));
-                        ecRegisterClientCountView.setText(valueOf(hhcount));
-                        ancRegisterClientCountView.setText(valueOf(anccount));
-                        fpRegisterClientCountView.setText(valueOf(elcocount));
-                        childRegisterClientCountView.setText(valueOf(childcount));
+//                        pncRegisterClientCountView.setText(valueOf(pnccount));
+//                        ecRegisterClientCountView.setText(valueOf(hhcount));
+//                        ancRegisterClientCountView.setText(valueOf(anccount));
+//                        fpRegisterClientCountView.setText(valueOf(elcocount));
+//                        childRegisterClientCountView.setText(valueOf(childcount));
                     }
                 };
                 mainHandler.post(myRunnable);
@@ -320,9 +320,6 @@ public class NativeHomeActivity extends SecuredActivity {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-                case R.id.btn_ec_register:
-                    navigationController.startECSmartRegistry();
-                    break;
 
                 case R.id.btn_anc_register:
                     navigationController.startANCSmartRegistry();
@@ -332,13 +329,13 @@ public class NativeHomeActivity extends SecuredActivity {
                     navigationController.startPNCSmartRegistry();
                     break;
 
-                case R.id.btn_child_register:
+                case R.id.btn_chw_register:
                     navigationController.startChildSmartRegistry();
                     break;
 
-                case R.id.btn_fp_register:
-                    navigationController.startFPSmartRegistry();
-                    break;
+//                case R.id.btn_reporting:
+//                    navigationController.startFPSmartRegistry();
+//                    break;
             }
         }
     };
@@ -352,9 +349,9 @@ public class NativeHomeActivity extends SecuredActivity {
 //                    navigationController.startReports();
                     break;
 
-                case R.id.btn_videos:
+//                case R.id.btn_videos:
 //                    navigationController.startVideos();
-                    break;
+//                    break;
             }
         }
     };

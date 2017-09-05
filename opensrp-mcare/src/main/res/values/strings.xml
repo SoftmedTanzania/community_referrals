@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">OpenSRP</string>
+    <string name="app_name">UNFPA</string>
     <string name="userNameEditText">Enter user name</string>
     <string name="passwordEditText">Enter password</string>
     <string name="login_text">Log In</string>
@@ -409,6 +409,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="provide_username_password">Please provide username and password.</string>
 
 
 </resources>

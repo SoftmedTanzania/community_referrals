@@ -31,9 +31,7 @@ import org.ei.opensrp.mcare.anc.mCareANCSmartRegisterActivity;
 import org.ei.opensrp.mcare.anc.mCareAncDetailActivity;
 import org.ei.opensrp.mcare.elco.ElcoMauzaCommonObjectFilterOption;
 import org.ei.opensrp.mcare.elco.ElcoPSRFDueDateSort;
-import org.ei.opensrp.mcare.elco.ElcoSmartRegisterActivity;
 import org.ei.opensrp.mcare.elco.PSRFHandler;
-import org.ei.opensrp.mcare.household.HouseHoldSmartRegisterActivity;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.util.StringUtil;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
@@ -49,31 +47,39 @@ import org.ei.opensrp.view.dialog.EditOption;
 import org.ei.opensrp.view.dialog.FilterOption;
 import org.ei.opensrp.view.dialog.ServiceModeOption;
 import org.ei.opensrp.view.dialog.SortOption;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.XML;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
 import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.ei.opensrp.util.FormUtils.populateJSONWithData;
 
 /**
  * Created by koros on 11/2/15.
  */
 public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     private static final String TAG = mCareANCSmartRegisterFragment.class.getSimpleName();
-
+    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     private SmartRegisterClientsProvider clientProvider = null;
     private CommonPersonObjectController controller;
     private VillageController villageController;
     private DialogOptionMapper dialogOptionMapper;
     private String locationDialogTAG = "locationDialogTAG";
-
-    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
+    private JSONObject fieldOverides = new JSONObject();
+    private String recordId;
+    private String formName;
 
     @Override
     protected SmartRegisterPaginatedAdapter adapter() {
@@ -114,24 +120,24 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
             @Override
             public DialogOption[] filterOptions() {
                 ArrayList<DialogOption> dialogOptionslist = new ArrayList<DialogOption>();
-                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label),""));
-                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_anc1),filterStringForANCRV1()));
-                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_anc2),filterStringForANCRV2()));
-                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_anc3),filterStringForANCRV3()));
-                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_anc4),filterStringForANCRV4()));
+                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label), ""));
+                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_anc1), filterStringForANCRV1()));
+                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_anc2), filterStringForANCRV2()));
+                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_anc3), filterStringForANCRV3()));
+                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_anc4), filterStringForANCRV4()));
 
                 String locationjson = context().anmLocationController().get();
                 LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
 
-                Map<String,TreeNode<String, Location>> locationMap =
+                Map<String, TreeNode<String, Location>> locationMap =
                         locationTree.getLocationsHierarchy();
-                addChildToList(dialogOptionslist,locationMap);
+                addChildToList(dialogOptionslist, locationMap);
                 DialogOption[] dialogOptions = new DialogOption[dialogOptionslist.size()];
-                for (int i = 0;i < dialogOptionslist.size();i++){
+                for (int i = 0; i < dialogOptionslist.size(); i++) {
                     dialogOptions[i] = dialogOptionslist.get(i);
                 }
 
-                return  dialogOptions;
+                return dialogOptions;
             }
 
             @Override
@@ -143,11 +149,11 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
             public DialogOption[] sortingOptions() {
                 return new DialogOption[]{
 //                        new ElcoPSRFDueDateSort(),
-                        new CursorCommonObjectSort(getString(R.string.due_status),sortByAlertmethod()),
-                        new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.elco_alphabetical_sort),sortByFWWOMFNAME()),
-                        new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.hh_fwGobhhid_sort),sortByGOBHHID()),
-                        new CursorCommonObjectSort( Context.getInstance().applicationContext().getString(R.string.hh_fwJivhhid_sort),sortByJiVitAHHID()),
-                        new CursorCommonObjectSort( Context.getInstance().applicationContext().getString(R.string.sortbyLmp),sortByLmp())
+                        new CursorCommonObjectSort(getString(R.string.due_status), sortByAlertmethod()),
+                        new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.elco_alphabetical_sort), sortByFWWOMFNAME()),
+                        new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.hh_fwGobhhid_sort), sortByGOBHHID()),
+                        new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.hh_fwJivhhid_sort), sortByJiVitAHHID()),
+                        new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.sortbyLmp), sortByLmp())
 
 //                        new CommonObjectSort(true,false,true,"age")
                 };
@@ -170,12 +176,12 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
     @Override
     protected void onInitialization() {
 
-        context().formSubmissionRouter().getHandlerMap().put("psrf_form",new PSRFHandler());
+        context().formSubmissionRouter().getHandlerMap().put("psrf_form", new PSRFHandler());
     }
 
     @Override
     public void startRegistration() {
-        Log.d(TAG,"starting registrations");
+        Log.d(TAG, "starting registrations");
         FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
         Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
         if (prev != null) {
@@ -191,17 +197,18 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
     @Override
     protected void onCreation() {
     }
+
     @Override
     protected void onResumption() {
         super.onResumption();
         getDefaultOptionsProvider();
-        if(isPausedOrRefreshList()) {
+        if (isPausedOrRefreshList()) {
             initializeQueries();
         }
         updateSearchView();
-        try{
+        try {
             LoginActivity.setLanguage();
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -213,7 +220,7 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
         view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
         view.findViewById(R.id.service_mode_selection).setVisibility(INVISIBLE);
 
-        ImageButton startregister = (ImageButton)view.findViewById(org.ei.opensrp.R.id.register_client);
+        ImageButton startregister = (ImageButton) view.findViewById(org.ei.opensrp.R.id.register_client);
         startregister.setVisibility(View.VISIBLE);
         clientsView.setVisibility(View.VISIBLE);
         clientsProgressView.setVisibility(View.INVISIBLE);
@@ -222,71 +229,14 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
     }
 
     private DialogOption[] getEditOptions() {
-        return ((mCareANCSmartRegisterActivity)getActivity()).getEditOptions();
-    }
-    private DialogOption[] getEditOptionsforanc(String ancvisittext,String ancvisitstatus) {
-        return ((mCareANCSmartRegisterActivity)getActivity()).getEditOptionsforanc(ancvisittext,ancvisitstatus);
+        return ((mCareANCSmartRegisterActivity) getActivity()).getEditOptions();
     }
 
-
-
-    private class ClientActionHandler implements View.OnClickListener {
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.profile_info_layout:
-                    mCareAncDetailActivity.ancclient = (CommonPersonObjectClient)view.getTag();
-                    Intent intent = new Intent(getActivity(),mCareAncDetailActivity.class);
-                    startActivity(intent);
-                    break;
-                case R.id.nbnf_due_date:
-                    showFragmentDialog(new EditDialogOptionModelfornbnf(), view.getTag(R.id.clientobject));
-                    break;
-                case R.id.anc_reminder_due_date:
-                    CustomFontTextView ancreminderDueDate = (CustomFontTextView)view.findViewById(R.id.anc_reminder_due_date);
-                    Log.v("do as you will", (String) view.getTag(R.id.textforAncRegister));
-                    showFragmentDialog(new EditDialogOptionModelForANC((String)view.getTag(R.id.textforAncRegister),(String)view.getTag(R.id.AlertStatustextforAncRegister)), view.getTag(R.id.clientobject));
-                    break;
-            }
-        }
-
-        private void showProfileView(ECClient client) {
-            navigationController.startEC(client.entityId());
-        }
-    }
-    private class EditDialogOptionModelfornbnf implements DialogOptionModel {
-        @Override
-        public DialogOption[] getDialogOptions() {
-            return getEditOptions();
-        }
-
-        @Override
-        public void onDialogOptionSelection(DialogOption option, Object tag) {
-            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
-        }
-    }
-    private class EditDialogOptionModelForANC implements DialogOptionModel {
-        String ancvisittext ;;
-        String Ancvisitstatus;
-        public EditDialogOptionModelForANC(String text,String status) {
-            ancvisittext = text;
-            Ancvisitstatus = status;
-        }
-
-        @Override
-        public DialogOption[] getDialogOptions() {
-            return getEditOptionsforanc(ancvisittext,Ancvisitstatus);
-        }
-
-        @Override
-        public void onDialogOptionSelection(DialogOption option, Object tag) {
-            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
-        }
+    private DialogOption[] getEditOptionsforanc(String ancvisittext, String ancvisitstatus) {
+        return ((mCareANCSmartRegisterActivity) getActivity()).getEditOptionsforanc(ancvisittext, ancvisitstatus);
     }
 
-
-
-    public void updateSearchView(){
+    public void updateSearchView() {
         getSearchView().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
@@ -295,9 +245,9 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
             @Override
             public void onTextChanged(final CharSequence cs, int start, int before, int count) {
 
-                if(cs.toString().equalsIgnoreCase("")){
+                if (cs.toString().equalsIgnoreCase("")) {
                     filters = "";
-                }else {
+                } else {
                     //filters = "and FWWOMFNAME Like '%" + cs.toString() + "%' or GOBHHID Like '%" + cs.toString() + "%'  or JiVitAHHID Like '%" + cs.toString() + "%' ";
                     filters = cs.toString();
                 }
@@ -316,52 +266,36 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
             }
         });
     }
-    public void addChildToList(ArrayList<DialogOption> dialogOptionslist,Map<String,TreeNode<String, Location>> locationMap){
-        for(Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
 
-            if(entry.getValue().getChildren() != null) {
-                addChildToList(dialogOptionslist,entry.getValue().getChildren());
+    public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
+        for (Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
 
-            }else{
+            if (entry.getValue().getChildren() != null) {
+                addChildToList(dialogOptionslist, entry.getValue().getChildren());
+
+            } else {
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
-                dialogOptionslist.add(new ElcoMauzaCommonObjectFilterOption(name,"location_name", name));
+                dialogOptionslist.add(new ElcoMauzaCommonObjectFilterOption(name, "location_name", name));
 
             }
         }
     }
-    class ancControllerfiltermap extends ControllerFilterMap{
 
-        @Override
-        public boolean filtermapLogic(CommonPersonObject commonPersonObject) {
-            boolean returnvalue = false;
-            if(commonPersonObject.getDetails().get("FWWOMVALID") != null){
-                if(commonPersonObject.getDetails().get("FWWOMVALID").equalsIgnoreCase("1")){
-                    returnvalue = true;
-                    if(commonPersonObject.getDetails().get("Is_PNC")!=null){
-                        if(commonPersonObject.getDetails().get("Is_PNC").equalsIgnoreCase("1")){
-                            returnvalue = false;
-                        }
-
-                    }
-                }
-            }
-            Log.v("the filter",""+returnvalue);
-            return returnvalue;
-        }
-    }
-    public String ancMainSelectWithJoins(){
+    public String ancMainSelectWithJoins() {
         return "Select id as _id,relationalid,details,FWWOMFNAME,FWPSRLMP,FWSORTVALUE,JiVitAHHID,GOBHHID,Is_PNC,FWBNFSTS,FWBNFDTOO \n" +
                 "from mcaremother\n";
     }
-    public String ancMainCountWithJoins(){
+
+    public String ancMainCountWithJoins() {
         return "Select Count(*) \n" +
                 "from mcaremother\n";
     }
-    public void initializeQueries(){
+
+    public void initializeQueries() {
         mCareANCSmartClientsProvider hhscp = new mCareANCSmartClientsProvider(getActivity(),
-                clientActionHandler,context().alertService());
-        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, new CommonRepository("mcaremother",new String []{"FWWOMFNAME","FWPSRLMP","FWSORTVALUE","JiVitAHHID","GOBHHID","Is_PNC","FWBNFSTS","FWBNFDTOO"}));
+                clientActionHandler, context().alertService());
+        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, new CommonRepository("mcaremother", new String[]{"FWWOMFNAME", "FWPSRLMP", "FWSORTVALUE", "JiVitAHHID", "GOBHHID", "Is_PNC", "FWBNFSTS", "FWBNFDTOO"}));
         clientsView.setAdapter(clientAdapter);
 
         setTablename("mcaremother");
@@ -383,33 +317,43 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
         refresh();
 
     }
-    private String sortBySortValue(){
+
+    private String sortBySortValue() {
         return " FWSORTVALUE ASC";
     }
-    private String sortByFWWOMFNAME(){
+
+    private String sortByFWWOMFNAME() {
         return " FWWOMFNAME ASC";
     }
-    private String sortByJiVitAHHID(){
+
+    private String sortByJiVitAHHID() {
         return " JiVitAHHID ASC";
     }
-    private String sortByLmp(){
+
+    private String sortByLmp() {
         return " FWPSRLMP ASC";
     }
-    private String filterStringForANCRV1(){
+
+    private String filterStringForANCRV1() {
         return "ancrv_1";
     }
-    private String filterStringForANCRV2(){
+
+    private String filterStringForANCRV2() {
         return "ancrv_2";
     }
-    private String filterStringForANCRV3(){
+
+    private String filterStringForANCRV3() {
         return "ancrv_3";
     }
-    private String filterStringForANCRV4(){
+
+    private String filterStringForANCRV4() {
         return "ancrv_4";
     }
-    private String sortByGOBHHID(){
+
+    private String sortByGOBHHID() {
         return " GOBHHID ASC";
     }
+
     private String sortByAlertmethod() {
         return " CASE WHEN Ante_Natal_Care_Reminder_Visit = 'urgent' and BirthNotificationPregnancyStatusFollowUp = 'urgent' THEN 1 "
                 +
@@ -444,20 +388,201 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
 
     /**
      * Override filter to capture fts filter by location
+     *
      * @param filter
      */
     @Override
     public void onFilterSelection(FilterOption filter) {
         appliedVillageFilterView.setText(filter.name());
-        filters = ((CursorFilterOption)filter).filter();
+        filters = ((CursorFilterOption) filter).filter();
         mainCondition = "(Is_PNC is null or Is_PNC = '0') and FWWOMFNAME not null and FWWOMFNAME != \"\"   AND details  LIKE '%\"FWWOMVALID\":\"1\"%'";
 
-        if(StringUtils.isNotBlank(filters) && filters.contains(" and details LIKE ")){
+        if (StringUtils.isNotBlank(filters) && filters.contains(" and details LIKE ")) {
             mainCondition += filters;
             filters = "";
         }
         CountExecute();
         filterandSortExecute();
+    }
+
+    public String getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(String recordId) {
+        this.recordId = recordId;
+    }
+
+    // override this on tha child classes to override specific fields
+    public JSONObject getFormFieldsOverrides() {
+        return fieldOverides;
+    }
+
+    public JSONObject getFieldOverides() {
+        return fieldOverides;
+    }
+
+    public void setFieldOverides(String overrides) {
+        try {
+            //get the field overrides map
+            if (overrides != null) {
+                JSONObject json = new JSONObject(overrides);
+                String overridesStr = json.getString("fieldOverrides");
+                this.fieldOverides = new JSONObject(overridesStr);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void processFormSubmission(String formSubmission) {
+        Log.d(TAG, "submitted data = " + formSubmission);
+
+        HashMap<String, String> dataHash = new HashMap<String, String>();
+        dataHash.put("mother_id", recordId);
+        dataHash.put("form_name", formName);
+
+        //TODO Clean this data with the correct information from interface
+        dataHash.put("FWHOHBIRTHDATE", "07-09-1990");
+        dataHash.put("FWHOHGENDER", "1");
+        dataHash.put("FWNHHMBRNUM", "test");
+        dataHash.put("FWNHHMWRA", "test");
+        dataHash.put("ELCO", "1");
+        dataHash.put("user_type", "1");
+
+        Log.d(TAG, "formname = " + formName);
+
+        //TODO set this name via setform name method
+        formName = "new_household_registration";
+        String modelString = readFileAssets("www/form/" + formName + "/model.xml").replaceAll("\"", "'").replaceAll("\n", "").replaceAll("\r", "").replaceAll("/", "/");
+
+        try {
+            JSONObject formSubmissionJson = XML.toJSONObject(modelString);
+
+            for (Map.Entry<String, String> entry : dataHash.entrySet()) {
+                String key = entry.getKey();
+                String value = (String) entry.getValue();
+                populateJSONWithData(formSubmissionJson, key, value);
+            }
+
+            Log.d(TAG, "Results : " + formSubmission.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(formSubmission, recordId, formName, getFormFieldsOverrides());
+    }
+
+    public String readFileAssets(String fileName) {
+        String fileContents = null;
+        try {
+            InputStream is = getActivity().getAssets().open(fileName);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            fileContents = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        //Log.d("File", fileContents);
+        return fileContents;
+    }
+
+    public void savePartialFormData(String partialData) {
+        ((SecuredNativeSmartRegisterActivity) getActivity()).savePartialFormData(partialData, recordId, formName, getFormFieldsOverrides());
+    }
+
+    //TODO Implement this method to initialize a form data
+    public void setFormData(String data) {
+        Log.d(TAG, "Setting form data");
+    }
+
+    //TODO Implement this method to save the current unsubmitted form data for future uses
+    public void saveCurrentFormData() {
+        Log.d(TAG, "Save the currentform data");
+    }
+
+    private class ClientActionHandler implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.profile_info_layout:
+                    mCareAncDetailActivity.ancclient = (CommonPersonObjectClient) view.getTag();
+                    Intent intent = new Intent(getActivity(), mCareAncDetailActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.nbnf_due_date:
+                    showFragmentDialog(new EditDialogOptionModelfornbnf(), view.getTag(R.id.clientobject));
+                    break;
+                case R.id.anc_reminder_due_date:
+                    CustomFontTextView ancreminderDueDate = (CustomFontTextView) view.findViewById(R.id.anc_reminder_due_date);
+                    Log.v("do as you will", (String) view.getTag(R.id.textforAncRegister));
+                    showFragmentDialog(new EditDialogOptionModelForANC((String) view.getTag(R.id.textforAncRegister), (String) view.getTag(R.id.AlertStatustextforAncRegister)), view.getTag(R.id.clientobject));
+                    break;
+            }
+        }
+
+        private void showProfileView(ECClient client) {
+            navigationController.startEC(client.entityId());
+        }
+    }
+
+    private class EditDialogOptionModelfornbnf implements DialogOptionModel {
+        @Override
+        public DialogOption[] getDialogOptions() {
+            return getEditOptions();
+        }
+
+        @Override
+        public void onDialogOptionSelection(DialogOption option, Object tag) {
+            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
+        }
+    }
+
+    private class EditDialogOptionModelForANC implements DialogOptionModel {
+        String ancvisittext;
+        ;
+        String Ancvisitstatus;
+
+        public EditDialogOptionModelForANC(String text, String status) {
+            ancvisittext = text;
+            Ancvisitstatus = status;
+        }
+
+        @Override
+        public DialogOption[] getDialogOptions() {
+            return getEditOptionsforanc(ancvisittext, Ancvisitstatus);
+        }
+
+        @Override
+        public void onDialogOptionSelection(DialogOption option, Object tag) {
+            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
+        }
+    }
+
+    class ancControllerfiltermap extends ControllerFilterMap {
+
+        @Override
+        public boolean filtermapLogic(CommonPersonObject commonPersonObject) {
+            boolean returnvalue = false;
+            if (commonPersonObject.getDetails().get("FWWOMVALID") != null) {
+                if (commonPersonObject.getDetails().get("FWWOMVALID").equalsIgnoreCase("1")) {
+                    returnvalue = true;
+                    if (commonPersonObject.getDetails().get("Is_PNC") != null) {
+                        if (commonPersonObject.getDetails().get("Is_PNC").equalsIgnoreCase("1")) {
+                            returnvalue = false;
+                        }
+
+                    }
+                }
+            }
+            Log.v("the filter", "" + returnvalue);
+            return returnvalue;
+        }
     }
 
     private class EditDialogOptionModel implements DialogOptionModel {
@@ -471,4 +596,5 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
             onEditSelection((EditOption) option, (SmartRegisterClient) tag);
         }
     }
+
 }

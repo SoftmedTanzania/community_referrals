@@ -10,7 +10,12 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -18,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,11 +63,12 @@ import static org.ei.opensrp.domain.LoginResponse.UNKNOWN_RESPONSE;
 import static org.ei.opensrp.util.Log.logError;
 import static org.ei.opensrp.util.Log.logVerbose;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends AppCompatActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();
     private Context context;
     private EditText userNameEditText;
     private EditText passwordEditText;
+    private Button loginButton;
     private ProgressDialog progressDialog;
     public static final String ENGLISH_LOCALE = "en";
     public static final String KANNADA_LOCALE = "kn";
@@ -75,7 +82,7 @@ public class LoginActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         logVerbose("Initializing ...");
-        try{
+        try {
             AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(this));
             String preferredLocale = allSharedPreferences.fetchLanguagePreference();
             Resources res = Context.getInstance().applicationContext().getResources();
@@ -84,34 +91,45 @@ public class LoginActivity extends Activity {
             android.content.res.Configuration conf = res.getConfiguration();
             conf.locale = new Locale(preferredLocale);
             res.updateConfiguration(conf, dm);
-        }catch(Exception e){
+        } catch (Exception e) {
 
         }
-        setContentView(org.ei.opensrp.R.layout.login);
-        ImageView loginglogo = (ImageView)findViewById(R.id.login_logo);
-        loginglogo.setImageDrawable(getResources().getDrawable(R.mipmap.login_logo));
+//        setContentView(org.ei.opensrp.R.layout.login);
+        setContentView(R.layout.activity_login);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.mToolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setTitle("");
+
+//        ImageView loginglogo = (ImageView) findViewById(R.id.login_logo);
+//        loginglogo.setImageDrawable(getResources().getDrawable(R.mipmap.login_logo));
+
         context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
         initializeLoginFields();
-        initializeBuildDetails();
+//        initializeBuildDetails();
         setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
-        getActionBar().setTitle("");
+
+//        getActionBar().setTitle("");
 //        getActionBar().setIcon(getResources().getDrawable(R.mipmap.login_header_logo));
-        getActionBar().setBackgroundDrawable(getResources().getDrawable(org.ei.opensrp.mcare.R.color.action_bar_background));
+//        getActionBar().setBackgroundDrawable(getResources().getDrawable(org.ei.opensrp.mcare.R.color.action_bar_background));
         setLanguage();
 
     }
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         menu.add("Settings");
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getTitle().toString().equalsIgnoreCase("Settings")){
-            startActivity(new Intent(this,SettingsActivity.class));
+        if (item.getTitle().toString().equalsIgnoreCase("Settings")) {
+            startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -156,12 +174,25 @@ public class LoginActivity extends Activity {
     }
 
     private void initializeLoginFields() {
-        userNameEditText = ((EditText) findViewById(org.ei.opensrp.R.id.login_userNameText));
-        userNameEditText.setHint("username");
-        userNameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        passwordEditText = ((EditText) findViewById(org.ei.opensrp.R.id.login_passwordText));
-        passwordEditText.setHint("password");
-        passwordEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        userNameEditText = ((EditText) findViewById(org.ei.opensrp.R.id.login_userNameText));
+//        userNameEditText.setHint("username");
+//        userNameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        passwordEditText = ((EditText) findViewById(org.ei.opensrp.R.id.login_passwordText));
+//        passwordEditText.setHint("password");
+//        passwordEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+
+        userNameEditText = (EditText) findViewById(R.id.editTextUsername);
+        passwordEditText = (EditText) findViewById(R.id.editTextPassword);
+        loginButton = (Button) findViewById(R.id.buttonSignIn);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // check input fields first
+                if (isLoginInitiateOk())
+                    login(loginButton);
+            }
+        });
     }
 
     private void setDoneActionHandlerOnPasswordField() {
@@ -169,7 +200,10 @@ public class LoginActivity extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    login(findViewById(org.ei.opensrp.R.id.login_loginButton));
+//                    login(findViewById(org.ei.opensrp.R.id.login_loginButton));
+                    // check input fields first
+                    if (isLoginInitiateOk())
+                        login(loginButton);
                 }
                 return false;
             }
@@ -201,11 +235,11 @@ public class LoginActivity extends Activity {
                     if (loginResponse == null) {
                         showErrorDialog("Login failed. Unknown reason. Try Again");
                     } else {
-                        if(loginResponse == NO_INTERNET_CONNECTIVITY){
+                        if (loginResponse == NO_INTERNET_CONNECTIVITY) {
                             showErrorDialog(getResources().getString(R.string.no_internet_connectivity));
-                        }else if (loginResponse == UNKNOWN_RESPONSE){
+                        } else if (loginResponse == UNKNOWN_RESPONSE) {
                             showErrorDialog(getResources().getString(R.string.unknown_response));
-                        }else if (loginResponse == UNAUTHORIZED){
+                        } else if (loginResponse == UNAUTHORIZED) {
                             showErrorDialog(getResources().getString(R.string.unauthorized));
                         }
 //                        showErrorDialog(loginResponse.message());
@@ -243,10 +277,13 @@ public class LoginActivity extends Activity {
     private void tryGetLocation(final Listener<Response<String>> afterGet) {
         LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
             @Override
-            public void setVisible() { }
+            public void setVisible() {
+            }
 
             @Override
-            public void setInvisible() { Log.logInfo("Successfully get location"); }
+            public void setInvisible() {
+                Log.logInfo("Successfully get location");
+            }
         });
 
         task.doActionInBackground(new BackgroundAction<Response<String>>() {
@@ -289,7 +326,8 @@ public class LoginActivity extends Activity {
     private void fillUserIfExists() {
         if (context.userService().hasARegisteredUser()) {
             userNameEditText.setText(context.allSharedPreferences().fetchRegisteredANM());
-            userNameEditText.setEnabled(false);
+            // remove disable edit username
+            //  userNameEditText.setEnabled(false);
         }
     }
 
@@ -328,21 +366,22 @@ public class LoginActivity extends Activity {
         return new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new java.util.Date(ze.getTime()));
     }
 
-    public static void setLanguage(){
+    public static void setLanguage() {
         AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
         String preferredLocale = allSharedPreferences.fetchLanguagePreference();
-            Resources res = Context.getInstance().applicationContext().getResources();
-            // Change locale settings in the app.
-            DisplayMetrics dm = res.getDisplayMetrics();
-            android.content.res.Configuration conf = res.getConfiguration();
-            conf.locale = new Locale(preferredLocale);
-            res.updateConfiguration(conf, dm);
+        Resources res = Context.getInstance().applicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(preferredLocale);
+        res.updateConfiguration(conf, dm);
 
     }
-     public static String switchLanguagePreference() {
-         AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
 
-         String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+    public static String switchLanguagePreference() {
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
+
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
         if (ENGLISH_LOCALE.equals(preferredLocale)) {
             allSharedPreferences.saveLanguagePreference(BENGALI_LOCALE);
             Resources res = Context.getInstance().applicationContext().getResources();
@@ -362,6 +401,19 @@ public class LoginActivity extends Activity {
             res.updateConfiguration(conf, dm);
             return ENGLISH_LANGUAGE;
         }
+    }
+
+    private boolean isLoginInitiateOk() {
+        if (TextUtils.isEmpty(userNameEditText.getText())
+                || TextUtils.isEmpty(passwordEditText.getText())) {
+            // tell user to enter username and pwd
+            Snackbar.make(
+                    findViewById(R.id.coordinatorLogin),
+                    R.string.provide_username_password,
+                    Snackbar.LENGTH_SHORT).show();
+            return false;
+        } else
+            return true;
     }
 
 }

@@ -40,6 +40,7 @@
             android:textSize="14sp" />
 
         <CheckBox
+            android:id="@+id/checkboxAgeBelow20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
@@ -49,6 +50,7 @@
             android:textSize="14sp" />
 
         <CheckBox
+            android:id="@+id/checkbox10YrsLastPreg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
@@ -58,6 +60,7 @@
             android:textSize="14sp" />
 
         <CheckBox
+            android:id="@+id/checkboxBabyDeath"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
@@ -76,6 +79,7 @@
         <!--android:textSize="14sp" />-->
 
         <CheckBox
+            android:id="@+id/checkbox2orMoreBBA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
@@ -85,6 +89,7 @@
             android:textSize="14sp" />
 
         <CheckBox
+            android:id="@+id/checkboxHeartProb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
@@ -94,6 +99,7 @@
             android:textSize="14sp" />
 
         <CheckBox
+            android:id="@+id/checkboxDiabetes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
@@ -103,6 +109,7 @@
             android:textSize="14sp" />
 
         <CheckBox
+            android:id="@+id/checkboxTB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"

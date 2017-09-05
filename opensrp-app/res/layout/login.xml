@@ -65,12 +65,12 @@
         android:background="@drawable/login_button"
         android:ems="10"
         android:onClick="login"
-        android:shadowColor="#ffffff"
+        android:shadowColor="#353564"
         android:shadowDx="0"
         android:shadowDy="1"
         android:shadowRadius="0.5"
         android:text="@string/login_text"
-        android:textColor="#666666"
+        android:textColor="#ffffff"
         android:textSize="20sp" />
 
     <ImageView

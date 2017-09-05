@@ -243,13 +243,12 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
                     data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
-                //TODO FIX this area to pass data to our new custom fragment
-//                DisplayFormFragment displayFormFragment = (DisplayFormFragment)getDisplayFormFragmentAtIndex(formIndex);
-//                if (displayFormFragment != null) {
-//                    displayFormFragment.setFormData(data);
-//                    displayFormFragment.setRecordId(entityId);
-//                    displayFormFragment.setFieldOverides(metaData);
-//                }
+                mCareANCSmartRegisterFragment displayFormFragment = (mCareANCSmartRegisterFragment)getDisplayFormFragmentAtIndex(formIndex);
+                if (displayFormFragment != null) {
+                    displayFormFragment.setFormData(data);
+                    displayFormFragment.setRecordId(entityId);
+                    displayFormFragment.setFieldOverides(metaData);
+                }
             }
 
             mPager.setCurrentItem(2, false); //Don't animate the view on orientation change the view disappears
@@ -351,10 +350,8 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
                 }
 
                 try {
-                    //TODO fix this hack reset the form
-                    DisplayFormFragment displayFormFragment = (DisplayFormFragment) getDisplayFormFragmentAtIndex(prevPageIndex);
+                    mCareANCSmartRegisterFragment displayFormFragment = (mCareANCSmartRegisterFragment) getDisplayFormFragmentAtIndex(prevPageIndex);
                     if (displayFormFragment != null) {
-                        displayFormFragment.hideTranslucentProgressDialog();
                         displayFormFragment.setFormData(null);
                     }
 
@@ -452,9 +449,12 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
     public void retrieveAndSaveUnsubmittedFormData() {
         if (currentActivityIsShowingForm()) {
-            //TODO implement a hack to handle our custom forms
-            DisplayFormFragment formFragment = (DisplayFormFragment)getDisplayFormFragmentAtIndex(currentPage);
-            formFragment.saveCurrentFormData();
+            try {
+                mCareANCSmartRegisterFragment formFragment = (mCareANCSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
+                formFragment.saveCurrentFormData();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
