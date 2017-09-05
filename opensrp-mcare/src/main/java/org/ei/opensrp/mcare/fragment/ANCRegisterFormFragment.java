@@ -10,6 +10,7 @@ import android.support.design.widget.TabLayout;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toolbar;
 
+import com.google.gson.Gson;
+
 import org.ei.opensrp.mcare.R;
 import org.ei.opensrp.mcare.adapters.ANCRegisterPagerAdapter;
+import org.ei.opensrp.mcare.datamodels.PregnantMom;
 
 public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
 
@@ -28,6 +32,11 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
 
     private ANCRegisterPagerAdapter pagerAdapter;
     private TabLayout tabs;
+
+    private PregnantMom pregnantMom;
+    private Gson gson = new Gson();
+
+    private static final String TAG = ANCRegisterFormFragment.class.getSimpleName();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -118,6 +127,9 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
                 //todo collect data from forms
                 if (((ANCRegister1stFragment) pagerAdapter.getItem(0)).isFormSubmissionOk()) {
                     // collect mother details from the 1st page
+                    pregnantMom = ((ANCRegister1stFragment) pagerAdapter.getItem(0)).getPregnantMom();
+
+                    Log.d(TAG, "mom = " + gson.toJson(pregnantMom));
                 }
 
                 //todo check for checkboxes on the 2nd page then submit form

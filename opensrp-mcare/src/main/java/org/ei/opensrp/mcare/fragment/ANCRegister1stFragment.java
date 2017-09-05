@@ -3,6 +3,7 @@ package org.ei.opensrp.mcare.fragment;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.mcare.R;
+import org.ei.opensrp.mcare.datamodels.PregnantMom;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -202,5 +204,21 @@ public class ANCRegister1stFragment extends Fragment {
         else
             // all good
             return true;
+    }
+
+    public PregnantMom getPregnantMom() {
+        PregnantMom mom = new PregnantMom();
+
+        mom.setName(editTextMotherName.getText().toString());
+        mom.setId(editTextMotherId.getText().toString());
+        mom.setPhone(textPhone.getText().toString());
+        mom.setAge(Integer.valueOf(editTextMotherAge.getText().toString()));
+        mom.setHeight(Integer.valueOf(editTextHeight.getText().toString()));
+        mom.setPregnancyCount(Integer.valueOf(editTextPregCount.getText().toString()));
+        mom.setBirthCount(Integer.valueOf(editTextBirthCount.getText().toString()));
+        mom.setChildrenCount(Integer.valueOf(editTextChildrenCount.getText().toString()));
+        mom.setAbove20WeeksPregnant(radioGroupPregnancyAge.getCheckedRadioButtonId() == R.id.radioAbove20);
+
+        return mom;
     }
 }
