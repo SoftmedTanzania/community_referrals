@@ -79,7 +79,7 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
     private String locationDialogTAG = "locationDialogTAG";
     private JSONObject fieldOverides = new JSONObject();
     private String recordId;
-    private String formName;
+    private String formName = "pregnant_mothers_registration";
 
     @Override
     protected SmartRegisterPaginatedAdapter adapter() {
