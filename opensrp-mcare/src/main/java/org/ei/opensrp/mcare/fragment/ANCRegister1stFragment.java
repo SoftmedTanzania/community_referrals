@@ -13,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
@@ -32,6 +34,9 @@ public class ANCRegister1stFragment extends Fragment {
     TextView textDate, textPhone, textDateLNMP;
     LinearLayout layoutDatePick, layoutEditPhone;
     CardView cardDatePickLNMP;
+    EditText editTextMotherName, editTextMotherId, editTextMotherAge,
+            editTextHeight, editTextPregCount, editTextBirthCount, editTextChildrenCount;
+    RadioGroup radioGroupPregnancyAge;
 
     private Calendar today;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
@@ -58,6 +63,16 @@ public class ANCRegister1stFragment extends Fragment {
         layoutDatePick = (LinearLayout) fragmentView.findViewById(R.id.layoutDatePick);
         layoutEditPhone = (LinearLayout) fragmentView.findViewById(R.id.layoutEditPhone);
         cardDatePickLNMP = (CardView) fragmentView.findViewById(R.id.cardPickDateLNMP);
+
+        editTextMotherName = (EditText) fragmentView.findViewById(R.id.editTextMotherName);
+        editTextMotherId = (EditText) fragmentView.findViewById(R.id.editTextMotherId);
+        editTextMotherAge = (EditText) fragmentView.findViewById(R.id.editTextMotherAge);
+        editTextHeight = (EditText) fragmentView.findViewById(R.id.editTextHeight);
+        editTextPregCount = (EditText) fragmentView.findViewById(R.id.editTextPregCount);
+        editTextBirthCount = (EditText) fragmentView.findViewById(R.id.editTextBirthCount);
+        editTextChildrenCount = (EditText) fragmentView.findViewById(R.id.editTextChildrenCount);
+
+        radioGroupPregnancyAge = (RadioGroup) fragmentView.findViewById(R.id.radioGroupPregnancyAge);
 
         // initialize date to today's date
         textDate.setText(dateFormat.format(today.getTimeInMillis()));
@@ -163,5 +178,29 @@ public class ANCRegister1stFragment extends Fragment {
                 dialog.dismiss();
             }
         });
+    }
+
+    public boolean isFormSubmissionOk() {
+        if (TextUtils.isEmpty(editTextMotherName.getText())
+                || TextUtils.isEmpty(editTextMotherId.getText())
+                || TextUtils.isEmpty(editTextMotherAge.getText())
+                || TextUtils.isEmpty(editTextHeight.getText())
+                || TextUtils.isEmpty(editTextPregCount.getText())
+                || TextUtils.isEmpty(editTextBirthCount.getText())
+                || TextUtils.isEmpty(editTextChildrenCount.getText())
+                || TextUtils.isEmpty(textPhone.getText())
+                || TextUtils.isEmpty(textDateLNMP.getText())) {
+
+            Toast.makeText(getContext(),
+                    "Please provide all required information.",
+                    Toast.LENGTH_LONG).show();
+            return false;
+
+        } else if (radioGroupPregnancyAge.getCheckedRadioButtonId() == -1)
+            // no radio checked
+            return false;
+        else
+            // all good
+            return true;
     }
 }

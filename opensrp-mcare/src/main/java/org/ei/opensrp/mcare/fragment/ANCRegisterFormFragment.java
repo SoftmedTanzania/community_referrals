@@ -111,6 +111,19 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
             fabDone.setEnabled(false);
         }
 
+
+        fabDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //todo collect data from forms
+                if (((ANCRegister1stFragment) pagerAdapter.getItem(0)).isFormSubmissionOk()) {
+                    // collect mother details from the 1st page
+                }
+
+                //todo check for checkboxes on the 2nd page then submit form
+
+            }
+        });
         return v;
     }
 
