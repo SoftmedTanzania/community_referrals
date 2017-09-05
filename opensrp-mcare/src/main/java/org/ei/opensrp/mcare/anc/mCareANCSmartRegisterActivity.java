@@ -245,6 +245,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
                 mCareANCSmartRegisterFragment displayFormFragment = (mCareANCSmartRegisterFragment)getDisplayFormFragmentAtIndex(formIndex);
                 if (displayFormFragment != null) {
+                    Log.d(TAG,"form data = "+data);
                     displayFormFragment.setFormData(data);
                     displayFormFragment.setRecordId(entityId);
                     displayFormFragment.setFieldOverides(metaData);
@@ -329,9 +330,9 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
             switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
 
         } catch (Exception e) {
-            DisplayFormFragment displayFormFragment =(DisplayFormFragment) getDisplayFormFragmentAtIndex(currentPage);
+            mCareANCSmartRegisterFragment displayFormFragment =(mCareANCSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
             if (displayFormFragment != null) {
-                displayFormFragment.hideTranslucentProgressDialog();
+//                displayFormFragment.hideTranslucentProgressDialog();
             }
             e.printStackTrace();
         }

@@ -79,7 +79,7 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
     private String locationDialogTAG = "locationDialogTAG";
     private JSONObject fieldOverides = new JSONObject();
     private String recordId;
-    private String formName;
+    private String formName = "pregnant_mothers_registration";
 
     @Override
     protected SmartRegisterPaginatedAdapter adapter() {
@@ -152,7 +152,6 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
                         new CursorCommonObjectSort(getString(R.string.due_status), sortByAlertmethod()),
                         new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.elco_alphabetical_sort), sortByFWWOMFNAME()),
                         new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.hh_fwGobhhid_sort), sortByGOBHHID()),
-                        new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.hh_fwJivhhid_sort), sortByJiVitAHHID()),
                         new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.sortbyLmp), sortByLmp())
 
 //                        new CommonObjectSort(true,false,true,"age")
@@ -209,7 +208,7 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
         try {
             LoginActivity.setLanguage();
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
 
     }
@@ -226,6 +225,7 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
         clientsProgressView.setVisibility(View.INVISIBLE);
 //        list.setBackgroundColor(Color.RED);
         initializeQueries();
+        processFormSubmission("");
     }
 
     private DialogOption[] getEditOptions() {
@@ -440,21 +440,29 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
         Log.d(TAG, "submitted data = " + formSubmission);
 
         HashMap<String, String> dataHash = new HashMap<String, String>();
-        dataHash.put("mother_id", recordId);
-        dataHash.put("form_name", formName);
+        dataHash.put("mother_id", "1");
+        dataHash.put("reg_date", "2017-09-04");
+        dataHash.put("reg_place", "Sinza");
 
-        //TODO Clean this data with the correct information from interface
+        dataHash.put("FWWOMFNAME", "Jane");
+        dataHash.put("FWWOMLNAME", "Doe");
+        dataHash.put("FWHUSNAME", "John Doe");
         dataHash.put("FWHOHBIRTHDATE", "07-09-1990");
-        dataHash.put("FWHOHGENDER", "1");
-        dataHash.put("FWNHHMBRNUM", "test");
-        dataHash.put("FWNHHMWRA", "test");
-        dataHash.put("ELCO", "1");
+        dataHash.put("FWHOHGENDER", "2");
+        dataHash.put("FWWOMAGE", "27");
+
+
+
+        dataHash.put("case_num_pregnancies", "0");
+        dataHash.put("case_would_be_high_risk", "1");
+
+        dataHash.put("FWEDD", "2018-05-04");
+        dataHash.put("height", "190");
+        dataHash.put("weight_startofpregnancy", "80");
+
         dataHash.put("user_type", "1");
 
         Log.d(TAG, "formname = " + formName);
-
-        //TODO set this name via setform name method
-        formName = "new_household_registration";
         String modelString = readFileAssets("www/form/" + formName + "/model.xml").replaceAll("\"", "'").replaceAll("\n", "").replaceAll("\r", "").replaceAll("/", "/");
 
         try {
