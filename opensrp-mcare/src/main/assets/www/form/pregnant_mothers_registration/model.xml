@@ -1,47 +1,77 @@
 <model>
     <instance>
-        <ANC_Registration_EngKan id="ANC_Registration_EngKan">
+        <Pregnant_Mothers_Registration encounter_type="Pregnant Mothers Registration" id="Pregnant_Mothers_Registration" version="201602250625">
             <formhub>
                 <uuid/>
             </formhub>
-            <today/>
-            <case_woman_name/>
-            <woman_name/>
-            <case_num_pregnancies/>
+            <version/>
+            <changes/>
+            <existing_gobhhid/>
+            <existing_jivhhid/>
+            <FWWOMFNAME openmrs_entity="person" openmrs_entity_id="first_name"/>
+            <FWWOMLNAME openmrs_entity="person" openmrs_entity_id="last_name"/>
+            <FWBIRTHDATE openmrs_entity="person" openmrs_entity_id="birthdate"/>
+            <FWGENDER openmrs_entity="person" openmrs_entity_id="gender"/>
+            <FWWOMAGE openmrs_entity="concept" openmrs_entity_id="1532AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+            <display_age/>
+            <FWHUSNAME openmrs_entity="concept" openmrs_entity_id="161135AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+            <FWCWOMSTRMEN openmrs_entity="concept" openmrs_entity_id="160600AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">1</FWCWOMSTRMEN>
+            <FWCWOMSTER openmrs_entity_id="163006AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">0</FWCWOMSTER>
+            <FWCWOMHUSLIV openmrs_entity="concept" openmrs_entity_id="162994AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">0</FWCWOMHUSLIV>
+            <FWCWOMHUSALV openmrs_entity="concept" openmrs_entity_id="5561AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
             <num_pregnancies/>
-            <reg_date/>
-            <reg_place/>
-            <thayi_no/>
-            <anc_number/>
-            <jsy_beneficiary/>
-            <asha_name/>
-            <asha_phone_number/>
-            <lmp_date/>
-            <edd/>
-            <edd_formatted/>
-            <edd_note/>
-            <linked_facility_delivery/>
-            <name_facility/>
-            <complication/>
-            <medical_histories/>
+            <case_would_be_high_risk/>
+            <case_would_be_high_risk_reason/>
+            <danger_signs>
+                <yn_dk_label/>
+                <FWANC1HEAD openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="139081AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+                <FWDISPLAYTEXT6/>
+                <FWANC1BLRVIS openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="147104AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+                <FWDISPLAYTEXT7/>
+                <FWANC1SWLNG openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="130428AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+                <FWDISPLAYTEXT8/>
+                <FWANC1CONVL openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="113054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+                <FWDISPLAYTEXT9/>
+                <FWANC1BLD openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="150802AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+                <FWDISPLAYTEXT10/>
+                <FWDISPLAYTEXT11/>
+            </danger_signs>
+            <risk_group>
+                <yn_dk_label/>
+                <FWANC1ANM openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="148834AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+                <FWANC1HBP openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="113859AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+                <FWANC1DBT openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="119477AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+                <FWANC1THY openmrs_entity="concept" openmrs_entity_id="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="124719AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+            </risk_group>
+            <psrf_schedule_logic/>
+            <FWPSRSTS openmrs_entity="concept" openmrs_entity_id="163088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+            <start openmrs_entity="concept" openmrs_entity_id="163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+            <end openmrs_entity="concept" openmrs_entity_id="163138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+            <external_user_ID openmrs_entity="concept" openmrs_entity_id="163161AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+            <user_type openmrs_entity="concept" openmrs_entity_id="163095AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">FWA</user_type>
+            <anc1_current_formStatus/>
+            <today openmrs_entity="encounter" openmrs_entity_id="encounter_date"/>
             <w_blood_group/>
             <height/>
             <weight_startofpregnancy/>
+            <complication/>
+            <medical_histories/>
+            <FWEDD openmrs_entity="concept" openmrs_entity_id="5596AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+            <existing_location openmrs_entity="encounter" openmrs_entity_id="location_id"/>
+            <phone_number/>
+            <anc_number/>
             <case_would_be_high_risk/>
             <case_would_be_high_risk_reason/>
-            <weight_risk/>
-            <height_risk/>
-            <is_high_risk_till_delivery/>
-            <is_high_risk_till_delivery_reason/>
-            <is_high_risk_till_pnc_close/>
-            <is_high_risk_till_pnc_close_reason/>
-            <is_high_risk1/>
-            <high_risk_reason/>
-            <high_risk_note/>
-            <is_high_risk/>
+
+            <case_num_pregnancies/>
+
+            <FWWOMVALID>1</FWWOMVALID>
+
+            <FWSORTVALUE/>
+            <relationalid/>
             <meta>
                 <instanceID/>
             </meta>
-        </ANC_Registration_EngKan>
+        </Pregnant_Mothers_Registration>
     </instance>
 </model>

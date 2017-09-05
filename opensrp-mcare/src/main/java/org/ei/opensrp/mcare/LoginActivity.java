@@ -92,9 +92,8 @@ public class LoginActivity extends AppCompatActivity {
             conf.locale = new Locale(preferredLocale);
             res.updateConfiguration(conf, dm);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
-//        setContentView(org.ei.opensrp.R.layout.login);
         setContentView(R.layout.activity_login);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.mToolbar);
@@ -103,8 +102,6 @@ public class LoginActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setTitle("");
 
-//        ImageView loginglogo = (ImageView) findViewById(R.id.login_logo);
-//        loginglogo.setImageDrawable(getResources().getDrawable(R.mipmap.login_logo));
 
         context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
         initializeLoginFields();
@@ -112,9 +109,7 @@ public class LoginActivity extends AppCompatActivity {
         setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
 
-//        getActionBar().setTitle("");
-//        getActionBar().setIcon(getResources().getDrawable(R.mipmap.login_header_logo));
-//        getActionBar().setBackgroundDrawable(getResources().getDrawable(org.ei.opensrp.mcare.R.color.action_bar_background));
+
         setLanguage();
 
     }
@@ -404,16 +399,20 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isLoginInitiateOk() {
-        if (TextUtils.isEmpty(userNameEditText.getText())
-                || TextUtils.isEmpty(passwordEditText.getText())) {
-            // tell user to enter username and pwd
-            Snackbar.make(
-                    findViewById(R.id.coordinatorLogin),
-                    R.string.provide_username_password,
-                    Snackbar.LENGTH_SHORT).show();
-            return false;
-        } else
-            return true;
+        //TODO remove the following hack to reimplement the proper login flow
+        return true;
+
+        //TODO coze uncomment the following
+//        if (TextUtils.isEmpty(userNameEditText.getText())
+//                || TextUtils.isEmpty(passwordEditText.getText())) {
+//            // tell user to enter username and pwd
+//            Snackbar.make(
+//                    findViewById(R.id.coordinatorLogin),
+//                    R.string.provide_username_password,
+//                    Snackbar.LENGTH_SHORT).show();
+//            return false;
+//        } else
+//            return true;
     }
 
 }

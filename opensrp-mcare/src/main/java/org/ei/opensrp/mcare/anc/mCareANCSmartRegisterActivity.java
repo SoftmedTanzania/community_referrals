@@ -245,6 +245,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
                 mCareANCSmartRegisterFragment displayFormFragment = (mCareANCSmartRegisterFragment)getDisplayFormFragmentAtIndex(formIndex);
                 if (displayFormFragment != null) {
+                    Log.d(TAG,"form data = "+data);
                     displayFormFragment.setFormData(data);
                     displayFormFragment.setRecordId(entityId);
                     displayFormFragment.setFieldOverides(metaData);
