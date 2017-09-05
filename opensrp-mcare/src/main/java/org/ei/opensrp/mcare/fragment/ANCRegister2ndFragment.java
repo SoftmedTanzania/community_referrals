@@ -3,6 +3,7 @@ package org.ei.opensrp.mcare.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,12 @@ public class ANCRegister2ndFragment extends Fragment {
         View fragmentView = inflater.inflate(R.layout.fragment_ancregister2nd, container, false);
 
         return fragmentView;
+    }
+
+
+    public SparseBooleanArray getCheckBoxMap() {
+        // todo get all checked boxes
+        return new SparseBooleanArray();
     }
 
 }

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -130,12 +131,16 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
                     pregnantMom = ((ANCRegister1stFragment) pagerAdapter.getItem(0)).getPregnantMom();
 
                     Log.d(TAG, "mom = " + gson.toJson(pregnantMom));
-                }
 
-                //todo check for checkboxes on the 2nd page then submit form
+                    //todo check for checkboxes on the 2nd page then submit form
+
+                    SparseBooleanArray checkboxesMap = ((ANCRegister2ndFragment) pagerAdapter.getItem(1))
+                            .getCheckBoxMap();
+                }
 
             }
         });
+
         return v;
     }
 
