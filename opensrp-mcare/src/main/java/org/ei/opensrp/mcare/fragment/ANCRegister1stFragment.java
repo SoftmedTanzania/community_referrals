@@ -183,15 +183,15 @@ public class ANCRegister1stFragment extends Fragment {
     }
 
     public boolean isFormSubmissionOk() {
-        if (TextUtils.isEmpty(editTextMotherName.getText().toString())
-                || TextUtils.isEmpty(editTextMotherId.getText().toString())
-                || TextUtils.isEmpty(editTextMotherAge.getText().toString())
-                || TextUtils.isEmpty(editTextHeight.getText().toString())
-                || TextUtils.isEmpty(editTextPregCount.getText().toString())
-                || TextUtils.isEmpty(editTextBirthCount.getText().toString())
-                || TextUtils.isEmpty(editTextChildrenCount.getText().toString())
-                || TextUtils.isEmpty(textPhone.getText().toString())
-                || TextUtils.isEmpty(textDateLNMP.getText().toString())) {
+        if (TextUtils.isEmpty(editTextMotherName.getText())
+                || TextUtils.isEmpty(editTextMotherId.getText())
+                || TextUtils.isEmpty(editTextMotherAge.getText())
+                || TextUtils.isEmpty(editTextHeight.getText())
+                || TextUtils.isEmpty(editTextPregCount.getText())
+                || TextUtils.isEmpty(editTextBirthCount.getText())
+                || TextUtils.isEmpty(editTextChildrenCount.getText())
+                || TextUtils.isEmpty(textPhone.getText())
+                || TextUtils.isEmpty(textDateLNMP.getText())) {
 
             Toast.makeText(getActivity(),
                     "Tafadhali Jaza taarifa zote muhimu",

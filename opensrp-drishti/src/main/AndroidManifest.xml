@@ -35,8 +35,8 @@
 
     </compatible-screens>
 
-    <application android:allowBackup="true" android:label="@string/app_name"
-        android:icon="@drawable/opensrp_logo" >
+    <application android:allowBackup="true" android:label="@string/app_name">
+        <!--android:icon="@drawable/opensrp_logo" >-->
         <activity
             android:name=".LoginActivity"
             android:clearTaskOnLaunch="true"

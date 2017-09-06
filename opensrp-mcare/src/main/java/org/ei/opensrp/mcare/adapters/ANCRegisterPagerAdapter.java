@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import org.ei.opensrp.mcare.fragment.ANCFollowUpFormFragment;
 import org.ei.opensrp.mcare.fragment.ANCRegister1stFragment;
 import org.ei.opensrp.mcare.fragment.ANCRegister2ndFragment;
 
@@ -27,8 +28,8 @@ public class ANCRegisterPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return new ANCRegister2ndFragment();
 
-//            case 2:
-//                return new ANCRegister3rdFragment();
+            case 2:
+                return new ANCFollowUpFormFragment();
 
             default:
                 return null;
@@ -37,7 +38,7 @@ public class ANCRegisterPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -49,8 +50,8 @@ public class ANCRegisterPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return "Vidokezo";
 
-//            case 2:
-//                return new ANCRegister3rdFragment();
+            case 2:
+                return "FollowUP";
 
             default:
                 return String.valueOf(position + 1);

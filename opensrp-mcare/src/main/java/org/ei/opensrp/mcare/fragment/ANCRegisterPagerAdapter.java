@@ -26,8 +26,8 @@ public class ANCRegisterPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return new ANCRegister2ndFragment();
 
-//            case 2:
-//                return new ANCRegister3rdFragment();
+            case 2:
+                return new ANCFollowUpFormFragment();
 
             default:
                 return null;
