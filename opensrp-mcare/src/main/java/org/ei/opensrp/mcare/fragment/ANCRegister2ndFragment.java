@@ -17,7 +17,10 @@ import org.ei.opensrp.mcare.R;
 public class ANCRegister2ndFragment extends Fragment {
 
     CheckBox checkBoxAgeBelow20, checkBox10YrsPassed, checkBoxBabyDeath,
-            checkBox2orMoreBBA, checkBoxHeartProb, checkBoxDiabetes, checkBoxTB;
+            checkBox2orMoreBBA, checkBoxHeartProb, checkBoxDiabetes, checkBoxTB,
+            checkBox4orMorePregnancies, checkBox1stPregAbove35Yrs, checkBoxHeightBelow150,
+            checkBoxCSDelivery, checkBoxKilemaChaNyonga, checkBoxBleedingOnDelivery,
+            checkBoxKondoKukwama;
 
     public ANCRegister2ndFragment() {
         // Required empty public constructor
@@ -37,6 +40,14 @@ public class ANCRegister2ndFragment extends Fragment {
         checkBoxHeartProb = (CheckBox) fragmentView.findViewById(R.id.checkboxHeartProb);
         checkBoxDiabetes = (CheckBox) fragmentView.findViewById(R.id.checkboxDiabetes);
         checkBoxTB = (CheckBox) fragmentView.findViewById(R.id.checkboxTB);
+        checkBox4orMorePregnancies = (CheckBox) fragmentView.findViewById(R.id.checkbox4orMorePregnancies);
+        checkBox1stPregAbove35Yrs = (CheckBox) fragmentView.findViewById(R.id.checkbox1stPregAbove35Yrs);
+        checkBoxHeightBelow150 = (CheckBox) fragmentView.findViewById(R.id.checkboxHeightBelow150);
+        checkBoxCSDelivery = (CheckBox) fragmentView.findViewById(R.id.checkboxCSDelivery);
+        checkBoxKilemaChaNyonga = (CheckBox) fragmentView.findViewById(R.id.checkboxKilemaChaNyonga);
+        checkBoxBleedingOnDelivery = (CheckBox) fragmentView.findViewById(R.id.checkboxBleedingOnDelivery);
+        checkBoxKondoKukwama = (CheckBox) fragmentView.findViewById(R.id.checkboxKondoKukwama);
+
 
         return fragmentView;
     }
@@ -53,7 +64,13 @@ public class ANCRegister2ndFragment extends Fragment {
         indicators.put(R.id.checkboxHeartProb, checkBoxHeartProb.isChecked());
         indicators.put(R.id.checkboxDiabetes, checkBoxDiabetes.isChecked());
         indicators.put(R.id.checkboxTB, checkBoxTB.isChecked());
-
+        indicators.put(R.id.checkbox4orMorePregnancies, checkBox4orMorePregnancies.isChecked());
+        indicators.put(R.id.checkbox1stPregAbove35Yrs, checkBox1stPregAbove35Yrs.isChecked());
+        indicators.put(R.id.checkboxHeightBelow150, checkBoxHeightBelow150.isChecked());
+        indicators.put(R.id.checkboxCSDelivery, checkBoxCSDelivery.isChecked());
+        indicators.put(R.id.checkboxKilemaChaNyonga, checkBoxKilemaChaNyonga.isChecked());
+        indicators.put(R.id.checkboxBleedingOnDelivery, checkBoxBleedingOnDelivery.isChecked());
+        indicators.put(R.id.checkboxKondoKukwama, checkBoxKondoKukwama.isChecked());
 
         return indicators;
     }
