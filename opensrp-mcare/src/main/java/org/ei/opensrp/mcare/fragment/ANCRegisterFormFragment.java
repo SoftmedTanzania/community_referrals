@@ -143,6 +143,13 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
                     pregnantMom.setHasHeartProblem(indicatorsMap.get(R.id.checkboxHeartProb));
                     pregnantMom.setHasDiabetes(indicatorsMap.get(R.id.checkboxDiabetes));
                     pregnantMom.setHasTB(indicatorsMap.get(R.id.checkboxTB));
+                    pregnantMom.setFourOrMorePreg(indicatorsMap.get(R.id.checkbox4orMorePregnancies));
+                    pregnantMom.setFirstPregAbove35Yrs(indicatorsMap.get(R.id.checkbox1stPregAbove35Yrs));
+                    pregnantMom.setHeightBelow150(indicatorsMap.get(R.id.checkboxHeightBelow150));
+                    pregnantMom.setCsDelivery(indicatorsMap.get(R.id.checkboxCSDelivery));
+                    pregnantMom.setKilemaChaNyonga(indicatorsMap.get(R.id.checkboxKilemaChaNyonga));
+                    pregnantMom.setBleedingOnDelivery(indicatorsMap.get(R.id.checkboxBleedingOnDelivery));
+                    pregnantMom.setKondoKukwama(indicatorsMap.get(R.id.checkboxKondoKukwama));
 
                     // convert to json
                     String gsonMom = gson.toJson(pregnantMom);

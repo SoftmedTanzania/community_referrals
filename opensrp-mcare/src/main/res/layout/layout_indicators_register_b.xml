@@ -40,6 +40,7 @@
             android:textSize="14sp" />
 
         <CheckBox
+            android:id="@+id/checkbox4orMorePregnancies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
@@ -49,6 +50,7 @@
             android:textSize="14sp" />
 
         <CheckBox
+            android:id="@+id/checkbox1stPregAbove35Yrs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
@@ -58,6 +60,7 @@
             android:textSize="14sp" />
 
         <CheckBox
+            android:id="@+id/checkboxHeightBelow150"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
@@ -76,6 +79,7 @@
         <!--android:textSize="14sp" />-->
 
         <CheckBox
+            android:id="@+id/checkboxCSDelivery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
@@ -85,6 +89,7 @@
             android:textSize="14sp" />
 
         <CheckBox
+            android:id="@+id/checkboxKilemaChaNyonga"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
@@ -94,6 +99,7 @@
             android:textSize="14sp" />
 
         <CheckBox
+            android:id="@+id/checkboxBleedingOnDelivery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
@@ -103,6 +109,7 @@
             android:textSize="14sp" />
 
         <CheckBox
+            android:id="@+id/checkboxKondoKukwama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
