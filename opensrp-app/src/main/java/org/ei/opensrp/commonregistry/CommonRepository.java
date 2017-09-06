@@ -183,9 +183,9 @@ public class CommonRepository extends DrishtiRepository {
         values.put(ID_COLUMN, common.getCaseId());
         values.put(Relational_ID, common.getRelationalId());
         values.put(DETAILS_COLUMN, new Gson().toJson(common.getDetails()));
-        values.put("FWWOMFNAME", "JANE");
-        values.put("JiVitAHHID","1");
-        values.put("FWPSRLMP","2017-09-06");
+        values.put("FWWOMFNAME", common.getDetails().get("FWWOMFNAME"));
+        values.put("JiVitAHHID",common.getDetails().get("GOBHHID"));
+        values.put("FWPSRLMP",common.getDetails().get("FWPSRLMP"));
         return values;
     }
 

@@ -11,6 +11,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import org.ei.opensrp.Context;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
@@ -18,6 +20,7 @@ import org.ei.opensrp.commonregistry.CommonPersonObjectController;
 import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.mcare.LoginActivity;
 import org.ei.opensrp.mcare.R;
+import org.ei.opensrp.mcare.datamodels.PregnantMom;
 import org.ei.opensrp.mcare.elco.ElcoMauzaCommonObjectFilterOption;
 import org.ei.opensrp.mcare.elco.ElcoSearchOption;
 import org.ei.opensrp.mcare.fragment.ANCRegisterFormFragment;
@@ -47,6 +50,7 @@ import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.TreeNode;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,6 +80,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
     private String[] formNames = new String[]{};
     private android.support.v4.app.Fragment mBaseFragment = null;
+    private Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -323,10 +328,23 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
         // save the form
 
+        PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
 
         Map<String, String> personDetails1 = create("Is_PNC", "0").map();
         personDetails1.put("FWWOMVALID","1");
         personDetails1.put("FWBNFGEN", "2");
+        personDetails1.put("FWWOMFNAME", pregnantMom.getName());
+        personDetails1.put("GOBHHID", pregnantMom.getId());
+        personDetails1.put("FWWOMLNAME", pregnantMom.getName());
+        personDetails1.put("FWPSRLMP", new Date(pregnantMom.getDateLNMP()).toString());
+        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.getPregnancyCount()+"");
+        personDetails1.put("FWPSRPRSB", pregnantMom.isHasBabyDeath()?"Has had still birth":"");
+        personDetails1.put("FWPSRTOTBIRTH", pregnantMom.getChildrenCount()+"");
+        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.isHas2orMoreBBA()?"Has had no pregnancies in the last 2 years":"");
+        personDetails1.put("FWWOMAGE", pregnantMom.getAge()+"");
+        personDetails1.put("HEIGHT", pregnantMom.getHeight()+"");
+        personDetails1.put("user_type", "1");
+
 
         CommonPersonObject cpo2 = new CommonPersonObject(id,id,personDetails1,"mcaremother");
         context().commonrepository("mcaremother").addMCARE(cpo2);

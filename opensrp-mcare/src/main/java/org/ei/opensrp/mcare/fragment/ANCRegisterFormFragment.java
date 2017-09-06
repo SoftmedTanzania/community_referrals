@@ -62,6 +62,8 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
 
         viewPager.setAdapter(pagerAdapter);
 
+        viewPager.setOffscreenPageLimit(10);
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -157,6 +159,7 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
 
                     // todo start form submission
 
+                    ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(gsonMom, recordId, formName, getFormFieldsOverrides());
                 }
 
             }
@@ -168,8 +171,7 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
     //TODO Implement this method to initialize a form data
     public void setFormData(String data) {
         Log.d(TAG, "Setting form data");
-        ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(data, recordId, formName, getFormFieldsOverrides());
-
+//        ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(data, recordId, formName, getFormFieldsOverrides());
     }
 
     public void savePartialFormData(String partialData) {

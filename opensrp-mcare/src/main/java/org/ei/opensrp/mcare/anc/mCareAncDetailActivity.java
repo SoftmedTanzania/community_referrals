@@ -107,12 +107,13 @@ public class mCareAncDetailActivity extends Activity {
         age.setText(Html.fromHtml(getString(R.string.elco_age_label)+" " + (ancclient.getDetails().get("FWWOMAGE") != null ? ancclient.getDetails().get("FWWOMAGE") : "")));
 
 
+        try{
         DateUtil.setDefaultDateFormat("yyyy-MM-dd");
         AllCommonsRepository allmotherRepository = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("mcaremother");
         CommonPersonObject childobject = allmotherRepository.findByCaseID(ancclient.entityId());
         AllCommonsRepository elcorep = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("elco");
+
         final CommonPersonObject elcoObject = elcorep.findByCaseID(childobject.getRelationalId());
-        try {
             int days = DateUtil.dayDifference(DateUtil.getLocalDate((elcoObject.getDetails().get("FWBIRTHDATE") != null ?  elcoObject.getDetails().get("FWBIRTHDATE")  : "")), DateUtil.today());
             Log.v("days",""+days);
             int calc_age = days / 365;
