@@ -295,6 +295,7 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
     public void initializeQueries() {
         mCareANCSmartClientsProvider hhscp = new mCareANCSmartClientsProvider(getActivity(),
                 clientActionHandler, context().alertService());
+
         clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, new CommonRepository("mcaremother", new String[]{"FWWOMFNAME", "FWPSRLMP", "FWSORTVALUE", "JiVitAHHID", "GOBHHID", "Is_PNC", "FWBNFSTS", "FWBNFDTOO"}));
         clientsView.setAdapter(clientAdapter);
 

@@ -1,5 +1,7 @@
 package org.ei.opensrp.cursoradapter;
 
+import android.util.Log;
+
 import org.apache.commons.lang3.StringUtils;
 import org.ei.opensrp.commonregistry.CommonFtsObject;
 import org.ei.opensrp.util.StringUtil;
@@ -21,6 +23,7 @@ public class SmartRegisterQueryBuilder {
     }
 
     public SmartRegisterQueryBuilder(String selectquery) {
+        Log.d("SmartRegisterQueryBuilder","query = "+selectquery);
         Selectquery = selectquery;
     }
 

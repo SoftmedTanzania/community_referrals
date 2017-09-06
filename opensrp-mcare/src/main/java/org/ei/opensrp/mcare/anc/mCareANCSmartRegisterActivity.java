@@ -13,6 +13,7 @@ import android.util.Log;
 
 import org.ei.opensrp.Context;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
+import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectController;
 import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.mcare.LoginActivity;
@@ -24,6 +25,7 @@ import org.ei.opensrp.mcare.fragment.mCareANCSmartRegisterFragment;
 import org.ei.opensrp.mcare.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
+import org.ei.opensrp.repository.Repository;
 import org.ei.opensrp.service.FormSubmissionService;
 import org.ei.opensrp.service.ZiggyService;
 import org.ei.opensrp.util.FormUtils;
@@ -57,6 +59,7 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.ei.opensrp.util.EasyMap.create;
 
 public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
     private static final String TAG = mCareANCSmartRegisterActivity.class.getSimpleName();
@@ -319,28 +322,37 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
     @Override
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
         // save the form
-        try {
-            FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
-            FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
 
-            org.ei.opensrp.Context context = org.ei.opensrp.Context.getInstance();
-            ZiggyService ziggyService = context.ziggyService();
-            ziggyService.saveForm(getParams(submission), submission.instance());
 
-            FormSubmissionService formSubmissionService = context.formSubmissionService();
-            formSubmissionService.updateFTSsearch(submission);
+        Map<String, String> personDetails1 = create("Is_PNC", "0").map();
+        personDetails1.put("FWWOMVALID","1");
+        personDetails1.put("FWBNFGEN", "2");
 
-            Log.v("we are here", "hhregister");
-            //switch to forms list fragmentstregi
-            switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
-
-        } catch (Exception e) {
-            mCareANCSmartRegisterFragment displayFormFragment =(mCareANCSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
-            if (displayFormFragment != null) {
-//                displayFormFragment.hideTranslucentProgressDialog();
-            }
-            e.printStackTrace();
-        }
+        CommonPersonObject cpo2 = new CommonPersonObject(id,id,personDetails1,"mcaremother");
+        context().commonrepository("mcaremother").addMCARE(cpo2);
+//
+//        try {
+//            FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
+//            FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
+//
+//            org.ei.opensrp.Context context = org.ei.opensrp.Context.getInstance();
+//            ZiggyService ziggyService = context.ziggyService();
+//            ziggyService.saveForm(getParams(submission), submission.instance());
+//
+//            FormSubmissionService formSubmissionService = context.formSubmissionService();
+//            formSubmissionService.updateFTSsearch(submission);
+//
+//            Log.v("we are here", "hhregister");
+//            //switch to forms list fragmentstregi
+//            switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
+//
+//        } catch (Exception e) {
+//            mCareANCSmartRegisterFragment displayFormFragment =(mCareANCSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
+//            if (displayFormFragment != null) {
+////                displayFormFragment.hideTranslucentProgressDialog();
+//            }
+//            e.printStackTrace();
+//        }
     }
 
     public void switchToBaseFragment(final String data) {

@@ -90,6 +90,14 @@ public class CommonRepository extends DrishtiRepository {
         database.insert(TABLE_NAME, null, createValuesFor(common));
     }
 
+    public void addMCARE(CommonPersonObject common) {
+        SQLiteDatabase database = masterRepository.getWritableDatabase();
+        database.insert(TABLE_NAME, null, createValuesForMcare(common));
+    }
+
+
+
+
     public void updateDetails(String caseId, Map<String, String> details) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
 
@@ -165,6 +173,19 @@ public class CommonRepository extends DrishtiRepository {
         values.put(ID_COLUMN, common.getCaseId());
         values.put(Relational_ID, common.getRelationalId());
         values.put(DETAILS_COLUMN, new Gson().toJson(common.getDetails()));
+        return values;
+    }
+
+
+    //TODO REMOVE THIS HACK
+    private ContentValues createValuesForMcare(CommonPersonObject common) {
+        ContentValues values = new ContentValues();
+        values.put(ID_COLUMN, common.getCaseId());
+        values.put(Relational_ID, common.getRelationalId());
+        values.put(DETAILS_COLUMN, new Gson().toJson(common.getDetails()));
+        values.put("FWWOMFNAME", "JANE");
+        values.put("JiVitAHHID","1");
+        values.put("FWPSRLMP","2017-09-06");
         return values;
     }
 
