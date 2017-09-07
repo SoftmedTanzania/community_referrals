@@ -6,9 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
-import org.ei.opensrp.mcare.fragment.ANCRegisterFormFragment;
+import org.ei.opensrp.mcare.fragment.AncRegisterFormFragment;
 import org.ei.opensrp.mcare.fragment.HouseHoldRegistrationFragment;
-import org.ei.opensrp.mcare.fragment.HouseHoldSmartRegisterFragment;
 import org.ei.opensrp.view.fragment.DisplayFormFragment;
 
 /**
@@ -50,7 +49,7 @@ public class BaseRegisterActivityPagerAdapter extends FragmentPagerAdapter {
                         break;
             case 2:
                 Log.d(TAG,"setting HouseHoldRegistrationFragment");
-                fragment = new ANCRegisterFormFragment();
+                fragment = new AncRegisterFormFragment();
                 break;
 //                if(mProfileFragment != null) {
 //                    fragment = mProfileFragment;

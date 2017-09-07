@@ -17,12 +17,12 @@ import android.view.animation.AnimationUtils;
 import com.google.gson.Gson;
 
 import org.ei.opensrp.mcare.R;
-import org.ei.opensrp.mcare.adapters.ANCRegisterPagerAdapter;
+import org.ei.opensrp.mcare.pageradapter.ANCRegisterPagerAdapter;
 import org.ei.opensrp.mcare.datamodels.PregnantMom;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
 
-public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
+public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
 
     private ViewPager viewPager;
     Animation animationFabShow, animationFabHide, animationFabHideSlow;
@@ -38,7 +38,7 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
     private String recordId;
     private String formName = "pregnant_mothers_registration";
 
-    private static final String TAG = ANCRegisterFormFragment.class.getSimpleName();
+    private static final String TAG = AncRegisterFormFragment.class.getSimpleName();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -129,13 +129,13 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View view) {
                 //todo collect data from forms
-                if (((ANCRegister1stFragment) pagerAdapter.getItem(0)).isFormSubmissionOk()) {
+                if (((AncRegister1stFragment) pagerAdapter.getItem(0)).isFormSubmissionOk()) {
                     // collect mother details from the 1st page
-                    pregnantMom = ((ANCRegister1stFragment) pagerAdapter.getItem(0)).getPregnantMom();
+                    pregnantMom = ((AncRegister1stFragment) pagerAdapter.getItem(0)).getPregnantMom();
 
                     //todo check for checkboxes on the 2nd page then submit form
 
-                    SparseBooleanArray indicatorsMap = ((ANCRegister2ndFragment) pagerAdapter.getItem(1))
+                    SparseBooleanArray indicatorsMap = ((AncRegister2ndFragment) pagerAdapter.getItem(1))
                             .getIndicatorsMap();
 
                     pregnantMom.setAbove20WeeksPregnant(indicatorsMap.get(R.id.checkboxAgeBelow20));

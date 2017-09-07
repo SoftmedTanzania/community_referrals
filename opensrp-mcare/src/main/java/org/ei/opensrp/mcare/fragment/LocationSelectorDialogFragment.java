@@ -30,8 +30,8 @@ import static org.ei.opensrp.util.StringUtil.humanize;
 /**
  * Created by koros on 2/25/16.
  */
-public class McareLocationSelectorDialogFragment extends DialogFragment {
-    private static final String TAG = McareLocationSelectorDialogFragment.class.getSimpleName();
+public class LocationSelectorDialogFragment extends DialogFragment {
+    private static final String TAG = LocationSelectorDialogFragment.class.getSimpleName();
     private final SecuredNativeSmartRegisterActivity parentActivity;
     private final DialogOption[] options;
     private final DialogOptionModel dialogOptionModel;
@@ -41,10 +41,10 @@ public class McareLocationSelectorDialogFragment extends DialogFragment {
     public String formname;
     // private final Object tag;
 
-    private McareLocationSelectorDialogFragment(SecuredNativeSmartRegisterActivity activity,
+    private LocationSelectorDialogFragment(SecuredNativeSmartRegisterActivity activity,
                                            DialogOptionModel dialogOptionModel,
                                            String locationJSONString
-            ,String formname) {
+            , String formname) {
         this.formname = formname;
         this.parentActivity = activity;
         this.options = dialogOptionModel.getDialogOptions();
@@ -53,11 +53,11 @@ public class McareLocationSelectorDialogFragment extends DialogFragment {
         // this.tag = tag;
     }
 
-    public static McareLocationSelectorDialogFragment newInstance(
+    public static LocationSelectorDialogFragment newInstance(
             SecuredNativeSmartRegisterActivity activity,
             DialogOptionModel dialogOptionModel,
             String locationJSONString,String formname) {
-        return new McareLocationSelectorDialogFragment(activity, dialogOptionModel, locationJSONString,formname);
+        return new LocationSelectorDialogFragment(activity, dialogOptionModel, locationJSONString,formname);
     }
 
     @Override

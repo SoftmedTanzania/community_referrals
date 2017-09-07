@@ -31,7 +31,7 @@ import java.util.Locale;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ANCRegister1stFragment extends Fragment {
+public class AncRegister1stFragment extends Fragment {
 
     public static TextView textDate, textPhone, textDateLNMP;
     LinearLayout layoutDatePick, layoutEditPhone;
@@ -43,7 +43,7 @@ public class ANCRegister1stFragment extends Fragment {
     private Calendar today;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
-    public ANCRegister1stFragment() {
+    public AncRegister1stFragment() {
         // Required empty public constructor
     }
 

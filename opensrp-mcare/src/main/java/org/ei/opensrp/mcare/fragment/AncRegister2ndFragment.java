@@ -14,7 +14,7 @@ import org.ei.opensrp.mcare.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ANCRegister2ndFragment extends Fragment {
+public class AncRegister2ndFragment extends Fragment {
 
     private static CheckBox checkBoxAgeBelow20, checkBox10YrsPassed, checkBoxBabyDeath,
             checkBox2orMoreBBA, checkBoxHeartProb, checkBoxDiabetes, checkBoxTB,
@@ -22,7 +22,7 @@ public class ANCRegister2ndFragment extends Fragment {
             checkBoxCSDelivery, checkBoxKilemaChaNyonga, checkBoxBleedingOnDelivery,
             checkBoxKondoKukwama;
 
-    public ANCRegister2ndFragment() {
+    public AncRegister2ndFragment() {
         // Required empty public constructor
     }
 

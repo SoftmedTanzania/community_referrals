@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import org.apache.commons.lang3.StringUtils;
 import org.ei.opensrp.Context;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
+import org.ei.opensrp.commonregistry.CommonFtsObject;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectClient;
 import org.ei.opensrp.commonregistry.CommonPersonObjectController;
@@ -23,14 +24,12 @@ import org.ei.opensrp.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
 import org.ei.opensrp.mcare.LoginActivity;
 import org.ei.opensrp.mcare.R;
-import org.ei.opensrp.mcare.anc.mCareANCSmartRegisterActivity;
-import org.ei.opensrp.mcare.elco.ElcoMauzaCommonObjectFilterOption;
+import org.ei.opensrp.mcare.child.ChildDetailActivity;
+import org.ei.opensrp.mcare.child.mCareChildServiceModeOption;
+import org.ei.opensrp.mcare.child.mCareChildSmartClientsProvider;
+import org.ei.opensrp.mcare.child.mCareChildSmartRegisterActivity;
 import org.ei.opensrp.mcare.elco.ElcoPSRFDueDateSort;
 import org.ei.opensrp.mcare.elco.ElcoSmartRegisterActivity;
-import org.ei.opensrp.mcare.pnc.mCarePNCServiceModeOption;
-import org.ei.opensrp.mcare.pnc.mCarePNCSmartClientsProvider;
-import org.ei.opensrp.mcare.pnc.mCarePNCSmartRegisterActivity;
-import org.ei.opensrp.mcare.pnc.mCarePncDetailActivity;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.util.StringUtil;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
@@ -61,7 +60,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 /**
  * Created by koros on 11/2/15.
  */
-public class mCarePNCSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+public class ChildSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
 
     private SmartRegisterClientsProvider clientProvider = null;
     private CommonPersonObjectController controller;
@@ -81,7 +80,7 @@ public class mCarePNCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
 
             @Override
             public ServiceModeOption serviceMode() {
-                return new mCarePNCServiceModeOption(clientsProvider());
+                return new mCareChildServiceModeOption(clientsProvider());
             }
 
             @Override
@@ -97,7 +96,7 @@ public class mCarePNCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
 
             @Override
             public String nameInShortFormForTitle() {
-                return getResources().getString(R.string.mcare_PNC_register_title_in_short);
+                return getResources().getString(R.string.mcare_Child_register_title_in_short);
             }
         };
     }
@@ -110,9 +109,9 @@ public class mCarePNCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
             public DialogOption[] filterOptions() {
                 ArrayList<DialogOption> dialogOptionslist = new ArrayList<DialogOption>();
                 dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label),""));
-                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_pncrv1),filterStringForPNCRV1()));
-                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_pncrv2),filterStringForPNCRV2()));
-                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_pncrv3),filterStringForPNCRV3()));
+                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_encc1),filterStringForENCCRV1()));
+                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_encc2),filterStringForENCCRV2()));
+                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_encc3),filterStringForENCCRV3()));
 
                 String locationjson = context().anmLocationController().get();
                 LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
@@ -137,12 +136,10 @@ public class mCarePNCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
             public DialogOption[] sortingOptions() {
                 return new DialogOption[]{
 //                        new ElcoPSRFDueDateSort(),
-                        new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.due_status),sortByAlertmethod()),
+                        new CursorCommonObjectSort(getString(R.string.due_status),sortByAlertmethod()),
                         new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.elco_alphabetical_sort),sortByFWWOMFNAME()),
                         new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.hh_fwGobhhid_sort),sortByGOBHHID()),
-                        new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.hh_fwJivhhid_sort),sortByJiVitAHHID()),
-                        new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.pnc_date_of_outcome),sortByDateOfOutcome()),
-                        new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.pnc_outcome),sortByOutcomeStatis())
+                        new CursorCommonObjectSort( Context.getInstance().applicationContext().getString(R.string.hh_fwJivhhid_sort),sortByJiVitAHHID()),
 
 //                        new CommonObjectSort(true,false,true,"age")
                 };
@@ -182,6 +179,7 @@ public class mCarePNCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
         if(isPausedOrRefreshList()) {
             initializeQueries();
         }
+        updateSearchView();
         try{
             LoginActivity.setLanguage();
         }catch (Exception e){
@@ -195,19 +193,18 @@ public class mCarePNCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
         super.setupViews(view);
         view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
         view.findViewById(R.id.service_mode_selection).setVisibility(INVISIBLE);
+
         ImageButton startregister = (ImageButton)view.findViewById(org.ei.opensrp.R.id.register_client);
         startregister.setVisibility(View.GONE);
         clientsView.setVisibility(View.VISIBLE);
         clientsProgressView.setVisibility(View.INVISIBLE);
         setServiceModeViewDrawableRight(null);
         initializeQueries();
+        updateSearchView();
     }
 
-    private DialogOption[] getEditOptions() {
-        return ((mCareANCSmartRegisterActivity)getActivity()).getEditOptions();
-    }
-    private DialogOption[] getEditOptionsforanc(String pncvisittext,String pncvisitstatus) {
-        return ((mCarePNCSmartRegisterActivity)getActivity()).getEditOptionsforpnc(pncvisittext, pncvisitstatus);
+    private DialogOption[] getEditOptionsforChild(String childvisittext,String childvisitstatus) {
+        return ((mCareChildSmartRegisterActivity)getActivity()).getEditOptionsforChild(childvisittext, childvisitstatus);
     }
 
 
@@ -217,14 +214,14 @@ public class mCarePNCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.profile_info_layout:
-                    mCarePncDetailActivity.ancclient = (CommonPersonObjectClient)view.getTag();
-                    Intent intent = new Intent(getActivity(),mCarePncDetailActivity.class);
+                    ChildDetailActivity.ChildClient = (CommonPersonObjectClient)view.getTag();
+                    Intent intent = new Intent(getActivity(),ChildDetailActivity.class);
                     startActivity(intent);
                     break;
-                case R.id.pnc_reminder_due_date:
-                    CustomFontTextView pncreminderDueDate = (CustomFontTextView)view.findViewById(R.id.pnc_reminder_due_date);
-                    Log.v("do as you will", (String) view.getTag(R.id.textforPncRegister));
-                    showFragmentDialog(new EditDialogOptionModelForPNC((String)view.getTag(R.id.textforPncRegister),(String)view.getTag(R.id.AlertStatustextforPncRegister)), view.getTag(R.id.clientobject));
+                case R.id.encc_reminder_due_date:
+                    CustomFontTextView enccreminderDueDate = (CustomFontTextView)view.findViewById(R.id.encc_reminder_due_date);
+                    Log.v("do as you will", (String) view.getTag(R.id.textforEnccRegister));
+                    showFragmentDialog(new EditDialogOptionModelForChild((String)view.getTag(R.id.textforEnccRegister),(String)view.getTag(R.id.AlertStatustextforEnccRegister)), view.getTag(R.id.clientobject));
                     break;
             }
         }
@@ -233,28 +230,18 @@ public class mCarePNCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
             navigationController.startEC(client.entityId());
         }
     }
-    private class EditDialogOptionModelfornbnf implements DialogOptionModel {
-        @Override
-        public DialogOption[] getDialogOptions() {
-            return getEditOptions();
-        }
 
-        @Override
-        public void onDialogOptionSelection(DialogOption option, Object tag) {
-            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
-        }
-    }
-    private class EditDialogOptionModelForPNC implements DialogOptionModel {
-        String pncvisittext ;;
-        String pncvisitstatus;
-        public EditDialogOptionModelForPNC(String text,String status) {
-            pncvisittext = text;
-            pncvisitstatus = status;
+    private class EditDialogOptionModelForChild implements DialogOptionModel {
+        String childvisittext ;;
+        String childvisitstatus;
+        public EditDialogOptionModelForChild(String text,String status) {
+            childvisittext = text;
+            childvisitstatus = status;
         }
 
         @Override
         public DialogOption[] getDialogOptions() {
-            return getEditOptionsforanc(pncvisittext,pncvisitstatus);
+            return getEditOptionsforChild(childvisittext,childvisitstatus);
         }
 
         @Override
@@ -274,14 +261,14 @@ public class mCarePNCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
             @Override
             public void onTextChanged(final CharSequence cs, int start, int before, int count) {
 
-                if(cs.toString().equalsIgnoreCase("")){
+                if (cs.toString().equalsIgnoreCase("")) {
                     filters = "";
-                }else {
+                } else {
                     //filters = "and FWWOMFNAME Like '%" + cs.toString() + "%' or GOBHHID Like '%" + cs.toString() + "%'  or JiVitAHHID Like '%" + cs.toString() + "%' ";
                     filters = cs.toString();
                 }
                 joinTable = "";
-                mainCondition = " Is_PNC = '1'  and FWWOMFNAME not null and FWWOMFNAME != \"\"   AND details  LIKE '%\"FWWOMVALID\":\"1\"%'";
+                mainCondition = " FWBNFGEN is not null ";
 
                 getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
                 CountExecute();
@@ -304,7 +291,7 @@ public class mCarePNCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
             }else{
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
-                dialogOptionslist.add(new ElcoMauzaCommonObjectFilterOption(name,"location_name",name));
+                dialogOptionslist.add(new CursorCommonObjectFilterOption(name," and mcaremother.details like '%"+name +"%'"));
 
             }
         }
@@ -331,80 +318,71 @@ public class mCarePNCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
             return returnvalue;
         }
     }
-
-    public String pncMainSelectWithJoins(){
-        return "Select id as _id,relationalid,details,FWWOMFNAME,FWPSRLMP,FWSORTVALUE,JiVitAHHID,GOBHHID,Is_PNC,FWBNFSTS,FWBNFDTOO \n" +
-                "from mcaremother\n";
-    }
-    public String pncMainCountWithJoins(){
-        return "Select Count(*) \n" +
-                "from mcaremother\n";
-    }
     public void initializeQueries(){
-        mCarePNCSmartClientsProvider hhscp = new mCarePNCSmartClientsProvider(getActivity(),
+        mCareChildSmartClientsProvider hhscp = new mCareChildSmartClientsProvider(getActivity(),
                 clientActionHandler,context().alertService());
-        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, new CommonRepository("mcaremother",new String []{"FWWOMFNAME","FWPSRLMP","FWSORTVALUE","JiVitAHHID","GOBHHID","Is_PNC","FWBNFSTS","FWBNFDTOO"}));
+        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, new CommonRepository("mcarechild",new String []{ "FWBNFGEN"}));
         clientsView.setAdapter(clientAdapter);
 
-        setTablename("mcaremother");
-        SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder(pncMainCountWithJoins());
-        countSelect = countqueryBUilder.mainCondition(" mcaremother.Is_PNC = '1'  and mcaremother.FWWOMFNAME not null and mcaremother.FWWOMFNAME != \"\"   AND mcaremother.details  LIKE '%\"FWWOMVALID\":\"1\"%'");
-        mainCondition = " Is_PNC = '1'  and FWWOMFNAME not null and FWWOMFNAME != \"\"   AND details  LIKE '%\"FWWOMVALID\":\"1\"%'";
+        setTablename("mcarechild");
+        SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder(childMainCountWithJoins());
+        countSelect = countqueryBUilder.mainCondition(" mcarechild.FWBNFGEN is not null ");
+        mainCondition = " FWBNFGEN is not null ";
         super.CountExecute();
 
-        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder(pncMainSelectWithJoins());
-        mainSelect = queryBUilder.mainCondition(" mcaremother.Is_PNC = '1'  and mcaremother.FWWOMFNAME not null and mcaremother.FWWOMFNAME != \"\"   AND mcaremother.details  LIKE '%\"FWWOMVALID\":\"1\"%'");
-        Sortqueries = sortByAlertmethod();
+        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder(childMainSelectWithJoins());
+        mainSelect = queryBUilder.mainCondition(" mcarechild.FWBNFGEN is not null ");
+        Sortqueries = sortBySortValue();
 
         currentlimit = 20;
         currentoffset = 0;
 
         super.filterandSortInInitializeQueries();
 
-        updateSearchView();
+//        setServiceModeViewDrawableRight(null);
+//        updateSearchView();
         refresh();
 
     }
     private String sortByAlertmethod() {
-        return " CASE WHEN Post_Natal_Care_Reminder_Visit = 'urgent' THEN '1'\n" +
-                "WHEN Post_Natal_Care_Reminder_Visit = 'upcoming' THEN '2'\n" +
-                "WHEN Post_Natal_Care_Reminder_Visit = 'normal' THEN '3'\n" +
-                "WHEN Post_Natal_Care_Reminder_Visit = 'expired' THEN '4'\n" +
-                "WHEN Post_Natal_Care_Reminder_Visit is Null THEN '5'\n" +
-                "WHEN Post_Natal_Care_Reminder_Visit = 'complete' THEN '6'\n" +
-                "Else Post_Natal_Care_Reminder_Visit END ASC";
+        return " CASE WHEN Essential_Newborn_Care_Checklist = 'urgent' THEN '1'\n" +
+                "WHEN Essential_Newborn_Care_Checklist = 'upcoming' THEN '2'\n" +
+                "WHEN Essential_Newborn_Care_Checklist = 'normal' THEN '3'\n" +
+                "WHEN Essential_Newborn_Care_Checklist = 'expired' THEN '4'\n" +
+                "WHEN Essential_Newborn_Care_Checklist is Null THEN '5'\n" +
+                "WHEN Essential_Newborn_Care_Checklist = 'complete' THEN '6'\n" +
+                "Else Essential_Newborn_Care_Checklist END ASC";
     }
+    public String childMainSelectWithJoins(){
+        return "Select mcarechild.id as _id,mcarechild.relationalid,mcarechild.details,mcarechild.FWBNFGEN \n" +
+                "from mcarechild\n";
+    }
+    public String childMainCountWithJoins() {
+        return "Select Count(*) \n" +
+                "from mcarechild\n";
+    }
+
     private String sortBySortValue(){
         return " FWSORTVALUE ASC";
     }
     private String sortByFWWOMFNAME(){
         return " FWWOMFNAME ASC";
     }
-    private String sortByJiVitAHHID(){  return " JiVitAHHID ASC";
+    private String sortByJiVitAHHID(){
+        return " JiVitAHHID ASC";
     }
     private String sortByGOBHHID(){
         return " GOBHHID ASC";
     }
-    private String sortByDateOfOutcome(){
-        return " FWBNFDTOO ASC";
+    private String filterStringForENCCRV1(){
+        return "enccrv_1";
     }
-
-    private String sortByOutcomeStatis() {
-        return " CASE WHEN FWBNFSTS = '3' THEN '1'"
-                +
-                "WHEN FWBNFSTS = '4' THEN '2'\n" +
-                "Else FWBNFSTS END ASC";
+    private String filterStringForENCCRV2(){
+        return "enccrv_2";
     }
-    private String filterStringForPNCRV1(){
-        return "pncrv_1";
+    private String filterStringForENCCRV3(){
+        return "enccrv_3";
     }
-    private String filterStringForPNCRV2(){
-        return "pncrv_2";
-    }
-    private String filterStringForPNCRV3(){
-        return "pncrv_3";
-    }
-
 
     /**
      * Override filter to capture fts filter by location
@@ -414,10 +392,11 @@ public class mCarePNCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
     public void onFilterSelection(FilterOption filter) {
         appliedVillageFilterView.setText(filter.name());
         filters = ((CursorFilterOption)filter).filter();
-        mainCondition = " Is_PNC = '1'  and FWWOMFNAME not null and FWWOMFNAME != \"\"   AND details  LIKE '%\"FWWOMVALID\":\"1\"%'";
+        mainCondition = " FWBNFGEN is not null ";
 
-        if(StringUtils.isNotBlank(filters) && filters.contains(" and details LIKE ")){
-            mainCondition += filters;
+        if(StringUtils.isNotBlank(filters) && filters.contains(" and mcaremother.details like ")){
+            String searchString = filters.replace(" and mcaremother.details like ", "");
+            mainCondition += " AND "+ CommonFtsObject.relationalIdColumn +" IN (SELECT "+CommonFtsObject.idColumn+ " FROM " + CommonFtsObject.searchTableName("mcaremother")+ " WHERE details LIKE " + searchString+ " ) ";
             filters = "";
         }
         CountExecute();

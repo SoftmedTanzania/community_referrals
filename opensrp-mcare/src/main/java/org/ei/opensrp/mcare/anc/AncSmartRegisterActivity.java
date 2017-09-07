@@ -17,20 +17,16 @@ import org.ei.opensrp.Context;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectController;
-import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.mcare.LoginActivity;
 import org.ei.opensrp.mcare.R;
 import org.ei.opensrp.mcare.datamodels.PregnantMom;
 import org.ei.opensrp.mcare.elco.ElcoMauzaCommonObjectFilterOption;
 import org.ei.opensrp.mcare.elco.ElcoSearchOption;
-import org.ei.opensrp.mcare.fragment.ANCRegisterFormFragment;
-import org.ei.opensrp.mcare.fragment.mCareANCSmartRegisterFragment;
+import org.ei.opensrp.mcare.fragment.AncRegisterFormFragment;
+import org.ei.opensrp.mcare.fragment.AncSmartRegisterFragment;
 import org.ei.opensrp.mcare.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
-import org.ei.opensrp.repository.Repository;
-import org.ei.opensrp.service.FormSubmissionService;
-import org.ei.opensrp.service.ZiggyService;
 import org.ei.opensrp.util.FormUtils;
 import org.ei.opensrp.util.StringUtil;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
@@ -42,7 +38,6 @@ import org.ei.opensrp.view.dialog.DialogOptionMapper;
 import org.ei.opensrp.view.dialog.DialogOptionModel;
 import org.ei.opensrp.view.dialog.EditOption;
 import org.ei.opensrp.view.dialog.OpenFormOption;
-import org.ei.opensrp.view.fragment.DisplayFormFragment;
 import org.ei.opensrp.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.ei.opensrp.view.viewpager.OpenSRPViewPager;
 import org.json.JSONObject;
@@ -66,8 +61,8 @@ import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.ei.opensrp.util.EasyMap.create;
 
-public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
-    private static final String TAG = mCareANCSmartRegisterActivity.class.getSimpleName();
+public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
+    private static final String TAG = AncSmartRegisterActivity.class.getSimpleName();
 
     private SmartRegisterClientsProvider clientProvider = null;
     private CommonPersonObjectController controller;
@@ -92,7 +87,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         formNames = this.buildFormNameList();
-        mBaseFragment = new mCareANCSmartRegisterFragment();
+        mBaseFragment = new AncSmartRegisterFragment();
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
@@ -254,7 +249,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
                     data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
-                ANCRegisterFormFragment displayFormFragment = (ANCRegisterFormFragment)getDisplayFormFragmentAtIndex(2);
+                AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment)getDisplayFormFragmentAtIndex(2);
                 if (displayFormFragment != null) {
                     Log.d(TAG,"form data = "+data);
                     displayFormFragment.setFormData(data);
@@ -368,7 +363,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
 //            switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
 //
 //        } catch (Exception e) {
-//            mCareANCSmartRegisterFragment displayFormFragment =(mCareANCSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
+//            AncSmartRegisterFragment displayFormFragment =(AncSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
 //            if (displayFormFragment != null) {
 ////                displayFormFragment.hideTranslucentProgressDialog();
 //            }
@@ -389,7 +384,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
                 }
 
                 try {
-                    mCareANCSmartRegisterFragment displayFormFragment = (mCareANCSmartRegisterFragment) getDisplayFormFragmentAtIndex(prevPageIndex);
+                    AncSmartRegisterFragment displayFormFragment = (AncSmartRegisterFragment) getDisplayFormFragmentAtIndex(prevPageIndex);
                     if (displayFormFragment != null) {
 //                        displayFormFragment.setFormData(null);
                     }
@@ -489,7 +484,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
     public void retrieveAndSaveUnsubmittedFormData() {
         if (currentActivityIsShowingForm()) {
             try {
-                mCareANCSmartRegisterFragment formFragment = (mCareANCSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
+                AncSmartRegisterFragment formFragment = (AncSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
                 formFragment.saveCurrentFormData();
             }catch (Exception e){
                 e.printStackTrace();

@@ -47,7 +47,7 @@ import static org.ei.opensrp.util.StringUtil.humanize;
 /**
  * Created by user on 2/12/15.
  */
-public class mCareANCSmartClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
+public class AncSmartClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
 
     private final LayoutInflater inflater;
     private final Context context;
@@ -58,8 +58,8 @@ public class mCareANCSmartClientsProvider implements SmartRegisterCLientsProvide
 
     protected CommonPersonObjectController controller;
     AlertService alertService;
-    public mCareANCSmartClientsProvider(Context context,
-                                        View.OnClickListener onClickListener,AlertService alertService) {
+    public AncSmartClientsProvider(Context context,
+                                   View.OnClickListener onClickListener, AlertService alertService) {
         this.onClickListener = onClickListener;
         this.alertService = alertService;
         this.context = context;

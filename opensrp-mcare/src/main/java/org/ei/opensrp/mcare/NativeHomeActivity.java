@@ -1,7 +1,6 @@
 package org.ei.opensrp.mcare;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
 
@@ -20,11 +19,11 @@ import org.ei.opensrp.commonregistry.CommonPersonObjectController;
 import org.ei.opensrp.commonregistry.ControllerFilterMap;
 import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
 import org.ei.opensrp.event.Listener;
-import org.ei.opensrp.mcare.anc.anc1handler;
-import org.ei.opensrp.mcare.anc.anc2handler;
-import org.ei.opensrp.mcare.anc.anc3handler;
-import org.ei.opensrp.mcare.anc.anc4handler;
-import org.ei.opensrp.mcare.anc.nbnfhandler;
+import org.ei.opensrp.mcare.anc.Anc1handler;
+import org.ei.opensrp.mcare.anc.Anc2handler;
+import org.ei.opensrp.mcare.anc.Anc3handler;
+import org.ei.opensrp.mcare.anc.Anc4handler;
+import org.ei.opensrp.mcare.anc.Bnfhandler;
 import org.ei.opensrp.mcare.child.encc1handler;
 import org.ei.opensrp.mcare.child.encc2handler;
 import org.ei.opensrp.mcare.child.encc3handler;
@@ -118,7 +117,7 @@ public class NativeHomeActivity extends SecuredActivity {
     @Override
     protected void onCreation() {
         setContentView(R.layout.smart_registers_home);
-        navigationController = new McareNavigationController(this,anmController);
+        navigationController = new NavigationController(this,anmController);
         setupViews();
         initialize();
         DisplayFormFragment.formInputErrorMessage = getResources().getString(R.string.forminputerror);
@@ -127,13 +126,13 @@ public class NativeHomeActivity extends SecuredActivity {
                 new CensusEnrollmentHandler());
         context().formSubmissionRouter().getHandlerMap().put("psrf_form", new PSRFHandler());
         context().formSubmissionRouter().getHandlerMap().put("anc_reminder_visit_1",
-                new anc1handler());
+                new Anc1handler());
         context().formSubmissionRouter().getHandlerMap().put("anc_reminder_visit_2",
-                new anc2handler());
+                new Anc2handler());
         context().formSubmissionRouter().getHandlerMap().put("anc_reminder_visit_3",
-                new anc3handler());
+                new Anc3handler());
         context().formSubmissionRouter().getHandlerMap().put("anc_reminder_visit_4",
-                new anc4handler());
+                new Anc4handler());
         context().formSubmissionRouter().getHandlerMap().put("pnc_reminder_visit_1",
                 new pnc1handler());
         context().formSubmissionRouter().getHandlerMap().put("pnc_reminder_visit_2",
@@ -147,7 +146,7 @@ public class NativeHomeActivity extends SecuredActivity {
         context().formSubmissionRouter().getHandlerMap().put(
                 "mis_elco", new MIS_elco_form_handler());
         context().formSubmissionRouter().getHandlerMap().put(
-                "birthnotificationpregnancystatusfollowup", new nbnfhandler());
+                "birthnotificationpregnancystatusfollowup", new Bnfhandler());
 
         backUpDataBase();
     }

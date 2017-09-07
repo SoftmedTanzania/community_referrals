@@ -55,7 +55,7 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle" />
         <activity
-            android:name=".anc.mCareANCSmartRegisterActivity"
+            android:name=".anc.AncSmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle"
@@ -73,7 +73,7 @@
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".anc.mCareAncDetailActivity"
+            android:name=".AncDetailActivity"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
         <activity
@@ -85,7 +85,7 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
         <activity
-            android:name=".fragment.ANCFollowUpFormActivity"
+            android:name=".AncFollowUpFormActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme" />
 

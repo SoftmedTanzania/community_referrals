@@ -4,24 +4,22 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import org.ei.opensrp.mcare.anc.mCareANCSmartRegisterActivity;
+import org.ei.opensrp.mcare.anc.AncSmartRegisterActivity;
 import org.ei.opensrp.mcare.child.mCareChildSmartRegisterActivity;
 import org.ei.opensrp.mcare.elco.ElcoSmartRegisterActivity;
 import org.ei.opensrp.mcare.household.HouseHoldSmartRegisterActivity;
 import org.ei.opensrp.mcare.household.tutorial.tutorialCircleViewFlow;
 import org.ei.opensrp.mcare.pnc.mCarePNCSmartRegisterActivity;
-import org.ei.opensrp.view.activity.NativeANCSmartRegisterActivity;
-import org.ei.opensrp.view.activity.NativePNCSmartRegisterActivity;
 import org.ei.opensrp.view.controller.ANMController;
 
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
-public class McareNavigationController extends org.ei.opensrp.view.controller.NavigationController {
+public class NavigationController extends org.ei.opensrp.view.controller.NavigationController {
     private Activity activity;
     private ANMController anmController;
 
-    public McareNavigationController(Activity activity, ANMController anmController) {
+    public NavigationController(Activity activity, ANMController anmController) {
         super(activity,anmController);
         this.activity = activity;
         this.anmController = anmController;
@@ -44,7 +42,7 @@ public class McareNavigationController extends org.ei.opensrp.view.controller.Na
     }
     @Override
     public void startANCSmartRegistry() {
-        activity.startActivity(new Intent(activity, mCareANCSmartRegisterActivity.class));
+        activity.startActivity(new Intent(activity, AncSmartRegisterActivity.class));
     }
     public void startPNCSmartRegistry() {
         activity.startActivity(new Intent(activity, mCarePNCSmartRegisterActivity.class));

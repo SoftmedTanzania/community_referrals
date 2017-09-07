@@ -1,4 +1,4 @@
-package org.ei.opensrp.mcare.anc;
+package org.ei.opensrp.mcare;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -17,12 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.ei.opensrp.Context;
-import org.ei.opensrp.commonregistry.AllCommonsRepository;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectClient;
 import org.ei.opensrp.domain.Alert;
-import org.ei.opensrp.mcare.R;
-import org.ei.opensrp.util.DateUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,7 +39,7 @@ import static org.ei.opensrp.util.StringUtil.humanize;
 /**
  * Created by raihan on 5/11/15.
  */
-public class mCareAncDetailActivity extends Activity {
+public class AncDetailActivity extends Activity {
 
     //image retrieving
     private static final String TAG = "ImageGridFragment";
@@ -167,7 +163,7 @@ public class mCareAncDetailActivity extends Activity {
         final ImageView householdview = (ImageView) findViewById(R.id.householdprofileview);
 
         if (ancclient.getDetails().get("profilepic") != null) {
-            setImagetoHolder(mCareAncDetailActivity.this, ancclient.getDetails().get("profilepic"), householdview, R.mipmap.woman_placeholder);
+            setImagetoHolder(AncDetailActivity.this, ancclient.getDetails().get("profilepic"), householdview, R.mipmap.woman_placeholder);
         }
 //        householdview.setOnClickListener(new View.OnClickListener() {
 //            @Override

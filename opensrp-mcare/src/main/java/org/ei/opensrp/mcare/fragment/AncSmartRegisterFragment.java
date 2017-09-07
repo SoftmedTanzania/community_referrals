@@ -23,12 +23,13 @@ import org.ei.opensrp.cursoradapter.CursorFilterOption;
 import org.ei.opensrp.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
+import org.ei.opensrp.mcare.AncFollowUpFormActivity;
 import org.ei.opensrp.mcare.LoginActivity;
 import org.ei.opensrp.mcare.R;
-import org.ei.opensrp.mcare.anc.mCareANCServiceModeOption;
-import org.ei.opensrp.mcare.anc.mCareANCSmartClientsProvider;
-import org.ei.opensrp.mcare.anc.mCareANCSmartRegisterActivity;
-import org.ei.opensrp.mcare.anc.mCareAncDetailActivity;
+import org.ei.opensrp.mcare.anc.AncServiceModeOption;
+import org.ei.opensrp.mcare.anc.AncSmartClientsProvider;
+import org.ei.opensrp.mcare.anc.AncSmartRegisterActivity;
+import org.ei.opensrp.mcare.AncDetailActivity;
 import org.ei.opensrp.mcare.elco.ElcoMauzaCommonObjectFilterOption;
 import org.ei.opensrp.mcare.elco.ElcoPSRFDueDateSort;
 import org.ei.opensrp.mcare.elco.PSRFHandler;
@@ -69,8 +70,8 @@ import static org.ei.opensrp.util.FormUtils.populateJSONWithData;
 /**
  * Created by koros on 11/2/15.
  */
-public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
-    private static final String TAG = mCareANCSmartRegisterFragment.class.getSimpleName();
+public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+    private static final String TAG = AncSmartRegisterFragment.class.getSimpleName();
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     private SmartRegisterClientsProvider clientProvider = null;
     private CommonPersonObjectController controller;
@@ -92,7 +93,7 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
 
             @Override
             public ServiceModeOption serviceMode() {
-                return new mCareANCServiceModeOption(clientsProvider());
+                return new AncServiceModeOption(clientsProvider());
             }
 
             @Override
@@ -187,8 +188,8 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
             ft.remove(prev);
         }
         ft.addToBackStack(null);
-        McareLocationSelectorDialogFragment
-                .newInstance((mCareANCSmartRegisterActivity) getActivity(), new EditDialogOptionModel(), context().anmLocationController().get(),
+        LocationSelectorDialogFragment
+                .newInstance((AncSmartRegisterActivity) getActivity(), new EditDialogOptionModel(), context().anmLocationController().get(),
                         "pregnant_mothers_registration")
                 .show(ft, locationDialogTAG);
     }
@@ -229,11 +230,11 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
     }
 
     private DialogOption[] getEditOptions() {
-        return ((mCareANCSmartRegisterActivity) getActivity()).getEditOptions();
+        return ((AncSmartRegisterActivity) getActivity()).getEditOptions();
     }
 
     private DialogOption[] getEditOptionsforanc(String ancvisittext, String ancvisitstatus) {
-        return ((mCareANCSmartRegisterActivity) getActivity()).getEditOptionsforanc(ancvisittext, ancvisitstatus);
+        return ((AncSmartRegisterActivity) getActivity()).getEditOptionsforanc(ancvisittext, ancvisitstatus);
     }
 
     public void updateSearchView() {
@@ -293,7 +294,7 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
     }
 
     public void initializeQueries() {
-        mCareANCSmartClientsProvider hhscp = new mCareANCSmartClientsProvider(getActivity(),
+        AncSmartClientsProvider hhscp = new AncSmartClientsProvider(getActivity(),
                 clientActionHandler, context().alertService());
 
         clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, new CommonRepository("mcaremother", new String[]{"FWWOMFNAME", "FWPSRLMP", "FWSORTVALUE", "JiVitAHHID", "GOBHHID", "Is_PNC", "FWBNFSTS", "FWBNFDTOO"}));
@@ -515,8 +516,8 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
             Log.d("coze","onclick listener clicked");
             switch (view.getId()) {
                 case R.id.profile_info_layout:
-                    mCareAncDetailActivity.ancclient = (CommonPersonObjectClient) view.getTag();
-                    Intent intent = new Intent(getActivity(), mCareAncDetailActivity.class);
+                    AncDetailActivity.ancclient = (CommonPersonObjectClient) view.getTag();
+                    Intent intent = new Intent(getActivity(), AncDetailActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.nbnf_due_date:
@@ -524,11 +525,11 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
                     break;
                 case R.id.reminder:
                     CustomFontTextView ancreminderDueDate = (CustomFontTextView) view.findViewById(R.id.anc_reminder_due_date);
-                    Intent intent2 = new Intent(getActivity(), ANCFollowUpFormActivity.class);
+                    Intent intent2 = new Intent(getActivity(), AncFollowUpFormActivity.class);
                     startActivity(intent2);
                     break;
                 case R.id.reminder2:
-                    Intent intent3 = new Intent(getActivity(), ANCFollowUpFormActivity.class);
+                    Intent intent3 = new Intent(getActivity(), AncFollowUpFormActivity.class);
                     startActivity(intent3);
                     break;
             }

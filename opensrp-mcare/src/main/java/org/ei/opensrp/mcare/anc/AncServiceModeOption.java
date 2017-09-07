@@ -17,9 +17,9 @@ import org.ei.opensrp.view.viewHolder.NativePNCSmartRegisterViewHolder;
 
 import static org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity.ClientsHeaderProvider;
 
-public class mCareANCServiceModeOption extends ServiceModeOption {
+public class AncServiceModeOption extends ServiceModeOption {
 
-    public mCareANCServiceModeOption(SmartRegisterClientsProvider provider) {
+    public AncServiceModeOption(SmartRegisterClientsProvider provider) {
         super(provider);
     }
 
