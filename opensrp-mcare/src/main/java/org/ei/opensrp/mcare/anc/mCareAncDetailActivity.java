@@ -107,20 +107,20 @@ public class mCareAncDetailActivity extends Activity {
         age.setText(Html.fromHtml(getString(R.string.elco_age_label)+" " + (ancclient.getDetails().get("FWWOMAGE") != null ? ancclient.getDetails().get("FWWOMAGE") : "")));
 
 
-        try{
-        DateUtil.setDefaultDateFormat("yyyy-MM-dd");
-        AllCommonsRepository allmotherRepository = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("mcaremother");
-        CommonPersonObject childobject = allmotherRepository.findByCaseID(ancclient.entityId());
-        AllCommonsRepository elcorep = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("elco");
-
-        final CommonPersonObject elcoObject = elcorep.findByCaseID(childobject.getRelationalId());
-            int days = DateUtil.dayDifference(DateUtil.getLocalDate((elcoObject.getDetails().get("FWBIRTHDATE") != null ?  elcoObject.getDetails().get("FWBIRTHDATE")  : "")), DateUtil.today());
-            Log.v("days",""+days);
-            int calc_age = days / 365;
-            age.setText(Html.fromHtml(getString(R.string.elco_age_label)+" " + calc_age));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+//        try{
+//        DateUtil.setDefaultDateFormat("yyyy-MM-dd");
+//        AllCommonsRepository allmotherRepository = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("mcaremother");
+//        CommonPersonObject childobject = allmotherRepository.findByCaseID(ancclient.entityId());
+//        AllCommonsRepository elcorep = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("elco");
+//
+//        final CommonPersonObject elcoObject = elcorep.findByCaseID(childobject.getRelationalId());
+//            int days = DateUtil.dayDifference(DateUtil.getLocalDate((elcoObject.getDetails().get("FWBIRTHDATE") != null ?  elcoObject.getDetails().get("FWBIRTHDATE")  : "")), DateUtil.today());
+//            Log.v("days",""+days);
+//            int calc_age = days / 365;
+//            age.setText(Html.fromHtml(getString(R.string.elco_age_label)+" " + calc_age));
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
 
 
         jivitahhid.setText(Html.fromHtml(getString(R.string.hhiid_jivita_elco_label)+" " +(ancclient.getColumnmaps().get("JiVitAHHID") != null ? ancclient.getColumnmaps().get("JiVitAHHID") : "")));
@@ -130,22 +130,22 @@ public class mCareAncDetailActivity extends Activity {
 
         village.setText(Html.fromHtml(getString(R.string.elco_details_mauza) + " " + humanize(ancclient.getDetails().get("mauza") != null ? ancclient.getDetails().get("mauza") : "")));
             /////from househld
-        AllCommonsRepository allancRepository = Context.getInstance().allCommonsRepositoryobjects("mcaremother");
-        CommonPersonObject ancobject = allancRepository.findByCaseID(ancclient.entityId());
-        AllCommonsRepository allelcorep = Context.getInstance().allCommonsRepositoryobjects("elco");
-        CommonPersonObject elcoparent = allelcorep.findByCaseID(ancobject.getRelationalId());
+//        AllCommonsRepository allancRepository = Context.getInstance().allCommonsRepositoryobjects("mcaremother");
+//        CommonPersonObject ancobject = allancRepository.findByCaseID(ancclient.entityId());
+//        AllCommonsRepository allelcorep = Context.getInstance().allCommonsRepositoryobjects("elco");
+//        CommonPersonObject elcoparent = allelcorep.findByCaseID(ancobject.getRelationalId());
 
 //
-        checkAnc1view(ancclient);
-        checkAnc2view(ancclient);
-        checkAnc3view(ancclient);
-        checkAnc4view(ancclient);
-        numberofChildrenView(elcoparent);
-        numberofstillbirthview(elcoparent);
-        historyofmr(elcoparent);
-        historyofsb(elcoparent);
-        pregnancyin2years(elcoparent);
-        eddlay(ancclient);
+//        checkAnc1view(ancclient);
+//        checkAnc2view(ancclient);
+//        checkAnc3view(ancclient);
+//        checkAnc4view(ancclient);
+//        numberofChildrenView(elcoparent);
+//        numberofstillbirthview(elcoparent);
+//        historyofmr(elcoparent);
+//        historyofsb(elcoparent);
+//        pregnancyin2years(elcoparent);
+//        eddlay(ancclient);
 
 
 

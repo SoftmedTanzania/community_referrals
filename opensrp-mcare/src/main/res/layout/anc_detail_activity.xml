@@ -6,8 +6,7 @@
               android:orientation="vertical"
               android:background="@color/client_list_header_dark_grey">
 
-    <include layout="@layout/ancdetail_nav_bar"
-         />
+    <include layout="@layout/ancdetail_nav_bar" />
 
     <ImageView
         android:layout_width="match_parent"
@@ -129,7 +128,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Medium Text"
+                        android:text="2018-06-10"
                         android:id="@+id/edd_date"
                         android:layout_gravity="center_vertical"
                         android:textColor="@color/text_black"
@@ -137,6 +136,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -145,6 +145,7 @@
                     android:id="@+id/anc1_layout">
 
                     <ImageView
+                        android:visibility="gone"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:id="@+id/imageView8"
@@ -173,6 +174,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+
+                    android:visibility="gone"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -209,6 +212,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+
+                    android:visibility="gone"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -246,6 +251,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+
+                    android:visibility="gone"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -347,6 +354,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="3"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:id="@+id/livechildren"
                         android:layout_gravity="center_vertical"
@@ -383,6 +391,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:id="@+id/stillbirths"
+                        android:text="0"
                         android:layout_gravity="center_vertical"
                         android:textColor="@color/text_black"
                         android:layout_marginRight="5dp" />
@@ -390,6 +399,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -417,6 +427,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -435,6 +446,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="1"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         style="@style/CustomFontTextViewStyle.ListView.Medium"
                         android:id="@+id/history_of_sb"
@@ -462,6 +474,7 @@
                     <org.ei.opensrp.view.customControls.CustomFontTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="1"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         style="@style/CustomFontTextViewStyle.ListView.Medium"
                         android:id="@+id/number_of_pregnancy"

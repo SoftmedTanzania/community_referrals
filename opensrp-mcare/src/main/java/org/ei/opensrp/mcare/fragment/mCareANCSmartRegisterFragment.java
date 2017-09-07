@@ -512,6 +512,7 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
     private class ClientActionHandler implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+            Log.d("coze","onclick listener clicked");
             switch (view.getId()) {
                 case R.id.profile_info_layout:
                     mCareAncDetailActivity.ancclient = (CommonPersonObjectClient) view.getTag();
@@ -521,10 +522,14 @@ public class mCareANCSmartRegisterFragment extends SecuredNativeSmartRegisterCur
                 case R.id.nbnf_due_date:
                     showFragmentDialog(new EditDialogOptionModelfornbnf(), view.getTag(R.id.clientobject));
                     break;
-                case R.id.anc_reminder_due_date:
+                case R.id.reminder:
                     CustomFontTextView ancreminderDueDate = (CustomFontTextView) view.findViewById(R.id.anc_reminder_due_date);
-                    Log.v("do as you will", (String) view.getTag(R.id.textforAncRegister));
-                    showFragmentDialog(new EditDialogOptionModelForANC((String) view.getTag(R.id.textforAncRegister), (String) view.getTag(R.id.AlertStatustextforAncRegister)), view.getTag(R.id.clientobject));
+                    Intent intent2 = new Intent(getActivity(), ANCFollowUpFormActivity.class);
+                    startActivity(intent2);
+                    break;
+                case R.id.reminder2:
+                    Intent intent3 = new Intent(getActivity(), ANCFollowUpFormActivity.class);
+                    startActivity(intent3);
                     break;
             }
         }

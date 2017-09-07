@@ -76,6 +76,8 @@ public class mCareANCSmartClientsProvider implements SmartRegisterCLientsProvide
         itemView = convertView;
 //        itemView = (ViewGroup) inflater().inflate(R.layout.smart_register_mcare_anc_client, null);
         LinearLayout profileinfolayout = (LinearLayout)itemView.findViewById(R.id.profile_info_layout);
+        LinearLayout reminderLayout = (LinearLayout)itemView.findViewById(R.id.reminder);
+        itemView.findViewById(R.id.reminder2).setOnClickListener(onClickListener);
 
 //        ImageView profilepic = (ImageView)itemView.findViewById(R.id.profilepic);
         TextView name = (TextView)itemView.findViewById(R.id.name);
@@ -96,6 +98,10 @@ public class mCareANCSmartClientsProvider implements SmartRegisterCLientsProvide
 ////        Button due_visit_date = (Button)itemView.findViewById(R.id.hh_due_date);
 //
 //        ImageButton follow_up = (ImageButton)itemView.findViewById(R.id.btn_edit);
+        reminderLayout.setOnClickListener(onClickListener);
+        reminderLayout.setTag(smartRegisterClient);
+
+
         profileinfolayout.setOnClickListener(onClickListener);
         profileinfolayout.setTag(smartRegisterClient);
 
@@ -522,6 +528,9 @@ public class mCareANCSmartClientsProvider implements SmartRegisterCLientsProvide
         CustomFontTextView ancreminderDueDate = (CustomFontTextView)itemView.findViewById(R.id.anc_reminder_due_date);
         setalerttextandColorInView(ancreminderDueDate, alerttextstatus,pc);
         ancreminderDueDate.setText(McareApplication.convertToEnglishDigits(ancreminderDueDate.getText().toString()));
+
+        ancreminderDueDate.setOnClickListener(onClickListener);
+
 
 
     }

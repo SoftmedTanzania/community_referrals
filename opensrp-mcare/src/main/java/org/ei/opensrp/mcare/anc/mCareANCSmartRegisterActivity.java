@@ -49,6 +49,7 @@ import org.json.JSONObject;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.TreeNode;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -124,7 +125,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
     }
 
     public void onPageChanged(int page) {
-        setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 
     @Override
@@ -330,13 +331,15 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
         PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
         Map<String, String> personDetails1 = create("Is_PNC", "0").map();
         personDetails1.put("FWWOMVALID","1");
         personDetails1.put("FWBNFGEN", "2");
         personDetails1.put("FWWOMFNAME", pregnantMom.getName());
         personDetails1.put("GOBHHID", pregnantMom.getId());
         personDetails1.put("FWWOMLNAME", pregnantMom.getName());
-        personDetails1.put("FWPSRLMP", new Date(pregnantMom.getDateLNMP()).toString());
+        personDetails1.put("FWPSRLMP", sdf.format(new Date(pregnantMom.getDateLNMP())));
         personDetails1.put("FWPSRPREGTWYRS", pregnantMom.getPregnancyCount()+"");
         personDetails1.put("FWPSRPRSB", pregnantMom.isHasBabyDeath()?"Has had still birth":"");
         personDetails1.put("FWPSRTOTBIRTH", pregnantMom.getChildrenCount()+"");

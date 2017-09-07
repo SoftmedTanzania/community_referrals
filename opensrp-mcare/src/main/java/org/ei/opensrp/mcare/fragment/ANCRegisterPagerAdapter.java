@@ -4,9 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import org.ei.opensrp.mcare.fragment.ANCRegister1stFragment;
-import org.ei.opensrp.mcare.fragment.ANCRegister2ndFragment;
-
 /**
  * Created by ali on 8/22/17.
  */
@@ -26,8 +23,6 @@ public class ANCRegisterPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return new ANCRegister2ndFragment();
 
-            case 2:
-                return new ANCFollowUpFormFragment();
 
             default:
                 return null;

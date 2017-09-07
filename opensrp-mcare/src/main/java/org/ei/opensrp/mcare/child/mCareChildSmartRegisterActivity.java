@@ -111,7 +111,7 @@ public class mCareChildSmartRegisterActivity extends SecuredNativeSmartRegisterA
         return formNames.toArray(new String[formNames.size()]);
     }
     public void onPageChanged(int page){
-        setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 
     @Override

@@ -160,6 +160,7 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
                     // todo start form submission
 
                     ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(gsonMom, recordId, formName, getFormFieldsOverrides());
+                    getActivity().finish();
                 }
 
             }
