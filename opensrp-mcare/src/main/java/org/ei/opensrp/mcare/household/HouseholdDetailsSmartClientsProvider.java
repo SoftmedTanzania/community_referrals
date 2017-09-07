@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -18,18 +17,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.ei.opensrp.commonregistry.AllCommonsRepository;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectClient;
 import org.ei.opensrp.commonregistry.CommonPersonObjectController;
 import org.ei.opensrp.mcare.R;
-import org.ei.opensrp.mcare.anc.mCareANCSmartRegisterActivity;
+import org.ei.opensrp.mcare.anc.AncSmartRegisterActivity;
 import org.ei.opensrp.mcare.child.mCareChildSmartRegisterActivity;
-import org.ei.opensrp.mcare.elco.ElcoSmartRegisterActivity;
 import org.ei.opensrp.mcare.pnc.mCarePNCSmartRegisterActivity;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.util.DateUtil;
-import org.ei.opensrp.view.activity.ANCSmartRegisterActivity;
 import org.ei.opensrp.view.contract.SmartRegisterClient;
 import org.ei.opensrp.view.contract.SmartRegisterClients;
 import org.ei.opensrp.view.dialog.FilterOption;
@@ -163,7 +159,7 @@ public class HouseholdDetailsSmartClientsProvider implements SmartRegisterClient
                         @Override
                         public void onClick(View v) {
                             if(((TextView)v).getText().toString().contains("ANC")){
-                                context.startActivity(new Intent(context, mCareANCSmartRegisterActivity.class));
+                                context.startActivity(new Intent(context, AncSmartRegisterActivity.class));
 
                             }
                             if(((TextView)v).getText().toString().contains("PNC")){

@@ -146,6 +146,7 @@
             android:src="@color/smart_register_client_divider_color"/>
 
     <LinearLayout
+        android:id="@+id/reminder2"
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
@@ -313,11 +314,11 @@
             android:src="@color/smart_register_client_divider_color"/>
 
     <LinearLayout
+        android:id="@+id/reminder"
         android:orientation="horizontal"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
-        android:layout_weight="1.25"
-        >
+        android:layout_weight="1.25">
 
         <org.ei.opensrp.view.customControls.CustomFontTextView
             android:layout_width="match_parent"

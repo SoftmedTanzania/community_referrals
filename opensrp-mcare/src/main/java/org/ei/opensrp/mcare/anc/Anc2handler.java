@@ -7,22 +7,22 @@ import org.ei.opensrp.service.formSubmissionHandler.FormSubmissionHandler;
 
 import java.util.List;
 
-public class anc4handler implements FormSubmissionHandler {
+public class Anc2handler implements FormSubmissionHandler {
 
 
-    public anc4handler() {
+    public Anc2handler() {
 
     }
 
     @Override
     public void handle(FormSubmission submission) {
         String entityID = submission.entityId();
-        List<Alert> alertlist_for_client = Context.getInstance().alertService().findByEntityIdAndAlertNames(entityID, "ancrv_4");
+        List<Alert> alertlist_for_client = Context.getInstance().alertService().findByEntityIdAndAlertNames(entityID, "ancrv_2");
         if(alertlist_for_client.size() == 0){
 
         }else{
             for(int i = 0;i<alertlist_for_client.size();i++){
-                Context.getInstance().alertService().changeAlertStatusToComplete(entityID, "ancrv_4");
+                Context.getInstance().alertService().changeAlertStatusToComplete(entityID, "ancrv_2");
             }
         }
 

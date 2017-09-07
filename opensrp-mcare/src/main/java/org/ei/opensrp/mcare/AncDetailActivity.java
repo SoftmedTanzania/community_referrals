@@ -1,4 +1,4 @@
-package org.ei.opensrp.mcare.anc;
+package org.ei.opensrp.mcare;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -47,7 +47,7 @@ import static org.ei.opensrp.util.StringUtil.humanize;
 /**
  * Created by raihan on 5/11/15.
  */
-public class mCareAncDetailActivity extends AppCompatActivity {
+public class AncDetailActivity extends AppCompatActivity {
 
     //image retrieving
     private static final String TAG = "ImageGridFragment";
@@ -171,7 +171,7 @@ public class mCareAncDetailActivity extends AppCompatActivity {
         final ImageView householdview = (ImageView) findViewById(R.id.householdprofileview);
 
         if (ancclient.getDetails().get("profilepic") != null) {
-            setImagetoHolder(mCareAncDetailActivity.this, ancclient.getDetails().get("profilepic"), householdview, R.mipmap.woman_placeholder);
+            setImagetoHolder(AncDetailActivity.this, ancclient.getDetails().get("profilepic"), householdview, R.mipmap.woman_placeholder);
         }
 //        householdview.setOnClickListener(new View.OnClickListener() {
 //            @Override

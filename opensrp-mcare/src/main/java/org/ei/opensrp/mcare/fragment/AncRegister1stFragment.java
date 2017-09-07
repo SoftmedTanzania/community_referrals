@@ -31,19 +31,19 @@ import java.util.Locale;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ANCRegister1stFragment extends Fragment {
+public class AncRegister1stFragment extends Fragment {
 
-    TextView textDate, textPhone, textDateLNMP;
+    public static TextView textDate, textPhone, textDateLNMP;
     LinearLayout layoutDatePick, layoutEditPhone;
     CardView cardDatePickLNMP;
-    EditText editTextMotherName, editTextMotherId, editTextMotherAge,
+    public static EditText editTextMotherName, editTextMotherId, editTextMotherAge,
             editTextHeight, editTextPregCount, editTextBirthCount, editTextChildrenCount;
-    RadioGroup radioGroupPregnancyAge;
+    public static  RadioGroup radioGroupPregnancyAge;
 
     private Calendar today;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
-    public ANCRegister1stFragment() {
+    public AncRegister1stFragment() {
         // Required empty public constructor
     }
 
@@ -183,23 +183,22 @@ public class ANCRegister1stFragment extends Fragment {
     }
 
     public boolean isFormSubmissionOk() {
-        if (TextUtils.isEmpty(editTextMotherName.getText().toString())
-                || TextUtils.isEmpty(editTextMotherId.getText().toString())
-                || TextUtils.isEmpty(editTextMotherAge.getText().toString())
-                || TextUtils.isEmpty(editTextHeight.getText().toString())
-                || TextUtils.isEmpty(editTextPregCount.getText().toString())
-                || TextUtils.isEmpty(editTextBirthCount.getText().toString())
-                || TextUtils.isEmpty(editTextChildrenCount.getText().toString())
-                || TextUtils.isEmpty(textPhone.getText().toString())
-                || TextUtils.isEmpty(textDateLNMP.getText().toString())) {
+        if (TextUtils.isEmpty(editTextMotherName.getText())
+                || TextUtils.isEmpty(editTextMotherId.getText())
+                || TextUtils.isEmpty(editTextMotherAge.getText())
+                || TextUtils.isEmpty(editTextHeight.getText())
+                || TextUtils.isEmpty(editTextPregCount.getText())
+                || TextUtils.isEmpty(editTextBirthCount.getText())
+                || TextUtils.isEmpty(editTextChildrenCount.getText())
+                || TextUtils.isEmpty(textPhone.getText())
+                || TextUtils.isEmpty(textDateLNMP.getText())) {
 
-            Toast.makeText(getContext(),
-                    "Please provide all required information.",
+            Toast.makeText(getActivity(),
+                    "Tafadhali Jaza taarifa zote muhimu",
                     Toast.LENGTH_LONG).show();
             return false;
 
-        } else
-        if (radioGroupPregnancyAge.getCheckedRadioButtonId() == -1)
+        } else if (radioGroupPregnancyAge.getCheckedRadioButtonId() == -1)
             // no radio checked
             return false;
         else

@@ -18,8 +18,7 @@ import org.ei.opensrp.mcare.LoginActivity;
 import org.ei.opensrp.mcare.R;
 import org.ei.opensrp.mcare.elco.ElcoMauzaCommonObjectFilterOption;
 import org.ei.opensrp.mcare.elco.ElcoSearchOption;
-import org.ei.opensrp.mcare.fragment.mCareChildSmartRegisterFragment;
-import org.ei.opensrp.mcare.fragment.mCarePNCSmartRegisterFragment;
+import org.ei.opensrp.mcare.fragment.ChildSmartRegisterFragment;
 import org.ei.opensrp.mcare.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
@@ -81,7 +80,7 @@ public class mCareChildSmartRegisterActivity extends SecuredNativeSmartRegisterA
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         formNames = this.buildFormNameList();
-        mBaseFragment = new mCareChildSmartRegisterFragment();
+        mBaseFragment = new ChildSmartRegisterFragment();
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
@@ -111,7 +110,7 @@ public class mCareChildSmartRegisterActivity extends SecuredNativeSmartRegisterA
         return formNames.toArray(new String[formNames.size()]);
     }
     public void onPageChanged(int page){
-        setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 
     @Override

@@ -244,7 +244,7 @@ public class HouseHoldSmartRegisterFragment extends SecuredNativeSmartRegisterCu
             ft.remove(prev);
         }
         ft.addToBackStack(null);
-        McareLocationSelectorDialogFragment
+        LocationSelectorDialogFragment
                 .newInstance((HouseHoldSmartRegisterActivity) getActivity(), new
                         EditDialogOptionModel(), context().anmLocationController().get(),
                         "new_household_registration")

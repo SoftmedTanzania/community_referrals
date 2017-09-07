@@ -1,12 +1,11 @@
-package org.ei.opensrp.mcare.adapters;
+package org.ei.opensrp.mcare.pageradapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import org.ei.opensrp.mcare.fragment.ANCFollowUpFormFragment;
-import org.ei.opensrp.mcare.fragment.ANCRegister1stFragment;
-import org.ei.opensrp.mcare.fragment.ANCRegister2ndFragment;
+import org.ei.opensrp.mcare.fragment.AncRegister1stFragment;
+import org.ei.opensrp.mcare.fragment.AncRegister2ndFragment;
 
 
 /**
@@ -23,14 +22,10 @@ public class ANCRegisterPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new ANCRegister1stFragment();
+                return new AncRegister1stFragment();
 
             case 1:
-                return new ANCRegister2ndFragment();
-
-            case 2:
-                return new ANCFollowUpFormFragment();
-
+                return new AncRegister2ndFragment();
             default:
                 return null;
         }
@@ -38,7 +33,7 @@ public class ANCRegisterPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
     @Override

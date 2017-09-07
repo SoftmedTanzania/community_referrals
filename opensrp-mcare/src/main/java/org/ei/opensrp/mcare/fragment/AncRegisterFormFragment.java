@@ -17,10 +17,12 @@ import android.view.animation.AnimationUtils;
 import com.google.gson.Gson;
 
 import org.ei.opensrp.mcare.R;
-import org.ei.opensrp.mcare.adapters.ANCRegisterPagerAdapter;
+import org.ei.opensrp.mcare.pageradapter.ANCRegisterPagerAdapter;
 import org.ei.opensrp.mcare.datamodels.PregnantMom;
+import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
+import org.json.JSONObject;
 
-public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
+public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
 
     private ViewPager viewPager;
     Animation animationFabShow, animationFabHide, animationFabHideSlow;
@@ -32,7 +34,11 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
     private PregnantMom pregnantMom;
     private Gson gson = new Gson();
 
-    private static final String TAG = ANCRegisterFormFragment.class.getSimpleName();
+    private JSONObject fieldOverides = new JSONObject();
+    private String recordId;
+    private String formName = "pregnant_mothers_registration";
+
+    private static final String TAG = AncRegisterFormFragment.class.getSimpleName();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +61,8 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
         pagerAdapter = new ANCRegisterPagerAdapter(getActivity().getSupportFragmentManager());
 
         viewPager.setAdapter(pagerAdapter);
+
+        viewPager.setOffscreenPageLimit(10);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -121,13 +129,13 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View view) {
                 //todo collect data from forms
-                if (((ANCRegister1stFragment) pagerAdapter.getItem(0)).isFormSubmissionOk()) {
+                if (((AncRegister1stFragment) pagerAdapter.getItem(0)).isFormSubmissionOk()) {
                     // collect mother details from the 1st page
-                    pregnantMom = ((ANCRegister1stFragment) pagerAdapter.getItem(0)).getPregnantMom();
+                    pregnantMom = ((AncRegister1stFragment) pagerAdapter.getItem(0)).getPregnantMom();
 
                     //todo check for checkboxes on the 2nd page then submit form
 
-                    SparseBooleanArray indicatorsMap = ((ANCRegister2ndFragment) pagerAdapter.getItem(1))
+                    SparseBooleanArray indicatorsMap = ((AncRegister2ndFragment) pagerAdapter.getItem(1))
                             .getIndicatorsMap();
 
                     pregnantMom.setAbove20WeeksPregnant(indicatorsMap.get(R.id.checkboxAgeBelow20));
@@ -151,6 +159,8 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
 
                     // todo start form submission
 
+                    ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(gsonMom, recordId, formName, getFormFieldsOverrides());
+                    getActivity().finish();
                 }
 
             }
@@ -159,4 +169,39 @@ public class ANCRegisterFormFragment extends android.support.v4.app.Fragment {
         return v;
     }
 
+    //TODO Implement this method to initialize a form data
+    public void setFormData(String data) {
+        Log.d(TAG, "Setting form data");
+//        ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(data, recordId, formName, getFormFieldsOverrides());
+    }
+
+    public void savePartialFormData(String partialData) {
+        ((SecuredNativeSmartRegisterActivity) getActivity()).savePartialFormData(partialData, recordId, formName, getFormFieldsOverrides());
+    }
+
+    public JSONObject getFormFieldsOverrides() {
+        return fieldOverides;
+    }
+
+    public JSONObject getFieldOverides() {
+        return fieldOverides;
+    }
+
+    public void setFieldOverides(String overrides) {
+        try {
+            //get the field overrides map
+            if (overrides != null) {
+                JSONObject json = new JSONObject(overrides);
+                String overridesStr = json.getString("fieldOverrides");
+                this.fieldOverides = new JSONObject(overridesStr);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void setRecordId(String recordId) {
+        this.recordId = recordId;
+    }
 }

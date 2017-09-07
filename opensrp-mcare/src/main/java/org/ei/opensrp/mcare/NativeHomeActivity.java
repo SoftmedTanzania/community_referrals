@@ -1,7 +1,7 @@
 package org.ei.opensrp.mcare;
 
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.os.Environment;
 import android.os.Handler;
 
 import android.util.Log;
@@ -19,11 +19,11 @@ import org.ei.opensrp.commonregistry.CommonPersonObjectController;
 import org.ei.opensrp.commonregistry.ControllerFilterMap;
 import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
 import org.ei.opensrp.event.Listener;
-import org.ei.opensrp.mcare.anc.anc1handler;
-import org.ei.opensrp.mcare.anc.anc2handler;
-import org.ei.opensrp.mcare.anc.anc3handler;
-import org.ei.opensrp.mcare.anc.anc4handler;
-import org.ei.opensrp.mcare.anc.nbnfhandler;
+import org.ei.opensrp.mcare.anc.Anc1handler;
+import org.ei.opensrp.mcare.anc.Anc2handler;
+import org.ei.opensrp.mcare.anc.Anc3handler;
+import org.ei.opensrp.mcare.anc.Anc4handler;
+import org.ei.opensrp.mcare.anc.Bnfhandler;
 import org.ei.opensrp.mcare.child.encc1handler;
 import org.ei.opensrp.mcare.child.encc2handler;
 import org.ei.opensrp.mcare.child.encc3handler;
@@ -44,6 +44,12 @@ import org.ei.opensrp.view.controller.NativeAfterANMDetailsFetchListener;
 import org.ei.opensrp.view.controller.NativeUpdateANMDetailsTask;
 import org.ei.opensrp.view.fragment.DisplayFormFragment;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import static android.widget.Toast.LENGTH_SHORT;
 import static java.lang.String.valueOf;
 import static org.ei.opensrp.event.Event.ACTION_HANDLED;
@@ -55,6 +61,7 @@ public class NativeHomeActivity extends SecuredActivity {
     private MenuItem updateMenuItem;
     private MenuItem remainingFormsToSyncMenuItem;
     private PendingFormSubmissionService pendingFormSubmissionService;
+    static final String DATABASE_NAME = "drishti.db";
 
     private Listener<Boolean> onSyncStartListener = new Listener<Boolean>() {
         @Override
@@ -110,7 +117,7 @@ public class NativeHomeActivity extends SecuredActivity {
     @Override
     protected void onCreation() {
         setContentView(R.layout.smart_registers_home);
-        navigationController = new McareNavigationController(this,anmController);
+        navigationController = new NavigationController(this,anmController);
         setupViews();
         initialize();
         DisplayFormFragment.formInputErrorMessage = getResources().getString(R.string.forminputerror);
@@ -119,13 +126,13 @@ public class NativeHomeActivity extends SecuredActivity {
                 new CensusEnrollmentHandler());
         context().formSubmissionRouter().getHandlerMap().put("psrf_form", new PSRFHandler());
         context().formSubmissionRouter().getHandlerMap().put("anc_reminder_visit_1",
-                new anc1handler());
+                new Anc1handler());
         context().formSubmissionRouter().getHandlerMap().put("anc_reminder_visit_2",
-                new anc2handler());
+                new Anc2handler());
         context().formSubmissionRouter().getHandlerMap().put("anc_reminder_visit_3",
-                new anc3handler());
+                new Anc3handler());
         context().formSubmissionRouter().getHandlerMap().put("anc_reminder_visit_4",
-                new anc4handler());
+                new Anc4handler());
         context().formSubmissionRouter().getHandlerMap().put("pnc_reminder_visit_1",
                 new pnc1handler());
         context().formSubmissionRouter().getHandlerMap().put("pnc_reminder_visit_2",
@@ -139,7 +146,9 @@ public class NativeHomeActivity extends SecuredActivity {
         context().formSubmissionRouter().getHandlerMap().put(
                 "mis_elco", new MIS_elco_form_handler());
         context().formSubmissionRouter().getHandlerMap().put(
-                "birthnotificationpregnancystatusfollowup", new nbnfhandler());
+                "birthnotificationpregnancystatusfollowup", new Bnfhandler());
+
+        backUpDataBase();
     }
 
     private void setupViews() {
@@ -396,5 +405,50 @@ public class NativeHomeActivity extends SecuredActivity {
             Log.v("the filter",""+returnvalue);
             return returnvalue;
         }
+    }
+
+
+
+    public  boolean backUpDataBase(){
+        boolean result = true;
+
+        // Source path in the application database folder
+        String appDbPath = "/data/data/com.my.application/databases/" + DATABASE_NAME;
+
+        // Destination Path to the sdcard app folder
+        String sdFolder =  Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + DATABASE_NAME;
+
+
+        InputStream myInput = null;
+        OutputStream myOutput = null;
+        try {
+            //Open your local db as the input stream
+            myInput = new FileInputStream(appDbPath);
+            //Open the empty db as the output stream
+            myOutput = new FileOutputStream(sdFolder);
+
+            //transfer bytes from the inputfile to the outputfile
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = myInput.read(buffer))>0){
+                myOutput.write(buffer, 0, length);
+            }
+        } catch (IOException e) {
+            result = false;
+            e.printStackTrace();
+        } finally {
+            try {
+                //Close the streams
+                if(myOutput!=null){
+                    myOutput.flush();
+                    myOutput.close();
+                }
+                if(myInput!=null){
+                    myInput.close();
+                }
+            } catch (IOException e) { }
+        }
+
+        return result;
     }
 }

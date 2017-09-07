@@ -47,7 +47,7 @@ import static org.ei.opensrp.util.StringUtil.humanize;
 /**
  * Created by user on 2/12/15.
  */
-public class mCareANCSmartClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
+public class AncSmartClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
 
     private final LayoutInflater inflater;
     private final Context context;
@@ -58,8 +58,8 @@ public class mCareANCSmartClientsProvider implements SmartRegisterCLientsProvide
 
     protected CommonPersonObjectController controller;
     AlertService alertService;
-    public mCareANCSmartClientsProvider(Context context,
-                                        View.OnClickListener onClickListener,AlertService alertService) {
+    public AncSmartClientsProvider(Context context,
+                                   View.OnClickListener onClickListener, AlertService alertService) {
         this.onClickListener = onClickListener;
         this.alertService = alertService;
         this.context = context;
@@ -76,6 +76,8 @@ public class mCareANCSmartClientsProvider implements SmartRegisterCLientsProvide
         itemView = convertView;
 //        itemView = (ViewGroup) inflater().inflate(R.layout.smart_register_mcare_anc_client, null);
         LinearLayout profileinfolayout = (LinearLayout)itemView.findViewById(R.id.profile_info_layout);
+        LinearLayout reminderLayout = (LinearLayout)itemView.findViewById(R.id.reminder);
+        itemView.findViewById(R.id.reminder2).setOnClickListener(onClickListener);
 
 //        ImageView profilepic = (ImageView)itemView.findViewById(R.id.profilepic);
         TextView name = (TextView)itemView.findViewById(R.id.name);
@@ -96,6 +98,10 @@ public class mCareANCSmartClientsProvider implements SmartRegisterCLientsProvide
 ////        Button due_visit_date = (Button)itemView.findViewById(R.id.hh_due_date);
 //
 //        ImageButton follow_up = (ImageButton)itemView.findViewById(R.id.btn_edit);
+        reminderLayout.setOnClickListener(onClickListener);
+        reminderLayout.setTag(smartRegisterClient);
+
+
         profileinfolayout.setOnClickListener(onClickListener);
         profileinfolayout.setTag(smartRegisterClient);
 
@@ -115,36 +121,49 @@ public class mCareANCSmartClientsProvider implements SmartRegisterCLientsProvide
 
         DateUtil.setDefaultDateFormat("yyyy-MM-dd");
         AllCommonsRepository allmotherRepository = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("mcaremother");
-        CommonPersonObject childobject = allmotherRepository.findByCaseID(smartRegisterClient.entityId());
+        //CommonPersonObject childobject = allmotherRepository.findByCaseID(smartRegisterClient.entityId());
         AllCommonsRepository elcorep = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("elco");
-        final CommonPersonObject elcoObject = elcorep.findByCaseID(childobject.getRelationalId());
+       // final CommonPersonObject elcoObject = elcorep.findByCaseID(childobject.getRelationalId());
+//        try {
+//            int days = DateUtil.dayDifference(DateUtil.getLocalDate((elcoObject.getDetails().get("FWBIRTHDATE") != null ?  elcoObject.getDetails().get("FWBIRTHDATE")  : "")), DateUtil.today());
+//            int calc_age = days / 365;
+//            age.setText("("+calc_age+") ");
+//        }catch (Exception e){
+//            Log.e(getClass().getName(), "Exception", e);
+//        }
+
         try {
-            int days = DateUtil.dayDifference(DateUtil.getLocalDate((elcoObject.getDetails().get("FWBIRTHDATE") != null ?  elcoObject.getDetails().get("FWBIRTHDATE")  : "")), DateUtil.today());
-            int calc_age = days / 365;
-            age.setText("("+calc_age+") ");
+            if (pc.getDetails().get("FWWOMNID").length() > 0) {
+                String NIDSourcestring = "NID: " + (pc.getDetails().get("FWWOMNID") != null ? pc.getDetails().get("FWWOMNID") : "") + " ";
+                nid.setText(Html.fromHtml(NIDSourcestring));
+                nid.setVisibility(View.VISIBLE);
+            }
         }catch (Exception e){
-            Log.e(getClass().getName(), "Exception", e);
+            e.printStackTrace();
         }
 
-        if(pc.getDetails().get("FWWOMNID").length()>0) {
-            String NIDSourcestring = "NID: " +  (pc.getDetails().get("FWWOMNID") != null ? pc.getDetails().get("FWWOMNID") : "") + " ";
-            nid.setText(Html.fromHtml(NIDSourcestring));
-            nid.setVisibility(View.VISIBLE);
-        }
-        if(pc.getDetails().get("FWWOMBID").length()>0) {
-            String BRIDSourcestring = "BRID: " +  (pc.getDetails().get("FWWOMBID") != null ? pc.getDetails().get("FWWOMBID") : "") + " ";
-            brid.setText(Html.fromHtml(BRIDSourcestring));
-            brid.setVisibility(View.VISIBLE);
-        }
+        try {
+            if (pc.getDetails().get("FWWOMBID").length() > 0) {
+                String BRIDSourcestring = "BRID: " + (pc.getDetails().get("FWWOMBID") != null ? pc.getDetails().get("FWWOMBID") : "") + " ";
+                brid.setText(Html.fromHtml(BRIDSourcestring));
+                brid.setVisibility(View.VISIBLE);
+            }
 
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 //        Log.v("brid tag",pc.getDetails().get("FWWOMBID"));
 
 
 
-        if(pc.getDetails().get("FWGESTATIONALAGE")!=null){
-            String GASourcestring = "GA: " + pc.getDetails().get("FWGESTATIONALAGE")+ " weeks" + " ";
+        try {
+            if (pc.getDetails().get("FWGESTATIONALAGE") != null) {
+                String GASourcestring = "GA: " + pc.getDetails().get("FWGESTATIONALAGE") + " weeks" + " ";
 
-            ga.setText(Html.fromHtml(GASourcestring));
+                ga.setText(Html.fromHtml(GASourcestring));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -160,10 +179,15 @@ public class mCareANCSmartClientsProvider implements SmartRegisterCLientsProvide
         } catch (ParseException e) {
             Log.e(getClass().getName(), "Exception", e);
         }
-        constructRiskFlagView(pc,itemView);
-        constructANCReminderDueBlock(pc.getColumnmaps().get("FWPSRLMP")!=null?pc.getColumnmaps().get("FWPSRLMP"):"",pc, itemView);
-        constructNBNFDueBlock(pc, itemView);
-        constructAncVisitStatusBlock(pc,itemView);
+
+        try {
+            constructRiskFlagView(pc, itemView);
+            constructANCReminderDueBlock(pc.getColumnmaps().get("FWPSRLMP") != null ? pc.getColumnmaps().get("FWPSRLMP") : "", pc, itemView);
+            constructNBNFDueBlock(pc, itemView);
+            constructAncVisitStatusBlock(pc, itemView);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
 
 
@@ -504,6 +528,9 @@ public class mCareANCSmartClientsProvider implements SmartRegisterCLientsProvide
         CustomFontTextView ancreminderDueDate = (CustomFontTextView)itemView.findViewById(R.id.anc_reminder_due_date);
         setalerttextandColorInView(ancreminderDueDate, alerttextstatus,pc);
         ancreminderDueDate.setText(McareApplication.convertToEnglishDigits(ancreminderDueDate.getText().toString()));
+
+        ancreminderDueDate.setOnClickListener(onClickListener);
+
 
 
     }

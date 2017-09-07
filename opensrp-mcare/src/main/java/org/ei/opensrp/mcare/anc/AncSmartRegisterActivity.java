@@ -11,20 +11,22 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import org.ei.opensrp.Context;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
+import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectController;
-import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.mcare.LoginActivity;
 import org.ei.opensrp.mcare.R;
+import org.ei.opensrp.mcare.datamodels.PregnantMom;
 import org.ei.opensrp.mcare.elco.ElcoMauzaCommonObjectFilterOption;
 import org.ei.opensrp.mcare.elco.ElcoSearchOption;
-import org.ei.opensrp.mcare.fragment.mCareANCSmartRegisterFragment;
+import org.ei.opensrp.mcare.fragment.AncRegisterFormFragment;
+import org.ei.opensrp.mcare.fragment.AncSmartRegisterFragment;
 import org.ei.opensrp.mcare.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
-import org.ei.opensrp.service.FormSubmissionService;
-import org.ei.opensrp.service.ZiggyService;
 import org.ei.opensrp.util.FormUtils;
 import org.ei.opensrp.util.StringUtil;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
@@ -36,14 +38,15 @@ import org.ei.opensrp.view.dialog.DialogOptionMapper;
 import org.ei.opensrp.view.dialog.DialogOptionModel;
 import org.ei.opensrp.view.dialog.EditOption;
 import org.ei.opensrp.view.dialog.OpenFormOption;
-import org.ei.opensrp.view.fragment.DisplayFormFragment;
 import org.ei.opensrp.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.ei.opensrp.view.viewpager.OpenSRPViewPager;
 import org.json.JSONObject;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.TreeNode;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,9 +59,10 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.ei.opensrp.util.EasyMap.create;
 
-public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
-    private static final String TAG = mCareANCSmartRegisterActivity.class.getSimpleName();
+public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
+    private static final String TAG = AncSmartRegisterActivity.class.getSimpleName();
 
     private SmartRegisterClientsProvider clientProvider = null;
     private CommonPersonObjectController controller;
@@ -72,6 +76,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
     private String[] formNames = new String[]{};
     private android.support.v4.app.Fragment mBaseFragment = null;
+    private Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +87,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         formNames = this.buildFormNameList();
-        mBaseFragment = new mCareANCSmartRegisterFragment();
+        mBaseFragment = new AncSmartRegisterFragment();
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
@@ -99,6 +104,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
     private String[] buildFormNameList() {
         List<String> formNames = new ArrayList<String>();
+        formNames.add("pregnant_mothers_registration");
         formNames.add("anc_reminder_visit_1");
         formNames.add("anc_reminder_visit_2");
         formNames.add("anc_reminder_visit_3");
@@ -114,7 +120,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
     }
 
     public void onPageChanged(int page) {
-        setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 
     @Override
@@ -243,7 +249,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
                     data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
-                mCareANCSmartRegisterFragment displayFormFragment = (mCareANCSmartRegisterFragment)getDisplayFormFragmentAtIndex(formIndex);
+                AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment)getDisplayFormFragmentAtIndex(2);
                 if (displayFormFragment != null) {
                     Log.d(TAG,"form data = "+data);
                     displayFormFragment.setFormData(data);
@@ -259,6 +265,9 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
         }
 
     }
+
+
+
 
     public void updateSearchView() {
         getSearchView().addTextChangedListener(new TextWatcher() {
@@ -314,28 +323,52 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
     @Override
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
         // save the form
-        try {
-            FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
-            FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
 
-            org.ei.opensrp.Context context = org.ei.opensrp.Context.getInstance();
-            ZiggyService ziggyService = context.ziggyService();
-            ziggyService.saveForm(getParams(submission), submission.instance());
+        PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
 
-            FormSubmissionService formSubmissionService = context.formSubmissionService();
-            formSubmissionService.updateFTSsearch(submission);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-            Log.v("we are here", "hhregister");
-            //switch to forms list fragmentstregi
-            switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
+        Map<String, String> personDetails1 = create("Is_PNC", "0").map();
+        personDetails1.put("FWWOMVALID","1");
+        personDetails1.put("FWBNFGEN", "2");
+        personDetails1.put("FWWOMFNAME", pregnantMom.getName());
+        personDetails1.put("GOBHHID", pregnantMom.getId());
+        personDetails1.put("FWWOMLNAME", pregnantMom.getName());
+        personDetails1.put("FWPSRLMP", sdf.format(new Date(pregnantMom.getDateLNMP())));
+        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.getPregnancyCount()+"");
+        personDetails1.put("FWPSRPRSB", pregnantMom.isHasBabyDeath()?"Has had still birth":"");
+        personDetails1.put("FWPSRTOTBIRTH", pregnantMom.getChildrenCount()+"");
+        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.isHas2orMoreBBA()?"Has had no pregnancies in the last 2 years":"");
+        personDetails1.put("FWWOMAGE", pregnantMom.getAge()+"");
+        personDetails1.put("HEIGHT", pregnantMom.getHeight()+"");
+        personDetails1.put("user_type", "1");
 
-        } catch (Exception e) {
-            mCareANCSmartRegisterFragment displayFormFragment =(mCareANCSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
-            if (displayFormFragment != null) {
-//                displayFormFragment.hideTranslucentProgressDialog();
-            }
-            e.printStackTrace();
-        }
+
+        CommonPersonObject cpo2 = new CommonPersonObject(id,id,personDetails1,"mcaremother");
+        context().commonrepository("mcaremother").addMCARE(cpo2);
+//
+//        try {
+//            FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
+//            FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
+//
+//            org.ei.opensrp.Context context = org.ei.opensrp.Context.getInstance();
+//            ZiggyService ziggyService = context.ziggyService();
+//            ziggyService.saveForm(getParams(submission), submission.instance());
+//
+//            FormSubmissionService formSubmissionService = context.formSubmissionService();
+//            formSubmissionService.updateFTSsearch(submission);
+//
+//            Log.v("we are here", "hhregister");
+//            //switch to forms list fragmentstregi
+//            switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
+//
+//        } catch (Exception e) {
+//            AncSmartRegisterFragment displayFormFragment =(AncSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
+//            if (displayFormFragment != null) {
+////                displayFormFragment.hideTranslucentProgressDialog();
+//            }
+//            e.printStackTrace();
+//        }
     }
 
     public void switchToBaseFragment(final String data) {
@@ -351,9 +384,9 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
                 }
 
                 try {
-                    mCareANCSmartRegisterFragment displayFormFragment = (mCareANCSmartRegisterFragment) getDisplayFormFragmentAtIndex(prevPageIndex);
+                    AncSmartRegisterFragment displayFormFragment = (AncSmartRegisterFragment) getDisplayFormFragmentAtIndex(prevPageIndex);
                     if (displayFormFragment != null) {
-                        displayFormFragment.setFormData(null);
+//                        displayFormFragment.setFormData(null);
                     }
 
                     displayFormFragment.setRecordId(null);
@@ -451,7 +484,7 @@ public class mCareANCSmartRegisterActivity extends SecuredNativeSmartRegisterAct
     public void retrieveAndSaveUnsubmittedFormData() {
         if (currentActivityIsShowingForm()) {
             try {
-                mCareANCSmartRegisterFragment formFragment = (mCareANCSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
+                AncSmartRegisterFragment formFragment = (AncSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
                 formFragment.saveCurrentFormData();
             }catch (Exception e){
                 e.printStackTrace();

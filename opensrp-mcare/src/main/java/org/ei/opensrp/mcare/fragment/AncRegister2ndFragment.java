@@ -14,15 +14,15 @@ import org.ei.opensrp.mcare.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ANCRegister2ndFragment extends Fragment {
+public class AncRegister2ndFragment extends Fragment {
 
-    CheckBox checkBoxAgeBelow20, checkBox10YrsPassed, checkBoxBabyDeath,
+    private static CheckBox checkBoxAgeBelow20, checkBox10YrsPassed, checkBoxBabyDeath,
             checkBox2orMoreBBA, checkBoxHeartProb, checkBoxDiabetes, checkBoxTB,
             checkBox4orMorePregnancies, checkBox1stPregAbove35Yrs, checkBoxHeightBelow150,
             checkBoxCSDelivery, checkBoxKilemaChaNyonga, checkBoxBleedingOnDelivery,
             checkBoxKondoKukwama;
 
-    public ANCRegister2ndFragment() {
+    public AncRegister2ndFragment() {
         // Required empty public constructor
     }
 
@@ -57,20 +57,24 @@ public class ANCRegister2ndFragment extends Fragment {
         // todo get all checked boxes
         SparseBooleanArray indicators = new SparseBooleanArray();
 
-        indicators.put(R.id.checkboxAgeBelow20, checkBoxAgeBelow20.isChecked());
-        indicators.put(R.id.checkbox10YrsLastPreg, checkBox10YrsPassed.isChecked());
-        indicators.put(R.id.checkboxBabyDeath, checkBoxBabyDeath.isChecked());
-        indicators.put(R.id.checkbox2orMoreBBA, checkBox2orMoreBBA.isChecked());
-        indicators.put(R.id.checkboxHeartProb, checkBoxHeartProb.isChecked());
-        indicators.put(R.id.checkboxDiabetes, checkBoxDiabetes.isChecked());
-        indicators.put(R.id.checkboxTB, checkBoxTB.isChecked());
-        indicators.put(R.id.checkbox4orMorePregnancies, checkBox4orMorePregnancies.isChecked());
-        indicators.put(R.id.checkbox1stPregAbove35Yrs, checkBox1stPregAbove35Yrs.isChecked());
-        indicators.put(R.id.checkboxHeightBelow150, checkBoxHeightBelow150.isChecked());
-        indicators.put(R.id.checkboxCSDelivery, checkBoxCSDelivery.isChecked());
-        indicators.put(R.id.checkboxKilemaChaNyonga, checkBoxKilemaChaNyonga.isChecked());
-        indicators.put(R.id.checkboxBleedingOnDelivery, checkBoxBleedingOnDelivery.isChecked());
-        indicators.put(R.id.checkboxKondoKukwama, checkBoxKondoKukwama.isChecked());
+        try {
+            indicators.put(R.id.checkboxAgeBelow20, checkBoxAgeBelow20.isChecked());
+            indicators.put(R.id.checkbox10YrsLastPreg, checkBox10YrsPassed.isChecked());
+            indicators.put(R.id.checkboxBabyDeath, checkBoxBabyDeath.isChecked());
+            indicators.put(R.id.checkbox2orMoreBBA, checkBox2orMoreBBA.isChecked());
+            indicators.put(R.id.checkboxHeartProb, checkBoxHeartProb.isChecked());
+            indicators.put(R.id.checkboxDiabetes, checkBoxDiabetes.isChecked());
+            indicators.put(R.id.checkboxTB, checkBoxTB.isChecked());
+            indicators.put(R.id.checkbox4orMorePregnancies, checkBox4orMorePregnancies.isChecked());
+            indicators.put(R.id.checkbox1stPregAbove35Yrs, checkBox1stPregAbove35Yrs.isChecked());
+            indicators.put(R.id.checkboxHeightBelow150, checkBoxHeightBelow150.isChecked());
+            indicators.put(R.id.checkboxCSDelivery, checkBoxCSDelivery.isChecked());
+            indicators.put(R.id.checkboxKilemaChaNyonga, checkBoxKilemaChaNyonga.isChecked());
+            indicators.put(R.id.checkboxBleedingOnDelivery, checkBoxBleedingOnDelivery.isChecked());
+            indicators.put(R.id.checkboxKondoKukwama, checkBoxKondoKukwama.isChecked());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         return indicators;
     }
