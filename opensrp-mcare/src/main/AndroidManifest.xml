@@ -75,7 +75,7 @@
         <activity
             android:name=".anc.mCareAncDetailActivity"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
+            android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
         <activity
             android:name=".pnc.mCarePncDetailActivity"
             android:screenOrientation="landscape"
