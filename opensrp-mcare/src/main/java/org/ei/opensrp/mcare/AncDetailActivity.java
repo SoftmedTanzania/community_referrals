@@ -94,6 +94,7 @@ public class AncDetailActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("");
         }
 
         name.setText(humanize((ancclient.getColumnmaps().get("FWWOMFNAME") != null ? ancclient.getColumnmaps().get("FWWOMFNAME") : "").replace("+", "_")));

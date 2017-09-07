@@ -256,4 +256,18 @@
         <item name="android:textColorPrimary">@android:color/white</item>
     </style>
 
+    <!-- collapsingAppBar -->
+    <style name="ExpandedTitleTextAppearance" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">#FFFF</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <!-- collapsingAppBar -->
+    <style name="CollapsedTitleTextAppearance" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">#FFFF</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>
