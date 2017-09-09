@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,91 +31,307 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:textStyle="bold"
-                android:text="Chunguza Vidokezo Vifuatavyo Kwa Mama.Weka alama (&#x2713;) panapohusika."
+                android:text="Chunguza Vidokezo Vifuatavyo Kwa Mama.Chaguwa ndio au hapana panapohusika."
                 android:textAllCaps="true"
                 android:textColor="@color/light_blue"
                 android:textSize="16sp" />
 
 
-            <CheckBox
-                android:id="@+id/checkbox_pressure"
+            <TextView
+                android:id="@+id/textview_pressure"
+                android:layout_width="365dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:text="Bp 140/90 au zaidi"
+                android:textColor="@color/secondary_text"
+                android:textSize="18sp" />
+            <RadioGroup
+                android:id="@+id/pressure"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:text="bp 140/90 au zaidi"
-                android:textColor="@color/secondary_text"
-                android:textSize="14sp" />
+                android:orientation="horizontal"
+                android:layout_marginLeft="16dp"
+                >
 
-            <CheckBox
-                android:id="@+id/checkbox_hb_below_60"
+                <RadioButton
+                    android:id="@+id/pressure_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no"
+                    android:textSize="12sp"
+                    android:checked="true"
+                    android:textColor="@color/secondary_text"/>
+
+                <RadioButton
+                    android:id="@+id/pressure_yes"
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/yes"
+                    android:textColor="@color/secondary_text"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textview_hb_below_60"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
-                android:text="hb chini ya 60%"
+                android:text="Hb chini ya 60%"
                 android:textColor="@color/secondary_text"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
+            <RadioGroup
+                android:id="@+id/hb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="16dp"
+                >
 
-            <CheckBox
-                android:id="@+id/checkbox_albumin"
+                <RadioButton
+                    android:id="@+id/hb_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no"
+                    android:textSize="12sp"
+                    android:checked="true"
+                    android:textColor="@color/secondary_text"/>
+
+                <RadioButton
+                    android:id="@+id/hb_yes"
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/yes"
+                    android:textColor="@color/secondary_text"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textview_albumin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
-                android:text="albumin kwenye mkojo"
+                android:text="Albumin kwenye mkojo"
                 android:textColor="@color/secondary_text"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
+            <RadioGroup
+                android:id="@+id/albumin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="16dp"
+                >
 
-            <CheckBox
-                android:id="@+id/checkbox_sugar_level"
+                <RadioButton
+                    android:id="@+id/albumin_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no"
+                    android:textSize="12sp"
+                    android:checked="true"
+                    android:textColor="@color/secondary_text"/>
+
+                <RadioButton
+                    android:id="@+id/albumin_yes"
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/yes"
+                    android:textColor="@color/secondary_text"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textview_sugar_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
-                android:text="sukari kweny mkojo"
+                android:text="Sukari kweny mkojo"
                 android:textColor="@color/secondary_text"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
+            <RadioGroup
+                android:id="@+id/sukari"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="16dp"
+                >
 
-            <CheckBox
-                android:id="@+id/checkbox_umri_wa_mimba"
+                <RadioButton
+                    android:id="@+id/sukari_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no"
+                    android:textSize="12sp"
+                    android:checked="true"
+                    android:textColor="@color/secondary_text"/>
+
+                <RadioButton
+                    android:id="@+id/sukari_yes"
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/yes"
+                    android:textColor="@color/secondary_text"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textview_umri_wa_mimba"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
-                android:text="umri wa mimba zaidi ya wiki 40"
+                android:text="Umri wa mimba zaidi ya wiki 40"
                 android:textColor="@color/secondary_text"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
+            <RadioGroup
+                android:id="@+id/umri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="16dp"
+                >
 
-            <CheckBox
-                android:id="@+id/checkbox_baby_death"
+                <RadioButton
+                    android:id="@+id/umri_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no"
+                    android:textSize="12sp"
+                    android:checked="true"
+                    android:textColor="@color/secondary_text"/>
+
+                <RadioButton
+                    android:id="@+id/umri_yes"
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/yes"
+                    android:textColor="@color/secondary_text"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textview_baby_death"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
-                android:text="mtoto kufia tumboni"
+                android:text="Mtoto kufia tumboni"
                 android:textColor="@color/secondary_text"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
+            <RadioGroup
+                android:id="@+id/kifo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="16dp"
+                >
 
-            <CheckBox
-                android:id="@+id/checkbox_mlalo_wa_mtotos"
+                <RadioButton
+                    android:id="@+id/kifo_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no"
+                    android:textSize="12sp"
+                    android:checked="true"
+                    android:textColor="@color/secondary_text"/>
+
+                <RadioButton
+                    android:id="@+id/kifo_yes"
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/yes"
+                    android:textColor="@color/secondary_text"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textview_mlalo_wa_mtotos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
-                android:text="mtoto amelala vibaya baada ya wiki 40"
+                android:text="Mtoto amelala vibaya baada ya wiki 40"
                 android:textColor="@color/secondary_text"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
+            <RadioGroup
+                android:id="@+id/mlalo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="16dp"
+                >
 
-            <CheckBox
-                android:id="@+id/checkbox_kimo"
+                <RadioButton
+                    android:id="@+id/mlalo_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no"
+                    android:textSize="12sp"
+                    android:checked="true"
+                    android:textColor="@color/secondary_text"/>
+
+                <RadioButton
+                    android:id="@+id/mlalo_yes"
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/yes"
+                    android:textColor="@color/secondary_text"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textview_kimo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
-                android:text="kimo cha mimba kikubwa/kidogo zaidi kuliko umri wake"
+                android:text="Kimo cha mimba kikubwa/kidogo zaidi kuliko umri wake"
                 android:textColor="@color/secondary_text"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
+            <RadioGroup
+                android:id="@+id/kimo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="16dp"
+                >
+
+                <RadioButton
+                    android:id="@+id/kimo_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no"
+                    android:textSize="12sp"
+                    android:checked="true"
+                    android:textColor="@color/secondary_text"/>
+
+                <RadioButton
+                    android:id="@+id/kimo_yes"
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/yes"
+                    android:textColor="@color/secondary_text"/>
+
+            </RadioGroup>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -151,4 +367,4 @@
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
-</LinearLayout>
+</ScrollView>

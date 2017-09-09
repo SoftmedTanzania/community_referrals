@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.RadioGroup;
+import android.widget.RadioButton;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,8 +23,10 @@ public class AncFollowUpFormActivity extends Activity {
     private String mParam1;
     private String mParam2;
     private Button submitButton;
-    private CheckBox checkBoxPressure,checkboxHb,chechboxAlbumini, checkboxSugar, checkboxUmriWaMimba,
-                     checkboxChildDeath, chechkboxMlaloWaMtoto, checkboxKimo;
+    private RadioButton radioButtonPressure,radioButtonHb,radioButtonAlbumini, radioButtonSugar, radioButtonUmriWaMimba,
+                     radioButtonChildDeath, radioButtonMlaloWaMtoto, radioButtonKimo;
+    private RadioGroup radioGroupPressure,radioGroupHb,radioGroupAlbumini, radioGroupSugar, radioGroupUmriWaMimba,
+            radioGroupChildDeath, radioGroupMlaloWaMtoto, radioGroupKimo;
     private String pressure,hb, albumini,sugar, umriWaMimba,childDeath,mlaloWaMtoto,kimo;
     private String formName;
     private EditText editTextFacilityName;
@@ -54,14 +57,14 @@ public class AncFollowUpFormActivity extends Activity {
 
     private void findViews() {
         editTextFacilityName = (EditText) findViewById(R.id.facility);
-        checkBoxPressure = (CheckBox) findViewById(R.id.checkbox_pressure);
-        chechboxAlbumini = (CheckBox) findViewById(R.id.checkbox_albumin);
-        checkboxHb = (CheckBox) findViewById(R.id.checkbox_hb_below_60);
-        chechkboxMlaloWaMtoto = (CheckBox) findViewById(R.id.checkbox_mlalo_wa_mtotos);
-        checkboxChildDeath = (CheckBox) findViewById(R.id.checkbox_baby_death);
-        checkboxKimo = (CheckBox) findViewById(R.id.checkbox_kimo);
-        checkboxSugar = (CheckBox) findViewById(R.id.checkbox_sugar_level);
-        checkboxUmriWaMimba = (CheckBox) findViewById(R.id.checkbox_umri_wa_mimba);
+        radioGroupPressure = (RadioGroup) findViewById(R.id.pressure);
+        radioGroupAlbumini = (RadioGroup) findViewById(R.id.albumin);
+        radioGroupHb = (RadioGroup) findViewById(R.id.hb);
+        radioGroupMlaloWaMtoto = (RadioGroup) findViewById(R.id.mlalo);
+        radioGroupChildDeath = (RadioGroup) findViewById(R.id.kifo);
+        radioGroupKimo = (RadioGroup) findViewById(R.id.kimo);
+        radioGroupSugar = (RadioGroup) findViewById(R.id.sukari);
+        radioGroupUmriWaMimba = (RadioGroup) findViewById(R.id.umri);
         submitButton = (Button)findViewById(R.id.submit);
 
 
@@ -76,97 +79,47 @@ public class AncFollowUpFormActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                checkBoxPressure.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-                    {
-                        if ( isChecked )
-                        {   pressure = "true";
-                        } else {
-                            pressure = "false";
-                        }
+                int selectedPressureId = radioGroupPressure.getCheckedRadioButtonId();
+                // find the radiobutton by returned id
+                radioButtonPressure = (RadioButton) findViewById(selectedPressureId);
+                pressure = (String) radioButtonPressure.getText();
 
-                    }
-                });
+                int selectedHbId = radioGroupHb.getCheckedRadioButtonId();
+                // find the radiobutton by returned id
+                radioButtonHb = (RadioButton) findViewById(selectedHbId);
+                hb = (String) radioButtonHb.getText();
 
-                chechboxAlbumini.setOnClickListener(new View.OnClickListener() {
+                int selectedSukariId = radioGroupSugar.getCheckedRadioButtonId();
+                // find the radiobutton by returned id
+                radioButtonSugar = (RadioButton) findViewById(selectedSukariId);
+                sugar = (String) radioButtonSugar.getText();
 
-                        @Override
-                        public void onClick(View view) {
-                            if (chechboxAlbumini.isChecked()) {
-                                albumini = "true";
-                            } else {
-                                albumini = "false";
-                            }
-                        }
-                    });
+                int selectedMlaloId = radioGroupMlaloWaMtoto.getCheckedRadioButtonId();
+                // find the radiobutton by returned id
+                radioButtonMlaloWaMtoto = (RadioButton) findViewById(selectedMlaloId);
+                mlaloWaMtoto = (String) radioButtonMlaloWaMtoto.getText();
 
-                checkboxHb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
+                int selectedAlbuminId = radioGroupAlbumini.getCheckedRadioButtonId();
+                // find the radiobutton by returned id
+                radioButtonAlbumini = (RadioButton) findViewById(selectedAlbuminId);
+                albumini = (String) radioButtonAlbumini.getText();
 
-                        if ( isChecked) {
-                            hb = "true";
-                        } else {
-                            hb = "false";
-                        }
-                    }
-                });
-                chechkboxMlaloWaMtoto.setOnClickListener(new View.OnClickListener() {
+                int selectedKimoId = radioGroupKimo.getCheckedRadioButtonId();
+                // find the radiobutton by returned id
+                radioButtonKimo = (RadioButton) findViewById(selectedKimoId);
+                kimo = (String) radioButtonKimo.getText();
 
-                    @Override
-                    public void onClick(View view) {
-                        if (chechkboxMlaloWaMtoto.isChecked()) {
-                            mlaloWaMtoto = "true";
-                        } else {
-                            mlaloWaMtoto = "false";
-                        }
-                    }
-                });
-                checkboxChildDeath.setOnClickListener(new View.OnClickListener() {
+                int selectedKifoId = radioGroupChildDeath.getCheckedRadioButtonId();
+                // find the radiobutton by returned id
+                radioButtonChildDeath = (RadioButton) findViewById(selectedKifoId);
+                childDeath = (String) radioButtonChildDeath.getText();
 
-                    @Override
-                    public void onClick(View view) {
-                        if (checkboxChildDeath.isChecked()) {
-                            childDeath = "true";
-                        } else {
-                            childDeath = "false";
-                        }
-                    }
-                });
-                checkboxKimo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-                    {
-                        if (isChecked) {
-                            kimo = "true";
-                        } else {
-                            kimo = "false";
-                        }
-                    }
-                });
-                checkboxSugar.setOnClickListener(new View.OnClickListener() {
+                int selectedId = radioGroupUmriWaMimba.getCheckedRadioButtonId();
+                // find the radiobutton by returned id
+                radioButtonUmriWaMimba = (RadioButton) findViewById(selectedId);
+                umriWaMimba = (String) radioButtonUmriWaMimba.getText();
 
-                    @Override
-                    public void onClick(View view) {
-                        if (checkboxSugar.isChecked()) {
-                            sugar = "true";
-                        } else {
-                            sugar = "false";
-                        }
-                    }
-                });
-                checkboxUmriWaMimba.setOnClickListener(new View.OnClickListener() {
 
-                    @Override
-                    public void onClick(View view) {
-                        if (checkboxUmriWaMimba.isEnabled()) {
-                            umriWaMimba = "true";
-                        } else {
-                            umriWaMimba = "false";
-                        }
-                    }
-                });
 
                 HashMap<String,String> followHash = new HashMap<String, String>();
                 followHash.put("facility_name",editTextFacilityName.toString());
