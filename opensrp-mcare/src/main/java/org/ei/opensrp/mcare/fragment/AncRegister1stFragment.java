@@ -44,9 +44,10 @@ public class AncRegister1stFragment extends Fragment {
     CardView cardDatePickLNMP;
     public static EditText editTextMotherName, editTextMotherId, editTextMotherAge,
             editTextHeight, editTextPregCount, editTextBirthCount, editTextChildrenCount,
-            editTextDiscountId, editTextMotherOccupation, editTextPhysicalAddress;
+            editTextDiscountId, editTextMotherOccupation, editTextPhysicalAddress,
+            editTextHusbandName, editTextHusbandOccupation;
     public static RadioGroup radioGroupPregnancyAge;
-    public static MaterialSpinner spinnerMotherEducation;
+    public static MaterialSpinner spinnerMotherEducation, spinnerHusbandEducation;
     private ArrayAdapter<String> educationAdapter;
 
     private Calendar today;
@@ -92,16 +93,34 @@ public class AncRegister1stFragment extends Fragment {
         editTextDiscountId = (EditText) fragmentView.findViewById(R.id.editTextDiscountId);
         editTextMotherOccupation = (EditText) fragmentView.findViewById(R.id.editTextMotherOccupation);
         editTextPhysicalAddress = (EditText) fragmentView.findViewById(R.id.editTextPhysicalAddress);
+        editTextHusbandName = (EditText) fragmentView.findViewById(R.id.editTextHusbandName);
+        editTextHusbandOccupation = (EditText) fragmentView.findViewById(R.id.editTextHusbandOccupation);
 
         educationAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, educationList);
         educationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         spinnerMotherEducation = (MaterialSpinner) fragmentView.findViewById(R.id.spinnerMotherEducation);
+        spinnerHusbandEducation = (MaterialSpinner) fragmentView.findViewById(R.id.spinnerHusbandEducation);
         spinnerMotherEducation.setAdapter(educationAdapter);
+        spinnerHusbandEducation.setAdapter(educationAdapter);
+
         spinnerMotherEducation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i >= 0)
                     spinnerMotherEducation.setFloatingLabelText("Elimu Ya Mama");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        spinnerHusbandEducation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i >= 0)
+                    spinnerHusbandEducation.setFloatingLabelText("Elimu Ya Mume/Mwenza");
             }
 
             @Override
