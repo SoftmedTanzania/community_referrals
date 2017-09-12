@@ -39,14 +39,14 @@ import fr.ganfra.materialspinner.MaterialSpinner;
  */
 public class AncRegister1stFragment extends Fragment {
 
-    public static TextView textDate, textPhone, textDateLNMP;
+    TextView textDate, textPhone, textDateLNMP;
     LinearLayout layoutDatePick, layoutEditPhone;
     CardView cardDatePickLNMP;
-    public static EditText editTextMotherName, editTextMotherId, editTextMotherAge,
+    EditText editTextMotherName, editTextMotherId, editTextMotherAge,
             editTextHeight, editTextPregCount, editTextBirthCount, editTextChildrenCount,
             editTextDiscountId, editTextMotherOccupation, editTextPhysicalAddress,
             editTextHusbandName, editTextHusbandOccupation;
-    public static RadioGroup radioGroupPregnancyAge;
+    RadioGroup radioGroupPregnancyAge;
     public static MaterialSpinner spinnerMotherEducation, spinnerHusbandEducation;
     private ArrayAdapter<String> educationAdapter;
 
