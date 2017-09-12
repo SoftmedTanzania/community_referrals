@@ -246,17 +246,28 @@ public class AncRegister1stFragment extends Fragment {
                 || TextUtils.isEmpty(editTextBirthCount.getText())
                 || TextUtils.isEmpty(editTextChildrenCount.getText())
                 || TextUtils.isEmpty(textPhone.getText())
-                || TextUtils.isEmpty(textDateLNMP.getText())) {
+                || TextUtils.isEmpty(textDateLNMP.getText())
+                || TextUtils.isEmpty(editTextDiscountId.getText())
+                || TextUtils.isEmpty(editTextMotherOccupation.getText())
+                || TextUtils.isEmpty(editTextPhysicalAddress.getText())
+                || TextUtils.isEmpty(editTextHusbandName.getText())
+                || TextUtils.isEmpty(editTextHusbandOccupation.getText())) {
 
-            Toast.makeText(getActivity(),
-                    "Tafadhali Jaza taarifa zote muhimu",
-                    Toast.LENGTH_LONG).show();
+            makeToast("Tafadhali jaza taarifa zote muhimu");
             return false;
 
-        } else if (radioGroupPregnancyAge.getCheckedRadioButtonId() == -1)
+        } else if (radioGroupPregnancyAge.getCheckedRadioButtonId() == -1) {
             // no radio checked
+            makeToast("Tafadhali chagua umri wa ujauzito.");
             return false;
-        else
+
+        } else if (spinnerMotherEducation.getSelectedItemPosition() < 0
+                || spinnerHusbandEducation.getSelectedItemPosition() < 0) {
+
+            makeToast("Tafadhali chagua elimu ya mama na mwenza.");
+            return false;
+
+        } else
             // all good
             return true;
     }
@@ -275,5 +286,11 @@ public class AncRegister1stFragment extends Fragment {
         mom.setAbove20WeeksPregnant(radioGroupPregnancyAge.getCheckedRadioButtonId() == R.id.radioAbove20);
 
         return mom;
+    }
+
+    private void makeToast(String message) {
+        Toast.makeText(getActivity(),
+                message,
+                Toast.LENGTH_LONG).show();
     }
 }
