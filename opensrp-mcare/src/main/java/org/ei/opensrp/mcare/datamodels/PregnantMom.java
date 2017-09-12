@@ -5,7 +5,9 @@ package org.ei.opensrp.mcare.datamodels;
  */
 
 public class PregnantMom {
-    private String name, id, phone;
+    private String name, id, phone, discountId, education, occupation,
+            husbandName, husbandEducation, husbandOccupation, physicalAddress;
+
     private long dateReg, dateLNMP, dateDeliveryPrediction;
     private int age, height, pregnancyCount, birthCount, childrenCount;
     private boolean isAbove20WeeksPregnant,
@@ -221,5 +223,61 @@ public class PregnantMom {
 
     public void setKondoKukwama(boolean kondoKukwama) {
         this.kondoKukwama = kondoKukwama;
+    }
+
+    public String getDiscountId() {
+        return discountId;
+    }
+
+    public void setDiscountId(String discountId) {
+        this.discountId = discountId;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
+    public String getHusbandName() {
+        return husbandName;
+    }
+
+    public void setHusbandName(String husbandName) {
+        this.husbandName = husbandName;
+    }
+
+    public String getHusbandEducation() {
+        return husbandEducation;
+    }
+
+    public void setHusbandEducation(String husbandEducation) {
+        this.husbandEducation = husbandEducation;
+    }
+
+    public String getHusbandOccupation() {
+        return husbandOccupation;
+    }
+
+    public void setHusbandOccupation(String husbandOccupation) {
+        this.husbandOccupation = husbandOccupation;
+    }
+
+    public String getPhysicalAddress() {
+        return physicalAddress;
+    }
+
+    public void setPhysicalAddress(String physicalAddress) {
+        this.physicalAddress = physicalAddress;
     }
 }
