@@ -1,0 +1,24 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f5f5"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="org.ei.opensrp.mcare.fragment.AncRegister2ndFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_indicators_register_a" />
+
+        <include layout="@layout/layout_indicators_register_b" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="128dp"
+            android:clickable="false" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

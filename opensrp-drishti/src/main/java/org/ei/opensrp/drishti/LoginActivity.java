@@ -1,6 +1,5 @@
 package org.ei.opensrp.drishti;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -8,13 +7,19 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -22,13 +27,14 @@ import org.ei.opensrp.Context;
 import org.ei.opensrp.domain.LoginResponse;
 import org.ei.opensrp.domain.Response;
 import org.ei.opensrp.domain.ResponseStatus;
+import org.ei.opensrp.drishti.Application.UzazniSalamaApplication;
 import org.ei.opensrp.event.Listener;
+import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.sync.DrishtiSyncScheduler;
 import org.ei.opensrp.util.Log;
 import org.ei.opensrp.view.BackgroundAction;
 import org.ei.opensrp.view.LockingBackgroundTask;
 import org.ei.opensrp.view.ProgressIndicator;
-import org.ei.opensrp.view.activity.NativeHomeActivity;
 import org.ei.opensrp.view.activity.SettingsActivity;
 
 import java.io.IOException;
@@ -37,46 +43,84 @@ import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS;
+import static org.ei.opensrp.domain.LoginResponse.NO_INTERNET_CONNECTIVITY;
 import static org.ei.opensrp.domain.LoginResponse.SUCCESS;
+import static org.ei.opensrp.domain.LoginResponse.UNAUTHORIZED;
+import static org.ei.opensrp.domain.LoginResponse.UNKNOWN_RESPONSE;
 import static org.ei.opensrp.util.Log.logError;
 import static org.ei.opensrp.util.Log.logVerbose;
 
-public class LoginActivity extends Activity {
+
+public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = LoginActivity.class.getSimpleName();
     private Context context;
     private EditText userNameEditText;
     private EditText passwordEditText;
+    private Button loginButton;
     private ProgressDialog progressDialog;
+    public static final String ENGLISH_LOCALE = "en";
+    public static final String KANNADA_LOCALE = "kn";
+    public static final String BENGALI_LOCALE = "bn";
+    public static final String ENGLISH_LANGUAGE = "English";
+    public static final String KANNADA_LANGUAGE = "Kannada";
+    public static final String Bengali_LANGUAGE = "Bengali";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         logVerbose("Initializing ...");
-        setContentView(R.layout.login);
+        try {
+            AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(this));
+            String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+            Resources res = Context.getInstance().applicationContext().getResources();
+            // Change locale settings in the app.
+            DisplayMetrics dm = res.getDisplayMetrics();
+            android.content.res.Configuration conf = res.getConfiguration();
+            conf.locale = new Locale(preferredLocale);
+            res.updateConfiguration(conf, dm);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        setContentView(R.layout.activity_login);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.mToolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setTitle("");
+
 
         context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
         initializeLoginFields();
-        initializeBuildDetails();
         setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
+
+
+        setLanguage();
+
     }
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
         menu.add("Settings");
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getTitle().toString().equalsIgnoreCase("Settings")){
-            startActivity(new Intent(this,SettingsActivity.class));
+        if (item.getTitle().toString().equalsIgnoreCase("Settings")) {
+            startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void initializeBuildDetails() {
-        TextView buildDetailsTextView = (TextView) findViewById(R.id.login_build);
+        TextView buildDetailsTextView = (TextView) findViewById(org.ei.opensrp.R.id.login_build);
         try {
             buildDetailsTextView.setText("Version " + getVersion() + ", Built on: " + getBuildDate());
         } catch (Exception e) {
@@ -99,8 +143,12 @@ public class LoginActivity extends Activity {
         hideKeyboard();
         view.setClickable(false);
 
-        final String userName = userNameEditText.getText().toString();
-        final String password = passwordEditText.getText().toString();
+        //TODO Coze Remove the hardcoded credentials
+//        final String userName = userNameEditText.getText().toString();
+//        final String password = passwordEditText.getText().toString();
+
+        final String userName = "sean";
+        final String password = "Admin123";
 
         if (context.userService().hasARegisteredUser()) {
             localLogin(view, userName, password);
@@ -110,8 +158,19 @@ public class LoginActivity extends Activity {
     }
 
     private void initializeLoginFields() {
-        userNameEditText = ((EditText) findViewById(R.id.login_userNameText));
-        passwordEditText = ((EditText) findViewById(R.id.login_passwordText));
+
+        userNameEditText = (EditText) findViewById(R.id.editTextUsername);
+        passwordEditText = (EditText) findViewById(R.id.editTextPassword);
+        loginButton = (Button) findViewById(R.id.buttonSignIn);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // check input fields first
+                if (isLoginInitiateOk())
+                    login(loginButton);
+            }
+        });
     }
 
     private void setDoneActionHandlerOnPasswordField() {
@@ -119,7 +178,10 @@ public class LoginActivity extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    login(findViewById(R.id.login_loginButton));
+//                    login(findViewById(org.ei.opensrp.R.id.login_loginButton));
+                    // check input fields first
+                    if (isLoginInitiateOk())
+                        login(loginButton);
                 }
                 return false;
             }
@@ -129,15 +191,15 @@ public class LoginActivity extends Activity {
     private void initializeProgressDialog() {
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
-        progressDialog.setTitle(getString(R.string.loggin_in_dialog_title));
-        progressDialog.setMessage(getString(R.string.loggin_in_dialog_message));
+        progressDialog.setTitle(getString(org.ei.opensrp.R.string.loggin_in_dialog_title));
+        progressDialog.setMessage(getString(org.ei.opensrp.R.string.loggin_in_dialog_message));
     }
 
     private void localLogin(View view, String userName, String password) {
         if (context.userService().isValidLocalLogin(userName, password)) {
             localLoginWith(userName, password);
         } else {
-            showErrorDialog(getString(R.string.login_failed_dialog_message));
+            showErrorDialog(getString(org.ei.opensrp.R.string.login_failed_dialog_message));
             view.setClickable(true);
         }
     }
@@ -151,7 +213,14 @@ public class LoginActivity extends Activity {
                     if (loginResponse == null) {
                         showErrorDialog("Login failed. Unknown reason. Try Again");
                     } else {
-                        showErrorDialog(loginResponse.message());
+                        if (loginResponse == NO_INTERNET_CONNECTIVITY) {
+                            showErrorDialog(getResources().getString(R.string.no_internet_connectivity));
+                        } else if (loginResponse == UNKNOWN_RESPONSE) {
+                            showErrorDialog(getResources().getString(R.string.unknown_response));
+                        } else if (loginResponse == UNAUTHORIZED) {
+                            showErrorDialog(getResources().getString(R.string.unauthorized));
+                        }
+//                        showErrorDialog(loginResponse.message());
                     }
                     view.setClickable(true);
                 }
@@ -176,7 +245,7 @@ public class LoginActivity extends Activity {
         tryGetLocation(new Listener<Response<String>>() {
             @Override
             public void onEvent(Response<String> data) {
-                if(data.status() == ResponseStatus.success) {
+                if (data.status() == ResponseStatus.success) {
                     context.userService().saveAnmLocation(data.payload());
                 }
             }
@@ -186,10 +255,13 @@ public class LoginActivity extends Activity {
     private void tryGetLocation(final Listener<Response<String>> afterGet) {
         LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
             @Override
-            public void setVisible() { }
+            public void setVisible() {
+            }
 
             @Override
-            public void setInvisible() { Log.logInfo("Successfully get location"); }
+            public void setInvisible() {
+                Log.logInfo("Successfully get location");
+            }
         });
 
         task.doActionInBackground(new BackgroundAction<Response<String>>() {
@@ -232,7 +304,8 @@ public class LoginActivity extends Activity {
     private void fillUserIfExists() {
         if (context.userService().hasARegisteredUser()) {
             userNameEditText.setText(context.allSharedPreferences().fetchRegisteredANM());
-            userNameEditText.setEnabled(false);
+            // remove disable edit username
+            //  userNameEditText.setEnabled(false);
         }
     }
 
@@ -254,6 +327,7 @@ public class LoginActivity extends Activity {
     }
 
     private void goToHome() {
+        UzazniSalamaApplication.setCrashlyticsUser(context);
         startActivity(new Intent(this, NativeHomeActivity.class));
         finish();
     }
@@ -268,6 +342,60 @@ public class LoginActivity extends Activity {
         ZipFile zf = new ZipFile(applicationInfo.sourceDir);
         ZipEntry ze = zf.getEntry("classes.dex");
         return new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new java.util.Date(ze.getTime()));
+    }
+
+    public static void setLanguage() {
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+        Resources res = Context.getInstance().applicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(preferredLocale);
+        res.updateConfiguration(conf, dm);
+
+    }
+
+    public static String switchLanguagePreference() {
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
+
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+        if (ENGLISH_LOCALE.equals(preferredLocale)) {
+            allSharedPreferences.saveLanguagePreference(BENGALI_LOCALE);
+            Resources res = Context.getInstance().applicationContext().getResources();
+            // Change locale settings in the app.
+            DisplayMetrics dm = res.getDisplayMetrics();
+            android.content.res.Configuration conf = res.getConfiguration();
+            conf.locale = new Locale(BENGALI_LOCALE);
+            res.updateConfiguration(conf, dm);
+            return Bengali_LANGUAGE;
+        } else {
+            allSharedPreferences.saveLanguagePreference(ENGLISH_LOCALE);
+            Resources res = Context.getInstance().applicationContext().getResources();
+            // Change locale settings in the app.
+            DisplayMetrics dm = res.getDisplayMetrics();
+            android.content.res.Configuration conf = res.getConfiguration();
+            conf.locale = new Locale(ENGLISH_LOCALE);
+            res.updateConfiguration(conf, dm);
+            return ENGLISH_LANGUAGE;
+        }
+    }
+
+    private boolean isLoginInitiateOk() {
+        //TODO remove the following hack to reimplement the proper login flow
+        return true;
+
+        //TODO coze uncomment the following
+//        if (TextUtils.isEmpty(userNameEditText.getText())
+//                || TextUtils.isEmpty(passwordEditText.getText())) {
+//            // tell user to enter username and pwd
+//            Snackbar.make(
+//                    findViewById(R.id.coordinatorLogin),
+//                    R.string.provide_username_password,
+//                    Snackbar.LENGTH_SHORT).show();
+//            return false;
+//        } else
+//            return true;
     }
 
 }

@@ -1,8 +1,9 @@
-package org.ei.opensrp.mcare.anc;
+package org.ei.opensrp.drishti;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -17,14 +18,10 @@ import org.ei.opensrp.Context;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectController;
-import org.ei.opensrp.mcare.LoginActivity;
-import org.ei.opensrp.mcare.R;
-import org.ei.opensrp.mcare.datamodels.PregnantMom;
-import org.ei.opensrp.mcare.elco.ElcoMauzaCommonObjectFilterOption;
-import org.ei.opensrp.mcare.elco.ElcoSearchOption;
-import org.ei.opensrp.mcare.fragment.AncRegisterFormFragment;
-import org.ei.opensrp.mcare.fragment.AncSmartRegisterFragment;
-import org.ei.opensrp.mcare.pageradapter.BaseRegisterActivityPagerAdapter;
+import org.ei.opensrp.drishti.DataModels.PregnantMom;
+import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
+import org.ei.opensrp.drishti.Fragments.AncSmartRegisterFragment;
+import org.ei.opensrp.drishti.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.util.FormUtils;
@@ -53,7 +50,6 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import util.AsyncTask;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.View.INVISIBLE;
@@ -75,7 +71,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private int currentPage;
 
     private String[] formNames = new String[]{};
-    private android.support.v4.app.Fragment mBaseFragment = null;
+    private Fragment mBaseFragment = null;
     private Gson gson = new Gson();
 
     @Override
@@ -451,7 +447,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         }
     }
 
-    public android.support.v4.app.Fragment findFragmentByPosition(int position) {
+    public Fragment findFragmentByPosition(int position) {
         FragmentPagerAdapter fragmentPagerAdapter = mPagerAdapter;
         return getSupportFragmentManager().findFragmentByTag("android:switcher:" + mPager.getId() + ":" + fragmentPagerAdapter.getItemId(position));
     }
@@ -464,21 +460,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             e.printStackTrace();
         }
         return findFragmentByPosition(index);
-    }
-
-    public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
-        for (Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
-
-            if (entry.getValue().getChildren() != null) {
-                addChildToList(dialogOptionslist, entry.getValue().getChildren());
-
-            } else {
-                StringUtil.humanize(entry.getValue().getLabel());
-                String name = StringUtil.humanize(entry.getValue().getLabel());
-                dialogOptionslist.add(new ElcoMauzaCommonObjectFilterOption(name.replace(" ", "_"), "existing_Mauzapara", name));
-
-            }
-        }
     }
 
     public void retrieveAndSaveUnsubmittedFormData() {

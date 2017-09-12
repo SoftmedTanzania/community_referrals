@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="16dp"
+    android:layout_marginTop="16dp"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal"
+        android:text="Chunguza Vidokezo Vifuatavyo Kwa Mama.\nWeka alama (&#x2713;) panapohusika."
+        android:textAllCaps="true"
+        android:textColor="@color/primary_text"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="0dp"
+        android:text="Mshauri aende kituo cha afya au hospitali kujifungua endapo mama ana:"
+        android:textAllCaps="false"
+        android:textColor="@color/secondary_text"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="Mimba ya 4 au zaidi"
+        android:textColor="@color/secondary_text"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="Mimba ya kwanza zaidi ya miaka 35"
+        android:textColor="@color/secondary_text"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="Kimo chini ya cm 150"
+        android:textColor="@color/secondary_text"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="Kujifungua kwa upasuaji au vakyum"
+        android:textColor="@color/secondary_text"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="Kileme cha nyonga"
+        android:textColor="@color/secondary_text"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="Kutoka damu nyingi baada ya kujifungua"
+        android:textColor="@color/secondary_text"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="Kondo la nyuma kukwama"
+        android:textColor="@color/secondary_text"
+        android:textSize="14sp" />
+
+</LinearLayout>

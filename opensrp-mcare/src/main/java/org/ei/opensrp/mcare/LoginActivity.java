@@ -105,7 +105,6 @@ public class LoginActivity extends AppCompatActivity {
 
         context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
         initializeLoginFields();
-//        initializeBuildDetails();
         setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
 
@@ -169,12 +168,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initializeLoginFields() {
-//        userNameEditText = ((EditText) findViewById(org.ei.opensrp.R.id.login_userNameText));
-//        userNameEditText.setHint("username");
-//        userNameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
-//        passwordEditText = ((EditText) findViewById(org.ei.opensrp.R.id.login_passwordText));
-//        passwordEditText.setHint("password");
-//        passwordEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
 
         userNameEditText = (EditText) findViewById(R.id.editTextUsername);
         passwordEditText = (EditText) findViewById(R.id.editTextPassword);

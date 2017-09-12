@@ -55,7 +55,7 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle" />
         <activity
-            android:name=".anc.AncSmartRegisterActivity"
+            android:name=".AncSmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle"
