@@ -284,6 +284,13 @@ public class AncRegister1stFragment extends Fragment {
         mom.setBirthCount(Integer.valueOf(editTextBirthCount.getText().toString()));
         mom.setChildrenCount(Integer.valueOf(editTextChildrenCount.getText().toString()));
         mom.setAbove20WeeksPregnant(radioGroupPregnancyAge.getCheckedRadioButtonId() == R.id.radioAbove20);
+        mom.setDiscountId(editTextDiscountId.getText().toString());
+        mom.setEducation(spinnerMotherEducation.getSelectedItem().toString());
+        mom.setOccupation(editTextMotherOccupation.getText().toString());
+        mom.setPhysicalAddress(editTextPhysicalAddress.getText().toString());
+        mom.setHusbandName(editTextHusbandName.getText().toString());
+        mom.setHusbandEducation(spinnerHusbandEducation.getSelectedItem().toString());
+        mom.setHusbandOccupation(editTextHusbandOccupation.getText().toString());
 
         return mom;
     }
