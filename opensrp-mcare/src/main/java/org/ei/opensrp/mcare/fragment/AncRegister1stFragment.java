@@ -3,7 +3,6 @@ package org.ei.opensrp.mcare.fragment;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -280,9 +279,9 @@ public class AncRegister1stFragment extends Fragment {
         mom.setPhone(textPhone.getText().toString());
         mom.setAge(Integer.valueOf(editTextMotherAge.getText().toString()));
         mom.setHeight(Integer.valueOf(editTextHeight.getText().toString()));
-        mom.setPregnancyCount(Integer.valueOf(editTextPregCount.getText().toString()));
-        mom.setBirthCount(Integer.valueOf(editTextBirthCount.getText().toString()));
-        mom.setChildrenCount(Integer.valueOf(editTextChildrenCount.getText().toString()));
+        mom.setPreviousFertilityCount(Integer.valueOf(editTextPregCount.getText().toString()));
+        mom.setSuccessfulBirths(Integer.valueOf(editTextBirthCount.getText().toString()));
+        mom.setLivingChildren(Integer.valueOf(editTextChildrenCount.getText().toString()));
         mom.setAbove20WeeksPregnant(radioGroupPregnancyAge.getCheckedRadioButtonId() == R.id.radioAbove20);
         mom.setDiscountId(editTextDiscountId.getText().toString());
         mom.setEducation(spinnerMotherEducation.getSelectedItem().toString());
