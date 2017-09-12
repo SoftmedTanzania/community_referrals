@@ -32,13 +32,14 @@ import java.util.List;
 import java.util.Locale;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
+import util.EDDCalculator;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class AncRegister1stFragment extends Fragment {
 
-    TextView textDate, textPhone, textDateLNMP;
+    TextView textDate, textPhone, textDateLNMP, textEDD;
     LinearLayout layoutDatePick, layoutEditPhone;
     CardView cardDatePickLNMP;
     EditText editTextMotherName, editTextMotherId, editTextMotherAge,
@@ -51,6 +52,7 @@ public class AncRegister1stFragment extends Fragment {
 
     private Calendar today;
     private List<String> educationList = new ArrayList<>();
+    private long edd, lnmp;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
     public AncRegister1stFragment() {
@@ -78,6 +80,7 @@ public class AncRegister1stFragment extends Fragment {
         textDate = (TextView) fragmentView.findViewById(R.id.textDate);
         textPhone = (TextView) fragmentView.findViewById(R.id.textPhone);
         textDateLNMP = (TextView) fragmentView.findViewById(R.id.textDateLNMP);
+        textEDD = (TextView) fragmentView.findViewById(R.id.textEDD);
         layoutDatePick = (LinearLayout) fragmentView.findViewById(R.id.layoutDatePick);
         layoutEditPhone = (LinearLayout) fragmentView.findViewById(R.id.layoutEditPhone);
         cardDatePickLNMP = (CardView) fragmentView.findViewById(R.id.cardPickDateLNMP);
@@ -173,8 +176,13 @@ public class AncRegister1stFragment extends Fragment {
                 if (id == R.id.textDate)
                     textDate.setText(dateFormat.format(pickedDate.getTimeInMillis()));
 
-                else if (id == R.id.textDateLNMP)
-                    textDateLNMP.setText(dateFormat.format(pickedDate.getTimeInMillis()));
+                else if (id == R.id.textDateLNMP) {
+                    lnmp = pickedDate.getTimeInMillis();
+                    textDateLNMP.setText(dateFormat.format(lnmp));
+                    // update edd
+                    edd = EDDCalculator.calculateEDDFromLNMP(lnmp);
+                    textEDD.setText(dateFormat.format(edd));
+                }
             }
         };
 
@@ -266,6 +274,10 @@ public class AncRegister1stFragment extends Fragment {
             makeToast("Tafadhali chagua elimu ya mama na mwenza.");
             return false;
 
+        } else if ((int) lnmp == 0) {
+            makeToast("Tafadhali chagua tarehe ya LNMP.");
+            return false;
+
         } else
             // all good
             return true;
@@ -290,6 +302,8 @@ public class AncRegister1stFragment extends Fragment {
         mom.setHusbandName(editTextHusbandName.getText().toString());
         mom.setHusbandEducation(spinnerHusbandEducation.getSelectedItem().toString());
         mom.setHusbandOccupation(editTextHusbandOccupation.getText().toString());
+        mom.setDateLNMP(lnmp);
+        mom.setEdd(edd);
 
         return mom;
     }
