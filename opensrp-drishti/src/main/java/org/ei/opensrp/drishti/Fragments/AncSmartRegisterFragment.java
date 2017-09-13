@@ -248,11 +248,11 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                 if (cs.toString().equalsIgnoreCase("")) {
                     filters = "";
                 } else {
-                    //filters = "and FWWOMFNAME Like '%" + cs.toString() + "%' or GOBHHID Like '%" + cs.toString() + "%'  or JiVitAHHID Like '%" + cs.toString() + "%' ";
+                    //filters = "and MOTHERS_FIRST_NAME Like '%" + cs.toString() + "%' or GOBHHID Like '%" + cs.toString() + "%'  or JiVitAHHID Like '%" + cs.toString() + "%' ";
                     filters = cs.toString();
                 }
                 joinTable = "";
-                mainCondition = "(Is_PNC is null or Is_PNC = '0') and FWWOMFNAME not null and FWWOMFNAME != \"\"   AND details  LIKE '%\"FWWOMVALID\":\"1\"%'";
+                mainCondition = "(Is_PNC is null or Is_PNC = '0') and MOTHERS_FIRST_NAME not null and MOTHERS_FIRST_NAME != \"\"   AND details  LIKE '%\"IS_VALID\":\"1\"%'";
 
                 getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
                 CountExecute();
@@ -283,30 +283,30 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     }
 
     public String ancMainSelectWithJoins() {
-        return "Select id as _id,relationalid,details,FWWOMFNAME,FWPSRLMP,FWSORTVALUE,JiVitAHHID,GOBHHID,Is_PNC,FWBNFSTS,FWBNFDTOO \n" +
+        return "Select id as _id,relationalid,details,MOTHERS_FIRST_NAME,FWPSRLMP,FWSORTVALUE,JiVitAHHID,GOBHHID,Is_PNC,FWBNFSTS,FWBNFDTOO \n" +
                 "from mcaremother\n";
     }
 
     public String ancMainCountWithJoins() {
         return "Select Count(*) \n" +
-                "from mcaremother\n";
+                "from wazazi_salama_mother\n";
     }
 
     public void initializeQueries() {
         AncSmartClientsProvider hhscp = new AncSmartClientsProvider(getActivity(),
                 clientActionHandler, context().alertService());
 
-        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, new CommonRepository("mcaremother", new String[]{"FWWOMFNAME", "FWPSRLMP", "FWSORTVALUE", "JiVitAHHID", "GOBHHID", "Is_PNC", "FWBNFSTS", "FWBNFDTOO"}));
+        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, new CommonRepository("wazazi_salama_mother", new String[]{"MOTHERS_FIRST_NAME", "MOTHERS_LAST_NAME", "MOTHERS_LAST_MENSTRUATION_DATE", "MOTHERS_SORTVALUE", "MOTHERS_ID", "Is_PNC", "EXPECTED_DELIVERY_DATE", "PNC_STATUS"}));
         clientsView.setAdapter(clientAdapter);
 
-        setTablename("mcaremother");
+        setTablename("wazazi_salama_mother");
         SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder(ancMainCountWithJoins());
-        countSelect = countqueryBUilder.mainCondition("(mcaremother.Is_PNC is null or mcaremother.Is_PNC = '0') and mcaremother.FWWOMFNAME not null and mcaremother.FWWOMFNAME != \"\"   AND mcaremother.details  LIKE '%\"FWWOMVALID\":\"1\"%'");
-        mainCondition = "(Is_PNC is null or Is_PNC = '0') and FWWOMFNAME not null and FWWOMFNAME != \"\"   AND details  LIKE '%\"FWWOMVALID\":\"1\"%'";
+        countSelect = countqueryBUilder.mainCondition("(wazazi_salama_mother.Is_PNC is null or wazazi_salama_mother.Is_PNC = '0') and wazazi_salama_mother.MOTHERS_FIRST_NAME not null and wazazi_salama_mother.MOTHERS_FIRST_NAME != \"\"   AND wazazi_salama_mother.details  LIKE '%\"IS_VALID\":\"1\"%'");
+        mainCondition = "(Is_PNC is null or Is_PNC = '0') and MOTHERS_FIRST_NAME not null and MOTHERS_FIRST_NAME != \"\"   AND details  LIKE '%\"IS_VALID\":\"1\"%'";
         super.CountExecute();
 
         SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder(ancMainSelectWithJoins());
-        mainSelect = queryBUilder.mainCondition("(mcaremother.Is_PNC is null or mcaremother.Is_PNC = '0') and mcaremother.FWWOMFNAME not null and mcaremother.FWWOMFNAME != \"\"   AND mcaremother.details  LIKE '%\"FWWOMVALID\":\"1\"%'");
+        mainSelect = queryBUilder.mainCondition("(wazazi_salama_mother.Is_PNC is null or wazazi_salama_mother.Is_PNC = '0') and wazazi_salama_mother.MOTHERS_FIRST_NAME not null and wazazi_salama_mother.MOTHERS_FIRST_NAME != \"\"   AND wazazi_salama_mother.details  LIKE '%\"IS_VALID\":\"1\"%'");
         Sortqueries = sortBySortValue();
 
         currentlimit = 20;
@@ -324,12 +324,9 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     }
 
     private String sortByFWWOMFNAME() {
-        return " FWWOMFNAME ASC";
+        return " MOTHERS_FIRST_NAME ASC";
     }
 
-    private String sortByJiVitAHHID() {
-        return " JiVitAHHID ASC";
-    }
 
     private String sortByLmp() {
         return " FWPSRLMP ASC";
@@ -396,7 +393,7 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     public void onFilterSelection(FilterOption filter) {
         appliedVillageFilterView.setText(filter.name());
         filters = ((CursorFilterOption) filter).filter();
-        mainCondition = "(Is_PNC is null or Is_PNC = '0') and FWWOMFNAME not null and FWWOMFNAME != \"\"   AND details  LIKE '%\"FWWOMVALID\":\"1\"%'";
+        mainCondition = "(Is_PNC is null or Is_PNC = '0') and MOTHERS_FIRST_NAME not null and MOTHERS_FIRST_NAME != \"\"   AND details  LIKE '%\"IS_VALID\":\"1\"%'";
 
         if (StringUtils.isNotBlank(filters) && filters.contains(" and details LIKE ")) {
             mainCondition += filters;
@@ -439,49 +436,49 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
     public void processFormSubmission(String formSubmission) {
         Log.d(TAG, "submitted data = " + formSubmission);
-        JSONObject formSubmissionJson = null;
-        HashMap<String, String> dataHash = new HashMap<String, String>();
-        dataHash.put("mother_id", "1");
-        dataHash.put("reg_date", "2017-09-04");
-        dataHash.put("reg_place", "Sinza");
-
-        dataHash.put("FWWOMFNAME", "Jane");
-        dataHash.put("FWWOMLNAME", "Doe");
-        dataHash.put("FWHUSNAME", "John Doe");
-        dataHash.put("FWHOHBIRTHDATE", "07-09-1990");
-        dataHash.put("FWHOHGENDER", "2");
-        dataHash.put("FWWOMAGE", "27");
-
-
-
-        dataHash.put("case_num_pregnancies", "0");
-        dataHash.put("case_would_be_high_risk", "1");
-
-        dataHash.put("FWEDD", "2018-05-04");
-        dataHash.put("height", "190");
-        dataHash.put("weight_startofpregnancy", "80");
-
-        dataHash.put("user_type", "1");
-
-        Log.d(TAG, "formname = " + formName);
-        String modelString = readFileAssets("www/form/" + formName + "/model.xml").replaceAll("\"", "'").replaceAll("\n", "").replaceAll("\r", "").replaceAll("/", "/");
-
-        try {
-            formSubmissionJson = XML.toJSONObject(modelString);
-
-            for (Map.Entry<String, String> entry : dataHash.entrySet()) {
-                String key = entry.getKey();
-                String value = (String) entry.getValue();
-                populateJSONWithData(formSubmissionJson, key, value);
-            }
-
-            Log.d(TAG, "Results : " + formSubmissionJson.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(formSubmissionJson.toString(), recordId, formName, getFormFieldsOverrides());
+//        JSONObject formSubmissionJson = null;
+//        HashMap<String, String> dataHash = new HashMap<String, String>();
+//        dataHash.put("mother_id", "1");
+//        dataHash.put("reg_date", "2017-09-04");
+//        dataHash.put("reg_place", "Sinza");
+//
+//        dataHash.put("MOTHERS_FIRST_NAME", "Jane");
+//        dataHash.put("FWWOMLNAME", "Doe");
+//        dataHash.put("FWHUSNAME", "John Doe");
+//        dataHash.put("FWHOHBIRTHDATE", "07-09-1990");
+//        dataHash.put("FWHOHGENDER", "2");
+//        dataHash.put("FWWOMAGE", "27");
+//
+//
+//
+//        dataHash.put("case_num_pregnancies", "0");
+//        dataHash.put("case_would_be_high_risk", "1");
+//
+//        dataHash.put("FWEDD", "2018-05-04");
+//        dataHash.put("height", "190");
+//        dataHash.put("weight_startofpregnancy", "80");
+//
+//        dataHash.put("user_type", "1");
+//
+//        Log.d(TAG, "formname = " + formName);
+//        String modelString = readFileAssets("www/form/" + formName + "/model.xml").replaceAll("\"", "'").replaceAll("\n", "").replaceAll("\r", "").replaceAll("/", "/");
+//
+//        try {
+//            formSubmissionJson = XML.toJSONObject(modelString);
+//
+//            for (Map.Entry<String, String> entry : dataHash.entrySet()) {
+//                String key = entry.getKey();
+//                String value = (String) entry.getValue();
+//                populateJSONWithData(formSubmissionJson, key, value);
+//            }
+//
+//            Log.d(TAG, "Results : " + formSubmissionJson.toString());
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(formSubmissionJson.toString(), recordId, formName, getFormFieldsOverrides());
     }
 
     public String readFileAssets(String fileName) {
@@ -577,8 +574,8 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         @Override
         public boolean filtermapLogic(CommonPersonObject commonPersonObject) {
             boolean returnvalue = false;
-            if (commonPersonObject.getDetails().get("FWWOMVALID") != null) {
-                if (commonPersonObject.getDetails().get("FWWOMVALID").equalsIgnoreCase("1")) {
+            if (commonPersonObject.getDetails().get("IS_VALID") != null) {
+                if (commonPersonObject.getDetails().get("IS_VALID").equalsIgnoreCase("1")) {
                     returnvalue = true;
                     if (commonPersonObject.getDetails().get("Is_PNC") != null) {
                         if (commonPersonObject.getDetails().get("Is_PNC").equalsIgnoreCase("1")) {

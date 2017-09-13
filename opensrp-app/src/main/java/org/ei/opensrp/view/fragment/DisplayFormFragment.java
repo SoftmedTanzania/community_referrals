@@ -109,9 +109,9 @@ public class DisplayFormFragment extends Fragment {
         View view = inflater.inflate(R.layout.display_form_fragment, container, false);
         webView = (WebView)view.findViewById(R.id.webview);
         progressBar = (ProgressBar)view.findViewById(R.id.progressBar);
-        initWebViewSettings();
-        loadHtml();
-        initProgressDialog();
+//        initWebViewSettings();
+//        loadHtml();
+//        initProgressDialog();
         return view;
     }
 

@@ -279,7 +279,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                     @Override
                     protected Object doInBackground(Object[] params) {
 //                        currentSearchFilter = new ElcoSearchOption(cs.toString());
-                        setCurrentSearchFilter(new ElcoSearchOption(cs.toString()));
+//                        setCurrentSearchFilter(new ElcoSearchOption(cs.toString()));
                         filteredClients = getClientsAdapter().getListItemProvider()
                                 .updateClients(getCurrentVillageFilter(), getCurrentServiceModeOption(),
                                         getCurrentSearchFilter(), getCurrentSortOption());

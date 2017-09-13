@@ -89,76 +89,39 @@ public class UzazniSalamaApplication extends DrishtiApplication {
         getBaseContext().getResources().updateConfiguration(config,
                 getBaseContext().getResources().getDisplayMetrics());
     }
-    public static String convertToEnglishDigits(String value)
-    {
-//        ০১২৩৪৫৬৭৮৯
-        String newValue = value.replace("১", "1").replace("২", "2").replace("৩", "3").replace("৪", "4").replace("৫", "5")
-                .replace("৬", "6").replace("৭", "7").replace("৮", "8").replace("৯", "9").replace("০", "0");
-
-        return newValue;
-    }
-    public static String convertToBengaliDigits(String value)
-    {
-//        ০১২৩৪৫৬৭৮৯
-        String newValue = value.replace("1","১").replace( "2","২").replace( "3","৩").replace( "4","৪").replace( "5","৫")
-                .replace( "6","৬").replace( "7","৭").replace( "8","৮").replace( "9","৯").replace( "0","০");
-
-        return newValue;
-    }
 
     private String[] getFtsSearchFields(String tableName){
-        if(tableName.equals("household")){
-            String[] ftsSearchFields =  { "FWHOHFNAME", "FWGOBHHID", "FWJIVHHID" };
-            return ftsSearchFields;
-        } else if(tableName.equals("elco")){
-            String[] ftsSearchFields =  { "FWWOMFNAME", "GOBHHID", "JiVitAHHID" };
-            return ftsSearchFields;
-        } else if (tableName.equals("mcaremother")){
-            String[] ftsSearchFields =  { "FWWOMFNAME", "GOBHHID", "JiVitAHHID", "Is_PNC", "alerts.visitCode" };
-            return ftsSearchFields;
-        } else if (tableName.equals("mcarechild")){
-            String[] ftsSearchFields =  { "FWWOMFNAME", "GOBHHID", "JiVitAHHID", "alerts.visitCode" };
+         if (tableName.equals("wazazi_salama_mother")){
+            String[] ftsSearchFields =  { "MOTHERS_FIRST_NAME","MOTHERS_LAST_NAME", "MOTHERS_LAST_MENSTRUATION_DATE", "MOTHERS_ID", "Is_PNC", "alerts.visitCode" };
             return ftsSearchFields;
         }
         return null;
     }
 
     private String[] getFtsSortFields(String tableName){
-        if(tableName.equals("household")) {
-            String[] sortFields = {"FWHOHFNAME", "FWGOBHHID", "FWJIVHHID", "alerts.FW_CENSUS"};
+        if(tableName.equals("wazazi_salama_mother")){
+            String[] sortFields = { "MOTHERS_FIRST_NAME","MOTHERS_LAST_NAME", "EXPECTED_DELIVERY_DATE", "MOTHERS_SORTVALUE", "PNC_STATUS", "alerts.Ante_Natal_Care_Reminder_Visit", "alerts.BirthNotificationPregnancyStatusFollowUp", "alerts.Post_Natal_Care_Reminder_Visit"};
             return sortFields;
-        } else if(tableName.equals("elco")){
-            String[] sortFields = {"FWWOMFNAME", "GOBHHID", "JiVitAHHID", "alerts.ELCO_PSRF"};
-            return sortFields;
-        } else if(tableName.equals("mcaremother")){
-            String[] sortFields = {"FWWOMFNAME", "GOBHHID", "JiVitAHHID", "FWPSRLMP", "FWBNFDTOO", "FWSORTVALUE", "FWBNFSTS", "alerts.Ante_Natal_Care_Reminder_Visit", "alerts.BirthNotificationPregnancyStatusFollowUp", "alerts.Post_Natal_Care_Reminder_Visit"};
-            return sortFields;
-        } else if(tableName.equals("mcarechild")){
-            String[] sortFields = {"FWWOMFNAME", "GOBHHID", "JiVitAHHID", "FWSORTVALUE", "alerts.Essential_Newborn_Care_Checklist"};
+        } else if(tableName.equals("child")){
+            String[] sortFields = {"GENDER",  "motherCaseId", "alerts.Essential_Newborn_Care_Checklist"};
             return sortFields;
         }
         return null;
     }
 
     private String[] getFtsMainConditions(String tableName){
-        if(tableName.equals("household")) {
-            String[] mainConditions = {"FWHOHFNAME", "details"};
+        if(tableName.equals("wazazi_salama_mother")){
+            String[] mainConditions = {"MOTHERS_NAME", "Is_PNC", "details"};
             return mainConditions;
-        } else if(tableName.equals("elco")){
-            String[] mainConditions = {"FWWOMFNAME", "details"};
-            return mainConditions;
-        } else if(tableName.equals("mcaremother")){
-            String[] mainConditions = {"FWWOMFNAME", "Is_PNC", "details"};
-            return mainConditions;
-        } else if(tableName.equals("mcarechild")){
-            String[] mainConditions = {"FWBNFGEN",  "details"};
+        } else if(tableName.equals("child")){
+            String[] mainConditions = {"GENDER",  "details"};
             return mainConditions;
         }
         return null;
     }
 
     private String[] getFtsTables(){
-        String[] ftsTables = { "household", "elco", "mcaremother", "mcarechild" };
+        String[] ftsTables = {  "wazazi_salama_mother", "child" };
         return ftsTables;
     }
 
@@ -168,18 +131,16 @@ public class UzazniSalamaApplication extends DrishtiApplication {
      */
     private Map<String, Pair<String, Boolean>> getAlertScheduleMap(){
         Map<String, Pair<String, Boolean>> map = new HashMap<String, Pair<String, Boolean>>();
-        map.put("FW CENSUS", Pair.create("household", false));
-        map.put("ELCO PSRF", Pair.create("elco", false));
-        map.put("Ante Natal Care Reminder Visit", Pair.create("mcaremother", true));
-        map.put("BirthNotificationPregnancyStatusFollowUp",  Pair.create("mcaremother", false));
-        map.put("Post Natal Care Reminder Visit", Pair.create("mcaremother", true));
-        map.put("Essential Newborn Care Checklist", Pair.create("mcarechild", true));
+        map.put("Ante Natal Care Reminder Visit", Pair.create("wazazi_salama_mother", true));
+//        map.put("BirthNotificationPregnancyStatusFollowUp",  Pair.create("mcaremother", false));
+//        map.put("Post Natal Care Reminder Visit", Pair.create("mcaremother", true));
+//        map.put("Essential Newborn Care Checklist", Pair.create("mcarechild", true));
 
         return map;
     }
 
     private String[] getAlertFilterVisitCodes(){
-        String[] ftsTables = { "ancrv_1", "ancrv_2", "ancrv_3", "ancrv_4", "pncrv_1", "pncrv_2", "pncrv_3", "enccrv_1", "enccrv_2", "enccrv_3" };
+        String[] ftsTables = { "ancrv_1", "ancrv_2", "ancrv_3", "ancrv_4" };
         return ftsTables;
     }
 
@@ -197,7 +158,7 @@ public class UzazniSalamaApplication extends DrishtiApplication {
     public static void setCrashlyticsUser(Context context) {
                 if(context != null && context.userService() != null
                                 && context.allSharedPreferences() != null) {
-                       Crashlytics.setUserName(context.allSharedPreferences().fetchRegisteredANM());
+//                       Crashlytics.setUserName(context.allSharedPreferences().fetchRegisteredANM());
                    }
            }
 

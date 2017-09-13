@@ -1,8 +1,7 @@
 {
     "bindobjects":
  [
-   {"name":"reports",
-   "columns":[]},
+   {"name":"reports", "columns":[]},
     {
       "name": "pkwoman",
       "columns" : [{"name":"dob"},

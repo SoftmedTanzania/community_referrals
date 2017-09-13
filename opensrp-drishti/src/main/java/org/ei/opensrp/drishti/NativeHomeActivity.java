@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
+import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.commonregistry.ControllerFilterMap;
 import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
 import org.ei.opensrp.drishti.Anc.Anc1handler;
@@ -166,40 +167,37 @@ public class NativeHomeActivity extends SecuredActivity {
             public void run() {
                 SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
 
-                Cursor hhcountcursor = context().commonrepository("household").RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("household", "household.FWHOHFNAME NOT Null and household.FWHOHFNAME != ''"));
-                hhcountcursor.moveToFirst();
-                hhcount= hhcountcursor.getInt(0);
-                hhcountcursor.close();
-                Cursor elcocountcursor = context().commonrepository("elco").RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("elco","elco.FWWOMFNAME NOT NULL and elco.FWWOMFNAME !=''  AND elco.details  LIKE '%\"FWELIGIBLE\":\"1\"%'"));
-                elcocountcursor.moveToFirst();
-                elcocount= elcocountcursor.getInt(0);
-                elcocountcursor.close();
-                Cursor anccountcursor = context().commonrepository("mcaremother").RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("mcaremother","(mcaremother.Is_PNC is null or mcaremother.Is_PNC = '0') and mcaremother.FWWOMFNAME is not NUll  AND mcaremother.FWWOMFNAME != \"\"      AND mcaremother.details  LIKE '%\"FWWOMVALID\":\"1\"%'"));
-                anccountcursor.moveToFirst();
-                anccount= anccountcursor.getInt(0);
-                anccountcursor.close();
-                Cursor pnccountcursor = context().commonrepository("mcaremother").RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("mcaremother","mcaremother.Is_PNC = '1' and mcaremother.FWWOMFNAME is not NUll  AND mcaremother.FWWOMFNAME != \"\"      AND mcaremother.details  LIKE '%\"FWWOMVALID\":\"1\"%'"));
-                pnccountcursor.moveToFirst();
-                pnccount= pnccountcursor.getInt(0);
-                pnccountcursor.close();
-                Cursor childcountcursor = context().commonrepository("mcarechild").RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("mcarechild"," mcarechild.FWBNFGEN is not NUll "));
-                childcountcursor.moveToFirst();
-                childcount= childcountcursor.getInt(0);
-                childcountcursor.close();
 
-                Handler mainHandler = new Handler(getMainLooper());
+                CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
+                if(commonRepository!=null) {
+                    Cursor anccountcursor = context().commonrepository("wazazi_salama_mother").RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("wazazi_salama_mother", "(wazazi_salama_mother.Is_PNC is null or wazazi_salama_mother.Is_PNC = '0') and wazazi_salama_mother.MOTHERS_NAME is not NUll  AND wazazi_salama_mother.MOTHERS_NAME != \"\"  AND wazazi_salama_mother.details  LIKE '%\"IS_VALID\":\"1\"%'"));
+                    anccountcursor.moveToFirst();
+                    anccount = anccountcursor.getInt(0);
+                    anccountcursor.close();
 
-                Runnable myRunnable = new Runnable() {
-                    @Override
-                    public void run() {
+
+//                Cursor pnccountcursor = context().commonrepository("mcaremother").RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("mcaremother","mcaremother.Is_PNC = '1' and mcaremother.FWWOMFNAME is not NUll  AND mcaremother.FWWOMFNAME != \"\"      AND mcaremother.details  LIKE '%\"FWWOMVALID\":\"1\"%'"));
+//                pnccountcursor.moveToFirst();
+//                pnccount= pnccountcursor.getInt(0);
+//                pnccountcursor.close();
+
+
+                    Handler mainHandler = new Handler(getMainLooper());
+
+                    Runnable myRunnable = new Runnable() {
+                        @Override
+                        public void run() {
 //                        pncRegisterClientCountView.setText(valueOf(pnccount));
 //                        ecRegisterClientCountView.setText(valueOf(hhcount));
 //                        ancRegisterClientCountView.setText(valueOf(anccount));
 //                        fpRegisterClientCountView.setText(valueOf(elcocount));
 //                        childRegisterClientCountView.setText(valueOf(childcount));
-                    }
-                };
-                mainHandler.post(myRunnable);
+                        }
+                    };
+                    mainHandler.post(myRunnable);
+                }else{
+
+                }
             }
         }).start();
     }
@@ -325,8 +323,8 @@ public class NativeHomeActivity extends SecuredActivity {
         @Override
         public boolean filtermapLogic(CommonPersonObject commonPersonObject) {
             boolean returnvalue = false;
-            if(commonPersonObject.getDetails().get("FWWOMVALID") != null){
-                if(commonPersonObject.getDetails().get("FWWOMVALID").equalsIgnoreCase("1")){
+            if(commonPersonObject.getDetails().get("IS_VALID") != null){
+                if(commonPersonObject.getDetails().get("IS_VALID").equalsIgnoreCase("1")){
                     returnvalue = true;
                     if(commonPersonObject.getDetails().get("Is_PNC")!=null){
                         if(commonPersonObject.getDetails().get("Is_PNC").equalsIgnoreCase("1")){
@@ -347,8 +345,8 @@ public class NativeHomeActivity extends SecuredActivity {
         @Override
         public boolean filtermapLogic(CommonPersonObject commonPersonObject) {
             boolean returnvalue = false;
-            if(commonPersonObject.getDetails().get("FWWOMVALID") != null){
-                if(commonPersonObject.getDetails().get("FWWOMVALID").equalsIgnoreCase("1")){
+            if(commonPersonObject.getDetails().get("IS_VALID") != null){
+                if(commonPersonObject.getDetails().get("IS_VALID").equalsIgnoreCase("1")){
                     returnvalue = true;
                     if(commonPersonObject.getDetails().get("Is_PNC")!=null){
                         if(commonPersonObject.getDetails().get("Is_PNC").equalsIgnoreCase("1")){

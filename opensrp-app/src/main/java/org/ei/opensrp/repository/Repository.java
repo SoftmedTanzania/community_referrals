@@ -43,7 +43,11 @@ public class Repository extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database) {
         for (DrishtiRepository repository : repositories) {
-            repository.onCreate(database);
+            try {
+                repository.onCreate(database);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
         if(this.commonFtsObject != null) {

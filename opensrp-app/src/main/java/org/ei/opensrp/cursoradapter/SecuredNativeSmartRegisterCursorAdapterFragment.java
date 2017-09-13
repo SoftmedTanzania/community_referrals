@@ -158,7 +158,7 @@ public abstract class SecuredNativeSmartRegisterCursorAdapterFragment extends Se
         setupStatusBarViews(view);
         paginationViewHandler.addPagination(clientsView);
 
-        updateDefaultOptions();
+//        updateDefaultOptions();
     }
 
     public void refreshListView(){
