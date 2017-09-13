@@ -113,7 +113,7 @@ public class AncSmartClientsProvider implements SmartRegisterCLientsProviderForC
         age.setText("("+(pc.getDetails().get("FWWOMAGE")!=null?pc.getDetails().get("FWWOMAGE"):"")+") ");
 
         DateUtil.setDefaultDateFormat("yyyy-MM-dd");
-        AllCommonsRepository allmotherRepository = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("mcaremother");
+        AllCommonsRepository allmotherRepository = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("wazazi_salama_mother");
         //CommonPersonObject childobject = allmotherRepository.findByCaseID(smartRegisterClient.entityId());
         AllCommonsRepository elcorep = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("elco");
        // final CommonPersonObject elcoObject = elcorep.findByCaseID(childobject.getRelationalId());

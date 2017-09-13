@@ -320,28 +320,28 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
         // save the form
 
-        PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-        Map<String, String> personDetails1 = create("Is_PNC", "0").map();
-        personDetails1.put("FWWOMVALID","1");
-        personDetails1.put("FWBNFGEN", "2");
-        personDetails1.put("FWWOMFNAME", pregnantMom.getName());
-        personDetails1.put("GOBHHID", pregnantMom.getId());
-        personDetails1.put("FWWOMLNAME", pregnantMom.getName());
-        personDetails1.put("FWPSRLMP", sdf.format(new Date(pregnantMom.getDateLNMP())));
-        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.getPregnancyCount()+"");
-        personDetails1.put("FWPSRPRSB", pregnantMom.isHasBabyDeath()?"Has had still birth":"");
-        personDetails1.put("FWPSRTOTBIRTH", pregnantMom.getChildrenCount()+"");
-        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.isHas2orMoreBBA()?"Has had no pregnancies in the last 2 years":"");
-        personDetails1.put("FWWOMAGE", pregnantMom.getAge()+"");
-        personDetails1.put("HEIGHT", pregnantMom.getHeight()+"");
-        personDetails1.put("user_type", "1");
-
-
-        CommonPersonObject cpo2 = new CommonPersonObject(id,id,personDetails1,"mcaremother");
-        context().commonrepository("mcaremother").addMCARE(cpo2);
+//        PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
+//
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//
+//        Map<String, String> personDetails1 = create("Is_PNC", "0").map();
+//        personDetails1.put("FWWOMVALID","1");
+//        personDetails1.put("FWBNFGEN", "2");
+//        personDetails1.put("FWWOMFNAME", pregnantMom.getName());
+//        personDetails1.put("GOBHHID", pregnantMom.getId());
+//        personDetails1.put("FWWOMLNAME", pregnantMom.getName());
+//        personDetails1.put("FWPSRLMP", sdf.format(new Date(pregnantMom.getDateLNMP())));
+//        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.getPregnancyCount()+"");
+//        personDetails1.put("FWPSRPRSB", pregnantMom.isHasBabyDeath()?"Has had still birth":"");
+//        personDetails1.put("FWPSRTOTBIRTH", pregnantMom.getChildrenCount()+"");
+//        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.isHas2orMoreBBA()?"Has had no pregnancies in the last 2 years":"");
+//        personDetails1.put("FWWOMAGE", pregnantMom.getAge()+"");
+//        personDetails1.put("HEIGHT", pregnantMom.getHeight()+"");
+//        personDetails1.put("user_type", "1");
+//
+//
+//        CommonPersonObject cpo2 = new CommonPersonObject(id,id,personDetails1,"mcaremother");
+//        context().commonrepository("mcaremother").addMCARE(cpo2);
 //
 //        try {
 //            FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
