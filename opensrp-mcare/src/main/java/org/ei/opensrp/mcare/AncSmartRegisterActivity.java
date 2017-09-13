@@ -334,9 +334,9 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         personDetails1.put("GOBHHID", pregnantMom.getId());
         personDetails1.put("FWWOMLNAME", pregnantMom.getName());
         personDetails1.put("FWPSRLMP", sdf.format(new Date(pregnantMom.getDateLNMP())));
-        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.getPregnancyCount()+"");
-        personDetails1.put("FWPSRPRSB", pregnantMom.isHasBabyDeath()?"Has had still birth":"");
-        personDetails1.put("FWPSRTOTBIRTH", pregnantMom.getChildrenCount()+"");
+        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.getPreviousFertilityCount()+"");
+        personDetails1.put("FWPSRPRSB", pregnantMom.isHadStillBirth()?"Has had still birth":"");
+        personDetails1.put("FWPSRTOTBIRTH", pregnantMom.getLivingChildren()+"");
         personDetails1.put("FWPSRPREGTWYRS", pregnantMom.isHas2orMoreBBA()?"Has had no pregnancies in the last 2 years":"");
         personDetails1.put("FWWOMAGE", pregnantMom.getAge()+"");
         personDetails1.put("HEIGHT", pregnantMom.getHeight()+"");

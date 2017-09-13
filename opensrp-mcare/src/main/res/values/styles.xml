@@ -234,9 +234,11 @@
     </style>
 
 
-    <style name="AppTheme.MaterialDesign.ANCRegister" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.MaterialDesign.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:windowBackground">@color/background</item>
         <item name="colorAccent">@color/accent</item>
     </style>
 
@@ -249,13 +251,23 @@
         <item name="android:windowTranslucentStatus" tools:targetApi="KITKAT">true</item>
     </style>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
-        <item name="android:fitsSystemWindows">false</item>
-        <item name="colorButtonNormal">@color/primary</item>
+    <style name="ToolbarStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
+
+    <!-- collapsingAppBar -->
+    <style name="ExpandedTitleTextAppearance" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">#FFFF</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <!-- collapsingAppBar -->
+    <style name="CollapsedTitleTextAppearance" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">#FFFF</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
 </resources>

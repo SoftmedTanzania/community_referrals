@@ -16,12 +16,12 @@
             android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus"
             android:windowSoftInputMode="adjustResize|stateHidden">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".NativeHomeActivity"
@@ -75,7 +75,7 @@
         <activity
             android:name=".AncDetailActivity"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
+            android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
         <activity
             android:name=".pnc.mCarePncDetailActivity"
             android:screenOrientation="landscape"
@@ -95,12 +95,25 @@
 
         <activity android:name=".household.HouseHoldRegisterFormActivity" />
         <activity android:name=".household.ChooseFormActivity">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
+        <activity
+            android:name=".chw.CHWRegisterActivity"
+            android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".chw.CHWFormRegistrationActivity" />
+        <activity android:name=".chw.CHWFormFollowActivity"></activity>
     </application>
 
 </manifest>

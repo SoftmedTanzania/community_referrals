@@ -140,7 +140,7 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
 
                     pregnantMom.setAbove20WeeksPregnant(indicatorsMap.get(R.id.checkboxAgeBelow20));
                     pregnantMom.setHas10YrsPassedSinceLastPreg(indicatorsMap.get(R.id.checkbox10YrsLastPreg));
-                    pregnantMom.setHasBabyDeath(indicatorsMap.get(R.id.checkboxBabyDeath));
+                    pregnantMom.setHadStillBirth(indicatorsMap.get(R.id.checkboxBabyDeath));
                     pregnantMom.setHas2orMoreBBA(indicatorsMap.get(R.id.checkbox2orMoreBBA));
                     pregnantMom.setHasHeartProblem(indicatorsMap.get(R.id.checkboxHeartProb));
                     pregnantMom.setHasDiabetes(indicatorsMap.get(R.id.checkboxDiabetes));

@@ -8,7 +8,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -16,9 +21,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.ei.opensrp.Context;
+import org.ei.opensrp.commonregistry.AllCommonsRepository;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectClient;
 import org.ei.opensrp.domain.Alert;
+import org.ei.opensrp.mcare.R;
+import org.ei.opensrp.util.DateUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +47,7 @@ import static org.ei.opensrp.util.StringUtil.humanize;
 /**
  * Created by raihan on 5/11/15.
  */
-public class AncDetailActivity extends Activity {
+public class AncDetailActivity extends AppCompatActivity {
 
     //image retrieving
     private static final String TAG = "ImageGridFragment";
@@ -51,11 +59,10 @@ public class AncDetailActivity extends Activity {
     private static ImageFetcher mImageFetcher;
 
 
-
-
     //image retrieving
 
     public static CommonPersonObjectClient ancclient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,76 +80,78 @@ public class AncDetailActivity extends Activity {
 //        TextView psf_due_date = (TextView) findViewById(R.id.last_psf_date);
 
 
+//        ImageButton back = (ImageButton) findViewById(org.ei.opensrp.R.id.btn_back_to_home);
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
 
-
-
-
-
-        ImageButton back = (ImageButton) findViewById(org.ei.opensrp.R.id.btn_back_to_home);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        Toolbar toolbar = (Toolbar) findViewById(R.id.mToolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("");
+        }
 
         name.setText(humanize((ancclient.getColumnmaps().get("FWWOMFNAME") != null ? ancclient.getColumnmaps().get("FWWOMFNAME") : "").replace("+", "_")));
-        if((ancclient.getDetails().get("FWWOMBID") != null ? ancclient.getDetails().get("FWWOMBID") : "").length()>0) {
+        if ((ancclient.getDetails().get("FWWOMBID") != null ? ancclient.getDetails().get("FWWOMBID") : "").length() > 0) {
             brid.setText(Html.fromHtml(getString(R.string.BRID) + " " + humanize((ancclient.getDetails().get("FWWOMBID") != null ? ancclient.getDetails().get("FWWOMBID") : "").replace("+", "_"))));
             brid.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             brid.setVisibility(View.GONE);
         }
-        if((ancclient.getDetails().get("FWWOMNID") != null ? ancclient.getDetails().get("FWWOMNID") : "").length()>0) {
+        if ((ancclient.getDetails().get("FWWOMNID") != null ? ancclient.getDetails().get("FWWOMNID") : "").length() > 0) {
             nid.setText(Html.fromHtml(getString(R.string.NID) + " " + humanize((ancclient.getDetails().get("FWWOMNID") != null ? ancclient.getDetails().get("FWWOMNID") : "").replace("+", "_"))));
             nid.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             nid.setVisibility(View.GONE);
         }
-        husbandname.setText(Html.fromHtml(getString(R.string.elco_details_husband_name_label)+" "+humanize(ancclient.getDetails().get("FWHUSNAME") != null ? ancclient.getDetails().get("FWHUSNAME") : "")));
-        age.setText(Html.fromHtml(getString(R.string.elco_age_label)+" " + (ancclient.getDetails().get("FWWOMAGE") != null ? ancclient.getDetails().get("FWWOMAGE") : "")));
+        husbandname.setText(Html.fromHtml(getString(R.string.elco_details_husband_name_label) + " " + humanize(ancclient.getDetails().get("FWHUSNAME") != null ? ancclient.getDetails().get("FWHUSNAME") : "")));
+        age.setText(Html.fromHtml(getString(R.string.elco_age_label) + " " + (ancclient.getDetails().get("FWWOMAGE") != null ? ancclient.getDetails().get("FWWOMAGE") : "")));
 
 
-//        try{
-//        DateUtil.setDefaultDateFormat("yyyy-MM-dd");
-//        AllCommonsRepository allmotherRepository = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("mcaremother");
-//        CommonPersonObject childobject = allmotherRepository.findByCaseID(ancclient.entityId());
-//        AllCommonsRepository elcorep = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("elco");
-//
-//        final CommonPersonObject elcoObject = elcorep.findByCaseID(childobject.getRelationalId());
-//            int days = DateUtil.dayDifference(DateUtil.getLocalDate((elcoObject.getDetails().get("FWBIRTHDATE") != null ?  elcoObject.getDetails().get("FWBIRTHDATE")  : "")), DateUtil.today());
-//            Log.v("days",""+days);
-//            int calc_age = days / 365;
-//            age.setText(Html.fromHtml(getString(R.string.elco_age_label)+" " + calc_age));
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
+        DateUtil.setDefaultDateFormat("yyyy-MM-dd");
+        AllCommonsRepository allmotherRepository = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("mcaremother");
+        CommonPersonObject childobject = allmotherRepository.findByCaseID(ancclient.entityId());
+        AllCommonsRepository elcorep = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("elco");
+        final CommonPersonObject elcoObject = elcorep.findByCaseID(childobject.getRelationalId());
+        try {
+            int days = DateUtil.dayDifference(DateUtil.getLocalDate((elcoObject.getDetails().get("FWBIRTHDATE") != null ? elcoObject.getDetails().get("FWBIRTHDATE") : "")), DateUtil.today());
+            Log.v("days", "" + days);
+            int calc_age = days / 365;
+            age.setText(Html.fromHtml(getString(R.string.elco_age_label) + " " + calc_age));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
-        jivitahhid.setText(Html.fromHtml(getString(R.string.hhiid_jivita_elco_label)+" " +(ancclient.getColumnmaps().get("JiVitAHHID") != null ? ancclient.getColumnmaps().get("JiVitAHHID") : "")));
-        godhhid.setText(Html.fromHtml(getString(R.string.hhid_gob_elco_label) +" " + (ancclient.getColumnmaps().get("GOBHHID") != null ? ancclient.getColumnmaps().get("GOBHHID") : "")));
+        jivitahhid.setText(Html.fromHtml(getString(R.string.hhiid_jivita_elco_label) + " " + (ancclient.getColumnmaps().get("JiVitAHHID") != null ? ancclient.getColumnmaps().get("JiVitAHHID") : "")));
+        godhhid.setText(Html.fromHtml(getString(R.string.hhid_gob_elco_label) + " " + (ancclient.getColumnmaps().get("GOBHHID") != null ? ancclient.getColumnmaps().get("GOBHHID") : "")));
 //        psf_due_date.setText(Elcoclient.getDetails().get("FWPSRDATE") != null ? Elcoclient.getDetails().get("FWPSRDATE") : "");
 
 
         village.setText(Html.fromHtml(getString(R.string.elco_details_mauza) + " " + humanize(ancclient.getDetails().get("mauza") != null ? ancclient.getDetails().get("mauza") : "")));
-            /////from househld
-//        AllCommonsRepository allancRepository = Context.getInstance().allCommonsRepositoryobjects("mcaremother");
-//        CommonPersonObject ancobject = allancRepository.findByCaseID(ancclient.entityId());
-//        AllCommonsRepository allelcorep = Context.getInstance().allCommonsRepositoryobjects("elco");
-//        CommonPersonObject elcoparent = allelcorep.findByCaseID(ancobject.getRelationalId());
+        /////from househld
+        AllCommonsRepository allancRepository = Context.getInstance().allCommonsRepositoryobjects("mcaremother");
+        CommonPersonObject ancobject = allancRepository.findByCaseID(ancclient.entityId());
+        AllCommonsRepository allelcorep = Context.getInstance().allCommonsRepositoryobjects("elco");
+        CommonPersonObject elcoparent = allelcorep.findByCaseID(ancobject.getRelationalId());
 
 //
-//        checkAnc1view(ancclient);
-//        checkAnc2view(ancclient);
-//        checkAnc3view(ancclient);
-//        checkAnc4view(ancclient);
-//        numberofChildrenView(elcoparent);
-//        numberofstillbirthview(elcoparent);
-//        historyofmr(elcoparent);
-//        historyofsb(elcoparent);
-//        pregnancyin2years(elcoparent);
-//        eddlay(ancclient);
-
+        checkAnc1view(ancclient);
+        checkAnc2view(ancclient);
+        checkAnc3view(ancclient);
+        checkAnc4view(ancclient);
+        numberofChildrenView(elcoparent);
+        numberofstillbirthview(elcoparent);
+        historyofmr(elcoparent);
+        historyofsb(elcoparent);
+        pregnancyin2years(elcoparent);
+        eddlay(ancclient);
 
 
 //        AllCommonsRepository allelcoRepository = Context.getInstance().allCommonsRepositoryobjects("elco");
@@ -178,11 +187,23 @@ public class AncDetailActivity extends Activity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void eddlay(CommonPersonObjectClient ancclient) {
-        TextView edd = (TextView)findViewById(R.id.edd_date);
+        TextView edd = (TextView) findViewById(R.id.edd_date);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            Date edd_date = format.parse(ancclient.getColumnmaps().get("FWPSRLMP")!=null?ancclient.getColumnmaps().get("FWPSRLMP"):"");
+            Date edd_date = format.parse(ancclient.getColumnmaps().get("FWPSRLMP") != null ? ancclient.getColumnmaps().get("FWPSRLMP") : "");
             GregorianCalendar calendar = new GregorianCalendar();
             calendar.setTime(edd_date);
             calendar.add(Calendar.DATE, 259);
@@ -195,119 +216,121 @@ public class AncDetailActivity extends Activity {
     }
 
     private void pregnancyin2years(CommonPersonObject ecclient) {
-        String text = ecclient.getDetails().get("FWPSRPREGTWYRS")!=null?ecclient.getDetails().get("FWPSRPREGTWYRS"):"N/A";
-        TextView stillbirth = (TextView)findViewById(R.id.number_of_pregnancy);
+        String text = ecclient.getDetails().get("FWPSRPREGTWYRS") != null ? ecclient.getDetails().get("FWPSRPREGTWYRS") : "N/A";
+        TextView stillbirth = (TextView) findViewById(R.id.number_of_pregnancy);
         stillbirth.setText(text);
     }
 
     private void historyofsb(CommonPersonObject ecclient) {
-        String text = ecclient.getDetails().get("FWPSRPRSB")!=null?ecclient.getDetails().get("FWPSRPRSB"):"N/A";
-        TextView stillbirth = (TextView)findViewById(R.id.history_of_sb);
+        String text = ecclient.getDetails().get("FWPSRPRSB") != null ? ecclient.getDetails().get("FWPSRPRSB") : "N/A";
+        TextView stillbirth = (TextView) findViewById(R.id.history_of_sb);
         stillbirth.setText(text);
     }
 
     private void historyofmr(CommonPersonObject ecclient) {
-        String text = ecclient.getDetails().get("FWPSRPRMC")!=null?ecclient.getDetails().get("FWPSRPRMC"):"N/A";
-        TextView stillbirth = (TextView)findViewById(R.id.history_of_mr);
+        String text = ecclient.getDetails().get("FWPSRPRMC") != null ? ecclient.getDetails().get("FWPSRPRMC") : "N/A";
+        TextView stillbirth = (TextView) findViewById(R.id.history_of_mr);
         stillbirth.setText(text);
 
     }
 
     private void numberofstillbirthview(CommonPersonObject ecclient) {
-        String text = ecclient.getDetails().get("FWPSRNBDTH")!=null?ecclient.getDetails().get("FWPSRNBDTH"):"N/A";
-        TextView stillbirth = (TextView)findViewById(R.id.stillbirths);
+        String text = ecclient.getDetails().get("FWPSRNBDTH") != null ? ecclient.getDetails().get("FWPSRNBDTH") : "N/A";
+        TextView stillbirth = (TextView) findViewById(R.id.stillbirths);
         stillbirth.setText(text);
     }
 
     private void numberofChildrenView(CommonPersonObject ecclient) {
-        String text = ecclient.getDetails().get("FWPSRTOTBIRTH")!=null?ecclient.getDetails().get("FWPSRTOTBIRTH"):"N/A";
-        TextView numberofChildren = (TextView)findViewById(R.id.livechildren);
+        String text = ecclient.getDetails().get("FWPSRTOTBIRTH") != null ? ecclient.getDetails().get("FWPSRTOTBIRTH") : "N/A";
+        TextView numberofChildren = (TextView) findViewById(R.id.livechildren);
         numberofChildren.setText(text);
 
     }
+
     private void checkAnc4view(CommonPersonObjectClient ecclient) {
-        LinearLayout anc1layout = (LinearLayout)findViewById(R.id.anc4_layout);
+        LinearLayout anc1layout = (LinearLayout) findViewById(R.id.anc4_layout);
         List<Alert> alertlist = org.ei.opensrp.Context.getInstance().alertService().findByEntityIdAndAlertNames(ecclient.entityId(), "ancrv_4");
-        if(alertlist.size()!=0 && ecclient.getDetails().get("FWANC4DATE")!=null){
+        if (alertlist.size() != 0 && ecclient.getDetails().get("FWANC4DATE") != null) {
 //            alerttextstatus = setAlertStatus("ANC1",alertlist);
-            for(int i = 0;i<alertlist.size();i++){
+            for (int i = 0; i < alertlist.size(); i++) {
                 String status = alertlist.get(i).status().value();
-                String text = ecclient.getDetails().get("FWANC4DATE")!=null?ecclient.getDetails().get("FWANC4DATE"):"";
-                TextView anc1date = (TextView)findViewById(R.id.anc4date);
-                if((ecclient.getDetails().get("ANC4_current_formStatus")!=null?ecclient.getDetails().get("ANC4_current_formStatus"):"").equalsIgnoreCase("upcoming")){
+                String text = ecclient.getDetails().get("FWANC4DATE") != null ? ecclient.getDetails().get("FWANC4DATE") : "";
+                TextView anc1date = (TextView) findViewById(R.id.anc4date);
+                if ((ecclient.getDetails().get("ANC4_current_formStatus") != null ? ecclient.getDetails().get("ANC4_current_formStatus") : "").equalsIgnoreCase("upcoming")) {
                     anc1date.setTextColor(getResources().getColor(R.color.alert_complete_green));
-                }else if((ecclient.getDetails().get("ANC4_current_formStatus")!=null?ecclient.getDetails().get("ANC4_current_formStatus"):"").equalsIgnoreCase("urgent")){
+                } else if ((ecclient.getDetails().get("ANC4_current_formStatus") != null ? ecclient.getDetails().get("ANC4_current_formStatus") : "").equalsIgnoreCase("urgent")) {
                     anc1date.setTextColor(getResources().getColor(R.color.alert_urgent_red));
                 }
                 anc1date.setText(text);
 
             }
-        }else{
+        } else {
             anc1layout.setVisibility(View.GONE);
         }
     }
+
     private void checkAnc3view(CommonPersonObjectClient ecclient) {
-        LinearLayout anc1layout = (LinearLayout)findViewById(R.id.anc3_layout);
+        LinearLayout anc1layout = (LinearLayout) findViewById(R.id.anc3_layout);
         List<Alert> alertlist = org.ei.opensrp.Context.getInstance().alertService().findByEntityIdAndAlertNames(ecclient.entityId(), "ancrv_3");
-        if(alertlist.size()!=0 && ecclient.getDetails().get("FWANC3DATE")!=null){
+        if (alertlist.size() != 0 && ecclient.getDetails().get("FWANC3DATE") != null) {
 //            alerttextstatus = setAlertStatus("ANC1",alertlist);
-            for(int i = 0;i<alertlist.size();i++){
+            for (int i = 0; i < alertlist.size(); i++) {
                 String status = alertlist.get(i).status().value();
-                String text = ecclient.getDetails().get("FWANC3DATE")!=null?ecclient.getDetails().get("FWANC3DATE"):"";
-                TextView anc1date = (TextView)findViewById(R.id.anc3date);
-                if((ecclient.getDetails().get("ANC3_current_formStatus")!=null?ecclient.getDetails().get("ANC3_current_formStatus"):"").equalsIgnoreCase("upcoming")){
+                String text = ecclient.getDetails().get("FWANC3DATE") != null ? ecclient.getDetails().get("FWANC3DATE") : "";
+                TextView anc1date = (TextView) findViewById(R.id.anc3date);
+                if ((ecclient.getDetails().get("ANC3_current_formStatus") != null ? ecclient.getDetails().get("ANC3_current_formStatus") : "").equalsIgnoreCase("upcoming")) {
                     anc1date.setTextColor(getResources().getColor(R.color.alert_complete_green));
-                }else if((ecclient.getDetails().get("ANC3_current_formStatus")!=null?ecclient.getDetails().get("ANC3_current_formStatus"):"").equalsIgnoreCase("urgent")){
+                } else if ((ecclient.getDetails().get("ANC3_current_formStatus") != null ? ecclient.getDetails().get("ANC3_current_formStatus") : "").equalsIgnoreCase("urgent")) {
                     anc1date.setTextColor(getResources().getColor(R.color.alert_urgent_red));
                 }
                 anc1date.setText(text);
 
             }
-        }else{
+        } else {
             anc1layout.setVisibility(View.GONE);
         }
     }
 
     private void checkAnc2view(CommonPersonObjectClient ecclient) {
-        LinearLayout anc1layout = (LinearLayout)findViewById(R.id.anc2_layout);
+        LinearLayout anc1layout = (LinearLayout) findViewById(R.id.anc2_layout);
         List<Alert> alertlist = org.ei.opensrp.Context.getInstance().alertService().findByEntityIdAndAlertNames(ecclient.entityId(), "ancrv_2");
-        if(alertlist.size()!=0 && ecclient.getDetails().get("FWANC2DATE")!=null){
+        if (alertlist.size() != 0 && ecclient.getDetails().get("FWANC2DATE") != null) {
 //            alerttextstatus = setAlertStatus("ANC1",alertlist);
-            for(int i = 0;i<alertlist.size();i++){
+            for (int i = 0; i < alertlist.size(); i++) {
                 String status = alertlist.get(i).status().value();
-                String text = ecclient.getDetails().get("FWANC2DATE")!=null?ecclient.getDetails().get("FWANC2DATE"):"";
-                TextView anc1date = (TextView)findViewById(R.id.anc2date);
-                if((ecclient.getDetails().get("ANC2_current_formStatus")!=null?ecclient.getDetails().get("ANC2_current_formStatus"):"").equalsIgnoreCase("upcoming")){
+                String text = ecclient.getDetails().get("FWANC2DATE") != null ? ecclient.getDetails().get("FWANC2DATE") : "";
+                TextView anc1date = (TextView) findViewById(R.id.anc2date);
+                if ((ecclient.getDetails().get("ANC2_current_formStatus") != null ? ecclient.getDetails().get("ANC2_current_formStatus") : "").equalsIgnoreCase("upcoming")) {
                     anc1date.setTextColor(getResources().getColor(R.color.alert_complete_green));
-                }else if((ecclient.getDetails().get("ANC2_current_formStatus")!=null?ecclient.getDetails().get("ANC2_current_formStatus"):"").equalsIgnoreCase("urgent")){
+                } else if ((ecclient.getDetails().get("ANC2_current_formStatus") != null ? ecclient.getDetails().get("ANC2_current_formStatus") : "").equalsIgnoreCase("urgent")) {
                     anc1date.setTextColor(getResources().getColor(R.color.alert_urgent_red));
                 }
                 anc1date.setText(text);
 
             }
-        }else{
+        } else {
             anc1layout.setVisibility(View.GONE);
         }
     }
 
     private void checkAnc1view(CommonPersonObjectClient ecclient) {
-        LinearLayout anc1layout = (LinearLayout)findViewById(R.id.anc1_layout);
+        LinearLayout anc1layout = (LinearLayout) findViewById(R.id.anc1_layout);
         List<Alert> alertlist = org.ei.opensrp.Context.getInstance().alertService().findByEntityIdAndAlertNames(ecclient.entityId(), "ancrv_1");
-        if(alertlist.size()!=0 && ecclient.getDetails().get("FWANC1DATE")!=null){
+        if (alertlist.size() != 0 && ecclient.getDetails().get("FWANC1DATE") != null) {
 //            alerttextstatus = setAlertStatus("ANC1",alertlist);
-            for(int i = 0;i<alertlist.size();i++){
+            for (int i = 0; i < alertlist.size(); i++) {
                 String status = alertlist.get(i).status().value();
-                String text = ecclient.getDetails().get("FWANC1DATE")!=null?ecclient.getDetails().get("FWANC1DATE"):"";
-                TextView anc1date = (TextView)findViewById(R.id.anc1date);
-                if((ecclient.getDetails().get("anc1_current_formStatus")!=null?ecclient.getDetails().get("anc1_current_formStatus"):"").equalsIgnoreCase("upcoming")){
+                String text = ecclient.getDetails().get("FWANC1DATE") != null ? ecclient.getDetails().get("FWANC1DATE") : "";
+                TextView anc1date = (TextView) findViewById(R.id.anc1date);
+                if ((ecclient.getDetails().get("anc1_current_formStatus") != null ? ecclient.getDetails().get("anc1_current_formStatus") : "").equalsIgnoreCase("upcoming")) {
                     anc1date.setTextColor(getResources().getColor(R.color.alert_complete_green));
-                }else if((ecclient.getDetails().get("anc1_current_formStatus")!=null?ecclient.getDetails().get("anc1_current_formStatus"):"").equalsIgnoreCase("urgent")){
+                } else if ((ecclient.getDetails().get("anc1_current_formStatus") != null ? ecclient.getDetails().get("anc1_current_formStatus") : "").equalsIgnoreCase("urgent")) {
                     anc1date.setTextColor(getResources().getColor(R.color.alert_urgent_red));
                 }
                 anc1date.setText(text);
 
             }
-        }else{
+        } else {
             anc1layout.setVisibility(View.GONE);
         }
 
@@ -331,11 +354,13 @@ public class AncDetailActivity extends Activity {
         mCurrentPhotoPath = "file:" + image.getAbsolutePath();
         return image;
     }
+
     static final int REQUEST_TAKE_PHOTO = 1;
-   static ImageView mImageView;
+    static ImageView mImageView;
     static File currentfile;
     static String bindobject;
     static String entityid;
+
     private void dispatchTakePictureIntent(ImageView imageView) {
         mImageView = imageView;
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -365,39 +390,37 @@ public class AncDetailActivity extends Activity {
 //            Bundle extras = data.getExtras();
 //            String imageBitmap = (String) extras.get(MediaStore.EXTRA_OUTPUT);
 //            Toast.makeText(this,imageBitmap,Toast.LENGTH_LONG).show();
-            HashMap <String,String> details = new HashMap<String,String>();
-            details.put("profilepic",currentfile.getAbsolutePath());
-            saveimagereference(bindobject,entityid,details);
+            HashMap<String, String> details = new HashMap<String, String>();
+            details.put("profilepic", currentfile.getAbsolutePath());
+            saveimagereference(bindobject, entityid, details);
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
             Bitmap bitmap = BitmapFactory.decodeFile(currentfile.getPath(), options);
             mImageView.setImageBitmap(bitmap);
         }
     }
-    public void saveimagereference(String bindobject,String entityid,Map<String,String> details){
-        Context.getInstance().allCommonsRepositoryobjects(bindobject).mergeDetails(entityid,details);
+
+    public void saveimagereference(String bindobject, String entityid, Map<String, String> details) {
+        Context.getInstance().allCommonsRepositoryobjects(bindobject).mergeDetails(entityid, details);
 //                Elcoclient.entityId();
 //        Toast.makeText(this,entityid,Toast.LENGTH_LONG).show();
     }
-    public static void setImagetoHolder(Activity activity,String file, ImageView view, int placeholder){
+
+    public static void setImagetoHolder(Activity activity, String file, ImageView view, int placeholder) {
         mImageThumbSize = 300;
         mImageThumbSpacing = Context.getInstance().applicationContext().getResources().getDimensionPixelSize(R.dimen.image_thumbnail_spacing);
 
 
         ImageCache.ImageCacheParams cacheParams =
                 new ImageCache.ImageCacheParams(activity, IMAGE_CACHE_DIR);
-             cacheParams.setMemCacheSizePercent(0.50f); // Set memory cache to 25% of app memory
+        cacheParams.setMemCacheSizePercent(0.50f); // Set memory cache to 25% of app memory
         mImageFetcher = new ImageFetcher(activity, mImageThumbSize);
         mImageFetcher.setLoadingImage(placeholder);
         mImageFetcher.addImageCache(activity.getFragmentManager(), cacheParams);
 //        Toast.makeText(activity,file,Toast.LENGTH_LONG).show();
-        mImageFetcher.loadImage("file:///"+file,view);
+        mImageFetcher.loadImage("file:///" + file, view);
 
 //        Uri.parse(new File("/sdcard/cats.jpg")
-
-
-
-
 
 
 //        BitmapFactory.Options options = new BitmapFactory.Options();
