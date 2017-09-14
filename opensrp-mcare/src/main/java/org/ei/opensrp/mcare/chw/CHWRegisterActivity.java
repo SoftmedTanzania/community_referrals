@@ -89,4 +89,6 @@ public class CHWRegisterActivity extends AppCompatActivity {
         TextView textName = (TextView) dialogView.findViewById(R.id.name);
         textName.setText(mother.getName());
     }
+
+
 }

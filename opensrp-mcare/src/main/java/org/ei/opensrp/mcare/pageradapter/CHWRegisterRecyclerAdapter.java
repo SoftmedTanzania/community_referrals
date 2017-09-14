@@ -1,11 +1,15 @@
 package org.ei.opensrp.mcare.pageradapter;
 
 import android.content.Context;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.ei.opensrp.mcare.R;
 import org.ei.opensrp.mcare.chw.CHWRegisterActivity;
@@ -68,16 +72,16 @@ public class CHWRegisterRecyclerAdapter extends
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView nameTextView, eddTextView, visitedTextView, riskTextView;
+        TextView nameTextView, eddTextView, visitedTextView, riskTextView;
+        ImageView iconOptions;
 
         public ViewHolder(View itemView) {
-
             super(itemView);
-
             nameTextView = (TextView) itemView.findViewById(R.id.name);
             eddTextView = (TextView) itemView.findViewById(R.id.edd);
             visitedTextView = (TextView) itemView.findViewById(R.id.visited);
             riskTextView = (TextView) itemView.findViewById(R.id.risk);
+            iconOptions = (ImageView) itemView.findViewById(R.id.iconOptions);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -86,7 +90,49 @@ public class CHWRegisterRecyclerAdapter extends
                     ((CHWRegisterActivity) mContext).showDetailsDialog(mothers.get(getAdapterPosition()));
                 }
             });
+
+            iconOptions.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // show options
+                    showPop(getAdapterPosition(), view);
+                }
+            });
         }
+
+    }
+
+
+    public void showPop(int position, View anchor) {
+
+        PopupMenu popupMenu = new PopupMenu((CHWRegisterActivity) mContext, anchor);
+        // inflate menu xml res
+        popupMenu.getMenuInflater().inflate(R.menu.menu_popup_details, popupMenu.getMenu());
+        popupMenu.show();
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                switch (item.getItemId()) {
+                    // TODO: handle option selected
+                    case R.id.popOpt1:
+                        Toast.makeText(mContext, item.getTitle() + " clicked", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    case R.id.popOpt2:
+                        Toast.makeText(mContext, item.getTitle() + " clicked", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    case R.id.popOpt3:
+                        Toast.makeText(mContext, item.getTitle() + " clicked", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    default:
+                        return false;
+                }
+            }
+        });
 
     }
 }
