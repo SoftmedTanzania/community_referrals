@@ -135,7 +135,6 @@ public class CHWRegisterActivity extends AppCompatActivity {
         textName.setText(mother.getName());
     }
 
-    public void showFollowUpDetailsDialog(ChwFollowUpMother mother){
     public void showFollowUpDetailsDialog(ChwFollowUpMother mother) {
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_details, null);
