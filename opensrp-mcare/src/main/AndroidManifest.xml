@@ -113,7 +113,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".chw.CHWFormRegistrationActivity" />
-        <activity android:name=".chw.CHWFormFollowActivity"></activity>
+        <activity android:name=".chw.CHWFormFollowActivity" />
+        <activity android:name=".chw.CHWEditPreRegistrationActivity"></activity>
     </application>
 
 </manifest>

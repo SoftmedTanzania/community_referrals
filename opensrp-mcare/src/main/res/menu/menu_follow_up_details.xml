@@ -4,7 +4,7 @@
     <!-- todo replace with your own options ids and titles -->
     <item
         android:id="@+id/popOpt1"
-        android:title="Revist" />
+        android:title="Follow" />
 
     <item
         android:id="@+id/popOpt2"
