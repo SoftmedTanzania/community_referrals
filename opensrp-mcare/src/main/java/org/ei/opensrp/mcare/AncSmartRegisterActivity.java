@@ -343,8 +343,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         personDetails1.put("user_type", "1");
 
 
-        CommonPersonObject cpo2 = new CommonPersonObject(id,id,personDetails1,"mcaremother");
-        context().commonrepository("mcaremother").addMCARE(cpo2);
+//        CommonPersonObject cpo2 = new CommonPersonObject(id,id,personDetails1,"mcaremother");
+//        ((Dmo)context().commonrepository("mcaremother")).addMCARE(cpo2);
 //
 //        try {
 //            FormUtils formUtils = FormUtils.getInstance(getApplicationContext());

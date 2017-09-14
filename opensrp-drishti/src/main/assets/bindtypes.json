@@ -11,7 +11,7 @@
       "columns": [
         {"name":"GENDER"},{"name":"motherCaseId"}
       ]
-    }
+    },
     {
       "name": "facility",
       "columns": [

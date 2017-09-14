@@ -9,14 +9,14 @@ import java.util.Map;
  * Created by Kency on 14/09/2017.
  */
 
-public class DMotherPersonObject extends CommonPersonObject {
+public class DMotherPersonObject  {
     private String caseId,type,relationalid,MOTHERS_FIRST_NAME,MOTHERS_LAST_NAME,MOTHERS_SORTVALUE,
             EXPECTED_DELIVERY_DATE,MOTHERS_LAST_MENSTRUATION_DATE,FACILITY_ID,IS_PNC,IS_VALID,PNC_STATUS,MOTHERS_ID;
-    private Map<String, String> details,columnmaps;
+    private String details;
+ private Map<String, String> columnmaps;
 
     public DMotherPersonObject(String caseId, String relationalid, String MOTHERS_FIRST_NAME, String MOTHERS_LAST_NAME, String MOTHERS_ID, String MOTHERS_SORTVALUE, String EXPECTED_DELIVERY_DATE,
-                               String MOTHERS_LAST_MENSTRUATION_DATE, String FACILITY_ID, String IS_PNC, String IS_VALID, Map<String, String> details, String type) {
-        super(caseId, relationalid, details, type);
+                               String MOTHERS_LAST_MENSTRUATION_DATE, String FACILITY_ID, String IS_PNC, String IS_VALID,String details, String type) {
         this.details = details;
         this.caseId = caseId;
         this.type = type;
@@ -31,6 +31,25 @@ public class DMotherPersonObject extends CommonPersonObject {
         this.IS_PNC = IS_PNC;
         this.IS_VALID = IS_VALID;
 
+    }
+    public String getCaseId() {
+        return caseId;
+    }
+
+    public void setCaseId(String caseId) {
+        this.caseId = caseId;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails( String details) {
+        this.details = details;
+    }
+
+    public String getRelationalId() {
+        return relationalid;
     }
 
     public String getMOTHERS_FIRST_NAME() {

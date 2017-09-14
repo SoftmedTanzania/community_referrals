@@ -173,18 +173,6 @@ public class CommonRepository extends DrishtiRepository {
     }
 
 
-    //TODO REMOVE THIS HACK
-    private ContentValues createValuesForMcare(CommonPersonObject common) {
-        ContentValues values = new ContentValues();
-        values.put(ID_COLUMN, common.getCaseId());
-        values.put(Relational_ID, common.getRelationalId());
-        values.put(DETAILS_COLUMN, new Gson().toJson(common.getDetails()));
-        values.put("FWWOMFNAME", common.getDetails().get("FWWOMFNAME"));
-        values.put("JiVitAHHID",common.getDetails().get("GOBHHID"));
-        values.put("FWPSRLMP",common.getDetails().get("FWPSRLMP"));
-        return values;
-    }
-
     private List<CommonPersonObject> readAllcommon(Cursor cursor) {
         cursor.moveToFirst();
         List<CommonPersonObject> commons = new ArrayList<CommonPersonObject>();
@@ -308,12 +296,14 @@ public class CommonRepository extends DrishtiRepository {
 
         return cursor;
     }
+
     public Cursor RawCustomQueryForAdapter(String query){
         Log.i(getClass().getName(), query);
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.rawQuery(query, null);
           return cursor;
     }
+
     public CommonPersonObject readAllcommonforCursorAdapter (Cursor cursor) {
 
 
