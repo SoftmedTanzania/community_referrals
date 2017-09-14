@@ -46,7 +46,7 @@ public class CHWRegisterActivity extends AppCompatActivity {
         tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(feeds);
 
-        ((TextView)findViewById(R.id.txt_title_label)).setText("Community HW");
+        ((TextView) findViewById(R.id.txt_title_label)).setText("Community HW");
         // tabs icons
         tabs.getTabAt(0).setIcon(R.drawable.ic_account_circle);
         tabs.getTabAt(1).setIcon(R.drawable.ic_message_bulleted);
@@ -75,7 +75,7 @@ public class CHWRegisterActivity extends AppCompatActivity {
     }
 
 
-    public void showPreRegistrationDetailsDialog(PreRegisteredMother mother){
+    public void showPreRegistrationDetailsDialog(PreRegisteredMother mother) {
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
 
@@ -99,7 +99,7 @@ public class CHWRegisterActivity extends AppCompatActivity {
         textName.setText(mother.getName());
     }
 
-    public void showFollowUpDetailsDialog(ChwFollowUpMother mother){
+    public void showFollowUpDetailsDialog(ChwFollowUpMother mother) {
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_details, null);
 
@@ -121,6 +121,36 @@ public class CHWRegisterActivity extends AppCompatActivity {
         // example
         TextView textName = (TextView) dialogView.findViewById(R.id.name);
         textName.setText(mother.getName());
+    }
+
+    public void confirmDelete() {
+        final View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_confirm_delete, null);
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWRegisterActivity.this);
+        dialogBuilder.setView(dialogView)
+                .setCancelable(false);
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+
+
+        dialogView.findViewById(R.id.textOk).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // todo: delete mother
+
+
+                dialog.dismiss();
+            }
+        });
+
+        dialogView.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+
     }
 
 
