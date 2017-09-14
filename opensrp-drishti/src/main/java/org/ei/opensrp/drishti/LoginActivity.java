@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
             DisplayMetrics dm = res.getDisplayMetrics();
             android.content.res.Configuration conf = res.getConfiguration();
             conf.locale = new Locale(preferredLocale);
-            res.updateConfiguration(conf, dm);
+             res.updateConfiguration(conf, dm);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -103,8 +103,7 @@ public class LoginActivity extends AppCompatActivity {
             OrientationHelper.lockOrientationLandscape(LoginActivity.this);
         else
             // phone
-           OrientationHelper.lockOrientationPortrait(LoginActivity.this);
-
+            OrientationHelper.lockOrientationPortrait(LoginActivity.this);
 
         context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
         initializeLoginFields();

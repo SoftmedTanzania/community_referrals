@@ -312,7 +312,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     @Override
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
         // save the form
-
         PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
 
         MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);

@@ -1,6 +1,8 @@
 package org.ei.opensrp.drishti.Repository;
 
 import android.content.ContentValues;
+import android.database.Cursor;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -56,5 +58,14 @@ public class CustomMotherRepository extends CommonRepository {
         values.put(DETAILS_COLUMN, new Gson().toJson(motherPersonObject.getDetails()));
         return values;
     }
+
+//    @Override
+//    public Cursor RawCustomQueryForAdapter(String query) {
+////        return super.RawCustomQueryForAdapter(query);
+//        Log.d(getClass().getSimpleName(), query);
+//        SQLiteDatabase database = masterRepository.getReadableDatabase();
+//        // get cursor
+//        return database.rawQuery(query, null);
+//    }
 
 }
