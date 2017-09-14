@@ -14,6 +14,7 @@ import android.widget.TextView;
 import org.ei.opensrp.mcare.R;
 import org.ei.opensrp.mcare.datamodels.ChwFollowUpMother;
 import org.ei.opensrp.mcare.datamodels.PreRegisteredMother;
+import org.ei.opensrp.mcare.datamodels.PregnantMom;
 import org.ei.opensrp.mcare.pageradapter.CHWPagerAdapter;
 
 public class CHWRegisterActivity extends AppCompatActivity {
@@ -99,9 +100,57 @@ public class CHWRegisterActivity extends AppCompatActivity {
         textName.setText(mother.getName());
     }
 
+    public void showPreRegistrationVisitDialog(PreRegisteredMother mother){
+
+        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_visit_details, null);
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWRegisterActivity.this);
+        dialogBuilder.setView(dialogView)
+                .setCancelable(false);
+
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+        ImageView cancel = (ImageView) dialogView.findViewById(R.id.cancel_action);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        // TODO: findviewbyid that are on the dialog layout
+        // example
+        TextView textName = (TextView) dialogView.findViewById(R.id.name);
+        textName.setText(mother.getName());
+    }
+
     public void showFollowUpDetailsDialog(ChwFollowUpMother mother){
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_details, null);
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWRegisterActivity.this);
+        dialogBuilder.setView(dialogView)
+                .setCancelable(false);
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+
+        ImageView cancel = (ImageView) dialogView.findViewById(R.id.cancel_action);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        // TODO: findviewbyid that are on the dialog layout
+        // example
+        TextView textName = (TextView) dialogView.findViewById(R.id.name);
+        textName.setText(mother.getName());
+    }
+
+    public void showFollowUpFormDialog(ChwFollowUpMother mother){
+
+        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWRegisterActivity.this);
         dialogBuilder.setView(dialogView)
