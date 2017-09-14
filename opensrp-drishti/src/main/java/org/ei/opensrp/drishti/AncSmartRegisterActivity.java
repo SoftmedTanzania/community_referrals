@@ -16,15 +16,15 @@ import com.google.gson.Gson;
 
 import org.ei.opensrp.Context;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
-import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectController;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
 import org.ei.opensrp.drishti.Fragments.AncSmartRegisterFragment;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
-import org.ei.opensrp.drishti.Repository.MotherRepository;
+import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
 import org.ei.opensrp.drishti.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
+import org.ei.opensrp.drishti.util.CustomContext;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.util.FormUtils;
@@ -40,13 +40,9 @@ import org.ei.opensrp.view.dialog.OpenFormOption;
 import org.ei.opensrp.view.viewpager.OpenSRPViewPager;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -55,7 +51,6 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.ei.opensrp.util.EasyMap.create;
 
 public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
     private static final String TAG = AncSmartRegisterActivity.class.getSimpleName();
@@ -335,7 +330,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //        personDetails1.put("HEIGHT", pregnantMom.getHeight()+"");
 //        personDetails1.put("user_type", "1");
 
-        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
         String[] columns = {"MOTHERS_FIRST_NAME",
                 "MOTHERS_LAST_NAME",
                 "MOTHERS_LAST_MENSTRUATION_DATE",
@@ -347,12 +341,16 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 "Is_PNC",
                 "FACILITY_ID"};
 
-        MotherRepository motherRepository = new MotherRepository("wazazi_salama_mother", columns);
+//        CustomMotherRepository motherRepository = new CustomMotherRepository("wazazi_salama_mother", columns);
+//        motherRepository.add(motherPersonObject);
+
+        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
+        CustomContext customContext = new CustomContext();
+        CustomMotherRepository motherRepository = customContext.getCustomMotherRepo("wazazi_salama_mother");
         motherRepository.add(motherPersonObject);
 
-
 //        CommonPersonObject cpo2 = new CommonPersonObject(id,id,personDetails1,"mcaremother");
-//        context().commonrepository("mcaremother").addMCARE(cpo2);
+//        context().commonrepository("mcaremother").add(cpo2);
 //
 //        try {
 //            FormUtils formUtils = FormUtils.getInstance(getApplicationContext());

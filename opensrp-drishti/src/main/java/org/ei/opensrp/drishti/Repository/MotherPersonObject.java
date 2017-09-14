@@ -36,24 +36,25 @@ public class MotherPersonObject {
     // alternative constructor so you don't pass bucha stuff, PregnantMom contains everything
     public MotherPersonObject(String caseId, String relationalId, PregnantMom pregnantMom) {
 
-
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyy", Locale.getDefault());
 
         this.caseId = caseId;
         this.relationalId = relationalId;
-        this.type = type;
-        this.IS_PNC = IS_PNC;
-        this.IS_VALID = IS_VALID;
-        this.FACILITY_ID = FACILITY_ID;
         String[] names = pregnantMom.getName().split(" ");
         this.MOTHERS_FIRST_NAME = names[0];
         if (names.length > 1)
             this.MOTHERS_LAST_NAME = names[1];
 
         this.MOTHERS_ID = pregnantMom.getId();
-//        this.MOTHERS_SORTVALUE = ;
         this.MOTHERS_LAST_MENSTRUATION_DATE = sdf.format(pregnantMom.getDateLNMP());
         this.EXPECTED_DELIVERY_DATE = sdf.format(pregnantMom.getEdd());
+
+        // TODO: pass on custructor and add these values
+//        this.MOTHERS_SORTVALUE = MOTHERS_SORTVALUE;
+//        this.type = type;
+//        this.IS_PNC = IS_PNC;
+//        this.IS_VALID = IS_VALID;
+//        this.FACILITY_ID = FACILITY_ID;
 
     }
 
