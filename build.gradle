@@ -15,8 +15,8 @@ subprojects {
 
     group = 'org.ei.opensrp'
 
-    ext.androidToolsBuildGradle     = '25.0.1'
-    ext.androidBuildToolsVersion    = '25.0.1'
+    ext.androidToolsBuildGradle     = '21.1.2'
+    ext.androidBuildToolsVersion    = '21.1.2'
     ext.androidMinSdkVersion        = 16
     ext.androidCompileSdkVersion    = 25
     ext.androidTargetSdkVersion     = 25
