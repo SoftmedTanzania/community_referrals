@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.ei.opensrp.mcare.R;
+import org.ei.opensrp.mcare.chw.CHWRegisterActivity;
 import org.ei.opensrp.mcare.datamodels.PreRegisteredMother;
 
 import java.util.List;
@@ -20,17 +21,18 @@ import java.util.List;
 public class CHWRegisterRecyclerAdapter extends
         RecyclerView.Adapter<CHWRegisterRecyclerAdapter.ViewHolder> {
 
-    private List<PreRegisteredMother> vMother;
+    private List<PreRegisteredMother> mothers;
     private Context mContext;
 
     public CHWRegisterRecyclerAdapter(Context context, List<PreRegisteredMother> mothers) {
-        vMother = mothers;
-        mContext = context;
+        this.mothers = mothers;
+        this.mContext = context;
     }
 
     private Context getContext() {
         return mContext;
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -44,7 +46,7 @@ public class CHWRegisterRecyclerAdapter extends
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
-        PreRegisteredMother mother = vMother.get(position);
+        PreRegisteredMother mother = mothers.get(position);
 
         // Set item views based on your views and data model
         TextView name = viewHolder.nameTextView;
@@ -60,13 +62,13 @@ public class CHWRegisterRecyclerAdapter extends
 
     @Override
     public int getItemCount() {
-        return vMother.size();
+        return mothers.size();
     }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView nameTextView,eddTextView, visitedTextView,riskTextView;
+        public TextView nameTextView, eddTextView, visitedTextView, riskTextView;
 
         public ViewHolder(View itemView) {
 
@@ -76,8 +78,15 @@ public class CHWRegisterRecyclerAdapter extends
             eddTextView = (TextView) itemView.findViewById(R.id.edd);
             visitedTextView = (TextView) itemView.findViewById(R.id.visited);
             riskTextView = (TextView) itemView.findViewById(R.id.risk);
-        }
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // pass mother to show details
+                    ((CHWRegisterActivity) mContext).showDetailsDialog(mothers.get(getAdapterPosition()));
+                }
+            });
+        }
 
     }
 }

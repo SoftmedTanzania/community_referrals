@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.ei.opensrp.mcare.R;
+import org.ei.opensrp.mcare.datamodels.PreRegisteredMother;
 import org.ei.opensrp.mcare.pageradapter.CHWPagerAdapter;
 
 public class CHWRegisterActivity extends AppCompatActivity {
@@ -72,7 +73,7 @@ public class CHWRegisterActivity extends AppCompatActivity {
     }
 
 
-    public void showDetailsDialog(){
+    public void showDetailsDialog(PreRegisteredMother mother){
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
 
@@ -86,5 +87,6 @@ public class CHWRegisterActivity extends AppCompatActivity {
         // TODO: findviewbyid that are on the dialog layout
         // example
         TextView textName = (TextView) dialogView.findViewById(R.id.name);
+        textName.setText(mother.getName());
     }
 }
