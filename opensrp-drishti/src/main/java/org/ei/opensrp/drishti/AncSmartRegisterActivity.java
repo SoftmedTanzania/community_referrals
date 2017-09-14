@@ -21,11 +21,13 @@ import org.ei.opensrp.commonregistry.CommonPersonObjectController;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
 import org.ei.opensrp.drishti.Fragments.AncSmartRegisterFragment;
+import org.ei.opensrp.drishti.Repository.MotherPersonObject;
+import org.ei.opensrp.drishti.Repository.MotherRepository;
 import org.ei.opensrp.drishti.pageradapter.BaseRegisterActivityPagerAdapter;
+import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.util.FormUtils;
-import org.ei.opensrp.util.StringUtil;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.ei.opensrp.view.contract.SmartRegisterClient;
 import org.ei.opensrp.view.contract.SmartRegisterClients;
@@ -35,17 +37,15 @@ import org.ei.opensrp.view.dialog.DialogOptionMapper;
 import org.ei.opensrp.view.dialog.DialogOptionModel;
 import org.ei.opensrp.view.dialog.EditOption;
 import org.ei.opensrp.view.dialog.OpenFormOption;
-import org.ei.opensrp.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.ei.opensrp.view.viewpager.OpenSRPViewPager;
 import org.json.JSONObject;
-import org.opensrp.api.domain.Location;
-import org.opensrp.api.util.TreeNode;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -245,9 +245,9 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                     data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
-                AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment)getDisplayFormFragmentAtIndex(2);
+                AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) getDisplayFormFragmentAtIndex(2);
                 if (displayFormFragment != null) {
-                    Log.d(TAG,"form data = "+data);
+                    Log.d(TAG, "form data = " + data);
                     displayFormFragment.setFormData(data);
                     displayFormFragment.setRecordId(entityId);
                     displayFormFragment.setFieldOverides(metaData);
@@ -261,8 +261,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         }
 
     }
-
-
 
 
     public void updateSearchView() {
@@ -322,26 +320,39 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Map<String, String> personDetails1 = create("Is_PNC", "0").map();
+//        personDetails1.put("FWWOMVALID","1");
+//        personDetails1.put("FWBNFGEN", "2");
+//        personDetails1.put("FWWOMFNAME", pregnantMom.getName());
+//        personDetails1.put("GOBHHID", pregnantMom.getId());
+//        personDetails1.put("FWWOMLNAME", pregnantMom.getName());
+//        personDetails1.put("FWPSRLMP", sdf.format(new Date(pregnantMom.getDateLNMP())));
+//        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.getPregnancyCount()+"");
+//        personDetails1.put("FWPSRPRSB", pregnantMom.isHasBabyDeath()?"Has had still birth":"");
+//        personDetails1.put("FWPSRTOTBIRTH", pregnantMom.getChildrenCount()+"");
+//        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.isHas2orMoreBBA()?"Has had no pregnancies in the last 2 years":"");
+//        personDetails1.put("FWWOMAGE", pregnantMom.getAge()+"");
+//        personDetails1.put("HEIGHT", pregnantMom.getHeight()+"");
+//        personDetails1.put("user_type", "1");
 
-        Map<String, String> personDetails1 = create("Is_PNC", "0").map();
-        personDetails1.put("FWWOMVALID","1");
-        personDetails1.put("FWBNFGEN", "2");
-        personDetails1.put("FWWOMFNAME", pregnantMom.getName());
-        personDetails1.put("GOBHHID", pregnantMom.getId());
-        personDetails1.put("FWWOMLNAME", pregnantMom.getName());
-        personDetails1.put("FWPSRLMP", sdf.format(new Date(pregnantMom.getDateLNMP())));
-        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.getPregnancyCount()+"");
-        personDetails1.put("FWPSRPRSB", pregnantMom.isHasBabyDeath()?"Has had still birth":"");
-        personDetails1.put("FWPSRTOTBIRTH", pregnantMom.getChildrenCount()+"");
-        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.isHas2orMoreBBA()?"Has had no pregnancies in the last 2 years":"");
-        personDetails1.put("FWWOMAGE", pregnantMom.getAge()+"");
-        personDetails1.put("HEIGHT", pregnantMom.getHeight()+"");
-        personDetails1.put("user_type", "1");
+        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
+        String[] columns = {"MOTHERS_FIRST_NAME",
+                "MOTHERS_LAST_NAME",
+                "MOTHERS_LAST_MENSTRUATION_DATE",
+                "MOTHERS_SORTVALUE",
+                "MOTHERS_ID",
+                "PNC_STATUS",
+                "EXPECTED_DELIVERY_DATE",
+                "IS_VALID",
+                "Is_PNC",
+                "FACILITY_ID"};
+
+        MotherRepository motherRepository = new MotherRepository("wazazi_salama_mother", columns);
+        motherRepository.add(motherPersonObject);
 
 
-        CommonPersonObject cpo2 = new CommonPersonObject(id,id,personDetails1,"mcaremother");
-        context().commonrepository("mcaremother").addMCARE(cpo2);
+//        CommonPersonObject cpo2 = new CommonPersonObject(id,id,personDetails1,"mcaremother");
+//        context().commonrepository("mcaremother").addMCARE(cpo2);
 //
 //        try {
 //            FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
@@ -374,7 +385,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void run() {
                 mPager.setCurrentItem(0, false);
-                SecuredNativeSmartRegisterFragment registerFragment = (SecuredNativeSmartRegisterFragment) findFragmentByPosition(0);
+                SecuredNativeSmartRegisterCursorAdapterFragment registerFragment = (SecuredNativeSmartRegisterCursorAdapterFragment) findFragmentByPosition(0);
                 if (registerFragment != null && data != null) {
                     registerFragment.refreshListView();
                 }
@@ -386,7 +397,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                     }
 
                     displayFormFragment.setRecordId(null);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -456,7 +467,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         try {
             return findFragmentByPosition(index);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return findFragmentByPosition(index);
@@ -467,7 +478,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             try {
                 AncSmartRegisterFragment formFragment = (AncSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
                 formFragment.saveCurrentFormData();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

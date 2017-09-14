@@ -40,7 +40,7 @@
       <Is_PNC/>
       <user_type openmrs_entity="concept" openmrs_entity_id="163229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">FWA</user_type>
       <external_user_ID openmrs_entity="concept" openmrs_entity_id="163161AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
-      <relationalid/>
+      <relationalId/>
       <bnf_current_formStatus/>
       <meta>
         <instanceID/>

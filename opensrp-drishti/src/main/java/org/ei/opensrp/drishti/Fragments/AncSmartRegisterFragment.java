@@ -20,16 +20,17 @@ import org.ei.opensrp.commonregistry.ControllerFilterMap;
 import org.ei.opensrp.cursoradapter.CursorCommonObjectFilterOption;
 import org.ei.opensrp.cursoradapter.CursorCommonObjectSort;
 import org.ei.opensrp.cursoradapter.CursorFilterOption;
-import org.ei.opensrp.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
 import org.ei.opensrp.drishti.Anc.AncServiceModeOption;
 import org.ei.opensrp.drishti.AncDetailActivity;
 import org.ei.opensrp.drishti.AncFollowUpFormActivity;
+import org.ei.opensrp.drishti.AncRegisterListAdapter;
 import org.ei.opensrp.drishti.AncSmartRegisterActivity;
 import org.ei.opensrp.drishti.LoginActivity;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.pageradapter.AncSmartClientsProvider;
+import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.util.StringUtil;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
@@ -293,10 +294,12 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     }
 
     public void initializeQueries() {
-        AncSmartClientsProvider hhscp = new AncSmartClientsProvider(getActivity(),
+        AncSmartClientsProvider clientsProvider = new AncSmartClientsProvider(getActivity(),
                 clientActionHandler, context().alertService());
 
-        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, new CommonRepository("wazazi_salama_mother", new String[]{"MOTHERS_FIRST_NAME", "MOTHERS_LAST_NAME", "MOTHERS_LAST_MENSTRUATION_DATE", "MOTHERS_SORTVALUE", "MOTHERS_ID", "Is_PNC", "EXPECTED_DELIVERY_DATE", "PNC_STATUS"}));
+        // clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, new CommonRepository("wazazi_salama_mother", new String[]{"MOTHERS_FIRST_NAME", "MOTHERS_LAST_NAME", "MOTHERS_LAST_MENSTRUATION_DATE", "MOTHERS_SORTVALUE", "MOTHERS_ID", "Is_PNC", "EXPECTED_DELIVERY_DATE", "PNC_STATUS"}));
+
+        clientAdapter = new AncRegisterListAdapter(getActivity(), null, clientsProvider, new CommonRepository("wazazi_salama_mother", new String[]{"MOTHERS_FIRST_NAME", "MOTHERS_LAST_NAME", "MOTHERS_LAST_MENSTRUATION_DATE", "MOTHERS_SORTVALUE", "MOTHERS_ID", "Is_PNC", "EXPECTED_DELIVERY_DATE", "PNC_STATUS"}));
         clientsView.setAdapter(clientAdapter);
 
         setTablename("wazazi_salama_mother");
@@ -499,8 +502,6 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     }
 
 
-
-
     //TODO Implement this method to save the current unsubmitted form data for future uses
     public void saveCurrentFormData() {
         Log.d(TAG, "Save the currentform data");
@@ -509,7 +510,7 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     private class ClientActionHandler implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Log.d("coze","onclick listener clicked");
+            Log.d("coze", "onclick listener clicked");
             switch (view.getId()) {
                 case R.id.profile_info_layout:
                     AncDetailActivity.ancclient = (CommonPersonObjectClient) view.getTag();

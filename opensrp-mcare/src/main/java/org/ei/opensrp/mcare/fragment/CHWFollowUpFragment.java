@@ -1,7 +1,5 @@
 package org.ei.opensrp.mcare.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -13,9 +11,7 @@ import android.view.ViewGroup;
 
 import org.ei.opensrp.mcare.R;
 import org.ei.opensrp.mcare.datamodels.ChwFollowUpMother;
-import org.ei.opensrp.mcare.datamodels.PreRegisteredMother;
 import org.ei.opensrp.mcare.pageradapter.CHWFollowUpPagerAdapter;
-import org.ei.opensrp.mcare.pageradapter.CHWRegisterPagerAdapter;
 
 import java.util.ArrayList;
 

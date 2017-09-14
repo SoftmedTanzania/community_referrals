@@ -1,27 +1,28 @@
 package org.ei.opensrp.drishti.Repository;
 
-import org.apache.commons.codec.StringEncoder;
-import org.ei.opensrp.commonregistry.CommonPersonObject;
+import org.ei.opensrp.drishti.DataModels.PregnantMom;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.Map;
 
 /**
  * Created by Kency on 14/09/2017.
  */
 
-public class DMotherPersonObject  {
-    private String caseId,type,relationalid,MOTHERS_FIRST_NAME,MOTHERS_LAST_NAME,MOTHERS_SORTVALUE,
-            EXPECTED_DELIVERY_DATE,MOTHERS_LAST_MENSTRUATION_DATE,FACILITY_ID,IS_PNC,IS_VALID,PNC_STATUS,MOTHERS_ID;
+public class MotherPersonObject {
+    private String caseId, type, relationalId, MOTHERS_FIRST_NAME, MOTHERS_LAST_NAME, MOTHERS_SORTVALUE,
+            EXPECTED_DELIVERY_DATE, MOTHERS_LAST_MENSTRUATION_DATE, FACILITY_ID, IS_PNC, IS_VALID, PNC_STATUS, MOTHERS_ID;
     private String details;
- private Map<String, String> columnmaps;
+    private Map<String, String> columnmaps;
 
-    public DMotherPersonObject(String caseId, String relationalid, String MOTHERS_FIRST_NAME, String MOTHERS_LAST_NAME, String MOTHERS_ID, String MOTHERS_SORTVALUE, String EXPECTED_DELIVERY_DATE,
-                               String MOTHERS_LAST_MENSTRUATION_DATE, String FACILITY_ID, String IS_PNC, String IS_VALID,String details, String type) {
+    public MotherPersonObject(String caseId, String relationalId, String MOTHERS_FIRST_NAME, String MOTHERS_LAST_NAME, String MOTHERS_ID, String MOTHERS_SORTVALUE, String EXPECTED_DELIVERY_DATE,
+                              String MOTHERS_LAST_MENSTRUATION_DATE, String FACILITY_ID, String IS_PNC, String IS_VALID, String details, String type) {
         this.details = details;
         this.caseId = caseId;
         this.type = type;
-        this.relationalid = relationalid;
-        this.MOTHERS_FIRST_NAME = MOTHERS_FIRST_NAME ;
+        this.relationalId = relationalId;
+        this.MOTHERS_FIRST_NAME = MOTHERS_FIRST_NAME;
         this.MOTHERS_LAST_NAME = MOTHERS_LAST_NAME;
         this.MOTHERS_ID = MOTHERS_ID;
         this.MOTHERS_SORTVALUE = MOTHERS_SORTVALUE;
@@ -30,8 +31,32 @@ public class DMotherPersonObject  {
         this.FACILITY_ID = FACILITY_ID;
         this.IS_PNC = IS_PNC;
         this.IS_VALID = IS_VALID;
+    }
+
+    // alternative constructor so you don't pass bucha stuff, PregnantMom contains everything
+    public MotherPersonObject(String caseId, String relationalId, PregnantMom pregnantMom) {
+
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyy", Locale.getDefault());
+
+        this.caseId = caseId;
+        this.relationalId = relationalId;
+        this.type = type;
+        this.IS_PNC = IS_PNC;
+        this.IS_VALID = IS_VALID;
+        this.FACILITY_ID = FACILITY_ID;
+        String[] names = pregnantMom.getName().split(" ");
+        this.MOTHERS_FIRST_NAME = names[0];
+        if (names.length > 1)
+            this.MOTHERS_LAST_NAME = names[1];
+
+        this.MOTHERS_ID = pregnantMom.getId();
+//        this.MOTHERS_SORTVALUE = ;
+        this.MOTHERS_LAST_MENSTRUATION_DATE = sdf.format(pregnantMom.getDateLNMP());
+        this.EXPECTED_DELIVERY_DATE = sdf.format(pregnantMom.getEdd());
 
     }
+
     public String getCaseId() {
         return caseId;
     }
@@ -44,12 +69,12 @@ public class DMotherPersonObject  {
         return details;
     }
 
-    public void setDetails( String details) {
+    public void setDetails(String details) {
         this.details = details;
     }
 
     public String getRelationalId() {
-        return relationalid;
+        return relationalId;
     }
 
     public String getMOTHERS_FIRST_NAME() {
