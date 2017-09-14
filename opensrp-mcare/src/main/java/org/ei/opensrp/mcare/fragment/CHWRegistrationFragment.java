@@ -1,11 +1,8 @@
 package org.ei.opensrp.mcare.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +11,7 @@ import android.view.ViewGroup;
 
 import org.ei.opensrp.mcare.R;
 import org.ei.opensrp.mcare.datamodels.PreRegisteredMother;
-import org.ei.opensrp.mcare.pageradapter.CHWRegisterPagerAdapter;
+import org.ei.opensrp.mcare.pageradapter.CHWRegisterRecyclerAdapter;
 
 import java.util.ArrayList;
 
@@ -79,7 +76,7 @@ public class CHWRegistrationFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView)v.findViewById(R.id.pre_reg_listView);
 
         ArrayList<PreRegisteredMother> mothers = PreRegisteredMother.createPreRegisteredMotherList();
-        CHWRegisterPagerAdapter pager = new CHWRegisterPagerAdapter(getActivity(),mothers);
+        CHWRegisterRecyclerAdapter pager = new CHWRegisterRecyclerAdapter(getActivity(),mothers);
 
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());

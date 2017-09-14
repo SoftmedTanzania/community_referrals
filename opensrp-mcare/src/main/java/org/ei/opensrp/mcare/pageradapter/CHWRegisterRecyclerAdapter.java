@@ -1,22 +1,14 @@
 package org.ei.opensrp.mcare.pageradapter;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import org.ei.opensrp.mcare.R;
 import org.ei.opensrp.mcare.datamodels.PreRegisteredMother;
-import org.ei.opensrp.mcare.fragment.AncRegister1stFragment;
-import org.ei.opensrp.mcare.fragment.AncRegister2ndFragment;
-import org.ei.opensrp.mcare.fragment.CHWFollowUpFragment;
-import org.ei.opensrp.mcare.fragment.CHWRegistrationFragment;
 
 import java.util.List;
 
@@ -25,13 +17,13 @@ import java.util.List;
  * Created by martha on 8/22/17.
  */
 
-public class CHWRegisterPagerAdapter extends
-        RecyclerView.Adapter<CHWRegisterPagerAdapter.ViewHolder> {
+public class CHWRegisterRecyclerAdapter extends
+        RecyclerView.Adapter<CHWRegisterRecyclerAdapter.ViewHolder> {
 
     private List<PreRegisteredMother> vMother;
     private Context mContext;
 
-    public CHWRegisterPagerAdapter(Context context, List<PreRegisteredMother> mothers) {
+    public CHWRegisterRecyclerAdapter(Context context, List<PreRegisteredMother> mothers) {
         vMother = mothers;
         mContext = context;
     }

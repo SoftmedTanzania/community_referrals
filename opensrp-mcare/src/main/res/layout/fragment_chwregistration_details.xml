@@ -1,109 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="2dp"
-    android:paddingBottom="2dp"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    android:background="#E8E8E8">
+    android:background="#E8E8E8"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingTop="2dp">
+
     <RelativeLayout
-        android:layout_margin="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
         <android.support.v7.widget.CardView
-            android:layout_marginTop="48dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp">
+
             <LinearLayout
-                android:background="#fff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#fff"
                 android:orientation="vertical">
+
                 <TextView
-                    android:layout_marginTop="64dp"
                     android:id="@+id/name"
-                    android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Martha Shaka"/>
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="64dp"
+                    android:text="Martha Shaka" />
+
                 <TextView
                     android:id="@+id/mom_age"
-                    android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="16dp"
-                    android:text="30 years"/>
+                    android:text="30 years" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
+
         <ImageView
-            android:layout_below="@+id/textView"
             android:id="@+id/profilePic"
-            android:background="@drawable/shape_circle"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            android:elevation="10px"
+            android:layout_below="@+id/textView"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/unfpa_anc"/>
+            android:background="@drawable/shape_circle"
+            android:elevation="4dp"
+            android:src="@drawable/unfpa_anc" />
 
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:background="#e8e8e8">
-        <android.support.v7.widget.CardView
-            android:background="#F3F3F3"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_weight="1"
+        android:background="#e8e8e8"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_contact"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-            card_view:cardCornerRadius="0dp"
-            >
+            android:background="#F3F3F3"
+            card_view:cardCornerRadius="0dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
-                android:background="#D85751"/>
+                android:background="#D85751" />
+
             <RelativeLayout
                 android:id="@+id/details"
-                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp">
+
                 <TextView
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
                     android:id="@+id/textSpouse"
-                    android:textColor="#7c322f"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Spouse: "/>
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Spouse: "
+                    android:textColor="#7c322f" />
+
                 <TextView
-                    android:layout_alignTop="@+id/textSpouse"
-                    android:layout_toRightOf="@+id/textSpouse"
                     android:id="@+id/spouseName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="King Kive"/>
+                    android:layout_alignTop="@+id/textSpouse"
+                    android:layout_toRightOf="@+id/textSpouse"
+                    android:text="King Kive" />
+
                 <TextView
-                    android:layout_marginLeft="8dp"
-                    android:layout_below="@+id/textSpouse"
                     android:id="@+id/textSpouseTel"
-                    android:textColor="#7c322f"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tel no: "/>
-                <TextView
+                    android:layout_below="@+id/textSpouse"
                     android:layout_marginLeft="8dp"
-                    android:layout_alignTop="@+id/textSpouseTel"
-                    android:layout_toRightOf="@+id/textSpouseTel"
+                    android:text="Tel no: "
+                    android:textColor="#7c322f" />
+
+                <TextView
                     android:id="@+id/spouseTel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0712763362"/>
+                    android:layout_alignTop="@+id/textSpouseTel"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/textSpouseTel"
+                    android:text="0712763362" />
                 <!--<TextView-->
                 <!---->
                 <!--android:id="@+id/textMotherTel"-->
@@ -119,192 +131,207 @@
                 <!--android:layout_height="wrap_content"-->
                 <!--android:text="0742226984"/>-->
                 <TextView
-                    android:layout_below="@+id/textSpouseTel"
-                    android:textColor="#7c322f"
-                    android:layout_marginLeft="8dp"
                     android:id="@+id/textVillage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Village: "/>
+                    android:layout_below="@+id/textSpouseTel"
+                    android:layout_marginLeft="8dp"
+                    android:text="Village: "
+                    android:textColor="#7c322f" />
+
                 <TextView
-                    android:layout_alignTop="@+id/textVillage"
-                    android:layout_toRightOf="@+id/textVillage"
                     android:id="@+id/village"
-                    android:layout_marginLeft="6dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kwembe"/>
+                    android:layout_alignTop="@+id/textVillage"
+                    android:layout_marginLeft="6dp"
+                    android:layout_toRightOf="@+id/textVillage"
+                    android:text="Kwembe" />
+
                 <TextView
-                    android:layout_marginTop="4dp"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
-                    android:layout_below="@+id/village"
-                    android:gravity="center_horizontal"
-                    android:background="#fff"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mawasiliano"/>
+                    android:layout_below="@+id/village"
+                    android:layout_marginTop="4dp"
+                    android:background="#fff"
+                    android:gravity="center_horizontal"
+                    android:paddingBottom="2dp"
+                    android:paddingTop="2dp"
+                    android:text="Mawasiliano" />
             </RelativeLayout>
 
 
         </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-            android:background="#F3F3F3"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_info"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_weight="0.35"
+            android:background="#F3F3F3"
             card_view:cardCornerRadius="0dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
-                android:background="#8DC63F"/>
+                android:background="#8DC63F" />
+
             <RelativeLayout
-                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp">
+
                 <TextView
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
-                    android:textColor="#4f7122"
                     android:id="@+id/textFacility"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Facility: "/>
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Facility: "
+                    android:textColor="#4f7122" />
+
                 <TextView
-                    android:layout_alignTop="@+id/textFacility"
-                    android:layout_toRightOf="@+id/textFacility"
                     android:id="@+id/facility"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mt. Meru"/>
+                    android:layout_alignTop="@+id/textFacility"
+                    android:layout_toRightOf="@+id/textFacility"
+                    android:text="Mt. Meru" />
+
                 <TextView
-                    android:layout_below="@+id/facility"
-                    android:layout_alignLeft="@+id/textFacility"
-                    android:textColor="#4f7122"
                     android:id="@+id/textVisit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Visited: "/>
+                    android:layout_alignLeft="@+id/textFacility"
+                    android:layout_below="@+id/facility"
+                    android:text="Visited: "
+                    android:textColor="#4f7122" />
+
                 <TextView
 
-                    android:layout_alignTop="@+id/textVisit"
-                    android:layout_toRightOf="@+id/textVisit"
                     android:id="@+id/visit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Once"/>
+                    android:layout_alignTop="@+id/textVisit"
+                    android:layout_toRightOf="@+id/textVisit"
+                    android:text="Once" />
 
                 <TextView
-                    android:layout_below="@+id/visit"
-                    android:layout_alignLeft="@+id/textFacility"
-                    android:textColor="#4f7122"
                     android:id="@+id/textRisk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Risk: "/>
+                    android:layout_alignLeft="@+id/textFacility"
+                    android:layout_below="@+id/visit"
+                    android:text="Risk: "
+                    android:textColor="#4f7122" />
+
                 <TextView
-                    android:layout_marginLeft="18dp"
-                    android:layout_alignTop="@+id/textRisk"
-                    android:layout_toRightOf="@+id/textRisk"
                     android:id="@+id/risk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="High"/>
+                    android:layout_alignTop="@+id/textRisk"
+                    android:layout_marginLeft="18dp"
+                    android:layout_toRightOf="@+id/textRisk"
+                    android:text="High" />
 
                 <TextView
-                    android:layout_marginTop="4dp"
-                    android:padding="2dp"
-                    android:layout_below="@+id/risk"
-                    android:gravity="center_horizontal"
-                    android:background="#fff"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Taarifa nyongeza"/>
+                    android:layout_below="@+id/risk"
+                    android:layout_marginTop="4dp"
+                    android:background="#fff"
+                    android:gravity="center_horizontal"
+                    android:padding="2dp"
+                    android:text="Taarifa nyongeza" />
             </RelativeLayout>
 
         </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-            android:background="#F3F3F3"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_pregnancy"
             android:layout_width="0dp"
-            android:layout_weight="0.3"
             android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:background="#F3F3F3"
             card_view:cardCornerRadius="0dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
-                android:background="#99D9DE"/>
+                android:background="#99D9DE" />
+
             <RelativeLayout
-                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp">
+
                 <TextView
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
-                    android:textColor="#236c71"
                     android:id="@+id/textEdd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="EDD: "/>
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="EDD: "
+                    android:textColor="#236c71" />
+
                 <TextView
-                    android:layout_marginLeft="12dp"
-                    android:layout_alignTop="@+id/textEdd"
-                    android:layout_toRightOf="@+id/textEdd"
                     android:id="@+id/EDD"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2-Jan-2017"/>
+                    android:layout_alignTop="@+id/textEdd"
+                    android:layout_marginLeft="12dp"
+                    android:layout_toRightOf="@+id/textEdd"
+                    android:text="2-Jan-2017" />
+
                 <TextView
-                    android:layout_below="@+id/textEdd"
-                    android:layout_alignLeft="@+id/textEdd"
-                    android:textColor="#236c71"
                     android:id="@+id/textLNMP"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="LNMP: "/>
+                    android:layout_alignLeft="@+id/textEdd"
+                    android:layout_below="@+id/textEdd"
+                    android:text="LNMP: "
+                    android:textColor="#236c71" />
+
                 <TextView
 
-                    android:layout_alignTop="@+id/textLNMP"
-                    android:layout_toRightOf="@+id/textLNMP"
                     android:id="@+id/lnmp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7-Sep-2017"/>
+                    android:layout_alignTop="@+id/textLNMP"
+                    android:layout_toRightOf="@+id/textLNMP"
+                    android:text="7-Sep-2017" />
 
                 <TextView
-                    android:layout_below="@+id/lnmp"
-                    android:layout_alignLeft="@+id/textLNMP"
-                    android:textColor="#236c71"
                     android:id="@+id/textAge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="GA: "/>
+                    android:layout_alignLeft="@+id/textLNMP"
+                    android:layout_below="@+id/lnmp"
+                    android:text="GA: "
+                    android:textColor="#236c71" />
+
                 <TextView
-                    android:layout_marginLeft="20dp"
-                    android:layout_alignTop="@+id/textAge"
-                    android:layout_toRightOf="@+id/textAge"
                     android:id="@+id/age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="less 20"/>
+                    android:layout_alignTop="@+id/textAge"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/textAge"
+                    android:text="less 20" />
 
                 <TextView
-                    android:layout_marginTop="4dp"
-                    android:padding="2dp"
-                    android:layout_below="@+id/age"
-                    android:gravity="center_horizontal"
-                    android:background="#fff"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Ujauzito"/>
+                    android:layout_below="@+id/age"
+                    android:layout_marginTop="4dp"
+                    android:background="#fff"
+                    android:gravity="center_horizontal"
+                    android:padding="2dp"
+                    android:text="Ujauzito" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
-
 
 </LinearLayout>
