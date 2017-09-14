@@ -2,120 +2,128 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="2dp"
-    android:paddingBottom="2dp">
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="2dp"
+    android:paddingTop="2dp">
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginBottom="2dp"
         card_view:cardCornerRadius="0dp">
-        <RelativeLayout
-            android:background="#fff"
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="96dp"
-            xmlns:android="http://schemas.android.com/apk/res/android">
+            android:background="#fff">
+
             <ImageView
-                android:background="@drawable/shape_circle"
                 android:id="@+id/profilePic"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_margin="8dp"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/unfpa_anc"/>
+                android:layout_margin="8dp"
+                android:background="@drawable/shape_circle"
+                android:src="@drawable/unfpa_anc" />
+
             <ImageView
+                android:id="@+id/iconOptions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_more_vert_black_24dp"
-                android:layout_marginTop="8dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="0dp"/>
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_more_vert_black_24dp" />
+
             <TextView
-                android:layout_alignBottom="@+id/profilePic"
-                android:layout_marginLeft="0dp"
-                android:layout_marginBottom="4dp"
                 android:id="@+id/textDate"
-                android:layout_toRightOf="@+id/profilePic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EDD:"/>
+                android:layout_alignBottom="@+id/profilePic"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="0dp"
+                android:layout_toRightOf="@+id/profilePic"
+                android:text="EDD:" />
 
             <org.ei.opensrp.view.customControls.CustomFontTextView
-                android:layout_toRightOf="@+id/textDate"
-                android:layout_alignTop="@+id/textDate"
-                android:layout_marginLeft="16dp"
+                android:id="@+id/edd"
+                style="@style/CustomFontTextViewStyle.noPadding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                style="@style/CustomFontTextViewStyle.noPadding"
-                android:text="08 Jan 17"
-                android:textSize="14sp"
-                android:id="@+id/edd"
+                android:layout_alignTop="@+id/textDate"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@+id/textDate"
                 android:layout_weight="1"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:text="08 Jan 17"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="14sp" />
 
             <TextView
-                android:layout_marginTop="16dp"
-                android:layout_toRightOf="@+id/profilePic"
-                android:layout_marginLeft="0dp"
                 android:id="@+id/textName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name: "/>
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@+id/profilePic"
+                android:text="Name: " />
+
             <org.ei.opensrp.view.customControls.CustomFontTextView
-                android:layout_alignTop="@+id/textName"
-                android:layout_toRightOf="@+id/textName"
+                android:id="@+id/name"
+                style="@style/CustomFontTextViewStyle.ListView.Small.NoPadding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/textName"
                 android:layout_marginLeft="4dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                style="@style/CustomFontTextViewStyle.ListView.Small.NoPadding"
+                android:layout_toRightOf="@+id/textName"
                 android:text="Martha Shaka"
-                android:id="@+id/name"/>
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
             <org.ei.opensrp.view.customControls.CustomFontTextView
+                android:id="@+id/risk"
+                style="@style/CustomFontTextViewStyle.ListView.Small.NoPadding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textDate"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_alignBottom="@+id/textDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#870909"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                style="@style/CustomFontTextViewStyle.ListView.Small.NoPadding"
                 android:text="High"
-                android:id="@+id/risk"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#870909" />
+
             <TextView
-                android:layout_toLeftOf="@+id/risk"
-                android:layout_alignTop="@+id/risk"
-                android:layout_marginRight="0dp"
                 android:id="@+id/textRisk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Risk: "/>
+                android:layout_alignTop="@+id/risk"
+                android:layout_marginRight="0dp"
+                android:layout_toLeftOf="@+id/risk"
+                android:text="Risk: " />
 
             <TextView
-                android:layout_alignLeft="@+id/textName"
-                android:layout_below="@+id/name"
                 android:id="@+id/textVisited"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:text="Visited: "/>
+                android:layout_alignLeft="@+id/textName"
+                android:layout_below="@+id/name"
+                android:text="Visited: "
+                android:textSize="12sp" />
+
             <org.ei.opensrp.view.customControls.CustomFontTextView
-                android:layout_marginLeft="4dp"
-                android:textSize="12sp"
-                android:layout_toRightOf="@+id/textVisited"
-                android:layout_alignTop="@+id/textVisited"
+                android:id="@+id/visited"
+                style="@style/CustomFontTextViewStyle.ListView.Small.NoPadding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#268709"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                style="@style/CustomFontTextViewStyle.ListView.Small.NoPadding"
+                android:layout_alignTop="@+id/textVisited"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/textVisited"
                 android:text="Once"
-                android:id="@+id/visited"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#268709"
+                android:textSize="12sp" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
