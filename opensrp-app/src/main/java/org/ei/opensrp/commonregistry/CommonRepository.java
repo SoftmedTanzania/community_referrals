@@ -26,6 +26,7 @@ import static org.apache.commons.lang3.StringUtils.repeat;
  * Created by Raihan Ahmed on 4/15/15.
  */
 public class CommonRepository extends DrishtiRepository {
+
     private String common_SQL = "CREATE TABLE common(id VARCHAR PRIMARY KEY,details VARCHAR)";
     private String common_ID_INDEX_SQL =  "CREATE INDEX common_id_index ON common(id COLLATE NOCASE) ;";
     private String common_Relational_ID_INDEX_SQL = null;
@@ -88,11 +89,6 @@ public class CommonRepository extends DrishtiRepository {
     public void add(CommonPersonObject common) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
         database.insert(TABLE_NAME, null, createValuesFor(common));
-    }
-
-    public void addMCARE(CommonPersonObject common) {
-        SQLiteDatabase database = masterRepository.getWritableDatabase();
-        database.insert(TABLE_NAME, null, createValuesForMcare(common));
     }
 
 

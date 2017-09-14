@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import org.ei.opensrp.mcare.R;
-import org.ei.opensrp.mcare.pageradapter.CHWRegisterPagerAdapter;
+import org.ei.opensrp.mcare.pageradapter.CHWPagerAdapter;
 
 public class CHWRegisterActivity extends AppCompatActivity {
 
@@ -19,7 +19,7 @@ public class CHWRegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chwregister);
-        CHWRegisterPagerAdapter adapter = new CHWRegisterPagerAdapter(getSupportFragmentManager());
+        CHWPagerAdapter adapter = new CHWPagerAdapter(getSupportFragmentManager());
 
         ViewPager feeds = (ViewPager) findViewById(R.id.viewPager);
         feeds.setAdapter(adapter);

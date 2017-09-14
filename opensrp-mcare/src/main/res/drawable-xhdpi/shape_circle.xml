@@ -3,14 +3,15 @@
     android:innerRadius="0dp"
     android:shape="oval"
     android:thicknessRatio="2"
+
     android:useLevel="false" >
 
-    <solid android:color="@android:color/transparent" />
+    <solid android:color="#5179f1" />
 
     <size android:width="100dp"
         android:height="100dp"/>
 
     <stroke android:width="4dp"
-        android:color="#FFFFFF"/>
+        android:color="#5179f1"/>
 
 </shape>

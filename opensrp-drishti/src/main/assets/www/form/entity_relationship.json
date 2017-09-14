@@ -1,5 +1,13 @@
 [
     {
+        "parent": "facility",
+        "child": "wazazi_salama_mother",
+        "field": "pregnant women",
+        "kind": "one_to_many",
+        "from": "facility.id",
+        "to": "wazazi_salama_mother.FACILITY_ID"
+    },
+    {
         "parent": "wazazi_salama_mother",
         "child": "child",
         "field": "children",
