@@ -315,6 +315,12 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
 
+        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
+        CustomContext customContext = new CustomContext();
+        CustomMotherRepository motherRepository = customContext.getCustomMotherRepo("wazazi_salama_mother");
+        motherRepository.add(motherPersonObject);
+
+
 //        Map<String, String> personDetails1 = create("Is_PNC", "0").map();
 //        personDetails1.put("FWWOMVALID","1");
 //        personDetails1.put("FWBNFGEN", "2");
@@ -330,24 +336,19 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //        personDetails1.put("HEIGHT", pregnantMom.getHeight()+"");
 //        personDetails1.put("user_type", "1");
 
-        String[] columns = {"MOTHERS_FIRST_NAME",
-                "MOTHERS_LAST_NAME",
-                "MOTHERS_LAST_MENSTRUATION_DATE",
-                "MOTHERS_SORTVALUE",
-                "MOTHERS_ID",
-                "PNC_STATUS",
-                "EXPECTED_DELIVERY_DATE",
-                "IS_VALID",
-                "Is_PNC",
-                "FACILITY_ID"};
+//        String[] columns = {"MOTHERS_FIRST_NAME",
+//                "MOTHERS_LAST_NAME",
+//                "MOTHERS_LAST_MENSTRUATION_DATE",
+//                "MOTHERS_SORTVALUE",
+//                "MOTHERS_ID",
+//                "PNC_STATUS",
+//                "EXPECTED_DELIVERY_DATE",
+//                "IS_VALID",
+//                "Is_PNC",
+//                "FACILITY_ID"};
 
 //        CustomMotherRepository motherRepository = new CustomMotherRepository("wazazi_salama_mother", columns);
 //        motherRepository.add(motherPersonObject);
-
-        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
-        CustomContext customContext = new CustomContext();
-        CustomMotherRepository motherRepository = customContext.getCustomMotherRepo("wazazi_salama_mother");
-        motherRepository.add(motherPersonObject);
 
 //        CommonPersonObject cpo2 = new CommonPersonObject(id,id,personDetails1,"mcaremother");
 //        context().commonrepository("mcaremother").add(cpo2);

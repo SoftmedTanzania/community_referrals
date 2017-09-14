@@ -126,7 +126,8 @@ public class CHWRegisterRecyclerAdapter extends
                         return true;
 
                     case R.id.popOpt3:
-                        Toast.makeText(mContext, item.getTitle() + " clicked", Toast.LENGTH_SHORT).show();
+                        // delete mother
+                        ((CHWRegisterActivity) mContext).confirmDelete();
                         return true;
 
                     default:
