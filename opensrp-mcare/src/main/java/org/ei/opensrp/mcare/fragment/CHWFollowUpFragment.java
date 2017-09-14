@@ -4,11 +4,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.ei.opensrp.mcare.R;
+import org.ei.opensrp.mcare.datamodels.ChwFollowUpMother;
+import org.ei.opensrp.mcare.datamodels.PreRegisteredMother;
+import org.ei.opensrp.mcare.pageradapter.CHWFollowUpPagerAdapter;
+import org.ei.opensrp.mcare.pageradapter.CHWRegisterPagerAdapter;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +42,7 @@ public class CHWFollowUpFragment extends Fragment {
     public CHWFollowUpFragment() {
         // Required empty public constructor
     }
+
 
     /**
      * Use this factory method to create a new instance of
@@ -65,7 +75,26 @@ public class CHWFollowUpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chwfollow, container, false);
+
+        View v= inflater.inflate(R.layout.fragment_chwfollow, container, false);
+
+        RecyclerView recyclerView = (RecyclerView)v.findViewById(R.id.chw_followUp_listView);
+
+        ArrayList<ChwFollowUpMother> mothers = ChwFollowUpMother.createFollowUpMotherList();
+        CHWFollowUpPagerAdapter pager = new CHWFollowUpPagerAdapter(getActivity(),mothers);
+
+
+        int numberOfColumns = 3;
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
+
+
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
+
+        recyclerView.setAdapter(pager);
+
+        return v;
     }
 
 

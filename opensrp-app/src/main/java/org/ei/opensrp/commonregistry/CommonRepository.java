@@ -26,6 +26,7 @@ import static org.apache.commons.lang3.StringUtils.repeat;
  * Created by Raihan Ahmed on 4/15/15.
  */
 public class CommonRepository extends DrishtiRepository {
+
     private String common_SQL = "CREATE TABLE common(id VARCHAR PRIMARY KEY,details VARCHAR)";
     private String common_ID_INDEX_SQL =  "CREATE INDEX common_id_index ON common(id COLLATE NOCASE) ;";
     private String common_Relational_ID_INDEX_SQL = null;
@@ -88,11 +89,6 @@ public class CommonRepository extends DrishtiRepository {
     public void add(CommonPersonObject common) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
         database.insert(TABLE_NAME, null, createValuesFor(common));
-    }
-
-    public void addMCARE(CommonPersonObject common) {
-        SQLiteDatabase database = masterRepository.getWritableDatabase();
-        database.insert(TABLE_NAME, null, createValuesForMcare(common));
     }
 
 
@@ -176,18 +172,6 @@ public class CommonRepository extends DrishtiRepository {
         return values;
     }
 
-
-    //TODO REMOVE THIS HACK
-    private ContentValues createValuesForMcare(CommonPersonObject common) {
-        ContentValues values = new ContentValues();
-        values.put(ID_COLUMN, common.getCaseId());
-        values.put(Relational_ID, common.getRelationalId());
-        values.put(DETAILS_COLUMN, new Gson().toJson(common.getDetails()));
-        values.put("FWWOMFNAME", common.getDetails().get("FWWOMFNAME"));
-        values.put("JiVitAHHID",common.getDetails().get("GOBHHID"));
-        values.put("FWPSRLMP",common.getDetails().get("FWPSRLMP"));
-        return values;
-    }
 
     private List<CommonPersonObject> readAllcommon(Cursor cursor) {
         cursor.moveToFirst();
@@ -312,12 +296,14 @@ public class CommonRepository extends DrishtiRepository {
 
         return cursor;
     }
+
     public Cursor RawCustomQueryForAdapter(String query){
         Log.i(getClass().getName(), query);
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.rawQuery(query, null);
           return cursor;
     }
+
     public CommonPersonObject readAllcommonforCursorAdapter (Cursor cursor) {
 
 

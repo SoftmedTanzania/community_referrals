@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/list_item_height_chw"
+    android:weightSum="10"
+    android:background="#fff">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="3"
+        android:id="@+id/profile_info_layout">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/profilepic"
+            android:src="@drawable/woman_placeholder"
+            android:scaleType="fitXY" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:weightSum="3">
+
+            <org.ei.opensrp.view.customControls.CustomFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                style="@style/CustomFontTextViewStyle.ListView.Small.NoPadding"
+                android:text="Martha Shaka"
+                android:id="@+id/name"
+                android:layout_weight="1" />
+
+            <org.ei.opensrp.view.customControls.CustomFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                style="@style/CustomFontTextViewStyle.noPadding"
+                android:text="King kive"
+                android:id="@+id/spousename"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical">
+                <org.ei.opensrp.view.customControls.CustomFontTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    style="@style/CustomFontTextViewStyle.noPadding"
+                    android:text="30 yrs"
+                    android:textColor="@color/alert_urgent_red"
+                    android:id="@+id/mother_age"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text=", "
+                    android:id="@+id/textView"
+                    android:textSize="12sp" />
+
+                <org.ei.opensrp.view.customControls.CustomFontTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    style="@style/CustomFontTextViewStyle.ListView.Small.NoHeight"
+                    android:text="071276363"
+                    android:textColor="@color/light_blue"
+                    android:id="@+id/phone_number"
+                    android:textSize="12sp" />
+
+
+
+
+            </LinearLayout>
+
+            <org.ei.opensrp.view.customControls.CustomFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                style="@style/CustomFontTextViewStyle.noPadding"
+                android:text="Kanisa Road"
+                android:textSize="10sp"
+                android:id="@+id/village"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <org.ei.opensrp.view.customControls.CustomFontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/CustomFontTextViewStyle.noPadding"
+            android:textColor="#0e6904"
+            android:text="le20"
+            android:id="@+id/pregnancy_age"
+            android:gravity="right"
+            android:layout_marginRight="1dp"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="@dimen/smart_register_client_divider_height"
+        android:layout_height="fill_parent"
+        android:src="@color/smart_register_client_divider_color"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:layout_gravity="center">
+
+        <org.ei.opensrp.view.customControls.CustomFontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="visited 1"
+            style="@style/CustomFontTextViewStyle"
+            android:id="@+id/visit_one"
+            android:layout_marginTop="3dp" />
+
+        <org.ei.opensrp.view.customControls.CustomFontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/CustomFontTextViewStyle"
+            android:text="visited 2"
+            android:id="@+id/visit_two"
+            android:visibility="visible"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="@dimen/smart_register_client_divider_height"
+        android:layout_height="fill_parent"
+        android:src="@color/smart_register_client_divider_color"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.25"
+        android:layout_gravity="center" >
+
+        <org.ei.opensrp.view.customControls.CustomFontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LMNP"
+            style="@style/CustomFontTextViewStyle"
+            android:id="@+id/lmp" />
+    </LinearLayout>
+    <ImageView
+        android:layout_width="@dimen/smart_register_client_divider_height"
+        android:layout_height="fill_parent"
+        android:src="@color/smart_register_client_divider_color"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.25"
+        android:layout_gravity="center" >
+
+        <org.ei.opensrp.view.customControls.CustomFontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reg. Date"
+            style="@style/CustomFontTextViewStyle"
+            android:id="@+id/date" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="@dimen/smart_register_client_divider_height"
+        android:layout_height="fill_parent"
+        android:src="@color/smart_register_client_divider_color"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.75">
+
+        <org.ei.opensrp.view.customControls.CustomFontTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Refered FAcility"
+            style="@style/CustomFontTextViewStyle.ListView.Medium"
+            android:id="@+id/facility"
+            android:background="@color/status_bar_text_almost_white"
+            android:layout_margin="2dp" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="@dimen/smart_register_client_divider_height"
+        android:layout_height="fill_parent"
+        android:src="@color/smart_register_client_divider_color"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.75">
+
+        <org.ei.opensrp.view.customControls.CustomFontTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Status Colour"
+            style="@style/CustomFontTextViewStyle.ListView.Medium"
+            android:id="@+id/status"
+            android:background="@color/alert_urgent_red"
+            android:layout_margin="2dp" />
+    </LinearLayout>
+</LinearLayout>
