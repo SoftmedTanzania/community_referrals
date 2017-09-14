@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +29,7 @@ import org.ei.opensrp.domain.LoginResponse;
 import org.ei.opensrp.domain.Response;
 import org.ei.opensrp.domain.ResponseStatus;
 import org.ei.opensrp.drishti.Application.UzazniSalamaApplication;
+import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.sync.DrishtiSyncScheduler;
@@ -91,6 +93,17 @@ public class LoginActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setTitle("");
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+        float widthDp = displayMetrics.widthPixels / displayMetrics.density;
+        if (widthDp > 600)
+            // tablet
+            OrientationHelper.lockOrientationLandscape(LoginActivity.this);
+        else
+            // phone
+           OrientationHelper.lockOrientationPortrait(LoginActivity.this);
 
 
         context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
