@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.ei.opensrp.mcare.R;
+import org.ei.opensrp.mcare.chw.CHWRegisterActivity;
 import org.ei.opensrp.mcare.datamodels.ChwFollowUpMother;
 import org.ei.opensrp.mcare.datamodels.PreRegisteredMother;
 
@@ -87,6 +88,15 @@ public class CHWFollowUpPagerAdapter extends
             anc2TextView = (TextView) itemView.findViewById(R.id.date_two);
             anc3TextView = (TextView) itemView.findViewById(R.id.date_three);
             anc4TextView = (TextView) itemView.findViewById(R.id.date_four);
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // pass mother to show details
+                    ((CHWRegisterActivity) mContext).showFollowUpDetailsDialog(fMother.get(getAdapterPosition()));
+                }
+            });
         }
 
 

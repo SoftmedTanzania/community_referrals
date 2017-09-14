@@ -87,7 +87,7 @@ public class CHWRegisterRecyclerAdapter extends
                 @Override
                 public void onClick(View view) {
                     // pass mother to show details
-                    ((CHWRegisterActivity) mContext).showDetailsDialog(mothers.get(getAdapterPosition()));
+                    ((CHWRegisterActivity) mContext).showPreRegistrationDetailsDialog(mothers.get(getAdapterPosition()));
                 }
             });
 
