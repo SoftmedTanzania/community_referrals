@@ -4,14 +4,14 @@
     <!-- todo replace with your own options ids and titles -->
     <item
         android:id="@+id/popOpt1"
-        android:title="Option 1" />
+        android:title="Revist" />
 
     <item
         android:id="@+id/popOpt2"
-        android:title="Option 2" />
+        android:title="Edit" />
 
     <item
         android:id="@+id/popOpt3"
-        android:title="option 3" />
+        android:title="Delete" />
 
 </menu>

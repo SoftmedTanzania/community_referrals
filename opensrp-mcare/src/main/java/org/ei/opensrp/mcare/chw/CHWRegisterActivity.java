@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.ei.opensrp.mcare.R;
@@ -80,10 +81,17 @@ public class CHWRegisterActivity extends AppCompatActivity {
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWRegisterActivity.this);
         dialogBuilder.setView(dialogView)
-                .setCancelable(true);
+                .setCancelable(false);
 
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
+        ImageView cancel = (ImageView) dialogView.findViewById(R.id.cancel_action);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
 
         // TODO: findviewbyid that are on the dialog layout
         // example
@@ -97,10 +105,17 @@ public class CHWRegisterActivity extends AppCompatActivity {
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWRegisterActivity.this);
         dialogBuilder.setView(dialogView)
-                .setCancelable(true);
-
+                .setCancelable(false);
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
+
+        ImageView cancel = (ImageView) dialogView.findViewById(R.id.cancel_action);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
 
         // TODO: findviewbyid that are on the dialog layout
         // example

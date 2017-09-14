@@ -98,6 +98,7 @@ public class CHWRegisterRecyclerAdapter extends
                     showPop(getAdapterPosition(), view);
                 }
             });
+
         }
 
     }

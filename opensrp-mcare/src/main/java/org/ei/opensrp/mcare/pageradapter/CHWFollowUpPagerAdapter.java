@@ -1,16 +1,19 @@
 package org.ei.opensrp.mcare.pageradapter;
 
 import android.content.Context;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.ei.opensrp.mcare.R;
 import org.ei.opensrp.mcare.chw.CHWRegisterActivity;
 import org.ei.opensrp.mcare.datamodels.ChwFollowUpMother;
-import org.ei.opensrp.mcare.datamodels.PreRegisteredMother;
 
 import java.util.List;
 
@@ -72,11 +75,12 @@ public class CHWFollowUpPagerAdapter extends
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView nameTextView,riskTextView, uniqueIDTextView, villageTextView, ageTextView, numberTextView, facilityTextView, anc1TextView,anc2TextView,anc3TextView,anc4TextView;
-
+        public ImageView iconOptions;
         public ViewHolder(View itemView) {
 
             super(itemView);
 
+            iconOptions = (ImageView) itemView.findViewById(R.id.action_options);
             nameTextView = (TextView) itemView.findViewById(R.id.name);
             riskTextView = (TextView) itemView.findViewById(R.id.risk);
             uniqueIDTextView = (TextView) itemView.findViewById(R.id.unique);
@@ -97,8 +101,47 @@ public class CHWFollowUpPagerAdapter extends
                     ((CHWRegisterActivity) mContext).showFollowUpDetailsDialog(fMother.get(getAdapterPosition()));
                 }
             });
+
+            iconOptions.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // show options
+                    showPop(getAdapterPosition(), view);
+                }
+            });
         }
 
+    }
+    public void showPop(int position, View anchor) {
+
+        PopupMenu popupMenu = new PopupMenu((CHWRegisterActivity) mContext, anchor);
+        // inflate menu xml res
+        popupMenu.getMenuInflater().inflate(R.menu.menu_follow_up_details, popupMenu.getMenu());
+        popupMenu.show();
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                switch (item.getItemId()) {
+                    // TODO: handle option selected
+                    case R.id.popOpt1:
+                        Toast.makeText(mContext, item.getTitle() + " clicked", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    case R.id.popOpt2:
+                        Toast.makeText(mContext, item.getTitle() + " clicked", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    case R.id.popOpt3:
+                        Toast.makeText(mContext, item.getTitle() + " clicked", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    default:
+                        return false;
+                }
+            }
+        });
 
     }
 }
