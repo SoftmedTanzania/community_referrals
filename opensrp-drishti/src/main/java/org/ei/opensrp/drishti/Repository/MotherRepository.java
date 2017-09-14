@@ -13,7 +13,7 @@ import org.ei.opensrp.commonregistry.CommonRepository;
  * Created by Kency on 14/09/2017.
  */
 
-public class DMotherRepository extends CommonRepository {
+public class MotherRepository extends CommonRepository {
 
     public static final String MOTHERS_FIRST_NAME = "MOTHERS_FIRST_NAME";
     public static final String MOTHERS_LAST_NAME = "MOTHERS_LAST_NAME";
@@ -26,20 +26,20 @@ public class DMotherRepository extends CommonRepository {
     public static final String PNC_STATUS = "PNC_STATUS";
     public static final String MOTHERS_ID = "MOTHERS_ID";
 
-    public DMotherRepository(String tablename, String[] columns) {
+    public MotherRepository(String tablename, String[] columns) {
         super(tablename, columns);
     }
 
-    public DMotherRepository(CommonFtsObject commonFtsObject, String tablename, String[] columns) {
+    public MotherRepository(CommonFtsObject commonFtsObject, String tablename, String[] columns) {
         super(commonFtsObject, tablename, columns);
     }
 
-    public void add(DMotherPersonObject common) {
+    public void add(MotherPersonObject common) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
         database.insert(TABLE_NAME, null, createValuesFor(common));
     }
 
-    private ContentValues createValuesFor(DMotherPersonObject common) {
+    private ContentValues createValuesFor(MotherPersonObject common) {
         ContentValues values = new ContentValues();
         values.put(ID_COLUMN, common.getCaseId());
         values.put(Relational_ID, common.getRelationalId());

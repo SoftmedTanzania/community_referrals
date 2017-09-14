@@ -90,7 +90,7 @@
       <user_type openmrs_entity="concept" openmrs_entity_id="163095AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">FWA</user_type>
       <external_user_ID openmrs_entity="concept" openmrs_entity_id="163161AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
       <anc1_current_formStatus/>
-      <relationalid/>
+      <relationalId/>
       <meta>
         <instanceID/>
       </meta>

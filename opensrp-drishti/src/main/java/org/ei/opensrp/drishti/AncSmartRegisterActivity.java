@@ -21,6 +21,8 @@ import org.ei.opensrp.commonregistry.CommonPersonObjectController;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
 import org.ei.opensrp.drishti.Fragments.AncSmartRegisterFragment;
+import org.ei.opensrp.drishti.Repository.MotherPersonObject;
+import org.ei.opensrp.drishti.Repository.MotherRepository;
 import org.ei.opensrp.drishti.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
@@ -318,8 +320,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyy", Locale.getDefault());
-
 //        Map<String, String> personDetails1 = create("Is_PNC", "0").map();
 //        personDetails1.put("FWWOMVALID","1");
 //        personDetails1.put("FWBNFGEN", "2");
@@ -334,6 +334,21 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //        personDetails1.put("FWWOMAGE", pregnantMom.getAge()+"");
 //        personDetails1.put("HEIGHT", pregnantMom.getHeight()+"");
 //        personDetails1.put("user_type", "1");
+
+        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
+        String[] columns = {"MOTHERS_FIRST_NAME",
+                "MOTHERS_LAST_NAME",
+                "MOTHERS_LAST_MENSTRUATION_DATE",
+                "MOTHERS_SORTVALUE",
+                "MOTHERS_ID",
+                "PNC_STATUS",
+                "EXPECTED_DELIVERY_DATE",
+                "IS_VALID",
+                "Is_PNC",
+                "FACILITY_ID"};
+
+        MotherRepository motherRepository = new MotherRepository("wazazi_salama_mother", columns);
+        motherRepository.add(motherPersonObject);
 
 
 //        CommonPersonObject cpo2 = new CommonPersonObject(id,id,personDetails1,"mcaremother");
