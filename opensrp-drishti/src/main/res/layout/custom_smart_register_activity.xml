@@ -31,14 +31,10 @@
         android:layout_weight="1"
         android:background="@drawable/listview_background_rounded">
 
-        <ListView
-        android:id="@+id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:divider="@color/smart_register_client_divider_color"
-        android:dividerHeight="@dimen/smart_register_client_divider_height"
-        android:visibility="invisible" />
-
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <ProgressBar
             android:id="@+id/client_list_progress"

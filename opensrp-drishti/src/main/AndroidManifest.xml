@@ -70,7 +70,7 @@
         <activity
             android:name=".AncDetailActivity"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
+            android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
 
 
         <meta-data
