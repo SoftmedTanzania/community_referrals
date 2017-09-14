@@ -60,6 +60,11 @@ android {
 
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        // dexDebug error fix
+        dexOptions {
+            preDexLibraries = false
+            javaMaxHeapSize "4g"
+        }
     }
     buildTypes {
         release {

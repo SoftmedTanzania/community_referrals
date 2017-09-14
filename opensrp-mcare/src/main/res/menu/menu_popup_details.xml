@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- todo replace with your own options ids and titles -->
+    <item
+        android:id="@+id/popOpt1"
+        android:title="Option 1" />
+
+    <item
+        android:id="@+id/popOpt2"
+        android:title="Option 2" />
+
+    <item
+        android:id="@+id/popOpt3"
+        android:title="option 3" />
+
+</menu>
