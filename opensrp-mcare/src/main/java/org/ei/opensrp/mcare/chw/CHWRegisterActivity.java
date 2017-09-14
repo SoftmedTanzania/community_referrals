@@ -118,7 +118,7 @@ public class CHWRegisterActivity extends AppCompatActivity {
         button_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CHWRegisterActivity.this, "Thank you for revisiting "+ mother.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CHWRegisterActivity.this, "Asante kwa kumtembelea tena "+ mother.getName(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
