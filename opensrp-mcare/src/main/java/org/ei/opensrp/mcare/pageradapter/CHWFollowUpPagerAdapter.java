@@ -112,7 +112,7 @@ public class CHWFollowUpPagerAdapter extends
         }
 
     }
-    public void showPop(int position, View anchor) {
+    public void showPop(final int position, View anchor) {
 
         PopupMenu popupMenu = new PopupMenu((CHWRegisterActivity) mContext, anchor);
         // inflate menu xml res
@@ -126,7 +126,7 @@ public class CHWFollowUpPagerAdapter extends
                 switch (item.getItemId()) {
                     // TODO: handle option selected
                     case R.id.popOpt1:
-                        Toast.makeText(mContext, item.getTitle() + " clicked", Toast.LENGTH_SHORT).show();
+                        ((CHWRegisterActivity) mContext).showFollowUpFormDialog(fMother.get(position));
                         return true;
 
                     case R.id.popOpt2:

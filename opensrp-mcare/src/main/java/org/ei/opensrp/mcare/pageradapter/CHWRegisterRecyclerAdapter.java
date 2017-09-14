@@ -118,7 +118,7 @@ public class CHWRegisterRecyclerAdapter extends
                 switch (item.getItemId()) {
                     // TODO: handle option selected
                     case R.id.popOpt1:
-                        Toast.makeText(mContext, item.getTitle() + " clicked", Toast.LENGTH_SHORT).show();
+                        ((CHWRegisterActivity) mContext).showPreRegistrationVisitDialog(mothers.get(position));
                         return true;
 
                     case R.id.popOpt2:

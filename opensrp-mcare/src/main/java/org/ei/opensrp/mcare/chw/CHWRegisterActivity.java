@@ -8,12 +8,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.ei.opensrp.mcare.R;
 import org.ei.opensrp.mcare.datamodels.ChwFollowUpMother;
 import org.ei.opensrp.mcare.datamodels.PreRegisteredMother;
+import org.ei.opensrp.mcare.datamodels.PregnantMom;
 import org.ei.opensrp.mcare.pageradapter.CHWPagerAdapter;
 
 public class CHWRegisterActivity extends AppCompatActivity {
@@ -99,9 +102,66 @@ public class CHWRegisterActivity extends AppCompatActivity {
         textName.setText(mother.getName());
     }
 
+    public void showPreRegistrationVisitDialog(final PreRegisteredMother mother){
+
+        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_visit_details, null);
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWRegisterActivity.this);
+        dialogBuilder.setView(dialogView)
+                .setCancelable(false);
+
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+        Button button_yes = (Button) dialogView.findViewById(R.id.button_yes);
+        Button button_no = (Button) dialogView.findViewById(R.id.button_no);
+
+        button_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(CHWRegisterActivity.this, "Asante kwa kumtembelea tena "+ mother.getName(), Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+        button_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        // TODO: findviewbyid that are on the dialog layout
+        // example
+        TextView textName = (TextView) dialogView.findViewById(R.id.name);
+        textName.setText(mother.getName());
+    }
+
     public void showFollowUpDetailsDialog(ChwFollowUpMother mother) {
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_details, null);
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWRegisterActivity.this);
+        dialogBuilder.setView(dialogView)
+                .setCancelable(false);
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+
+        ImageView cancel = (ImageView) dialogView.findViewById(R.id.cancel_action);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        // TODO: findviewbyid that are on the dialog layout
+        // example
+        TextView textName = (TextView) dialogView.findViewById(R.id.name);
+        textName.setText(mother.getName());
+    }
+
+    public void showFollowUpFormDialog(ChwFollowUpMother mother){
+
+        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWRegisterActivity.this);
         dialogBuilder.setView(dialogView)
