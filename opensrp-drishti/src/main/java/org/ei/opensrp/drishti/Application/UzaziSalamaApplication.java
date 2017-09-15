@@ -35,7 +35,7 @@ import static org.ei.opensrp.util.Log.logInfo;
         formUriBasicAuthPassword = "ecUMrMeTKf1X1ODxHqo3b43W",
         mode = ReportingInteractionMode.SILENT
 )
-public class UzazniSalamaApplication extends DrishtiApplication {
+public class UzaziSalamaApplication extends DrishtiApplication {
 
     @Override
     public void onCreate() {
@@ -69,7 +69,7 @@ public class UzazniSalamaApplication extends DrishtiApplication {
     @Override
     public void onTerminate() {
         super.onTerminate();
-        logInfo("UzazniSalamaApplication is terminating. Stopping Dristhi Sync scheduler and resetting isSyncInProgress setting.");
+        logInfo("UzaziSalamaApplication is terminating. Stopping Dristhi Sync scheduler and resetting isSyncInProgress setting.");
         cleanUpSyncState();
     }
 
