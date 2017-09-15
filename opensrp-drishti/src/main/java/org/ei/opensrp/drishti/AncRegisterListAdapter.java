@@ -17,9 +17,9 @@ import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectClient;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
-import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
+import org.ei.opensrp.drishti.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
     private Context context;
     private Cursor cursor;
     private Gson gson = new Gson();
-    private CustomMotherRepository customMotherRepository;
+    private CommonRepository customMotherRepository;
     private android.content.Context appContext;
     private List<MotherPersonObject> motherPersonList = new ArrayList<>();
 
@@ -51,9 +51,10 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
     }
 
     public AncRegisterListAdapter(Context context, CustomMotherRepository customMotherRepository, Cursor cursor, android.content.Context appContext) {
+    public AncRegisterListAdapter(Context context, CommonRepository customMotherRepository, Cursor cursor) {
         this.context = context;
         this.customMotherRepository = customMotherRepository;
-        this.motherPersonList = customMotherRepository.readAllMotherForField(cursor, TABLE_NAME);
+        this.motherPersonList = Utils.convertToMotherPersonObjectList(customMotherRepository.readAllcommonForField(cursor, TABLE_NAME));
         this.appContext = appContext;
 
         Log.d(TAG, "repo count = " + customMotherRepository.count() + ", list count = " + motherPersonList.size());

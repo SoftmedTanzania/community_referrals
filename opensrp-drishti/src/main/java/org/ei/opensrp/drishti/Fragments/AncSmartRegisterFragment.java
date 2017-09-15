@@ -50,9 +50,7 @@ import org.ei.opensrp.view.dialog.FilterOption;
 import org.ei.opensrp.view.dialog.LocationSelectorDialogFragment;
 import org.ei.opensrp.view.dialog.ServiceModeOption;
 import org.ei.opensrp.view.dialog.SortOption;
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.XML;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
 import org.opensrp.api.util.LocationTree;
@@ -61,13 +59,11 @@ import org.opensrp.api.util.TreeNode;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.ei.opensrp.util.FormUtils.populateJSONWithData;
 
 /**
  * Created by koros on 11/2/15.
@@ -155,7 +151,7 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 //                        new ElcoPSRFDueDateSort(),
                         new CursorCommonObjectSort(getString(R.string.due_status), sortByAlertmethod()),
                         new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.elco_alphabetical_sort), sortByFWWOMFNAME()),
-                        new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.hh_fwGobhhid_sort), sortByGOBHHID()),
+                        new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.hh_fwGobhhid_sort), sortByMOTHERS_ID()),
                         new CursorCommonObjectSort(Context.getInstance().applicationContext().getString(R.string.sortbyLmp), sortByLmp())
 
 //                        new CommonObjectSort(true,false,true,"age")
@@ -287,8 +283,8 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     }
 
     public String ancMainSelectWithJoins() {
-        return "Select id as _id,relationalid,details,MOTHERS_FIRST_NAME,FWPSRLMP,FWSORTVALUE,JiVitAHHID,GOBHHID,Is_PNC,FWBNFSTS,FWBNFDTOO \n" +
-                "from mcaremother\n";
+        return "Select id as _id,relationalid,details,MOTHERS_FIRST_NAME,MOTHERS_LAST_NAME,MOTHERS_LAST_MENSTRUATION_DATE,MOTHERS_SORTVALUE,PNC_STATUS,MOTHERS_ID,Is_PNC,EXPECTED_DELIVERY_DATE \n" +
+                "from wazazi_salama_mother\n";
     }
 
     public String ancMainCountWithJoins() {
@@ -325,7 +321,7 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 //        updateSearchView();
 //        refresh();
 
-        CustomMotherRepository motherRepository = new CustomContext().getCustomMotherRepo("wazazi_salama_mother");
+        CommonRepository motherRepository =context().commonrepository("wazazi_salama_mother");
         Cursor cursor = motherRepository.RawCustomQueryForAdapter("select * from wazazi_salama_mother");
         clientAdapter = new AncRegisterListAdapter(context(), motherRepository, cursor);
         clientsView.setAdapter(clientAdapter);
@@ -333,7 +329,7 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     }
 
     private String sortBySortValue() {
-        return " FWSORTVALUE ASC";
+        return " MOTHERS_SORTVALUE ASC";
     }
 
     private String sortByFWWOMFNAME() {
@@ -342,7 +338,7 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
 
     private String sortByLmp() {
-        return " FWPSRLMP ASC";
+        return " MOTHERS_LAST_MENSTRUATION_DATE ASC";
     }
 
     private String filterStringForANCRV1() {
@@ -361,8 +357,8 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         return "ancrv_4";
     }
 
-    private String sortByGOBHHID() {
-        return " GOBHHID ASC";
+    private String sortByMOTHERS_ID() {
+        return " MOTHERS_ID ASC";
     }
 
     private String sortByAlertmethod() {

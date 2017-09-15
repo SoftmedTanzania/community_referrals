@@ -196,8 +196,8 @@ public abstract class SecuredNativeSmartRegisterCursorAdapterFragment extends or
             protected Void doInBackground(Void... params) {
                 publishProgress();
 
-                CustomMotherRepository motherRepository = new CustomContext().getCustomMotherRepo("wazazi_salama_mother");
-                String query = "";
+                CommonRepository motherRepository = context().commonrepository("wazazi_salama_mother");
+                String query = "SELECT * FROM wazazi_salama_mother";
                 Cursor cursor = motherRepository.RawCustomQueryForAdapter(query);
                 listAdapter = new AncRegisterListAdapter(context(), motherRepository, cursor, getContext());
 
