@@ -47,6 +47,7 @@ import static org.ei.opensrp.event.Event.SYNC_COMPLETED;
 import static org.ei.opensrp.event.Event.SYNC_STARTED;
 
 public class NativeHomeActivity extends SecuredActivity {
+    private NavigationController navigationController1;
     private MenuItem updateMenuItem;
     private MenuItem remainingFormsToSyncMenuItem;
     private PendingFormSubmissionService pendingFormSubmissionService;
@@ -98,6 +99,7 @@ public class NativeHomeActivity extends SecuredActivity {
     protected void onCreation() {
         setContentView(R.layout.smart_registers_home);
         navigationController = new NavigationController(this, anmController);
+        navigationController1 = new NavigationController(this, anmController);
         setupViews();
         initialize();
         DisplayFormFragment.formInputErrorMessage = getResources().getString(R.string.forminputerror);
@@ -122,6 +124,7 @@ public class NativeHomeActivity extends SecuredActivity {
 //        findViewById(R.id.btn_pnc_register).setOnClickListener(onRegisterStartListener);
         findViewById(R.id.btn_anc_register).setOnClickListener(onRegisterStartListener);
         findViewById(R.id.btn_pnc_register).setOnClickListener(onRegisterStartListener);
+        findViewById(R.id.btn_chw_register).setOnClickListener(onRegisterStartListener);
 
         findViewById(R.id.btn_reporting).setOnClickListener(onButtonsClickListener);
 //        findViewById(R.id.btn_videos).setOnClickListener(onButtonsClickListener);
@@ -295,9 +298,9 @@ public class NativeHomeActivity extends SecuredActivity {
                     navigationController.startPNCSmartRegistry();
                     break;
 
-//                case R.id.btn_chw_register:
-//                    navigationController.startChildSmartRegistry();
-//                    break;
+                case R.id.btn_chw_register:
+                    navigationController1.startCHWSmartRegistry();
+                    break;
 
 //                case R.id.btn_reporting:
 //                    navigationController.startFPSmartRegistry();

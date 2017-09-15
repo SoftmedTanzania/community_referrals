@@ -70,7 +70,18 @@
             android:name=".AncDetailActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
+        <activity
+            android:name=".chw.CHWSmartRegisterActivity"
+            android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".chw.CHWFormRegistrationActivity" />
+        <activity android:name=".chw.CHWFormFollowActivity" />
+        <activity android:name=".chw.CHWEditPreRegistrationActivity"></activity>
 
         <meta-data
             android:name="io.fabric.ApiKey"
