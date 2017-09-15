@@ -25,6 +25,7 @@ import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
 import org.ei.opensrp.drishti.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.drishti.util.CustomContext;
+import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.util.FormUtils;
@@ -67,7 +68,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private int currentPage;
 
     private String[] formNames = new String[]{};
-    private Fragment mBaseFragment = null;
+    private Fragment mBaseFragment;
     private Gson gson = new Gson();
 
     @Override
@@ -76,7 +77,10 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+        // orientation
+        OrientationHelper.setProperOrientationForDevice(AncSmartRegisterActivity.this);
 
         formNames = this.buildFormNameList();
         mBaseFragment = new AncSmartRegisterFragment();
@@ -89,7 +93,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void onPageSelected(int position) {
                 currentPage = position;
-                onPageChanged(position);
+                // onPageChanged(position);
             }
         });
     }
@@ -198,7 +202,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     @Override
     public void OnLocationSelected(String locationSelected) {
-
+        // set registration fragment
+        mPager.setCurrentItem(1, true);
     }
 
     private class EditDialogOptionModelfornbnf implements DialogOptionModel {
@@ -323,6 +328,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
         CustomContext customContext = new CustomContext();
         CustomMotherRepository motherRepository = customContext.getCustomMotherRepo("wazazi_salama_mother");
+        // todo fix NullPointerException on getWritableDatabase
         motherRepository.add(motherPersonObject);
 
 
