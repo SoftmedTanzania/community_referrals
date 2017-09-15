@@ -14,7 +14,7 @@ public class MotherPersonObject {
     private String caseId, type, relationalId, MOTHERS_FIRST_NAME, MOTHERS_LAST_NAME, MOTHERS_SORTVALUE,
             EXPECTED_DELIVERY_DATE, MOTHERS_LAST_MENSTRUATION_DATE, FACILITY_ID, IS_PNC, IS_VALID, PNC_STATUS, MOTHERS_ID;
     private String details;
-    private Map<String, String> columnmaps;
+    private Map<String, String> columnMap;
 
     public MotherPersonObject(String caseId, String relationalId, String MOTHERS_FIRST_NAME, String MOTHERS_LAST_NAME, String MOTHERS_ID, String MOTHERS_SORTVALUE, String EXPECTED_DELIVERY_DATE,
                               String MOTHERS_LAST_MENSTRUATION_DATE, String FACILITY_ID, String IS_PNC, String IS_VALID, String details, String type) {
@@ -158,4 +158,11 @@ public class MotherPersonObject {
         this.MOTHERS_ID = MOTHERS_ID;
     }
 
+    public Map<String, String> getcolumnMap() {
+        return columnMap;
+    }
+
+    public void setcolumnMap(Map<String, String> columnMap) {
+        this.columnMap = columnMap;
+    }
 }

@@ -1,13 +1,21 @@
 package org.ei.opensrp.drishti.Repository;
 
 import android.content.ContentValues;
+import android.database.Cursor;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
 import org.ei.opensrp.commonregistry.CommonFtsObject;
+import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
+import org.ei.opensrp.drishti.DataModels.PregnantMom;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Kency on 14/09/2017.
@@ -55,6 +63,47 @@ public class CustomMotherRepository extends CommonRepository {
         values.put(FACILITY_ID, motherPersonObject.getFACILITY_ID());
         values.put(DETAILS_COLUMN, new Gson().toJson(motherPersonObject.getDetails()));
         return values;
+    }
+
+//    @Override
+//    public Cursor RawCustomQueryForAdapter(String query) {
+////        return super.RawCustomQueryForAdapter(query);
+//        Log.d(getClass().getSimpleName(), query);
+//        SQLiteDatabase database = masterRepository.getReadableDatabase();
+//        // get cursor
+//        return database.rawQuery(query, null);
+//    }
+
+
+    public List<MotherPersonObject> readAllMotherForField(Cursor cursor, String tableName) {
+        List<MotherPersonObject> mothers = new ArrayList<>();
+        try {
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+                int columnCount = cursor.getColumnCount();
+                HashMap<String, String> columns = new HashMap<>();
+                for (int i = 0; i < columnCount; i++) {
+                    columns.put(cursor.getColumnName(i), String.valueOf(cursor.getInt(i)));
+                }
+
+                MotherPersonObject motherPersonObject = new MotherPersonObject(
+                        columns.get("caseId"),
+                        columns.get("relationalId"),
+                        new Gson().fromJson(columns.get("details"), PregnantMom.class));
+
+                motherPersonObject.setcolumnMap(columns);
+
+                mothers.add(motherPersonObject);
+                cursor.moveToNext();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
+        }
+
+        return mothers;
     }
 
 }

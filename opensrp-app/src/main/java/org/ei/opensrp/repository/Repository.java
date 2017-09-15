@@ -45,28 +45,28 @@ public class Repository extends SQLiteOpenHelper {
         for (DrishtiRepository repository : repositories) {
             try {
                 repository.onCreate(database);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        if(this.commonFtsObject != null) {
-            for (String ftsTable: commonFtsObject.getTables()) {
+        if (this.commonFtsObject != null) {
+            for (String ftsTable : commonFtsObject.getTables()) {
                 Set<String> searchColumns = new LinkedHashSet<String>();
                 searchColumns.add(CommonFtsObject.idColumn);
                 searchColumns.add(CommonFtsObject.relationalIdColumn);
                 searchColumns.add(CommonFtsObject.phraseColumnName);
 
                 String[] mainConditions = this.commonFtsObject.getMainConditions(ftsTable);
-                if(mainConditions != null)
+                if (mainConditions != null)
                     for (String mainCondition : mainConditions) {
                         searchColumns.add(mainCondition);
                     }
 
                 String[] sortFields = this.commonFtsObject.getSortFields(ftsTable);
-                if(sortFields != null)
+                if (sortFields != null)
                     for (String sortValue : sortFields) {
-                        if(sortValue.startsWith("alerts.")){
+                        if (sortValue.startsWith("alerts.")) {
                             sortValue = sortValue.split("\\.")[1];
                         }
                         searchColumns.add(sortValue);
