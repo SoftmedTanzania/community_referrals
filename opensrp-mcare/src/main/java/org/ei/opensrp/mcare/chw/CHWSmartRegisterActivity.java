@@ -5,21 +5,24 @@ import android.graphics.PorterDuff;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.ei.opensrp.mcare.R;
 import org.ei.opensrp.mcare.datamodels.ChwFollowUpMother;
 import org.ei.opensrp.mcare.datamodels.PreRegisteredMother;
-import org.ei.opensrp.mcare.datamodels.PregnantMom;
 import org.ei.opensrp.mcare.pageradapter.CHWPagerAdapter;
+import org.ei.opensrp.provider.SmartRegisterClientsProvider;
+import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
-public class CHWRegisterActivity extends AppCompatActivity {
+public class CHWSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
 
     private TabLayout tabs;
 
@@ -77,12 +80,35 @@ public class CHWRegisterActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected DefaultOptionsProvider getDefaultOptionsProvider() {
+        return null;
+    }
+
+    @Override
+    protected NavBarOptionsProvider getNavBarOptionsProvider() {
+        return null;
+    }
+
+    @Override
+    protected SmartRegisterClientsProvider clientsProvider() {
+        return null;
+    }
+
+    @Override
+    protected void onInitialization() {
+    }
+
+    @Override
+    public void startRegistration() {
+    }
+
 
     public void showPreRegistrationDetailsDialog(PreRegisteredMother mother) {
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
 
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWRegisterActivity.this);
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
                 .setCancelable(false);
 
@@ -106,7 +132,7 @@ public class CHWRegisterActivity extends AppCompatActivity {
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_visit_details, null);
 
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWRegisterActivity.this);
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
                 .setCancelable(false);
 
@@ -118,7 +144,7 @@ public class CHWRegisterActivity extends AppCompatActivity {
         button_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CHWRegisterActivity.this, "Asante kwa kumtembelea tena "+ mother.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CHWSmartRegisterActivity.this, "Asante kwa kumtembelea tena "+ mother.getName(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -139,7 +165,7 @@ public class CHWRegisterActivity extends AppCompatActivity {
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_details, null);
 
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWRegisterActivity.this);
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
                 .setCancelable(false);
         final AlertDialog dialog = dialogBuilder.create();
@@ -159,20 +185,48 @@ public class CHWRegisterActivity extends AppCompatActivity {
         textName.setText(mother.getName());
     }
 
-    public void showFollowUpFormDialog(ChwFollowUpMother mother){
+    public void showFollowUpFormDialog(final ChwFollowUpMother mother){
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
 
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWRegisterActivity.this);
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
                 .setCancelable(false);
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
 
-        ImageView cancel = (ImageView) dialogView.findViewById(R.id.cancel_action);
+        RadioGroup radioGroup = (RadioGroup) dialogView.findViewById(R.id.visit) ;
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int selectedId = group.getCheckedRadioButtonId();
+                RadioButton radioButton = (RadioButton) findViewById(selectedId);
+
+                if(selectedId == R.id.visit_yes){
+                    RelativeLayout info = (RelativeLayout) dialogView.findViewById(R.id.information);
+                    info.setVisibility(View.VISIBLE);
+                }
+                if(selectedId == R.id.visit_no){
+                    RelativeLayout info = (RelativeLayout) dialogView.findViewById(R.id.information);
+                    info.setVisibility(View.GONE);
+                }
+            }
+        });
+
+
+        Button cancel = (Button) dialogView.findViewById(R.id.cancel_action);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        Button save = (Button) dialogView.findViewById(R.id.save);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(CHWSmartRegisterActivity.this, "Asante kwa kumtembelea tena "+ mother.getName(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -186,7 +240,7 @@ public class CHWRegisterActivity extends AppCompatActivity {
     public void confirmDelete() {
         final View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_confirm_delete, null);
 
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWRegisterActivity.this);
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CHWSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
                 .setCancelable(false);
         final AlertDialog dialog = dialogBuilder.create();

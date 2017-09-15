@@ -252,21 +252,21 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="4dp"
                     android:textColor="#236c71"
-                    android:id="@+id/textEdd"
+                    android:id="@+id/textDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="EDD: "/>
                 <TextView
                     android:layout_marginLeft="12dp"
-                    android:layout_alignTop="@+id/textEdd"
-                    android:layout_toRightOf="@+id/textEdd"
+                    android:layout_alignTop="@+id/textDate"
+                    android:layout_toRightOf="@+id/textDate"
                     android:id="@+id/EDD"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2-Jan-2017"/>
                 <TextView
-                    android:layout_below="@+id/textEdd"
-                    android:layout_alignLeft="@+id/textEdd"
+                    android:layout_below="@+id/textDate"
+                    android:layout_alignLeft="@+id/textDate"
                     android:textColor="#236c71"
                     android:id="@+id/textLNMP"
                     android:layout_width="wrap_content"

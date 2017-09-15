@@ -50,10 +50,10 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".elco.ElcoDetailActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoActionBarAndTitle" />
+        <!--<activity-->
+            <!--android:name=".elco.ElcoDetailActivity"-->
+            <!--android:screenOrientation="landscape"-->
+            <!--android:theme="@style/AppThemeNoActionBarAndTitle" />-->
         <activity
             android:name=".AncSmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -104,7 +104,7 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name=".chw.CHWRegisterActivity"
+            android:name=".chw.CHWSmartRegisterActivity"
             android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
