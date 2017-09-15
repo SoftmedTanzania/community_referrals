@@ -6,7 +6,7 @@ package org.ei.opensrp.drishti.DataModels;
 
 public class PregnantMom {
     private String name, id, phone, discountId, education, occupation,
-            husbandName, husbandEducation, husbandOccupation, physicalAddress;
+            husbandName, husbandEducation, husbandOccupation, physicalAddress, facilityId;
 
     private long dateReg, dateLNMP, edd;
     private int age, height, previousFertilityCount, successfulBirths, livingChildren;
@@ -279,5 +279,13 @@ public class PregnantMom {
 
     public void setPhysicalAddress(String physicalAddress) {
         this.physicalAddress = physicalAddress;
+    }
+
+    public String getFacilityId() {
+        return facilityId;
+    }
+
+    public void setFacilityId(String facilityId) {
+        this.facilityId = facilityId;
     }
 }
