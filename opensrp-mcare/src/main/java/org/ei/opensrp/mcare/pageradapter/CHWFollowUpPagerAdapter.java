@@ -133,10 +133,6 @@ public class CHWFollowUpPagerAdapter extends
                         Toast.makeText(mContext, item.getTitle() + " clicked", Toast.LENGTH_SHORT).show();
                         return true;
 
-                    case R.id.popOpt3:
-                        Toast.makeText(mContext, item.getTitle() + " clicked", Toast.LENGTH_SHORT).show();
-                        return true;
-
                     default:
                         return false;
                 }

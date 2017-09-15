@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -159,7 +162,7 @@ public class CHWRegisterActivity extends AppCompatActivity {
         textName.setText(mother.getName());
     }
 
-    public void showFollowUpFormDialog(ChwFollowUpMother mother){
+    public void showFollowUpFormDialog(final ChwFollowUpMother mother){
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
 
@@ -169,10 +172,38 @@ public class CHWRegisterActivity extends AppCompatActivity {
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
 
-        ImageView cancel = (ImageView) dialogView.findViewById(R.id.cancel_action);
+        RadioGroup radioGroup = (RadioGroup) dialogView.findViewById(R.id.visit) ;
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int selectedId = group.getCheckedRadioButtonId();
+                RadioButton radioButton = (RadioButton) findViewById(selectedId);
+
+                if(selectedId == R.id.visit_yes){
+                    RelativeLayout info = (RelativeLayout) dialogView.findViewById(R.id.information);
+                    info.setVisibility(View.VISIBLE);
+                }
+                if(selectedId == R.id.visit_no){
+                    RelativeLayout info = (RelativeLayout) dialogView.findViewById(R.id.information);
+                    info.setVisibility(View.GONE);
+                }
+            }
+        });
+
+
+        Button cancel = (Button) dialogView.findViewById(R.id.cancel_action);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        Button save = (Button) dialogView.findViewById(R.id.save);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(CHWRegisterActivity.this, "Asante kwa kumtembelea tena "+ mother.getName(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });

@@ -10,8 +10,4 @@
         android:id="@+id/popOpt2"
         android:title="Edit" />
 
-    <item
-        android:id="@+id/popOpt3"
-        android:title="Delete" />
-
 </menu>
