@@ -1,6 +1,7 @@
 package org.ei.opensrp.drishti;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
@@ -17,6 +18,7 @@ import com.google.gson.Gson;
 import org.ei.opensrp.Context;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
 import org.ei.opensrp.commonregistry.CommonPersonObjectController;
+import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
 import org.ei.opensrp.drishti.Fragments.AncSmartRegisterFragment;
@@ -24,7 +26,6 @@ import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
 import org.ei.opensrp.drishti.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
-import org.ei.opensrp.drishti.util.CustomContext;
 import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
@@ -325,12 +326,17 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         // save the form
         PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
 
-        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
-        CustomContext customContext = new CustomContext();
-        CustomMotherRepository motherRepository = customContext.getCustomMotherRepo("wazazi_salama_mother");
         // todo fix NullPointerException on getWritableDatabase
-        motherRepository.add(motherPersonObject);
 
+//        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
+//        CustomContext customContext = new CustomContext();
+//        CustomMotherRepository motherRepository = customContext.getCustomMotherRepo("wazazi_salama_mother");
+//        motherRepository.add(motherPersonObject);
+
+        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
+        CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
+        ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
+        commonRepository.customInsert(values);
 
 //        Map<String, String> personDetails1 = create("Is_PNC", "0").map();
 //        personDetails1.put("FWWOMVALID","1");
