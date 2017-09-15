@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,7 +28,7 @@ import static org.ei.opensrp.AllConstants.*;
 import static org.ei.opensrp.event.Event.ON_LOGOUT;
 import static org.ei.opensrp.util.Log.logInfo;
 
-public abstract class SecuredActivity extends ActionBarActivity {
+public abstract class SecuredActivity extends AppCompatActivity {
     private static final String TAG = SecuredActivity.class.getSimpleName();
     protected Listener<Boolean> logoutListener;
     protected FormController formController;

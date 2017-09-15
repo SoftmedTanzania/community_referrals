@@ -64,7 +64,7 @@
         <activity
             android:name=".AncSmartRegisterActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".AncDetailActivity"
