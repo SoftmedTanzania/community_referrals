@@ -5,12 +5,14 @@ package org.ei.opensrp.drishti.DataModels;
  */
 
 public class PregnantMom {
-    private String name, id, phone;
-    private long dateReg, dateLNMP, dateDeliveryPrediction;
-    private int age, height, pregnancyCount, birthCount, childrenCount;
+    private String name, id, phone, discountId, education, occupation,
+            husbandName, husbandEducation, husbandOccupation, physicalAddress;
+
+    private long dateReg, dateLNMP, edd;
+    private int age, height, previousFertilityCount, successfulBirths, livingChildren;
     private boolean isAbove20WeeksPregnant,
             has10YrsPassedSinceLastPreg,
-            hasBabyDeath,
+            hadStillBirth,
             has2orMoreBBA,
             hasHeartProblem,
             hasDiabetes,
@@ -63,12 +65,12 @@ public class PregnantMom {
         this.dateLNMP = dateLNMP;
     }
 
-    public long getDateDeliveryPrediction() {
-        return dateDeliveryPrediction;
+    public long getEdd() {
+        return edd;
     }
 
-    public void setDateDeliveryPrediction(long dateDeliveryPrediction) {
-        this.dateDeliveryPrediction = dateDeliveryPrediction;
+    public void setEdd(long edd) {
+        this.edd = edd;
     }
 
     public int getAge() {
@@ -87,28 +89,28 @@ public class PregnantMom {
         this.height = height;
     }
 
-    public int getPregnancyCount() {
-        return pregnancyCount;
+    public int getPreviousFertilityCount() {
+        return previousFertilityCount;
     }
 
-    public void setPregnancyCount(int pregnancyCount) {
-        this.pregnancyCount = pregnancyCount;
+    public void setPreviousFertilityCount(int previousFertilityCount) {
+        this.previousFertilityCount = previousFertilityCount;
     }
 
-    public int getBirthCount() {
-        return birthCount;
+    public int getSuccessfulBirths() {
+        return successfulBirths;
     }
 
-    public void setBirthCount(int birthCount) {
-        this.birthCount = birthCount;
+    public void setSuccessfulBirths(int successfulBirths) {
+        this.successfulBirths = successfulBirths;
     }
 
-    public int getChildrenCount() {
-        return childrenCount;
+    public int getLivingChildren() {
+        return livingChildren;
     }
 
-    public void setChildrenCount(int childrenCount) {
-        this.childrenCount = childrenCount;
+    public void setLivingChildren(int livingChildren) {
+        this.livingChildren = livingChildren;
     }
 
     public boolean isAbove20WeeksPregnant() {
@@ -127,12 +129,12 @@ public class PregnantMom {
         this.has10YrsPassedSinceLastPreg = has10YrsPassedSinceLastPreg;
     }
 
-    public boolean isHasBabyDeath() {
-        return hasBabyDeath;
+    public boolean isHadStillBirth() {
+        return hadStillBirth;
     }
 
-    public void setHasBabyDeath(boolean hasBabyDeath) {
-        this.hasBabyDeath = hasBabyDeath;
+    public void setHadStillBirth(boolean hadStillBirth) {
+        this.hadStillBirth = hadStillBirth;
     }
 
     public boolean isHas2orMoreBBA() {
@@ -221,5 +223,61 @@ public class PregnantMom {
 
     public void setKondoKukwama(boolean kondoKukwama) {
         this.kondoKukwama = kondoKukwama;
+    }
+
+    public String getDiscountId() {
+        return discountId;
+    }
+
+    public void setDiscountId(String discountId) {
+        this.discountId = discountId;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
+    public String getHusbandName() {
+        return husbandName;
+    }
+
+    public void setHusbandName(String husbandName) {
+        this.husbandName = husbandName;
+    }
+
+    public String getHusbandEducation() {
+        return husbandEducation;
+    }
+
+    public void setHusbandEducation(String husbandEducation) {
+        this.husbandEducation = husbandEducation;
+    }
+
+    public String getHusbandOccupation() {
+        return husbandOccupation;
+    }
+
+    public void setHusbandOccupation(String husbandOccupation) {
+        this.husbandOccupation = husbandOccupation;
+    }
+
+    public String getPhysicalAddress() {
+        return physicalAddress;
+    }
+
+    public void setPhysicalAddress(String physicalAddress) {
+        this.physicalAddress = physicalAddress;
     }
 }

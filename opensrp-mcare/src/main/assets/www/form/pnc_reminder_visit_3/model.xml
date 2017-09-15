@@ -43,7 +43,7 @@
                 <DISPLAY_URNBRN/>
                 <FWPNC3DELCOMP/>
             </pnc3group>
-            <relationalid/>
+            <relationalId/>
             <pnc3_current_formStatus/>
             <user_type openmrs_entity="concept" openmrs_entity_id="163229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">FWA</user_type>
             <external_user_ID openmrs_entity="concept" openmrs_entity_id="163161AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>

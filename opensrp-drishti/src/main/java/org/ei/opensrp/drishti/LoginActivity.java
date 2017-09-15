@@ -27,7 +27,8 @@ import org.ei.opensrp.Context;
 import org.ei.opensrp.domain.LoginResponse;
 import org.ei.opensrp.domain.Response;
 import org.ei.opensrp.domain.ResponseStatus;
-import org.ei.opensrp.drishti.Application.UzazniSalamaApplication;
+import org.ei.opensrp.drishti.Application.UzaziSalamaApplication;
+import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.sync.DrishtiSyncScheduler;
@@ -80,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
             DisplayMetrics dm = res.getDisplayMetrics();
             android.content.res.Configuration conf = res.getConfiguration();
             conf.locale = new Locale(preferredLocale);
-            res.updateConfiguration(conf, dm);
+             res.updateConfiguration(conf, dm);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -92,6 +93,16 @@ public class LoginActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setTitle("");
 
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+        float widthDp = displayMetrics.widthPixels / displayMetrics.density;
+        if (widthDp > 600)
+            // tablet
+            OrientationHelper.lockOrientationLandscape(LoginActivity.this);
+        else
+            // phone
+            OrientationHelper.lockOrientationPortrait(LoginActivity.this);
 
         context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
         initializeLoginFields();
@@ -327,7 +338,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goToHome() {
-        UzazniSalamaApplication.setCrashlyticsUser(context);
+        UzaziSalamaApplication.setCrashlyticsUser(context);
         startActivity(new Intent(this, NativeHomeActivity.class));
         finish();
     }

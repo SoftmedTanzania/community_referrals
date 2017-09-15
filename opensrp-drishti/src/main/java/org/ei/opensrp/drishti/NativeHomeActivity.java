@@ -20,6 +20,8 @@ import org.ei.opensrp.drishti.Anc.Anc1handler;
 import org.ei.opensrp.drishti.Anc.Anc2handler;
 import org.ei.opensrp.drishti.Anc.Anc3handler;
 import org.ei.opensrp.drishti.Anc.Anc4handler;
+import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
+import org.ei.opensrp.drishti.util.CustomContext;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.service.PendingFormSubmissionService;
 import org.ei.opensrp.sync.SyncAfterFetchListener;
@@ -95,7 +97,7 @@ public class NativeHomeActivity extends SecuredActivity {
     @Override
     protected void onCreation() {
         setContentView(R.layout.smart_registers_home);
-        navigationController = new NavigationController(this,anmController);
+        navigationController = new NavigationController(this, anmController);
         setupViews();
         initialize();
         DisplayFormFragment.formInputErrorMessage = getResources().getString(R.string.forminputerror);
@@ -155,7 +157,8 @@ public class NativeHomeActivity extends SecuredActivity {
         task.fetch(new NativeAfterANMDetailsFetchListener() {
             @Override
             public void afterFetch(HomeContext anmDetails) {
-                updateRegisterCounts(anmDetails);
+                // TODO: 9/14/17 update counts after fetch
+               // updateRegisterCounts(anmDetails);
             }
         });
     }
@@ -168,12 +171,20 @@ public class NativeHomeActivity extends SecuredActivity {
                 SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
 
 
-                CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
-                if(commonRepository!=null) {
-                    Cursor anccountcursor = context().commonrepository("wazazi_salama_mother").RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("wazazi_salama_mother", "(wazazi_salama_mother.Is_PNC is null or wazazi_salama_mother.Is_PNC = '0') and wazazi_salama_mother.MOTHERS_NAME is not NUll  AND wazazi_salama_mother.MOTHERS_NAME != \"\"  AND wazazi_salama_mother.details  LIKE '%\"IS_VALID\":\"1\"%'"));
-                    anccountcursor.moveToFirst();
-                    anccount = anccountcursor.getInt(0);
-                    anccountcursor.close();
+//                CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
+//                if(commonRepository!=null) {
+//                    Cursor anccountcursor = context().commonrepository("wazazi_salama_mother").RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("wazazi_salama_mother", "(wazazi_salama_mother.Is_PNC is null or wazazi_salama_mother.Is_PNC = '0') and wazazi_salama_mother.MOTHERS_NAME is not NUll  AND wazazi_salama_mother.MOTHERS_NAME != \"\"  AND wazazi_salama_mother.details  LIKE '%\"IS_VALID\":\"1\"%'"));
+//                    anccountcursor.moveToFirst();
+//                    anccount = anccountcursor.getInt(0);
+//                    anccountcursor.close();
+
+
+                CustomMotherRepository motherRepository = new CustomContext().getCustomMotherRepo("wazazi_salama_mother");
+                if (motherRepository != null) {
+                    Cursor ancCountCursor = motherRepository.RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("wazazi_salama_mother", "(wazazi_salama_mother.Is_PNC is null or wazazi_salama_mother.Is_PNC = '0') and wazazi_salama_mother.MOTHERS_NAME is not NUll  AND wazazi_salama_mother.MOTHERS_NAME != \"\"  AND wazazi_salama_mother.details  LIKE '%\"IS_VALID\":\"1\"%'"));
+                    ancCountCursor.moveToFirst();
+                    anccount = ancCountCursor.getInt(0);
+                    ancCountCursor.close();
 
 
 //                Cursor pnccountcursor = context().commonrepository("mcaremother").RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("mcaremother","mcaremother.Is_PNC = '1' and mcaremother.FWWOMFNAME is not NUll  AND mcaremother.FWWOMFNAME != \"\"      AND mcaremother.details  LIKE '%\"FWWOMVALID\":\"1\"%'"));
@@ -195,7 +206,7 @@ public class NativeHomeActivity extends SecuredActivity {
                         }
                     };
                     mainHandler.post(myRunnable);
-                }else{
+                } else {
 
                 }
             }
@@ -318,20 +329,21 @@ public class NativeHomeActivity extends SecuredActivity {
             }
         }
     };
+
     class pncControllerfiltermap extends ControllerFilterMap {
 
         @Override
         public boolean filtermapLogic(CommonPersonObject commonPersonObject) {
             boolean returnvalue = false;
-            if(commonPersonObject.getDetails().get("IS_VALID") != null){
-                if(commonPersonObject.getDetails().get("IS_VALID").equalsIgnoreCase("1")){
+            if (commonPersonObject.getDetails().get("IS_VALID") != null) {
+                if (commonPersonObject.getDetails().get("IS_VALID").equalsIgnoreCase("1")) {
                     returnvalue = true;
-                    if(commonPersonObject.getDetails().get("Is_PNC")!=null){
-                        if(commonPersonObject.getDetails().get("Is_PNC").equalsIgnoreCase("1")){
+                    if (commonPersonObject.getDetails().get("Is_PNC") != null) {
+                        if (commonPersonObject.getDetails().get("Is_PNC").equalsIgnoreCase("1")) {
                             returnvalue = true;
                         }
 
-                    }else{
+                    } else {
                         returnvalue = false;
                     }
                 }
@@ -340,37 +352,37 @@ public class NativeHomeActivity extends SecuredActivity {
             return returnvalue;
         }
     }
-    class ancControllerfiltermap extends ControllerFilterMap{
+
+    class ancControllerfiltermap extends ControllerFilterMap {
 
         @Override
         public boolean filtermapLogic(CommonPersonObject commonPersonObject) {
             boolean returnvalue = false;
-            if(commonPersonObject.getDetails().get("IS_VALID") != null){
-                if(commonPersonObject.getDetails().get("IS_VALID").equalsIgnoreCase("1")){
+            if (commonPersonObject.getDetails().get("IS_VALID") != null) {
+                if (commonPersonObject.getDetails().get("IS_VALID").equalsIgnoreCase("1")) {
                     returnvalue = true;
-                    if(commonPersonObject.getDetails().get("Is_PNC")!=null){
-                        if(commonPersonObject.getDetails().get("Is_PNC").equalsIgnoreCase("1")){
+                    if (commonPersonObject.getDetails().get("Is_PNC") != null) {
+                        if (commonPersonObject.getDetails().get("Is_PNC").equalsIgnoreCase("1")) {
                             returnvalue = false;
                         }
 
                     }
                 }
             }
-            Log.v("the filter",""+returnvalue);
+            Log.v("the filter", "" + returnvalue);
             return returnvalue;
         }
     }
 
 
-
-    public  boolean backUpDataBase(){
+    public boolean backUpDataBase() {
         boolean result = true;
 
         // Source path in the application database folder
         String appDbPath = "/data/data/com.my.application/databases/" + DATABASE_NAME;
 
         // Destination Path to the sdcard app folder
-        String sdFolder =  Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + DATABASE_NAME;
+        String sdFolder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + DATABASE_NAME;
 
 
         InputStream myInput = null;
@@ -384,7 +396,7 @@ public class NativeHomeActivity extends SecuredActivity {
             //transfer bytes from the inputfile to the outputfile
             byte[] buffer = new byte[1024];
             int length;
-            while ((length = myInput.read(buffer))>0){
+            while ((length = myInput.read(buffer)) > 0) {
                 myOutput.write(buffer, 0, length);
             }
         } catch (IOException e) {
@@ -393,14 +405,15 @@ public class NativeHomeActivity extends SecuredActivity {
         } finally {
             try {
                 //Close the streams
-                if(myOutput!=null){
+                if (myOutput != null) {
                     myOutput.flush();
                     myOutput.close();
                 }
-                if(myInput!=null){
+                if (myInput != null) {
                     myInput.close();
                 }
-            } catch (IOException e) { }
+            } catch (IOException e) {
+            }
         }
 
         return result;

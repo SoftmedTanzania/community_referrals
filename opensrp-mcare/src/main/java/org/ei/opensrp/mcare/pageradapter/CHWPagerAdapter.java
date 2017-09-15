@@ -4,19 +4,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import org.ei.opensrp.mcare.fragment.AncRegister1stFragment;
-import org.ei.opensrp.mcare.fragment.AncRegister2ndFragment;
 import org.ei.opensrp.mcare.fragment.CHWFollowUpFragment;
 import org.ei.opensrp.mcare.fragment.CHWRegistrationFragment;
 
 
 /**
- * Created by ali on 8/22/17.
+ * Created by martha on 8/22/17.
  */
 
-public class CHWRegisterPagerAdapter extends FragmentPagerAdapter {
+public class CHWPagerAdapter extends FragmentPagerAdapter {
 
-    public CHWRegisterPagerAdapter(FragmentManager fm) {
+    public CHWPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
@@ -24,10 +22,10 @@ public class CHWRegisterPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new CHWRegistrationFragment();
+                return new CHWFollowUpFragment() ;
 
             case 1:
-                return new CHWFollowUpFragment();
+                return new CHWRegistrationFragment();
             default:
                 return null;
         }

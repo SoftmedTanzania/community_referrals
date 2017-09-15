@@ -11,31 +11,48 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.drishti.util.EDDCalculator;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 
+import fr.ganfra.materialspinner.MaterialSpinner;
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
 public class AncRegister1stFragment extends Fragment {
 
-    public static TextView textDate, textPhone, textDateLNMP;
+    TextView textDate, textPhone, textDateLNMP, textEDD;
     LinearLayout layoutDatePick, layoutEditPhone;
     CardView cardDatePickLNMP;
-    public static EditText editTextMotherName, editTextMotherId, editTextMotherAge,
-            editTextHeight, editTextPregCount, editTextBirthCount, editTextChildrenCount;
-    public static  RadioGroup radioGroupPregnancyAge;
+    EditText editTextMotherName, editTextMotherId, editTextMotherAge,
+            editTextHeight, editTextPregCount, editTextBirthCount, editTextChildrenCount,
+            editTextDiscountId, editTextMotherOccupation, editTextPhysicalAddress,
+            editTextHusbandName, editTextHusbandOccupation;
+    RadioGroup radioGroupPregnancyAge;
+    public static MaterialSpinner spinnerMotherEducation, spinnerHusbandEducation;
+    private ArrayAdapter<String> educationAdapter;
 
     private Calendar today;
+    private List<String> educationList = new ArrayList<>();
+    private long edd, lnmp;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
     public AncRegister1stFragment() {
@@ -46,6 +63,12 @@ public class AncRegister1stFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         today = Calendar.getInstance();
+
+        educationList.add("Primary Education");
+        educationList.add("Ordinary Secondary Education");
+        educationList.add("Advanced Secondary Education");
+        educationList.add("College Education");
+        educationList.add("Higher Education");
     }
 
     @Override
@@ -57,6 +80,7 @@ public class AncRegister1stFragment extends Fragment {
         textDate = (TextView) fragmentView.findViewById(R.id.textDate);
         textPhone = (TextView) fragmentView.findViewById(R.id.textPhone);
         textDateLNMP = (TextView) fragmentView.findViewById(R.id.textDateLNMP);
+        textEDD = (TextView) fragmentView.findViewById(R.id.textEDD);
         layoutDatePick = (LinearLayout) fragmentView.findViewById(R.id.layoutDatePick);
         layoutEditPhone = (LinearLayout) fragmentView.findViewById(R.id.layoutEditPhone);
         cardDatePickLNMP = (CardView) fragmentView.findViewById(R.id.cardPickDateLNMP);
@@ -68,6 +92,44 @@ public class AncRegister1stFragment extends Fragment {
         editTextPregCount = (EditText) fragmentView.findViewById(R.id.editTextPregCount);
         editTextBirthCount = (EditText) fragmentView.findViewById(R.id.editTextBirthCount);
         editTextChildrenCount = (EditText) fragmentView.findViewById(R.id.editTextChildrenCount);
+        editTextDiscountId = (EditText) fragmentView.findViewById(R.id.editTextDiscountId);
+        editTextMotherOccupation = (EditText) fragmentView.findViewById(R.id.editTextMotherOccupation);
+        editTextPhysicalAddress = (EditText) fragmentView.findViewById(R.id.editTextPhysicalAddress);
+        editTextHusbandName = (EditText) fragmentView.findViewById(R.id.editTextHusbandName);
+        editTextHusbandOccupation = (EditText) fragmentView.findViewById(R.id.editTextHusbandOccupation);
+
+        educationAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, educationList);
+        educationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinnerMotherEducation = (MaterialSpinner) fragmentView.findViewById(R.id.spinnerMotherEducation);
+        spinnerHusbandEducation = (MaterialSpinner) fragmentView.findViewById(R.id.spinnerHusbandEducation);
+        spinnerMotherEducation.setAdapter(educationAdapter);
+        spinnerHusbandEducation.setAdapter(educationAdapter);
+
+        spinnerMotherEducation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i >= 0)
+                    spinnerMotherEducation.setFloatingLabelText("Elimu Ya Mama");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        spinnerHusbandEducation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i >= 0)
+                    spinnerHusbandEducation.setFloatingLabelText("Elimu Ya Mume/Mwenza");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
 
         radioGroupPregnancyAge = (RadioGroup) fragmentView.findViewById(R.id.radioGroupPregnancyAge);
 
@@ -114,8 +176,13 @@ public class AncRegister1stFragment extends Fragment {
                 if (id == R.id.textDate)
                     textDate.setText(dateFormat.format(pickedDate.getTimeInMillis()));
 
-                else if (id == R.id.textDateLNMP)
-                    textDateLNMP.setText(dateFormat.format(pickedDate.getTimeInMillis()));
+                else if (id == R.id.textDateLNMP) {
+                    lnmp = pickedDate.getTimeInMillis();
+                    textDateLNMP.setText(dateFormat.format(lnmp));
+                    // update edd
+                    edd = EDDCalculator.calculateEDDFromLNMP(lnmp);
+                    textEDD.setText(dateFormat.format(edd));
+                }
             }
         };
 
@@ -186,17 +253,32 @@ public class AncRegister1stFragment extends Fragment {
                 || TextUtils.isEmpty(editTextBirthCount.getText())
                 || TextUtils.isEmpty(editTextChildrenCount.getText())
                 || TextUtils.isEmpty(textPhone.getText())
-                || TextUtils.isEmpty(textDateLNMP.getText())) {
+                || TextUtils.isEmpty(textDateLNMP.getText())
+                || TextUtils.isEmpty(editTextDiscountId.getText())
+                || TextUtils.isEmpty(editTextMotherOccupation.getText())
+                || TextUtils.isEmpty(editTextPhysicalAddress.getText())
+                || TextUtils.isEmpty(editTextHusbandName.getText())
+                || TextUtils.isEmpty(editTextHusbandOccupation.getText())) {
 
-            Toast.makeText(getActivity(),
-                    "Tafadhali Jaza taarifa zote muhimu",
-                    Toast.LENGTH_LONG).show();
+            makeToast("Tafadhali jaza taarifa zote muhimu");
             return false;
 
-        } else if (radioGroupPregnancyAge.getCheckedRadioButtonId() == -1)
+        } else if (radioGroupPregnancyAge.getCheckedRadioButtonId() == -1) {
             // no radio checked
+            makeToast("Tafadhali chagua umri wa ujauzito.");
             return false;
-        else
+
+        } else if (spinnerMotherEducation.getSelectedItemPosition() < 0
+                || spinnerHusbandEducation.getSelectedItemPosition() < 0) {
+
+            makeToast("Tafadhali chagua elimu ya mama na mwenza.");
+            return false;
+
+        } else if ((int) lnmp == 0) {
+            makeToast("Tafadhali chagua tarehe ya LNMP.");
+            return false;
+
+        } else
             // all good
             return true;
     }
@@ -209,11 +291,26 @@ public class AncRegister1stFragment extends Fragment {
         mom.setPhone(textPhone.getText().toString());
         mom.setAge(Integer.valueOf(editTextMotherAge.getText().toString()));
         mom.setHeight(Integer.valueOf(editTextHeight.getText().toString()));
-        mom.setPregnancyCount(Integer.valueOf(editTextPregCount.getText().toString()));
-        mom.setBirthCount(Integer.valueOf(editTextBirthCount.getText().toString()));
-        mom.setChildrenCount(Integer.valueOf(editTextChildrenCount.getText().toString()));
+        mom.setPreviousFertilityCount(Integer.valueOf(editTextPregCount.getText().toString()));
+        mom.setSuccessfulBirths(Integer.valueOf(editTextBirthCount.getText().toString()));
+        mom.setLivingChildren(Integer.valueOf(editTextChildrenCount.getText().toString()));
         mom.setAbove20WeeksPregnant(radioGroupPregnancyAge.getCheckedRadioButtonId() == R.id.radioAbove20);
+        mom.setDiscountId(editTextDiscountId.getText().toString());
+        mom.setEducation(spinnerMotherEducation.getSelectedItem().toString());
+        mom.setOccupation(editTextMotherOccupation.getText().toString());
+        mom.setPhysicalAddress(editTextPhysicalAddress.getText().toString());
+        mom.setHusbandName(editTextHusbandName.getText().toString());
+        mom.setHusbandEducation(spinnerHusbandEducation.getSelectedItem().toString());
+        mom.setHusbandOccupation(editTextHusbandOccupation.getText().toString());
+        mom.setDateLNMP(lnmp);
+        mom.setEdd(edd);
 
         return mom;
+    }
+
+    private void makeToast(String message) {
+        Toast.makeText(getActivity(),
+                message,
+                Toast.LENGTH_LONG).show();
     }
 }

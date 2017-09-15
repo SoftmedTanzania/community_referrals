@@ -3,6 +3,7 @@ package org.ei.opensrp.drishti.Fragments;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.database.Cursor;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -20,16 +21,19 @@ import org.ei.opensrp.commonregistry.ControllerFilterMap;
 import org.ei.opensrp.cursoradapter.CursorCommonObjectFilterOption;
 import org.ei.opensrp.cursoradapter.CursorCommonObjectSort;
 import org.ei.opensrp.cursoradapter.CursorFilterOption;
-import org.ei.opensrp.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
 import org.ei.opensrp.drishti.Anc.AncServiceModeOption;
 import org.ei.opensrp.drishti.AncDetailActivity;
 import org.ei.opensrp.drishti.AncFollowUpFormActivity;
+import org.ei.opensrp.drishti.AncRegisterListAdapter;
 import org.ei.opensrp.drishti.AncSmartRegisterActivity;
 import org.ei.opensrp.drishti.LoginActivity;
 import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
 import org.ei.opensrp.drishti.pageradapter.AncSmartClientsProvider;
+import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
+import org.ei.opensrp.drishti.util.CustomContext;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.util.StringUtil;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
@@ -289,29 +293,38 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     }
 
     public void initializeQueries() {
-        AncSmartClientsProvider hhscp = new AncSmartClientsProvider(getActivity(),
-                clientActionHandler, context().alertService());
+        // TODO: uncomment and initialize queeries the right way
+//        AncSmartClientsProvider clientsProvider = new AncSmartClientsProvider(getActivity(),
+//                clientActionHandler, context().alertService());
 
-        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, new CommonRepository("wazazi_salama_mother", new String[]{"MOTHERS_FIRST_NAME", "MOTHERS_LAST_NAME", "MOTHERS_LAST_MENSTRUATION_DATE", "MOTHERS_SORTVALUE", "MOTHERS_ID", "Is_PNC", "EXPECTED_DELIVERY_DATE", "PNC_STATUS"}));
+//        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, new CommonRepository("wazazi_salama_mother", new String[]{"MOTHERS_FIRST_NAME", "MOTHERS_LAST_NAME", "MOTHERS_LAST_MENSTRUATION_DATE", "MOTHERS_SORTVALUE", "MOTHERS_ID", "Is_PNC", "EXPECTED_DELIVERY_DATE", "PNC_STATUS"}));
+
+//        clientAdapter = new AncRegisterListAdapter(context(), null, clientsProvider, new CommonRepository("wazazi_salama_mother", new String[]{"MOTHERS_FIRST_NAME", "MOTHERS_LAST_NAME", "MOTHERS_LAST_MENSTRUATION_DATE", "MOTHERS_SORTVALUE", "MOTHERS_ID", "Is_PNC", "EXPECTED_DELIVERY_DATE", "PNC_STATUS"}));
+//        clientsView.setAdapter(clientsAdapter);
+
+//        setTablename("wazazi_salama_mother");
+//        SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder(ancMainCountWithJoins());
+//        countSelect = countqueryBUilder.mainCondition("(wazazi_salama_mother.Is_PNC is null or wazazi_salama_mother.Is_PNC = '0') and wazazi_salama_mother.MOTHERS_FIRST_NAME not null and wazazi_salama_mother.MOTHERS_FIRST_NAME != \"\"   AND wazazi_salama_mother.details  LIKE '%\"IS_VALID\":\"1\"%'");
+//        mainCondition = "(Is_PNC is null or Is_PNC = '0') and MOTHERS_FIRST_NAME not null and MOTHERS_FIRST_NAME != \"\"   AND details  LIKE '%\"IS_VALID\":\"1\"%'";
+//        super.CountExecute();
+//
+//        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder(ancMainSelectWithJoins());
+//        mainSelect = queryBUilder.mainCondition("(wazazi_salama_mother.Is_PNC is null or wazazi_salama_mother.Is_PNC = '0') and wazazi_salama_mother.MOTHERS_FIRST_NAME not null and wazazi_salama_mother.MOTHERS_FIRST_NAME != \"\"   AND wazazi_salama_mother.details  LIKE '%\"IS_VALID\":\"1\"%'");
+//        Sortqueries = sortBySortValue();
+//
+//        currentlimit = 20;
+//        currentoffset = 0;
+//
+//        super.filterandSortInInitializeQueries();
+//
+//
+//        updateSearchView();
+//        refresh();
+
+        CustomMotherRepository motherRepository = new CustomContext().getCustomMotherRepo("wazazi_salama_mother");
+        Cursor cursor = motherRepository.RawCustomQueryForAdapter("select * from wazazi_salama_mother");
+        clientAdapter = new AncRegisterListAdapter(context(), motherRepository, cursor);
         clientsView.setAdapter(clientAdapter);
-
-        setTablename("wazazi_salama_mother");
-        SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder(ancMainCountWithJoins());
-        countSelect = countqueryBUilder.mainCondition("(wazazi_salama_mother.Is_PNC is null or wazazi_salama_mother.Is_PNC = '0') and wazazi_salama_mother.MOTHERS_FIRST_NAME not null and wazazi_salama_mother.MOTHERS_FIRST_NAME != \"\"   AND wazazi_salama_mother.details  LIKE '%\"IS_VALID\":\"1\"%'");
-        mainCondition = "(Is_PNC is null or Is_PNC = '0') and MOTHERS_FIRST_NAME not null and MOTHERS_FIRST_NAME != \"\"   AND details  LIKE '%\"IS_VALID\":\"1\"%'";
-        super.CountExecute();
-
-        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder(ancMainSelectWithJoins());
-        mainSelect = queryBUilder.mainCondition("(wazazi_salama_mother.Is_PNC is null or wazazi_salama_mother.Is_PNC = '0') and wazazi_salama_mother.MOTHERS_FIRST_NAME not null and wazazi_salama_mother.MOTHERS_FIRST_NAME != \"\"   AND wazazi_salama_mother.details  LIKE '%\"IS_VALID\":\"1\"%'");
-        Sortqueries = sortBySortValue();
-
-        currentlimit = 20;
-        currentoffset = 0;
-
-        super.filterandSortInInitializeQueries();
-
-        updateSearchView();
-        refresh();
 
     }
 
@@ -495,8 +508,6 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     }
 
 
-
-
     //TODO Implement this method to save the current unsubmitted form data for future uses
     public void saveCurrentFormData() {
         Log.d(TAG, "Save the currentform data");
@@ -505,7 +516,7 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     private class ClientActionHandler implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Log.d("coze","onclick listener clicked");
+            Log.d("coze", "onclick listener clicked");
             switch (view.getId()) {
                 case R.id.profile_info_layout:
                     AncDetailActivity.ancclient = (CommonPersonObjectClient) view.getTag();
