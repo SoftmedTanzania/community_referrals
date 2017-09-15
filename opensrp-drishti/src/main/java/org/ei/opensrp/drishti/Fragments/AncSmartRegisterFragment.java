@@ -321,7 +321,7 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 //        updateSearchView();
 //        refresh();
 
-        CustomMotherRepository motherRepository = new CustomContext().getCustomMotherRepo("wazazi_salama_mother");
+        CommonRepository motherRepository =context().commonrepository("wazazi_salama_mother");
         Cursor cursor = motherRepository.RawCustomQueryForAdapter("select * from wazazi_salama_mother");
         clientAdapter = new AncRegisterListAdapter(context(), motherRepository, cursor);
         clientsView.setAdapter(clientAdapter);
