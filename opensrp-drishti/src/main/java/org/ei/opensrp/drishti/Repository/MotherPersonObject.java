@@ -49,12 +49,11 @@ public class MotherPersonObject {
         this.MOTHERS_LAST_MENSTRUATION_DATE = sdf.format(pregnantMom.getDateLNMP());
         this.EXPECTED_DELIVERY_DATE = sdf.format(pregnantMom.getEdd());
 
-        // TODO: pass on custructor and add these values
-//        this.MOTHERS_SORTVALUE = MOTHERS_SORTVALUE;
-//        this.type = type;
-//        this.IS_PNC = IS_PNC;
-//        this.IS_VALID = IS_VALID;
-//        this.FACILITY_ID = FACILITY_ID;
+        this.MOTHERS_SORTVALUE = "";
+        this.type = "1";
+        this.IS_PNC = "false";
+        this.IS_VALID = "true";
+        this.FACILITY_ID = pregnantMom.getFacilityId();
 
     }
 

@@ -214,7 +214,7 @@ public abstract class SecuredNativeSmartRegisterCursorAdapterFragment extends or
             @Override
             protected void onPostExecute(Void result) {
                 clientsView.setAdapter(listAdapter);
-                if(isAdded()) {
+                if (isAdded()) {
 //                    paginationViewHandler.refresh();
                     clientsProgressView.setVisibility(View.GONE);
                     clientsView.setVisibility(VISIBLE);
