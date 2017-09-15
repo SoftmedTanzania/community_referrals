@@ -255,8 +255,9 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                 mainCondition = "(Is_PNC is null or Is_PNC = '0') and MOTHERS_FIRST_NAME not null and MOTHERS_FIRST_NAME != \"\"   AND details  LIKE '%\"IS_VALID\":\"1\"%'";
 
                 getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
-                CountExecute();
-                filterandSortExecute();
+                // TODO: 9/15/17 uncomment to count execute and filter and sort
+                // CountExecute();
+                // filterandSortExecute();
 
             }
 
@@ -321,7 +322,7 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 //        updateSearchView();
 //        refresh();
 
-        CommonRepository motherRepository =context().commonrepository("wazazi_salama_mother");
+        CommonRepository motherRepository = context().commonrepository("wazazi_salama_mother");
         Cursor cursor = motherRepository.RawCustomQueryForAdapter("select * from wazazi_salama_mother");
 //        clientAdapter = new AncRegisterListAdapter(context(), motherRepository, cursor, getContext());
 //        clientsView.setAdapter(clientAdapter);

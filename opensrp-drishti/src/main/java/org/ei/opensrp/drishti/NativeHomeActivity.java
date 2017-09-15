@@ -22,6 +22,7 @@ import org.ei.opensrp.drishti.Anc.Anc3handler;
 import org.ei.opensrp.drishti.Anc.Anc4handler;
 import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
 import org.ei.opensrp.drishti.util.CustomContext;
+import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.service.PendingFormSubmissionService;
 import org.ei.opensrp.sync.SyncAfterFetchListener;
@@ -111,6 +112,9 @@ public class NativeHomeActivity extends SecuredActivity {
                 new Anc3handler());
         context().formSubmissionRouter().getHandlerMap().put("anc_reminder_visit_4",
                 new Anc4handler());
+
+        // orientation
+        OrientationHelper.setProperOrientationForDevice(NativeHomeActivity.this);
 
 
 //        context().formSubmissionRouter().getHandlerMap().put("mis_elco", new MIS_elco_form_handler());

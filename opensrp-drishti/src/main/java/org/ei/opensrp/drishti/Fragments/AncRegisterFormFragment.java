@@ -2,6 +2,7 @@ package org.ei.opensrp.drishti.Fragments;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
@@ -129,9 +130,10 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View view) {
                 //todo collect data from forms
-                if (((AncRegister1stFragment) pagerAdapter.getItem(0)).isFormSubmissionOk()) {
+                AncRegister1stFragment firstFragment = (AncRegister1stFragment) pagerAdapter.getItem(0);
+                if (firstFragment.isFormSubmissionOk()) {
                     // collect mother details from the 1st page
-                    pregnantMom = ((AncRegister1stFragment) pagerAdapter.getItem(0)).getPregnantMom();
+                    pregnantMom = firstFragment.getPregnantMom();
 
                     //todo check for checkboxes on the 2nd page then submit form
 

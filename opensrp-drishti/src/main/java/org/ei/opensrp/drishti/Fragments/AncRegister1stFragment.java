@@ -2,6 +2,7 @@ package org.ei.opensrp.drishti.Fragments;
 
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -39,20 +40,23 @@ import fr.ganfra.materialspinner.MaterialSpinner;
  */
 public class AncRegister1stFragment extends Fragment {
 
-    TextView textDate, textPhone, textDateLNMP, textEDD;
+    public static TextView textDate, textPhone, textDateLNMP, textEDD;
     LinearLayout layoutDatePick, layoutEditPhone;
     CardView cardDatePickLNMP;
-    EditText editTextMotherName, editTextMotherId, editTextMotherAge,
+    public static EditText editTextMotherName, editTextMotherId, editTextMotherAge,
             editTextHeight, editTextPregCount, editTextBirthCount, editTextChildrenCount,
             editTextDiscountId, editTextMotherOccupation, editTextPhysicalAddress,
             editTextHusbandName, editTextHusbandOccupation;
-    RadioGroup radioGroupPregnancyAge;
+    public static RadioGroup radioGroupPregnancyAge;
     public static MaterialSpinner spinnerMotherEducation, spinnerHusbandEducation;
     private ArrayAdapter<String> educationAdapter;
 
     private Calendar today;
     private List<String> educationList = new ArrayList<>();
-    private long edd, lnmp;
+    public String message = "";
+    public static long edd, lnmp;
+    public static Context context;
+    public static int motherEduSelection = -1, husbandEduSelection = -1;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
     public AncRegister1stFragment() {
@@ -69,6 +73,8 @@ public class AncRegister1stFragment extends Fragment {
         educationList.add("Advanced Secondary Education");
         educationList.add("College Education");
         educationList.add("Higher Education");
+
+        context = getContext();
     }
 
     @Override
@@ -109,8 +115,10 @@ public class AncRegister1stFragment extends Fragment {
         spinnerMotherEducation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i >= 0)
+                if (i >= 0) {
                     spinnerMotherEducation.setFloatingLabelText("Elimu Ya Mama");
+                    motherEduSelection = i;
+                }
             }
 
             @Override
@@ -121,14 +129,20 @@ public class AncRegister1stFragment extends Fragment {
         spinnerHusbandEducation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i >= 0)
+                if (i >= 0) {
                     spinnerHusbandEducation.setFloatingLabelText("Elimu Ya Mume/Mwenza");
+                    husbandEduSelection = i;
+
+                }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+
+        spinnerMotherEducation.setSelection(motherEduSelection);
+        spinnerHusbandEducation.setSelection(husbandEduSelection);
 
 
         radioGroupPregnancyAge = (RadioGroup) fragmentView.findViewById(R.id.radioGroupPregnancyAge);
@@ -260,22 +274,27 @@ public class AncRegister1stFragment extends Fragment {
                 || TextUtils.isEmpty(editTextHusbandName.getText())
                 || TextUtils.isEmpty(editTextHusbandOccupation.getText())) {
 
-            makeToast("Tafadhali jaza taarifa zote muhimu");
+            message = "Tafadhali jaza taarifa zote muhimu";
+            makeToast();
+
             return false;
 
         } else if (radioGroupPregnancyAge.getCheckedRadioButtonId() == -1) {
             // no radio checked
-            makeToast("Tafadhali chagua umri wa ujauzito.");
+            message = "Tafadhali chagua umri wa ujauzito.";
+            makeToast();
             return false;
 
         } else if (spinnerMotherEducation.getSelectedItemPosition() < 0
                 || spinnerHusbandEducation.getSelectedItemPosition() < 0) {
 
-            makeToast("Tafadhali chagua elimu ya mama na mwenza.");
+            message = "Tafadhali chagua elimu ya mama na mwenza.";
+            makeToast();
             return false;
 
         } else if ((int) lnmp == 0) {
-            makeToast("Tafadhali chagua tarehe ya LNMP.");
+            message = "Tafadhali chagua tarehe ya LNMP.";
+            makeToast();
             return false;
 
         } else
@@ -308,8 +327,8 @@ public class AncRegister1stFragment extends Fragment {
         return mom;
     }
 
-    private void makeToast(String message) {
-        Toast.makeText(getActivity(),
+    private void makeToast() {
+        Toast.makeText(context,
                 message,
                 Toast.LENGTH_LONG).show();
     }
