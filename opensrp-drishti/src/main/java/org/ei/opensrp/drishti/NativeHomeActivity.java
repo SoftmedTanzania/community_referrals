@@ -179,14 +179,6 @@ public class NativeHomeActivity extends SecuredActivity {
 //                    anccountcursor.close();
 
 
-                CustomMotherRepository motherRepository = new CustomContext().getCustomMotherRepo("wazazi_salama_mother");
-                if (motherRepository != null) {
-                    Cursor ancCountCursor = motherRepository.RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("wazazi_salama_mother", "(wazazi_salama_mother.Is_PNC is null or wazazi_salama_mother.Is_PNC = '0') and wazazi_salama_mother.MOTHERS_NAME is not NUll  AND wazazi_salama_mother.MOTHERS_NAME != \"\"  AND wazazi_salama_mother.details  LIKE '%\"IS_VALID\":\"1\"%'"));
-                    ancCountCursor.moveToFirst();
-                    anccount = ancCountCursor.getInt(0);
-                    ancCountCursor.close();
-
-
 //                Cursor pnccountcursor = context().commonrepository("mcaremother").RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("mcaremother","mcaremother.Is_PNC = '1' and mcaremother.FWWOMFNAME is not NUll  AND mcaremother.FWWOMFNAME != \"\"      AND mcaremother.details  LIKE '%\"FWWOMVALID\":\"1\"%'"));
 //                pnccountcursor.moveToFirst();
 //                pnccount= pnccountcursor.getInt(0);
@@ -206,9 +198,9 @@ public class NativeHomeActivity extends SecuredActivity {
                         }
                     };
                     mainHandler.post(myRunnable);
-                } else {
-
-                }
+//                } else {
+//
+//                }
             }
         }).start();
     }
