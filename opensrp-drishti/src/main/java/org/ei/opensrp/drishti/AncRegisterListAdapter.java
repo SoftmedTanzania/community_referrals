@@ -13,8 +13,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import org.ei.opensrp.Context;
-import org.ei.opensrp.commonregistry.CommonPersonObject;
-import org.ei.opensrp.commonregistry.CommonPersonObjectClient;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
@@ -34,7 +32,6 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
     private Context context;
     private Cursor cursor;
     private Gson gson = new Gson();
-    private CommonRepository customMotherRepository;
     private android.content.Context appContext;
     private List<MotherPersonObject> motherPersonList = new ArrayList<>();
 
@@ -42,23 +39,20 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
             TABLE_NAME = "wazazi_salama_mother";
 
 
-    public AncRegisterListAdapter(Context context, Cursor cursor, SmartRegisterCLientsProviderForCursorAdapter listItemProvider, CustomMotherRepository customMotherRepository) {
+    public AncRegisterListAdapter(Context context, Cursor cursor, SmartRegisterCLientsProviderForCursorAdapter listItemProvider, CustomMotherRepository commonRepository) {
 //        super(context, cursor);
 //        this.listItemProvider = listItemProvider;
         this.context = context;
-        this.customMotherRepository = customMotherRepository;
         this.cursor = cursor;
-        this.motherPersonList = customMotherRepository.readAllMotherForField(cursor, TABLE_NAME);
+        this.motherPersonList = commonRepository.readAllMotherForField(cursor, TABLE_NAME);
     }
 
-    public AncRegisterListAdapter(Context context, CustomMotherRepository customMotherRepository, Cursor cursor, android.content.Context appContext) {
-
+    public AncRegisterListAdapter(Context context, CommonRepository commonRepository, Cursor cursor, android.content.Context appContext) {
         this.context = context;
-        this.customMotherRepository = customMotherRepository;
-        this.motherPersonList = Utils.convertToMotherPersonObjectList(customMotherRepository.readAllcommonForField(cursor, TABLE_NAME));
+        this.motherPersonList = Utils.convertToMotherPersonObjectList(commonRepository.readAllcommonForField(cursor, TABLE_NAME));
         this.appContext = appContext;
 
-        Log.d(TAG, "repo count = " + customMotherRepository.count() + ", list count = " + motherPersonList.size());
+        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + motherPersonList.size());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -96,11 +90,6 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-//        CommonPersonObject personinlist = commonRepository.readAllcommonforCursorAdapter(cursor);
-//        CommonPersonObjectClient pClient = new CommonPersonObjectClient(personinlist.getCaseId(), personinlist.getDetails(), personinlist.getDetails().get("FWHOHFNAME"));
-//        pClient.setColumnmaps(personinlist.getColumnmaps());
-        // listItemProvider.getView(pClient, view);
-
         // todo get item form list
         MotherPersonObject motherPersonObject = motherPersonList.get(position);
         PregnantMom mom = gson.fromJson(motherPersonObject.getDetails(), PregnantMom.class);
@@ -115,7 +104,7 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
 
     @Override
     public int getItemCount() {
-        //  int itemCount = (int) customMotherRepository.count();
+        //  int itemCount = (int) commonRepository.count();
         int itemCount = motherPersonList.size();
         Log.d(TAG, "item count = " + itemCount);
         return itemCount;

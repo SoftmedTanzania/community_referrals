@@ -323,8 +323,8 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
         CommonRepository motherRepository =context().commonrepository("wazazi_salama_mother");
         Cursor cursor = motherRepository.RawCustomQueryForAdapter("select * from wazazi_salama_mother");
-        clientAdapter = new AncRegisterListAdapter(context(), motherRepository, cursor);
-        clientsView.setAdapter(clientAdapter);
+//        clientAdapter = new AncRegisterListAdapter(context(), motherRepository, cursor, getContext());
+//        clientsView.setAdapter(clientAdapter);
 
     }
 
