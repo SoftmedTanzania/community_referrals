@@ -36,6 +36,7 @@ import org.ei.opensrp.view.dialog.DialogOption;
 import org.ei.opensrp.view.dialog.DialogOptionMapper;
 import org.ei.opensrp.view.dialog.DialogOptionModel;
 import org.ei.opensrp.view.dialog.EditOption;
+import org.ei.opensrp.view.dialog.LocationSelectorDialogFragment;
 import org.ei.opensrp.view.dialog.OpenFormOption;
 import org.ei.opensrp.view.viewpager.OpenSRPViewPager;
 import org.json.JSONObject;
@@ -52,7 +53,7 @@ import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
-public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
+public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener {
     private static final String TAG = AncSmartRegisterActivity.class.getSimpleName();
 
     private SmartRegisterClientsProvider clientProvider = null;
@@ -193,6 +194,11 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         } else {
             return new DialogOption[]{};
         }
+    }
+
+    @Override
+    public void OnLocationSelected(String locationSelected) {
+
     }
 
     private class EditDialogOptionModelfornbnf implements DialogOptionModel {

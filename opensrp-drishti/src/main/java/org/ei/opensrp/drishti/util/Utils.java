@@ -19,6 +19,15 @@ package org.ei.opensrp.drishti.util;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 
+import com.google.gson.Gson;
+
+import org.ei.opensrp.commonregistry.CommonPersonObject;
+import org.ei.opensrp.drishti.DataModels.PregnantMom;
+import org.ei.opensrp.drishti.Repository.MotherPersonObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Class containing some static utility methods.
@@ -49,6 +58,23 @@ public class Utils {
 
     public static boolean hasJellyBean() {
         return Build.VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN;
+    }
+
+
+    public static MotherPersonObject convertToMotherPersonObject(CommonPersonObject commonPersonObject){
+        return new MotherPersonObject(commonPersonObject.getColumnmaps().get("id"),commonPersonObject.getColumnmaps().get("relationalid"), new Gson().fromJson(commonPersonObject.getColumnmaps().get("details"), PregnantMom.class));
+    }
+
+
+    public static List<MotherPersonObject> convertToMotherPersonObjectList(List<CommonPersonObject> commonPersonObjectsList){
+        List<MotherPersonObject> mothers = new ArrayList<>();
+        for (CommonPersonObject common : commonPersonObjectsList) {
+            mothers.add(convertToMotherPersonObject(common));
+        }
+
+
+
+        return mothers;
     }
 
 }
