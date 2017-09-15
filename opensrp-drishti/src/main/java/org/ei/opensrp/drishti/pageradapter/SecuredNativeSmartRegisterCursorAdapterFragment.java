@@ -199,7 +199,7 @@ public abstract class SecuredNativeSmartRegisterCursorAdapterFragment extends or
                 CustomMotherRepository motherRepository = new CustomContext().getCustomMotherRepo("wazazi_salama_mother");
                 String query = "";
                 Cursor cursor = motherRepository.RawCustomQueryForAdapter(query);
-                listAdapter = new AncRegisterListAdapter(context(), motherRepository, cursor);
+                listAdapter = new AncRegisterListAdapter(context(), motherRepository, cursor, getContext());
 
                 return null;
             }
