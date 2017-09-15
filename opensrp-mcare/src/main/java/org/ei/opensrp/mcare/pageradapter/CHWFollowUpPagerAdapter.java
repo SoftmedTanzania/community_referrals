@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.ei.opensrp.mcare.R;
-import org.ei.opensrp.mcare.chw.CHWRegisterActivity;
+import org.ei.opensrp.mcare.chw.CHWSmartRegisterActivity;
 import org.ei.opensrp.mcare.datamodels.ChwFollowUpMother;
 
 import java.util.List;
@@ -98,7 +98,7 @@ public class CHWFollowUpPagerAdapter extends
                 @Override
                 public void onClick(View view) {
                     // pass mother to show details
-                    ((CHWRegisterActivity) mContext).showFollowUpDetailsDialog(fMother.get(getAdapterPosition()));
+                    ((CHWSmartRegisterActivity) mContext).showFollowUpDetailsDialog(fMother.get(getAdapterPosition()));
                 }
             });
 
@@ -114,7 +114,7 @@ public class CHWFollowUpPagerAdapter extends
     }
     public void showPop(final int position, View anchor) {
 
-        PopupMenu popupMenu = new PopupMenu((CHWRegisterActivity) mContext, anchor);
+        PopupMenu popupMenu = new PopupMenu((CHWSmartRegisterActivity) mContext, anchor);
         // inflate menu xml res
         popupMenu.getMenuInflater().inflate(R.menu.menu_follow_up_details, popupMenu.getMenu());
         popupMenu.show();
@@ -126,7 +126,7 @@ public class CHWFollowUpPagerAdapter extends
                 switch (item.getItemId()) {
                     // TODO: handle option selected
                     case R.id.popOpt1:
-                        ((CHWRegisterActivity) mContext).showFollowUpFormDialog(fMother.get(position));
+                        ((CHWSmartRegisterActivity) mContext).showFollowUpFormDialog(fMother.get(position));
                         return true;
 
                     case R.id.popOpt2:

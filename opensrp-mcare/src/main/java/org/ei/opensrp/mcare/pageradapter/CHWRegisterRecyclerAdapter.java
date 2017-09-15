@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.ei.opensrp.mcare.R;
-import org.ei.opensrp.mcare.chw.CHWRegisterActivity;
+import org.ei.opensrp.mcare.chw.CHWSmartRegisterActivity;
 import org.ei.opensrp.mcare.datamodels.PreRegisteredMother;
 
 import java.util.List;
@@ -87,7 +87,7 @@ public class CHWRegisterRecyclerAdapter extends
                 @Override
                 public void onClick(View view) {
                     // pass mother to show details
-                    ((CHWRegisterActivity) mContext).showPreRegistrationDetailsDialog(mothers.get(getAdapterPosition()));
+                    ((CHWSmartRegisterActivity) mContext).showPreRegistrationDetailsDialog(mothers.get(getAdapterPosition()));
                 }
             });
 
@@ -106,7 +106,7 @@ public class CHWRegisterRecyclerAdapter extends
 
     public void showPop(final int position, View anchor) {
 
-        PopupMenu popupMenu = new PopupMenu((CHWRegisterActivity) mContext, anchor);
+        PopupMenu popupMenu = new PopupMenu((CHWSmartRegisterActivity) mContext, anchor);
         // inflate menu xml res
         popupMenu.getMenuInflater().inflate(R.menu.menu_popup_details, popupMenu.getMenu());
         popupMenu.show();
@@ -118,7 +118,7 @@ public class CHWRegisterRecyclerAdapter extends
                 switch (item.getItemId()) {
                     // TODO: handle option selected
                     case R.id.popOpt1:
-                        ((CHWRegisterActivity) mContext).showPreRegistrationVisitDialog(mothers.get(position));
+                        ((CHWSmartRegisterActivity) mContext).showPreRegistrationVisitDialog(mothers.get(position));
                         return true;
 
                     case R.id.popOpt2:
@@ -127,7 +127,7 @@ public class CHWRegisterRecyclerAdapter extends
 
                     case R.id.popOpt3:
                         // delete mother
-                        ((CHWRegisterActivity) mContext).confirmDelete();
+                        ((CHWSmartRegisterActivity) mContext).confirmDelete();
                         return true;
 
                     default:

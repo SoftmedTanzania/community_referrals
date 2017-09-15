@@ -17,6 +17,7 @@ import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectClient;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
+import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.util.Utils;
@@ -51,7 +52,7 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
     }
 
     public AncRegisterListAdapter(Context context, CustomMotherRepository customMotherRepository, Cursor cursor, android.content.Context appContext) {
-    public AncRegisterListAdapter(Context context, CommonRepository customMotherRepository, Cursor cursor) {
+
         this.context = context;
         this.customMotherRepository = customMotherRepository;
         this.motherPersonList = Utils.convertToMotherPersonObjectList(customMotherRepository.readAllcommonForField(cursor, TABLE_NAME));
