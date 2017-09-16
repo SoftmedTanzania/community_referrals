@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.ei.opensrp.drishti.AncSmartRegisterActivity;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.chw.CHWSmartRegisterActivity;
 import org.ei.opensrp.drishti.DataModels.ChwFollowUpMother;
@@ -98,7 +99,7 @@ public class CHWFollowUpPagerAdapter extends
                 @Override
                 public void onClick(View view) {
                     // pass mother to show details
-                    ((CHWSmartRegisterActivity) mContext).showFollowUpDetailsDialog(fMother.get(getAdapterPosition()));
+                    ((AncSmartRegisterActivity) mContext).showFollowUpDetailsDialog(fMother.get(getAdapterPosition()));
                 }
             });
 
@@ -126,7 +127,7 @@ public class CHWFollowUpPagerAdapter extends
                 switch (item.getItemId()) {
                     // TODO: handle option selected
                     case R.id.popOpt1:
-                        ((CHWSmartRegisterActivity) mContext).showFollowUpFormDialog(fMother.get(position));
+                        ((AncSmartRegisterActivity) mContext).showFollowUpFormDialog(fMother.get(position));
                         return true;
 
                     case R.id.popOpt2:

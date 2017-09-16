@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
 import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
+import org.ei.opensrp.drishti.Fragments.CHWRegisterFormFragment;
 import org.ei.opensrp.view.fragment.DisplayFormFragment;
 
 /**
@@ -45,6 +46,10 @@ public class BaseRegisterActivityPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 Log.d(TAG,"setting AncRegisterFormFragment");
                 fragment = new AncRegisterFormFragment();
+                break;
+            case 2:
+                Log.d(TAG,"setting Chw fragment");
+                fragment = new CHWRegisterFormFragment();
                 break;
             default:
                 String formName = dialogOptions[position - offset]; // account for the base fragment
