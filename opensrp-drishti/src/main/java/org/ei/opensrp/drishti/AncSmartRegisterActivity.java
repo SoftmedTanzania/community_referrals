@@ -97,6 +97,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private String[] buildFormNameList() {
         List<String> formNames = new ArrayList<String>();
         formNames.add("pregnant_mothers_registration");
+        formNames.add("pregnant_mothers_pre_registration");
         formNames.add("anc_reminder_visit_1");
         formNames.add("anc_reminder_visit_2");
         formNames.add("anc_reminder_visit_3");
@@ -246,7 +247,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                     data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
-                AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) getDisplayFormFragmentAtIndex(2);
+                AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) getDisplayFormFragmentAtIndex(formIndex);
                 if (displayFormFragment != null) {
                     Log.d(TAG, "form data = " + data);
                     displayFormFragment.setFormData(data);
