@@ -32,6 +32,7 @@ import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
 import org.ei.opensrp.drishti.Fragments.AncSmartRegisterFragment;
+import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
 import org.ei.opensrp.drishti.pageradapter.BaseRegisterActivityPagerAdapter;
@@ -48,7 +49,6 @@ import org.ei.opensrp.view.dialog.DialogOption;
 import org.ei.opensrp.view.dialog.DialogOptionMapper;
 import org.ei.opensrp.view.dialog.DialogOptionModel;
 import org.ei.opensrp.view.dialog.EditOption;
-import org.ei.opensrp.view.dialog.LocationSelectorDialogFragment;
 import org.ei.opensrp.view.dialog.OpenFormOption;
 import org.ei.opensrp.view.viewpager.OpenSRPViewPager;
 import org.json.JSONObject;
@@ -380,7 +380,14 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     @Override
     public void OnLocationSelected(String locationSelected) {
         // set registration fragment
-        mPager.setCurrentItem(1, true);
+        Log.d(TAG,"Location selected");
+
+    }
+
+    public void StartRegistrationFragment(String formName, String entityId, String metaData){
+        if(formName.equals("pregnant_mothers_registration")){
+            mPager.setCurrentItem(1, true);
+        }
     }
 
     private class EditDialogOptionModelfornbnf implements DialogOptionModel {
