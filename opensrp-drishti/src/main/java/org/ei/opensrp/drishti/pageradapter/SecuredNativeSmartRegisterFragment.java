@@ -60,6 +60,7 @@ public abstract class SecuredNativeSmartRegisterFragment extends SecuredFragment
     public static final List<? extends DialogOption> DEFAULT_FILTER_OPTIONS = asList(new AllClientsFilter());
 
     public RecyclerView clientsView;
+    public RecyclerView chwView;
     public ProgressBar clientsProgressView;
     public TextView serviceModeView;
     public TextView appliedVillageFilterView;

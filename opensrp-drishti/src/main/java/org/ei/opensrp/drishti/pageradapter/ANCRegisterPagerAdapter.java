@@ -14,6 +14,9 @@ import org.ei.opensrp.drishti.Fragments.AncRegister2ndFragment;
 
 public class ANCRegisterPagerAdapter extends FragmentPagerAdapter {
 
+    private AncRegister1stFragment ancRegister1stFragment;
+    private AncRegister2ndFragment ancRegister2ndFragment;
+
     public ANCRegisterPagerAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -22,10 +25,16 @@ public class ANCRegisterPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new AncRegister1stFragment();
+                if (ancRegister1stFragment == null)
+                    ancRegister1stFragment = new AncRegister1stFragment();
+
+                return ancRegister1stFragment;
 
             case 1:
-                return new AncRegister2ndFragment();
+                if (ancRegister2ndFragment == null)
+                    ancRegister2ndFragment = new AncRegister2ndFragment();
+
+                return ancRegister2ndFragment;
             default:
                 return null;
         }

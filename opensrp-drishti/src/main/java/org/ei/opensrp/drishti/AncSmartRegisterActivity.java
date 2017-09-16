@@ -1,6 +1,7 @@
 package org.ei.opensrp.drishti;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
@@ -11,12 +12,23 @@ import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import org.ei.opensrp.Context;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
 import org.ei.opensrp.commonregistry.CommonPersonObjectController;
+import org.ei.opensrp.drishti.DataModels.ChwFollowUpMother;
+import org.ei.opensrp.drishti.DataModels.PreRegisteredMother;
+import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
 import org.ei.opensrp.drishti.Fragments.AncSmartRegisterFragment;
@@ -24,7 +36,7 @@ import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
 import org.ei.opensrp.drishti.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
-import org.ei.opensrp.drishti.util.CustomContext;
+import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.util.FormUtils;
@@ -67,7 +79,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private int currentPage;
 
     private String[] formNames = new String[]{};
-    private Fragment mBaseFragment = null;
+    private Fragment mBaseFragment;
     private Gson gson = new Gson();
 
     @Override
@@ -76,7 +88,10 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+        // orientation
+        OrientationHelper.setProperOrientationForDevice(AncSmartRegisterActivity.this);
 
         formNames = this.buildFormNameList();
         mBaseFragment = new AncSmartRegisterFragment();
@@ -89,11 +104,176 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void onPageSelected(int position) {
                 currentPage = position;
-                onPageChanged(position);
+                // onPageChanged(position);
             }
         });
+
+//        mPager.setCurrentItem(2);
+
     }
 
+    public void showPreRegistrationDetailsDialog(PreRegisteredMother mother) {
+
+        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
+        dialogBuilder.setView(dialogView)
+                .setCancelable(false);
+
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+        ImageView cancel = (ImageView) dialogView.findViewById(R.id.cancel_action);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        // TODO: findviewbyid that are on the dialog layout
+        // example
+        TextView textName = (TextView) dialogView.findViewById(R.id.name);
+        textName.setText(mother.getName());
+    }
+
+    public void showPreRegistrationVisitDialog(final PreRegisteredMother mother){
+
+        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_visit_details, null);
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
+        dialogBuilder.setView(dialogView)
+                .setCancelable(false);
+
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+        Button button_yes = (Button) dialogView.findViewById(R.id.button_yes);
+        Button button_no = (Button) dialogView.findViewById(R.id.button_no);
+
+        button_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena "+ mother.getName(), Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+        button_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        // TODO: findviewbyid that are on the dialog layout
+        // example
+        TextView textName = (TextView) dialogView.findViewById(R.id.name);
+        textName.setText(mother.getName());
+    }
+
+    public void showFollowUpDetailsDialog(ChwFollowUpMother mother) {
+
+        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_details, null);
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
+        dialogBuilder.setView(dialogView)
+                .setCancelable(false);
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+
+        ImageView cancel = (ImageView) dialogView.findViewById(R.id.cancel_action);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        // TODO: findviewbyid that are on the dialog layout
+        // example
+        TextView textName = (TextView) dialogView.findViewById(R.id.name);
+        textName.setText(mother.getName());
+    }
+
+    public void showFollowUpFormDialog(final ChwFollowUpMother mother){
+
+        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
+        dialogBuilder.setView(dialogView)
+                .setCancelable(false);
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+
+        RadioGroup radioGroup = (RadioGroup) dialogView.findViewById(R.id.visit) ;
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int selectedId = group.getCheckedRadioButtonId();
+                RadioButton radioButton = (RadioButton) findViewById(selectedId);
+
+                if(selectedId == R.id.visit_yes){
+                    RelativeLayout info = (RelativeLayout) dialogView.findViewById(R.id.information);
+                    info.setVisibility(View.VISIBLE);
+                }
+                if(selectedId == R.id.visit_no){
+                    RelativeLayout info = (RelativeLayout) dialogView.findViewById(R.id.information);
+                    info.setVisibility(View.GONE);
+                }
+            }
+        });
+
+
+        Button cancel = (Button) dialogView.findViewById(R.id.cancel_action);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        Button save = (Button) dialogView.findViewById(R.id.save);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena "+ mother.getName(), Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+
+        // TODO: findviewbyid that are on the dialog layout
+        // example
+        TextView textName = (TextView) dialogView.findViewById(R.id.name);
+        textName.setText(mother.getName());
+    }
+
+    public void confirmDelete() {
+        final View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_confirm_delete, null);
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
+        dialogBuilder.setView(dialogView)
+                .setCancelable(false);
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+
+
+        dialogView.findViewById(R.id.textOk).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // todo: delete mother
+
+
+                dialog.dismiss();
+            }
+        });
+
+        dialogView.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+
+    }
     private String[] buildFormNameList() {
         List<String> formNames = new ArrayList<String>();
         formNames.add("pregnant_mothers_registration");
@@ -199,7 +379,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     @Override
     public void OnLocationSelected(String locationSelected) {
-
+        // set registration fragment
+        mPager.setCurrentItem(1, true);
     }
 
     private class EditDialogOptionModelfornbnf implements DialogOptionModel {
@@ -321,11 +502,17 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         // save the form
         PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
 
-        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
-        CustomContext customContext = new CustomContext();
-        CustomMotherRepository motherRepository = customContext.getCustomMotherRepo("wazazi_salama_mother");
-        motherRepository.add(motherPersonObject);
+        // todo fix NullPointerException on getWritableDatabase
 
+//        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
+//        CustomContext customContext = new CustomContext();
+//        CustomMotherRepository motherRepository = customContext.getCustomMotherRepo("wazazi_salama_mother");
+//        motherRepository.add(motherPersonObject);
+
+        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
+        CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
+        ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
+        commonRepository.customInsert(values);
 
 //        Map<String, String> personDetails1 = create("Is_PNC", "0").map();
 //        personDetails1.put("FWWOMVALID","1");

@@ -36,12 +36,12 @@ public class CustomContext extends Context {
 
             if (commonFtsObject != null && commonFtsObject.containsTable(tableName)) {
                 // table already exists in repo
-                customRepoMap.put(bindTypeName,
-                        new CustomMotherRepository(commonFtsObject, bindTypeName, columnNames));
+//                customRepoMap.put(bindTypeName,
+//                        new CustomMotherRepository(commonFtsObject, bindTypeName, columnNames));
             } else {
                 // table doesn't exist in repo
-                customRepoMap.put(bindTypeName,
-                        new CustomMotherRepository(bindTypeName, columnNames));
+//                customRepoMap.put(bindTypeName,
+//                        new CustomMotherRepository(bindTypeName, columnNames));
             }
         }
 

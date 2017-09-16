@@ -22,6 +22,7 @@ import org.ei.opensrp.drishti.Anc.Anc3handler;
 import org.ei.opensrp.drishti.Anc.Anc4handler;
 import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
 import org.ei.opensrp.drishti.util.CustomContext;
+import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.service.PendingFormSubmissionService;
 import org.ei.opensrp.sync.SyncAfterFetchListener;
@@ -47,6 +48,7 @@ import static org.ei.opensrp.event.Event.SYNC_COMPLETED;
 import static org.ei.opensrp.event.Event.SYNC_STARTED;
 
 public class NativeHomeActivity extends SecuredActivity {
+    private NavigationController navigationController1;
     private MenuItem updateMenuItem;
     private MenuItem remainingFormsToSyncMenuItem;
     private PendingFormSubmissionService pendingFormSubmissionService;
@@ -98,6 +100,7 @@ public class NativeHomeActivity extends SecuredActivity {
     protected void onCreation() {
         setContentView(R.layout.smart_registers_home);
         navigationController = new NavigationController(this, anmController);
+        navigationController1 = new NavigationController(this, anmController);
         setupViews();
         initialize();
         DisplayFormFragment.formInputErrorMessage = getResources().getString(R.string.forminputerror);
@@ -112,6 +115,9 @@ public class NativeHomeActivity extends SecuredActivity {
         context().formSubmissionRouter().getHandlerMap().put("anc_reminder_visit_4",
                 new Anc4handler());
 
+        // orientation
+        OrientationHelper.setProperOrientationForDevice(NativeHomeActivity.this);
+
 
 //        context().formSubmissionRouter().getHandlerMap().put("mis_elco", new MIS_elco_form_handler());
 
@@ -122,6 +128,7 @@ public class NativeHomeActivity extends SecuredActivity {
 //        findViewById(R.id.btn_pnc_register).setOnClickListener(onRegisterStartListener);
         findViewById(R.id.btn_anc_register).setOnClickListener(onRegisterStartListener);
         findViewById(R.id.btn_pnc_register).setOnClickListener(onRegisterStartListener);
+        findViewById(R.id.btn_chw_register).setOnClickListener(onRegisterStartListener);
 
         findViewById(R.id.btn_reporting).setOnClickListener(onButtonsClickListener);
 //        findViewById(R.id.btn_videos).setOnClickListener(onButtonsClickListener);
@@ -171,7 +178,7 @@ public class NativeHomeActivity extends SecuredActivity {
                 SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
 
 
-//                CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
+//                MotherRepository commonRepository = context().commonrepository("wazazi_salama_mother");
 //                if(commonRepository!=null) {
 //                    Cursor anccountcursor = context().commonrepository("wazazi_salama_mother").RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("wazazi_salama_mother", "(wazazi_salama_mother.Is_PNC is null or wazazi_salama_mother.Is_PNC = '0') and wazazi_salama_mother.MOTHERS_NAME is not NUll  AND wazazi_salama_mother.MOTHERS_NAME != \"\"  AND wazazi_salama_mother.details  LIKE '%\"IS_VALID\":\"1\"%'"));
 //                    anccountcursor.moveToFirst();
@@ -295,9 +302,9 @@ public class NativeHomeActivity extends SecuredActivity {
                     navigationController.startPNCSmartRegistry();
                     break;
 
-//                case R.id.btn_chw_register:
-//                    navigationController.startChildSmartRegistry();
-//                    break;
+                case R.id.btn_chw_register:
+                    navigationController1.startCHWSmartRegistry();
+                    break;
 
 //                case R.id.btn_reporting:
 //                    navigationController.startFPSmartRegistry();

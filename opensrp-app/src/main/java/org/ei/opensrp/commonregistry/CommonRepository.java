@@ -92,6 +92,11 @@ public class CommonRepository extends DrishtiRepository {
         database.insert(TABLE_NAME, null, createValuesFor(common));
     }
 
+    public void customInsert(ContentValues contentValues){
+        SQLiteDatabase database = masterRepository.getWritableDatabase();
+        database.insert(TABLE_NAME, null, contentValues);
+    }
+
 
     public void updateDetails(String caseId, Map<String, String> details) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();

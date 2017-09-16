@@ -1,5 +1,7 @@
 package org.ei.opensrp.drishti.Repository;
 
+import com.google.gson.Gson;
+
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 
 import java.text.SimpleDateFormat;
@@ -54,6 +56,7 @@ public class MotherPersonObject {
         this.IS_PNC = "false";
         this.IS_VALID = "true";
         this.FACILITY_ID = pregnantMom.getFacilityId();
+        this.details = new Gson().toJson(pregnantMom);
 
     }
 

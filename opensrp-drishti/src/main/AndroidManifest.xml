@@ -2,35 +2,35 @@
     package="org.ei.opensrp.drishti">
     <compatible-screens>
         <screen
-            android:screenSize="large"
-            android:screenDensity="ldpi"/>
+            android:screenDensity="ldpi"
+            android:screenSize="large" />
         <screen
-            android:screenSize="large"
-            android:screenDensity="mdpi"/>
+            android:screenDensity="mdpi"
+            android:screenSize="large" />
         <screen
-            android:screenSize="large"
-            android:screenDensity="hdpi"/>
+            android:screenDensity="hdpi"
+            android:screenSize="large" />
         <screen
-            android:screenSize="large"
-            android:screenDensity="xhdpi"/>
+            android:screenDensity="xhdpi"
+            android:screenSize="large" />
 
         <screen
-            android:screenSize="xlarge"
-            android:screenDensity="ldpi"/>
+            android:screenDensity="ldpi"
+            android:screenSize="xlarge" />
         <screen
-            android:screenSize="xlarge"
-            android:screenDensity="mdpi"/>
+            android:screenDensity="mdpi"
+            android:screenSize="xlarge" />
         <screen
-            android:screenSize="xlarge"
-            android:screenDensity="hdpi"/>
+            android:screenDensity="hdpi"
+            android:screenSize="xlarge" />
         <screen
-            android:screenSize="xlarge"
-            android:screenDensity="xhdpi"/>
+            android:screenDensity="xhdpi"
+            android:screenSize="xlarge" />
 
         <!-- Special case for Nexus 7 -->
         <screen
-            android:screenSize="large"
-            android:screenDensity="213"/>
+            android:screenDensity="213"
+            android:screenSize="large" />
 
 
     </compatible-screens>
@@ -70,7 +70,18 @@
             android:name=".AncDetailActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
+        <activity
+            android:name=".chw.CHWSmartRegisterActivity"
+            android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".chw.CHWFormRegistrationActivity" />
+        <activity android:name=".chw.CHWFormFollowActivity" />
+        <activity android:name=".chw.CHWEditPreRegistrationActivity"></activity>
 
         <meta-data
             android:name="io.fabric.ApiKey"

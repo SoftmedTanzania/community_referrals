@@ -93,16 +93,8 @@ public class LoginActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setTitle("");
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-        float widthDp = displayMetrics.widthPixels / displayMetrics.density;
-        if (widthDp > 600)
-            // tablet
-            OrientationHelper.lockOrientationLandscape(LoginActivity.this);
-        else
-            // phone
-            OrientationHelper.lockOrientationPortrait(LoginActivity.this);
+        // orientation
+        OrientationHelper.setProperOrientationForDevice(LoginActivity.this);
 
         context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
         initializeLoginFields();

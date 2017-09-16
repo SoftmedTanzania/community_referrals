@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import org.ei.opensrp.Context;
@@ -44,7 +45,7 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
 //        this.listItemProvider = listItemProvider;
         this.context = context;
         this.cursor = cursor;
-        this.motherPersonList = commonRepository.readAllMotherForField(cursor, TABLE_NAME);
+//        this.motherPersonList = commonRepository.readAllMotherForField(cursor, TABLE_NAME);
     }
 
     public AncRegisterListAdapter(Context context, CommonRepository commonRepository, Cursor cursor, android.content.Context appContext) {
@@ -99,6 +100,7 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
         holder.textPhysicalAddress.setText(mom.getPhysicalAddress());
         holder.textAge.setText("Miaka");
         holder.textAge.append(" " + mom.getAge());
+        //  Glide.with(appContext).load("photoUrl").into(holder.imageProfilePic);
 
     }
 

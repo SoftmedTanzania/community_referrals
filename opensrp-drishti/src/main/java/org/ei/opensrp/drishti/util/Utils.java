@@ -18,7 +18,9 @@ package org.ei.opensrp.drishti.util;
 
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
+import android.util.Log;
 
+import com.bumptech.glide.util.Util;
 import com.google.gson.Gson;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
@@ -33,6 +35,7 @@ import java.util.List;
  * Class containing some static utility methods.
  */
 public class Utils {
+    private static final String TAG = Utils.class.getSimpleName();
     private Utils() {};
 
 
@@ -62,6 +65,7 @@ public class Utils {
 
 
     public static MotherPersonObject convertToMotherPersonObject(CommonPersonObject commonPersonObject){
+        Log.d(TAG,"json object = "+commonPersonObject.getColumnmaps().get("details"));
         return new MotherPersonObject(commonPersonObject.getColumnmaps().get("id"),commonPersonObject.getColumnmaps().get("relationalid"), new Gson().fromJson(commonPersonObject.getColumnmaps().get("details"), PregnantMom.class));
     }
 
