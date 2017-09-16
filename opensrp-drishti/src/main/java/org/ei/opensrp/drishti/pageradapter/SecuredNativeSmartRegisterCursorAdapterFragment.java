@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -230,6 +232,12 @@ public abstract class SecuredNativeSmartRegisterCursorAdapterFragment extends or
     }
 
     private void setupNavBarViews(View view) {
+
+
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         view.findViewById(R.id.btn_back_to_home).setOnClickListener(navBarActionsHandler);
 
         setupTitleView(view);

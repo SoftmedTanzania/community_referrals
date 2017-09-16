@@ -1,4 +1,4 @@
-package org.ei.opensrp.view.dialog;
+package org.ei.opensrp.drishti.Repository;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -12,7 +12,10 @@ import com.google.common.base.Strings;
 
 import org.ei.opensrp.R;
 import org.ei.opensrp.domain.form.FieldOverrides;
+import org.ei.opensrp.drishti.AncSmartRegisterActivity;
+import org.ei.opensrp.view.activity.ANCSmartRegisterActivity;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
+import org.ei.opensrp.view.dialog.DialogOptionModel;
 import org.json.JSONObject;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
@@ -128,7 +131,7 @@ public class LocationSelectorDialogFragment extends DialogFragment {
                     if(mCallback != null) {
                         mCallback.OnLocationSelected(locationjson.toString());
                          FieldOverrides fieldOverrides = new FieldOverrides(locationjson.toString());
-                         ((SecuredNativeSmartRegisterActivity)getActivity()).startFormActivity(formName, null, fieldOverrides.getJSONString());
+                        ((AncSmartRegisterActivity)getActivity()).StartRegistrationFragment(formName, null, fieldOverrides.getJSONString());
                     }
                     savestate = tView.getSaveState();
                     dismiss();
