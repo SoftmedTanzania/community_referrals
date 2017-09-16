@@ -178,7 +178,7 @@ public class NativeHomeActivity extends SecuredActivity {
                 SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
 
 
-//                CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
+//                MotherRepository commonRepository = context().commonrepository("wazazi_salama_mother");
 //                if(commonRepository!=null) {
 //                    Cursor anccountcursor = context().commonrepository("wazazi_salama_mother").RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("wazazi_salama_mother", "(wazazi_salama_mother.Is_PNC is null or wazazi_salama_mother.Is_PNC = '0') and wazazi_salama_mother.MOTHERS_NAME is not NUll  AND wazazi_salama_mother.MOTHERS_NAME != \"\"  AND wazazi_salama_mother.details  LIKE '%\"IS_VALID\":\"1\"%'"));
 //                    anccountcursor.moveToFirst();
