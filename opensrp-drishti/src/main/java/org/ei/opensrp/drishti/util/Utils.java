@@ -65,7 +65,7 @@ public class Utils {
 
 
     public static MotherPersonObject convertToMotherPersonObject(CommonPersonObject commonPersonObject){
-        Log.d(TAG,"json object = "+commonPersonObject.getColumnmaps().get("details"));
+        Log.d(TAG,"json details = "+commonPersonObject.getColumnmaps().get("details"));
         return new MotherPersonObject(commonPersonObject.getColumnmaps().get("id"),commonPersonObject.getColumnmaps().get("relationalid"), new Gson().fromJson(commonPersonObject.getColumnmaps().get("details"), PregnantMom.class));
     }
 
