@@ -11,16 +11,21 @@ import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectClient;
 import org.ei.opensrp.domain.Alert;
+import org.ei.opensrp.drishti.DataModels.PregnantMom;
+import org.ei.opensrp.drishti.util.DatesHelper;
 import org.ei.opensrp.drishti.util.ImageCache;
 import org.ei.opensrp.drishti.util.ImageFetcher;
 
@@ -33,6 +38,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -41,13 +47,24 @@ import java.util.Map;
 public class AncDetailActivityAlt extends AppCompatActivity {
 
     //image retrieving
-    private static final String TAG = "ImageGridFragment";
+    private static final String TAG = AncDetailActivityAlt.class.getSimpleName();
     private static final String IMAGE_CACHE_DIR = "thumbs";
 
     private static int mImageThumbSize;
     private static int mImageThumbSpacing;
 
     private static ImageFetcher mImageFetcher;
+
+    private TextView textName, textId, textDiscountId, textPhysicalAddress,
+            textAge, textPhone, textMotherEducation, textMotherOccupation,
+            textHusbandName, textHusbandEducation, textHusbandOccupation,
+            text1stVisit, text2ndVisit, text3rdVisit, text4thVisit, textEdd;
+
+
+    private ImageView imageDisplayPicture, iconAnc1Date, iconAnc2Date,
+            iconAnc3Date, iconAnc4Date, iconEdd;
+
+    private PregnantMom mom;
 
 
     //image retrieving
@@ -69,9 +86,107 @@ public class AncDetailActivityAlt extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        setUpViews();
 
-        TextView texName = (TextView) findViewById(R.id.name);
+        String gsonMom = getIntent().getStringExtra("mom");
+        Log.d(TAG, "mom=" + gsonMom);
 
+        if (gsonMom != null) {
+            mom = new Gson().fromJson(gsonMom, PregnantMom.class);
+            // set values
+            setMotherProfileDetails();
+        }
+
+    }
+
+
+    private void setUpViews() {
+
+        textName = (TextView) findViewById(R.id.textName);
+        textAge = (TextView) findViewById(R.id.textAge);
+        textId = (TextView) findViewById(R.id.textId);
+        textPhysicalAddress = (TextView) findViewById(R.id.textPhysicalAddress);
+        textPhone = (TextView) findViewById(R.id.textPhone);
+        textMotherEducation = (TextView) findViewById(R.id.textMotherEducation);
+        textMotherOccupation = (TextView) findViewById(R.id.textMotherOccupation);
+        textHusbandName = (TextView) findViewById(R.id.textHusbandName);
+        textHusbandEducation = (TextView) findViewById(R.id.textHusbandEducation);
+        textHusbandOccupation = (TextView) findViewById(R.id.textHusbandOccupation);
+        text1stVisit = (TextView) findViewById(R.id.textAnc1Date);
+        text2ndVisit = (TextView) findViewById(R.id.textAnc2Date);
+        text3rdVisit = (TextView) findViewById(R.id.textAnc3Date);
+        text4thVisit = (TextView) findViewById(R.id.textAnc4Date);
+        textEdd = (TextView) findViewById(R.id.textEdd);
+
+        imageDisplayPicture = (ImageView) findViewById(R.id.imageProfilePic);
+        iconAnc1Date = (ImageView) findViewById(R.id.iconAnc1Date);
+        iconAnc2Date = (ImageView) findViewById(R.id.iconAnc2Date);
+        iconAnc3Date = (ImageView) findViewById(R.id.iconAnc3Date);
+        iconAnc4Date = (ImageView) findViewById(R.id.iconAnc4Date);
+        iconEdd = (ImageView) findViewById(R.id.iconEdd);
+    }
+
+    private void setMotherProfileDetails() {
+        // todo set all profile details
+        textName.setText(mom.getName());
+        textId.setText(mom.getId());
+        textAge.setText(String.valueOf(mom.getAge()));
+        textPhysicalAddress.setText(mom.getPhysicalAddress());
+        textPhone.setText(mom.getPhone());
+        textMotherEducation.setText(mom.getEducation());
+        textMotherOccupation.setText(mom.getOccupation());
+        textHusbandName.setText(mom.getHusbandName());
+        textHusbandEducation.setText(mom.getHusbandEducation());
+        textHusbandOccupation.setText(mom.getHusbandOccupation());
+
+        calculateAndSetDates();
+    }
+
+    private void calculateAndSetDates() {
+        Calendar calendar = Calendar.getInstance();
+
+        long today = new GregorianCalendar(
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)).getTimeInMillis();
+
+        long lnmp = mom.getDateLNMP();
+        long firstVisit = DatesHelper.calculate1stVisitFromLNMP(lnmp);
+        long secondVisit = DatesHelper.calculate2ndVisitFromLNMP(lnmp);
+        long thirdVisit = DatesHelper.calculate3rdVisitFromLNMP(lnmp);
+        long fourthVisit = DatesHelper.calculate4thVisitFromLNMP(lnmp);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+
+        textEdd.setText(dateFormat.format(mom.getEdd()));
+        text1stVisit.setText(dateFormat.format(firstVisit));
+        text2ndVisit.setText(dateFormat.format(secondVisit));
+        text3rdVisit.setText(dateFormat.format(thirdVisit));
+        text4thVisit.setText(dateFormat.format(fourthVisit));
+
+
+        if (today > fourthVisit) {
+            iconAnc1Date.setImageResource(R.drawable.ic_calendar_check);
+            iconAnc2Date.setImageResource(R.drawable.ic_calendar_check);
+            iconAnc3Date.setImageResource(R.drawable.ic_calendar_check);
+            iconAnc4Date.setImageResource(R.drawable.ic_calendar_check);
+            return;
+
+        } else if (today > thirdVisit) {
+            iconAnc1Date.setImageResource(R.drawable.ic_calendar_check);
+            iconAnc2Date.setImageResource(R.drawable.ic_calendar_check);
+            iconAnc3Date.setImageResource(R.drawable.ic_calendar_check);
+            return;
+
+        } else if (today > secondVisit) {
+            iconAnc1Date.setImageResource(R.drawable.ic_calendar_check);
+            iconAnc2Date.setImageResource(R.drawable.ic_calendar_check);
+            return;
+
+        } else if (today > firstVisit) {
+            iconAnc1Date.setImageResource(R.drawable.ic_calendar_check);
+            return;
+        }
     }
 
     @Override
