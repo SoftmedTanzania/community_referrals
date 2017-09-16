@@ -24,7 +24,7 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.R;
-import org.ei.opensrp.drishti.util.EDDCalculator;
+import org.ei.opensrp.drishti.util.DatesHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -194,7 +194,7 @@ public class AncRegister1stFragment extends Fragment {
                     lnmp = pickedDate.getTimeInMillis();
                     textDateLNMP.setText(dateFormat.format(lnmp));
                     // update edd
-                    edd = EDDCalculator.calculateEDDFromLNMP(lnmp);
+                    edd = DatesHelper.calculateEDDFromLNMP(lnmp);
                     textEDD.setText(dateFormat.format(edd));
                 }
             }
