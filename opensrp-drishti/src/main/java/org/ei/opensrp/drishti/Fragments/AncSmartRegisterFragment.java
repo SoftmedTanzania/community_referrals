@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.google.gson.Gson;
+
 import org.apache.commons.lang3.StringUtils;
 import org.ei.opensrp.Context;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
@@ -321,8 +323,21 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 //        updateSearchView();
 //        refresh();
 
+
+        String[] columns = {"MOTHERS_FIRST_NAME",
+                "MOTHERS_LAST_NAME",
+                "MOTHERS_LAST_MENSTRUATION_DATE",
+                "MOTHERS_SORTVALUE",
+                "MOTHERS_ID",
+                "PNC_STATUS",
+                "EXPECTED_DELIVERY_DATE",
+                "IS_VALID",
+                "Is_PNC",
+                "FACILITY_ID"};
+
         CommonRepository motherRepository = context().commonrepository("wazazi_salama_mother");
         Cursor cursor = motherRepository.RawCustomQueryForAdapter("select * from wazazi_salama_mother");
+//        Cursor cursor = motherRepository.CustomQueryForAdapter(columns, "wazazi_salama_mother", "", "");
         clientAdapter = new AncRegisterListAdapter(context(), motherRepository, cursor, getContext());
         clientsView.setAdapter(clientAdapter);
 

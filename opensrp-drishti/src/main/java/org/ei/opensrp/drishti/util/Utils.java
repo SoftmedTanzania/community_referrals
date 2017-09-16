@@ -36,9 +36,11 @@ import java.util.List;
  */
 public class Utils {
     private static final String TAG = Utils.class.getSimpleName();
-    private Utils() {};
 
+    private Utils() {
+    }
 
+    ;
 
 
     public static boolean hasFroyo() {
@@ -64,18 +66,18 @@ public class Utils {
     }
 
 
-    public static MotherPersonObject convertToMotherPersonObject(CommonPersonObject commonPersonObject){
-        Log.d(TAG,"json details = "+commonPersonObject.getColumnmaps().get("details"));
-        return new MotherPersonObject(commonPersonObject.getColumnmaps().get("id"),commonPersonObject.getColumnmaps().get("relationalid"), new Gson().fromJson(commonPersonObject.getColumnmaps().get("details"), PregnantMom.class));
+    public static MotherPersonObject convertToMotherPersonObject(CommonPersonObject commonPersonObject) {
+        Log.d(TAG, "commonPersonObject = " + new Gson().toJson(commonPersonObject));
+        Log.d(TAG, "json details = " + commonPersonObject.getColumnmaps().get("details"));
+        return new MotherPersonObject(commonPersonObject.getColumnmaps().get("id"), commonPersonObject.getColumnmaps().get("relationalid"), new Gson().fromJson(commonPersonObject.getColumnmaps().get("details"), PregnantMom.class));
     }
 
 
-    public static List<MotherPersonObject> convertToMotherPersonObjectList(List<CommonPersonObject> commonPersonObjectsList){
+    public static List<MotherPersonObject> convertToMotherPersonObjectList(List<CommonPersonObject> commonPersonObjectsList) {
         List<MotherPersonObject> mothers = new ArrayList<>();
         for (CommonPersonObject common : commonPersonObjectsList) {
             mothers.add(convertToMotherPersonObject(common));
         }
-
 
 
         return mothers;

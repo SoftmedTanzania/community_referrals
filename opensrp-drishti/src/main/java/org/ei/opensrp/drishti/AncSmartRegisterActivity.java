@@ -136,7 +136,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         textName.setText(mother.getName());
     }
 
-    public void showPreRegistrationVisitDialog(final PreRegisteredMother mother){
+    public void showPreRegistrationVisitDialog(final PreRegisteredMother mother) {
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_visit_details, null);
 
@@ -152,7 +152,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         button_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena "+ mother.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + mother.getName(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -193,7 +193,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         textName.setText(mother.getName());
     }
 
-    public void showFollowUpFormDialog(final ChwFollowUpMother mother){
+    public void showFollowUpFormDialog(final ChwFollowUpMother mother) {
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
 
@@ -203,18 +203,18 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
 
-        RadioGroup radioGroup = (RadioGroup) dialogView.findViewById(R.id.visit) ;
+        RadioGroup radioGroup = (RadioGroup) dialogView.findViewById(R.id.visit);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int selectedId = group.getCheckedRadioButtonId();
                 RadioButton radioButton = (RadioButton) findViewById(selectedId);
 
-                if(selectedId == R.id.visit_yes){
+                if (selectedId == R.id.visit_yes) {
                     RelativeLayout info = (RelativeLayout) dialogView.findViewById(R.id.information);
                     info.setVisibility(View.VISIBLE);
                 }
-                if(selectedId == R.id.visit_no){
+                if (selectedId == R.id.visit_no) {
                     RelativeLayout info = (RelativeLayout) dialogView.findViewById(R.id.information);
                     info.setVisibility(View.GONE);
                 }
@@ -234,7 +234,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena "+ mother.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + mother.getName(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -274,6 +274,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
 
     }
+
     private String[] buildFormNameList() {
         List<String> formNames = new ArrayList<String>();
         formNames.add("pregnant_mothers_registration");
@@ -509,9 +510,12 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //        motherRepository.add(motherPersonObject);
 
         MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
-        CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
         ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
-        commonRepository.customInsert(values);
+        Log.d(TAG, "motherPersonObject = " + gson.toJson(motherPersonObject));
+        Log.d(TAG, "values = " + gson.toJson(values));
+
+        CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
+        commonRepository.customInsert(values, commonRepository);
 
 //        Map<String, String> personDetails1 = create("Is_PNC", "0").map();
 //        personDetails1.put("FWWOMVALID","1");

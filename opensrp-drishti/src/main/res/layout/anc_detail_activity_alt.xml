@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="320dp"
         android:fitsSystemWindows="false"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbar"
@@ -292,11 +292,53 @@
                         android:textColor="@color/secondary_text"
                         android:textSize="16sp" />
 
+                    <ImageView
+                        android:id="@+id/iconChild"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_below="@+id/iconOccupationMother"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_child"
+                        android:tint="@color/primary" />
+
+                    <TextView
+                        android:id="@+id/textLivingChildren"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iconChild"
+                        android:layout_marginTop="2dp"
+                        android:layout_toRightOf="@+id/iconSchoolMother"
+                        android:text="00"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/iconDiscountNumber"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_below="@+id/iconChild"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_card"
+                        android:tint="@color/primary" />
+
+                    <TextView
+                        android:id="@+id/textDiscountNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iconDiscountNumber"
+                        android:layout_marginTop="2dp"
+                        android:layout_toRightOf="@+id/iconSchoolMother"
+                        android:text="AABB1122"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="16sp" />
+
                     <View
                         android:id="@+id/line"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_below="@+id/iconOccupationMother"
+                        android:layout_below="@+id/iconDiscountNumber"
                         android:layout_marginBottom="16dp"
                         android:layout_marginTop="16dp"
                         android:background="@color/primary" />
@@ -318,7 +360,7 @@
                         android:layout_height="24dp"
                         android:layout_below="@+id/titleAboutHusband"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/ic_account_circle"
+                        android:src="@drawable/ic_account_box"
                         android:tint="@color/primary" />
 
                     <TextView

@@ -92,9 +92,14 @@ public class CommonRepository extends DrishtiRepository {
         database.insert(TABLE_NAME, null, createValuesFor(common));
     }
 
-    public void customInsert(ContentValues contentValues){
+    public void customInsert(ContentValues contentValues, CommonRepository commonRepository) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
+        Log.d("customInsert", "tableName = " + TABLE_NAME);
         database.insert(TABLE_NAME, null, contentValues);
+
+        Cursor cursor = commonRepository.RawCustomQueryForAdapter("select * from wazazi_salama_mother");
+        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
+        Log.d("commonPersonObjectList", "cpoList = " + new Gson().toJson(commonPersonObjectList));
     }
 
 

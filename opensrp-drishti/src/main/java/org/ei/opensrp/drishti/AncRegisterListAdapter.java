@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import org.ei.opensrp.Context;
+import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
@@ -50,10 +51,14 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
 
     public AncRegisterListAdapter(Context context, CommonRepository commonRepository, Cursor cursor, android.content.Context appContext) {
         this.context = context;
-        this.motherPersonList = Utils.convertToMotherPersonObjectList(commonRepository.readAllcommonForField(cursor, TABLE_NAME));
         this.appContext = appContext;
+        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
+//        Log.d(TAG, "cursor = " + gson.toJson(cursor));
+        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
 
+        this.motherPersonList = Utils.convertToMotherPersonObjectList(commonPersonObjectList);
         Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + motherPersonList.size());
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
