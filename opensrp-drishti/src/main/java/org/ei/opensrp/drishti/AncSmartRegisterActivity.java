@@ -25,7 +25,13 @@ import com.google.gson.Gson;
 
 import org.ei.opensrp.Context;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
+import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectController;
+import org.ei.opensrp.domain.SyncStatus;
+import org.ei.opensrp.domain.form.FormData;
+import org.ei.opensrp.domain.form.FormField;
+import org.ei.opensrp.domain.form.FormInstance;
+import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.drishti.DataModels.ChwFollowUpMother;
 import org.ei.opensrp.drishti.DataModels.PreRegisteredMother;
 import org.ei.opensrp.commonregistry.CommonRepository;
@@ -109,8 +115,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
 
         //TODO this is hacking should be changed depending with the usertype
-        mPager.setCurrentItem(2);
-        currentPage = 2;
+        mPager.setCurrentItem(0);
+        currentPage = 0;
 
     }
 
@@ -516,13 +522,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         // save the form
         PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
 
-        // todo fix NullPointerException on getWritableDatabase
-
-//        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
-//        CustomContext customContext = new CustomContext();
-//        CustomMotherRepository motherRepository = customContext.getCustomMotherRepo("wazazi_salama_mother");
-//        motherRepository.add(motherPersonObject);
-
         MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
         ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
         Log.d(TAG, "motherPersonObject = " + gson.toJson(motherPersonObject));
@@ -531,60 +530,24 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
         commonRepository.customInsert(values);
 
-//        Map<String, String> personDetails1 = create("Is_PNC", "0").map();
-//        personDetails1.put("FWWOMVALID","1");
-//        personDetails1.put("FWBNFGEN", "2");
-//        personDetails1.put("FWWOMFNAME", pregnantMom.getName());
-//        personDetails1.put("GOBHHID", pregnantMom.getId());
-//        personDetails1.put("FWWOMLNAME", pregnantMom.getName());
-//        personDetails1.put("FWPSRLMP", sdf.format(new Date(pregnantMom.getDateLNMP())));
-//        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.getPregnancyCount()+"");
-//        personDetails1.put("FWPSRPRSB", pregnantMom.isHasBabyDeath()?"Has had still birth":"");
-//        personDetails1.put("FWPSRTOTBIRTH", pregnantMom.getChildrenCount()+"");
-//        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.isHas2orMoreBBA()?"Has had no pregnancies in the last 2 years":"");
-//        personDetails1.put("FWWOMAGE", pregnantMom.getAge()+"");
-//        personDetails1.put("HEIGHT", pregnantMom.getHeight()+"");
-//        personDetails1.put("user_type", "1");
+        CommonPersonObject c = commonRepository.findByCaseID("1");
 
-//        String[] columns = {"MOTHERS_FIRST_NAME",
-//                "MOTHERS_LAST_NAME",
-//                "MOTHERS_LAST_MENSTRUATION_DATE",
-//                "MOTHERS_SORTVALUE",
-//                "MOTHERS_ID",
-//                "PNC_STATUS",
-//                "EXPECTED_DELIVERY_DATE",
-//                "IS_VALID",
-//                "Is_PNC",
-//                "FACILITY_ID"};
 
-//        CustomMotherRepository motherRepository = new CustomMotherRepository("wazazi_salama_mother", columns);
-//        motherRepository.add(motherPersonObject);
+        List<FormField> formFields = new ArrayList<>();
+        for ( String key : c.getDetails().keySet() ) {
+            FormField f = null;
+            if(!key.equals("FACILITY_ID")) {
+                f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
+            }else{
+                f = new FormField(key, c.getDetails().get(key), "facility.id");
+            }
+            formFields.add(f);
+        }
 
-//        CommonPersonObject cpo2 = new CommonPersonObject(id,id,personDetails1,"mcaremother");
-//        context().commonrepository("mcaremother").add(cpo2);
-//
-//        try {
-//            FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
-//            FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
-//
-//            org.ei.opensrp.Context context = org.ei.opensrp.Context.getInstance();
-//            ZiggyService ziggyService = context.ziggyService();
-//            ziggyService.saveForm(getParams(submission), submission.instance());
-//
-//            FormSubmissionService formSubmissionService = context.formSubmissionService();
-//            formSubmissionService.updateFTSsearch(submission);
-//
-//            Log.v("we are here", "hhregister");
-//            //switch to forms list fragmentstregi
-//            switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
-//
-//        } catch (Exception e) {
-//            AncSmartRegisterFragment displayFormFragment =(AncSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
-//            if (displayFormFragment != null) {
-////                displayFormFragment.hideTranslucentProgressDialog();
-//            }
-//            e.printStackTrace();
-//        }
+        FormData formData = new FormData("wazazi_salama_mother","/model/instance/Wazazi_Salama_ANC_Registration/",formFields,null);
+        FormInstance formInstance = new FormInstance(formData,"1");
+        FormSubmission submission = new FormSubmission(id,id,"wazazi_salama_pregnant_mothers_registration",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
+        context().formDataRepository().saveFormSubmission(submission);
     }
 
     public void switchToBaseFragment(final String data) {
