@@ -20,8 +20,11 @@ import com.google.gson.Gson;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.pageradapter.ANCRegisterPagerAdapter;
+import org.ei.opensrp.drishti.util.DatesHelper;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
+
+import java.util.Calendar;
 
 public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
 
@@ -34,6 +37,7 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
 
     private PregnantMom pregnantMom;
     private Gson gson = new Gson();
+    private Calendar calendar = Calendar.getInstance();
 
     private JSONObject fieldOverides = new JSONObject();
     private String recordId;
@@ -165,10 +169,27 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
                     pregnantMom.setDateLastVisited(0);
                     pregnantMom.setLastSmsToken("0");
                     pregnantMom.setChwComment("no comment");
+
+                    long lnmp = pregnantMom.getDateLNMP();
+                    long firstVisit = DatesHelper.calculate1stVisitFromLNMP(lnmp);
+                    long secondVisit = DatesHelper.calculate2ndVisitFromLNMP(lnmp);
+                    long thirdVisit = DatesHelper.calculate3rdVisitFromLNMP(lnmp);
+                    long fourthVisit = DatesHelper.calculate4thVisitFromLNMP(lnmp);
+                    long today = calendar.getTimeInMillis();
+
                     pregnantMom.setAncAppointment1(false);
                     pregnantMom.setAncAppointment2(false);
                     pregnantMom.setAncAppointment3(false);
                     pregnantMom.setAncAppointment4(false);
+
+                    if (today > fourthVisit)
+                        pregnantMom.setAncAppointment4(true);
+                    else if (today > thirdVisit)
+                        pregnantMom.setAncAppointment3(true);
+                    else if (today > secondVisit)
+                        pregnantMom.setAncAppointment2(true);
+                    else if (today > firstVisit)
+                        pregnantMom.setAncAppointment1(true);
 
                     // convert to json
                     String gsonMom = gson.toJson(pregnantMom);
