@@ -523,7 +523,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         Log.d(TAG, "values = " + gson.toJson(values));
 
         CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
-        commonRepository.customInsert(values, commonRepository);
+        commonRepository.customInsert(values);
 
 //        Map<String, String> personDetails1 = create("Is_PNC", "0").map();
 //        personDetails1.put("FWWOMVALID","1");
