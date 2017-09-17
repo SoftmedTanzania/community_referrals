@@ -104,7 +104,7 @@ public class AncSmartClientsProvider implements SmartRegisterCLientsProviderForC
 //            HouseHoldDetailActivity.setImagetoHolder((Activity) context, pc.getDetails().get("profilepic"), profilepic, R.mipmap.woman_placeholder);
 //        }
 //
-//        id.setText(pc.getDetails().get("case_id")!=null?pc.getCaseId():"");
+//        id.setText(pc.getDetails().get("case_id")!=null?pc.getId():"");
         name.setText(humanize(pc.getColumnmaps().get("FWWOMFNAME")!=null?pc.getColumnmaps().get("FWWOMFNAME"):""));
         spousename.setText(humanize(pc.getDetails().get("FWHUSNAME")!=null?pc.getDetails().get("FWHUSNAME"):""));
         gobhhid.setText(" "+(pc.getColumnmaps().get("GOBHHID")!=null?pc.getColumnmaps().get("GOBHHID"):""));

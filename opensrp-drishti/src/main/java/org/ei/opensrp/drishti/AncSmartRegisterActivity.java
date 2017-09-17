@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,6 +26,7 @@ import com.google.gson.Gson;
 
 import org.ei.opensrp.Context;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
+import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectController;
 import org.ei.opensrp.drishti.DataModels.ChwFollowUpMother;
 import org.ei.opensrp.drishti.DataModels.PreRegisteredMother;
@@ -32,6 +34,8 @@ import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
 import org.ei.opensrp.drishti.Fragments.AncSmartRegisterFragment;
+import org.ei.opensrp.drishti.Fragments.CHWPreRegisterFormFragment;
+import org.ei.opensrp.drishti.Fragments.CHWPreRegistrationFragment;
 import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
@@ -57,6 +61,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -85,6 +90,11 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private String[] formNames = new String[]{};
     private Fragment mBaseFragment;
     private Gson gson = new Gson();
+    private CommonRepository commonRepository;
+    private android.content.Context appContext;
+    private List<MotherPersonObject> motherPersonList = new ArrayList<>();
+    private Cursor cursor;
+    private static final String TABLE_NAME = "wazazi_salama_mother";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,8 +123,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
 
         //TODO this is hacking should be changed depending with the usertype
-        mPager.setCurrentItem(0);
-        currentPage = 0;
+        mPager.setCurrentItem(2);
+        currentPage = 2;
 
     }
 
@@ -179,7 +189,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         String gsonMom = Utils.convertStandardJSONString(mother.getDetails().substring(1, mother.getDetails().length() - 1));
         Log.d(TAG, "gsonMom = " + gsonMom);
-        PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
+        final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_visit_details, null);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
@@ -194,7 +204,12 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         button_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + mother.getMOTHERS_FIRST_NAME(), Toast.LENGTH_SHORT).show();
+
+                pregnantMom.setDateLastVisited(Calendar.getInstance().getTimeInMillis());
+
+                mother.setDetails(new Gson().toJson(pregnantMom));
+                updateFormSubmission(mother,mother.getId());
+                Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + mother.getMOTHERS_FIRST_NAME() +" "+mother.getMOTHERS_LAST_NAME(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -471,15 +486,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     }
 
-    public void StartRegistrationFragment(String formName, String entityId, String metaData){
-        if(formName.equals("pregnant_mothers_registration")){
-            mPager.setCurrentItem(1, true);
-        }
-        if(formName.equals("pregnant_mothers_pre_registration")){
-            Log.d(TAG,"pregnant_mothers_pre_registration is selected");
-            mPager.setCurrentItem(3, true);
-        }
-    }
 
     private class EditDialogOptionModelfornbnf implements DialogOptionModel {
         @Override
@@ -517,7 +523,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public void startFormActivity(String formName, String entityId, String metaData) {
         Log.d(TAG, "startFormActivity");
         try {
-            int formIndex = FormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
+            int formIndex = FormUtils.getIndexForFormName(formName, formNames) + 2; // add the offset
             if (entityId != null || metaData != null) {
                 String data = null;
                 //check if there is previously saved data for the form
@@ -525,17 +531,29 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 if (data == null) {
                     data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
+                if (formName.equals("pregnant_mothers_registration")) {
+                    AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) getDisplayFormFragmentAtIndex(formIndex);
+                    if (displayFormFragment != null) {
+                        Log.d(TAG, "form data = " + data);
+                        displayFormFragment.setFormData(data);
+                        displayFormFragment.setRecordId(entityId);
+                        displayFormFragment.setFieldOverides(metaData);
+                    }
+                } else if(formName.equals("pregnant_mothers_pre_registration")){
+                    CHWPreRegisterFormFragment displayFormFragment = (CHWPreRegisterFormFragment) getDisplayFormFragmentAtIndex(formIndex);
+                    if (displayFormFragment != null) {
+                        Log.d(TAG, "form data = " + data);
+                        displayFormFragment.setFormData(data);
+                        displayFormFragment.setRecordId(entityId);
+                        displayFormFragment.setFieldOverides(metaData);
+                    }
 
-                AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) getDisplayFormFragmentAtIndex(formIndex);
-                if (displayFormFragment != null) {
-                    Log.d(TAG, "form data = " + data);
-                    displayFormFragment.setFormData(data);
-                    displayFormFragment.setRecordId(entityId);
-                    displayFormFragment.setFieldOverides(metaData);
                 }
             }
 
-            mPager.setCurrentItem(2, false); //Don't animate the view on orientation change the view disappears
+            mPager.setCurrentItem(formIndex, true);
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -607,7 +625,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //        CustomMotherRepository motherRepository = customContext.getCustomMotherRepo("wazazi_salama_mother");
 //        motherRepository.add(motherPersonObject);
 
-        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
+        MotherPersonObject motherPersonObject = new MotherPersonObject(id, null, pregnantMom);
         ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
         Log.d(TAG, "motherPersonObject = " + gson.toJson(motherPersonObject));
         Log.d(TAG, "values = " + gson.toJson(values));
@@ -669,6 +687,15 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //            }
 //            e.printStackTrace();
 //        }
+    }
+
+    public void updateFormSubmission(MotherPersonObject motherPersonObject, String id){
+
+
+        ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
+
+        CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
+        commonRepository.customUpdate(values,id);
     }
 
     public void switchToBaseFragment(final String data) {

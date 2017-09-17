@@ -1,21 +1,8 @@
 package org.ei.opensrp.drishti.Repository;
 
 import android.content.ContentValues;
-import android.database.Cursor;
-import android.util.Log;
 
 import com.google.gson.Gson;
-
-import net.sqlcipher.database.SQLiteDatabase;
-
-import org.ei.opensrp.commonregistry.CommonFtsObject;
-import org.ei.opensrp.commonregistry.CommonPersonObject;
-import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.drishti.DataModels.PregnantMom;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import static org.ei.opensrp.commonregistry.CommonRepository.DETAILS_COLUMN;
 import static org.ei.opensrp.commonregistry.CommonRepository.ID_COLUMN;
@@ -42,7 +29,7 @@ public class CustomMotherRepository{
 
     public ContentValues createValuesFor(MotherPersonObject motherPersonObject) {
         ContentValues values = new ContentValues();
-        values.put(ID_COLUMN, motherPersonObject.getCaseId());
+        values.put(ID_COLUMN, motherPersonObject.getId());
         values.put(Relational_ID, motherPersonObject.getRelationalId());
         values.put(MOTHERS_FIRST_NAME, motherPersonObject.getMOTHERS_FIRST_NAME());
         values.put(MOTHERS_LAST_NAME, motherPersonObject.getMOTHERS_LAST_NAME());

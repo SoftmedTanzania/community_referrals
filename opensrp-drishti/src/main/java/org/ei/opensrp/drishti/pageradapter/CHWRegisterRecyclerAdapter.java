@@ -65,7 +65,7 @@ public class CHWRegisterRecyclerAdapter extends
         String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
         PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-        String reg_date = dateFormat.format(pregnantMom.getDateReg());
+        String reg_date = dateFormat.format(pregnantMom.getDateLastVisited());
 
         // Set item views based on your views and data model
         TextView name = viewHolder.nameTextView;

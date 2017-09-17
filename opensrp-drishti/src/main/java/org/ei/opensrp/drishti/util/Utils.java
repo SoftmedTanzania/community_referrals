@@ -33,6 +33,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -77,7 +78,7 @@ public class Utils {
         try {
             o = new JSONObject(convertStandardJSONString(details.substring(1, details.length() - 1)));
             return new MotherPersonObject(
-                    commonPersonObject.getColumnmaps().get("caseId"),
+                    commonPersonObject.getColumnmaps().get("id"),
                     commonPersonObject.getColumnmaps().get("relationalid"),
                     commonPersonObject.getColumnmaps().get("MOTHERS_FIRST_NAME"),
                     commonPersonObject.getColumnmaps().get("MOTHERS_LAST_NAME"),
@@ -121,6 +122,10 @@ public class Utils {
         return (context.getResources().getConfiguration().screenLayout
                 & Configuration.SCREENLAYOUT_SIZE_MASK)
                 >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+    }
+
+    public static String generateRandomUUIDString(){
+        return UUID.randomUUID().toString();
     }
 
 }

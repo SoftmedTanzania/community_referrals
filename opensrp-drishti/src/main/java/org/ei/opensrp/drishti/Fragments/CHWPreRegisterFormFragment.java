@@ -195,6 +195,13 @@ public class CHWPreRegisterFormFragment extends Fragment {
                 if (isFormSubmissionOk()) {
                     // convert to json
                     pregnantMom = getPregnantMom();
+                    pregnantMom.setDateLastVisited(today.getTimeInMillis());
+                    pregnantMom.setLastSmsToken("0");
+                    pregnantMom.setChwComment("no comment");
+                    pregnantMom.setAncAppointment1(false);
+                    pregnantMom.setAncAppointment2(false);
+                    pregnantMom.setAncAppointment3(false);
+                    pregnantMom.setAncAppointment4(false);
                     String gsonMom = gson.toJson(pregnantMom);
                     Log.d(TAG, "mom = " + gsonMom);
 
@@ -358,6 +365,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
         mom.setHusbandOccupation(editTextHusbandOccupation.getText().toString());
         mom.setDateLNMP(lnmp);
         mom.setEdd(edd);
+        mom.setDateRegistration(today.getTimeInMillis());
 
         return mom;
     }
@@ -372,5 +380,24 @@ public class CHWPreRegisterFormFragment extends Fragment {
         Toast.makeText(context,
                 message,
                 Toast.LENGTH_LONG).show();
+    }
+    //TODO martha Implement this method to initialize a form data
+    public void setFormData(String data) {
+        Log.d(TAG, "Setting form data");
+//        ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(data, recordId, formName, getFormFieldsOverrides());
+    }
+
+    public void setFieldOverides(String overrides) {
+        try {
+            //get the field overrides map
+            if (overrides != null) {
+                JSONObject json = new JSONObject(overrides);
+                String overridesStr = json.getString("fieldOverrides");
+                this.fieldOverides = new JSONObject(overridesStr);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
