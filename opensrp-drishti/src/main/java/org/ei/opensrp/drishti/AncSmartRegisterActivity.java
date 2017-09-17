@@ -108,7 +108,9 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             }
         });
 
-//        mPager.setCurrentItem(2);
+        //TODO this is hacking should be changed depending with the usertype
+        mPager.setCurrentItem(2);
+        currentPage = 2;
 
     }
 
@@ -388,6 +390,10 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         if(formName.equals("pregnant_mothers_registration")){
             mPager.setCurrentItem(1, true);
         }
+        if(formName.equals("pregnant_mothers_pre_registration")){
+            Log.d(TAG,"pregnant_mothers_pre_registration is selected");
+            mPager.setCurrentItem(3, true);
+        }
     }
 
     private class EditDialogOptionModelfornbnf implements DialogOptionModel {
@@ -583,8 +589,11 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mPager.setCurrentItem(0, false);
-                SecuredNativeSmartRegisterCursorAdapterFragment registerFragment = (SecuredNativeSmartRegisterCursorAdapterFragment) findFragmentByPosition(0);
+                // TODO: 9/17/17 this is a hack
+                mPager.setCurrentItem(2, true);
+
+
+                SecuredNativeSmartRegisterCursorAdapterFragment registerFragment = (SecuredNativeSmartRegisterCursorAdapterFragment) findFragmentByPosition(currentPage);
                 if (registerFragment != null && data != null) {
                     registerFragment.refreshListView();
                 }

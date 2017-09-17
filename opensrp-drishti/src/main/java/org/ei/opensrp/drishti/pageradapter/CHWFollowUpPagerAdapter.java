@@ -115,7 +115,7 @@ public class CHWFollowUpPagerAdapter extends
     }
     public void showPop(final int position, View anchor) {
 
-        PopupMenu popupMenu = new PopupMenu((CHWSmartRegisterActivity) mContext, anchor);
+        PopupMenu popupMenu = new PopupMenu((AncSmartRegisterActivity) mContext, anchor);
         // inflate menu xml res
         popupMenu.getMenuInflater().inflate(R.menu.menu_follow_up_details, popupMenu.getMenu());
         popupMenu.show();

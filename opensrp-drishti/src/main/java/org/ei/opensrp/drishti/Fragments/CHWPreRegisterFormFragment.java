@@ -38,7 +38,7 @@ import fr.ganfra.materialspinner.MaterialSpinner;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AncRegister1stFragment extends Fragment {
+public class CHWPreRegisterFormFragment extends Fragment {
 
     public static TextView textDate, textPhone, textDateLNMP, textEDD;
     LinearLayout layoutDatePick, layoutEditPhone;
@@ -59,7 +59,7 @@ public class AncRegister1stFragment extends Fragment {
     public static int motherEduSelection = -1, husbandEduSelection = -1;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
-    public AncRegister1stFragment() {
+    public CHWPreRegisterFormFragment() {
         // Required empty public constructor
     }
 

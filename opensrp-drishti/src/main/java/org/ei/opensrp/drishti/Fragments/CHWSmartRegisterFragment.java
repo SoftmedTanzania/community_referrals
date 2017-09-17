@@ -1,6 +1,8 @@
 package org.ei.opensrp.drishti.Fragments;
 
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -24,20 +27,27 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import org.ei.opensrp.drishti.AncSmartRegisterActivity;
 import org.ei.opensrp.drishti.DataModels.ChwFollowUpMother;
 import org.ei.opensrp.drishti.DataModels.PreRegisteredMother;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.chw.CHWSmartRegisterActivity;
 import org.ei.opensrp.drishti.pageradapter.ANCRegisterPagerAdapter;
 import org.ei.opensrp.drishti.pageradapter.CHWPagerAdapter;
+import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
+import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
 
-public class CHWRegisterFormFragment extends android.support.v4.app.Fragment {
-
+public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+    private static final String TAG = CHWSmartRegisterFragment.class.getSimpleName();
+    private String locationDialogTAG = "locationDialogTAG";
+    private JSONObject fieldOverides = new JSONObject();
     private TabLayout tabs;
     private LayoutInflater inflater;
+    private ImageButton imageButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +55,7 @@ public class CHWRegisterFormFragment extends android.support.v4.app.Fragment {
 
         this.inflater = inflater;
         View v = inflater.inflate(R.layout.activity_chwregister, container, false);
+        imageButton = (ImageButton) v.findViewById(R.id.register_client);
 
         CHWPagerAdapter adapter = new CHWPagerAdapter(getActivity().getSupportFragmentManager());
 
@@ -62,6 +73,14 @@ public class CHWRegisterFormFragment extends android.support.v4.app.Fragment {
 
             @Override
             public void onPageScrollStateChanged(int state) {
+            }
+        });
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startRegistration();
+
             }
         });
 
@@ -97,169 +116,45 @@ public class CHWRegisterFormFragment extends android.support.v4.app.Fragment {
         return v;
     }
 
-
-
-
-    public void showPreRegistrationDetailsDialog(PreRegisteredMother mother) {
-
-        final View dialogView = getActivity().getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
-
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this.getActivity());
-        dialogBuilder.setView(dialogView)
-                .setCancelable(false);
-
-        final AlertDialog dialog = dialogBuilder.create();
-        dialog.show();
-        ImageView cancel = (ImageView) dialogView.findViewById(R.id.cancel_action);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-        // TODO: findviewbyid that are on the dialog layout
-        // example
-        TextView textName = (TextView) dialogView.findViewById(R.id.name);
-        textName.setText(mother.getName());
+    @Override
+    protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
+        return null;
     }
 
-    public void showPreRegistrationVisitDialog(final PreRegisteredMother mother){
-
-        final View dialogView = inflater.inflate(R.layout.fragment_chwregistration_visit_details, null);
-
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-        dialogBuilder.setView(dialogView)
-                .setCancelable(false);
-
-        final AlertDialog dialog = dialogBuilder.create();
-        dialog.show();
-        Button button_yes = (Button) dialogView.findViewById(R.id.button_yes);
-        Button button_no = (Button) dialogView.findViewById(R.id.button_no);
-
-        button_yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "Asante kwa kumtembelea tena "+ mother.getName(), Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
-        });
-        button_no.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-        // TODO: findviewbyid that are on the dialog layout
-        // example
-        TextView textName = (TextView) dialogView.findViewById(R.id.name);
-        textName.setText(mother.getName());
+    @Override
+    protected SecuredNativeSmartRegisterActivity.NavBarOptionsProvider getNavBarOptionsProvider() {
+        return null;
     }
 
-    public void showFollowUpDetailsDialog(ChwFollowUpMother mother) {
-
-        final View dialogView = inflater.inflate(R.layout.fragment_chwfollow_details, null);
-
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-        dialogBuilder.setView(dialogView)
-                .setCancelable(false);
-        final AlertDialog dialog = dialogBuilder.create();
-        dialog.show();
-
-        ImageView cancel = (ImageView) dialogView.findViewById(R.id.cancel_action);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-        // TODO: findviewbyid that are on the dialog layout
-        // example
-        TextView textName = (TextView) dialogView.findViewById(R.id.name);
-        textName.setText(mother.getName());
+    @Override
+    protected SmartRegisterClientsProvider clientsProvider() {
+        return null;
     }
 
-    public void showFollowUpFormDialog(final ChwFollowUpMother mother){
+    @Override
+    protected void onInitialization() {
 
-        final View dialogView = inflater.inflate(R.layout.fragment_chwfollow_visit_details, null);
-
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-        dialogBuilder.setView(dialogView)
-                .setCancelable(false);
-        final AlertDialog dialog = dialogBuilder.create();
-        dialog.show();
-
-        RadioGroup radioGroup = (RadioGroup) dialogView.findViewById(R.id.visit) ;
-
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                int selectedId = group.getCheckedRadioButtonId();
-                RadioButton radioButton = (RadioButton) dialogView.findViewById(selectedId);
-
-                if(selectedId == R.id.visit_yes){
-                    RelativeLayout info = (RelativeLayout) dialogView.findViewById(R.id.information);
-                    info.setVisibility(View.VISIBLE);
-                }
-                if(selectedId == R.id.visit_no){
-                    RelativeLayout info = (RelativeLayout) dialogView.findViewById(R.id.information);
-                    info.setVisibility(View.GONE);
-                }
-            }
-        });
-
-
-        Button cancel = (Button) dialogView.findViewById(R.id.cancel_action);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-        Button save = (Button) dialogView.findViewById(R.id.save);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "Asante kwa kumtembelea tena "+ mother.getName(), Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
-        });
-
-        // TODO: findviewbyid that are on the dialog layout
-        // example
-        TextView textName = (TextView) dialogView.findViewById(R.id.name);
-        textName.setText(mother.getName());
     }
 
-    public void confirmDelete() {
-        final View dialogView = inflater.inflate(R.layout.layout_dialog_confirm_delete, null);
 
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-        dialogBuilder.setView(dialogView)
-                .setCancelable(false);
-        final AlertDialog dialog = dialogBuilder.create();
-        dialog.show();
+    @Override
+    public void startRegistration() {
+        Log.d(TAG, "starting registrations");
+        FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
+        Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+        LocationSelectorDialogFragment
+                .newInstance((AncSmartRegisterActivity) getActivity(), null, context().anmLocationController().get(),
+                        "pregnant_mothers_pre_registration")
+                .show(ft, locationDialogTAG);
+    }
 
 
-        dialogView.findViewById(R.id.textOk).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // todo: delete mother
-
-
-                dialog.dismiss();
-            }
-        });
-
-        dialogView.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
+    @Override
+    protected void onCreation() {
 
     }
 }
