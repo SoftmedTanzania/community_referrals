@@ -45,6 +45,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
             android:paddingTop="12dp"
+            android:visibility="gone"
             android:text="Umri chini ya miaka 20"
             android:textColor="@color/secondary_text"
             android:textSize="14sp" />

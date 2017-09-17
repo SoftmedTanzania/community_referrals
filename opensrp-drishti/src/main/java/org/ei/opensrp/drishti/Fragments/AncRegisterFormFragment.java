@@ -77,6 +77,12 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
                     // show only on the last fragment
                     fabDone.startAnimation(animationFabShow);
                     fabDone.setEnabled(true);
+                    AncRegister1stFragment detailsFragment = (AncRegister1stFragment) pagerAdapter.getItem(0);
+
+                    AncRegister2ndFragment indicatorsFragment = (AncRegister2ndFragment) pagerAdapter.getItem(1);
+                    int[] riskIndicators = detailsFragment.getRiskIndicatorsFromDetails();
+                    // update risk indicators
+                    indicatorsFragment.updateRiskIndicators(riskIndicators[0], riskIndicators[1], riskIndicators[2]);
 
                 } else if (fabDone.isEnabled()) {
                     fabDone.startAnimation(animationFabHide);
@@ -140,16 +146,16 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
                     SparseBooleanArray indicatorsMap = ((AncRegister2ndFragment) pagerAdapter.getItem(1))
                             .getIndicatorsMap();
 
-                    pregnantMom.setAbove20WeeksPregnant(indicatorsMap.get(R.id.checkboxAgeBelow20));
+//                    pregnantMom.setAbove20WeeksPregnant(indicatorsMap.get(R.id.checkboxAgeBelow20));
                     pregnantMom.setHas10YrsPassedSinceLastPreg(indicatorsMap.get(R.id.checkbox10YrsLastPreg));
                     pregnantMom.setHadStillBirth(indicatorsMap.get(R.id.checkboxBabyDeath));
-                    pregnantMom.setHas2orMoreBBA(indicatorsMap.get(R.id.checkbox2orMoreBBA));
+//                    pregnantMom.setHas2orMoreBBA(indicatorsMap.get(R.id.checkbox2orMoreBBA));
                     pregnantMom.setHasHeartProblem(indicatorsMap.get(R.id.checkboxHeartProb));
                     pregnantMom.setHasDiabetes(indicatorsMap.get(R.id.checkboxDiabetes));
                     pregnantMom.setHasTB(indicatorsMap.get(R.id.checkboxTB));
-                    pregnantMom.setFourOrMorePreg(indicatorsMap.get(R.id.checkbox4orMorePregnancies));
+//                    pregnantMom.setFourOrMorePreg(indicatorsMap.get(R.id.checkbox4orMorePregnancies));
                     pregnantMom.setFirstPregAbove35Yrs(indicatorsMap.get(R.id.checkbox1stPregAbove35Yrs));
-                    pregnantMom.setHeightBelow150(indicatorsMap.get(R.id.checkboxHeightBelow150));
+//                    pregnantMom.setHeightBelow150(indicatorsMap.get(R.id.checkboxHeightBelow150));
                     pregnantMom.setCsDelivery(indicatorsMap.get(R.id.checkboxCSDelivery));
                     pregnantMom.setKilemaChaNyonga(indicatorsMap.get(R.id.checkboxKilemaChaNyonga));
                     pregnantMom.setBleedingOnDelivery(indicatorsMap.get(R.id.checkboxBleedingOnDelivery));

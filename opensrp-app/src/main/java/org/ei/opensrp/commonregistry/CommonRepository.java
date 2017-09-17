@@ -98,7 +98,7 @@ public class CommonRepository extends DrishtiRepository {
         Log.d("customInsert", "tableName = " + TABLE_NAME);
         database.insert(TABLE_NAME, null, contentValues);
 
-        Cursor cursor = database.rawQuery("select * from wazazi_salama_mother",null);
+       // Cursor cursor = database.rawQuery("select * from wazazi_salama_mother",null);
     }
 
 

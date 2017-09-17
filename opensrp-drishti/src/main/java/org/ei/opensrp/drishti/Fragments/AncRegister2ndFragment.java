@@ -3,11 +3,13 @@ package org.ei.opensrp.drishti.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 
 import org.ei.opensrp.drishti.R;
 
@@ -21,6 +23,9 @@ public class AncRegister2ndFragment extends Fragment {
             checkBox4orMorePregnancies, checkBox1stPregAbove35Yrs, checkBoxHeightBelow150,
             checkBoxCSDelivery, checkBoxKilemaChaNyonga, checkBoxBleedingOnDelivery,
             checkBoxKondoKukwama;
+
+    private CardView cardRiskIndicators;
+    private LinearLayout layoutRiskAge, layoutRiskHeight, layoutRiskFertilityCount;
 
     public AncRegister2ndFragment() {
         // Required empty public constructor
@@ -48,6 +53,14 @@ public class AncRegister2ndFragment extends Fragment {
         checkBoxBleedingOnDelivery = (CheckBox) fragmentView.findViewById(R.id.checkboxBleedingOnDelivery);
         checkBoxKondoKukwama = (CheckBox) fragmentView.findViewById(R.id.checkboxKondoKukwama);
 
+        cardRiskIndicators = (CardView) fragmentView.findViewById(R.id.cardRiskIndicators);
+        layoutRiskAge = (LinearLayout) fragmentView.findViewById(R.id.layoutRiskAge);
+        layoutRiskHeight = (LinearLayout) fragmentView.findViewById(R.id.layoutRiskHeight);
+        layoutRiskFertilityCount = (LinearLayout) fragmentView.findViewById(R.id.layoutRiskFertilityCount);
+
+        layoutRiskAge.setVisibility(View.GONE);
+        layoutRiskHeight.setVisibility(View.GONE);
+        layoutRiskFertilityCount.setVisibility(View.GONE);
 
         return fragmentView;
     }
@@ -72,11 +85,40 @@ public class AncRegister2ndFragment extends Fragment {
             indicators.put(R.id.checkboxKilemaChaNyonga, checkBoxKilemaChaNyonga.isChecked());
             indicators.put(R.id.checkboxBleedingOnDelivery, checkBoxBleedingOnDelivery.isChecked());
             indicators.put(R.id.checkboxKondoKukwama, checkBoxKondoKukwama.isChecked());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return indicators;
+    }
+
+
+    public void updateRiskIndicators(int age, int height, int fertilityCount) {
+        boolean isToShowCard = false;
+
+        if (age < 20 && age != -1) {
+            layoutRiskAge.setVisibility(View.VISIBLE);
+            isToShowCard = true;
+        } else
+            layoutRiskAge.setVisibility(View.GONE);
+
+        if (height < 150 && height != -1) {
+            layoutRiskHeight.setVisibility(View.VISIBLE);
+            isToShowCard = true;
+        } else
+            layoutRiskHeight.setVisibility(View.GONE);
+
+        if (fertilityCount >= 4 && fertilityCount != -1) {
+            layoutRiskFertilityCount.setVisibility(View.VISIBLE);
+            isToShowCard = true;
+        } else
+            layoutRiskFertilityCount.setVisibility(View.GONE);
+
+
+        if (isToShowCard)
+            cardRiskIndicators.setVisibility(View.VISIBLE);
+        else
+            cardRiskIndicators.setVisibility(View.GONE);
     }
 
 }
