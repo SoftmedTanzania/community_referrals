@@ -409,6 +409,7 @@ public class AncRegister1stFragment extends Fragment {
         mom.setHusbandOccupation(editTextHusbandOccupation.getText().toString());
         mom.setDateLNMP(lnmp);
         mom.setEdd(edd);
+        mom.setDateRegistration(today.getTimeInMillis());
 
         return mom;
     }

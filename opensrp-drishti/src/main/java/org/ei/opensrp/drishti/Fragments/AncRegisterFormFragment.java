@@ -161,6 +161,15 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
                     pregnantMom.setBleedingOnDelivery(indicatorsMap.get(R.id.checkboxBleedingOnDelivery));
                     pregnantMom.setKondoKukwama(indicatorsMap.get(R.id.checkboxKondoKukwama));
 
+                    // default values
+                    pregnantMom.setDateLastVisited(0);
+                    pregnantMom.setLastSmsToken("0");
+                    pregnantMom.setChwComment("no comment");
+                    pregnantMom.setAncAppointment1(false);
+                    pregnantMom.setAncAppointment2(false);
+                    pregnantMom.setAncAppointment3(false);
+                    pregnantMom.setAncAppointment4(false);
+
                     // convert to json
                     String gsonMom = gson.toJson(pregnantMom);
                     Log.d(TAG, "mom = " + gsonMom);
