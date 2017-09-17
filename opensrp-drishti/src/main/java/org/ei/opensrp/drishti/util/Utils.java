@@ -71,9 +71,9 @@ public class Utils {
     public static MotherPersonObject convertToMotherPersonObject(CommonPersonObject commonPersonObject) {
         JSONObject o = null;
         String details = commonPersonObject.getColumnmaps().get("details");
-        Log.d(TAG,"details string = "+convertStandardJSONString(details.substring(1, details.length()-1)));
+        Log.d(TAG, "details string = " + convertStandardJSONString(details.substring(1, details.length() - 1)));
         try {
-            o = new JSONObject(convertStandardJSONString(details.substring(1, details.length()-1)));
+            o = new JSONObject(convertStandardJSONString(details.substring(1, details.length() - 1)));
             return new MotherPersonObject(
                     commonPersonObject.getColumnmaps().get("caseId"),
                     commonPersonObject.getColumnmaps().get("relationalid"),
@@ -86,10 +86,10 @@ public class Utils {
                     commonPersonObject.getColumnmaps().get("FACILITY_ID"),
                     commonPersonObject.getColumnmaps().get("IS_PNC"),
                     commonPersonObject.getColumnmaps().get("IS_VALID"),
-                    commonPersonObject.getColumnmaps().get("details"),
+                     commonPersonObject.getColumnmaps().get("details"),
                     commonPersonObject.getColumnmaps().get("type")
             );
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

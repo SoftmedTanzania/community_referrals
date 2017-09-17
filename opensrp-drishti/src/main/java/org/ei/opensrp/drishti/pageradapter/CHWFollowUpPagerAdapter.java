@@ -48,6 +48,7 @@ public class CHWFollowUpPagerAdapter extends
     private Context getContext() {
         return mContext;
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -62,7 +63,10 @@ public class CHWFollowUpPagerAdapter extends
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
         MotherPersonObject mother = fMother.get(position);
-        PregnantMom pregnantMom = new Gson().fromJson(mother.getDetails(),PregnantMom.class);
+        String gsonMom = Utils.convertStandardJSONString(mother.getDetails().substring(1, mother.getDetails().length() - 1));
+        Log.d("CHWFollowUpPagerAdapter", "gsonMom = " + gsonMom);
+        PregnantMom pregnantMom = new Gson().fromJson(gsonMom, PregnantMom.class);
+
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
         long lnmp = pregnantMom.getDateLNMP();
@@ -71,12 +75,12 @@ public class CHWFollowUpPagerAdapter extends
         String anc3 = dateFormat.format(DatesHelper.calculate3rdVisitFromLNMP(lnmp));
         String anc4 = dateFormat.format(DatesHelper.calculate4thVisitFromLNMP(lnmp));
 
-        viewHolder.nameTextView.setText(mother.getMOTHERS_FIRST_NAME() +" "+ mother.getMOTHERS_LAST_NAME());
-        viewHolder.ageTextView.setText(pregnantMom.getAge());
+        viewHolder.nameTextView.setText(mother.getMOTHERS_FIRST_NAME() + " " + mother.getMOTHERS_LAST_NAME());
+        viewHolder.ageTextView.setText(String.valueOf(pregnantMom.getAge()) +" years");
         viewHolder.riskTextView.setText("high");
         viewHolder.villageTextView.setText(pregnantMom.getPhysicalAddress());
         viewHolder.uniqueIDTextView.setText(pregnantMom.getId());
-        viewHolder.facilityTextView.setText(mother.getFACILITY_ID());
+        viewHolder.facilityTextView.setText(pregnantMom.getFacilityId());
         viewHolder.anc1TextView.setText(anc1);
         viewHolder.anc2TextView.setText(anc2);
         viewHolder.anc3TextView.setText(anc3);
@@ -92,8 +96,9 @@ public class CHWFollowUpPagerAdapter extends
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView nameTextView,riskTextView, uniqueIDTextView, villageTextView, ageTextView, numberTextView, facilityTextView, anc1TextView,anc2TextView,anc3TextView,anc4TextView;
+        public TextView nameTextView, riskTextView, uniqueIDTextView, villageTextView, ageTextView, numberTextView, facilityTextView, anc1TextView, anc2TextView, anc3TextView, anc4TextView;
         public ImageView iconOptions;
+
         public ViewHolder(View itemView) {
 
             super(itemView);
@@ -130,6 +135,7 @@ public class CHWFollowUpPagerAdapter extends
         }
 
     }
+
     public void showPop(final int position, View anchor) {
 
         PopupMenu popupMenu = new PopupMenu((AncSmartRegisterActivity) mContext, anchor);

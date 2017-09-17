@@ -109,7 +109,7 @@ public class CHWFollowUpFragment extends SecuredNativeSmartRegisterCursorAdapter
         this.motherPersonList = Utils.convertToMotherPersonObjectList(commonPersonObjectList);
         Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + motherPersonList.size());
 
-        CHWFollowUpPagerAdapter pager = new CHWFollowUpPagerAdapter(getActivity(),motherPersonList);
+        CHWFollowUpPagerAdapter pager = new CHWFollowUpPagerAdapter(getActivity(), motherPersonList);
 
 
         int numberOfColumns = 3;

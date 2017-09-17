@@ -39,6 +39,7 @@ import org.ei.opensrp.drishti.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.drishti.util.DatesHelper;
 import org.ei.opensrp.drishti.util.OrientationHelper;
+import org.ei.opensrp.drishti.util.Utils;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.util.FormUtils;
@@ -118,7 +119,9 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     }
 
     public void showPreRegistrationDetailsDialog(MotherPersonObject mother) {
-        PregnantMom pregnantMom = new Gson().fromJson(mother.getDetails(),PregnantMom.class);
+        String gsonMom = Utils.convertStandardJSONString(mother.getDetails().substring(1, mother.getDetails().length() - 1));
+        Log.d(TAG, "gsonMom = " + gsonMom);
+        PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
@@ -154,7 +157,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
 
         textName.setText(mother.getMOTHERS_FIRST_NAME() +" "+mother.getMOTHERS_LAST_NAME());
-        textAge.setText(pregnantMom.getAge());
+        textAge.setText(String.valueOf(pregnantMom.getAge())+" years");
         textSpouseName.setText(pregnantMom.getHusbandName()+"["+ pregnantMom.getHusbandOccupation() +"]");
         textSpousetel.setText(pregnantMom.getPhone());
         textvillage.setText(pregnantMom.getPhysicalAddress());
@@ -174,6 +177,9 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     public void showPreRegistrationVisitDialog(final MotherPersonObject mother) {
 
+        String gsonMom = Utils.convertStandardJSONString(mother.getDetails().substring(1, mother.getDetails().length() - 1));
+        Log.d(TAG, "gsonMom = " + gsonMom);
+        PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_visit_details, null);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
@@ -207,7 +213,9 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     public void showFollowUpDetailsDialog(MotherPersonObject mother) {
 
-        PregnantMom pregnantMom = new Gson().fromJson(mother.getDetails(),PregnantMom.class);
+        String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
+        Log.d(TAG, "gsonMom = " + gsonMom);
+        PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_details, null);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
@@ -244,7 +252,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
 
         textName.setText(mother.getMOTHERS_FIRST_NAME() +" "+mother.getMOTHERS_LAST_NAME());
-        textAge.setText(pregnantMom.getAge());
+        textAge.setText(String.valueOf(pregnantMom.getAge()) + " years");
         textSpouseName.setText(pregnantMom.getHusbandName()+"["+ pregnantMom.getHusbandOccupation() +"]");
         textSpousetel.setText(pregnantMom.getPhone());
         textvillage.setText(pregnantMom.getPhysicalAddress());
@@ -264,7 +272,10 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     public void showFollowUpFormDialog(final MotherPersonObject mother) {
 
-        PregnantMom pregnantMom = new Gson().fromJson(mother.getDetails(),PregnantMom.class);
+        String gsonMom = Utils.convertStandardJSONString(mother.getDetails().substring(1, mother.getDetails().length() - 1));
+        Log.d(TAG, "gsonMom = " + gsonMom);
+        PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
+
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
@@ -315,7 +326,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         TextView textAge = (TextView) dialogView.findViewById(R.id.mom_age);
 
         textName.setText(mother.getMOTHERS_FIRST_NAME() +" "+ mother.getMOTHERS_LAST_NAME());
-        textAge.setText(pregnantMom.getAge());
+        textAge.setText(String.valueOf(pregnantMom.getAge())+" years");
 
 
     }

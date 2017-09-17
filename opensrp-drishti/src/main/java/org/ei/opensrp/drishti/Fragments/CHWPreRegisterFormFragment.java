@@ -192,15 +192,18 @@ public class CHWPreRegisterFormFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // convert to json
-                pregnantMom = getPregnantMom();
-                String gsonMom = gson.toJson(pregnantMom);
-                Log.d(TAG, "mom = " + gsonMom);
+                if (isFormSubmissionOk()) {
+                    // convert to json
+                    pregnantMom = getPregnantMom();
+                    String gsonMom = gson.toJson(pregnantMom);
+                    Log.d(TAG, "mom = " + gsonMom);
 
-                // todo start form submission
+                    // todo start form submission
 
-                ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(gsonMom, recordId, formName, getFormFieldsOverrides());
-                getActivity().finish();
+                    ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(gsonMom, recordId, formName, getFormFieldsOverrides());
+                    getActivity().finish();
+                }
+
             }
         });
 
@@ -290,6 +293,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
 
     public boolean isFormSubmissionOk() {
         if (TextUtils.isEmpty(editTextMotherName.getText())
+                || TextUtils.isEmpty(editTextClinicName.getText())
                 || TextUtils.isEmpty(editTextMotherId.getText())
                 || TextUtils.isEmpty(editTextMotherAge.getText())
                 || TextUtils.isEmpty(editTextHeight.getText())
@@ -357,6 +361,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
 
         return mom;
     }
+
     public JSONObject getFormFieldsOverrides() {
         return fieldOverides;
     }
