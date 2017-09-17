@@ -113,8 +113,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
 
         //TODO this is hacking should be changed depending with the usertype
-        mPager.setCurrentItem(2);
-        currentPage = 2;
+        mPager.setCurrentItem(0);
+        currentPage = 0;
 
     }
 

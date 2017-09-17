@@ -8,8 +8,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -57,12 +60,16 @@ public class AncDetailActivityAlt extends AppCompatActivity {
 
     private TextView textName, textId, textDiscountId, textPhysicalAddress,
             textAge, textPhone, textMotherEducation, textMotherOccupation,
-            textHusbandName, textHusbandEducation, textHusbandOccupation,
+            textHusbandName, textHusbandEducation, textHusbandOccupation, textLiveChildren,
             text1stVisit, text2ndVisit, text3rdVisit, text4thVisit, textEdd;
 
 
     private ImageView imageDisplayPicture, iconAnc1Date, iconAnc2Date,
             iconAnc3Date, iconAnc4Date, iconEdd;
+
+    private CardView cardRiskIndicatiors;
+    private LinearLayout layoutRiskAge, layoutRiskHeight, layoutRiskFertifility;
+
 
     private PregnantMom mom;
 
@@ -85,6 +92,13 @@ public class AncDetailActivityAlt extends AppCompatActivity {
         actionBar.setTitle("");
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
+        collapsingToolbar.setTitle("");
+
+        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appBarLayout);
+        if (appBarLayout.getVisibility() != View.VISIBLE)
+            appBarLayout.setVisibility(View.VISIBLE);
 
         setUpViews();
 
@@ -117,6 +131,7 @@ public class AncDetailActivityAlt extends AppCompatActivity {
         text3rdVisit = (TextView) findViewById(R.id.textAnc3Date);
         text4thVisit = (TextView) findViewById(R.id.textAnc4Date);
         textEdd = (TextView) findViewById(R.id.textEdd);
+        textLiveChildren = (TextView) findViewById(R.id.textLivingChildren);
 
         imageDisplayPicture = (ImageView) findViewById(R.id.imageProfilePic);
         iconAnc1Date = (ImageView) findViewById(R.id.iconAnc1Date);
@@ -124,6 +139,16 @@ public class AncDetailActivityAlt extends AppCompatActivity {
         iconAnc3Date = (ImageView) findViewById(R.id.iconAnc3Date);
         iconAnc4Date = (ImageView) findViewById(R.id.iconAnc4Date);
         iconEdd = (ImageView) findViewById(R.id.iconEdd);
+
+        cardRiskIndicatiors = (CardView) findViewById(R.id.cardRiskIndicators);
+        layoutRiskAge = (LinearLayout) findViewById(R.id.layoutRiskAge);
+        layoutRiskHeight = (LinearLayout) findViewById(R.id.layoutRiskHeight);
+        layoutRiskFertifility = (LinearLayout) findViewById(R.id.layoutRiskFertilityCount);
+
+        cardRiskIndicatiors.setVisibility(View.GONE);
+        layoutRiskAge.setVisibility(View.GONE);
+        layoutRiskHeight.setVisibility(View.GONE);
+        layoutRiskFertifility.setVisibility(View.GONE);
     }
 
     private void setMotherProfileDetails() {
@@ -138,8 +163,11 @@ public class AncDetailActivityAlt extends AppCompatActivity {
         textHusbandName.setText(mom.getHusbandName());
         textHusbandEducation.setText(mom.getHusbandEducation());
         textHusbandOccupation.setText(mom.getHusbandOccupation());
+        textLiveChildren.setText(String.valueOf(mom.getAge()));
 
         calculateAndSetDates();
+
+        updateRiskIndicators(mom.getAge(), mom.getHeight(), mom.getPreviousFertilityCount());
     }
 
     private void calculateAndSetDates() {
@@ -187,6 +215,35 @@ public class AncDetailActivityAlt extends AppCompatActivity {
             iconAnc1Date.setImageResource(R.drawable.ic_calendar_check);
             return;
         }
+    }
+
+
+    public void updateRiskIndicators(int age, int height, int fertilityCount) {
+        boolean isToShowCard = false;
+
+        if (age < 20 && age != -1) {
+            layoutRiskAge.setVisibility(View.VISIBLE);
+            isToShowCard = true;
+        } else
+            layoutRiskAge.setVisibility(View.GONE);
+
+        if (height < 150 && height != -1) {
+            layoutRiskHeight.setVisibility(View.VISIBLE);
+            isToShowCard = true;
+        } else
+            layoutRiskHeight.setVisibility(View.GONE);
+
+        if (fertilityCount >= 4 && fertilityCount != -1) {
+            layoutRiskFertifility.setVisibility(View.VISIBLE);
+            isToShowCard = true;
+        } else
+            layoutRiskFertifility.setVisibility(View.GONE);
+
+
+        if (isToShowCard)
+            cardRiskIndicatiors.setVisibility(View.VISIBLE);
+        else
+            cardRiskIndicatiors.setVisibility(View.INVISIBLE);
     }
 
     @Override

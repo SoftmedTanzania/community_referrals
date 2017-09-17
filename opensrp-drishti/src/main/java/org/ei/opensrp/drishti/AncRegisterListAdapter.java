@@ -25,6 +25,8 @@ import org.ei.opensrp.drishti.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.ei.opensrp.drishti.util.Utils.convertStandardJSONString;
+
 /**
  * Created by ali on 9/13/17.
  */
@@ -71,9 +73,10 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
                 @Override
                 public void onClick(View view) {
                     // go to AncDetailActivity
+                    String gsonMom = Utils.convertStandardJSONString(motherPersonList.get(getAdapterPosition()).getDetails());
                     appContext.startActivity(new Intent(appContext, AncDetailActivityAlt.class)
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            .putExtra("mom", motherPersonList.get(getAdapterPosition()).getDetails()));
+                            .putExtra("mom", gsonMom));
                 }
             });
         }
@@ -89,7 +92,7 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
     public void onBindViewHolder(ViewHolder holder, int position) {
         // todo get item form list
         MotherPersonObject motherPersonObject = motherPersonList.get(position);
-        PregnantMom mom = gson.fromJson(motherPersonObject.getDetails(), PregnantMom.class);
+        PregnantMom mom = gson.fromJson(convertStandardJSONString(motherPersonObject.getDetails()), PregnantMom.class);
 
         holder.textName.setText(mom.getName());
         holder.textEDD.setText(motherPersonObject.getEXPECTED_DELIVERY_DATE());
