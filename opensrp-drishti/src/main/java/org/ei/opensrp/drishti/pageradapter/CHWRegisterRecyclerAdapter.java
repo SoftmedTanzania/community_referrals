@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import org.ei.opensrp.drishti.AncSmartRegisterActivity;
 import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.chw.CHWSmartRegisterActivity;
 import org.ei.opensrp.drishti.DataModels.PreRegisteredMother;
 
@@ -26,10 +27,11 @@ import java.util.List;
 public class CHWRegisterRecyclerAdapter extends
         RecyclerView.Adapter<CHWRegisterRecyclerAdapter.ViewHolder> {
 
-    private List<PreRegisteredMother> mothers;
+    private List<MotherPersonObject> mothers;
     private Context mContext;
+    private MotherPersonObject mother;
 
-    public CHWRegisterRecyclerAdapter(Context context, List<PreRegisteredMother> mothers) {
+    public CHWRegisterRecyclerAdapter(Context context, List<MotherPersonObject> mothers) {
         this.mothers = mothers;
         this.mContext = context;
     }
@@ -51,17 +53,17 @@ public class CHWRegisterRecyclerAdapter extends
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
-        PreRegisteredMother mother = mothers.get(position);
+        mother = mothers.get(position);
 
         // Set item views based on your views and data model
         TextView name = viewHolder.nameTextView;
-        name.setText(mother.getName());
+        name.setText(mother.getMOTHERS_FIRST_NAME() +" "+mother.getMOTHERS_LAST_NAME());
         TextView edd = viewHolder.eddTextView;
-        edd.setText(mother.getEdd());
+        edd.setText(mother.getEXPECTED_DELIVERY_DATE());
         TextView visited = viewHolder.visitedTextView;
-        visited.setText(mother.getVisited());
+        visited.setText(mother.getEXPECTED_DELIVERY_DATE());
         TextView risk = viewHolder.riskTextView;
-        risk.setText(mother.getRisk());
+        risk.setText(mother.getMOTHERS_LAST_NAME());
 
     }
 
