@@ -26,6 +26,8 @@ import com.google.gson.Gson;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,9 +69,30 @@ public class Utils {
 
 
     public static MotherPersonObject convertToMotherPersonObject(CommonPersonObject commonPersonObject) {
-        Log.d(TAG, "commonPersonObject = " + new Gson().toJson(commonPersonObject));
-        Log.d(TAG, "json details = " + commonPersonObject.getColumnmaps().get("details"));
-        return new MotherPersonObject(commonPersonObject.getColumnmaps().get("id"), commonPersonObject.getColumnmaps().get("relationalid"), new Gson().fromJson(commonPersonObject.getColumnmaps().get("details"), PregnantMom.class));
+        JSONObject o = null;
+        String details = commonPersonObject.getColumnmaps().get("details");
+        Log.d(TAG,"details string = "+convertStandardJSONString(details.substring(1, details.length()-1)));
+        try {
+            o = new JSONObject(convertStandardJSONString(details.substring(1, details.length()-1)));
+            return new MotherPersonObject(
+                    commonPersonObject.getColumnmaps().get("caseId"),
+                    commonPersonObject.getColumnmaps().get("relationalid"),
+                    commonPersonObject.getColumnmaps().get("MOTHERS_FIRST_NAME"),
+                    commonPersonObject.getColumnmaps().get("MOTHERS_LAST_NAME"),
+                    commonPersonObject.getColumnmaps().get("MOTHERS_ID"),
+                    commonPersonObject.getColumnmaps().get("MOTHERS_SORTVALUE"),
+                    commonPersonObject.getColumnmaps().get("EXPECTED_DELIVERY_DATE"),
+                    commonPersonObject.getColumnmaps().get("MOTHERS_LAST_MENSTRUATION_DATE"),
+                    commonPersonObject.getColumnmaps().get("FACILITY_ID"),
+                    commonPersonObject.getColumnmaps().get("IS_PNC"),
+                    commonPersonObject.getColumnmaps().get("IS_VALID"),
+                    commonPersonObject.getColumnmaps().get("details"),
+                    commonPersonObject.getColumnmaps().get("type")
+            );
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
@@ -81,6 +104,15 @@ public class Utils {
 
 
         return mothers;
+    }
+
+    public static String convertStandardJSONString(String data_json) {
+        data_json = data_json.replaceAll("\\\\r\\\\n", "");
+        data_json = data_json.replace("\"{", "{");
+        data_json = data_json.replace("}\",", "},");
+        data_json = data_json.replace("}\"", "}");
+        data_json = data_json.replace("\\", "");
+        return data_json;
     }
 
 }

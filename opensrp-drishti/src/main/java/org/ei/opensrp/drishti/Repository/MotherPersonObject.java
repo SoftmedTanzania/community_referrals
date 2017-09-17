@@ -18,8 +18,19 @@ public class MotherPersonObject {
     private String details;
     private Map<String, String> columnMap;
 
-    public MotherPersonObject(String caseId, String relationalId, String MOTHERS_FIRST_NAME, String MOTHERS_LAST_NAME, String MOTHERS_ID, String MOTHERS_SORTVALUE, String EXPECTED_DELIVERY_DATE,
-                              String MOTHERS_LAST_MENSTRUATION_DATE, String FACILITY_ID, String IS_PNC, String IS_VALID, String details, String type) {
+    public MotherPersonObject(String caseId,
+                              String relationalId,
+                              String MOTHERS_FIRST_NAME,
+                              String MOTHERS_LAST_NAME,
+                              String MOTHERS_ID,
+                              String MOTHERS_SORTVALUE,
+                              String EXPECTED_DELIVERY_DATE,
+                              String MOTHERS_LAST_MENSTRUATION_DATE,
+                              String FACILITY_ID,
+                              String IS_PNC,
+                              String IS_VALID,
+                              String details,
+                              String type) {
         this.details = details;
         this.caseId = caseId;
         this.type = type;

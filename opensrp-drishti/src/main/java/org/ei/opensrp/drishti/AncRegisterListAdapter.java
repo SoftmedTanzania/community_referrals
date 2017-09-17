@@ -41,19 +41,10 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
             TABLE_NAME = "wazazi_salama_mother";
 
 
-    public AncRegisterListAdapter(Context context, Cursor cursor, SmartRegisterCLientsProviderForCursorAdapter listItemProvider, CustomMotherRepository commonRepository) {
-//        super(context, cursor);
-//        this.listItemProvider = listItemProvider;
-        this.context = context;
-        this.cursor = cursor;
-//        this.motherPersonList = commonRepository.readAllMotherForField(cursor, TABLE_NAME);
-    }
-
     public AncRegisterListAdapter(Context context, CommonRepository commonRepository, Cursor cursor, android.content.Context appContext) {
         this.context = context;
         this.appContext = appContext;
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
-//        Log.d(TAG, "cursor = " + gson.toJson(cursor));
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
 
         this.motherPersonList = Utils.convertToMotherPersonObjectList(commonPersonObjectList);

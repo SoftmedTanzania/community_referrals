@@ -2,6 +2,7 @@ package org.ei.opensrp.commonregistry;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -92,14 +93,12 @@ public class CommonRepository extends DrishtiRepository {
         database.insert(TABLE_NAME, null, createValuesFor(common));
     }
 
-    public void customInsert(ContentValues contentValues, CommonRepository commonRepository) {
+    public void customInsert(ContentValues contentValues) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
         Log.d("customInsert", "tableName = " + TABLE_NAME);
         database.insert(TABLE_NAME, null, contentValues);
 
-        Cursor cursor = commonRepository.RawCustomQueryForAdapter("select * from wazazi_salama_mother");
-        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
-        Log.d("commonPersonObjectList", "cpoList = " + new Gson().toJson(commonPersonObjectList));
+        Cursor cursor = database.rawQuery("select * from wazazi_salama_mother",null);
     }
 
 
@@ -244,7 +243,7 @@ public class CommonRepository extends DrishtiRepository {
                 int columncount = cursor.getColumnCount();
                 HashMap<String, String> columns = new HashMap<String, String>();
                 for (int i = 0; i < columncount; i++) {
-                    columns.put(cursor.getColumnName(i), String.valueOf(cursor.getInt(i)));
+                    columns.put(cursor.getColumnName(i), String.valueOf(cursor.getString(i)));
                 }
                 CommonPersonObject common = new CommonPersonObject("1", "0", null, tableName);
                 common.setColumnmaps(columns);
