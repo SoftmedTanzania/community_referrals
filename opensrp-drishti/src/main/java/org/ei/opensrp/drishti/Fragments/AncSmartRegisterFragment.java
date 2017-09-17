@@ -4,6 +4,10 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -66,6 +70,7 @@ import java.util.Map;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.ei.opensrp.drishti.util.Utils.isTablet;
 
 /**
  * Created by koros on 11/2/15.
@@ -339,6 +344,14 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         Cursor cursor = motherRepository.RawCustomQueryForAdapter("select * from wazazi_salama_mother");
 //        Cursor cursor = motherRepository.CustomQueryForAdapter(columns, "wazazi_salama_mother", "", "");
         clientAdapter = new AncRegisterListAdapter(context(), motherRepository, cursor, getContext());
+
+
+        int numberOfColumns=2;
+        if(isTablet(getActivity())){
+            numberOfColumns = 3;
+        }
+        clientsView.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
+        clientsView.setItemAnimator(new DefaultItemAnimator());
         clientsView.setAdapter(clientAdapter);
 
     }

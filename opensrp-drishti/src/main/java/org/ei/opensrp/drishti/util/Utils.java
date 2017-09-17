@@ -16,6 +16,8 @@
 
 package org.ei.opensrp.drishti.util;
 
+import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.util.Log;
@@ -113,6 +115,12 @@ public class Utils {
         data_json = data_json.replace("}\"", "}");
         data_json = data_json.replace("\\", "");
         return data_json;
+    }
+
+    public static boolean isTablet(Context context) {
+        return (context.getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK)
+                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
 }

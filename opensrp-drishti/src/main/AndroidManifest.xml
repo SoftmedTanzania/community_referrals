@@ -67,6 +67,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
+            android:name=".AncDetailActivityAlt"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".AncDetailActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
