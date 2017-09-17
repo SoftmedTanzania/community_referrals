@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import org.ei.opensrp.drishti.Fragments.CHWFollowUpFragment;
-import org.ei.opensrp.drishti.Fragments.CHWRegistrationFragment;
+import org.ei.opensrp.drishti.Fragments.CHWPreRegistrationFragment;
 
 
 /**
@@ -25,7 +25,7 @@ public class CHWPagerAdapter extends FragmentPagerAdapter {
                 return new CHWFollowUpFragment() ;
 
             case 1:
-                return new CHWRegistrationFragment();
+                return new CHWPreRegistrationFragment();
             default:
                 return null;
         }
