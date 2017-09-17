@@ -3,6 +3,7 @@ package org.ei.opensrp.drishti.pageradapter;
 import android.content.Context;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,10 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.drishti.AncSmartRegisterActivity;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.chw.CHWSmartRegisterActivity;
 import org.ei.opensrp.drishti.DataModels.ChwFollowUpMother;
+import org.ei.opensrp.drishti.util.Utils;
 
 import java.util.List;
 
@@ -32,6 +35,7 @@ public class CHWFollowUpPagerAdapter extends
     public CHWFollowUpPagerAdapter(Context context, List<ChwFollowUpMother> mothers) {
         fMother = mothers;
         mContext = context;
+
     }
 
     private Context getContext() {

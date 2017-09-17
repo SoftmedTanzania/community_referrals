@@ -76,6 +76,8 @@ public class CHWPreRegistrationFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView)v.findViewById(R.id.pre_reg_listView);
 
         ArrayList<PreRegisteredMother> mothers = PreRegisteredMother.createPreRegisteredMotherList();
+
+
         CHWRegisterRecyclerAdapter pager = new CHWRegisterRecyclerAdapter(getActivity(),mothers);
 
 

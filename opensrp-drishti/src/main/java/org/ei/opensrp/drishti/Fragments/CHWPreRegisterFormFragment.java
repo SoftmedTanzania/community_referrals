@@ -9,22 +9,27 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.util.DatesHelper;
+import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,14 +44,15 @@ import fr.ganfra.materialspinner.MaterialSpinner;
  * A simple {@link Fragment} subclass.
  */
 public class CHWPreRegisterFormFragment extends Fragment {
-
+    private static final String TAG = AncRegisterFormFragment.class.getSimpleName();
     public static TextView textDate, textPhone, textDateLNMP, textEDD;
     LinearLayout layoutDatePick, layoutEditPhone;
     CardView cardDatePickLNMP;
-    public static EditText editTextMotherName, editTextMotherId, editTextMotherAge,
+    public static EditText editTextMotherName,editTextClinicName, editTextMotherId, editTextMotherAge,
             editTextHeight, editTextPregCount, editTextBirthCount, editTextChildrenCount,
             editTextDiscountId, editTextMotherOccupation, editTextPhysicalAddress,
             editTextHusbandName, editTextHusbandOccupation;
+    public static Button button;
     public static RadioGroup radioGroupPregnancyAge;
     public static MaterialSpinner spinnerMotherEducation, spinnerHusbandEducation;
     private ArrayAdapter<String> educationAdapter;
@@ -58,6 +64,11 @@ public class CHWPreRegisterFormFragment extends Fragment {
     public static Context context;
     public static int motherEduSelection = -1, husbandEduSelection = -1;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+    private String formName = "pregnant_mothers_pre_registration";
+    private String recordId;
+    private PregnantMom pregnantMom;
+    private Gson gson = new Gson();
+    private JSONObject fieldOverides = new JSONObject();
 
     public CHWPreRegisterFormFragment() {
         // Required empty public constructor
@@ -81,7 +92,8 @@ public class CHWPreRegisterFormFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View fragmentView = inflater.inflate(R.layout.fragment_ancregister1st, container, false);
+        View fragmentView = inflater.inflate(R.layout.activity_chwedit_pre_registration, container, false);
+
 
         textDate = (TextView) fragmentView.findViewById(R.id.textDate);
         textPhone = (TextView) fragmentView.findViewById(R.id.textPhone);
@@ -91,6 +103,8 @@ public class CHWPreRegisterFormFragment extends Fragment {
         layoutEditPhone = (LinearLayout) fragmentView.findViewById(R.id.layoutEditPhone);
         cardDatePickLNMP = (CardView) fragmentView.findViewById(R.id.cardPickDateLNMP);
 
+
+        editTextClinicName = (EditText) fragmentView.findViewById(R.id.editTextClinicName);
         editTextMotherName = (EditText) fragmentView.findViewById(R.id.editTextMotherName);
         editTextMotherId = (EditText) fragmentView.findViewById(R.id.editTextMotherId);
         editTextMotherAge = (EditText) fragmentView.findViewById(R.id.editTextMotherAge);
@@ -103,6 +117,8 @@ public class CHWPreRegisterFormFragment extends Fragment {
         editTextPhysicalAddress = (EditText) fragmentView.findViewById(R.id.editTextPhysicalAddress);
         editTextHusbandName = (EditText) fragmentView.findViewById(R.id.editTextHusbandName);
         editTextHusbandOccupation = (EditText) fragmentView.findViewById(R.id.editTextHusbandOccupation);
+
+        button = (Button) fragmentView.findViewById(R.id.save);
 
         educationAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, educationList);
         educationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -173,6 +189,20 @@ public class CHWPreRegisterFormFragment extends Fragment {
             }
         });
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // convert to json
+                pregnantMom = getPregnantMom();
+                String gsonMom = gson.toJson(pregnantMom);
+                Log.d(TAG, "mom = " + gsonMom);
+
+                // todo start form submission
+
+                ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(gsonMom, recordId, formName, getFormFieldsOverrides());
+                getActivity().finish();
+            }
+        });
 
         return fragmentView;
     }
@@ -305,6 +335,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
     public PregnantMom getPregnantMom() {
         PregnantMom mom = new PregnantMom();
 
+        mom.setFacilityId(editTextClinicName.getText().toString());
         mom.setName(editTextMotherName.getText().toString());
         mom.setId(editTextMotherId.getText().toString());
         mom.setPhone(textPhone.getText().toString());
@@ -326,7 +357,12 @@ public class CHWPreRegisterFormFragment extends Fragment {
 
         return mom;
     }
-
+    public JSONObject getFormFieldsOverrides() {
+        return fieldOverides;
+    }
+    public void setRecordId(String recordId) {
+        this.recordId = recordId;
+    }
     private void makeToast() {
         Toast.makeText(context,
                 message,
