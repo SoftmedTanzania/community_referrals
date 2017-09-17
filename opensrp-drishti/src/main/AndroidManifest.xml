@@ -69,7 +69,7 @@
         <activity
             android:name=".AncDetailActivityAlt"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
 
         <activity
             android:name=".AncDetailActivity"
