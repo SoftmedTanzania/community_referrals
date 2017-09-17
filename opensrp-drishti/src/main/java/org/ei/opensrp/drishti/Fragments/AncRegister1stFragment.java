@@ -59,6 +59,8 @@ public class AncRegister1stFragment extends Fragment {
     public static int motherEduSelection = -1, husbandEduSelection = -1;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
+    public  static PregnantMom mom = new PregnantMom();
+
     public AncRegister1stFragment() {
         // Required empty public constructor
     }
@@ -303,7 +305,6 @@ public class AncRegister1stFragment extends Fragment {
     }
 
     public PregnantMom getPregnantMom() {
-        PregnantMom mom = new PregnantMom();
 
         mom.setName(editTextMotherName.getText().toString());
         mom.setId(editTextMotherId.getText().toString());
