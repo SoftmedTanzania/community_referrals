@@ -63,7 +63,7 @@ public class CHWFollowUpPagerAdapter extends
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
         MotherPersonObject mother = fMother.get(position);
-        String gsonMom = Utils.convertStandardJSONString(mother.getDetails().substring(1, mother.getDetails().length() - 1));
+        String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
         Log.d("CHWFollowUpPagerAdapter", "gsonMom = " + gsonMom);
         PregnantMom pregnantMom = new Gson().fromJson(gsonMom, PregnantMom.class);
 

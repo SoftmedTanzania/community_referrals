@@ -123,8 +123,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
 
         //TODO this is hacking should be changed depending with the usertype
-        mPager.setCurrentItem(2);
-        currentPage = 2;
+        mPager.setCurrentItem(1);
+        currentPage = 1;
 
     }
 
@@ -187,7 +187,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     public void showPreRegistrationVisitDialog(final MotherPersonObject mother) {
 
-        String gsonMom = Utils.convertStandardJSONString(mother.getDetails().substring(1, mother.getDetails().length() - 1));
+        String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
         Log.d(TAG, "gsonMom = " + gsonMom);
         final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_visit_details, null);
@@ -705,7 +705,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void run() {
                 // TODO: 9/17/17 this is a hack
-                mPager.setCurrentItem(2, true);
+                mPager.setCurrentItem(1, true);
 
 
                 SecuredNativeSmartRegisterCursorAdapterFragment registerFragment = (SecuredNativeSmartRegisterCursorAdapterFragment) findFragmentByPosition(currentPage);

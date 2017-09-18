@@ -107,7 +107,9 @@ public class MotherPersonObject {
         this.MOTHERS_LAST_NAME = MOTHERS_LAST_NAME;
     }
 
-    public String getMOTHERS_SORTVALUE() {
+    public String
+
+    getMOTHERS_SORTVALUE() {
         return MOTHERS_SORTVALUE;
     }
 

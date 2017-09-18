@@ -41,7 +41,7 @@ public class CustomMotherRepository{
         values.put(PNC_STATUS, motherPersonObject.getPNC_STATUS());
         values.put(IS_VALID, motherPersonObject.getIS_VALID());
 //        values.put(FACILITY_ID, motherPersonObject.getFACILITY_ID());
-        values.put(DETAILS_COLUMN, new Gson().toJson(motherPersonObject.getDetails()));
+        values.put(DETAILS_COLUMN, motherPersonObject.getDetails());
         return values;
     }
 
