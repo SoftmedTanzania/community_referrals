@@ -46,13 +46,14 @@ public class BaseRegisterActivityPagerAdapter extends FragmentPagerAdapter {
                 fragment = mBaseFragment;
                 break;
             case 1:
+                Log.d(TAG,"setting Chw women list fragment");
+                fragment = new CHWSmartRegisterFragment();
+                break;
+            case 2:
                 Log.d(TAG,"setting AncRegisterFormFragment");
                 fragment = new AncRegisterFormFragment();
                 break;
-            case 2:
-                Log.d(TAG,"setting Chw fragment");
-                fragment = new CHWSmartRegisterFragment();
-                break;
+
             case 3:
                 Log.d(TAG,"setting Chw Registration fragment");
                 fragment = new CHWPreRegisterFormFragment();

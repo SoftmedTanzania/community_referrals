@@ -98,9 +98,15 @@ public class CommonRepository extends DrishtiRepository {
         Log.d("customInsert", "tableName = " + TABLE_NAME);
         database.insert(TABLE_NAME, null, contentValues);
 
-        Cursor cursor = database.rawQuery("select * from wazazi_salama_mother",null);
+       // Cursor cursor = database.rawQuery("select * from wazazi_salama_mother",null);
     }
 
+    public void customUpdate(ContentValues contentValues, String caseId) {
+        SQLiteDatabase database = masterRepository.getWritableDatabase();
+        Log.d("customInsert", "tableName = " + TABLE_NAME);
+        database.update(TABLE_NAME, contentValues, ID_COLUMN + " = ?", new String[]{caseId});
+        // Cursor cursor = database.rawQuery("select * from wazazi_salama_mother",null);
+    }
 
     public void updateDetails(String caseId, Map<String, String> details) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();

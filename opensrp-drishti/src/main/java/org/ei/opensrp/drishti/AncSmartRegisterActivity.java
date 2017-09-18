@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -38,12 +39,16 @@ import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
 import org.ei.opensrp.drishti.Fragments.AncSmartRegisterFragment;
+import org.ei.opensrp.drishti.Fragments.CHWPreRegisterFormFragment;
+import org.ei.opensrp.drishti.Fragments.CHWPreRegistrationFragment;
 import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
 import org.ei.opensrp.drishti.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
+import org.ei.opensrp.drishti.util.DatesHelper;
 import org.ei.opensrp.drishti.util.OrientationHelper;
+import org.ei.opensrp.drishti.util.Utils;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.util.FormUtils;
@@ -59,9 +64,12 @@ import org.ei.opensrp.view.dialog.OpenFormOption;
 import org.ei.opensrp.view.viewpager.OpenSRPViewPager;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -87,6 +95,11 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private String[] formNames = new String[]{};
     private Fragment mBaseFragment;
     private Gson gson = new Gson();
+    private CommonRepository commonRepository;
+    private android.content.Context appContext;
+    private List<MotherPersonObject> motherPersonList = new ArrayList<>();
+    private Cursor cursor;
+    private static final String TABLE_NAME = "wazazi_salama_mother";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,13 +128,15 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
 
         //TODO this is hacking should be changed depending with the usertype
-        mPager.setCurrentItem(0);
-        currentPage = 0;
+        mPager.setCurrentItem(1);
+        currentPage = 1;
 
     }
 
-    public void showPreRegistrationDetailsDialog(PreRegisteredMother mother) {
-
+    public void showPreRegistrationDetailsDialog(MotherPersonObject mother) {
+        String gsonMom = Utils.convertStandardJSONString(mother.getDetails().substring(1, mother.getDetails().length() - 1));
+        Log.d(TAG, "gsonMom = " + gsonMom);
+        PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
@@ -138,14 +153,48 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             }
         });
 
-        // TODO: findviewbyid that are on the dialog layout
-        // example
+        long lnmp = pregnantMom.getDateLNMP();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+        String edd = dateFormat.format(DatesHelper.calculateEDDFromLNMP(lnmp));
+        String reg_date = dateFormat.format(pregnantMom.getDateReg());
+
         TextView textName = (TextView) dialogView.findViewById(R.id.name);
-        textName.setText(mother.getName());
+        TextView textAge = (TextView) dialogView.findViewById(R.id.mom_age);
+        TextView textSpouseName = (TextView) dialogView.findViewById(R.id.spouseName);
+        TextView textSpousetel = (TextView) dialogView.findViewById(R.id.spouseTel);
+        TextView textvillage = (TextView) dialogView.findViewById(R.id.village);
+        TextView textfacility = (TextView) dialogView.findViewById(R.id.facility);
+        TextView textvisit = (TextView) dialogView.findViewById(R.id.visit);
+        TextView textrisk = (TextView) dialogView.findViewById(R.id.risk);
+        TextView textedd = (TextView) dialogView.findViewById(R.id.EDD);
+        TextView textlnmp = (TextView) dialogView.findViewById(R.id.lnmp);
+        TextView textPregnancyAge = (TextView) dialogView.findViewById(R.id.age);
+
+
+        textName.setText(mother.getMOTHERS_FIRST_NAME() +" "+mother.getMOTHERS_LAST_NAME());
+        textAge.setText(String.valueOf(pregnantMom.getAge())+" years");
+        textSpouseName.setText(pregnantMom.getHusbandName()+"["+ pregnantMom.getHusbandOccupation() +"]");
+        textSpousetel.setText(pregnantMom.getPhone());
+        textvillage.setText(pregnantMom.getPhysicalAddress());
+        textfacility.setText(pregnantMom.getFacilityId());
+        textvisit.setText(reg_date);
+        //Todo to check the risk indicators if checked to display high or low or moderate
+        textrisk.setText("high");
+        textedd.setText(edd);
+        textlnmp.setText(mother.getMOTHERS_LAST_MENSTRUATION_DATE());
+        if(pregnantMom.isAbove20WeeksPregnant()){
+            textPregnancyAge.setText("greater than 20");
+        }
+        else     {
+            textPregnancyAge.setText("less than 20");
+        }
     }
 
-    public void showPreRegistrationVisitDialog(final PreRegisteredMother mother) {
+    public void showPreRegistrationVisitDialog(final MotherPersonObject mother) {
 
+        String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
+        Log.d(TAG, "gsonMom = " + gsonMom);
+        final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_visit_details, null);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
@@ -160,7 +209,12 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         button_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + mother.getName(), Toast.LENGTH_SHORT).show();
+
+                pregnantMom.setDateLastVisited(Calendar.getInstance().getTimeInMillis());
+
+                mother.setDetails(new Gson().toJson(pregnantMom));
+                updateFormSubmission(mother,mother.getId());
+                Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + mother.getMOTHERS_FIRST_NAME() +" "+mother.getMOTHERS_LAST_NAME(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -174,11 +228,14 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         // TODO: findviewbyid that are on the dialog layout
         // example
         TextView textName = (TextView) dialogView.findViewById(R.id.name);
-        textName.setText(mother.getName());
+        textName.setText(mother.getMOTHERS_FIRST_NAME()+" "+ mother.getMOTHERS_LAST_NAME());
     }
 
-    public void showFollowUpDetailsDialog(ChwFollowUpMother mother) {
+    public void showFollowUpDetailsDialog(MotherPersonObject mother) {
 
+        String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
+        Log.d(TAG, "gsonMom = " + gsonMom);
+        PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_details, null);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
@@ -195,13 +252,49 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             }
         });
 
-        // TODO: findviewbyid that are on the dialog layout
-        // example
+
+        long lnmp = pregnantMom.getDateLNMP();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+        String edd = dateFormat.format(DatesHelper.calculateEDDFromLNMP(lnmp));
+        String reg_date = dateFormat.format(pregnantMom.getDateReg());
+
         TextView textName = (TextView) dialogView.findViewById(R.id.name);
-        textName.setText(mother.getName());
+        TextView textAge = (TextView) dialogView.findViewById(R.id.mom_age);
+        TextView textSpouseName = (TextView) dialogView.findViewById(R.id.spouseName);
+        TextView textSpousetel = (TextView) dialogView.findViewById(R.id.spouseTel);
+        TextView textvillage = (TextView) dialogView.findViewById(R.id.village);
+        TextView textfacility = (TextView) dialogView.findViewById(R.id.facility);
+        TextView textvisit = (TextView) dialogView.findViewById(R.id.visit);
+        TextView textrisk = (TextView) dialogView.findViewById(R.id.risk);
+        TextView textedd = (TextView) dialogView.findViewById(R.id.EDD);
+        TextView textlnmp = (TextView) dialogView.findViewById(R.id.lnmp);
+        TextView textPregnancyAge = (TextView) dialogView.findViewById(R.id.age);
+
+
+        textName.setText(mother.getMOTHERS_FIRST_NAME() +" "+mother.getMOTHERS_LAST_NAME());
+        textAge.setText(String.valueOf(pregnantMom.getAge()) + " years");
+        textSpouseName.setText(pregnantMom.getHusbandName()+"["+ pregnantMom.getHusbandOccupation() +"]");
+        textSpousetel.setText(pregnantMom.getPhone());
+        textvillage.setText(pregnantMom.getPhysicalAddress());
+        textfacility.setText(pregnantMom.getFacilityId());
+        textvisit.setText(reg_date);
+        //Todo to check the risk indicators if checked to display high or low or moderate
+        textrisk.setText("high");
+        textedd.setText(edd);
+        textlnmp.setText(mother.getMOTHERS_LAST_MENSTRUATION_DATE());
+        if(pregnantMom.isAbove20WeeksPregnant()){
+            textPregnancyAge.setText("greater than 20");
+        }
+        else     {
+            textPregnancyAge.setText("less than 20");
+        }
     }
 
-    public void showFollowUpFormDialog(final ChwFollowUpMother mother) {
+    public void showFollowUpFormDialog(final MotherPersonObject mother) {
+
+        String gsonMom = Utils.convertStandardJSONString(mother.getDetails().substring(1, mother.getDetails().length() - 1));
+        Log.d(TAG, "gsonMom = " + gsonMom);
+        PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
 
@@ -242,7 +335,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + mother.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + mother.getMOTHERS_FIRST_NAME(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -250,7 +343,12 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         // TODO: findviewbyid that are on the dialog layout
         // example
         TextView textName = (TextView) dialogView.findViewById(R.id.name);
-        textName.setText(mother.getName());
+        TextView textAge = (TextView) dialogView.findViewById(R.id.mom_age);
+
+        textName.setText(mother.getMOTHERS_FIRST_NAME() +" "+ mother.getMOTHERS_LAST_NAME());
+        textAge.setText(String.valueOf(pregnantMom.getAge())+" years");
+
+
     }
 
     public void confirmDelete() {
@@ -393,15 +491,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     }
 
-    public void StartRegistrationFragment(String formName, String entityId, String metaData){
-        if(formName.equals("pregnant_mothers_registration")){
-            mPager.setCurrentItem(1, true);
-        }
-        if(formName.equals("pregnant_mothers_pre_registration")){
-            Log.d(TAG,"pregnant_mothers_pre_registration is selected");
-            mPager.setCurrentItem(3, true);
-        }
-    }
 
     private class EditDialogOptionModelfornbnf implements DialogOptionModel {
         @Override
@@ -439,7 +528,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public void startFormActivity(String formName, String entityId, String metaData) {
         Log.d(TAG, "startFormActivity");
         try {
-            int formIndex = FormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
+            int formIndex = FormUtils.getIndexForFormName(formName, formNames) + 2; // add the offset
             if (entityId != null || metaData != null) {
                 String data = null;
                 //check if there is previously saved data for the form
@@ -447,17 +536,29 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 if (data == null) {
                     data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
+                if (formName.equals("pregnant_mothers_registration")) {
+                    AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) getDisplayFormFragmentAtIndex(formIndex);
+                    if (displayFormFragment != null) {
+                        Log.d(TAG, "form data = " + data);
+                        displayFormFragment.setFormData(data);
+                        displayFormFragment.setRecordId(entityId);
+                        displayFormFragment.setFieldOverides(metaData);
+                    }
+                } else if(formName.equals("pregnant_mothers_pre_registration")){
+                    CHWPreRegisterFormFragment displayFormFragment = (CHWPreRegisterFormFragment) getDisplayFormFragmentAtIndex(formIndex);
+                    if (displayFormFragment != null) {
+                        Log.d(TAG, "form data = " + data);
+                        displayFormFragment.setFormData(data);
+                        displayFormFragment.setRecordId(entityId);
+                        displayFormFragment.setFieldOverides(metaData);
+                    }
 
-                AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) getDisplayFormFragmentAtIndex(formIndex);
-                if (displayFormFragment != null) {
-                    Log.d(TAG, "form data = " + data);
-                    displayFormFragment.setFormData(data);
-                    displayFormFragment.setRecordId(entityId);
-                    displayFormFragment.setFieldOverides(metaData);
                 }
             }
 
-            mPager.setCurrentItem(2, false); //Don't animate the view on orientation change the view disappears
+            mPager.setCurrentItem(formIndex, true);
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -522,6 +623,14 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         // save the form
         PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
 
+        // todo fix NullPointerException on getWritableDatabase
+
+//        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
+//        CustomContext customContext = new CustomContext();
+//        CustomMotherRepository motherRepository = customContext.getCustomMotherRepo("wazazi_salama_mother");
+//        motherRepository.add(motherPersonObject);
+
+        MotherPersonObject motherPersonObject = new MotherPersonObject(id, null, pregnantMom);
         MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
         ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
         Log.d(TAG, "motherPersonObject = " + gson.toJson(motherPersonObject));
@@ -550,6 +659,15 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         context().formDataRepository().saveFormSubmission(submission);
     }
 
+    public void updateFormSubmission(MotherPersonObject motherPersonObject, String id){
+
+
+        ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
+
+        CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
+        commonRepository.customUpdate(values,id);
+    }
+
     public void switchToBaseFragment(final String data) {
         Log.v("we are here", "switchtobasegragment");
         final int prevPageIndex = currentPage;
@@ -557,7 +675,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void run() {
                 // TODO: 9/17/17 this is a hack
-                mPager.setCurrentItem(2, true);
+                mPager.setCurrentItem(1, true);
 
 
                 SecuredNativeSmartRegisterCursorAdapterFragment registerFragment = (SecuredNativeSmartRegisterCursorAdapterFragment) findFragmentByPosition(currentPage);

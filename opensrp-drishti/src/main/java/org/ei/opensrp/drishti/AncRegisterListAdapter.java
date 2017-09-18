@@ -73,9 +73,10 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
                 @Override
                 public void onClick(View view) {
                     // go to AncDetailActivity
+                    String gsonMom = Utils.convertStandardJSONString(motherPersonList.get(getAdapterPosition()).getDetails());
                     appContext.startActivity(new Intent(appContext, AncDetailActivityAlt.class)
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            .putExtra("mom", motherPersonList.get(getAdapterPosition()).getDetails()));
+                            .putExtra("mom", gsonMom));
                 }
             });
         }

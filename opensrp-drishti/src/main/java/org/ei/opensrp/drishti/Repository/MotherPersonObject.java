@@ -13,12 +13,12 @@ import java.util.Map;
  */
 
 public class MotherPersonObject {
-    private String caseId, type, relationalId, MOTHERS_FIRST_NAME, MOTHERS_LAST_NAME, MOTHERS_SORTVALUE,
+    private String id, type, relationalId, MOTHERS_FIRST_NAME, MOTHERS_LAST_NAME, MOTHERS_SORTVALUE,
             EXPECTED_DELIVERY_DATE, MOTHERS_LAST_MENSTRUATION_DATE, FACILITY_ID, IS_PNC, IS_VALID, PNC_STATUS, MOTHERS_ID;
     private String details;
     private Map<String, String> columnMap;
 
-    public MotherPersonObject(String caseId,
+    public MotherPersonObject(String id,
                               String relationalId,
                               String MOTHERS_FIRST_NAME,
                               String MOTHERS_LAST_NAME,
@@ -32,7 +32,7 @@ public class MotherPersonObject {
                               String details,
                               String type) {
         this.details = details;
-        this.caseId = caseId;
+        this.id = id;
         this.type = type;
         this.relationalId = relationalId;
         this.MOTHERS_FIRST_NAME = MOTHERS_FIRST_NAME;
@@ -47,11 +47,11 @@ public class MotherPersonObject {
     }
 
     // alternative constructor so you don't pass bucha stuff, PregnantMom contains everything
-    public MotherPersonObject(String caseId, String relationalId, PregnantMom pregnantMom) {
+    public MotherPersonObject(String id, String relationalId, PregnantMom pregnantMom) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyy", Locale.getDefault());
 
-        this.caseId = caseId;
+        this.id = id;
         this.relationalId = relationalId;
         String[] names = pregnantMom.getName().split(" ");
         this.MOTHERS_FIRST_NAME = names[0];
@@ -71,12 +71,12 @@ public class MotherPersonObject {
 
     }
 
-    public String getCaseId() {
-        return caseId;
+    public String getId() {
+        return id;
     }
 
-    public void setCaseId(String caseId) {
-        this.caseId = caseId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDetails() {
@@ -107,7 +107,9 @@ public class MotherPersonObject {
         this.MOTHERS_LAST_NAME = MOTHERS_LAST_NAME;
     }
 
-    public String getMOTHERS_SORTVALUE() {
+    public String
+
+    getMOTHERS_SORTVALUE() {
         return MOTHERS_SORTVALUE;
     }
 

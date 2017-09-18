@@ -3,6 +3,7 @@ package org.ei.opensrp.drishti.pageradapter;
 import android.content.Context;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,12 +12,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.ei.opensrp.drishti.AncSmartRegisterActivity;
+import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.chw.CHWSmartRegisterActivity;
 import org.ei.opensrp.drishti.DataModels.PreRegisteredMother;
+import org.ei.opensrp.drishti.util.DatesHelper;
+import org.ei.opensrp.drishti.util.Utils;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -26,10 +35,11 @@ import java.util.List;
 public class CHWRegisterRecyclerAdapter extends
         RecyclerView.Adapter<CHWRegisterRecyclerAdapter.ViewHolder> {
 
-    private List<PreRegisteredMother> mothers;
+    private List<MotherPersonObject> mothers;
     private Context mContext;
+    private MotherPersonObject mother;
 
-    public CHWRegisterRecyclerAdapter(Context context, List<PreRegisteredMother> mothers) {
+    public CHWRegisterRecyclerAdapter(Context context, List<MotherPersonObject> mothers) {
         this.mothers = mothers;
         this.mContext = context;
     }
@@ -51,17 +61,23 @@ public class CHWRegisterRecyclerAdapter extends
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
-        PreRegisteredMother mother = mothers.get(position);
+        mother = mothers.get(position);
+        String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
+        PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+        String reg_date = dateFormat.format(pregnantMom.getDateLastVisited());
 
         // Set item views based on your views and data model
         TextView name = viewHolder.nameTextView;
-        name.setText(mother.getName());
         TextView edd = viewHolder.eddTextView;
-        edd.setText(mother.getEdd());
         TextView visited = viewHolder.visitedTextView;
-        visited.setText(mother.getVisited());
         TextView risk = viewHolder.riskTextView;
-        risk.setText(mother.getRisk());
+
+        visited.setText(reg_date);
+        edd.setText(mother.getEXPECTED_DELIVERY_DATE());
+        name.setText(mother.getMOTHERS_FIRST_NAME() +" "+mother.getMOTHERS_LAST_NAME());
+        //todo check the risk level factor from the indicators
+        risk.setText("high");
 
     }
 

@@ -5,10 +5,10 @@ package org.ei.opensrp.drishti.DataModels;
  */
 
 public class PregnantMom {
-    private String name, id, phone, discountId, education, occupation,
+    private String name, id, phone, discountId, education, occupation, lastSmsToken, chwComment,
             husbandName, husbandEducation, husbandOccupation, physicalAddress, facilityId;
 
-    private long dateReg, dateLNMP, edd;
+    private long dateReg, dateLNMP, edd, dateRegistration, dateLastVisited;
     private int age, height, previousFertilityCount, successfulBirths, livingChildren;
     private boolean isAbove20WeeksPregnant,
             has10YrsPassedSinceLastPreg,
@@ -23,7 +23,11 @@ public class PregnantMom {
             csDelivery,
             kilemaChaNyonga,
             bleedingOnDelivery,
-            kondoKukwama;
+            kondoKukwama,
+            ancAppointment1,
+            ancAppointment2,
+            ancAppointment3,
+            ancAppointment4;
 
     public String getName() {
         return name;
@@ -287,5 +291,69 @@ public class PregnantMom {
 
     public void setFacilityId(String facilityId) {
         this.facilityId = facilityId;
+    }
+
+    public long getDateRegistration() {
+        return dateRegistration;
+    }
+
+    public void setDateRegistration(long dateRegistration) {
+        this.dateRegistration = dateRegistration;
+    }
+
+    public long getDateLastVisited() {
+        return dateLastVisited;
+    }
+
+    public void setDateLastVisited(long dateLastVisited) {
+        this.dateLastVisited = dateLastVisited;
+    }
+
+    public boolean isAncAppointment1() {
+        return ancAppointment1;
+    }
+
+    public void setAncAppointment1(boolean ancAppointment1) {
+        this.ancAppointment1 = ancAppointment1;
+    }
+
+    public boolean isAncAppointment2() {
+        return ancAppointment2;
+    }
+
+    public void setAncAppointment2(boolean ancAppointment2) {
+        this.ancAppointment2 = ancAppointment2;
+    }
+
+    public boolean isAncAppointment3() {
+        return ancAppointment3;
+    }
+
+    public void setAncAppointment3(boolean ancAppointment3) {
+        this.ancAppointment3 = ancAppointment3;
+    }
+
+    public boolean isAncAppointment4() {
+        return ancAppointment4;
+    }
+
+    public void setAncAppointment4(boolean ancAppointment4) {
+        this.ancAppointment4 = ancAppointment4;
+    }
+
+    public String getLastSmsToken() {
+        return lastSmsToken;
+    }
+
+    public void setLastSmsToken(String lastSmsToken) {
+        this.lastSmsToken = lastSmsToken;
+    }
+
+    public String getChwComment() {
+        return chwComment;
+    }
+
+    public void setChwComment(String chwComment) {
+        this.chwComment = chwComment;
     }
 }

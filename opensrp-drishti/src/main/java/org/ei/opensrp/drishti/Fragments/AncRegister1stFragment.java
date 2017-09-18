@@ -4,11 +4,15 @@ package org.ei.opensrp.drishti.Fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +63,9 @@ public class AncRegister1stFragment extends Fragment {
     public static int motherEduSelection = -1, husbandEduSelection = -1;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
-    public  static PregnantMom mom = new PregnantMom();
+    public static PregnantMom mom = new PregnantMom();
+    private static final String TAG = AncRegister1stFragment.class.getSimpleName();
+    private static int age = -1, height = -1, pregnancyCount = -1;
 
     public AncRegister1stFragment() {
         // Required empty public constructor
@@ -172,6 +178,85 @@ public class AncRegister1stFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 pickDate(R.id.textDateLNMP);
+            }
+        });
+
+        // check risk indicators automatically
+        editTextMotherAge.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                try {
+                    age = Integer.valueOf(editable.toString());
+                    Log.d(TAG, "age = " + age);
+                    if (age < 20) {
+                        // risk
+                        message = "Mother at risk.";
+//                        makeToast();
+                    }
+                } catch (Exception e) {
+                    // can't cast
+                    Log.d(TAG, "value = " + editable + " err = " + e.getMessage());
+                }
+            }
+        });
+
+        editTextHeight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                try {
+                    height = Integer.valueOf(editable.toString());
+                    Log.d(TAG, "height = " + height);
+                    if (height < 150) {
+                        // risk
+                        message = "Mother at risk.";
+//                        makeToast();
+                    }
+                } catch (Exception e) {
+                    // can't cast
+                    Log.d(TAG, "value = " + editable + " err = " + e.getMessage());
+                }
+            }
+        });
+
+        editTextPregCount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                try {
+                    pregnancyCount = Integer.valueOf(editable.toString());
+                    Log.d(TAG, "fertility count = " + pregnancyCount);
+                    if (pregnancyCount >= 4) {
+                        // risk
+                        message = "Mother at risk.";
+//                        makeToast();
+                    }
+                } catch (Exception e) {
+                    // can't cast
+                    Log.d(TAG, "value = " + editable + " err = " + e.getMessage());
+                }
             }
         });
 
@@ -324,8 +409,14 @@ public class AncRegister1stFragment extends Fragment {
         mom.setHusbandOccupation(editTextHusbandOccupation.getText().toString());
         mom.setDateLNMP(lnmp);
         mom.setEdd(edd);
+        mom.setDateRegistration(today.getTimeInMillis());
 
         return mom;
+    }
+
+    public int[] getRiskIndicatorsFromDetails() {
+
+        return new int[]{age, height, pregnancyCount};
     }
 
     private void makeToast() {

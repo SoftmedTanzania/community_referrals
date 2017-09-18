@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="480dp"
     android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
     android:layout_marginBottom="16dp"
     android:orientation="vertical">
 
@@ -20,7 +21,7 @@
         android:paddingRight="16dp"
         android:textColor="@color/primary_text"
         android:textColorHint="@color/hint_text"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
     <fr.ganfra.materialspinner.MaterialSpinner
         android:id="@+id/spinnerHusbandEducation"
@@ -29,6 +30,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
+        android:textSize="16sp"
 
         app:ms_arrowColor="@color/accent"
         app:ms_arrowSize="14dp"
@@ -55,6 +57,6 @@
         android:paddingRight="16dp"
         android:textColor="@color/primary_text"
         android:textColorHint="@color/hint_text"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
 </LinearLayout>

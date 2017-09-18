@@ -27,6 +27,7 @@ import atv.holder.SelectableItemHolder;
 import atv.model.TreeNode;
 import atv.view.AndroidTreeView;
 
+import static org.ei.opensrp.drishti.util.Utils.generateRandomUUIDString;
 import static org.ei.opensrp.util.StringUtil.*;
 
 public class LocationSelectorDialogFragment extends DialogFragment {
@@ -131,7 +132,7 @@ public class LocationSelectorDialogFragment extends DialogFragment {
                     if(mCallback != null) {
                         mCallback.OnLocationSelected(locationjson.toString());
                          FieldOverrides fieldOverrides = new FieldOverrides(locationjson.toString());
-                        ((AncSmartRegisterActivity)getActivity()).StartRegistrationFragment(formName, null, fieldOverrides.getJSONString());
+                        ((AncSmartRegisterActivity)getActivity()).startFormActivity(formName, generateRandomUUIDString(), fieldOverrides.getJSONString());
                     }
                     savestate = tView.getSaveState();
                     dismiss();
