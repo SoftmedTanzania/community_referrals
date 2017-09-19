@@ -40,6 +40,7 @@ import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
 import org.ei.opensrp.drishti.Fragments.AncSmartRegisterFragment;
 import org.ei.opensrp.drishti.Fragments.CHWFollowUpFragment;
 import org.ei.opensrp.drishti.Fragments.CHWPreRegisterFormFragment;
+import org.ei.opensrp.drishti.Fragments.CHWPreRegistrationFragment;
 import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
@@ -680,7 +681,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     @Override
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
         // save the form
-        PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
+        final PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
 
         MotherPersonObject motherPersonObject = new MotherPersonObject(id, null, pregnantMom);
         ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
@@ -723,6 +724,17 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+
+
+        new  org.ei.opensrp.drishti.util.AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+                if(!pregnantMom.getPhone().equals(""))
+                Utils.sendRegistrationAlert(pregnantMom.getPhone());
+                return null;
+            }
+        }.execute();
+
     }
 
     public void updateFormSubmission(MotherPersonObject motherPersonObject, String id){

@@ -21,19 +21,36 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.util.Log;
-
-import com.bumptech.glide.util.Util;
-import com.google.gson.Gson;
-
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
+import org.apache.http.protocol.HTTP;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
-import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.client.CookieStore;
+import cz.msebera.android.httpclient.client.protocol.ClientContext;
+import cz.msebera.android.httpclient.cookie.Cookie;
+import cz.msebera.android.httpclient.entity.ByteArrayEntity;
+import cz.msebera.android.httpclient.message.BasicHeader;
+import cz.msebera.android.httpclient.protocol.HttpContext;
+
 
 
 /**
@@ -124,6 +141,53 @@ public class Utils {
 
     public static String generateRandomUUIDString(){
         return UUID.randomUUID().toString();
+    }
+
+    public static void sendRegistrationAlert(String phoneNumber){
+        Log.d(TAG,"sending registration alerts to rapid pro server");
+        JSONObject object = new JSONObject();
+        try {
+            object.put("urns",new JSONArray().put("tel:"+phoneNumber));
+            object.put("flow","c342cb9e-67a6-4a11-b063-1ac04fbbc26f");
+            Log.d(TAG,"payload = "+object.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        URL url = null;
+        try {
+            url = new URL("http://45.56.90.103:8000/api/v2/flow_starts.json");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        HttpURLConnection conn = null;
+        try {
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestProperty("Authorization", "Token 7dae598d311c91fb3907687fdf6ed900fecb1a05");
+            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            conn.setRequestMethod("POST");
+
+            OutputStream os = conn.getOutputStream();
+            os.write(object.toString().getBytes("UTF-8"));
+            os.close();
+
+            // read the response
+            InputStream in = new BufferedInputStream(conn.getInputStream());
+            String result = org.apache.commons.io.IOUtils.toString(in, "UTF-8");
+            JSONObject jsonObject = new JSONObject(result);
+
+            Log.d(TAG,"response is "+jsonObject.toString());
+
+            in.close();
+            conn.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 }
