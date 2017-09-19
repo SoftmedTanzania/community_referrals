@@ -130,8 +130,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
         mPager.setOffscreenPageLimit(formNames.length);
         //TODO this is hacking should be changed depending with the usertype
-        mPager.setCurrentItem(1);
-        currentPage = 1;
+        mPager.setCurrentItem(3);
+        currentPage = 3;
 
     }
 
@@ -427,7 +427,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //
 //                mPager.setCurrentItem(1);
 //                currentPage = 1;
-                CHWPreRegistrationFragment.newInstance();
+                CHWPreRegistrationFragment preRegisterFragment = (CHWPreRegistrationFragment) findFragmentByPosition(currentPage);
+                preRegisterFragment.refreshListView();
                 Toast.makeText(AncSmartRegisterActivity.this, "umemfuta " + mother.getMOTHERS_FIRST_NAME() +" "+mother.getMOTHERS_LAST_NAME(), Toast.LENGTH_SHORT).show();
 
                 dialog.dismiss();
@@ -752,7 +753,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     @Override
     public void onBackPressed() {
-        if (currentPage != 0) {
+        if (currentPage != 0 && currentPage != 3) {
             retrieveAndSaveUnsubmittedFormData();
             String BENGALI_LOCALE = "bn";
             AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
@@ -798,7 +799,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                         .show();
             }
 
-        } else if (currentPage == 0) {
+        } else if (currentPage == 0 || currentPage == 3) {
             super.onBackPressed(); // allow back key only if we are
         }
     }
