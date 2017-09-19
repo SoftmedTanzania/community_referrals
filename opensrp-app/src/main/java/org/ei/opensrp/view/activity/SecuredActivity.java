@@ -91,8 +91,7 @@ public abstract class SecuredActivity extends AppCompatActivity {
 
             return super.onOptionsItemSelected(item);
         } else if (i == MENU_ITEM_LOGOUT) {
-            DrishtiApplication application = (DrishtiApplication)getApplication();
-            application.logoutCurrentUser();
+            DrishtiApplication.getInstance().logoutCurrentUser();
 
             return super.onOptionsItemSelected(item);
         } else {

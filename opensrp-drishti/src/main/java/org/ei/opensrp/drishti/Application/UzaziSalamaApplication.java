@@ -55,6 +55,7 @@ public class UzaziSalamaApplication extends DrishtiApplication {
 
     @Override
     public void logoutCurrentUser(){
+        cleanUpSyncState();
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getApplicationContext().startActivity(intent);

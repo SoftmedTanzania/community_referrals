@@ -172,6 +172,7 @@ public abstract class SecuredNativeSmartRegisterCursorAdapterFragment extends or
 
         setupStatusBarViews(view);
 //        paginationViewHandler.addPagination(clientsView);
+
 //        updateDefaultOptions();
     }
 

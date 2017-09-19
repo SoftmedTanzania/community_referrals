@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -223,6 +224,7 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     @Override
     public void setupViews(View view) {
         super.setupViews(view);
+        ((Toolbar)view.findViewById(R.id.toolbar)).setTitle("AnC Register");
         view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
         view.findViewById(R.id.service_mode_selection).setVisibility(INVISIBLE);
 
