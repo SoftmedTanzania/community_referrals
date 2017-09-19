@@ -102,15 +102,24 @@ public class FormSubmissionSyncService {
                 Log.d("Formsubmission",format("Form submissions pull failed."));
                 return fetchedFailed;
             }
-            List<FormSubmissionDTO> formSubmissions = new Gson().fromJson(response.payload(),
-                    new TypeToken<List<FormSubmissionDTO>>() {
-                    }.getType());
-            if (formSubmissions.isEmpty()) {
+            List<FormSubmissionDTO> formSubmissions = new ArrayList<>();
+            try {
+                formSubmissions = new Gson().fromJson(response.payload(),
+                        new TypeToken<List<FormSubmissionDTO>>() {
+                        }.getType());
+
+                if (formSubmissions.isEmpty()) {
+                    return dataStatus;
+                } else {
+                    formSubmissionService.processSubmissions(toDomain(formSubmissions));
+                    dataStatus = fetched;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
                 return dataStatus;
-            } else {
-                formSubmissionService.processSubmissions(toDomain(formSubmissions));
-                dataStatus = fetched;
             }
+
+
         }
     }
 

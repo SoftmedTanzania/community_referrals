@@ -735,8 +735,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                         .show();
             }
 
-        } else if (currentPage == 0) {
-            super.onBackPressed(); // allow back key only if we are
         }
     }
 
