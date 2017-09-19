@@ -33,19 +33,15 @@ import org.ei.opensrp.domain.form.FormData;
 import org.ei.opensrp.domain.form.FormField;
 import org.ei.opensrp.domain.form.FormInstance;
 import org.ei.opensrp.domain.form.FormSubmission;
-import org.ei.opensrp.drishti.DataModels.ChwFollowUpMother;
-import org.ei.opensrp.drishti.DataModels.PreRegisteredMother;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
 import org.ei.opensrp.drishti.Fragments.AncSmartRegisterFragment;
 import org.ei.opensrp.drishti.Fragments.CHWPreRegisterFormFragment;
-import org.ei.opensrp.drishti.Fragments.CHWPreRegistrationFragment;
 import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
 import org.ei.opensrp.drishti.pageradapter.BaseRegisterActivityPagerAdapter;
-import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.drishti.util.DatesHelper;
 import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.drishti.util.Utils;
@@ -622,13 +618,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         // save the form
         PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
 
-        // todo fix NullPointerException on getWritableDatabase
-
-//        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
-//        CustomContext customContext = new CustomContext();
-//        CustomMotherRepository motherRepository = customContext.getCustomMotherRepo("wazazi_salama_mother");
-//        motherRepository.add(motherPersonObject);
-
         MotherPersonObject motherPersonObject = new MotherPersonObject(id, null, pregnantMom);
         ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
         Log.d(TAG, "motherPersonObject = " + gson.toJson(motherPersonObject));
@@ -638,6 +627,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         commonRepository.customInsert(values);
 
         CommonPersonObject c = commonRepository.findByCaseID(id);
+
         List<FormField> formFields = new ArrayList<>();
         for ( String key : c.getDetails().keySet() ) {
             FormField f = null;
@@ -653,6 +643,23 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         FormInstance formInstance = new FormInstance(formData,"1");
         FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"wazazi_salama_pregnant_mothers_registration",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
         context().formDataRepository().saveFormSubmission(submission);
+
+
+//        TODO finish this better implementation for saving data to the database
+//        FormSubmission formSubmission1 = null;
+//        try {
+//            formSubmission1 = FormUtils.getInstance(getApplicationContext()).generateFormSubmisionFromJSONString(id,new Gson().toJson(pregnantMom),"wazazi_salama_pregnant_mothers_registration",fieldOverrides);
+//            Log.d(TAG,"form submission generated successfully");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        try {
+//            context().ziggyService().saveForm(getParams(formSubmission1), formSubmission1.instance());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void updateFormSubmission(MotherPersonObject motherPersonObject, String id){
@@ -674,7 +681,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
 
                 if(currentPage==1) {//for supervisors
-                    AncSmartRegisterFragment registerFragment = (AncSmartRegisterFragment) findFragmentByPosition(currentPage);
+                    AncSmartRegisterFragment registerFragment = (AncSmartRegisterFragment) findFragmentByPosition(0);
                     if (registerFragment != null) {
                         registerFragment.refreshListView();
                     }
@@ -735,6 +742,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                         .show();
             }
 
+        }else{
+            super.onBackPressed();
         }
     }
 

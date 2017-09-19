@@ -10,6 +10,13 @@
         android:id="@+id/register_nav_bar_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="     Wazazi Salama Registry"
+            android:textColor="#fff"
+            android:textSize="16sp"/>
 
         <ImageButton
             android:visibility="gone"
