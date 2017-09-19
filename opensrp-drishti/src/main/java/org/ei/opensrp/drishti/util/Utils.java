@@ -73,7 +73,7 @@ public class Utils {
 
     public static MotherPersonObject convertToMotherPersonObject(CommonPersonObject commonPersonObject) {
         String details = commonPersonObject.getColumnmaps().get("details");
-        Log.d(TAG, "details string = " + convertStandardJSONString(details.substring(1, details.length() - 1)));
+        Log.d(TAG, "details string = " + convertStandardJSONString(details));
         try {
             return new MotherPersonObject(
                     commonPersonObject.getColumnmaps().get("id"),

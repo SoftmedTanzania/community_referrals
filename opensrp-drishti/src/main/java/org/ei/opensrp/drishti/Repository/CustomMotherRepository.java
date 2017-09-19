@@ -20,7 +20,7 @@ public class CustomMotherRepository{
     public static final String EXPECTED_DELIVERY_DATE = "EXPECTED_DELIVERY_DATE";
     public static final String MOTHERS_LAST_MENSTRUATION_DATE = "MOTHERS_LAST_MENSTRUATION_DATE";
     public static final String FACILITY_ID = "FACILITY_ID";
-    public static final String IS_PNC = "IS_PNC";
+    public static final String IS_PNC = "Is_PNC";
     public static final String IS_VALID = "IS_VALID";
     public static final String PNC_STATUS = "PNC_STATUS";
     public static final String MOTHERS_ID = "MOTHERS_ID";

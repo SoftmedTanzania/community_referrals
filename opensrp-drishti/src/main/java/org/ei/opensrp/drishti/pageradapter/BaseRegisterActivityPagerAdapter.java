@@ -50,13 +50,14 @@ public class BaseRegisterActivityPagerAdapter extends FragmentPagerAdapter {
                 fragment = new AncRegisterFormFragment();
                 break;
             case 2:
-                Log.d(TAG,"setting Chw women list fragment");
-                fragment = new CHWSmartRegisterFragment();
-                break;
-            case 3:
                 Log.d(TAG,"setting Chw Registration fragment");
                 fragment = new CHWPreRegisterFormFragment();
                 break;
+            case 3:
+                Log.d(TAG,"setting Chw women list fragment");
+                fragment = new CHWSmartRegisterFragment();
+                break;
+
             default:
                 String formName = dialogOptions[position - offset]; // account for the base fragment
                 Log.d(TAG,"Form name  = "+formName);

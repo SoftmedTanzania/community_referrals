@@ -15,6 +15,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -37,6 +38,7 @@ import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
 import org.ei.opensrp.drishti.Fragments.AncSmartRegisterFragment;
+import org.ei.opensrp.drishti.Fragments.CHWFollowUpFragment;
 import org.ei.opensrp.drishti.Fragments.CHWPreRegisterFormFragment;
 import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
@@ -130,7 +132,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     }
 
     public void showPreRegistrationDetailsDialog(MotherPersonObject mother) {
-        String gsonMom = Utils.convertStandardJSONString(mother.getDetails().substring(1, mother.getDetails().length() - 1));
+        String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
         Log.d(TAG, "gsonMom = " + gsonMom);
         PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
@@ -210,6 +212,24 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
                 mother.setDetails(new Gson().toJson(pregnantMom));
                 updateFormSubmission(mother,mother.getId());
+//todo how to refresh the  pre registartion  fragment after updating
+//                mBaseFragment = new CHWPreRegistrationFragment();
+//                // Instantiate a ViewPager and a PagerAdapter.
+//                mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
+//                mPager.setOffscreenPageLimit(formNames.length);
+//                mPager.setAdapter(mPagerAdapter);
+//                mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+//                    @Override
+//                    public void onPageSelected(int position) {
+//                        currentPage = position;
+//                        // onPageChanged(position);
+//                    }
+//                });
+//
+//                mPager.setCurrentItem(1);
+//                currentPage = 1;
+                CHWPreRegistrationFragment.newInstance();
+                CHWFollowUpFragment.newInstance();
                 Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + mother.getMOTHERS_FIRST_NAME() +" "+mother.getMOTHERS_LAST_NAME(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
@@ -288,9 +308,9 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     public void showFollowUpFormDialog(final MotherPersonObject mother) {
 
-        String gsonMom = Utils.convertStandardJSONString(mother.getDetails().substring(1, mother.getDetails().length() - 1));
+        String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
         Log.d(TAG, "gsonMom = " + gsonMom);
-        PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
+        final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
 
@@ -299,6 +319,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 .setCancelable(false);
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
+        final String[] met = new String[1];
 
         RadioGroup radioGroup = (RadioGroup) dialogView.findViewById(R.id.visit);
 
@@ -310,6 +331,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 if (selectedId == R.id.visit_yes) {
                     RelativeLayout info = (RelativeLayout) dialogView.findViewById(R.id.information);
                     info.setVisibility(View.VISIBLE);
+                    met[0] = "yes";
                 }
                 if (selectedId == R.id.visit_no) {
                     RelativeLayout info = (RelativeLayout) dialogView.findViewById(R.id.information);
@@ -318,6 +340,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             }
         });
 
+        final EditText comment = (EditText) dialogView.findViewById(R.id.observation);
+        final EditText Token = (EditText) dialogView.findViewById(R.id.token);
 
         Button cancel = (Button) dialogView.findViewById(R.id.cancel_action);
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -331,7 +355,23 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + mother.getMOTHERS_FIRST_NAME(), Toast.LENGTH_SHORT).show();
+                if(met[0] == "yes"){
+                    pregnantMom.setDateLastVisited(Calendar.getInstance().getTimeInMillis());
+                    pregnantMom.setChwComment(comment.getText().toString());
+                    pregnantMom.setLastSmsToken(Token.getText().toString());
+
+                    mother.setDetails(new Gson().toJson(pregnantMom));
+
+
+                    updateFormSubmission(mother,mother.getId());
+
+                    Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea " + mother.getMOTHERS_FIRST_NAME(), Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    Toast.makeText(AncSmartRegisterActivity.this, "Tafadhali hakikisha unamtafuta tena kumjulia hali " + mother.getMOTHERS_FIRST_NAME(), Toast.LENGTH_SHORT).show();
+
+                }
                 dialog.dismiss();
             }
         });
@@ -347,7 +387,10 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     }
 
-    public void confirmDelete() {
+    public void confirmDelete(final MotherPersonObject mother) {
+        String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
+        Log.d(TAG, "gsonMom = " + gsonMom);
+        final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
         final View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_confirm_delete, null);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
@@ -361,7 +404,28 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void onClick(View view) {
                 // todo: delete mother
+                mother.setIS_VALID("false");
+//                mother.setDetails(new Gson().toJson(pregnantMom));
+                updateFormSubmission(mother,mother.getId());
 
+//                mBaseFragment = new CHWPreRegistrationFragment();
+                // Instantiate a ViewPager and a PagerAdapter.
+//                mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
+//                mPager.setOffscreenPageLimit(formNames.length);
+//                mPager.setAdapter(mPagerAdapter);
+//                mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+//                    @Override
+//                    public void onPageSelected(int position) {
+//                        currentPage = position;
+//                        // onPageChanged(position);
+//                    }
+//                });
+//
+//                mPager.setCurrentItem(1);
+//                currentPage = 1;
+                CHWPreRegistrationFragment preRegisterFragment = (CHWPreRegistrationFragment) findFragmentByPosition(currentPage);
+                preRegisterFragment.refreshListView();
+                Toast.makeText(AncSmartRegisterActivity.this, "umemfuta " + mother.getMOTHERS_FIRST_NAME() +" "+mother.getMOTHERS_LAST_NAME(), Toast.LENGTH_SHORT).show();
 
                 dialog.dismiss();
             }
@@ -627,7 +691,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         commonRepository.customInsert(values);
 
         CommonPersonObject c = commonRepository.findByCaseID(id);
-
         List<FormField> formFields = new ArrayList<>();
         for ( String key : c.getDetails().keySet() ) {
             FormField f = null;
@@ -696,7 +759,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     @Override
     public void onBackPressed() {
-        if (currentPage != 0) {
+        if (currentPage != 0 && currentPage != 3) {
             retrieveAndSaveUnsubmittedFormData();
             String BENGALI_LOCALE = "bn";
             AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
@@ -742,8 +805,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                         .show();
             }
 
-        }else{
-            super.onBackPressed();
+        } else if (currentPage == 0 || currentPage == 3) {
+            super.onBackPressed(); // allow back key only if we are
         }
     }
 

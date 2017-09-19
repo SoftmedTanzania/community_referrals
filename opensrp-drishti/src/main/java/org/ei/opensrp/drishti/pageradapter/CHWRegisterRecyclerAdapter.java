@@ -144,7 +144,7 @@ public class CHWRegisterRecyclerAdapter extends
 
                     case R.id.popOpt3:
                         // delete mother
-                        ((AncSmartRegisterActivity) mContext).confirmDelete();
+                        ((AncSmartRegisterActivity) mContext).confirmDelete(mothers.get(position));
                         return true;
 
                     default:
