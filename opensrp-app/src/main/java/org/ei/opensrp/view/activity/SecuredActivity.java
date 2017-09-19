@@ -51,8 +51,12 @@ public abstract class SecuredActivity extends AppCompatActivity {
         ON_LOGOUT.addListener(logoutListener);
 
         if (context().IsUserLoggedOut()) {
-            DrishtiApplication application = (DrishtiApplication)getApplication();
-            application.logoutCurrentUser();
+            try {
+                DrishtiApplication application = (DrishtiApplication) getApplication();
+                application.logoutCurrentUser();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             return;
         }
 
@@ -66,9 +70,13 @@ public abstract class SecuredActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (context().IsUserLoggedOut()) {
-            DrishtiApplication application = (DrishtiApplication)getApplication();
-            application.logoutCurrentUser();
-            return;
+            try {
+                DrishtiApplication application = (DrishtiApplication) getApplication();
+                application.logoutCurrentUser();
+                return;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
         onResumption();

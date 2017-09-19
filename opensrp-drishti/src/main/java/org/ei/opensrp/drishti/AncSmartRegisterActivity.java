@@ -118,7 +118,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
-        mPager.setOffscreenPageLimit(formNames.length);
         mPager.setAdapter(mPagerAdapter);
         mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -127,10 +126,10 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 // onPageChanged(position);
             }
         });
-
+        mPager.setOffscreenPageLimit(formNames.length);
         //TODO this is hacking should be changed depending with the usertype
-        mPager.setCurrentItem(1);
-        currentPage = 1;
+        mPager.setCurrentItem(0);
+        currentPage = 0;
 
     }
 
@@ -393,10 +392,10 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         formNames.add("birthnotificationpregnancystatusfollowup");
 
 
-//        DialogOption[] options = getEditOptions();
-//        for (int i = 0; i < options.length; i++){
-//            formNames.add(((OpenFormOption) options[i]).getFormName());
-//        }
+        DialogOption[] options = getEditOptions();
+        for (int i = 0; i < options.length; i++){
+            formNames.add(((OpenFormOption) options[i]).getFormName());
+        }
         return formNames.toArray(new String[formNames.size()]);
     }
 
@@ -489,7 +488,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public void OnLocationSelected(String locationSelected) {
         // set registration fragment
         Log.d(TAG,"Location selected");
-
+        mPager.setCurrentItem(2);
+        currentPage = 2;
     }
 
 
@@ -527,9 +527,12 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     @Override
     public void startFormActivity(String formName, String entityId, String metaData) {
-        Log.d(TAG, "startFormActivity");
+        Log.d(TAG, "starting form = "+formName);
+
+        int formIndex = FormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
+        Log.d(TAG, "starting form index = "+formIndex);
+        mPager.setCurrentItem(formIndex, true);
         try {
-            int formIndex = FormUtils.getIndexForFormName(formName, formNames) + 2; // add the offset
             if (entityId != null || metaData != null) {
                 String data = null;
                 //check if there is previously saved data for the form
@@ -556,11 +559,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
                 }
             }
-
-            mPager.setCurrentItem(formIndex, true);
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -673,23 +671,16 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void run() {
                 // TODO: 9/17/17 this is a hack
-                mPager.setCurrentItem(1, true);
 
 
-                SecuredNativeSmartRegisterCursorAdapterFragment registerFragment = (SecuredNativeSmartRegisterCursorAdapterFragment) findFragmentByPosition(currentPage);
-                if (registerFragment != null && data != null) {
-                    registerFragment.refreshListView();
-                }
-
-                try {
-                    AncSmartRegisterFragment displayFormFragment = (AncSmartRegisterFragment) getDisplayFormFragmentAtIndex(prevPageIndex);
-                    if (displayFormFragment != null) {
-//                        displayFormFragment.setFormData(null);
+                if(currentPage==1) {//for supervisors
+                    AncSmartRegisterFragment registerFragment = (AncSmartRegisterFragment) findFragmentByPosition(currentPage);
+                    if (registerFragment != null) {
+                        registerFragment.refreshListView();
                     }
-
-                    displayFormFragment.setRecordId(null);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    mPager.setCurrentItem(0, true);
+                }else   if(currentPage==2) {//for chws
+                    finish();
                 }
             }
         });

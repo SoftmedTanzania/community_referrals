@@ -142,8 +142,6 @@
             android:hint="No. ya utambulisho"
             android:imeOptions="actionNext"
             android:inputType="text"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
             android:textColor="@color/primary_text"
             android:textColorHint="@color/hint_text"
             android:textSize="14sp" />
@@ -158,8 +156,6 @@
             android:hint="No. ya hati punguzo"
             android:imeOptions="actionNext"
             android:inputType="text"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
             android:textColor="@color/primary_text"
             android:textColorHint="@color/hint_text"
             android:textSize="14sp" />
@@ -179,8 +175,6 @@
                 android:hint="Umri wa Mama"
                 android:imeOptions="actionNext"
                 android:inputType="number"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
                 android:textColor="@color/primary_text"
                 android:textColorHint="@color/hint_text"
                 android:textSize="14sp" />
@@ -196,8 +190,6 @@
                 android:hint="Urefu"
                 android:imeOptions="actionNext"
                 android:inputType="number"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
                 android:textColor="@color/primary_text"
                 android:textColorHint="@color/hint_text"
                 android:textSize="14sp" />
@@ -232,8 +224,6 @@
             android:hint="Kazi ya Mama"
             android:imeOptions="actionNext"
             android:inputType="text"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
             android:textColor="@color/primary_text"
             android:textColorHint="@color/hint_text"
             android:textSize="14sp" />
@@ -248,8 +238,6 @@
             android:hint="Address"
             android:imeOptions="actionNext"
             android:inputType="text"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
             android:textColor="@color/primary_text"
             android:textColorHint="@color/hint_text"
             android:textSize="14sp" />

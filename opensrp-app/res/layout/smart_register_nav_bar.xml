@@ -12,6 +12,7 @@
         android:layout_height="match_parent">
 
         <ImageButton
+            android:visibility="gone"
             android:id="@+id/btn_back_to_home"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
@@ -23,19 +24,11 @@
             android:scaleType="center"
             android:src="@drawable/homestacks" />
 
-        <ImageView
-            android:id="@+id/home_title_separator"
-            android:layout_width="@dimen/smart_register_nav_bar_separator"
-            android:layout_height="fill_parent"
-            android:layout_toRightOf="@+id/btn_back_to_home"
-            android:scaleType="fitXY"
-            android:src="@drawable/separator" />
-
         <LinearLayout
             android:id="@+id/title_layout"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:layout_toRightOf="@id/home_title_separator"
+            android:layout_toRightOf="@id/btn_back_to_home"
             android:background="@drawable/transparent_gray_background"
             android:orientation="horizontal"
             android:paddingLeft="5dp"
@@ -102,14 +95,8 @@
             android:paddingRight="22dp"
             android:src="@drawable/ic_plus" />
 
-        <ImageView
-            android:layout_width="@dimen/smart_register_nav_bar_separator"
-            android:layout_height="fill_parent"
-            android:layout_toRightOf="@+id/register_client"
-            android:scaleType="fitXY"
-            android:src="@drawable/separator" />
-
         <ImageButton
+            android:visibility="gone"
             android:id="@+id/filter_selection"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
@@ -120,14 +107,8 @@
             android:paddingRight="22dp"
             android:src="@drawable/ic_village_filter" />
 
-        <ImageView
-            android:layout_width="@dimen/smart_register_nav_bar_separator"
-            android:layout_height="fill_parent"
-            android:layout_toRightOf="@+id/filter_selection"
-            android:scaleType="fitXY"
-            android:src="@drawable/separator" />
-
         <ImageButton
+            android:visibility="gone"
             android:id="@+id/sort_selection"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
@@ -138,12 +119,6 @@
             android:paddingRight="22dp"
             android:src="@drawable/ic_sort" />
 
-        <ImageView
-            android:layout_width="@dimen/smart_register_nav_bar_separator"
-            android:layout_height="fill_parent"
-            android:layout_toRightOf="@+id/sort_selection"
-            android:scaleType="fitXY"
-            android:src="@drawable/separator" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -152,6 +127,7 @@
 
         <org.ei.opensrp.view.customControls.CustomFontTextView
             android:id="@+id/service_mode_selection"
+            android:visibility="gone"
             style="@style/CustomFontTextViewStyle.NavBar.Bold"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
@@ -164,12 +140,6 @@
             android:paddingLeft="15dp"
             android:paddingRight="5dp" />
 
-        <ImageView
-            android:layout_width="@dimen/smart_register_nav_bar_separator"
-            android:layout_height="fill_parent"
-            android:layout_toRightOf="@+id/service_mode_selection"
-            android:scaleType="fitXY"
-            android:src="@drawable/separator" />
     </RelativeLayout>
 
 

@@ -169,20 +169,9 @@ public abstract class SecuredNativeSmartRegisterCursorAdapterFragment extends or
         clientsProgressView = (ProgressBar) view.findViewById(R.id.client_list_progress);
         clientsView = (RecyclerView) view.findViewById(R.id.list);
 
-//        String[] columns = {"MOTHERS_FIRST_NAME",
-//                "MOTHERS_LAST_NAME",
-//                "MOTHERS_LAST_MENSTRUATION_DATE",
-//                "MOTHERS_SORTVALUE",
-//                "MOTHERS_ID",
-//                "PNC_STATUS",
-//                "EXPECTED_DELIVERY_DATE",
-//                "IS_VALID",
-//                "Is_PNC",
-//                "FACILITY_ID"};
 
         setupStatusBarViews(view);
 //        paginationViewHandler.addPagination(clientsView);
-
 //        updateDefaultOptions();
     }
 
