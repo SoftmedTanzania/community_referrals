@@ -131,9 +131,9 @@ public class LocationSelectorDialogFragment extends DialogFragment {
                     }
                     if(mCallback != null) {
                         mCallback.OnLocationSelected(locationjson.toString());
-                         FieldOverrides fieldOverrides = new FieldOverrides(locationjson.toString());
-                        ((AncSmartRegisterActivity)getActivity()).startFormActivity(formName, generateRandomUUIDString(), fieldOverrides.getJSONString());
                     }
+                    FieldOverrides fieldOverrides = new FieldOverrides(locationjson.toString());
+                    ((AncSmartRegisterActivity)getActivity()).startFormActivity(formName, generateRandomUUIDString(), fieldOverrides.getJSONString());
                     savestate = tView.getSaveState();
                     dismiss();
                 }

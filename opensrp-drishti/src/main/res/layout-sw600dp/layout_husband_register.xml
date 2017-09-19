@@ -17,8 +17,6 @@
         android:hint="Jina la Mume/Mwenza"
         android:imeOptions="actionNext"
         android:inputType="textPersonName"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
         android:textColor="@color/primary_text"
         android:textColorHint="@color/hint_text"
         android:textSize="16sp" />
@@ -53,8 +51,6 @@
         android:hint="Kazi ya Mume/Mwenza"
         android:imeOptions="actionNext"
         android:inputType="text"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
         android:textColor="@color/primary_text"
         android:textColorHint="@color/hint_text"
         android:textSize="16sp" />

@@ -131,12 +131,6 @@ public class NativeHomeActivity extends SecuredActivity {
         findViewById(R.id.btn_chw_register).setOnClickListener(onRegisterStartListener);
 
         findViewById(R.id.btn_reporting).setOnClickListener(onButtonsClickListener);
-//        findViewById(R.id.btn_videos).setOnClickListener(onButtonsClickListener);
-//       onButtonsClickListener ecRegisterClientCountView = (TextView) findViewById(R.id.txt_ec_register_client_count);
-//        pncRegisterClientCountView = (TextView) findViewById(R.id.txt_pnc_register_client_count);
-//        ancRegisterClientCountView = (TextView) findViewById(R.id.txt_anc_register_client_count);
-//        fpRegisterClientCountView = (TextView) findViewById(R.id.txt_fp_register_client_count);
-//        childRegisterClientCountView = (TextView) findViewById(R.id.txt_child_register_client_count);
     }
 
     private void initialize() {

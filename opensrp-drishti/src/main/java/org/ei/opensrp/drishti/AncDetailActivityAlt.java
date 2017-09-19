@@ -150,12 +150,12 @@ public class AncDetailActivityAlt extends AppCompatActivity {
         layoutRiskHeight.setVisibility(View.GONE);
         layoutRiskFertifility.setVisibility(View.GONE);
 
-        imageDisplayPicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+//        imageDisplayPicture.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
     }
 
     private void setMotherProfileDetails() {

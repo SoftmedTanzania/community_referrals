@@ -29,6 +29,11 @@ import org.ei.opensrp.Context;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectController;
+import org.ei.opensrp.domain.SyncStatus;
+import org.ei.opensrp.domain.form.FormData;
+import org.ei.opensrp.domain.form.FormField;
+import org.ei.opensrp.domain.form.FormInstance;
+import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.drishti.DataModels.ChwFollowUpMother;
 import org.ei.opensrp.drishti.DataModels.PreRegisteredMother;
 import org.ei.opensrp.commonregistry.CommonRepository;
@@ -75,6 +80,7 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.ei.opensrp.drishti.util.Utils.generateRandomUUIDString;
 
 public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener {
     private static final String TAG = AncSmartRegisterActivity.class.getSimpleName();
@@ -114,7 +120,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
-        mPager.setOffscreenPageLimit(formNames.length);
         mPager.setAdapter(mPagerAdapter);
         mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -123,7 +128,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 // onPageChanged(position);
             }
         });
-
+        mPager.setOffscreenPageLimit(formNames.length);
         //TODO this is hacking should be changed depending with the usertype
         mPager.setCurrentItem(1);
         currentPage = 1;
@@ -426,8 +431,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 Toast.makeText(AncSmartRegisterActivity.this, "umemfuta " + mother.getMOTHERS_FIRST_NAME() +" "+mother.getMOTHERS_LAST_NAME(), Toast.LENGTH_SHORT).show();
 
                 dialog.dismiss();
-
-
             }
         });
 
@@ -452,10 +455,10 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         formNames.add("birthnotificationpregnancystatusfollowup");
 
 
-//        DialogOption[] options = getEditOptions();
-//        for (int i = 0; i < options.length; i++){
-//            formNames.add(((OpenFormOption) options[i]).getFormName());
-//        }
+        DialogOption[] options = getEditOptions();
+        for (int i = 0; i < options.length; i++){
+            formNames.add(((OpenFormOption) options[i]).getFormName());
+        }
         return formNames.toArray(new String[formNames.size()]);
     }
 
@@ -548,7 +551,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public void OnLocationSelected(String locationSelected) {
         // set registration fragment
         Log.d(TAG,"Location selected");
-
+        mPager.setCurrentItem(2);
+        currentPage = 2;
     }
 
 
@@ -586,10 +590,12 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     @Override
     public void startFormActivity(String formName, String entityId, String metaData) {
-        Log.d(TAG, "startFormActivity");
-        try {
-            int formIndex = FormUtils.getIndexForFormName(formName, formNames) + 2; // add the offset
+        Log.d(TAG, "starting form = "+formName);
 
+        int formIndex = FormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
+        Log.d(TAG, "starting form index = "+formIndex);
+        mPager.setCurrentItem(formIndex, true);
+        try {
             if (entityId != null || metaData != null) {
                 String data = null;
                 //check if there is previously saved data for the form
@@ -616,11 +622,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
                 }
             }
-
-            mPager.setCurrentItem(formIndex, true);
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -699,60 +700,22 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
         commonRepository.customInsert(values);
 
-//        Map<String, String> personDetails1 = create("Is_PNC", "0").map();
-//        personDetails1.put("FWWOMVALID","1");
-//        personDetails1.put("FWBNFGEN", "2");
-//        personDetails1.put("FWWOMFNAME", pregnantMom.getName());
-//        personDetails1.put("GOBHHID", pregnantMom.getId());
-//        personDetails1.put("FWWOMLNAME", pregnantMom.getName());
-//        personDetails1.put("FWPSRLMP", sdf.format(new Date(pregnantMom.getDateLNMP())));
-//        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.getPregnancyCount()+"");
-//        personDetails1.put("FWPSRPRSB", pregnantMom.isHasBabyDeath()?"Has had still birth":"");
-//        personDetails1.put("FWPSRTOTBIRTH", pregnantMom.getChildrenCount()+"");
-//        personDetails1.put("FWPSRPREGTWYRS", pregnantMom.isHas2orMoreBBA()?"Has had no pregnancies in the last 2 years":"");
-//        personDetails1.put("FWWOMAGE", pregnantMom.getAge()+"");
-//        personDetails1.put("HEIGHT", pregnantMom.getHeight()+"");
-//        personDetails1.put("user_type", "1");
+        CommonPersonObject c = commonRepository.findByCaseID(id);
+        List<FormField> formFields = new ArrayList<>();
+        for ( String key : c.getDetails().keySet() ) {
+            FormField f = null;
+            if(!key.equals("FACILITY_ID")) {
+                f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
+            }else{
+                f = new FormField(key, c.getDetails().get(key), "facility.id");
+            }
+            formFields.add(f);
+        }
 
-//        String[] columns = {"MOTHERS_FIRST_NAME",
-//                "MOTHERS_LAST_NAME",
-//                "MOTHERS_LAST_MENSTRUATION_DATE",
-//                "MOTHERS_SORTVALUE",
-//                "MOTHERS_ID",
-//                "PNC_STATUS",
-//                "EXPECTED_DELIVERY_DATE",
-//                "IS_VALID",
-//                "Is_PNC",
-//                "FACILITY_ID"};
-
-//        CustomMotherRepository motherRepository = new CustomMotherRepository("wazazi_salama_mother", columns);
-//        motherRepository.add(motherPersonObject);
-
-//        CommonPersonObject cpo2 = new CommonPersonObject(id,id,personDetails1,"mcaremother");
-//        context().commonrepository("mcaremother").add(cpo2);
-//
-//        try {
-//            FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
-//            FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
-//
-//            org.ei.opensrp.Context context = org.ei.opensrp.Context.getInstance();
-//            ZiggyService ziggyService = context.ziggyService();
-//            ziggyService.saveForm(getParams(submission), submission.instance());
-//
-//            FormSubmissionService formSubmissionService = context.formSubmissionService();
-//            formSubmissionService.updateFTSsearch(submission);
-//
-//            Log.v("we are here", "hhregister");
-//            //switch to forms list fragmentstregi
-//            switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
-//
-//        } catch (Exception e) {
-//            AncSmartRegisterFragment displayFormFragment =(AncSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
-//            if (displayFormFragment != null) {
-////                displayFormFragment.hideTranslucentProgressDialog();
-//            }
-//            e.printStackTrace();
-//        }
+        FormData formData = new FormData("wazazi_salama_mother","/model/instance/Wazazi_Salama_ANC_Registration/",formFields,null);
+        FormInstance formInstance = new FormInstance(formData,"1");
+        FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"wazazi_salama_pregnant_mothers_registration",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
+        context().formDataRepository().saveFormSubmission(submission);
     }
 
     public void updateFormSubmission(MotherPersonObject motherPersonObject, String id){
@@ -771,26 +734,16 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void run() {
                 // TODO: 9/17/17 this is a hack
-                if(currentPage == 0){
-                    mPager.setCurrentItem(0, true);
-                }else if(currentPage == 1){
-                    mPager.setCurrentItem(1, true);
-                }
 
-                SecuredNativeSmartRegisterCursorAdapterFragment registerFragment = (SecuredNativeSmartRegisterCursorAdapterFragment) findFragmentByPosition(currentPage);
-                if (registerFragment != null && data != null) {
-                    registerFragment.refreshListView();
-                }
 
-                try {
-                    AncSmartRegisterFragment displayFormFragment = (AncSmartRegisterFragment) getDisplayFormFragmentAtIndex(prevPageIndex);
-                    if (displayFormFragment != null) {
-//                        displayFormFragment.setFormData(null);
+                if(currentPage==1) {//for supervisors
+                    AncSmartRegisterFragment registerFragment = (AncSmartRegisterFragment) findFragmentByPosition(currentPage);
+                    if (registerFragment != null) {
+                        registerFragment.refreshListView();
                     }
-
-                    displayFormFragment.setRecordId(null);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    mPager.setCurrentItem(0, true);
+                }else   if(currentPage==2) {//for chws
+                    finish();
                 }
             }
         });
