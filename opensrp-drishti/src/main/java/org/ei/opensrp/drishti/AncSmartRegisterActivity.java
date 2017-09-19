@@ -130,8 +130,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
         mPager.setOffscreenPageLimit(formNames.length);
         //TODO this is hacking should be changed depending with the usertype
-        mPager.setCurrentItem(3);
-        currentPage = 3;
+        mPager.setCurrentItem(0);
+        currentPage = 0;
 
     }
 
