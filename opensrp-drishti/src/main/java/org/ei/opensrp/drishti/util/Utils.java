@@ -74,9 +74,9 @@ public class Utils {
     public static MotherPersonObject convertToMotherPersonObject(CommonPersonObject commonPersonObject) {
         JSONObject o = null;
         String details = commonPersonObject.getColumnmaps().get("details");
-        Log.d(TAG, "details string = " + convertStandardJSONString(details.substring(1, details.length() - 1)));
+        Log.d(TAG, "details string = " + convertStandardJSONString(details));
         try {
-            o = new JSONObject(convertStandardJSONString(details.substring(1, details.length() - 1)));
+            o = new JSONObject(convertStandardJSONString(details));
             return new MotherPersonObject(
                     commonPersonObject.getColumnmaps().get("id"),
                     commonPersonObject.getColumnmaps().get("relationalid"),
