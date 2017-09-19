@@ -78,6 +78,7 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.ei.opensrp.drishti.util.Utils.generateRandomUUIDString;
 
 public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener {
     private static final String TAG = AncSmartRegisterActivity.class.getSimpleName();
@@ -631,7 +632,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //        motherRepository.add(motherPersonObject);
 
         MotherPersonObject motherPersonObject = new MotherPersonObject(id, null, pregnantMom);
-        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
         ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
         Log.d(TAG, "motherPersonObject = " + gson.toJson(motherPersonObject));
         Log.d(TAG, "values = " + gson.toJson(values));
@@ -639,9 +639,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
         commonRepository.customInsert(values);
 
-        CommonPersonObject c = commonRepository.findByCaseID("1");
-
-
+        CommonPersonObject c = commonRepository.findByCaseID(id);
         List<FormField> formFields = new ArrayList<>();
         for ( String key : c.getDetails().keySet() ) {
             FormField f = null;
@@ -655,7 +653,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         FormData formData = new FormData("wazazi_salama_mother","/model/instance/Wazazi_Salama_ANC_Registration/",formFields,null);
         FormInstance formInstance = new FormInstance(formData,"1");
-        FormSubmission submission = new FormSubmission(id,id,"wazazi_salama_pregnant_mothers_registration",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
+        FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"wazazi_salama_pregnant_mothers_registration",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
         context().formDataRepository().saveFormSubmission(submission);
     }
 
