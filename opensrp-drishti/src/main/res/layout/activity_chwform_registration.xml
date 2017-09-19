@@ -16,11 +16,9 @@ tools:context="org.ei.opensrp.mcare.fragment.AncRegister1stFragment">
     android:id="@+id/editTextClinicName"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginLeft="48dp"
+    android:layout_marginRight="48dp"
     android:hint="Jina la kliniki"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
     android:textColor="@color/primary_text"
     android:textColorHint="@color/hint_text"
     android:textSize="14sp" />
@@ -84,7 +82,7 @@ tools:context="org.ei.opensrp.mcare.fragment.AncRegister1stFragment">
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="128dp"
+        android:layout_height="48dp"
         android:clickable="false" />
 </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
