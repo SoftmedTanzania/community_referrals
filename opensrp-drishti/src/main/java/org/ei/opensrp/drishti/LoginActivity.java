@@ -23,6 +23,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import org.ei.opensrp.Context;
 import org.ei.opensrp.domain.LoginResponse;
 import org.ei.opensrp.domain.Response;
@@ -75,6 +77,9 @@ public class LoginActivity extends AppCompatActivity {
         logVerbose("Initializing ...");
         try {
             AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(this));
+            Gson gson = new Gson();
+            android.util.Log.d(TAG, "sharedPreference = " + gson.toJson(allSharedPreferences));
+
             String preferredLocale = allSharedPreferences.fetchLanguagePreference();
             Resources res = Context.getInstance().applicationContext().getResources();
             // Change locale settings in the app.
