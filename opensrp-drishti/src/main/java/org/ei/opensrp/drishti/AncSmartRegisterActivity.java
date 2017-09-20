@@ -88,7 +88,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private DialogOptionMapper dialogOptionMapper;
 
     @Bind(R.id.view_pager)
-    OpenSRPViewPager mPager;
+    public    OpenSRPViewPager mPager;
     private FragmentPagerAdapter mPagerAdapter;
     private int currentPage;
 
@@ -132,6 +132,13 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     }
 
+    public void returnToBaseFragment(){
+        mPager.setCurrentItem(0);
+        AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) getDisplayFormFragmentAtIndex(1);
+        displayFormFragment.reloadValues();
+
+
+    }
     public void showPreRegistrationDetailsDialog(MotherPersonObject mother) {
         String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
         Log.d(TAG, "gsonMom = " + gsonMom);
@@ -855,7 +862,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     @Override
     protected void onPause() {
         super.onPause();
-        retrieveAndSaveUnsubmittedFormData();
+//        retrieveAndSaveUnsubmittedFormData();
     }
 
 

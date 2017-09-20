@@ -168,18 +168,26 @@ public class Utils {
             conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             conn.setRequestMethod("POST");
 
+            conn.setDoOutput(true);
             OutputStream os = conn.getOutputStream();
             os.write(object.toString().getBytes("UTF-8"));
+            os.flush();
             os.close();
 
+
+            int responseCode = conn.getResponseCode();
+            Log.d(TAG,"POST Response Code :: " + responseCode);
+
             // read the response
-            InputStream in = new BufferedInputStream(conn.getInputStream());
+            InputStream in  = conn.getInputStream();
+
             String result = org.apache.commons.io.IOUtils.toString(in, "UTF-8");
             JSONObject jsonObject = new JSONObject(result);
 
             Log.d(TAG,"response is "+jsonObject.toString());
 
             in.close();
+            os.close();
             conn.disconnect();
         } catch (IOException e) {
             e.printStackTrace();
