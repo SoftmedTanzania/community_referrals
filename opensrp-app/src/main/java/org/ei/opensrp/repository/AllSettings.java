@@ -12,7 +12,7 @@ public class AllSettings {
     private static final String USER_INFORMATION = "userInformation";
 
     protected AllSharedPreferences preferences;
-    protected SettingsRepository settingsRepository;
+    public SettingsRepository settingsRepository;
 
     public AllSettings(AllSharedPreferences preferences, SettingsRepository settingsRepository) {
         this.preferences = preferences;

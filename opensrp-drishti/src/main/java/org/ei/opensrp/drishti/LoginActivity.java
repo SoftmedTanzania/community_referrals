@@ -9,9 +9,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -151,11 +153,11 @@ public class LoginActivity extends AppCompatActivity {
         hideKeyboard();
         view.setClickable(false);
 
+
+        final String userName = userNameEditText.getText().toString();
         //TODO Coze Remove the hardcoded credentials
-//        final String userName = userNameEditText.getText().toString();
 //        final String password = passwordEditText.getText().toString();
 
-        final String userName = "sean";
         final String password = "Admin123";
 
         if (context.userService().hasARegisteredUser()) {
@@ -186,7 +188,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-//                    login(findViewById(org.ei.opensrp.R.id.login_loginButton));
                     // check input fields first
                     if (isLoginInitiateOk())
                         login(loginButton);
@@ -390,20 +391,16 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isLoginInitiateOk() {
-        //TODO remove the following hack to reimplement the proper login flow
-        return true;
-
-        //TODO coze uncomment the following
-//        if (TextUtils.isEmpty(userNameEditText.getText())
-//                || TextUtils.isEmpty(passwordEditText.getText())) {
-//            // tell user to enter username and pwd
-//            Snackbar.make(
-//                    findViewById(R.id.coordinatorLogin),
-//                    R.string.provide_username_password,
-//                    Snackbar.LENGTH_SHORT).show();
-//            return false;
-//        } else
-//            return true;
+        if (TextUtils.isEmpty(userNameEditText.getText())
+                || TextUtils.isEmpty(passwordEditText.getText())) {
+            // tell user to enter username and pwd
+            Snackbar.make(
+                    findViewById(R.id.coordinatorLogin),
+                    R.string.provide_username_password,
+                    Snackbar.LENGTH_SHORT).show();
+            return false;
+        } else
+            return true;
     }
 
 }
