@@ -20,8 +20,10 @@ import com.google.gson.Gson;
 import org.ei.opensrp.drishti.AncSmartRegisterActivity;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.pageradapter.ANCRegisterPagerAdapter;
 import org.ei.opensrp.drishti.util.DatesHelper;
+import org.ei.opensrp.drishti.util.Utils;
 import org.ei.opensrp.view.activity.ANCSmartRegisterActivity;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
@@ -38,6 +40,7 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
     private TabLayout tabs;
 
     private PregnantMom pregnantMom;
+    private PregnantMom motherData;
     private Gson gson = new Gson();
     private Calendar calendar = Calendar.getInstance();
 
@@ -147,6 +150,8 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
                     // collect mother details from the 1st page
                     pregnantMom = firstFragment.getPregnantMom();
 
+
+
                     //todo check for checkboxes on the 2nd page then submit form
 
                     SparseBooleanArray indicatorsMap = ((AncRegister2ndFragment) pagerAdapter.getItem(1))
@@ -248,6 +253,13 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
         this.recordId = recordId;
     }
 
+    public void setMotherDetails(PregnantMom mother) {
+
+        this.motherData = mother;
+        AncRegister1stFragment firstFragment = (AncRegister1stFragment) pagerAdapter.getItem(0);
+        firstFragment.setMotherDetails(motherData);
+
+    }
     public void reloadValues(){
         pagerAdapter = new ANCRegisterPagerAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);

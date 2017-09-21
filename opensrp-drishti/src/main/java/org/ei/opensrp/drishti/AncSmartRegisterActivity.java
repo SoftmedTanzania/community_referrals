@@ -422,6 +422,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 // todo: delete mother
                 mother.setIS_VALID("false");
                 pregnantMom.setIs_valid("false");
+//                this.motherData = new Gson().fromJson(gsonMom,PregnantMom.class);
 //                Log.d(TAG, "gsonMomafter Changes = " + pregnantMom);
 
 //                mother.setDetails(new Gson().toJson(pregnantMom));
@@ -876,5 +877,11 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //        retrieveAndSaveUnsubmittedFormData();
     }
 
+    public int getFormIndex(String formName){
+        return FormUtils.getIndexForFormName(formName, formNames) + 1;
+    }
+    public void switchToPage(int pageNumber){
+        mPager.setCurrentItem(pageNumber);
+    }
 
 }

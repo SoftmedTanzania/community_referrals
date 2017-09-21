@@ -24,11 +24,14 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.util.DatesHelper;
+import org.ei.opensrp.drishti.util.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,6 +67,7 @@ public class AncRegister1stFragment extends Fragment {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
     public static PregnantMom mom = new PregnantMom();
+    public static PregnantMom motherData ;
     private static final String TAG = AncRegister1stFragment.class.getSimpleName();
     private static int age = -1, height = -1, pregnancyCount = -1;
 
@@ -111,6 +115,7 @@ public class AncRegister1stFragment extends Fragment {
         editTextPhysicalAddress = (EditText) fragmentView.findViewById(R.id.editTextPhysicalAddress);
         editTextHusbandName = (EditText) fragmentView.findViewById(R.id.editTextHusbandName);
         editTextHusbandOccupation = (EditText) fragmentView.findViewById(R.id.editTextHusbandOccupation);
+
 
         educationAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, educationList);
         educationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -391,6 +396,7 @@ public class AncRegister1stFragment extends Fragment {
 
     public PregnantMom getPregnantMom() {
 
+
         mom.setName(editTextMotherName.getText().toString());
         mom.setId(editTextMotherId.getText().toString());
         mom.setPhone(textPhone.getText().toString());
@@ -423,5 +429,47 @@ public class AncRegister1stFragment extends Fragment {
         Toast.makeText(context,
                 message,
                 Toast.LENGTH_LONG).show();
+    }
+
+    public void setMotherDetails(PregnantMom mother) {
+
+        this.motherData = mother;
+        setRegisteredValues();
+
+    }
+
+    public void setRegisteredValues(){
+        if(motherData.getReg_type() == "2"){
+            View dialogView = getActivity().getLayoutInflater().inflate(R.layout.layout_dialog_edit_phone, null);
+            EditText editTextPhone = (EditText) dialogView.findViewById(R.id.editTextLocation);
+
+            long lnmp = motherData.getDateLNMP();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            String edd = dateFormat.format(DatesHelper.calculateEDDFromLNMP(lnmp));
+            String lnmpDate = dateFormat.format(motherData.getDateLNMP());
+            String reg_date = dateFormat.format(motherData.getDateReg());
+
+            //populating data
+            textDate.setText(reg_date);
+            textPhone.setText(motherData.getPhone());
+            textDateLNMP.setText(lnmpDate);
+            textEDD.setText(edd);
+//            editTextPhone.setText(textPhone.getText());
+
+            editTextMotherName.setText(motherData.getName());
+            editTextMotherId.setText(motherData.getId());
+            editTextMotherAge.setText(motherData.getAge());
+            editTextHeight.setText(motherData.getHeight());
+            editTextPregCount.setText(motherData.getPreviousFertilityCount());
+            editTextBirthCount.setText(motherData.getSuccessfulBirths());
+            editTextChildrenCount.setText(motherData.getLivingChildren());
+            editTextDiscountId.setText(motherData.getDiscountId());
+            editTextMotherOccupation.setText(motherData.getOccupation());
+            editTextPhysicalAddress.setText(motherData.getPhysicalAddress());
+            editTextHusbandName.setText(motherData.getHusbandName());
+            editTextHusbandOccupation.setText(motherData.getHusbandOccupation());
+
+        }
+
     }
 }

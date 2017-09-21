@@ -102,7 +102,9 @@ public class CHWFollowUpFragment extends SecuredNativeSmartRegisterCursorAdapter
         RecyclerView recyclerView = (RecyclerView)v.findViewById(R.id.chw_followUp_listView);
         //todo need to select all mothers with usertype id similar to the logged chw user
         commonRepository = context().commonrepository("wazazi_salama_mother");
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where IS_VALID='true'" );
+        //todo martha edit the query
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME );
+//        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where IS_VALID='true'" );
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
