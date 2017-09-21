@@ -433,6 +433,13 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
         Log.d(TAG, "gsonMom = " + gsonMom);
         final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
+        pregnantMom.setIs_valid("false");
+
+        //todo martha how to set is_valid in the pregnant mother for this passed motherpersonal object
+//        JSONArray arr = new JSONArray(gsonMom);
+//        JSONObject jObj = arr.getJSONObject(0);
+//        String date = jObj.getString("is_valid");
+
         final View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_confirm_delete, null);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
@@ -447,7 +454,9 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             public void onClick(View view) {
                 // todo: delete mother
                 mother.setIS_VALID("false");
-//                pregnantMom.setIs_valid("false");
+                pregnantMom.setIs_valid("false");
+//                Log.d(TAG, "gsonMomafter Changes = " + pregnantMom);
+
 //                mother.setDetails(new Gson().toJson(pregnantMom));
                 updateFormSubmission(mother,mother.getId());
 
