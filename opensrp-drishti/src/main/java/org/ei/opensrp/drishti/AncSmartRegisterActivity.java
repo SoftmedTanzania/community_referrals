@@ -130,35 +130,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
         mPager.setOffscreenPageLimit(formNames.length);
 
-        String userDetailsString = context().allSettings().settingsRepository.querySetting("userInformation","");
-        Log.d(TAG,"userDetails = "+userDetailsString);
-        JSONObject userSettings = null;
-        try {
-            userSettings = new JSONObject(userDetailsString);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JSONArray roles = null;
-        try {
-            roles = userSettings.getJSONArray("roles");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        int count = roles.length();
-        for (int i =0 ; i<count ; i++){
-            try {
-                if(roles.getString(i).equals("Organizational: Health Facility User")){
-                    ((UzaziSalamaApplication)getApplication()).setUserType(1);
-                }else if (roles.getString(i).equals("Organizational: CHW")){
-                    ((UzaziSalamaApplication)getApplication()).setUserType(0);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
         if(((UzaziSalamaApplication)getApplication()).getUserType()==0) {
             mPager.setCurrentItem(3);
             currentPage = 3;

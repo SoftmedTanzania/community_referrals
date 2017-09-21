@@ -20,6 +20,7 @@ import org.ei.opensrp.drishti.Anc.Anc1handler;
 import org.ei.opensrp.drishti.Anc.Anc2handler;
 import org.ei.opensrp.drishti.Anc.Anc3handler;
 import org.ei.opensrp.drishti.Anc.Anc4handler;
+import org.ei.opensrp.drishti.Application.UzaziSalamaApplication;
 import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
 import org.ei.opensrp.drishti.util.CustomContext;
 import org.ei.opensrp.drishti.util.OrientationHelper;
@@ -33,6 +34,9 @@ import org.ei.opensrp.view.contract.HomeContext;
 import org.ei.opensrp.view.controller.NativeAfterANMDetailsFetchListener;
 import org.ei.opensrp.view.controller.NativeUpdateANMDetailsTask;
 import org.ei.opensrp.view.fragment.DisplayFormFragment;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -119,7 +123,33 @@ public class NativeHomeActivity extends SecuredActivity {
         OrientationHelper.setProperOrientationForDevice(NativeHomeActivity.this);
 
 
-//        context().formSubmissionRouter().getHandlerMap().put("mis_elco", new MIS_elco_form_handler());
+        String userDetailsString = context().allSettings().settingsRepository.querySetting("userInformation","");
+        JSONObject userSettings = null;
+        try {
+            userSettings = new JSONObject(userDetailsString);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JSONArray roles = null;
+        try {
+            roles = userSettings.getJSONArray("roles");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        int count = roles.length();
+        for (int i =0 ; i<count ; i++){
+            try {
+                if(roles.getString(i).equals("Organizational: Health Facility User")){
+                    ((UzaziSalamaApplication)getApplication()).setUserType(1);
+                }else if (roles.getString(i).equals("Organizational: CHW")){
+                    ((UzaziSalamaApplication)getApplication()).setUserType(0);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
