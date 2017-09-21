@@ -17,10 +17,12 @@ import android.view.animation.AnimationUtils;
 
 import com.google.gson.Gson;
 
+import org.ei.opensrp.drishti.AncSmartRegisterActivity;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.pageradapter.ANCRegisterPagerAdapter;
 import org.ei.opensrp.drishti.util.DatesHelper;
+import org.ei.opensrp.view.activity.ANCSmartRegisterActivity;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
 
@@ -201,7 +203,7 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
                     // todo start form submission
 
                     ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(gsonMom, recordId, formName, getFormFieldsOverrides());
-                    getActivity().finish();
+                    ((AncSmartRegisterActivity)getActivity()).returnToBaseFragment();
                 }
 
             }
@@ -244,5 +246,10 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
 
     public void setRecordId(String recordId) {
         this.recordId = recordId;
+    }
+
+    public void reloadValues(){
+        pagerAdapter = new ANCRegisterPagerAdapter(getActivity().getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
     }
 }

@@ -1,0 +1,137 @@
+{
+    "form_data_definition_version": "4",
+    "form": {
+        "bind_type": "wazazi_salama_mother",
+        "default_bind_path": "/model/instance/Wazazi_Salama_ANC_Registration/",
+        "fields": [
+            {
+                "name": "id",
+                "shouldLoadValue": true
+            },
+            {
+                "name": "age"
+            },
+            {
+                "name": "ancAppointment1"
+            },
+            {
+                "name": "ancAppointment2"
+            },
+            {
+                "name": "ancAppointment3"
+            },
+            {
+                "name": "ancAppointment4"
+            },
+            {
+                "name": "kondoKukwama"
+            },
+            {
+                "name": "bleedingOnDelivery"
+            },
+            {
+                "name": "kilemaChaNyonga"
+            },
+            {
+                "name": "csDelivery"
+            },
+            {
+                "name": "heightBelow150"
+            },
+            {
+                "name": "firstPregAbove35Yrs"
+            },
+            {
+                "name": "fourOrMorePreg"
+            },
+            {
+                "name": "hasTB"
+            },
+            {
+                "name": "hasDiabetes"
+            },
+            {
+                "name": "hasHeartProblem"
+            },
+            {
+                "name": "has2orMoreBBA"
+            },
+            {
+                "name": "hadStillBirth"
+            },
+            {
+                "name": "has10YrsPassedSinceLastPreg"
+            },
+            {
+                "name": "isAbove20WeeksPregnant"
+            },
+            {
+                "name": "height"
+            },
+            {
+                "name": "previousFertilityCount"
+            },
+            {
+                "name": "successfulBirths"
+            },
+            {
+                "name": "livingChildren"
+            },
+            {
+                "name": "dateReg"
+            },
+            {
+                "name": "dateLNMP"
+            },
+            {
+                "name": "edd"
+            },
+            {
+                "name": "dateRegistration"
+            },
+            {
+                "name": "dateLastVisited"
+            },
+            {
+                "name": "husbandName"
+            },
+            {
+                "name": "husbandEducation"
+            },
+            {
+                "name": "husbandOccupation"
+            },
+            {
+                "name": "physicalAddress"
+            },
+            {
+                "name": "facilityId",
+                "source":"facility.id"
+            },
+            {
+                "name": "name"
+            },
+            {
+                "name": "id"
+            },
+            {
+                "name": "phone"
+            },
+            {
+                "name": "discountId"
+            },
+            {
+                "name": "education"
+            },
+            {
+                "name": "occupation"
+            },
+            {
+                "name": "lastSmsToken"
+            },
+            {
+                "name": "chwComment"
+            }
+        ]
+    }
+}

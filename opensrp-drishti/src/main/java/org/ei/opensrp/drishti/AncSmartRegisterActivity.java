@@ -34,8 +34,6 @@ import org.ei.opensrp.domain.form.FormData;
 import org.ei.opensrp.domain.form.FormField;
 import org.ei.opensrp.domain.form.FormInstance;
 import org.ei.opensrp.domain.form.FormSubmission;
-import org.ei.opensrp.drishti.DataModels.ChwFollowUpMother;
-import org.ei.opensrp.drishti.DataModels.PreRegisteredMother;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
@@ -47,7 +45,6 @@ import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
 import org.ei.opensrp.drishti.pageradapter.BaseRegisterActivityPagerAdapter;
-import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.drishti.util.DatesHelper;
 import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.drishti.util.Utils;
@@ -91,7 +88,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private DialogOptionMapper dialogOptionMapper;
 
     @Bind(R.id.view_pager)
-    OpenSRPViewPager mPager;
+    public    OpenSRPViewPager mPager;
     private FragmentPagerAdapter mPagerAdapter;
     private int currentPage;
 
@@ -135,6 +132,13 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     }
 
+    public void returnToBaseFragment(){
+        mPager.setCurrentItem(0);
+        AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) getDisplayFormFragmentAtIndex(1);
+        displayFormFragment.reloadValues();
+
+
+    }
     public void showPreRegistrationDetailsDialog(MotherPersonObject mother) {
         String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
         Log.d(TAG, "gsonMom = " + gsonMom);
@@ -685,14 +689,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     @Override
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
         // save the form
-        PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
-
-        // todo fix NullPointerException on getWritableDatabase
-
-//        MotherPersonObject motherPersonObject = new MotherPersonObject(id, id, pregnantMom);
-//        CustomContext customContext = new CustomContext();
-//        CustomMotherRepository motherRepository = customContext.getCustomMotherRepo("wazazi_salama_mother");
-//        motherRepository.add(motherPersonObject);
+        final PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
 
         MotherPersonObject motherPersonObject = new MotherPersonObject(id, null, pregnantMom);
         ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
@@ -718,6 +715,34 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         FormInstance formInstance = new FormInstance(formData,"1");
         FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"wazazi_salama_pregnant_mothers_registration",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
         context().formDataRepository().saveFormSubmission(submission);
+
+
+//        TODO finish this better implementation for saving data to the database
+//        FormSubmission formSubmission1 = null;
+//        try {
+//            formSubmission1 = FormUtils.getInstance(getApplicationContext()).generateFormSubmisionFromJSONString(id,new Gson().toJson(pregnantMom),"wazazi_salama_pregnant_mothers_registration",fieldOverrides);
+//            Log.d(TAG,"form submission generated successfully");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        try {
+//            context().ziggyService().saveForm(getParams(formSubmission1), formSubmission1.instance());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+
+        new  org.ei.opensrp.drishti.util.AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+                if(!pregnantMom.getPhone().equals(""))
+                Utils.sendRegistrationAlert(pregnantMom.getPhone());
+                return null;
+            }
+        }.execute();
+
     }
 
     public void updateFormSubmission(MotherPersonObject motherPersonObject, String id){
@@ -739,7 +764,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
 
                 if(currentPage==1) {//for supervisors
-                    AncSmartRegisterFragment registerFragment = (AncSmartRegisterFragment) findFragmentByPosition(currentPage);
+                    AncSmartRegisterFragment registerFragment = (AncSmartRegisterFragment) findFragmentByPosition(0);
                     if (registerFragment != null) {
                         registerFragment.refreshListView();
                     }
@@ -838,7 +863,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     @Override
     protected void onPause() {
         super.onPause();
-        retrieveAndSaveUnsubmittedFormData();
+//        retrieveAndSaveUnsubmittedFormData();
     }
 
 
