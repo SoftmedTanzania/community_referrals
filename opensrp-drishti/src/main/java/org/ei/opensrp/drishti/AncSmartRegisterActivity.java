@@ -35,6 +35,7 @@ import org.ei.opensrp.domain.form.FormField;
 import org.ei.opensrp.domain.form.FormInstance;
 import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.commonregistry.CommonRepository;
+import org.ei.opensrp.drishti.Application.UzaziSalamaApplication;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
 import org.ei.opensrp.drishti.Fragments.AncSmartRegisterFragment;
@@ -61,6 +62,8 @@ import org.ei.opensrp.view.dialog.DialogOptionModel;
 import org.ei.opensrp.view.dialog.EditOption;
 import org.ei.opensrp.view.dialog.OpenFormOption;
 import org.ei.opensrp.view.viewpager.OpenSRPViewPager;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -126,9 +129,40 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             }
         });
         mPager.setOffscreenPageLimit(formNames.length);
-        //TODO this is hacking should be changed depending with the usertype
-        mPager.setCurrentItem(3);
-        currentPage = 3;
+
+        String userDetailsString = context().allSettings().settingsRepository.querySetting("userInformation","");
+        Log.d(TAG,"userDetails = "+userDetailsString);
+        JSONObject userSettings = null;
+        try {
+            userSettings = new JSONObject(userDetailsString);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JSONArray roles = null;
+        try {
+            roles = userSettings.getJSONArray("roles");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        int count = roles.length();
+        for (int i =0 ; i<count ; i++){
+            try {
+                if(roles.getString(i).equals("Organizational: Health Facility User")){
+                    ((UzaziSalamaApplication)getApplication()).setUserType(1);
+                }else if (roles.getString(i).equals("Organizational: CHW")){
+                    ((UzaziSalamaApplication)getApplication()).setUserType(0);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(((UzaziSalamaApplication)getApplication()).getUserType()==0) {
+            mPager.setCurrentItem(3);
+            currentPage = 3;
+        }
 
     }
 
