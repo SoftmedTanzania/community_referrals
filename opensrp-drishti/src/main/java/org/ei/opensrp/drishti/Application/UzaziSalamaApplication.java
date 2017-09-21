@@ -159,7 +159,7 @@ public class UzaziSalamaApplication extends DrishtiApplication {
     public static void setCrashlyticsUser(Context context) {
                 if(context != null && context.userService() != null
                                 && context.allSharedPreferences() != null) {
-//                       Crashlytics.setUserName(context.allSharedPreferences().fetchRegisteredANM());
+                       Crashlytics.setUserName(context.allSharedPreferences().fetchRegisteredANM());
                    }
            }
 

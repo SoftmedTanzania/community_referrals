@@ -24,7 +24,7 @@
                 <LinearLayout
                     android:id="@+id/layout_profile"
                     android:layout_margin="8dp"
-                    android:layout_width="60dp"
+                    android:layout_width="48dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/shape_circle">
                     <ImageView

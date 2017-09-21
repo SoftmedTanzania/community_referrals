@@ -10,8 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
+
+import net.sqlcipher.database.SQLiteDatabase;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
@@ -22,6 +25,7 @@ import org.ei.opensrp.drishti.pageradapter.CHWFollowUpPagerAdapter;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.drishti.util.Utils;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
+import org.ei.opensrp.repository.Repository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
 import java.util.ArrayList;
@@ -42,9 +46,11 @@ public class CHWFollowUpFragment extends SecuredNativeSmartRegisterCursorAdapter
     private static final String ARG_PARAM2 = "param2";
     private CommonRepository commonRepository;
     private Gson gson = new Gson();
+    private Gson gson1 = new Gson();
+    private Gson gson2 = new Gson();
     private android.content.Context appContext;
     private List<MotherPersonObject> motherPersonList = new ArrayList<>();
-    private Cursor cursor;
+    private Cursor cursor,cursor2;
     private static final String TAG = CHWFollowUpFragment.class.getSimpleName(),
             TABLE_NAME = "wazazi_salama_mother";
 
