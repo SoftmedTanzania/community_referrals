@@ -13,8 +13,8 @@ import java.util.Map;
  */
 
 public class MotherPersonObject {
-    private String id, type, relationalId, MOTHERS_FIRST_NAME, MOTHERS_LAST_NAME, MOTHERS_SORTVALUE,
-            EXPECTED_DELIVERY_DATE, MOTHERS_LAST_MENSTRUATION_DATE, FACILITY_ID, IS_PNC, IS_VALID, PNC_STATUS, MOTHERS_ID;
+    private String id,IS_PNC, IS_VALID, REG_TYPE, relationalId, MOTHERS_FIRST_NAME, MOTHERS_LAST_NAME, MOTHERS_SORTVALUE,
+            EXPECTED_DELIVERY_DATE, MOTHERS_LAST_MENSTRUATION_DATE, FACILITY_ID,  PNC_STATUS, MOTHERS_ID;
     private String details;
     private Map<String, String> columnMap;
 
@@ -33,7 +33,7 @@ public class MotherPersonObject {
                               String type) {
         this.details = details;
         this.id = id;
-        this.type = type;
+        this.REG_TYPE = type;
         this.relationalId = relationalId;
         this.MOTHERS_FIRST_NAME = MOTHERS_FIRST_NAME;
         this.MOTHERS_LAST_NAME = MOTHERS_LAST_NAME;
@@ -63,9 +63,9 @@ public class MotherPersonObject {
         this.EXPECTED_DELIVERY_DATE = sdf.format(pregnantMom.getEdd());
 
         this.MOTHERS_SORTVALUE = "";
-        this.type = "1";
-        this.IS_PNC = "false";
-        this.IS_VALID = "true";
+        this.REG_TYPE = pregnantMom.getReg_type();
+        this.IS_PNC = pregnantMom.getIs_pnc();
+        this.IS_VALID = pregnantMom.getIs_valid();
         this.FACILITY_ID = pregnantMom.getFacilityId();
         this.details = new Gson().toJson(pregnantMom);
 
@@ -78,6 +78,8 @@ public class MotherPersonObject {
     public void setId(String id) {
         this.id = id;
     }
+
+
 
     public String getDetails() {
         return details;
@@ -179,5 +181,25 @@ public class MotherPersonObject {
 
     public void setcolumnMap(Map<String, String> columnMap) {
         this.columnMap = columnMap;
+    }
+
+    public String getREG_TYPE() {
+        return REG_TYPE;
+    }
+
+    public void setREG_TYPE(String REG_TYPE) {
+        this.REG_TYPE = REG_TYPE;
+    }
+
+    public void setRelationalId(String relationalId) {
+        this.relationalId = relationalId;
+    }
+
+    public String IS_PNC() {
+        return IS_PNC;
+    }
+
+    public String IS_VALID() {
+        return IS_VALID;
     }
 }

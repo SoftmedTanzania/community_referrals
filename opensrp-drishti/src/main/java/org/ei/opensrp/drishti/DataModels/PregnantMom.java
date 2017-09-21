@@ -5,7 +5,9 @@ package org.ei.opensrp.drishti.DataModels;
  */
 
 public class PregnantMom {
-    private String name, id, phone, discountId, education, occupation, lastSmsToken, chwComment,
+    private String name,id, phone, discountId, education, occupation, lastSmsToken, chwComment,reg_type,
+            is_pnc,
+            is_valid,
             husbandName, husbandEducation, husbandOccupation, physicalAddress, facilityId;
 
     private long dateReg, dateLNMP, edd, dateRegistration, dateLastVisited;
@@ -355,5 +357,29 @@ public class PregnantMom {
 
     public void setChwComment(String chwComment) {
         this.chwComment = chwComment;
+    }
+
+    public String getReg_type() {
+        return reg_type;
+    }
+
+    public void setReg_type(String reg_type) {
+        this.reg_type = reg_type;
+    }
+
+    public String getIs_pnc() {
+        return is_pnc;
+    }
+
+    public void setIs_pnc(String is_pnc) {
+        this.is_pnc = is_pnc;
+    }
+
+    public String getIs_valid() {
+        return is_valid;
+    }
+
+    public void setIs_valid(String is_valid) {
+        this.is_valid = is_valid;
     }
 }

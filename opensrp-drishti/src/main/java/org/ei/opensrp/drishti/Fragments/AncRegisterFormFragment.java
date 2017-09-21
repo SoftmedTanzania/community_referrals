@@ -171,6 +171,9 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
                     pregnantMom.setDateLastVisited(0);
                     pregnantMom.setLastSmsToken("0");
                     pregnantMom.setChwComment("no comment");
+                    pregnantMom.setReg_type("1");
+                    pregnantMom.setIs_pnc("false");
+                    pregnantMom.setIs_valid("true");
 
                     long lnmp = pregnantMom.getDateLNMP();
                     long firstVisit = DatesHelper.calculate1stVisitFromLNMP(lnmp);

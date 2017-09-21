@@ -447,6 +447,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             public void onClick(View view) {
                 // todo: delete mother
                 mother.setIS_VALID("false");
+//                pregnantMom.setIs_valid("false");
 //                mother.setDetails(new Gson().toJson(pregnantMom));
                 updateFormSubmission(mother,mother.getId());
 
