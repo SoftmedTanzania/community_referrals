@@ -745,6 +745,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         CommonPersonObject c = commonRepository.findByCaseID(id);
         List<FormField> formFields = new ArrayList<>();
         for ( String key : c.getDetails().keySet() ) {
+            Log.d(TAG,"key = "+key);
             FormField f = null;
             if(!key.equals("FACILITY_ID")) {
                 f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
