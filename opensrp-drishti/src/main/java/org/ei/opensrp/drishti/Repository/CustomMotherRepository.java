@@ -24,6 +24,7 @@ public class CustomMotherRepository{
     public static final String IS_VALID = "IS_VALID";
     public static final String PNC_STATUS = "PNC_STATUS";
     public static final String MOTHERS_ID = "MOTHERS_ID";
+    public static final String TYPE = "REG_TYPE";
 
 
 
@@ -34,13 +35,14 @@ public class CustomMotherRepository{
         values.put(MOTHERS_FIRST_NAME, motherPersonObject.getMOTHERS_FIRST_NAME());
         values.put(MOTHERS_LAST_NAME, motherPersonObject.getMOTHERS_LAST_NAME());
         values.put(MOTHERS_ID, motherPersonObject.getMOTHERS_ID());
+        values.put(TYPE, motherPersonObject.getREG_TYPE());
         values.put(MOTHERS_SORTVALUE, motherPersonObject.getMOTHERS_SORTVALUE());
         values.put(MOTHERS_LAST_MENSTRUATION_DATE, motherPersonObject.getMOTHERS_LAST_MENSTRUATION_DATE());
         values.put(EXPECTED_DELIVERY_DATE, motherPersonObject.getEXPECTED_DELIVERY_DATE());
         values.put(IS_PNC, motherPersonObject.getIS_PNC());
         values.put(PNC_STATUS, motherPersonObject.getPNC_STATUS());
         values.put(IS_VALID, motherPersonObject.getIS_VALID());
-//        values.put(FACILITY_ID, motherPersonObject.getFACILITY_ID());
+        values.put(FACILITY_ID, motherPersonObject.getFACILITY_ID());
         values.put(DETAILS_COLUMN, motherPersonObject.getDetails());
         return values;
     }

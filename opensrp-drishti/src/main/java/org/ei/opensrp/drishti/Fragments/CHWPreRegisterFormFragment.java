@@ -193,7 +193,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (isFormSubmissionOk()) {
-                    // convert to json
+                    //setting default values
                     pregnantMom = getPregnantMom();
                     pregnantMom.setDateLastVisited(today.getTimeInMillis());
                     pregnantMom.setLastSmsToken("0");
@@ -202,6 +202,11 @@ public class CHWPreRegisterFormFragment extends Fragment {
                     pregnantMom.setAncAppointment2(false);
                     pregnantMom.setAncAppointment3(false);
                     pregnantMom.setAncAppointment4(false);
+                    pregnantMom.setReg_type("2");
+                    pregnantMom.setIs_pnc("false");
+                    pregnantMom.setIs_valid("true");
+
+                    // convert to json
                     String gsonMom = gson.toJson(pregnantMom);
                     Log.d(TAG, "mom = " + gsonMom);
 

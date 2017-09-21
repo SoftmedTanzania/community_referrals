@@ -103,6 +103,15 @@
                 "name": "submissionDate"
             },
             {
+                "name": "reg_type"
+            },
+            {
+                "name": "is_pnc"
+            },
+            {
+                "name": "is_valid"
+            },
+            {
                 "name": "type",
                 "value": "ANC"
             },
