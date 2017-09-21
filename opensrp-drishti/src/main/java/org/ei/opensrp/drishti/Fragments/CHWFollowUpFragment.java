@@ -46,6 +46,8 @@ public class CHWFollowUpFragment extends SecuredNativeSmartRegisterCursorAdapter
     private static final String ARG_PARAM2 = "param2";
     private CommonRepository commonRepository;
     private Gson gson = new Gson();
+    private Gson gson1 = new Gson();
+    private Gson gson2 = new Gson();
     private android.content.Context appContext;
     private List<MotherPersonObject> motherPersonList = new ArrayList<>();
     private Cursor cursor,cursor2;
@@ -101,12 +103,6 @@ public class CHWFollowUpFragment extends SecuredNativeSmartRegisterCursorAdapter
         //todo need to select all mothers with usertype id similar to the logged chw user
         commonRepository = context().commonrepository("wazazi_salama_mother");
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where IS_VALID='true'" );
-
-        List<CommonPersonObject> commonPersonObjectList1 = commonRepository.customQuery("SELECT * FROM settings", null,"settings");
-        Log.d(TAG, "commonPersonList1 = " + gson.toJson(commonPersonObjectList1.get(2)));
-
-        List<CommonPersonObject> commonPersonObjectList2 = commonRepository.customQuery("SELECT * FROM sqlite_master WHERE type='table'", null,"sqlite");
-        Log.d(TAG, "commonPersonList2 = " + gson.toJson(commonPersonObjectList2));
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
