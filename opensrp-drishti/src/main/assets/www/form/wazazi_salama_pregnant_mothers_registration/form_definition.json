@@ -127,19 +127,40 @@
                 "name": "occupation"
             },
             {
-                "name": "reg_type"
+                "name": "REG_TYPE"
             },
             {
-                "name": "is_pnc"
+                "name": "Is_PNC"
             },
             {
-                "name": "is_valid"
+                "name": "IS_VALID"
             },
             {
                 "name": "lastSmsToken"
             },
             {
                 "name": "chwComment"
+            },
+            {
+                "name": "FACILITY_ID"
+            },
+            {
+                "name": "EXPECTED_DELIVERY_DATE"
+            },
+            {
+                "name": "MOTHERS_ID"
+            },
+            {
+                "name": "MOTHERS_SORTVALUE"
+            },
+            {
+                "name": "MOTHERS_LAST_MENSTRUATION_DATE"
+            },
+            {
+                "name": "MOTHERS_LAST_NAME"
+            },
+            {
+                "name": "MOTHERS_FIRST_NAME"
             }
         ]
     }
