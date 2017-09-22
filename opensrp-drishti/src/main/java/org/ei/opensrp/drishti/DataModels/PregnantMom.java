@@ -30,7 +30,9 @@ public class PregnantMom {
             ancAppointment1,
             ancAppointment2,
             ancAppointment3,
-            ancAppointment4;
+            ancAppointment4,
+            isOnRisk,
+            ancAppointmentEarly;
 
     public String getName() {
         return name;
@@ -390,5 +392,21 @@ public class PregnantMom {
 
     public void setHasHIV(boolean hasHIV) {
         this.hasHIV = hasHIV;
+    }
+
+    public boolean isOnRisk() {
+        return isOnRisk;
+    }
+
+    public void setOnRisk(boolean onRisk) {
+        isOnRisk = onRisk;
+    }
+
+    public boolean isAncAppointmentEarly() {
+        return ancAppointmentEarly;
+    }
+
+    public void setAncAppointmentEarly(boolean ancAppointmentEarly) {
+        this.ancAppointmentEarly = ancAppointmentEarly;
     }
 }

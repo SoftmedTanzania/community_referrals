@@ -27,4 +27,8 @@ public class DatesHelper {
     public static long calculate4thVisitFromLNMP(long lnmp) {
         return (WEEK * 32) + lnmp; // 32th week
     }
+
+    public static long calculateEarlyVisitFromLNMP(long lnmp) {
+        return (WEEK * 16) + lnmp; // 20th week
+    }
 }

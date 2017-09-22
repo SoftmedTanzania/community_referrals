@@ -419,6 +419,13 @@ public class AncRegister1stFragment extends Fragment {
         mom.setDateRegistration(today.getTimeInMillis());
         mom.setHasHeartProblem(radioGroupHIV.getCheckedRadioButtonId() == R.id.radioYesHIV);
 
+        if (mom.getAge() < 20
+                || mom.getHeight() < 150
+                || mom.getPreviousFertilityCount() >= 4
+                || mom.isHasHIV())
+            // for either of above indicators, mother is on risk
+            mom.setOnRisk(true);
+
         return mom;
     }
 
