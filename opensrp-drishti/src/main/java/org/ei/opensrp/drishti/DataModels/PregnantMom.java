@@ -5,7 +5,7 @@ package org.ei.opensrp.drishti.DataModels;
  */
 
 public class PregnantMom {
-    private String name,id, phone, discountId, education, occupation, lastSmsToken, chwComment,reg_type,
+    private String name, id, phone, discountId, education, occupation, lastSmsToken, chwComment, reg_type,
             is_pnc,
             is_valid,
             husbandName, husbandEducation, husbandOccupation, physicalAddress, facilityId;
@@ -19,6 +19,7 @@ public class PregnantMom {
             hasHeartProblem,
             hasDiabetes,
             hasTB,
+            hasHIV,
             fourOrMorePreg,
             firstPregAbove35Yrs,
             heightBelow150,
@@ -381,5 +382,13 @@ public class PregnantMom {
 
     public void setIs_valid(String is_valid) {
         this.is_valid = is_valid;
+    }
+
+    public boolean isHasHIV() {
+        return hasHIV;
+    }
+
+    public void setHasHIV(boolean hasHIV) {
+        this.hasHIV = hasHIV;
     }
 }

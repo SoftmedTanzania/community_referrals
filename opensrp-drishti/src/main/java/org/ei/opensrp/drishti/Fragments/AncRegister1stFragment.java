@@ -51,7 +51,7 @@ public class AncRegister1stFragment extends Fragment {
             editTextHeight, editTextPregCount, editTextBirthCount, editTextChildrenCount,
             editTextDiscountId, editTextMotherOccupation, editTextPhysicalAddress,
             editTextHusbandName, editTextHusbandOccupation;
-    public static RadioGroup radioGroupPregnancyAge;
+    public static RadioGroup radioGroupPregnancyAge, radioGroupHIV;
     public static MaterialSpinner spinnerMotherEducation, spinnerHusbandEducation;
     private ArrayAdapter<String> educationAdapter;
 
@@ -154,6 +154,7 @@ public class AncRegister1stFragment extends Fragment {
 
 
         radioGroupPregnancyAge = (RadioGroup) fragmentView.findViewById(R.id.radioGroupPregnancyAge);
+        radioGroupHIV = (RadioGroup) fragmentView.findViewById(R.id.radioGroupHIV);
 
         // initialize date to today's date
         textDate.setText(dateFormat.format(today.getTimeInMillis()));
@@ -372,6 +373,12 @@ public class AncRegister1stFragment extends Fragment {
             makeToast();
             return false;
 
+        } else if (radioGroupHIV.getCheckedRadioButtonId() == -1) {
+            // no radio checked
+            message = "Tafadhali weka taarifa kuhusu maambukizi ya UKIMWI.";
+            makeToast();
+            return false;
+
         } else if (spinnerMotherEducation.getSelectedItemPosition() < 0
                 || spinnerHusbandEducation.getSelectedItemPosition() < 0) {
 
@@ -410,6 +417,7 @@ public class AncRegister1stFragment extends Fragment {
         mom.setDateLNMP(lnmp);
         mom.setEdd(edd);
         mom.setDateRegistration(today.getTimeInMillis());
+        mom.setHasHeartProblem(radioGroupHIV.getCheckedRadioButtonId() == R.id.radioYesHIV);
 
         return mom;
     }
