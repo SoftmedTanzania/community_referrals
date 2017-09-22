@@ -61,11 +61,12 @@ public class AncDetailActivityAlt extends AppCompatActivity {
     private TextView textName, textId, textDiscountId, textPhysicalAddress,
             textAge, textPhone, textMotherEducation, textMotherOccupation,
             textHusbandName, textHusbandEducation, textHusbandOccupation, textLiveChildren,
-            text1stVisit, text2ndVisit, text3rdVisit, text4thVisit, textEdd;
+            text1stVisit, text2ndVisit, text3rdVisit, text4thVisit, textEdd,
+            textEarlyVisit, textLabelEarlyVisit;
 
 
     private ImageView imageDisplayPicture, iconAnc1Date, iconAnc2Date,
-            iconAnc3Date, iconAnc4Date, iconEdd;
+            iconAnc3Date, iconAnc4Date, iconEdd, iconAncEarly;
 
     private CardView cardRiskIndicatiors;
     private LinearLayout layoutRiskAge, layoutRiskHeight, layoutRiskFertility, layoutRiskHIV;
@@ -130,6 +131,8 @@ public class AncDetailActivityAlt extends AppCompatActivity {
         text2ndVisit = (TextView) findViewById(R.id.textAnc2Date);
         text3rdVisit = (TextView) findViewById(R.id.textAnc3Date);
         text4thVisit = (TextView) findViewById(R.id.textAnc4Date);
+        textEarlyVisit = (TextView) findViewById(R.id.textAncEarlyDate);
+        textLabelEarlyVisit = (TextView) findViewById(R.id.labelAncEarly);
         textEdd = (TextView) findViewById(R.id.textEdd);
         textLiveChildren = (TextView) findViewById(R.id.textLivingChildren);
 
@@ -139,6 +142,7 @@ public class AncDetailActivityAlt extends AppCompatActivity {
         iconAnc3Date = (ImageView) findViewById(R.id.iconAnc3Date);
         iconAnc4Date = (ImageView) findViewById(R.id.iconAnc4Date);
         iconEdd = (ImageView) findViewById(R.id.iconEdd);
+        iconAncEarly = (ImageView) findViewById(R.id.iconAncEarlyDate);
 
         cardRiskIndicatiors = (CardView) findViewById(R.id.cardRiskIndicators);
         layoutRiskAge = (LinearLayout) findViewById(R.id.layoutRiskAge);
@@ -189,6 +193,14 @@ public class AncDetailActivityAlt extends AppCompatActivity {
                 calendar.get(Calendar.DAY_OF_MONTH)).getTimeInMillis();
 
         long lnmp = mom.getDateLNMP();
+        long earlyVisit = 0;
+        if (mom.isOnRisk()) {
+            earlyVisit = DatesHelper.calculateEarlyVisitFromLNMP(lnmp);
+        } else {
+            textEarlyVisit.setVisibility(View.GONE);
+            textLabelEarlyVisit.setVisibility(View.GONE);
+            iconAncEarly.setVisibility(View.GONE);
+        }
         long firstVisit = DatesHelper.calculate1stVisitFromLNMP(lnmp);
         long secondVisit = DatesHelper.calculate2ndVisitFromLNMP(lnmp);
         long thirdVisit = DatesHelper.calculate3rdVisitFromLNMP(lnmp);
@@ -208,21 +220,29 @@ public class AncDetailActivityAlt extends AppCompatActivity {
             iconAnc2Date.setImageResource(R.drawable.ic_calendar_check);
             iconAnc3Date.setImageResource(R.drawable.ic_calendar_check);
             iconAnc4Date.setImageResource(R.drawable.ic_calendar_check);
+            iconAncEarly.setImageResource(R.drawable.ic_calendar_check);
             return;
 
         } else if (today > thirdVisit) {
             iconAnc1Date.setImageResource(R.drawable.ic_calendar_check);
             iconAnc2Date.setImageResource(R.drawable.ic_calendar_check);
             iconAnc3Date.setImageResource(R.drawable.ic_calendar_check);
+            iconAncEarly.setImageResource(R.drawable.ic_calendar_check);
             return;
 
         } else if (today > secondVisit) {
             iconAnc1Date.setImageResource(R.drawable.ic_calendar_check);
             iconAnc2Date.setImageResource(R.drawable.ic_calendar_check);
+            iconAncEarly.setImageResource(R.drawable.ic_calendar_check);
             return;
 
         } else if (today > firstVisit) {
             iconAnc1Date.setImageResource(R.drawable.ic_calendar_check);
+            iconAncEarly.setImageResource(R.drawable.ic_calendar_check);
+            return;
+
+        } else if ((int) earlyVisit != 0 && today > earlyVisit) {
+            iconAncEarly.setImageResource(R.drawable.ic_calendar_check);
             return;
         }
     }
