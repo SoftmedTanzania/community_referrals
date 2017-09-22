@@ -68,7 +68,7 @@ public class AncDetailActivityAlt extends AppCompatActivity {
             iconAnc3Date, iconAnc4Date, iconEdd;
 
     private CardView cardRiskIndicatiors;
-    private LinearLayout layoutRiskAge, layoutRiskHeight, layoutRiskFertifility;
+    private LinearLayout layoutRiskAge, layoutRiskHeight, layoutRiskFertility, layoutRiskHIV;
 
 
     private PregnantMom mom;
@@ -143,12 +143,15 @@ public class AncDetailActivityAlt extends AppCompatActivity {
         cardRiskIndicatiors = (CardView) findViewById(R.id.cardRiskIndicators);
         layoutRiskAge = (LinearLayout) findViewById(R.id.layoutRiskAge);
         layoutRiskHeight = (LinearLayout) findViewById(R.id.layoutRiskHeight);
-        layoutRiskFertifility = (LinearLayout) findViewById(R.id.layoutRiskFertilityCount);
+        layoutRiskFertility = (LinearLayout) findViewById(R.id.layoutRiskFertilityCount);
+        layoutRiskHIV = (LinearLayout) findViewById(R.id.layoutRiskHIV);
+
 
         cardRiskIndicatiors.setVisibility(View.GONE);
         layoutRiskAge.setVisibility(View.GONE);
         layoutRiskHeight.setVisibility(View.GONE);
-        layoutRiskFertifility.setVisibility(View.GONE);
+        layoutRiskFertility.setVisibility(View.GONE);
+        layoutRiskHIV.setVisibility(View.GONE);
 
 //        imageDisplayPicture.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -174,7 +177,7 @@ public class AncDetailActivityAlt extends AppCompatActivity {
 
         calculateAndSetDates();
 
-        updateRiskIndicators(mom.getAge(), mom.getHeight(), mom.getPreviousFertilityCount());
+        updateRiskIndicators(mom.getAge(), mom.getHeight(), mom.getPreviousFertilityCount(), mom.isHasHIV());
     }
 
     private void calculateAndSetDates() {
@@ -225,7 +228,7 @@ public class AncDetailActivityAlt extends AppCompatActivity {
     }
 
 
-    public void updateRiskIndicators(int age, int height, int fertilityCount) {
+    public void updateRiskIndicators(int age, int height, int fertilityCount, boolean isMomHasHIV) {
         boolean isToShowCard = false;
 
         if (age < 20 && age != -1) {
@@ -241,10 +244,16 @@ public class AncDetailActivityAlt extends AppCompatActivity {
             layoutRiskHeight.setVisibility(View.GONE);
 
         if (fertilityCount >= 4 && fertilityCount != -1) {
-            layoutRiskFertifility.setVisibility(View.VISIBLE);
+            layoutRiskFertility.setVisibility(View.VISIBLE);
             isToShowCard = true;
         } else
-            layoutRiskFertifility.setVisibility(View.GONE);
+            layoutRiskFertility.setVisibility(View.GONE);
+
+        if (isMomHasHIV) {
+            layoutRiskHIV.setVisibility(View.VISIBLE);
+            isToShowCard = true;
+        } else
+            layoutRiskHIV.setVisibility(View.GONE);
 
 
         if (isToShowCard)

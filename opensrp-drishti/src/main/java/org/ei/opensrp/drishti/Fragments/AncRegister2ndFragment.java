@@ -25,7 +25,7 @@ public class AncRegister2ndFragment extends Fragment {
             checkBoxKondoKukwama;
 
     private CardView cardRiskIndicators;
-    private LinearLayout layoutRiskAge, layoutRiskHeight, layoutRiskFertilityCount;
+    private LinearLayout layoutRiskAge, layoutRiskHeight, layoutRiskFertilityCount, layoutRiskHIV;
 
     public AncRegister2ndFragment() {
         // Required empty public constructor
@@ -57,10 +57,12 @@ public class AncRegister2ndFragment extends Fragment {
         layoutRiskAge = (LinearLayout) fragmentView.findViewById(R.id.layoutRiskAge);
         layoutRiskHeight = (LinearLayout) fragmentView.findViewById(R.id.layoutRiskHeight);
         layoutRiskFertilityCount = (LinearLayout) fragmentView.findViewById(R.id.layoutRiskFertilityCount);
+        layoutRiskHIV = (LinearLayout) fragmentView.findViewById(R.id.layoutRiskHIV);
 
         layoutRiskAge.setVisibility(View.GONE);
         layoutRiskHeight.setVisibility(View.GONE);
         layoutRiskFertilityCount.setVisibility(View.GONE);
+        layoutRiskHIV.setVisibility(View.GONE);
 
         return fragmentView;
     }
@@ -93,7 +95,7 @@ public class AncRegister2ndFragment extends Fragment {
     }
 
 
-    public void updateRiskIndicators(int age, int height, int fertilityCount) {
+    public void updateRiskIndicators(int age, int height, int fertilityCount, int radioCheckedHIV) {
         boolean isToShowCard = false;
 
         if (age < 20 && age != -1) {
@@ -113,6 +115,12 @@ public class AncRegister2ndFragment extends Fragment {
             isToShowCard = true;
         } else
             layoutRiskFertilityCount.setVisibility(View.GONE);
+
+        if (radioCheckedHIV == R.id.radioYesHIV) {
+            layoutRiskHIV.setVisibility(View.VISIBLE);
+            isToShowCard = true;
+        } else
+            layoutRiskHIV.setVisibility(View.GONE);
 
 
         if (isToShowCard)

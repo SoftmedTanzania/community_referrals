@@ -424,7 +424,7 @@ public class AncRegister1stFragment extends Fragment {
 
     public int[] getRiskIndicatorsFromDetails() {
 
-        return new int[]{age, height, pregnancyCount};
+        return new int[]{age, height, pregnancyCount, radioGroupHIV.getCheckedRadioButtonId()};
     }
 
     private void makeToast() {
