@@ -20,23 +20,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/primary"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="horizontal"
             android:paddingBottom="16dp"
             android:paddingTop="16dp">
 
             <ImageView
                 android:id="@+id/iconComment"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginRight="8dp"
-                android:src="@drawable/ic_comment"
+                android:src="@drawable/ic_comment_account"
                 android:tint="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:text="CHW Comment"
                 android:textAllCaps="true"
                 android:textColor="@android:color/white"
