@@ -62,7 +62,7 @@ public class AncDetailActivityAlt extends AppCompatActivity {
             textAge, textPhone, textMotherEducation, textMotherOccupation,
             textHusbandName, textHusbandEducation, textHusbandOccupation, textLiveChildren,
             text1stVisit, text2ndVisit, text3rdVisit, text4thVisit, textEdd,
-            textEarlyVisit, textLabelEarlyVisit;
+            textEarlyVisit, textLabelEarlyVisit, textChwComment;
 
 
     private ImageView imageDisplayPicture, iconAnc1Date, iconAnc2Date,
@@ -135,6 +135,8 @@ public class AncDetailActivityAlt extends AppCompatActivity {
         textLabelEarlyVisit = (TextView) findViewById(R.id.labelAncEarly);
         textEdd = (TextView) findViewById(R.id.textEdd);
         textLiveChildren = (TextView) findViewById(R.id.textLivingChildren);
+        textChwComment = (TextView) findViewById(R.id.textChwComment);
+        textChwComment.setText("");
 
         imageDisplayPicture = (ImageView) findViewById(R.id.imageProfilePic);
         iconAnc1Date = (ImageView) findViewById(R.id.iconAnc1Date);
@@ -178,6 +180,7 @@ public class AncDetailActivityAlt extends AppCompatActivity {
         textHusbandEducation.setText(mom.getHusbandEducation());
         textHusbandOccupation.setText(mom.getHusbandOccupation());
         textLiveChildren.setText(String.valueOf(mom.getAge()));
+        textChwComment.setText(mom.getChwComment());
 
         calculateAndSetDates();
 
