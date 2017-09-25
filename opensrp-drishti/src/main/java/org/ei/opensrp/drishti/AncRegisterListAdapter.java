@@ -77,7 +77,9 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
 
                     String gsonMom = Utils.convertStandardJSONString(motherPersonList.get(getAdapterPosition()).getDetails());
                     final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
-                    if(pregnantMom.getReg_type() == "2"){
+                    Log.d(TAG, "commonPersonList type= " + pregnantMom.getReg_type());
+                    if(pregnantMom.getReg_type().equals("2")){
+                        Log.d(TAG, "am in side for pre registration");
                         int index = ((AncSmartRegisterActivity) appContext).getFormIndex("pregnant_mothers_registration");
                         AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) ((AncSmartRegisterActivity) appContext).getDisplayFormFragmentAtIndex(index);
 
@@ -85,11 +87,14 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
                         ((AncSmartRegisterActivity) appContext).switchToPage(1);
 
 
+                    }else{
+                        Log.d(TAG, "am in side for details");
+                        appContext.startActivity(new Intent(appContext, AncDetailActivityAlt.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                .putExtra("mom", gsonMom));
                     }
 
-                    appContext.startActivity(new Intent(appContext, AncDetailActivityAlt.class)
-                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            .putExtra("mom", gsonMom));
+
                 }
             });
         }

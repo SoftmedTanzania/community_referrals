@@ -439,9 +439,9 @@ public class AncRegister1stFragment extends Fragment {
     }
 
     public void setRegisteredValues(){
-        if(motherData.getReg_type() == "2"){
-            View dialogView = getActivity().getLayoutInflater().inflate(R.layout.layout_dialog_edit_phone, null);
-            EditText editTextPhone = (EditText) dialogView.findViewById(R.id.editTextLocation);
+
+//            View dialogView = getActivity().getLayoutInflater().inflate(R.layout.layout_dialog_edit_phone, null);
+//            EditText editTextPhone = (EditText) dialogView.findViewById(R.id.editTextLocation);
 
             long lnmp = motherData.getDateLNMP();
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
@@ -454,22 +454,20 @@ public class AncRegister1stFragment extends Fragment {
             textPhone.setText(motherData.getPhone());
             textDateLNMP.setText(lnmpDate);
             textEDD.setText(edd);
-//            editTextPhone.setText(textPhone.getText());
-
             editTextMotherName.setText(motherData.getName());
             editTextMotherId.setText(motherData.getId());
-            editTextMotherAge.setText(motherData.getAge());
-            editTextHeight.setText(motherData.getHeight());
-            editTextPregCount.setText(motherData.getPreviousFertilityCount());
-            editTextBirthCount.setText(motherData.getSuccessfulBirths());
-            editTextChildrenCount.setText(motherData.getLivingChildren());
+            editTextMotherAge.setText(String.valueOf(motherData.getAge()));
+            editTextHeight.setText(String.valueOf(motherData.getHeight()));
+            editTextPregCount.setText(String.valueOf(motherData.getPreviousFertilityCount()));
+            editTextBirthCount.setText(String.valueOf(motherData.getSuccessfulBirths()));
+            editTextChildrenCount.setText(String.valueOf(motherData.getLivingChildren()));
             editTextDiscountId.setText(motherData.getDiscountId());
             editTextMotherOccupation.setText(motherData.getOccupation());
             editTextPhysicalAddress.setText(motherData.getPhysicalAddress());
             editTextHusbandName.setText(motherData.getHusbandName());
             editTextHusbandOccupation.setText(motherData.getHusbandOccupation());
 
-        }
+
 
     }
 }

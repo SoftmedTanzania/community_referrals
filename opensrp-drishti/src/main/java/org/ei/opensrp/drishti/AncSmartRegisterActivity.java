@@ -130,10 +130,14 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
         mPager.setOffscreenPageLimit(formNames.length);
 
-        if(((UzaziSalamaApplication)getApplication()).getUserType()==0) {
-            mPager.setCurrentItem(3);
-            currentPage = 3;
-        }
+//        if(((UzaziSalamaApplication)getApplication()).getUserType()==0) {
+//            mPager.setCurrentItem(3);
+//            currentPage = 3;
+//        }
+        mPager.setCurrentItem(0);
+        currentPage = 0;
+
+        Log.d(TAG, "table columns ="+new Gson().toJson(context().commonrepository("wazazi_salama_mother").common_TABLE_COLUMNS));
 
     }
 
@@ -726,6 +730,19 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             }
             formFields.add(f);
         }
+
+        for ( String key : c.getColumnmaps().keySet() ) {
+            Log.d(TAG,"key = "+key);
+            FormField f = null;
+            if(!key.equals("FACILITY_ID")) {
+                f = new FormField(key, c.getColumnmaps().get(key), commonRepository.TABLE_NAME + "." + key);
+            }else{
+                f = new FormField(key, c.getColumnmaps().get(key), "facility.id");
+            }
+            formFields.add(f);
+        }
+
+
 
         FormData formData = new FormData("wazazi_salama_mother","/model/instance/Wazazi_Salama_ANC_Registration/",formFields,null);
         FormInstance formInstance = new FormInstance(formData,"1");
