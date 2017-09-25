@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="320dp"
         android:fitsSystemWindows="false"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbar"
@@ -452,9 +452,21 @@
                     android:padding="16dp">
 
                     <ImageView
+                        android:id="@+id/iconAncEarlyDate"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="32dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/shape_round_blue"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_calendar_date_range"
+                        android:tint="@android:color/white" />
+
+                    <ImageView
                         android:id="@+id/iconAnc1Date"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
+                        android:layout_below="@+id/iconAncEarlyDate"
                         android:layout_marginBottom="32dp"
                         android:layout_marginRight="8dp"
                         android:background="@drawable/shape_round_blue"
@@ -505,6 +517,29 @@
                         android:padding="8dp"
                         android:src="@drawable/ic_calendar_today"
                         android:tint="@android:color/white" />
+
+                    <TextView
+                        android:id="@+id/labelAncEarly"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iconAncEarlyDate"
+                        android:layout_marginTop="4dp"
+                        android:layout_toRightOf="@+id/iconAnc1Date"
+                        android:text="Early Visit"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/textAncEarlyDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/labelAncEarly"
+                        android:layout_marginTop="0dp"
+                        android:layout_toRightOf="@+id/iconAnc1Date"
+                        android:text="11 Jan 2222"
+                        android:textColor="@color/primary_text"
+                        android:textSize="16sp" />
+
 
                     <TextView
                         android:id="@+id/labelAnc1"
@@ -818,7 +853,16 @@
                 layout="@layout/layout_risk_indicators"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp" />
+
+            <include
+                layout="@layout/layout_chw_comment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="8dp" />

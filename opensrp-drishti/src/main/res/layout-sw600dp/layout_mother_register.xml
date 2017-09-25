@@ -61,9 +61,9 @@
 
     <LinearLayout
         android:id="@+id/layoutDatePhone"
-        android:layout_gravity="center_horizontal"
         android:layout_width="480dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:paddingTop="8dp">
 
@@ -268,8 +268,8 @@
                 android:id="@+id/radioAbove20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="4dp"
-                android:paddingTop="4dp"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
                 android:text="&lt;20"
                 android:textColor="@color/primary_text"
                 android:textSize="16sp" />
@@ -278,9 +278,47 @@
                 android:id="@+id/radioBelow20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="4dp"
-                android:paddingTop="4dp"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
                 android:text="20+"
+                android:textColor="@color/primary_text"
+                android:textSize="16sp" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Mama ana maambukizi ya visuri vya UKIMWI?"
+            android:textColor="@color/secondary_text"
+            android:textSize="16sp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupHIV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <RadioButton
+                android:id="@+id/radioYesHIV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:text="Ndio"
+                android:textColor="@color/primary_text"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioNoHIV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:text="Hapana"
                 android:textColor="@color/primary_text"
                 android:textSize="16sp" />
         </RadioGroup>

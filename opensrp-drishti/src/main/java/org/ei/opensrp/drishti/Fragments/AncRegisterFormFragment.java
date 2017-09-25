@@ -91,7 +91,11 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
                     AncRegister2ndFragment indicatorsFragment = (AncRegister2ndFragment) pagerAdapter.getItem(1);
                     int[] riskIndicators = detailsFragment.getRiskIndicatorsFromDetails();
                     // update risk indicators
-                    indicatorsFragment.updateRiskIndicators(riskIndicators[0], riskIndicators[1], riskIndicators[2]);
+                    indicatorsFragment.updateRiskIndicators(
+                            riskIndicators[0],
+                            riskIndicators[1],
+                            riskIndicators[2],
+                            riskIndicators[3]);
 
                 } else if (fabDone.isEnabled()) {
                     fabDone.startAnimation(animationFabHide);
@@ -150,8 +154,6 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
                     // collect mother details from the 1st page
                     pregnantMom = firstFragment.getPregnantMom();
 
-
-
                     //todo check for checkboxes on the 2nd page then submit form
 
                     SparseBooleanArray indicatorsMap = ((AncRegister2ndFragment) pagerAdapter.getItem(1))
@@ -193,13 +195,25 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
                     pregnantMom.setAncAppointment4(false);
 
                     if (today > fourthVisit)
+                        // fourth appointment checked
                         pregnantMom.setAncAppointment4(true);
                     else if (today > thirdVisit)
+                        // third appointment checked
                         pregnantMom.setAncAppointment3(true);
                     else if (today > secondVisit)
+                        // second appointment checked
                         pregnantMom.setAncAppointment2(true);
                     else if (today > firstVisit)
+                        // first appointment checked
                         pregnantMom.setAncAppointment1(true);
+
+                    if (pregnantMom.isOnRisk()) {
+                        // calculate early visit date
+                        long earlyVisit = DatesHelper.calculateEarlyVisitFromLNMP(lnmp);
+                        if (today > earlyVisit)
+                            // early appointment checked
+                            pregnantMom.setAncAppointmentEarly(true);
+                    }
 
                     // convert to json
                     String gsonMom = gson.toJson(pregnantMom);
@@ -208,7 +222,7 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
                     // todo start form submission
 
                     ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(gsonMom, recordId, formName, getFormFieldsOverrides());
-                    ((AncSmartRegisterActivity)getActivity()).returnToBaseFragment();
+                    ((AncSmartRegisterActivity) getActivity()).returnToBaseFragment();
                 }
 
             }

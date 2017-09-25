@@ -17,6 +17,28 @@
         android:padding="16dp">
 
         <LinearLayout
+            android:id="@+id/layoutRiskHIV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/ic_alert_circle_outline"
+                android:tint="@android:color/holo_red_light" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mama ana maambukizi ya virusi vya UKIMWI."
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/layoutRiskAge"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
