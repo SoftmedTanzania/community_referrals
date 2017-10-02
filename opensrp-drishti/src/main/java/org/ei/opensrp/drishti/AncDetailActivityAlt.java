@@ -184,7 +184,7 @@ public class AncDetailActivityAlt extends AppCompatActivity {
 
         calculateAndSetDates();
 
-        updateRiskIndicators(mom.getAge(), mom.getHeight(), mom.getPreviousFertilityCount(), mom.isHasHIV());
+        updateRiskIndicators(mom.getAge(), mom.getHeight(), mom.getPreviousFertilityCount(), mom.getHivStatus() == 1);
     }
 
     private void calculateAndSetDates() {

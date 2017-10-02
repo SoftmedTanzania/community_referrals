@@ -11,28 +11,29 @@ public class PregnantMom {
             husbandName, husbandEducation, husbandOccupation, physicalAddress, facilityId;
 
     private long dateReg, dateLNMP, edd, dateRegistration, dateLastVisited;
-    private int age, height, previousFertilityCount, successfulBirths, livingChildren;
-    private boolean isAbove20WeeksPregnant,
-            has10YrsPassedSinceLastPreg,
-            hadStillBirth,
-            has2orMoreBBA,
-            hasHeartProblem,
-            hasDiabetes,
-            hasTB,
-            hasHIV,
-            fourOrMorePreg,
-            firstPregAbove35Yrs,
-            heightBelow150,
-            csDelivery,
-            kilemaChaNyonga,
-            bleedingOnDelivery,
-            kondoKukwama,
-            ancAppointment1,
-            ancAppointment2,
-            ancAppointment3,
-            ancAppointment4,
-            isOnRisk,
-            ancAppointmentEarly;
+    private int age, height, previousFertilityCount,
+            hivStatus, // 0=no, 1=yes, 2=unknown
+            successfulBirths, livingChildren;
+    private boolean isAbove20WeeksPregnant;
+    private boolean has10YrsPassedSinceLastPreg;
+    private boolean hadStillBirth;
+    private boolean has2orMoreBBA;
+    private boolean hasHeartProblem;
+    private boolean hasDiabetes;
+    private boolean hasTB;
+    private boolean fourOrMorePreg;
+    private boolean firstPregAbove35Yrs;
+    private boolean heightBelow150;
+    private boolean csDelivery;
+    private boolean kilemaChaNyonga;
+    private boolean bleedingOnDelivery;
+    private boolean kondoKukwama;
+    private boolean ancAppointment1;
+    private boolean ancAppointment2;
+    private boolean ancAppointment3;
+    private boolean ancAppointment4;
+    private boolean isOnRisk;
+    private boolean ancAppointmentEarly;
 
     public String getName() {
         return name;
@@ -386,14 +387,6 @@ public class PregnantMom {
         this.is_valid = is_valid;
     }
 
-    public boolean isHasHIV() {
-        return hasHIV;
-    }
-
-    public void setHasHIV(boolean hasHIV) {
-        this.hasHIV = hasHIV;
-    }
-
     public boolean isOnRisk() {
         return isOnRisk;
     }
@@ -408,5 +401,13 @@ public class PregnantMom {
 
     public void setAncAppointmentEarly(boolean ancAppointmentEarly) {
         this.ancAppointmentEarly = ancAppointmentEarly;
+    }
+
+    public int getHivStatus() {
+        return hivStatus;
+    }
+
+    public void setHivStatus(int hivStatus) {
+        this.hivStatus = hivStatus;
     }
 }
