@@ -260,7 +260,7 @@
             android:paddingRight="16dp">
 
             <RadioButton
-                android:id="@+id/radioAbove20"
+                android:id="@+id/radioBelow20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="4dp"
@@ -269,7 +269,7 @@
                 android:textColor="@color/primary_text" />
 
             <RadioButton
-                android:id="@+id/radioBelow20"
+                android:id="@+id/radioAbove20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="4dp"

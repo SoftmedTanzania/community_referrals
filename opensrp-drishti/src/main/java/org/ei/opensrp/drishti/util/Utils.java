@@ -104,7 +104,7 @@ public class Utils {
                     commonPersonObject.getColumnmaps().get("FACILITY_ID"),
                     commonPersonObject.getColumnmaps().get("IS_PNC"),
                     commonPersonObject.getColumnmaps().get("IS_VALID"),
-                     commonPersonObject.getColumnmaps().get("details"),
+                    commonPersonObject.getColumnmaps().get("details"),
                     commonPersonObject.getColumnmaps().get("type")
             );
         } catch (Exception e) {

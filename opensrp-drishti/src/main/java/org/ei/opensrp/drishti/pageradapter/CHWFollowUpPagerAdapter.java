@@ -14,13 +14,10 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.drishti.AncSmartRegisterActivity;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
-import org.ei.opensrp.drishti.chw.CHWSmartRegisterActivity;
-import org.ei.opensrp.drishti.DataModels.ChwFollowUpMother;
 import org.ei.opensrp.drishti.util.DatesHelper;
 import org.ei.opensrp.drishti.util.Utils;
 

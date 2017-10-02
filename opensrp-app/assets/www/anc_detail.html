@@ -41,8 +41,8 @@
         anc.bindToCamera("#womanPhoto");
         anc.bindToDefaultPhoto("#womanPhoto", "../img/woman-placeholder.png");
 
-        pageView.onReloadPhoto(function (caseId, photoPath) {
-            anc.reloadPhoto("#womanPhoto", caseId, photoPath);
+        pageView.onReloadPhoto(function (id, photoPath) {
+            anc.reloadPhoto("#womanPhoto", id, photoPath);
         });
 
         new Modal().bindToClick();

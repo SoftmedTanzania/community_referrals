@@ -51,6 +51,9 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
 
         this.motherPersonList = Utils.convertToMotherPersonObjectList(commonPersonObjectList);
+
+        Log.d(TAG, "mother list = " + gson.toJson(motherPersonList));
+
         Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + motherPersonList.size());
 
     }
@@ -83,7 +86,7 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
                         int index = ((AncSmartRegisterActivity) appContext).getFormIndex("pregnant_mothers_registration");
                         AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) ((AncSmartRegisterActivity) appContext).getDisplayFormFragmentAtIndex(index);
 
-                            displayFormFragment.setMotherDetails(pregnantMom);
+                            displayFormFragment.setMotherDetails(motherPersonList.get(getAdapterPosition()));
                         ((AncSmartRegisterActivity) appContext).switchToPage(1);
 
 

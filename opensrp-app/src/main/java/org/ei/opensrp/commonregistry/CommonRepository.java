@@ -105,10 +105,22 @@ public class CommonRepository extends DrishtiRepository {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
         Log.d("customInsert", "tableName = " + TABLE_NAME);
         database.update(TABLE_NAME, contentValues, ID_COLUMN + " = ?", new String[]{caseId});
-        // Cursor cursor = database.rawQuery("select * from wazazi_salama_mother",null);
+         Cursor cursor = database.rawQuery("select * from wazazi_salama_mother",null);
+        Log.d("customInsert", "table details " + new Gson().toJson(cursor));
+
     }
 
-    public void updateDetails(String caseId, Map<String, String> details) {
+    public void customUpdateTable(String tableName,ContentValues contentValues, String caseId) {
+        SQLiteDatabase database = masterRepository.getWritableDatabase();
+        Log.d("customInsert", "tableName = " + TABLE_NAME);
+        database.update(tableName, contentValues, ID_COLUMN + " = ?", new String[]{caseId});
+        Cursor cursor = database.rawQuery("select * from wazazi_salama_mother",null);
+
+        List<CommonPersonObject> commonPersonObjectList = readAllcommonForField(cursor, "wazazi_salama_mother");
+        Log.d("customInsert","commonPersonList = " + new Gson().toJson(commonPersonObjectList));
+
+    }
+    public void updateDetails(String TableName,String caseId, Map<String, String> details) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
 
         CommonPersonObject common = findByCaseID(caseId);
@@ -118,7 +130,7 @@ public class CommonRepository extends DrishtiRepository {
 
         ContentValues valuesToUpdate = new ContentValues();
         valuesToUpdate.put(DETAILS_COLUMN, new Gson().toJson(details));
-        database.update(TABLE_NAME, valuesToUpdate, ID_COLUMN + " = ?", new String[]{caseId});
+        database.update(TableName, valuesToUpdate, ID_COLUMN + " = ?", new String[]{caseId});
     }
 
     public void mergeDetails(String caseId, Map<String, String> details) {

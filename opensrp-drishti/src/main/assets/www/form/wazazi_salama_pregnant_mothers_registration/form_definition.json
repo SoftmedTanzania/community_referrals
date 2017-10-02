@@ -9,6 +9,9 @@
                 "shouldLoadValue": true
             },
             {
+                "name": "relationalid"
+            },
+            {
                 "name": "age"
             },
             {

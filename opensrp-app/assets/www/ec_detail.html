@@ -38,8 +38,8 @@
         ec.bindToCamera("#womanPhoto");
         ec.bindToDefaultPhoto("#womanPhoto", "../img/woman-placeholder.png");
 
-        pageView.onReloadPhoto(function (caseId, photoPath) {
-            ec.reloadPhoto("#womanPhoto", caseId, photoPath);
+        pageView.onReloadPhoto(function (id, photoPath) {
+            ec.reloadPhoto("#womanPhoto", id, photoPath);
         });
 
         new Modal().bindToClick();

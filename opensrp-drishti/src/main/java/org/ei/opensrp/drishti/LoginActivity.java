@@ -155,10 +155,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
         final String userName = userNameEditText.getText().toString();
-        //TODO Coze Remove the hardcoded credentials
-//        final String password = passwordEditText.getText().toString();
 
-        final String password = "Admin123";
+        final String password = passwordEditText.getText().toString();
+        //TODO Coze Remove the hardcoded credentials
+        // final String password = "Admin123";
 
         if (context.userService().hasARegisteredUser()) {
             localLogin(view, userName, password);
@@ -208,6 +208,7 @@ public class LoginActivity extends AppCompatActivity {
         if (context.userService().isValidLocalLogin(userName, password)) {
             localLoginWith(userName, password);
         } else {
+            android.util.Log.d("login","am in local login");
             showErrorDialog(getString(org.ei.opensrp.R.string.login_failed_dialog_message));
             view.setClickable(true);
         }
@@ -216,6 +217,7 @@ public class LoginActivity extends AppCompatActivity {
     private void remoteLogin(final View view, final String userName, final String password) {
         tryRemoteLogin(userName, password, new Listener<LoginResponse>() {
             public void onEvent(LoginResponse loginResponse) {
+                android.util.Log.d("login","am in remote login");
                 if (loginResponse == SUCCESS) {
                     remoteLoginWith(userName, password, loginResponse.payload());
                 } else {
