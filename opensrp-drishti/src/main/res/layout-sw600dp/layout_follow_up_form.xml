@@ -43,7 +43,7 @@
             android:paddingTop="8dp"
             android:text="hb chini ya 60%"
             android:textColor="@color/secondary_text"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <CheckBox
             android:id="@+id/checkbox_albumin"
@@ -53,7 +53,7 @@
             android:paddingTop="8dp"
             android:text="albumin kwenye mkojo"
             android:textColor="@color/secondary_text"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <CheckBox
             android:id="@+id/checkbox_sugar_level"
@@ -63,7 +63,7 @@
             android:paddingTop="8dp"
             android:text="sukari kweny mkojo"
             android:textColor="@color/secondary_text"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <CheckBox
             android:id="@+id/checkbox_umri_wa_mimba"
@@ -73,7 +73,7 @@
             android:paddingTop="8dp"
             android:text="umri wa mimba zaidi ya wiki 40"
             android:textColor="@color/secondary_text"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <CheckBox
             android:id="@+id/checkbox_baby_death"

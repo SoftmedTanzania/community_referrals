@@ -1,20 +1,18 @@
 package org.ei.opensrp.drishti;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import org.ei.opensrp.drishti.DataModels.FollowUpReport;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 
 import java.util.HashMap;
@@ -28,7 +26,6 @@ public class AncFollowUpFormActivity extends AppCompatActivity {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    //    private Button submitButton;
     private CheckBox checkBoxPressure, checkboxHb, chechboxAlbumini, checkboxSugar, checkboxUmriWaMimba,
             checkboxChildDeath, chechkboxMlaloWaMtoto, checkboxKimo;
     private String pressure, hb, albumini, sugar, umriWaMimba, childDeath, mlaloWaMtoto, kimo;
@@ -54,6 +51,7 @@ public class AncFollowUpFormActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Mahudhurio Ya Marudio");
 
+
         String gsonMom = getIntent().getStringExtra("mom");
         Log.d(TAG, "mom=" + gsonMom);
 
@@ -62,10 +60,20 @@ public class AncFollowUpFormActivity extends AppCompatActivity {
         findViews();
         setListeners();
 
-//        ((TextView) findViewById(R.id.txt_title_label)).setText("Uzazi Salama Mahudhurio ya Marudio");
 
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     private void findViews() {
         editTextFacilityName = (EditText) findViewById(R.id.facility);
@@ -77,7 +85,6 @@ public class AncFollowUpFormActivity extends AppCompatActivity {
         checkboxKimo = (CheckBox) findViewById(R.id.checkbox_kimo);
         checkboxSugar = (CheckBox) findViewById(R.id.checkbox_sugar_level);
         checkboxUmriWaMimba = (CheckBox) findViewById(R.id.checkbox_umri_wa_mimba);
-//        submitButton = (Button) findViewById(R.id.submit);
     }
 
     private void setListeners() {
@@ -86,116 +93,142 @@ public class AncFollowUpFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                checkBoxPressure.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            pressure = "true";
-                        } else {
-                            pressure = "false";
-                        }
+//                checkBoxPressure.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                    @Override
+//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                        if (isChecked) {
+//                            pressure = "true";
+//                        } else {
+//                            pressure = "false";
+//                        }
+//
+//                    }
+//                });
+//
+//                chechboxAlbumini.setOnClickListener(new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (chechboxAlbumini.isChecked()) {
+//                            albumini = "true";
+//                        } else {
+//                            albumini = "false";
+//                        }
+//                    }
+//                });
+//
+//                checkboxHb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                    @Override
+//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//
+//                        if (isChecked) {
+//                            hb = "true";
+//                        } else {
+//                            hb = "false";
+//                        }
+//                    }
+//                });
+//                chechkboxMlaloWaMtoto.setOnClickListener(new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (chechkboxMlaloWaMtoto.isChecked()) {
+//                            mlaloWaMtoto = "true";
+//                        } else {
+//                            mlaloWaMtoto = "false";
+//                        }
+//                    }
+//                });
+//                checkboxChildDeath.setOnClickListener(new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (checkboxChildDeath.isChecked()) {
+//                            childDeath = "true";
+//                        } else {
+//                            childDeath = "false";
+//                        }
+//                    }
+//                });
+//                checkboxKimo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                    @Override
+//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                        if (isChecked) {
+//                            kimo = "true";
+//                        } else {
+//                            kimo = "false";
+//                        }
+//                    }
+//                });
+//                checkboxSugar.setOnClickListener(new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (checkboxSugar.isChecked()) {
+//                            sugar = "true";
+//                        } else {
+//                            sugar = "false";
+//                        }
+//                    }
+//                });
+//                checkboxUmriWaMimba.setOnClickListener(new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (checkboxUmriWaMimba.isEnabled()) {
+//                            umriWaMimba = "true";
+//                        } else {
+//                            umriWaMimba = "false";
+//                        }
+//                    }
+//                });
+//
+//                HashMap<String, String> followHash = new HashMap<String, String>();
+//                followHash.put("facility_name", editTextFacilityName.toString());
+//                followHash.put("pressure", pressure);
+//                followHash.put("hb", hb);
+//                followHash.put("albumin", albumini);
+//                followHash.put("sugar", sugar);
+//                followHash.put("mlaloWaMtoto", mlaloWaMtoto);
+//                followHash.put("childDeath", childDeath);
+//                followHash.put("umriWaMimba", umriWaMimba);
+//                followHash.put("kimo", kimo);
+//
+//
+//                String trial_one = followHash.get(pressure);
+//                String trial_two = followHash.get(hb);
+//                String trial_three = followHash.get(umriWaMimba);
+//                Log.d(TAG, "pressure = " + trial_one);
+//                Log.d(TAG, "pressure_1 = " + trial_two);
+//                Log.d(TAG, "pressure_2 = " + trial_three);
 
-                    }
-                });
 
-                chechboxAlbumini.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        if (chechboxAlbumini.isChecked()) {
-                            albumini = "true";
-                        } else {
-                            albumini = "false";
-                        }
-                    }
-                });
-
-                checkboxHb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                        if (isChecked) {
-                            hb = "true";
-                        } else {
-                            hb = "false";
-                        }
-                    }
-                });
-                chechkboxMlaloWaMtoto.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        if (chechkboxMlaloWaMtoto.isChecked()) {
-                            mlaloWaMtoto = "true";
-                        } else {
-                            mlaloWaMtoto = "false";
-                        }
-                    }
-                });
-                checkboxChildDeath.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        if (checkboxChildDeath.isChecked()) {
-                            childDeath = "true";
-                        } else {
-                            childDeath = "false";
-                        }
-                    }
-                });
-                checkboxKimo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            kimo = "true";
-                        } else {
-                            kimo = "false";
-                        }
-                    }
-                });
-                checkboxSugar.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        if (checkboxSugar.isChecked()) {
-                            sugar = "true";
-                        } else {
-                            sugar = "false";
-                        }
-                    }
-                });
-                checkboxUmriWaMimba.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        if (checkboxUmriWaMimba.isEnabled()) {
-                            umriWaMimba = "true";
-                        } else {
-                            umriWaMimba = "false";
-                        }
-                    }
-                });
-
-                HashMap<String, String> followHash = new HashMap<String, String>();
-                followHash.put("facility_name", editTextFacilityName.toString());
-                followHash.put("pressure", pressure);
-                followHash.put("hb", hb);
-                followHash.put("albumin", albumini);
-                followHash.put("sugar", sugar);
-                followHash.put("mlaloWaMtoto", mlaloWaMtoto);
-                followHash.put("childDeath", childDeath);
-                followHash.put("umriWaMimba", umriWaMimba);
-                followHash.put("kimo", kimo);
-
-
-                String trial_one = followHash.get(pressure);
-                String trial_two = followHash.get(hb);
-                String trial_three = followHash.get(umriWaMimba);
-                Log.d(TAG, "pressure = " + trial_one);
-                Log.d(TAG, "pressure_1 = " + trial_two);
-                Log.d(TAG, "pressure_2 = " + trial_three);
+                // TODO: 10/2/17 submit follow up report
+                FollowUpReport report = getFollowUpReport();
             }
         });
+    }
+
+
+    private FollowUpReport getFollowUpReport() {
+        FollowUpReport report = new FollowUpReport();
+        report.setDate(System.currentTimeMillis());
+        report.setMotherId(pregnantMom.getId());
+
+        report.setAlbumin(chechboxAlbumini.isChecked());
+        report.setChildDealth(checkboxChildDeath.isChecked());
+        report.setOver40WeeksPregnancy(checkboxUmriWaMimba.isChecked());
+        report.setHighBloodPressure(checkBoxPressure.isChecked());
+        report.setBadChildPosition(chechkboxMlaloWaMtoto.isChecked());
+        report.setHighSugar(checkboxSugar.isChecked());
+        report.setHbBelow60(checkboxHb.isChecked());
+        report.setUnproportionalPregnancyHeight(checkboxKimo.isChecked());
+
+        report.setFacilityName(editTextFacilityName.getText().toString());
+
+        // log report object
+        Log.d(TAG, "report=" + gson.toJson(report));
+        return report;
     }
 
 
