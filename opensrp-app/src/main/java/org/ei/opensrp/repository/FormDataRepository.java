@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import android.util.Log;
 import android.webkit.JavascriptInterface;
 
 import static java.lang.System.currentTimeMillis;
@@ -118,6 +120,27 @@ public class FormDataRepository extends DrishtiRepository {
         return readFormSubmission(cursor).get(0);
     }
 
+    public FormSubmission fetchFromSubmissionByEntity(String entityId) {
+        SQLiteDatabase database = masterRepository.getReadableDatabase();
+        Cursor cursor = database.query(FORM_SUBMISSION_TABLE_NAME, FORM_SUBMISSION_TABLE_COLUMNS, ENTITY_ID_COLUMN + " = ?", new String[]{entityId}, null, null, null);
+        Log.d("custom insert"," no of id "+entityId);
+        Log.d("custom insert"," no of colums"+cursor.getCount());
+        cursor.moveToFirst();
+        FormSubmission fsubmissions;
+
+            fsubmissions = new FormSubmission(
+                    cursor.getString(cursor.getColumnIndex(INSTANCE_ID_COLUMN)),
+                    cursor.getString(cursor.getColumnIndex(ENTITY_ID_COLUMN)),
+                    cursor.getString(cursor.getColumnIndex(FORM_NAME_COLUMN)),
+                    cursor.getString(cursor.getColumnIndex(INSTANCE_COLUMN)),
+                    cursor.getString(cursor.getColumnIndex(VERSION_COLUMN)),
+                    SyncStatus.valueOf(cursor.getString(cursor.getColumnIndex(SYNC_STATUS_COLUMN))),
+                    cursor.getString(cursor.getColumnIndex(FORM_DATA_DEFINITION_VERSION_COLUMN)),
+                    cursor.getString(cursor.getColumnIndex(SERVER_VERSION_COLUMN)));
+
+        return fsubmissions;
+    }
+
     public List<FormSubmission> getPendingFormSubmissions(int maxSize) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.query(FORM_SUBMISSION_TABLE_NAME, FORM_SUBMISSION_TABLE_COLUMNS, SYNC_STATUS_COLUMN + " = ?", new String[]{PENDING.value()}, null, null, null, ""+maxSize);
@@ -136,6 +159,12 @@ public class FormDataRepository extends DrishtiRepository {
             FormSubmission updatedSubmission = new FormSubmission(submission.instanceId(), submission.entityId(), submission.formName(), submission.instance(), submission.version(), SYNCED, "1");
             database.update(FORM_SUBMISSION_TABLE_NAME, createValuesForFormSubmission(updatedSubmission), INSTANCE_ID_COLUMN + " = ?", new String[]{updatedSubmission.instanceId()});
         }
+    }
+
+    public void updateFormSubmission(FormSubmission submission) {
+        SQLiteDatabase database = masterRepository.getWritableDatabase();
+        database.update(FORM_SUBMISSION_TABLE_NAME, createValuesForFormSubmission(submission), INSTANCE_ID_COLUMN + " = ?", new String[]{submission.instanceId()});
+
     }
 
     public void updateServerVersion(String instanceId, String serverVersion) {

@@ -536,6 +536,9 @@ public abstract class SecuredNativeSmartRegisterActivity extends SecuredActivity
     public void saveFormSubmission(String formSubmision, String id, String formName, JSONObject fieldOverrides){
         Log.e("saveFormSubmission()", "Override this method in child class");
     }
+    public void updateFormSubmission(String formSubmision, String id){
+        Log.e("updateFormSubmission()", "Override this method in child class");
+    }
 
     protected String getParams(FormSubmission submission) {
         return new Gson().toJson(

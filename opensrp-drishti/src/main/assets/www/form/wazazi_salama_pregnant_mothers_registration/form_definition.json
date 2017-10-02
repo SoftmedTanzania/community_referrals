@@ -9,6 +9,9 @@
                 "shouldLoadValue": true
             },
             {
+                "name": "relationalid"
+            },
+            {
                 "name": "age"
             },
             {
@@ -110,9 +113,6 @@
             },
             {
                 "name": "name"
-            },
-            {
-                "name": "id"
             },
             {
                 "name": "phone"

@@ -20,9 +20,9 @@ import com.google.gson.Gson;
 import org.ei.opensrp.drishti.AncSmartRegisterActivity;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.pageradapter.ANCRegisterPagerAdapter;
 import org.ei.opensrp.drishti.util.DatesHelper;
-import org.ei.opensrp.view.activity.ANCSmartRegisterActivity;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
 
@@ -38,11 +38,12 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
     private TabLayout tabs;
 
     private PregnantMom pregnantMom;
+    private static MotherPersonObject motherData;
     private Gson gson = new Gson();
     private Calendar calendar = Calendar.getInstance();
 
     private JSONObject fieldOverides = new JSONObject();
-    private String recordId;
+    private static String recordId;
     private String formName = "pregnant_mothers_registration";
 
     private static final String TAG = AncRegisterFormFragment.class.getSimpleName();
@@ -85,14 +86,19 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
                     fabDone.setEnabled(true);
                     AncRegister1stFragment detailsFragment = (AncRegister1stFragment) pagerAdapter.getItem(0);
 
-                    AncRegister2ndFragment indicatorsFragment = (AncRegister2ndFragment) pagerAdapter.getItem(1);
-                    int[] riskIndicators = detailsFragment.getRiskIndicatorsFromDetails();
+                  final  AncRegister2ndFragment indicatorsFragment = (AncRegister2ndFragment) pagerAdapter.getItem(1);
+                  final  int[] riskIndicators = detailsFragment.getRiskIndicatorsFromDetails();
                     // update risk indicators
-                    indicatorsFragment.updateRiskIndicators(
-                            riskIndicators[0],
-                            riskIndicators[1],
-                            riskIndicators[2],
-                            riskIndicators[3]);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            indicatorsFragment.updateRiskIndicators(
+                                    riskIndicators[0],
+                                    riskIndicators[1],
+                                    riskIndicators[2],
+                                    riskIndicators[3]);
+                        }
+                    }, 100);
 
                 } else if (fabDone.isEnabled()) {
                     fabDone.startAnimation(animationFabHide);
@@ -217,9 +223,24 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
                     Log.d(TAG, "mom = " + gsonMom);
 
                     // todo start form submission
+                    if(firstFragment.getRegistrationType().equals("2")){
 
-                    ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(gsonMom, recordId, formName, getFormFieldsOverrides());
-                    ((AncSmartRegisterActivity) getActivity()).returnToBaseFragment();
+                        Log.d(TAG,"am in kumaliiza registration");
+                        String motherId = motherData.getId();
+                        motherData.setDetails(new Gson().toJson(pregnantMom));
+                        Log.d(TAG,"mother id "+ motherId);
+                        motherData = new MotherPersonObject(motherId, null, pregnantMom);
+                        Log.d(TAG,"motherdata to be updated"+ new Gson().toJson(motherData));
+                        ((AncSmartRegisterActivity) getActivity()).updateFormSubmission(motherData, motherId);
+                        ((AncSmartRegisterActivity) getActivity()).returnToBaseFragment();
+                    }else {
+                        Log.d(TAG,"am in for the first registration registration");
+                        ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(gsonMom, recordId, formName, getFormFieldsOverrides());
+                        ((AncSmartRegisterActivity) getActivity()).returnToBaseFragment();
+
+                    }
+
+
                 }
 
             }
@@ -264,7 +285,31 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
         this.recordId = recordId;
     }
 
-    public void reloadValues() {
+    public String getRecordId(){
+        return motherData.getId();
+    }
+
+    public void setMotherDetails(MotherPersonObject mother) {
+
+        this.motherData = mother;
+
+        Log.d("TAG","motherDATA ="+ new Gson().toJson(motherData));
+        AncRegister1stFragment firstFragment = (AncRegister1stFragment) pagerAdapter.getItem(0);
+        firstFragment.setMotherDetails(motherData);
+
+    }
+    public void setEmptyDetails() {
+        AncRegister1stFragment firstFragment = (AncRegister1stFragment) pagerAdapter.getItem(0);
+        firstFragment.setEmptyValues();
+    }
+
+    public String getRegistrationType(){
+
+        AncRegister1stFragment firstFragment = (AncRegister1stFragment) pagerAdapter.getItem(0);
+        return firstFragment.getRegistrationType();
+    }
+
+    public void reloadValues(){
         pagerAdapter = new ANCRegisterPagerAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
     }

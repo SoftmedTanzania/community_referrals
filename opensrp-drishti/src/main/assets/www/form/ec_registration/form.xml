@@ -2250,7 +2250,7 @@
         </fieldset>
     </fieldset>
     <label class="question or-branch pre-init non-select ">
-        <span lang="" class="question-label active">BPL card number, &#xCAC;&#xCBF;.&#xCAA;&#xCBF;.&#xC8E;&#xCB2;&#xCCD;
+        <span lang="" class="question-label active">BPL id number, &#xCAC;&#xCBF;.&#xCAA;&#xCBF;.&#xC8E;&#xCB2;&#xCCD;
             &#xC95;&#xCBE;&#xCB0;&#xCCD;&#xCA1;&#xCCD; &#xCB8;&#xC82;&#xC96;&#xCCD;&#xCAF;&#xCC6;:
         </span>
         <input autocomplete="off" type="text" name="/EC_Registration_EngKan/bpl_card_number"

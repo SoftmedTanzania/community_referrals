@@ -4,7 +4,6 @@ package org.ei.opensrp.drishti.Fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -24,11 +23,14 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.util.DatesHelper;
+import org.ei.opensrp.drishti.util.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,8 +47,8 @@ import fr.ganfra.materialspinner.MaterialSpinner;
 public class AncRegister1stFragment extends Fragment {
 
     public static TextView textDate, textPhone, textDateLNMP, textEDD;
-    LinearLayout layoutDatePick, layoutEditPhone;
-    CardView cardDatePickLNMP;
+    public static LinearLayout layoutDatePick, layoutEditPhone;
+    public static CardView cardDatePickLNMP;
     public static EditText editTextMotherName, editTextMotherId, editTextMotherAge,
             editTextHeight, editTextPregCount, editTextBirthCount, editTextChildrenCount,
             editTextDiscountId, editTextMotherOccupation, editTextPhysicalAddress,
@@ -54,9 +56,9 @@ public class AncRegister1stFragment extends Fragment {
     public static RadioGroup radioGroupPregnancyAge, radioGroupHIV;
     public static MaterialSpinner spinnerMotherEducation, spinnerHusbandEducation;
     private ArrayAdapter<String> educationAdapter;
-
-    private Calendar today;
-    private List<String> educationList = new ArrayList<>();
+    public static String typeOfRegistration = "1";
+    private static Calendar today;
+    private static List<String> educationList = new ArrayList<>();
     public String message = "";
     public static long edd, lnmp;
     public static Context context;
@@ -64,6 +66,7 @@ public class AncRegister1stFragment extends Fragment {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
     public static PregnantMom mom = new PregnantMom();
+    public static MotherPersonObject motherData ;
     private static final String TAG = AncRegister1stFragment.class.getSimpleName();
     private static int age = -1, height = -1, pregnancyCount = -1;
 
@@ -111,6 +114,7 @@ public class AncRegister1stFragment extends Fragment {
         editTextPhysicalAddress = (EditText) fragmentView.findViewById(R.id.editTextPhysicalAddress);
         editTextHusbandName = (EditText) fragmentView.findViewById(R.id.editTextHusbandName);
         editTextHusbandOccupation = (EditText) fragmentView.findViewById(R.id.editTextHusbandOccupation);
+
 
         educationAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, educationList);
         educationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -398,6 +402,7 @@ public class AncRegister1stFragment extends Fragment {
 
     public PregnantMom getPregnantMom() {
 
+
         mom.setName(editTextMotherName.getText().toString());
         mom.setId(editTextMotherId.getText().toString());
         mom.setPhone(textPhone.getText().toString());
@@ -427,7 +432,7 @@ public class AncRegister1stFragment extends Fragment {
                 || mom.getHivStatus() == 1)
             // for either of above indicators, mother is on risk
             mom.setOnRisk(true);
-
+        Log.d(TAG, "mom ="+ new Gson().toJson(mom));
         return mom;
     }
 
@@ -441,4 +446,97 @@ public class AncRegister1stFragment extends Fragment {
                 message,
                 Toast.LENGTH_LONG).show();
     }
+
+    public void setMotherDetails(MotherPersonObject mother) {
+
+        this.motherData = mother;
+        this.typeOfRegistration = "2";
+        String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
+        Log.d(TAG, "gsonMom = " + gsonMom);
+        PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
+        setRegisteredValues(pregnantMom);
+
+    }
+
+    public void setRegisteredValues(PregnantMom mom){
+
+//            View dialogView = getActivity().getLayoutInflater().inflate(R.layout.layout_dialog_edit_phone, null);
+//            EditText editTextPhone = (EditText) dialogView.findViewById(R.id.editTextLocation);
+
+            long lnmp = mom.getDateLNMP();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            String edd = dateFormat.format(DatesHelper.calculateEDDFromLNMP(lnmp));
+            String lnmpDate = dateFormat.format(mom.getDateLNMP());
+            String reg_date = dateFormat.format(mom.getDateReg());
+
+            //populating data
+            textDate.setText(reg_date);
+            textPhone.setText(mom.getPhone());
+            textDateLNMP.setText(lnmpDate);
+            textEDD.setText(edd);
+            if(mom.isAbove20WeeksPregnant()){
+                radioGroupPregnancyAge.check(R.id.radioAbove20);
+            }else{
+                radioGroupPregnancyAge.check(R.id.radioBelow20);
+            }if(mom.isHasHIV()){
+                radioGroupHIV.check(R.id.radioYesHIV);
+            }else{
+            radioGroupHIV.check(R.id.radioNoHIV);
+            }
+
+            int motherSelected = educationList.indexOf(mom.getEducation());
+            spinnerMotherEducation.setSelection(++motherSelected);
+
+            int husbandSelected = educationList.indexOf(mom.getHusbandEducation());
+            spinnerHusbandEducation.setSelection(++husbandSelected);
+
+
+            editTextMotherName.setText(mom.getName());
+            editTextMotherId.setText(motherData.getMOTHERS_ID());
+            editTextMotherAge.setText(String.valueOf(mom.getAge()));
+            editTextHeight.setText(String.valueOf(mom.getHeight()));
+            editTextPregCount.setText(String.valueOf(mom.getPreviousFertilityCount()));
+            editTextBirthCount.setText(String.valueOf(mom.getSuccessfulBirths()));
+            editTextChildrenCount.setText(String.valueOf(mom.getLivingChildren()));
+            editTextDiscountId.setText(mom.getDiscountId());
+            editTextMotherOccupation.setText(mom.getOccupation());
+            editTextPhysicalAddress.setText(mom.getPhysicalAddress());
+            editTextHusbandName.setText(mom.getHusbandName());
+            editTextHusbandOccupation.setText(mom.getHusbandOccupation());
+
+
+
+    }
+
+    public void setEmptyValues(){
+        this.typeOfRegistration = "1";
+        //empty the data
+
+        textDate.setText("");
+        textPhone.setText("");
+        textDateLNMP.setText("");
+        textEDD.setText("");
+        int motherSelected = -1;
+        spinnerMotherEducation.setSelection(motherSelected);
+        int husbandSelected = -1;
+        spinnerHusbandEducation.setSelection(husbandSelected);
+        editTextMotherName.setText("");
+        editTextMotherId.setText("");
+        editTextMotherAge.setText("");
+        editTextHeight.setText("");
+        editTextPregCount.setText("");
+        editTextBirthCount.setText("");
+        editTextChildrenCount.setText("");
+        editTextDiscountId.setText("");
+        editTextMotherOccupation.setText("");
+        editTextPhysicalAddress.setText("");
+        editTextHusbandName.setText("");
+        editTextHusbandOccupation.setText("");
+
+    }
+
+    public String getRegistrationType(){
+        return typeOfRegistration;
+    }
+
 }

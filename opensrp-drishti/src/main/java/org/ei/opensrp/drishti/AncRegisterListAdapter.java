@@ -18,6 +18,7 @@ import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
+import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
 import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.util.Utils;
@@ -50,6 +51,9 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
 
         this.motherPersonList = Utils.convertToMotherPersonObjectList(commonPersonObjectList);
+
+        Log.d(TAG, "mother list = " + gson.toJson(motherPersonList));
+
         Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + motherPersonList.size());
 
     }
@@ -73,10 +77,27 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
                 @Override
                 public void onClick(View view) {
                     // go to AncDetailActivity
+
                     String gsonMom = Utils.convertStandardJSONString(motherPersonList.get(getAdapterPosition()).getDetails());
-                    appContext.startActivity(new Intent(appContext, AncDetailActivityAlt.class)
-                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            .putExtra("mom", gsonMom));
+                    final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
+                    Log.d(TAG, "commonPersonList type= " + pregnantMom.getReg_type());
+                    if(pregnantMom.getReg_type().equals("2")){
+                        Log.d(TAG, "am in side for pre registration");
+                        int index = ((AncSmartRegisterActivity) appContext).getFormIndex("pregnant_mothers_registration");
+                        AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) ((AncSmartRegisterActivity) appContext).getDisplayFormFragmentAtIndex(index);
+
+                            displayFormFragment.setMotherDetails(motherPersonList.get(getAdapterPosition()));
+                        ((AncSmartRegisterActivity) appContext).switchToPage(1);
+
+
+                    }else{
+                        Log.d(TAG, "am in side for details");
+                        appContext.startActivity(new Intent(appContext, AncDetailActivityAlt.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                .putExtra("mom", gsonMom));
+                    }
+
+
                 }
             });
         }

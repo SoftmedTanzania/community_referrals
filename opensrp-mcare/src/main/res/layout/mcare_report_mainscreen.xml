@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="cwievi Kj ̈vY mnKvix"
-        android:id="@+id/textView3"
+        android:card="@+card/textView3"
         android:layout_gravity="center_horizontal"
         android:textColor="#333333" />
 
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="GLv‡b Avcbvi Kv‡Ri eZ©gvb e¨vwß I Kv‡Ri AM«MwZ ‡`L‡Z cvi‡Qb| Avcbvi Kg©e¨vwßi c«wZwU N‡i c«Kí ïi“ ‡_‡K GLb ch©š— cvIqv me©‡gvU msL¨v Ges GB gv‡m cvIqv ‡gvU msL¨v ‡`Lv‡bv n‡q‡Q| AM«MwZi c«wZwU N‡i GB gv‡m Avcbvi Øviv wbewÜZ wewfbœ d‡gi« msL¨v ‡`Lv hv‡”Q| ‡h ‡Kvb GKwU N‡ii Dci U¨vc Ki‡j Avcwb GB gv‡mi wewfbœ mßv‡ni Ges weMZ gv‡mi mswk­ó Z_¨ ‡`L‡Z cvi‡eb|"
-        android:id="@+id/textView5"
+        android:card="@+card/textView5"
         android:layout_gravity="center_horizontal"
         android:textColor="#333333"
         android:gravity="center" />
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Kg©e¨vwß"
-            android:id="@+id/button"
+            android:card="@+card/button"
             android:background="#E83E40"
             android:padding="10dp"
             android:layout_marginLeft="20dp" />
@@ -65,7 +65,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView6"
+                android:card="@+card/imageView6"
                 android:src="@mipmap/station_icon"
                 android:layout_margin="10dp" />
 

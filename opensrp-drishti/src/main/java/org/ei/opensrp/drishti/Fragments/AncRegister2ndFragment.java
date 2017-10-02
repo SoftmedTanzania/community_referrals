@@ -24,8 +24,8 @@ public class AncRegister2ndFragment extends Fragment {
             checkBoxCSDelivery, checkBoxKilemaChaNyonga, checkBoxBleedingOnDelivery,
             checkBoxKondoKukwama;
 
-    private CardView cardRiskIndicators;
-    private LinearLayout layoutRiskAge, layoutRiskHeight, layoutRiskFertilityCount, layoutRiskHIV;
+    private static CardView cardRiskIndicators;
+    private static LinearLayout layoutRiskAge, layoutRiskHeight, layoutRiskFertilityCount, layoutRiskHIV;
 
     public AncRegister2ndFragment() {
         // Required empty public constructor

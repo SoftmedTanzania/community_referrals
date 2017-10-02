@@ -33,7 +33,7 @@ public class FormSubmission {
         this.syncStatus = syncStatus;
         this.formDataDefinitionVersion = formDataDefinitionVersion;
         this.serverVersion = serverVersion;
-        Log.d("FormSubmissionConstructor",instance);
+        Log.d("FormSubmissionCon",instance);
         this.formInstance = new Gson().fromJson(instance, FormInstance.class);
     }
 

@@ -24,7 +24,7 @@
 
 ---------------  T H R E A D  ---------------
 
-Current thread (0x00007fac50078000):  VMThread [stack: 0x00007fac323f4000,0x00007fac324f5000] [id=19503]
+Current thread (0x00007fac50078000):  VMThread [stack: 0x00007fac323f4000,0x00007fac324f5000] [card=19503]
 
 Stack: [0x00007fac323f4000,0x00007fac324f5000],  sp=0x00007fac324f3320,  free space=1020k
 Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
@@ -52,24 +52,24 @@ VM_Operation (0x00007fac3133ec00): ParallelGCFailedAllocation, mode: safepoint, 
 ---------------  P R O C E S S  ---------------
 
 Java Threads: ( => current thread )
-  0x00007fac5018c800 JavaThread "pool-1-thread-1" [_thread_blocked, id=19701, stack(0x00007fac31240000,0x00007fac31341000)]
-  0x00007fac501ad800 JavaThread "pool-2-thread-4" [_thread_blocked, id=19516, stack(0x00007fac31341000,0x00007fac31442000)]
-  0x00007fac501ac000 JavaThread "pool-2-thread-3" [_thread_blocked, id=19515, stack(0x00007fac31442000,0x00007fac31543000)]
-  0x00007fac501aa000 JavaThread "pool-2-thread-2" [_thread_blocked, id=19514, stack(0x00007fac31543000,0x00007fac31644000)]
-  0x00007fac501a9000 JavaThread "pool-3-thread-1" [_thread_blocked, id=19513, stack(0x00007fac31644000,0x00007fac31745000)]
-  0x00007fac501a7000 JavaThread "pool-2-thread-1" [_thread_blocked, id=19512, stack(0x00007fac31745000,0x00007fac31846000)]
-  0x00007fac500c9000 JavaThread "Service Thread" daemon [_thread_blocked, id=19510, stack(0x00007fac31a14000,0x00007fac31b15000)]
-  0x00007fac500be000 JavaThread "C1 CompilerThread2" daemon [_thread_blocked, id=19509, stack(0x00007fac31b15000,0x00007fac31c16000)]
-  0x00007fac500bc000 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=19508, stack(0x00007fac31c16000,0x00007fac31d17000)]
-  0x00007fac500b9800 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=19507, stack(0x00007fac31d17000,0x00007fac31e18000)]
-  0x00007fac500b8000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=19506, stack(0x00007fac31e18000,0x00007fac31f19000)]
-  0x00007fac50084000 JavaThread "Finalizer" daemon [_thread_blocked, id=19505, stack(0x00007fac321f2000,0x00007fac322f3000)]
-  0x00007fac5007f800 JavaThread "Reference Handler" daemon [_thread_blocked, id=19504, stack(0x00007fac322f3000,0x00007fac323f4000)]
-  0x00007fac5000a000 JavaThread "main" [_thread_blocked, id=19498, stack(0x00007fac57b54000,0x00007fac57c55000)]
+  0x00007fac5018c800 JavaThread "pool-1-thread-1" [_thread_blocked, card=19701, stack(0x00007fac31240000,0x00007fac31341000)]
+  0x00007fac501ad800 JavaThread "pool-2-thread-4" [_thread_blocked, card=19516, stack(0x00007fac31341000,0x00007fac31442000)]
+  0x00007fac501ac000 JavaThread "pool-2-thread-3" [_thread_blocked, card=19515, stack(0x00007fac31442000,0x00007fac31543000)]
+  0x00007fac501aa000 JavaThread "pool-2-thread-2" [_thread_blocked, card=19514, stack(0x00007fac31543000,0x00007fac31644000)]
+  0x00007fac501a9000 JavaThread "pool-3-thread-1" [_thread_blocked, card=19513, stack(0x00007fac31644000,0x00007fac31745000)]
+  0x00007fac501a7000 JavaThread "pool-2-thread-1" [_thread_blocked, card=19512, stack(0x00007fac31745000,0x00007fac31846000)]
+  0x00007fac500c9000 JavaThread "Service Thread" daemon [_thread_blocked, card=19510, stack(0x00007fac31a14000,0x00007fac31b15000)]
+  0x00007fac500be000 JavaThread "C1 CompilerThread2" daemon [_thread_blocked, card=19509, stack(0x00007fac31b15000,0x00007fac31c16000)]
+  0x00007fac500bc000 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, card=19508, stack(0x00007fac31c16000,0x00007fac31d17000)]
+  0x00007fac500b9800 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, card=19507, stack(0x00007fac31d17000,0x00007fac31e18000)]
+  0x00007fac500b8000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, card=19506, stack(0x00007fac31e18000,0x00007fac31f19000)]
+  0x00007fac50084000 JavaThread "Finalizer" daemon [_thread_blocked, card=19505, stack(0x00007fac321f2000,0x00007fac322f3000)]
+  0x00007fac5007f800 JavaThread "Reference Handler" daemon [_thread_blocked, card=19504, stack(0x00007fac322f3000,0x00007fac323f4000)]
+  0x00007fac5000a000 JavaThread "main" [_thread_blocked, card=19498, stack(0x00007fac57b54000,0x00007fac57c55000)]
 
 Other Threads:
-=>0x00007fac50078000 VMThread [stack: 0x00007fac323f4000,0x00007fac324f5000] [id=19503]
-  0x00007fac500cc000 WatcherThread [stack: 0x00007fac31913000,0x00007fac31a14000] [id=19511]
+=>0x00007fac50078000 VMThread [stack: 0x00007fac323f4000,0x00007fac324f5000] [card=19503]
+  0x00007fac500cc000 WatcherThread [stack: 0x00007fac31913000,0x00007fac31a14000] [card=19511]
 
 VM state:at safepoint (normal execution)
 
@@ -536,9 +536,9 @@ stepping	: 3
 microcode	: 0x33
 cpu MHz		: 1213.623
 cache size	: 4096 KB
-physical id	: 0
+physical card	: 0
 siblings	: 4
-core id		: 0
+core card		: 0
 cpu cores	: 2
 apicid		: 0
 initial apicid	: 0
@@ -563,9 +563,9 @@ stepping	: 3
 microcode	: 0x33
 cpu MHz		: 1473.083
 cache size	: 4096 KB
-physical id	: 0
+physical card	: 0
 siblings	: 4
-core id		: 1
+core card		: 1
 cpu cores	: 2
 apicid		: 2
 initial apicid	: 2
@@ -590,9 +590,9 @@ stepping	: 3
 microcode	: 0x33
 cpu MHz		: 1225.982
 cache size	: 4096 KB
-physical id	: 0
+physical card	: 0
 siblings	: 4
-core id		: 0
+core card		: 0
 cpu cores	: 2
 apicid		: 1
 initial apicid	: 1
@@ -617,9 +617,9 @@ stepping	: 3
 microcode	: 0x33
 cpu MHz		: 1381.713
 cache size	: 4096 KB
-physical id	: 0
+physical card	: 0
 siblings	: 4
-core id		: 1
+core card		: 1
 cpu cores	: 2
 apicid		: 3
 initial apicid	: 3

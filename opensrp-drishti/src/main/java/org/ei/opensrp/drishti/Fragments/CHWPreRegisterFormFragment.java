@@ -372,20 +372,26 @@ public class CHWPreRegisterFormFragment extends Fragment {
         mom.setEdd(edd);
         mom.setDateRegistration(today.getTimeInMillis());
 
+        Log.d(TAG, "mom ="+ new Gson().toJson(mom));
         return mom;
     }
 
     public JSONObject getFormFieldsOverrides() {
         return fieldOverides;
     }
+
     public void setRecordId(String recordId) {
+
+        Log.d("TAG","record id = "+recordId);
         this.recordId = recordId;
     }
+
     private void makeToast() {
         Toast.makeText(context,
                 message,
                 Toast.LENGTH_LONG).show();
     }
+
     //TODO martha Implement this method to initialize a form data
     public void setFormData(String data) {
         Log.d(TAG, "Setting form data");

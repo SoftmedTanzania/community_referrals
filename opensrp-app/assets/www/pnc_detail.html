@@ -38,8 +38,8 @@
         pnc.bindToCamera("#womanPhoto");
         pnc.bindToDefaultPhoto("#womanPhoto", "../img/woman-placeholder.png");
 
-        pageView.onReloadPhoto(function (caseId, photoPath) {
-            pnc.reloadPhoto("#womanPhoto", caseId, photoPath);
+        pageView.onReloadPhoto(function (id, photoPath) {
+            pnc.reloadPhoto("#womanPhoto", id, photoPath);
         });
 
         new Modal().bindToClick();
