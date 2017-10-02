@@ -14,7 +14,7 @@
         <ImageView
             android:layout_width="@dimen/client_profile_pic_width"
             android:layout_height="match_parent"
-            android:card="@+card/childdetailprofileview"
+            android:id="@+id/childdetailprofileview"
             android:src="@drawable/child_boy_infant"
             android:layout_margin="5dp"
             android:scaleType="fitXY"
@@ -33,7 +33,7 @@
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:text="Child Id :"
                 android:layout_margin="5dp"
-                android:card="@+card/childdetail_childid_text"
+                android:id="@+id/childdetail_childid_text"
                 android:textSize="14sp"
                 android:textColor="@color/text_black" />
 
@@ -43,7 +43,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:text="EPI CARD No :"
-                android:card="@+card/childdetail_childepino_text"
+                android:id="@+id/childdetail_childepino_text"
                 android:textSize="14sp"
                 android:layout_margin="5dp"
                 android:textColor="@color/text_black" />
@@ -54,7 +54,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:text="Child Name :"
-                android:card="@+card/childdetail_childname_text"
+                android:id="@+id/childdetail_childname_text"
                 android:textSize="14sp"
                 android:layout_margin="5dp"
                 android:textColor="@color/text_black" />
@@ -65,7 +65,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:text="Father's Name :"
-                android:card="@+card/childdetail_fathername_text"
+                android:id="@+id/childdetail_fathername_text"
                 android:textSize="14sp"
                 android:layout_margin="5dp"
                 android:textColor="@color/text_black" />
@@ -83,7 +83,7 @@
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:text=""
                 android:layout_margin="5dp"
-                android:card="@+card/childdetail_childid"
+                android:id="@+id/childdetail_childid"
                 android:textSize="14sp"
                 android:textColor="@color/text_black" />
 
@@ -93,18 +93,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:text=""
-                android:card="@+card/childdetail_childepino"
-                android:textSize="14sp"
-                android:layout_margin="5dp"
-                android:textColor="@color/text_black" />
-
-            <org.ei.opensrp.view.customControls.CustomFontTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:text=""
-                android:card="@+card/childdetail_childname"
+                android:id="@+id/childdetail_childepino"
                 android:textSize="14sp"
                 android:layout_margin="5dp"
                 android:textColor="@color/text_black" />
@@ -115,7 +104,18 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:text=""
-                android:card="@+card/childdetail_fathername"
+                android:id="@+id/childdetail_childname"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColor="@color/text_black" />
+
+            <org.ei.opensrp.view.customControls.CustomFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:text=""
+                android:id="@+id/childdetail_fathername"
                 android:textSize="14sp"
                 android:layout_margin="5dp"
                 android:textColor="@color/text_black" />
@@ -132,7 +132,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:text="Child DOB :"
-                android:card="@+card/childdetail_childdob_text"
+                android:id="@+id/childdetail_childdob_text"
                 android:textSize="14sp"
                 android:layout_margin="5dp"
                 android:textColor="@color/text_black" />
@@ -151,7 +151,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:text=""
-                android:card="@+card/childdetail_childdob"
+                android:id="@+id/childdetail_childdob"
                 android:textSize="14sp"
                 android:layout_margin="5dp"
                 android:textColor="@color/text_black" />

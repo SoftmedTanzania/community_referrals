@@ -8,7 +8,7 @@
     android:fitsSystemWindows="false"
     android:orientation="vertical"
     android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus"
-    tools:context=".AncDetailActivity">
+    tools:context=".AncDetailActivityAlt">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabFollowUp"
@@ -21,7 +21,7 @@
         app:backgroundTint="@color/accent"
         app:elevation="6dp"
         app:fabSize="normal"
-        app:pressedTranslationZ="14sp" />
+        app:pressedTranslationZ="14dp" />
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"

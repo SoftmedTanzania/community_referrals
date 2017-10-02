@@ -2,6 +2,9 @@ package org.ei.opensrp.drishti;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +19,7 @@ import org.ei.opensrp.drishti.DataModels.PregnantMom;
 
 import java.util.HashMap;
 
-public class AncFollowUpFormActivity extends Activity {
+public class AncFollowUpFormActivity extends AppCompatActivity {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -25,37 +28,41 @@ public class AncFollowUpFormActivity extends Activity {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Button submitButton;
+    //    private Button submitButton;
     private CheckBox checkBoxPressure, checkboxHb, chechboxAlbumini, checkboxSugar, checkboxUmriWaMimba,
             checkboxChildDeath, chechkboxMlaloWaMtoto, checkboxKimo;
     private String pressure, hb, albumini, sugar, umriWaMimba, childDeath, mlaloWaMtoto, kimo;
     private String formName;
     private EditText editTextFacilityName;
 
-
     private PregnantMom pregnantMom;
     private Gson gson = new Gson();
-
-    public AncFollowUpFormActivity() {
-        // Required empty public constructor
-    }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_ancfollow_up_form);
+        setContentView(R.layout.activity_anc_follow_up_form);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.mToolbar);
+
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Mahudhurio Ya Marudio");
 
         String gsonMom = getIntent().getStringExtra("mom");
         Log.d(TAG, "mom=" + gsonMom);
 
         pregnantMom = gsonMom != null ? gson.fromJson(gsonMom, PregnantMom.class) : null;
 
-
         findViews();
         setListeners();
 
-        ((TextView) findViewById(R.id.txt_title_label)).setText("Uzazi Salama Mahudhurio ya Marudio");
+//        ((TextView) findViewById(R.id.txt_title_label)).setText("Uzazi Salama Mahudhurio ya Marudio");
 
     }
 
@@ -70,13 +77,12 @@ public class AncFollowUpFormActivity extends Activity {
         checkboxKimo = (CheckBox) findViewById(R.id.checkbox_kimo);
         checkboxSugar = (CheckBox) findViewById(R.id.checkbox_sugar_level);
         checkboxUmriWaMimba = (CheckBox) findViewById(R.id.checkbox_umri_wa_mimba);
-        submitButton = (Button) findViewById(R.id.submit);
+//        submitButton = (Button) findViewById(R.id.submit);
     }
 
     private void setListeners() {
 
-
-        submitButton.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.fabSubmit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

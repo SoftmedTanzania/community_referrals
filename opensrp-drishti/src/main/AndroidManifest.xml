@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.ei.opensrp.drishti">
+
     <compatible-screens>
         <screen
             android:screenDensity="ldpi"
@@ -61,8 +62,7 @@
 
         <activity
             android:name=".AncFollowUpFormActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.MaterialDesign" />
 
         <activity
             android:name=".AncSmartRegisterActivity"
@@ -82,9 +82,9 @@
             android:name=".chw.CHWSmartRegisterActivity"
             android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
         <activity android:name=".chw.CHWFormRegistrationActivity" />
