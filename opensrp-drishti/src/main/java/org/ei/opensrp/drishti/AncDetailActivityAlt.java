@@ -104,7 +104,7 @@ public class AncDetailActivityAlt extends AppCompatActivity {
 
         setUpViews();
 
-        String gsonMom = getIntent().getStringExtra("mom");
+        final String gsonMom = getIntent().getStringExtra("mom");
         Log.d(TAG, "mom=" + gsonMom);
 
         if (gsonMom != null) {
@@ -117,8 +117,8 @@ public class AncDetailActivityAlt extends AppCompatActivity {
         findViewById(R.id.fabFollowUp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // todo do follow up
-                Toast.makeText(getApplicationContext(), "Do follow up.", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(AncDetailActivityAlt.this, AncFollowUpFormActivity.class)
+                        .putExtra("mom", gsonMom));
             }
         });
 

@@ -66,7 +66,7 @@ public class AncRegister1stFragment extends Fragment {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
     public static PregnantMom mom = new PregnantMom();
-    public static MotherPersonObject motherData ;
+    public static MotherPersonObject motherData;
     private static final String TAG = AncRegister1stFragment.class.getSimpleName();
     private static int age = -1, height = -1, pregnancyCount = -1;
 
@@ -432,7 +432,7 @@ public class AncRegister1stFragment extends Fragment {
                 || mom.getHivStatus() == 1)
             // for either of above indicators, mother is on risk
             mom.setOnRisk(true);
-        Log.d(TAG, "mom ="+ new Gson().toJson(mom));
+        Log.d(TAG, "mom =" + new Gson().toJson(mom));
         return mom;
     }
 
@@ -453,62 +453,65 @@ public class AncRegister1stFragment extends Fragment {
         this.typeOfRegistration = "2";
         String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
         Log.d(TAG, "gsonMom = " + gsonMom);
-        PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
+        PregnantMom pregnantMom = new Gson().fromJson(gsonMom, PregnantMom.class);
         setRegisteredValues(pregnantMom);
 
     }
 
-    public void setRegisteredValues(PregnantMom mom){
+    public void setRegisteredValues(PregnantMom mom) {
 
 //            View dialogView = getActivity().getLayoutInflater().inflate(R.layout.layout_dialog_edit_phone, null);
 //            EditText editTextPhone = (EditText) dialogView.findViewById(R.id.editTextLocation);
 
-            long lnmp = mom.getDateLNMP();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-            String edd = dateFormat.format(DatesHelper.calculateEDDFromLNMP(lnmp));
-            String lnmpDate = dateFormat.format(mom.getDateLNMP());
-            String reg_date = dateFormat.format(mom.getDateReg());
+        long lnmp = mom.getDateLNMP();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+        String edd = dateFormat.format(DatesHelper.calculateEDDFromLNMP(lnmp));
+        String lnmpDate = dateFormat.format(mom.getDateLNMP());
+        String reg_date = dateFormat.format(mom.getDateReg());
 
-            //populating data
-            textDate.setText(reg_date);
-            textPhone.setText(mom.getPhone());
-            textDateLNMP.setText(lnmpDate);
-            textEDD.setText(edd);
-            if(mom.isAbove20WeeksPregnant()){
-                radioGroupPregnancyAge.check(R.id.radioAbove20);
-            }else{
-                radioGroupPregnancyAge.check(R.id.radioBelow20);
-            }if(mom.isHasHIV()){
-                radioGroupHIV.check(R.id.radioYesHIV);
-            }else{
+        //populating data
+        textDate.setText(reg_date);
+        textPhone.setText(mom.getPhone());
+        textDateLNMP.setText(lnmpDate);
+        textEDD.setText(edd);
+
+        if (mom.isAbove20WeeksPregnant()) {
+            radioGroupPregnancyAge.check(R.id.radioAbove20);
+        } else {
+            radioGroupPregnancyAge.check(R.id.radioBelow20);
+        }
+
+        if (mom.getHivStatus() == 1)
+            radioGroupHIV.check(R.id.radioYesHIV);
+        else if (mom.getHivStatus() == 0)
             radioGroupHIV.check(R.id.radioNoHIV);
-            }
+        else
+            radioGroupHIV.check(R.id.radioUnknownHIV);
 
-            int motherSelected = educationList.indexOf(mom.getEducation());
-            spinnerMotherEducation.setSelection(++motherSelected);
+        int motherSelected = educationList.indexOf(mom.getEducation());
+        spinnerMotherEducation.setSelection(++motherSelected);
 
-            int husbandSelected = educationList.indexOf(mom.getHusbandEducation());
-            spinnerHusbandEducation.setSelection(++husbandSelected);
+        int husbandSelected = educationList.indexOf(mom.getHusbandEducation());
+        spinnerHusbandEducation.setSelection(++husbandSelected);
 
 
-            editTextMotherName.setText(mom.getName());
-            editTextMotherId.setText(motherData.getMOTHERS_ID());
-            editTextMotherAge.setText(String.valueOf(mom.getAge()));
-            editTextHeight.setText(String.valueOf(mom.getHeight()));
-            editTextPregCount.setText(String.valueOf(mom.getPreviousFertilityCount()));
-            editTextBirthCount.setText(String.valueOf(mom.getSuccessfulBirths()));
-            editTextChildrenCount.setText(String.valueOf(mom.getLivingChildren()));
-            editTextDiscountId.setText(mom.getDiscountId());
-            editTextMotherOccupation.setText(mom.getOccupation());
-            editTextPhysicalAddress.setText(mom.getPhysicalAddress());
-            editTextHusbandName.setText(mom.getHusbandName());
-            editTextHusbandOccupation.setText(mom.getHusbandOccupation());
-
+        editTextMotherName.setText(mom.getName());
+        editTextMotherId.setText(motherData.getMOTHERS_ID());
+        editTextMotherAge.setText(String.valueOf(mom.getAge()));
+        editTextHeight.setText(String.valueOf(mom.getHeight()));
+        editTextPregCount.setText(String.valueOf(mom.getPreviousFertilityCount()));
+        editTextBirthCount.setText(String.valueOf(mom.getSuccessfulBirths()));
+        editTextChildrenCount.setText(String.valueOf(mom.getLivingChildren()));
+        editTextDiscountId.setText(mom.getDiscountId());
+        editTextMotherOccupation.setText(mom.getOccupation());
+        editTextPhysicalAddress.setText(mom.getPhysicalAddress());
+        editTextHusbandName.setText(mom.getHusbandName());
+        editTextHusbandOccupation.setText(mom.getHusbandOccupation());
 
 
     }
 
-    public void setEmptyValues(){
+    public void setEmptyValues() {
         this.typeOfRegistration = "1";
         //empty the data
 
@@ -535,7 +538,7 @@ public class AncRegister1stFragment extends Fragment {
 
     }
 
-    public String getRegistrationType(){
+    public String getRegistrationType() {
         return typeOfRegistration;
     }
 

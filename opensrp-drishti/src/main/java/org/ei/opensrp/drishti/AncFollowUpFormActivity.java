@@ -10,6 +10,10 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
+import org.ei.opensrp.drishti.DataModels.PregnantMom;
+
 import java.util.HashMap;
 
 public class AncFollowUpFormActivity extends Activity {
@@ -22,17 +26,19 @@ public class AncFollowUpFormActivity extends Activity {
     private String mParam1;
     private String mParam2;
     private Button submitButton;
-    private CheckBox checkBoxPressure,checkboxHb,chechboxAlbumini, checkboxSugar, checkboxUmriWaMimba,
-                     checkboxChildDeath, chechkboxMlaloWaMtoto, checkboxKimo;
-    private String pressure,hb, albumini,sugar, umriWaMimba,childDeath,mlaloWaMtoto,kimo;
+    private CheckBox checkBoxPressure, checkboxHb, chechboxAlbumini, checkboxSugar, checkboxUmriWaMimba,
+            checkboxChildDeath, chechkboxMlaloWaMtoto, checkboxKimo;
+    private String pressure, hb, albumini, sugar, umriWaMimba, childDeath, mlaloWaMtoto, kimo;
     private String formName;
     private EditText editTextFacilityName;
+
+
+    private PregnantMom pregnantMom;
+    private Gson gson = new Gson();
 
     public AncFollowUpFormActivity() {
         // Required empty public constructor
     }
-
-
 
 
     @Override
@@ -40,16 +46,18 @@ public class AncFollowUpFormActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_ancfollow_up_form);
 
+        String gsonMom = getIntent().getStringExtra("mom");
+        Log.d(TAG, "mom=" + gsonMom);
 
+        pregnantMom = gsonMom != null ? gson.fromJson(gsonMom, PregnantMom.class) : null;
 
 
         findViews();
         setListeners();
 
-        ((TextView)findViewById(R.id.txt_title_label)).setText("Uzazi Salama Mahudhurio ya Marudio");
+        ((TextView) findViewById(R.id.txt_title_label)).setText("Uzazi Salama Mahudhurio ya Marudio");
 
     }
-
 
 
     private void findViews() {
@@ -62,14 +70,10 @@ public class AncFollowUpFormActivity extends Activity {
         checkboxKimo = (CheckBox) findViewById(R.id.checkbox_kimo);
         checkboxSugar = (CheckBox) findViewById(R.id.checkbox_sugar_level);
         checkboxUmriWaMimba = (CheckBox) findViewById(R.id.checkbox_umri_wa_mimba);
-        submitButton = (Button)findViewById(R.id.submit);
-
-
+        submitButton = (Button) findViewById(R.id.submit);
     }
 
     private void setListeners() {
-
-
 
 
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -78,10 +82,9 @@ public class AncFollowUpFormActivity extends Activity {
 
                 checkBoxPressure.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-                    {
-                        if ( isChecked )
-                        {   pressure = "true";
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            pressure = "true";
                         } else {
                             pressure = "false";
                         }
@@ -91,21 +94,21 @@ public class AncFollowUpFormActivity extends Activity {
 
                 chechboxAlbumini.setOnClickListener(new View.OnClickListener() {
 
-                        @Override
-                        public void onClick(View view) {
-                            if (chechboxAlbumini.isChecked()) {
-                                albumini = "true";
-                            } else {
-                                albumini = "false";
-                            }
+                    @Override
+                    public void onClick(View view) {
+                        if (chechboxAlbumini.isChecked()) {
+                            albumini = "true";
+                        } else {
+                            albumini = "false";
                         }
-                    });
+                    }
+                });
 
                 checkboxHb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                        if ( isChecked) {
+                        if (isChecked) {
                             hb = "true";
                         } else {
                             hb = "false";
@@ -136,8 +139,7 @@ public class AncFollowUpFormActivity extends Activity {
                 });
                 checkboxKimo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-                    {
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             kimo = "true";
                         } else {
@@ -168,8 +170,8 @@ public class AncFollowUpFormActivity extends Activity {
                     }
                 });
 
-                HashMap<String,String> followHash = new HashMap<String, String>();
-                followHash.put("facility_name",editTextFacilityName.toString());
+                HashMap<String, String> followHash = new HashMap<String, String>();
+                followHash.put("facility_name", editTextFacilityName.toString());
                 followHash.put("pressure", pressure);
                 followHash.put("hb", hb);
                 followHash.put("albumin", albumini);
@@ -183,9 +185,9 @@ public class AncFollowUpFormActivity extends Activity {
                 String trial_one = followHash.get(pressure);
                 String trial_two = followHash.get(hb);
                 String trial_three = followHash.get(umriWaMimba);
-                Log.d(TAG,"pressure = "+trial_one);
-                Log.d(TAG,"pressure_1 = "+trial_two);
-                Log.d(TAG,"pressure_2 = "+trial_three);
+                Log.d(TAG, "pressure = " + trial_one);
+                Log.d(TAG, "pressure_1 = " + trial_two);
+                Log.d(TAG, "pressure_2 = " + trial_three);
             }
         });
     }

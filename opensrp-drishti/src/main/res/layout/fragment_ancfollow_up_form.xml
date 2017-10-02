@@ -4,16 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="16dp"
-    android:orientation="vertical"
-    android:background="@color/mdtp_white">
+    android:background="@color/mdtp_white"
+    android:orientation="vertical">
 
-    <include  layout="@layout/ancdetail_nav_bar" />
+    <include layout="@layout/ancdetail_nav_bar" />
+
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
-        android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_margin="16dp"
         android:layout_marginBottom="2dp"
         android:layout_marginTop="2dp"
         android:background="#e5e5e5"
@@ -30,11 +31,11 @@
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:textStyle="bold"
                 android:text="Chunguza Vidokezo Vifuatavyo Kwa Mama.Weka alama (&#x2713;) panapohusika."
                 android:textAllCaps="true"
                 android:textColor="@color/light_blue"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
 
             <CheckBox
@@ -120,34 +121,34 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:gravity="center_horizontal"
-                android:textStyle="bold"
-                android:layout_marginLeft="16dp"
                 android:text="Mama ameshauriwa azalie wapi"
                 android:textAllCaps="true"
                 android:textColor="@color/light_blue"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/facility"
-                android:layout_marginLeft="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
                 android:hint="jina la hospital" />
 
             <Button
-                android:layout_marginTop="32dp"
                 android:id="@+id/submit"
-                android:background="@color/light_blue"
-                android:textColor="#fff"
-                android:padding="8dp"
-                android:layout_marginLeft="16dp"
-                android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="Tunza" />
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/light_blue"
+                android:padding="8dp"
+                android:text="Tunza"
+                android:textColor="#fff"
+                android:textSize="16sp" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
