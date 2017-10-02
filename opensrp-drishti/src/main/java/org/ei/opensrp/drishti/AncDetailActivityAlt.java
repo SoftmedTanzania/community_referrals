@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -111,6 +112,15 @@ public class AncDetailActivityAlt extends AppCompatActivity {
             // set values
             setMotherProfileDetails();
         }
+
+
+        findViewById(R.id.fabFollowUp).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // todo do follow up
+                Toast.makeText(getApplicationContext(), "Do follow up.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
