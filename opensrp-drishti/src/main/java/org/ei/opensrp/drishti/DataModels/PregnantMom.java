@@ -5,7 +5,7 @@ package org.ei.opensrp.drishti.DataModels;
  */
 
 public class PregnantMom {
-    private String name, cardid, phone, discountId, education, occupation, lastSmsToken, chwComment, reg_type,
+    private String mother_name, cardid, phone, discountId, education, occupation, lastSmsToken, chwComment, reg_type,
             is_pnc,
             is_valid,
             husbandName, husbandEducation, husbandOccupation, physicalAddress, facilityId;
@@ -36,11 +36,11 @@ public class PregnantMom {
     private boolean ancAppointmentEarly;
 
     public String getName() {
-        return name;
+        return mother_name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.mother_name = name;
     }
 
     public String getId() {
