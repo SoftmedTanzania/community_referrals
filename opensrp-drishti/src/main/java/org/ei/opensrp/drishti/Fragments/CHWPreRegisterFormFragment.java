@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
+import org.ei.opensrp.drishti.AncSmartRegisterActivity;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.util.DatesHelper;
@@ -212,8 +213,8 @@ public class CHWPreRegisterFormFragment extends Fragment {
 
                     // todo start form submission
 
-                    ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(gsonMom, recordId, formName, getFormFieldsOverrides());
-                    getActivity().finish();
+                    ((AncSmartRegisterActivity) getActivity()).saveFormSubmission(gsonMom, recordId, formName, getFormFieldsOverrides());
+                    ((AncSmartRegisterActivity) getActivity()).switchToBaseFragment(null);
                 }
 
             }

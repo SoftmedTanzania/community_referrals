@@ -232,11 +232,11 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
                         motherData = new MotherPersonObject(motherId, null, pregnantMom);
                         Log.d(TAG,"motherdata to be updated"+ new Gson().toJson(motherData));
                         ((AncSmartRegisterActivity) getActivity()).updateFormSubmission(motherData, motherId);
-                        ((AncSmartRegisterActivity) getActivity()).returnToBaseFragment();
+                        ((AncSmartRegisterActivity) getActivity()).switchToBaseFragment(null);
                     }else {
                         Log.d(TAG,"am in for the first registration registration");
                         ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(gsonMom, recordId, formName, getFormFieldsOverrides());
-                        ((AncSmartRegisterActivity) getActivity()).returnToBaseFragment();
+                        ((AncSmartRegisterActivity) getActivity()).switchToBaseFragment(null);
 
                     }
 
@@ -310,6 +310,7 @@ public class AncRegisterFormFragment extends android.support.v4.app.Fragment {
     }
 
     public void reloadValues(){
+        Log.d(TAG,"reloading values");
         pagerAdapter = new ANCRegisterPagerAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
     }

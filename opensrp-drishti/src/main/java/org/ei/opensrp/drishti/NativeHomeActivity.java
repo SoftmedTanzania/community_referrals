@@ -141,9 +141,9 @@ public class NativeHomeActivity extends SecuredActivity {
         int count = roles.length();
         for (int i =0 ; i<count ; i++){
             try {
-                if(roles.getString(i).equals("Organizational: Health Facility User")){
+                if(roles.getString(i).equals("facilityworker")){
                     ((UzaziSalamaApplication)getApplication()).setUserType(1);
-                }else if (roles.getString(i).equals("Organizational: CHW")){
+                }else if (roles.getString(i).equals("communityworker")){
                     ((UzaziSalamaApplication)getApplication()).setUserType(0);
                 }
             } catch (JSONException e) {

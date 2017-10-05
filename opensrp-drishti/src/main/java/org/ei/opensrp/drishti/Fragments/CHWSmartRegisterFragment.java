@@ -7,6 +7,7 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import org.ei.opensrp.drishti.AncSmartRegisterActivity;
+import org.ei.opensrp.drishti.Application.UzaziSalamaApplication;
 import org.ei.opensrp.drishti.DataModels.ChwFollowUpMother;
 import org.ei.opensrp.drishti.DataModels.PreRegisteredMother;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
@@ -48,6 +50,8 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     private TabLayout tabs;
     private LayoutInflater inflater;
     private ImageButton imageButton;
+    private CHWPagerAdapter adapter;
+    private ViewPager feeds;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,9 +61,9 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         View v = inflater.inflate(R.layout.activity_chwregister, container, false);
         imageButton = (ImageButton) v.findViewById(R.id.register_client);
 
-        CHWPagerAdapter adapter = new CHWPagerAdapter(getActivity().getSupportFragmentManager());
+        adapter = new CHWPagerAdapter(getActivity().getSupportFragmentManager());
 
-        ViewPager feeds = (ViewPager) v.findViewById(R.id.viewPager);
+        feeds = (ViewPager) v.findViewById(R.id.viewPager);
         feeds.setAdapter(adapter);
 
         feeds.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -156,5 +160,25 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     @Override
     protected void onCreation() {
 
+    }
+
+    @Override
+    public void refreshListView() {
+
+        CHWFollowUpFragment chwFollowUpFragment = (CHWFollowUpFragment) findFragmentByPosition(0);
+        if (chwFollowUpFragment != null) {
+            chwFollowUpFragment.populateData();
+        }
+
+        CHWPreRegistrationFragment chwPreRegistrationFragment = (CHWPreRegistrationFragment) findFragmentByPosition(1);
+        if (chwPreRegistrationFragment != null) {
+            chwPreRegistrationFragment.refreshListView();
+        }
+
+    }
+
+    public android.support.v4.app.Fragment findFragmentByPosition(int position) {
+        FragmentPagerAdapter fragmentPagerAdapter = adapter;
+        return getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + feeds.getId() + ":" + fragmentPagerAdapter.getItemId(position));
     }
 }

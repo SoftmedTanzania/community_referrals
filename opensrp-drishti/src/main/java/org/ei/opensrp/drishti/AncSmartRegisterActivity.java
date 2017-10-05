@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +43,7 @@ import org.ei.opensrp.drishti.Fragments.AncSmartRegisterFragment;
 import org.ei.opensrp.drishti.Fragments.CHWFollowUpFragment;
 import org.ei.opensrp.drishti.Fragments.CHWPreRegisterFormFragment;
 import org.ei.opensrp.drishti.Fragments.CHWPreRegistrationFragment;
+import org.ei.opensrp.drishti.Fragments.CHWSmartRegisterFragment;
 import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
@@ -52,6 +54,7 @@ import org.ei.opensrp.drishti.util.Utils;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.util.FormUtils;
+import org.ei.opensrp.view.activity.DrishtiApplication;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.ei.opensrp.view.contract.SmartRegisterClient;
 import org.ei.opensrp.view.contract.SmartRegisterClients;
@@ -79,6 +82,7 @@ import butterknife.ButterKnife;
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
+import static android.widget.Toast.LENGTH_SHORT;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.ei.opensrp.domain.SyncStatus.SYNCED;
 import static org.ei.opensrp.drishti.util.Utils.generateRandomUUIDString;
@@ -131,22 +135,12 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
         mPager.setOffscreenPageLimit(formNames.length);
 
-//        if(((UzaziSalamaApplication)getApplication()).getUserType()==0) {
-//            mPager.setCurrentItem(3);
-//            currentPage = 3;
-//        }
-        mPager.setCurrentItem(0);
-        currentPage = 0;
+        if(((UzaziSalamaApplication)getApplication()).getUserType()==0) {
+            mPager.setCurrentItem(3);
+            currentPage = 3;
+        }
 
         Log.d(TAG, "table columns ="+new Gson().toJson(context().commonrepository("wazazi_salama_mother").common_TABLE_COLUMNS));
-
-    }
-
-    public void returnToBaseFragment(){
-        mPager.setCurrentItem(0);
-        AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) getDisplayFormFragmentAtIndex(1);
-        displayFormFragment.reloadValues();
-
 
     }
 
@@ -247,8 +241,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //
 //                mPager.setCurrentItem(1);
 //                currentPage = 1;
-                CHWPreRegistrationFragment.newInstance();
-                CHWFollowUpFragment.newInstance();
                 Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + mother.getMOTHERS_FIRST_NAME() +" "+mother.getMOTHERS_LAST_NAME(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
@@ -857,22 +849,23 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     }
 
     public void switchToBaseFragment(final String data) {
-        Log.v("we are here", "switchtobasegragment");
+        Log.v(TAG, "switchtobasegragment");
         final int prevPageIndex = currentPage;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                // TODO: 9/17/17 this is a hack
-
-
-                if(currentPage==1) {//for supervisors
+                if(((UzaziSalamaApplication)getApplication()).getUserType()==0) {//for chws
+                    CHWSmartRegisterFragment chwSmartRegisterFragment = (CHWSmartRegisterFragment) findFragmentByPosition(3);
+                    if (chwSmartRegisterFragment != null) {
+                        chwSmartRegisterFragment.refreshListView();
+                    }
+                    mPager.setCurrentItem(3, true);
+                }else {//for supervisors
                     AncSmartRegisterFragment registerFragment = (AncSmartRegisterFragment) findFragmentByPosition(0);
                     if (registerFragment != null) {
                         registerFragment.refreshListView();
                     }
                     mPager.setCurrentItem(0, true);
-                }else   if(currentPage==2) {//for chws
-                    finish();
                 }
             }
         });
@@ -975,6 +968,13 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         mPager.setCurrentItem(pageNumber);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 
 }

@@ -129,6 +129,8 @@ public class HTTPAgent {
 
     private int status;
     public LoginResponse urlCanBeAccessWithGivenCredentials(String requestURL, String userName, String password) {
+        Log.d(TAG,"username = "+userName);
+        Log.d(TAG,"password = "+password);
         httpClient.setBasicAuth(userName,password);
         responseContent=null;
 
@@ -139,6 +141,8 @@ public class HTTPAgent {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                     status=statusCode;
+                    throwable.printStackTrace();
+                    Log.d(TAG,"response string = "+responseString);
                 }
 
                 @Override

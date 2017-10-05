@@ -49,38 +49,14 @@ public class CHWPreRegistrationFragment extends SecuredNativeSmartRegisterCursor
     private static final String TAG = CHWPreRegistrationFragment.class.getSimpleName(),
             TABLE_NAME = "wazazi_salama_mother";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-//    private OnFragmentInteractionListener mListener;
+    private CHWRegisterRecyclerAdapter pager;
+    private RecyclerView recyclerView;
 
     public CHWPreRegistrationFragment() {
         // Required empty public constructor
     }
 
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-
-     * @return A new instance of fragment CHWFollowUpFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CHWFollowUpFragment newInstance() {
-        CHWFollowUpFragment fragment = new CHWFollowUpFragment();
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     protected void onCreation() {
@@ -93,7 +69,14 @@ public class CHWPreRegistrationFragment extends SecuredNativeSmartRegisterCursor
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_chwregistration, container, false);
 
-        RecyclerView recyclerView = (RecyclerView)v.findViewById(R.id.pre_reg_listView);
+        recyclerView = (RecyclerView)v.findViewById(R.id.pre_reg_listView);
+
+        populateData();
+
+        return v;
+    }
+
+    public void populateData(){
         commonRepository = context().commonrepository("wazazi_salama_mother");
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where IS_VALID='true'" );
 
@@ -103,18 +86,14 @@ public class CHWPreRegistrationFragment extends SecuredNativeSmartRegisterCursor
         this.motherPersonList = Utils.convertToMotherPersonObjectList(commonPersonObjectList);
         Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + motherPersonList.size());
 
-        CHWRegisterRecyclerAdapter pager = new CHWRegisterRecyclerAdapter(getActivity(),motherPersonList);
+        pager = new CHWRegisterRecyclerAdapter(getActivity(),motherPersonList);
 
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
-
         recyclerView.setAdapter(pager);
-
-        return v;
     }
 
     @Override

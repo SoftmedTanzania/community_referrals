@@ -58,6 +58,9 @@ public class CHWFollowUpFragment extends SecuredNativeSmartRegisterCursorAdapter
     private String mParam1;
     private String mParam2;
 
+    private  RecyclerView recyclerView;
+    private CHWFollowUpPagerAdapter pager;
+
 //    private OnFragmentInteractionListener mListener;
 
     public CHWFollowUpFragment() {
@@ -99,12 +102,19 @@ public class CHWFollowUpFragment extends SecuredNativeSmartRegisterCursorAdapter
 
         View v= inflater.inflate(R.layout.fragment_chwfollow, container, false);
 
-        RecyclerView recyclerView = (RecyclerView)v.findViewById(R.id.chw_followUp_listView);
+        recyclerView = (RecyclerView)v.findViewById(R.id.chw_followUp_listView);
+        populateData();
+
+        return v;
+    }
+
+    public void populateData(){
+
         //todo need to select all mothers with usertype id similar to the logged chw user
         commonRepository = context().commonrepository("wazazi_salama_mother");
         //todo martha edit the query
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME );
-//        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where IS_VALID='true'" );
+        //cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where IS_VALID='true'" );
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
@@ -112,20 +122,14 @@ public class CHWFollowUpFragment extends SecuredNativeSmartRegisterCursorAdapter
         this.motherPersonList = Utils.convertToMotherPersonObjectList(commonPersonObjectList);
         Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + motherPersonList.size());
 
-        CHWFollowUpPagerAdapter pager = new CHWFollowUpPagerAdapter(getActivity(), motherPersonList);
+        pager = new CHWFollowUpPagerAdapter(getActivity(), motherPersonList);
 
 
         int numberOfColumns = 3;
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
-
-
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
-
         recyclerView.setAdapter(pager);
-
-        return v;
     }
 
     @Override
