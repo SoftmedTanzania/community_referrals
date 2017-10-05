@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import org.ei.opensrp.drishti.DataModels.FollowUpReport;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
+import org.ei.opensrp.drishti.util.DatesHelper;
 
 import java.util.HashMap;
 
@@ -66,7 +67,7 @@ public class AncFollowUpFormActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 return true;
@@ -212,8 +213,10 @@ public class AncFollowUpFormActivity extends AppCompatActivity {
 
     private FollowUpReport getFollowUpReport() {
         FollowUpReport report = new FollowUpReport();
-        report.setDate(System.currentTimeMillis());
+        long today = System.currentTimeMillis();
+        report.setDate(today);
         report.setMotherId(pregnantMom.getId());
+        report.setFacilityName(editTextFacilityName.getText().toString());
 
         report.setAlbumin(chechboxAlbumini.isChecked());
         report.setChildDealth(checkboxChildDeath.isChecked());
@@ -224,7 +227,36 @@ public class AncFollowUpFormActivity extends AppCompatActivity {
         report.setHbBelow60(checkboxHb.isChecked());
         report.setUnproportionalPregnancyHeight(checkboxKimo.isChecked());
 
-        report.setFacilityName(editTextFacilityName.getText().toString());
+        // automate follow up number
+        long lnmp = pregnantMom.getDateLNMP();
+        long firstVisit = DatesHelper.calculate1stVisitFromLNMP(lnmp);
+        long secondVisit = DatesHelper.calculate2ndVisitFromLNMP(lnmp);
+        long thirdVisit = DatesHelper.calculate3rdVisitFromLNMP(lnmp);
+        long fourthVisit = DatesHelper.calculate4thVisitFromLNMP(lnmp);
+        long earlyVisit = 0;
+        if (pregnantMom.isOnRisk())
+            earlyVisit = DatesHelper.calculateEarlyVisitFromLNMP(lnmp);
+
+        if (today > fourthVisit)
+            // 4th follow up
+            report.setFollowUpNumber(4);
+
+        else if (today > thirdVisit)
+            // 3rd follow up
+            report.setFollowUpNumber(3);
+
+        else if (today > secondVisit)
+            // 2nd visit
+            report.setFollowUpNumber(2);
+
+        else if (today > firstVisit)
+            // 1st visit
+            report.setFollowUpNumber(1);
+
+        else if ((int) earlyVisit != 0 && today > earlyVisit)
+            // early visit for mother on risk
+            report.setFollowUpNumber(0);
+
 
         // log report object
         Log.d(TAG, "report=" + gson.toJson(report));
