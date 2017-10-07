@@ -1,5 +1,6 @@
 package com.softmed.uzazisalama;
 
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,9 +17,13 @@ import com.softmed.uzazisalama.DataModels.FollowUpReport;
 import com.softmed.uzazisalama.DataModels.PregnantMom;
 import com.softmed.uzazisalama.util.DatesHelper;
 
+import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.provider.SmartRegisterClientsProvider;
+import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
+import org.json.JSONObject;
 
-public class AncFollowUpFormActivity extends AppCompatActivity {
+public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +35,7 @@ public class AncFollowUpFormActivity extends AppCompatActivity {
     private CheckBox checkBoxPressure, checkboxHb, chechboxAlbumini, checkboxSugar, checkboxUmriWaMimba,
             checkboxChildDeath, chechkboxMlaloWaMtoto, checkboxKimo;
     private String pressure, hb, albumini, sugar, umriWaMimba, childDeath, mlaloWaMtoto, kimo;
-    private String formName;
+    private String formName = "anc_follow_up_report";
     private EditText editTextFacilityName;
 
     private PregnantMom pregnantMom;
@@ -38,19 +43,44 @@ public class AncFollowUpFormActivity extends AppCompatActivity {
 
 
     @Override
+    protected DefaultOptionsProvider getDefaultOptionsProvider() {
+        return null;
+    }
+
+    @Override
+    protected NavBarOptionsProvider getNavBarOptionsProvider() {
+        return null;
+    }
+
+    @Override
+    protected SmartRegisterClientsProvider clientsProvider() {
+        return null;
+    }
+
+    @Override
+    protected void onInitialization() {
+
+    }
+
+    @Override
+    public void startRegistration() {
+
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anc_follow_up_form);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.mToolbar);
-
-        setSupportActionBar(toolbar);
-
-        ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Mahudhurio Ya Marudio");
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.mToolbar);
+//
+//        setSupportActionBar(toolbar);
+//
+//        ActionBar actionBar = getSupportActionBar();
+//        assert actionBar != null;
+//        actionBar.setHomeButtonEnabled(true);
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+//        actionBar.setTitle("Mahudhurio Ya Marudio");
 
 
         String gsonMom = getIntent().getStringExtra("mom");
@@ -67,7 +97,7 @@ public class AncFollowUpFormActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 return true;
@@ -204,14 +234,24 @@ public class AncFollowUpFormActivity extends AppCompatActivity {
 //                Log.d(TAG, "pressure_2 = " + trial_three);
 
 
-                // TODO: 10/2/17 submit follow up report
-                FollowUpReport report = getFollowUpReport();
+                // TODO: 10/2/17 get id and fieldOverrides for follow up report submission
+                String report = getFollowUpReport();
+                saveFormSubmission(report, "id", formName, null);
+            }
+        });
+
+
+        // home as up button
+        findViewById(R.id.buttonHome).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
     }
 
 
-    private FollowUpReport getFollowUpReport() {
+    private String getFollowUpReport() {
         FollowUpReport report = new FollowUpReport();
         long today = System.currentTimeMillis();
         report.setDate(today);
@@ -260,8 +300,35 @@ public class AncFollowUpFormActivity extends AppCompatActivity {
 
         // log report object
         Log.d(TAG, "report=" + gson.toJson(report));
-        return report;
+        return gson.toJson(report);
     }
 
 
+    @Override
+    public void saveFormSubmission(String formSubmision, String id, String formName, JSONObject fieldOverrides) {
+        // super.saveFormSubmission(formSubmision, id, formName, fieldOverrides);
+        // TODO: 10/7/17 complete this implementation to save report to
+        FollowUpReport report = gson.fromJson(formSubmision, FollowUpReport.class);
+
+        ContentValues reportValues = new ContentValues();
+        reportValues.put("REPORT_DATE", report.getDate());
+        reportValues.put("FOLLOW_UP_DATA", formSubmision); // follow up data contains the whole report in
+
+        if (report.isAlbumin()
+                || report.isBadChildPosition()
+                || report.isChildDealth()
+                || report.isHbBelow60()
+                || report.isHighBloodPressure()
+                || report.isHighSugar()
+                || report.isOver40WeeksPregnancy()
+                || report.isUnproportionalPregnancyHeight())
+            reportValues.put("IS_ON_RISK", true);
+        else
+            reportValues.put("IS_ON_RISK", false);
+
+
+        CommonRepository commonRepository = context().commonrepository("uzazi_salama_follow_up_report");
+        commonRepository.customInsert(reportValues);
+
+    }
 }
