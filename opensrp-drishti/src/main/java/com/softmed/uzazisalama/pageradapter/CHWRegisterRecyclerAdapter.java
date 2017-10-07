@@ -90,7 +90,7 @@ public class CHWRegisterRecyclerAdapter extends
                 || pregnantMom.isHeightBelow150()
                 || pregnantMom.isKondoKukwama()
                 || pregnantMom.isKilemaChaNyonga()
-                || pregnantMom.getHivStatus() == 1
+                || pregnantMom.getHivStatus() == 0
                 || pregnantMom.isFirstPregAbove35Yrs()
                 )
         {

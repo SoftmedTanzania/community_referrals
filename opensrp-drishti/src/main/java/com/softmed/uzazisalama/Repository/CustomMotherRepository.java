@@ -23,6 +23,7 @@ public class CustomMotherRepository{
     public static final String PNC_STATUS = "PNC_STATUS";
     public static final String MOTHERS_ID = "MOTHERS_ID";
     public static final String TYPE = "REG_TYPE";
+    public static final String CREATEDBY = "CreatedBy";
 
 
 
@@ -41,6 +42,7 @@ public class CustomMotherRepository{
         values.put(PNC_STATUS, motherPersonObject.getPNC_STATUS());
         values.put(IS_VALID, motherPersonObject.getIS_VALID());
         values.put(FACILITY_ID, motherPersonObject.getFACILITY_ID());
+        values.put(CREATEDBY, motherPersonObject.getCreatedBy());
         values.put(DETAILS_COLUMN, motherPersonObject.getDetails());
         return values;
     }

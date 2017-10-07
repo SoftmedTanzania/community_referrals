@@ -17,6 +17,7 @@ import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.R;
 
+import com.softmed.uzazisalama.Application.UzaziSalamaApplication;
 import com.softmed.uzazisalama.Repository.MotherPersonObject;
 import com.softmed.uzazisalama.pageradapter.CHWRegisterRecyclerAdapter;
 import com.softmed.uzazisalama.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
@@ -77,7 +78,7 @@ public class CHWPreRegistrationFragment extends SecuredNativeSmartRegisterCursor
 
     public void populateData(){
         commonRepository = context().commonrepository("wazazi_salama_mother");
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where IS_VALID='true' and  REG_TYPE = 2 "  );
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where IS_VALID='true' and  REG_TYPE = 2 and CreatedBy = '"+  ((UzaziSalamaApplication) getActivity().getApplication()).getCurrentUserID()+"'" );
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));

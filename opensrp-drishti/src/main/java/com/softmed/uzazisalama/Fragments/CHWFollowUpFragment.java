@@ -17,6 +17,7 @@ import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.R;
 
+import com.softmed.uzazisalama.Application.UzaziSalamaApplication;
 import com.softmed.uzazisalama.Repository.MotherPersonObject;
 import com.softmed.uzazisalama.pageradapter.CHWFollowUpPagerAdapter;
 import com.softmed.uzazisalama.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
@@ -109,8 +110,8 @@ public class CHWFollowUpFragment extends SecuredNativeSmartRegisterCursorAdapter
         //todo need to select all mothers with usertype id similar to the logged chw user
         commonRepository = context().commonrepository("wazazi_salama_mother");
         //todo martha edit the query
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME );
-        //cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where IS_VALID='true'" );
+//        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME );
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where IS_VALID='true' and  REG_TYPE = 2 and CreatedBy = '"+  ((UzaziSalamaApplication) getActivity().getApplication()).getCurrentUserID()+"'" );
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));

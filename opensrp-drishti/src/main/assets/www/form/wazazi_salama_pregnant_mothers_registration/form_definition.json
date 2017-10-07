@@ -161,6 +161,9 @@
             },
             {
                 "name": "MOTHERS_FIRST_NAME"
+            },
+            {
+                "name": "CreatedBy"
             }
         ]
     }
