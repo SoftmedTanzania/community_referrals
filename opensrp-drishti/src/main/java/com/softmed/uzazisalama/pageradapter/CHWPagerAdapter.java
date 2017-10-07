@@ -43,7 +43,7 @@ public class CHWPagerAdapter extends FragmentPagerAdapter {
                 return "Mama wajawazito";
 
             case 1:
-                return "usaili wa awali";
+                return "Usajili wa awali";
 
             default:
                 return String.valueOf(position + 1);

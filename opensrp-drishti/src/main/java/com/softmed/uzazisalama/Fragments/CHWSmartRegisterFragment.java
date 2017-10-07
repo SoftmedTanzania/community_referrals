@@ -153,7 +153,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
         CHWPreRegistrationFragment chwPreRegistrationFragment = (CHWPreRegistrationFragment) findFragmentByPosition(1);
         if (chwPreRegistrationFragment != null) {
-            chwPreRegistrationFragment.refreshListView();
+            chwPreRegistrationFragment.populateData();
         }
 
     }

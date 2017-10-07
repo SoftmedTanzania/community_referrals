@@ -77,7 +77,7 @@ public class CHWPreRegistrationFragment extends SecuredNativeSmartRegisterCursor
 
     public void populateData(){
         commonRepository = context().commonrepository("wazazi_salama_mother");
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where IS_VALID='true'" );
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where IS_VALID='true' and  REG_TYPE = 2 "  );
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));

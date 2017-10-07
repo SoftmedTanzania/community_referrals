@@ -19,18 +19,14 @@ import com.softmed.uzazisalama.util.DatesHelper;
 import org.ei.opensrp.drishti.R;
 
 public class AncFollowUpFormActivity extends AppCompatActivity {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
+
     private static final String TAG = AncFollowUpFormActivity.class.getSimpleName();
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
+
     private CheckBox checkBoxPressure, checkboxHb, chechboxAlbumini, checkboxSugar, checkboxUmriWaMimba,
             checkboxChildDeath, chechkboxMlaloWaMtoto, checkboxKimo;
-    private String pressure, hb, albumini, sugar, umriWaMimba, childDeath, mlaloWaMtoto, kimo;
-    private String formName;
+
     private EditText editTextFacilityName;
 
     private PregnantMom pregnantMom;
@@ -93,117 +89,6 @@ public class AncFollowUpFormActivity extends AppCompatActivity {
         findViewById(R.id.fabSubmit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                checkBoxPressure.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                        if (isChecked) {
-//                            pressure = "true";
-//                        } else {
-//                            pressure = "false";
-//                        }
-//
-//                    }
-//                });
-//
-//                chechboxAlbumini.setOnClickListener(new View.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(View view) {
-//                        if (chechboxAlbumini.isChecked()) {
-//                            albumini = "true";
-//                        } else {
-//                            albumini = "false";
-//                        }
-//                    }
-//                });
-//
-//                checkboxHb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//
-//                        if (isChecked) {
-//                            hb = "true";
-//                        } else {
-//                            hb = "false";
-//                        }
-//                    }
-//                });
-//                chechkboxMlaloWaMtoto.setOnClickListener(new View.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(View view) {
-//                        if (chechkboxMlaloWaMtoto.isChecked()) {
-//                            mlaloWaMtoto = "true";
-//                        } else {
-//                            mlaloWaMtoto = "false";
-//                        }
-//                    }
-//                });
-//                checkboxChildDeath.setOnClickListener(new View.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(View view) {
-//                        if (checkboxChildDeath.isChecked()) {
-//                            childDeath = "true";
-//                        } else {
-//                            childDeath = "false";
-//                        }
-//                    }
-//                });
-//                checkboxKimo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                        if (isChecked) {
-//                            kimo = "true";
-//                        } else {
-//                            kimo = "false";
-//                        }
-//                    }
-//                });
-//                checkboxSugar.setOnClickListener(new View.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(View view) {
-//                        if (checkboxSugar.isChecked()) {
-//                            sugar = "true";
-//                        } else {
-//                            sugar = "false";
-//                        }
-//                    }
-//                });
-//                checkboxUmriWaMimba.setOnClickListener(new View.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(View view) {
-//                        if (checkboxUmriWaMimba.isEnabled()) {
-//                            umriWaMimba = "true";
-//                        } else {
-//                            umriWaMimba = "false";
-//                        }
-//                    }
-//                });
-//
-//                HashMap<String, String> followHash = new HashMap<String, String>();
-//                followHash.put("facility_name", editTextFacilityName.toString());
-//                followHash.put("pressure", pressure);
-//                followHash.put("hb", hb);
-//                followHash.put("albumin", albumini);
-//                followHash.put("sugar", sugar);
-//                followHash.put("mlaloWaMtoto", mlaloWaMtoto);
-//                followHash.put("childDeath", childDeath);
-//                followHash.put("umriWaMimba", umriWaMimba);
-//                followHash.put("kimo", kimo);
-//
-//
-//                String trial_one = followHash.get(pressure);
-//                String trial_two = followHash.get(hb);
-//                String trial_three = followHash.get(umriWaMimba);
-//                Log.d(TAG, "pressure = " + trial_one);
-//                Log.d(TAG, "pressure_1 = " + trial_two);
-//                Log.d(TAG, "pressure_2 = " + trial_three);
-
-
                 // TODO: 10/2/17 submit follow up report
                 FollowUpReport report = getFollowUpReport();
             }

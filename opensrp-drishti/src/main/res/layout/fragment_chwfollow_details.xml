@@ -1,315 +1,318 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="2dp"
     android:paddingBottom="2dp"
-    android:orientation="vertical"
     android:layout_margin="16dp"
     android:background="#E8E8E8">
-    <ImageView
-        android:id="@+id/cancel_action"
-        android:layout_gravity="right"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="#7e1e1a"
-        android:src="@drawable/ic_close_white_24dp"/>
-    <RelativeLayout
-        android:layout_margin="16dp"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.support.v7.widget.CardView
-            android:layout_marginTop="48dp"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/cancel_action"
+            android:layout_gravity="right"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#7e1e1a"
+            android:src="@drawable/ic_close_white_24dp"/>
+        <RelativeLayout
+            android:layout_margin="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <LinearLayout
-                android:background="#fff"
+
+            <android.support.v7.widget.CardView
+                android:layout_marginTop="48dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:background="#fff"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_marginTop="64dp"
+                        android:id="@+id/name"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Martha Shaka"/>
+                    <TextView
+                        android:id="@+id/mom_age"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:text="30 years"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <ImageView
+                android:layout_below="@+id/textView"
+                android:id="@+id/profilePic"
+                android:background="@drawable/shape_circle"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:elevation="10px"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/unfpa_anc"/>
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="#e8e8e8">
+            <android.support.v7.widget.CardView
+                android:background="#F3F3F3"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_contact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                card_view:cardCornerRadius="0dp"
+                >
                 <TextView
-                    android:layout_marginTop="64dp"
-                    android:id="@+id/name"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Martha Shaka"/>
-                <TextView
-                    android:id="@+id/mom_age"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:text="30 years"/>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-        <ImageView
-            android:layout_below="@+id/textView"
-            android:id="@+id/profilePic"
-            android:background="@drawable/shape_circle"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:elevation="10px"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/unfpa_anc"/>
-
-    </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="#e8e8e8">
-        <android.support.v7.widget.CardView
-            android:background="#F3F3F3"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_contact"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            card_view:cardCornerRadius="0dp"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="8dp"
-                android:background="#D85751"/>
-            <RelativeLayout
-                android:id="@+id/details"
-                android:layout_marginTop="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
-                    android:id="@+id/textSpouse"
-                    android:textColor="#7c322f"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Spouse: "/>
-                <TextView
-                    android:layout_alignTop="@+id/textSpouse"
-                    android:layout_toRightOf="@+id/textSpouse"
-                    android:id="@+id/spouseName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="King Kive"/>
-                <TextView
-                    android:layout_marginLeft="8dp"
-                    android:layout_below="@+id/textSpouse"
-                    android:id="@+id/textSpouseTel"
-                    android:textColor="#7c322f"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tel no: "/>
-                <TextView
-                    android:layout_marginLeft="8dp"
-                    android:layout_alignTop="@+id/textSpouseTel"
-                    android:layout_toRightOf="@+id/textSpouseTel"
-                    android:id="@+id/spouseTel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0712763362"/>
-                <!--<TextView-->
-                <!---->
-                <!--android:id="@+id/textMotherTel"-->
-                <!--android:textColor="#7c322f"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Mom.no:"/>-->
-                <!--<TextView-->
-                <!--android:layout_marginLeft="0dp"-->
-                <!---->
-                <!--android:id="@+id/motherTel"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="0742226984"/>-->
-                <TextView
-                    android:layout_below="@+id/textSpouseTel"
-                    android:textColor="#7c322f"
-                    android:layout_marginLeft="8dp"
-                    android:id="@+id/textVillage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Village: "/>
-                <TextView
-                    android:layout_alignTop="@+id/textVillage"
-                    android:layout_toRightOf="@+id/textVillage"
-                    android:id="@+id/village"
-                    android:layout_marginLeft="6dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kwembe"/>
-                <TextView
-                    android:layout_marginTop="4dp"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
-                    android:layout_below="@+id/village"
-                    android:gravity="center_horizontal"
-                    android:background="#fff"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Mawasiliano"/>
-            </RelativeLayout>
-
-
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-            android:background="#F3F3F3"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            card_view:cardCornerRadius="0dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="8dp"
-                android:background="#8DC63F"/>
-            <RelativeLayout
-                android:layout_marginTop="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
-                    android:textColor="#4f7122"
-                    android:id="@+id/textFacility"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Facility: "/>
-                <TextView
-                    android:layout_alignTop="@+id/textFacility"
-                    android:layout_toRightOf="@+id/textFacility"
-                    android:id="@+id/facility"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mt. Meru"/>
-                <TextView
-                    android:layout_below="@+id/facility"
-                    android:layout_alignLeft="@+id/textFacility"
-                    android:textColor="#4f7122"
-                    android:id="@+id/textVisit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Visited: "/>
-                <TextView
-
-                    android:layout_alignTop="@+id/textVisit"
-                    android:layout_toRightOf="@+id/textVisit"
-                    android:id="@+id/visit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Once"/>
-
-                <TextView
-                    android:layout_below="@+id/visit"
-                    android:layout_alignLeft="@+id/textFacility"
-                    android:textColor="#4f7122"
-                    android:id="@+id/textRisk"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Risk: "/>
-                <TextView
-                    android:layout_marginLeft="18dp"
-                    android:layout_alignTop="@+id/textRisk"
-                    android:layout_toRightOf="@+id/textRisk"
-                    android:id="@+id/risk"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="High"/>
-
-                <TextView
-                    android:layout_marginTop="4dp"
-                    android:padding="2dp"
-                    android:layout_below="@+id/risk"
-                    android:gravity="center_horizontal"
-                    android:background="#fff"
+                    android:layout_height="8dp"
+                    android:background="#D85751"/>
+                <RelativeLayout
+                    android:id="@+id/details"
+                    android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Taarifa nyongeza"/>
-            </RelativeLayout>
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="4dp"
+                        android:id="@+id/textSpouse"
+                        android:textColor="#7c322f"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Spouse: "/>
+                    <TextView
+                        android:layout_alignTop="@+id/textSpouse"
+                        android:layout_toRightOf="@+id/textSpouse"
+                        android:id="@+id/spouseName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="King Kive"/>
+                    <TextView
+                        android:layout_marginLeft="8dp"
+                        android:layout_below="@+id/textSpouse"
+                        android:id="@+id/textSpouseTel"
+                        android:textColor="#7c322f"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tel no: "/>
+                    <TextView
+                        android:layout_marginLeft="8dp"
+                        android:layout_alignTop="@+id/textSpouseTel"
+                        android:layout_toRightOf="@+id/textSpouseTel"
+                        android:id="@+id/spouseTel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0712763362"/>
+                    <!--<TextView-->
+                    <!---->
+                    <!--android:id="@+id/textMotherTel"-->
+                    <!--android:textColor="#7c322f"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Mom.no:"/>-->
+                    <!--<TextView-->
+                    <!--android:layout_marginLeft="0dp"-->
+                    <!---->
+                    <!--android:id="@+id/motherTel"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="0742226984"/>-->
+                    <TextView
+                        android:layout_below="@+id/textSpouseTel"
+                        android:textColor="#7c322f"
+                        android:layout_marginLeft="8dp"
+                        android:id="@+id/textVillage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Village: "/>
+                    <TextView
+                        android:layout_alignTop="@+id/textVillage"
+                        android:layout_toRightOf="@+id/textVillage"
+                        android:id="@+id/village"
+                        android:layout_marginLeft="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kwembe"/>
+                    <TextView
+                        android:layout_marginTop="4dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:layout_below="@+id/village"
+                        android:gravity="center_horizontal"
+                        android:background="#fff"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mawasiliano"/>
+                </RelativeLayout>
 
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-            android:background="#F3F3F3"
-            android:layout_marginBottom="16dp"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_pregnancy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            card_view:cardCornerRadius="0dp"
-            android:layout_marginTop="8dp">
-            <TextView
+
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:background="#F3F3F3"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_info"
                 android:layout_width="match_parent"
-                android:layout_height="8dp"
-                android:background="#99D9DE"/>
-            <RelativeLayout
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                card_view:cardCornerRadius="0dp">
                 <TextView
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
-                    android:textColor="#236c71"
-                    android:id="@+id/textDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="EDD: "/>
-                <TextView
-                    android:layout_marginLeft="12dp"
-                    android:layout_alignTop="@+id/textDate"
-                    android:layout_toRightOf="@+id/textDate"
-                    android:id="@+id/EDD"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2-Jan-2017"/>
-                <TextView
-                    android:layout_below="@+id/textDate"
-                    android:layout_alignLeft="@+id/textDate"
-                    android:textColor="#236c71"
-                    android:id="@+id/textLNMP"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="LNMP: "/>
-                <TextView
-
-                    android:layout_alignTop="@+id/textLNMP"
-                    android:layout_toRightOf="@+id/textLNMP"
-                    android:id="@+id/lnmp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="7-Sep-2017"/>
-
-                <TextView
-                    android:layout_below="@+id/lnmp"
-                    android:layout_alignLeft="@+id/textLNMP"
-                    android:textColor="#236c71"
-                    android:id="@+id/textAge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="GA: "/>
-                <TextView
-                    android:layout_marginLeft="20dp"
-                    android:layout_alignTop="@+id/textAge"
-                    android:layout_toRightOf="@+id/textAge"
-                    android:id="@+id/age"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="less 20"/>
-
-                <TextView
-                    android:layout_marginTop="4dp"
-                    android:padding="2dp"
-                    android:layout_below="@+id/age"
-                    android:gravity="center_horizontal"
-                    android:background="#fff"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Ujauzito"/>
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
+                    android:layout_height="8dp"
+                    android:background="#8DC63F"/>
+                <RelativeLayout
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="4dp"
+                        android:textColor="#4f7122"
+                        android:id="@+id/textFacility"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Facility: "/>
+                    <TextView
+                        android:layout_alignTop="@+id/textFacility"
+                        android:layout_toRightOf="@+id/textFacility"
+                        android:id="@+id/facility"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mt. Meru"/>
+                    <TextView
+                        android:layout_below="@+id/facility"
+                        android:layout_alignLeft="@+id/textFacility"
+                        android:textColor="#4f7122"
+                        android:id="@+id/textVisit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Visited: "/>
+                    <TextView
+
+                        android:layout_alignTop="@+id/textVisit"
+                        android:layout_toRightOf="@+id/textVisit"
+                        android:id="@+id/visit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Once"/>
+
+                    <TextView
+                        android:layout_below="@+id/visit"
+                        android:layout_alignLeft="@+id/textFacility"
+                        android:textColor="#4f7122"
+                        android:id="@+id/textRisk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Risk: "/>
+                    <TextView
+                        android:layout_marginLeft="18dp"
+                        android:layout_alignTop="@+id/textRisk"
+                        android:layout_toRightOf="@+id/textRisk"
+                        android:id="@+id/risk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="High"/>
+
+                    <TextView
+                        android:layout_marginTop="4dp"
+                        android:padding="2dp"
+                        android:layout_below="@+id/risk"
+                        android:gravity="center_horizontal"
+                        android:background="#fff"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Taarifa nyongeza"/>
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:background="#F3F3F3"
+                android:layout_marginBottom="16dp"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_pregnancy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="0dp"
+                android:layout_marginTop="8dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="#99D9DE"/>
+                <RelativeLayout
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="4dp"
+                        android:textColor="#236c71"
+                        android:id="@+id/textDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="EDD: "/>
+                    <TextView
+                        android:layout_marginLeft="12dp"
+                        android:layout_alignTop="@+id/textDate"
+                        android:layout_toRightOf="@+id/textDate"
+                        android:id="@+id/EDD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2-Jan-2017"/>
+                    <TextView
+                        android:layout_below="@+id/textDate"
+                        android:layout_alignLeft="@+id/textDate"
+                        android:textColor="#236c71"
+                        android:id="@+id/textLNMP"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="LNMP: "/>
+                    <TextView
+
+                        android:layout_alignTop="@+id/textLNMP"
+                        android:layout_toRightOf="@+id/textLNMP"
+                        android:id="@+id/lnmp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="7-Sep-2017"/>
+
+                    <TextView
+                        android:layout_below="@+id/lnmp"
+                        android:layout_alignLeft="@+id/textLNMP"
+                        android:textColor="#236c71"
+                        android:id="@+id/textAge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="GA: "/>
+                    <TextView
+                        android:layout_marginLeft="20dp"
+                        android:layout_alignTop="@+id/textAge"
+                        android:layout_toRightOf="@+id/textAge"
+                        android:id="@+id/age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="less 20"/>
+
+                    <TextView
+                        android:layout_marginTop="4dp"
+                        android:padding="2dp"
+                        android:layout_below="@+id/age"
+                        android:gravity="center_horizontal"
+                        android:background="#fff"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ujauzito"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
     </LinearLayout>
-
-
-</LinearLayout>
+</ScrollView>

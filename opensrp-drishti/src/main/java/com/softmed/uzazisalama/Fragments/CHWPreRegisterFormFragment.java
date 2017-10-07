@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.softmed.uzazisalama.Application.UzaziSalamaApplication;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import com.softmed.uzazisalama.AncSmartRegisterActivity;
@@ -371,6 +372,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
         mom.setHusbandOccupation(editTextHusbandOccupation.getText().toString());
         mom.setDateLNMP(lnmp);
         mom.setEdd(edd);
+        mom.setCreatedBy(((UzaziSalamaApplication) getActivity().getApplication()).getCurrentUserID());
         mom.setDateRegistration(today.getTimeInMillis());
 
         Log.d(TAG, "mom ="+ new Gson().toJson(mom));
