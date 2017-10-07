@@ -2,9 +2,6 @@ package com.softmed.uzazisalama;
 
 import android.content.ContentValues;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,17 +21,9 @@ import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
 
 public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private static final String TAG = AncFollowUpFormActivity.class.getSimpleName();
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private CheckBox checkBoxPressure, checkboxHb, chechboxAlbumini, checkboxSugar, checkboxUmriWaMimba,
             checkboxChildDeath, chechkboxMlaloWaMtoto, checkboxKimo;
-    private String pressure, hb, albumini, sugar, umriWaMimba, childDeath, mlaloWaMtoto, kimo;
     private String formName = "anc_follow_up_report";
     private EditText editTextFacilityName;
 
@@ -235,8 +224,7 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
 
 
                 // TODO: 10/2/17 get id and fieldOverrides for follow up report submission
-                String report = getFollowUpReport();
-                saveFormSubmission(report, "id", formName, null);
+                saveFormSubmission(getFollowUpReport(), "id", formName, null);
             }
         });
 
@@ -306,11 +294,11 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
 
     @Override
     public void saveFormSubmission(String formSubmision, String id, String formName, JSONObject fieldOverrides) {
-        // super.saveFormSubmission(formSubmision, id, formName, fieldOverrides);
-        // TODO: 10/7/17 complete this implementation to save report to
+        // TODO: 10/7/17 complete this implementation to save report to database
         FollowUpReport report = gson.fromJson(formSubmision, FollowUpReport.class);
 
         ContentValues reportValues = new ContentValues();
+        reportValues.put("MOTHER_ID", report.getMotherId());
         reportValues.put("REPORT_DATE", report.getDate());
         reportValues.put("FOLLOW_UP_DATA", formSubmision); // follow up data contains the whole report in
 

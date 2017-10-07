@@ -21,7 +21,7 @@
     {
       "name": "uzazi_salama_follow_up_report",
       "columns": [
-        {"name":"REPORT_DATE"}, {"name":"IS_ON_RISK"},{"name":"FOLLOW_UP_DATA"}
+        {"name":"MOTHER_ID"},{"name":"REPORT_DATE"}, {"name":"IS_ON_RISK"},{"name":"FOLLOW_UP_DATA"}
       ]
     }
   ]
