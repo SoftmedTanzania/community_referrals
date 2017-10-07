@@ -37,12 +37,12 @@
     </compatible-screens>
 
     <application
-        android:name=".Application.UzaziSalamaApplication"
+        android:name="com.softmed.uzazisalama.Application.UzaziSalamaApplication"
         android:allowBackup="true"
         android:label="@string/app_name">
         <!--android:icon="@drawable/opensrp_logo" >-->
         <activity
-            android:name=".LoginActivity"
+            android:name="com.softmed.uzazisalama.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus"
             android:windowSoftInputMode="adjustResize|stateHidden">
@@ -56,30 +56,30 @@
         </activity>
 
         <activity
-            android:name=".NativeHomeActivity"
+            android:name="com.softmed.uzazisalama.NativeHomeActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".AncFollowUpFormActivity"
+            android:name="com.softmed.uzazisalama.AncFollowUpFormActivity"
             android:theme="@style/AppTheme.MaterialDesign" />
 
         <activity
-            android:name=".AncSmartRegisterActivity"
+            android:name="com.softmed.uzazisalama.AncSmartRegisterActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".AncDetailActivityAlt"
+            android:name="com.softmed.uzazisalama.AncDetailActivityAlt"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
 
         <activity
-            android:name=".AncDetailActivity"
+            android:name="com.softmed.uzazisalama.AncDetailActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
         <activity
-            android:name=".chw.CHWSmartRegisterActivity"
+            android:name="com.softmed.uzazisalama.chw.CHWSmartRegisterActivity"
             android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus">
             <!--<intent-filter>-->
             <!--<action android:name="android.intent.action.MAIN" />-->
@@ -87,9 +87,9 @@
             <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".chw.CHWFormRegistrationActivity" />
-        <activity android:name=".chw.CHWFormFollowActivity" />
-        <activity android:name=".chw.CHWEditPreRegistrationActivity"></activity>
+        <activity android:name="com.softmed.uzazisalama.chw.CHWFormRegistrationActivity" />
+        <activity android:name="com.softmed.uzazisalama.chw.CHWFormFollowActivity" />
+        <activity android:name="com.softmed.uzazisalama.chw.CHWEditPreRegistrationActivity"></activity>
 
         <meta-data
             android:name="io.fabric.ApiKey"
