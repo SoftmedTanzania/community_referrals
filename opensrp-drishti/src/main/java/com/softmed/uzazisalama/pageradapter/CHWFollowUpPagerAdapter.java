@@ -1,6 +1,7 @@
 package com.softmed.uzazisalama.pageradapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -74,7 +75,8 @@ public class CHWFollowUpPagerAdapter extends
 
         viewHolder.nameTextView.setText(mother.getMOTHERS_FIRST_NAME() + " " + mother.getMOTHERS_LAST_NAME());
         viewHolder.ageTextView.setText(String.valueOf(pregnantMom.getAge()) +" years");
-        viewHolder.riskTextView.setText("high");
+
+
         viewHolder.villageTextView.setText(pregnantMom.getPhysicalAddress());
         viewHolder.uniqueIDTextView.setText(pregnantMom.getId());
         viewHolder.facilityTextView.setText(pregnantMom.getFacilityId());
@@ -82,6 +84,30 @@ public class CHWFollowUpPagerAdapter extends
         viewHolder.anc2TextView.setText(anc2);
         viewHolder.anc3TextView.setText(anc3);
         viewHolder.anc4TextView.setText(anc4);
+
+        if(pregnantMom.isBleedingOnDelivery()
+                || pregnantMom.isCsDelivery()
+                || pregnantMom.isFourOrMorePreg()
+                || pregnantMom.isHadStillBirth()
+                || pregnantMom.isHas2orMoreBBA()
+                || pregnantMom.isHas10YrsPassedSinceLastPreg()
+                || pregnantMom.isHasDiabetes()
+                || pregnantMom.isHasHeartProblem()
+                || pregnantMom.isHasTB()
+                || pregnantMom.isHeightBelow150()
+                || pregnantMom.isKondoKukwama()
+                || pregnantMom.isKilemaChaNyonga()
+                || pregnantMom.getHivStatus() == 0
+                || pregnantMom.isFirstPregAbove35Yrs()
+                )
+        {
+            viewHolder.riskTextView.setText("high");
+        }else{
+
+            String moderate = "moderate";
+            viewHolder.riskTextView.setText(moderate);
+            viewHolder.riskTextView.setTextColor(Color.parseColor("#389cc8"));
+        }
 
     }
 

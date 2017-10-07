@@ -78,7 +78,6 @@ public class CHWRegisterRecyclerAdapter extends
         edd.setText(mother.getEXPECTED_DELIVERY_DATE());
         name.setText(mother.getMOTHERS_FIRST_NAME() +" "+mother.getMOTHERS_LAST_NAME());
 
-        //todo check the risk level factor from the indicators
         if(pregnantMom.isBleedingOnDelivery()
                 || pregnantMom.isCsDelivery()
                 || pregnantMom.isFourOrMorePreg()
@@ -91,7 +90,7 @@ public class CHWRegisterRecyclerAdapter extends
                 || pregnantMom.isHeightBelow150()
                 || pregnantMom.isKondoKukwama()
                 || pregnantMom.isKilemaChaNyonga()
-                || pregnantMom.getHivStatus() == 1
+                || pregnantMom.getHivStatus() == 0
                 || pregnantMom.isFirstPregAbove35Yrs()
                 )
         {
