@@ -2111,7 +2111,7 @@
                data-constraint=".&gt;=15 and .&lt;=49" data-type-xml="int"/>
     </label>
     <label class="question non-select ">
-        <span lang="" class="question-label active">Thayi card number, &#xCA4;&#xCBE;&#xCAF;&#xCBF; &#xC95;&#xCBE;&#xCB0;&#xCCD;&#xCA1;&#xCCD;
+        <span lang="" class="question-label active">Thayi id number, &#xCA4;&#xCBE;&#xCAF;&#xCBF; &#xC95;&#xCBE;&#xCB0;&#xCCD;&#xCA1;&#xCCD;
             &#xCB8;&#xC82;&#xC96;&#xCCD;&#xCAF;&#xCC6;:
         </span>
         <span class="required">*</span>
@@ -2204,7 +2204,7 @@
         </fieldset>
     </fieldset>
     <label class="question or-branch pre-init non-select ">
-        <span lang="" class="question-label active">BPL card number, &#xCAC;&#xCBF;.&#xCAA;&#xCBF;.&#xC8E;&#xCB2;&#xCCD;
+        <span lang="" class="question-label active">BPL id number, &#xCAC;&#xCBF;.&#xCAA;&#xCBF;.&#xC8E;&#xCB2;&#xCCD;
             &#xC95;&#xCBE;&#xCB0;&#xCCD;&#xCA1;&#xCCD; &#xCB8;&#xC82;&#xC96;&#xCCD;&#xCAF;&#xCC6;:
         </span>
         <input type="text" name="/PNC_Child_Registration_EngKan/bpl_card_number"

@@ -8,14 +8,27 @@
     android:fitsSystemWindows="false"
     android:orientation="vertical"
     android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus"
-    tools:context=".AncDetailActivity">
+    tools:context="com.softmed.uzazisalama.AncDetailActivityAlt">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabFollowUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_file_assignment"
+
+        app:backgroundTint="@color/accent"
+        app:elevation="6dp"
+        app:fabSize="mini"
+        app:pressedTranslationZ="14dp" />
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="320dp"
         android:fitsSystemWindows="false"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbar"
@@ -78,8 +91,8 @@
                     android:layout_marginBottom="4dp"
                     android:text="Mother Name"
                     android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="24sp"
+                    android:textStyle="normal" />
 
                 <TextView
                     android:id="@+id/textId"
@@ -179,6 +192,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/iconLocationPin"
                     android:layout_alignParentRight="true"
+                    android:minWidth="80dp"
                     android:text="0000 000 000"
                     android:textColor="@android:color/white"
                     android:textSize="16sp" />
@@ -232,247 +246,437 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginTop="4dp"
-
-                    app:cardBackgroundColor="@android:color/white"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="2dp">
-
-                    <LinearLayout
-                        android:id="@+id/edd_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingEnd="16dp"
-                        android:paddingStart="16dp">
-
-                        <ImageView
-                            android:id="@+id/imageView7"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_margin="10dp"
-                            android:src="@mipmap/icon_event_edd" />
-
-                        <TextView
-                            android:id="@+id/textView6"
-                            style="@style/CustomFontTextViewStyle"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:text="EDD"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                        <TextView
-                            android:id="@+id/textEDD"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:text="Medium Text"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@color/text_black" />
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginTop="2dp"
-
-                    app:cardBackgroundColor="@android:color/white"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="2dp">
-
-                    <LinearLayout
-                        android:id="@+id/anc1_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingEnd="16dp"
-                        android:paddingStart="16dp">
-
-                        <ImageView
-                            android:id="@+id/imageView8"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_margin="10dp"
-                            android:src="@mipmap/icon_event_anc" />
-
-                        <TextView
-                            android:id="@+id/textView10"
-                            style="@style/CustomFontTextViewStyle"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:text="ANCRV1"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                        <TextView
-                            android:id="@+id/textAnc1Date"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:text="Medium Text"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@color/text_black" />
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginTop="2dp"
-
-                    app:cardBackgroundColor="@android:color/white"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="2dp">
-
-                    <LinearLayout
-                        android:id="@+id/anc2_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingEnd="16dp"
-                        android:paddingStart="16dp">
-
-                        <ImageView
-                            android:id="@+id/imageView9"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_margin="10dp"
-                            android:src="@mipmap/icon_event_anc" />
-
-                        <TextView
-                            android:id="@+id/textView12"
-                            style="@style/CustomFontTextViewStyle"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:text="ANCRV2"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                        <TextView
-                            android:id="@+id/textAnc2Date"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:text="Medium Text"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@color/text_black" />
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginTop="2dp"
-
-                    app:cardBackgroundColor="@android:color/white"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="2dp">
-
-                    <LinearLayout
-                        android:id="@+id/anc3_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingEnd="16dp"
-                        android:paddingStart="16dp">
-
-                        <ImageView
-                            android:id="@+id/imageView10"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_margin="10dp"
-                            android:src="@mipmap/icon_event_anc" />
-
-                        <TextView
-                            android:id="@+id/textView14"
-                            style="@style/CustomFontTextViewStyle"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:text="ANCRV3"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                        <TextView
-                            android:id="@+id/textAnc3Date"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:text="Medium Text"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@color/text_black" />
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginTop="2dp"
-
-                    app:cardBackgroundColor="@android:color/white"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="2dp">
-
-                    <LinearLayout
-                        android:id="@+id/anc4_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingEnd="16dp"
-                        android:paddingStart="16dp">
-
-                        <ImageView
-                            android:id="@+id/imageView11"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_margin="10dp"
-                            android:src="@mipmap/icon_event_anc" />
-
-                        <TextView
-                            android:id="@+id/textView16"
-                            style="@style/CustomFontTextViewStyle"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:text="ANCRV4"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                        <TextView
-                            android:id="@+id/textAnc4Date"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:text="Medium Text"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@color/text_black" />
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-            </LinearLayout>
-
             <android.support.v7.widget.CardView
+                android:id="@+id/cardBasicInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/iconSchoolMother"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="0dp"
+                        android:src="@drawable/ic_school"
+                        android:tint="@color/primary" />
+
+                    <TextView
+                        android:id="@+id/textMotherEducation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iconSchoolMother"
+                        android:layout_marginTop="2dp"
+                        android:layout_toRightOf="@+id/iconSchoolMother"
+                        android:text="Mother Education"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/iconOccupationMother"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_below="@+id/iconSchoolMother"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_work"
+                        android:tint="@color/primary" />
+
+                    <TextView
+                        android:id="@+id/textMotherOccupation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iconOccupationMother"
+                        android:layout_marginTop="2dp"
+                        android:layout_toRightOf="@+id/iconSchoolMother"
+                        android:text="Mother Occupation"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/iconChild"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_below="@+id/iconOccupationMother"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_child"
+                        android:tint="@color/primary" />
+
+                    <TextView
+                        android:id="@+id/textLivingChildren"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iconChild"
+                        android:layout_marginTop="2dp"
+                        android:layout_toRightOf="@+id/iconSchoolMother"
+                        android:text="00"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/iconDiscountNumber"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_below="@+id/iconChild"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_card"
+                        android:tint="@color/primary" />
+
+                    <TextView
+                        android:id="@+id/textDiscountNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iconDiscountNumber"
+                        android:layout_marginTop="2dp"
+                        android:layout_toRightOf="@+id/iconSchoolMother"
+                        android:text="AABB1122"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:id="@+id/line"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/iconDiscountNumber"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/primary" />
+
+                    <TextView
+                        android:id="@+id/titleAboutHusband"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/line"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="8dp"
+                        android:text="KUHUSU MWENZA"
+                        android:textColor="@color/primary_text"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/iconHusband"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_below="@+id/titleAboutHusband"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/ic_account_box"
+                        android:tint="@color/primary" />
+
+                    <TextView
+                        android:id="@+id/textHusbandName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iconHusband"
+                        android:layout_marginTop="2dp"
+                        android:layout_toRightOf="@+id/iconSchoolMother"
+                        android:text="Husband Name"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/iconSchoolHusband"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_below="@+id/iconHusband"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_school"
+                        android:tint="@color/primary" />
+
+                    <TextView
+                        android:id="@+id/textHusbandEducation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iconSchoolHusband"
+                        android:layout_marginTop="2dp"
+                        android:layout_toRightOf="@+id/iconSchoolMother"
+                        android:text="Husband Education"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/iconOccupationHusband"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_below="@+id/iconSchoolHusband"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_work"
+                        android:tint="@color/primary" />
+
+                    <TextView
+                        android:id="@+id/textHusbandOccupation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iconOccupationHusband"
+                        android:layout_marginTop="2dp"
+                        android:layout_toRightOf="@+id/iconSchoolMother"
+                        android:text="Husband Occupation"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical">-->
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardDates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp">
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="56dp"
+                    android:layout_marginLeft="36dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#BDBDBD" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/iconAncEarlyDate"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="32dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/shape_round_blue"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_calendar_date_range"
+                        android:tint="@android:color/white" />
+
+                    <ImageView
+                        android:id="@+id/iconAnc1Date"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/iconAncEarlyDate"
+                        android:layout_marginBottom="32dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/shape_round_blue"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_calendar_date_range"
+                        android:tint="@android:color/white" />
+
+                    <ImageView
+                        android:id="@+id/iconAnc2Date"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/iconAnc1Date"
+                        android:layout_marginBottom="32dp"
+                        android:background="@drawable/shape_round_blue"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_calendar_date_range"
+                        android:tint="@android:color/white" />
+
+                    <ImageView
+                        android:id="@+id/iconAnc3Date"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/iconAnc2Date"
+                        android:layout_marginBottom="32dp"
+                        android:background="@drawable/shape_round_blue"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_calendar_date_range"
+                        android:tint="@android:color/white" />
+
+                    <ImageView
+                        android:id="@+id/iconAnc4Date"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/iconAnc3Date"
+                        android:layout_marginBottom="32dp"
+                        android:background="@drawable/shape_round_blue"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_calendar_date_range"
+                        android:tint="@android:color/white" />
+
+                    <ImageView
+                        android:id="@+id/iconEdd"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/iconAnc4Date"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/shape_round_green"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_calendar_today"
+                        android:tint="@android:color/white" />
+
+                    <TextView
+                        android:id="@+id/labelAncEarly"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iconAncEarlyDate"
+                        android:layout_marginTop="4dp"
+                        android:layout_toRightOf="@+id/iconAnc1Date"
+                        android:text="Early Visit"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/textAncEarlyDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/labelAncEarly"
+                        android:layout_marginTop="0dp"
+                        android:layout_toRightOf="@+id/iconAnc1Date"
+                        android:text="11 Jan 2222"
+                        android:textColor="@color/primary_text"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:id="@+id/labelAnc1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iconAnc1Date"
+                        android:layout_marginTop="4dp"
+                        android:layout_toRightOf="@+id/iconAnc1Date"
+                        android:text="First Visit"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/textAnc1Date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/labelAnc1"
+                        android:layout_marginTop="0dp"
+                        android:layout_toRightOf="@+id/iconAnc1Date"
+                        android:text="11 Jan 2222"
+                        android:textColor="@color/primary_text"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/labelAnc2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iconAnc2Date"
+                        android:layout_marginTop="4dp"
+                        android:layout_toRightOf="@+id/iconAnc1Date"
+                        android:text="Second Visit"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/textAnc2Date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/labelAnc2"
+                        android:layout_marginTop="0dp"
+                        android:layout_toRightOf="@+id/iconAnc1Date"
+                        android:text="11 Jan 2222"
+                        android:textColor="@color/primary_text"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/labelAnc3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iconAnc3Date"
+                        android:layout_marginTop="4dp"
+                        android:layout_toRightOf="@+id/iconAnc1Date"
+                        android:text="Third Visit"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="14sp" />
+
+
+                    <TextView
+                        android:id="@+id/textAnc3Date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/labelAnc3"
+                        android:layout_marginTop="0dp"
+                        android:layout_toRightOf="@+id/iconAnc1Date"
+                        android:text="11 Jan 2222"
+                        android:textColor="@color/primary_text"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/labelAnc4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iconAnc4Date"
+                        android:layout_marginTop="4dp"
+                        android:layout_toRightOf="@+id/iconAnc1Date"
+                        android:text="Fourth Visit"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="14sp" />
+
+
+                    <TextView
+                        android:id="@+id/textAnc4Date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/labelAnc4"
+                        android:layout_marginTop="0dp"
+                        android:layout_toRightOf="@+id/iconAnc1Date"
+                        android:text="11 Jan 2222"
+                        android:textColor="@color/primary_text"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/labelEdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iconEdd"
+                        android:layout_marginTop="4dp"
+                        android:layout_toRightOf="@+id/iconAnc1Date"
+                        android:text="Expected Delivery Date"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="14sp" />
+
+
+                    <TextView
+                        android:id="@+id/textEdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/labelEdd"
+                        android:layout_marginTop="0dp"
+                        android:layout_toRightOf="@+id/iconAnc1Date"
+                        android:text="11 Jan 2222"
+                        android:textColor="@color/primary_text"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
 
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="2dp"
@@ -481,7 +685,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -656,6 +861,24 @@
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+
+            <include
+                layout="@layout/layout_risk_indicators"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp" />
+
+            <include
+                layout="@layout/layout_chw_comment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

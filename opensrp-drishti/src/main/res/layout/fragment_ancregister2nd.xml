@@ -5,12 +5,17 @@
     android:layout_height="match_parent"
     android:background="#f5f5f5"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="org.ei.opensrp.mcare.fragment.AncRegister2ndFragment">
+    tools:context="com.softmed.uzazisalama.Fragments.AncRegister2ndFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
+
+        <include
+            layout="@layout/layout_risk_indicators"
+            android:visibility="gone" />
 
         <include layout="@layout/layout_indicators_register_a" />
 

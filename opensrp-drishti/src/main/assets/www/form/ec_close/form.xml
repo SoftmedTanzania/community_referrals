@@ -1,7 +1,7 @@
-<form autocomplete="off" novalidate="novalidate" class="or clearfix" id="EC_Close_EngKan">
+<form autocomplete="off" novalidate="novalidate" class="or clearfix" card="EC_Close_EngKan">
     <!--This form was created by transforming a OpenRosa-flavored (X)Form using an XSLT sheet created by Enketo LLC.-->
     <section class="form-logo"></section>
-    <h3 id="form-title">EC Close</h3>
+    <h3 card="form-title">EC Close</h3>
 
 
     <fieldset class="question ">
@@ -223,13 +223,13 @@
         </fieldset>
     </fieldset>
 
-    <fieldset id="or-preload-items" style="display:none;">
+    <fieldset card="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
             <input autocomplete="off" type="hidden" name="/EC_Close_EngKan/today" data-preload="date"
                    data-preload-params="today" data-type-xml="date"/>
         </label>
     </fieldset>
-    <fieldset id="or-calculated-items" style="display:none;">
+    <fieldset card="or-calculated-items" style="display:none;">
         <label class="calculation non-select ">
             <input autocomplete="off" type="hidden" name="/EC_Close_EngKan/meta/instanceID"
                    data-calculate="concat('uuid:', uuid())" data-type-xml="string"/>

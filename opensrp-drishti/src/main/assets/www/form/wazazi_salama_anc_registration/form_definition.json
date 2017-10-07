@@ -1,0 +1,132 @@
+{
+    "form_data_definition_version": "4",
+    "form": {
+        "bind_type": "wazazi_salama_mother",
+        "default_bind_path": "/model/instance/Wazazi_Salama_ANC_Registration/",
+        "fields": [
+            {
+                "name": "id",
+                "shouldLoadValue": true
+            },
+            {
+                "name": "motherId"
+            },
+            {
+                "name": "registrationDate"
+            },
+            {
+                "name": "registrationPlace"
+            },
+            {
+                "name": "wifeName"
+            },
+            {
+                "name": "numberOfPregnancies"
+            },
+            {
+                "name": "wouldBeHighRisk"
+            },
+            {
+                "name": "wouldBeHighRiskReason"
+            },
+            {
+                "name": "numberOfPregnancies",
+                "bind": "/model/instance/Wazazi_Salama_ANC_Registration/num_pregnancies"
+            },
+            {
+                "name": "thayiCardNumber",
+                "bind": "/model/instance/Wazazi_Salama_ANC_Registration/thayi_no"
+            },
+            {
+                "name": "ancNumber",
+                "bind": "/model/instance/Wazazi_Salama_ANC_Registration/anc_number"
+            },
+            {
+                "name": "isJSYBeneficiary",
+                "bind": "/model/instance/Wazazi_Salama_ANC_Registration/jsy_beneficiary"
+            },
+            {
+                "name": "ashaName",
+                "bind": "/model/instance/Wazazi_Salama_ANC_Registration/asha_name"
+            },
+            {
+                "name": "ashaPhoneNumber",
+                "bind": "/model/instance/Wazazi_Salama_ANC_Registration/asha_phone_number"
+            },
+            {
+                "name": "referenceDate",
+                "bind": "/model/instance/Wazazi_Salama_ANC_Registration/lmp_date"
+            },
+            {
+                "name": "edd"
+            },
+            {
+                "name": "linkedFacilityForDelivery"
+            },
+            {
+                "name": "facilityName"
+            },
+            {
+                "name": "complications"
+            },
+            {
+                "name": "medicalHistories"
+            },
+            {
+                "name": "bloodGroup"
+            },
+            {
+                "name": "height"
+            },
+            {
+                "name": "weight"
+            },
+            {
+                "name": "isHighRiskTillDelivery"
+            },
+            {
+                "name": "highRiskTillDeliveryReason"
+            },
+            {
+                "name": "isHighRiskTillPNCClose"
+            },
+            {
+                "name": "highRiskTillPNCCloseReason"
+            },
+            {
+                "name": "highRiskReason"
+            },
+            {
+                "name": "isHighRisk"
+            },
+            {
+                "name": "submissionDate"
+            },
+            {
+                "name": "reg_type"
+            },
+            {
+                "name": "is_pnc"
+            },
+            {
+                "name": "is_valid"
+            },
+            {
+                "name": "type",
+                "value": "ANC"
+            },
+            {
+                "name": "isClosed",
+                "value": "false"
+            },
+            {
+                "name": "currentMethod",
+                "value": ""
+            },
+            {
+                "name": "familyPlanningMethodChangeDate",
+                "value": ""
+            }
+        ]
+    }
+}

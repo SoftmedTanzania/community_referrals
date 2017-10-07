@@ -121,14 +121,14 @@ public class LocationSelectorDialogFragment extends DialogFragment {
                         try {
                             locationjson.put(traversingnode.getlocationlevel(), traversingnode.getName());
                         }catch(Exception e){
-
+                            e.printStackTrace();
                         }
                         traversingnode = traversingnode.getParent();
                     }
                     if(mCallback != null) {
                         mCallback.OnLocationSelected(locationjson.toString());
-                        // FieldOverrides fieldOverrides = new FieldOverrides(locationjson.toString());
-                        // ((SecuredNativeSmartRegisterActivity)getActivity()).startFormActivity(formName, null, fieldOverrides.getJSONString());
+                         FieldOverrides fieldOverrides = new FieldOverrides(locationjson.toString());
+                         ((SecuredNativeSmartRegisterActivity)getActivity()).startFormActivity(formName, null, fieldOverrides.getJSONString());
                     }
                     savestate = tView.getSaveState();
                     dismiss();

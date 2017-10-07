@@ -5,6 +5,8 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import org.ei.opensrp.commonregistry.AllCommonsRepository;
 import org.ei.opensrp.commonregistry.CommonFtsObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectClients;
@@ -197,6 +199,7 @@ public class Context {
 
     ///////////////////common bindtypes///////////////
     public static ArrayList<CommonRepositoryInformationHolder> bindtypes;
+
     /////////////////////////////////////////////////
     protected Context() {
     }
@@ -207,7 +210,7 @@ public class Context {
 
 
     public static Context getInstance() {
-        if (context == null){
+        if (context == null) {
             context = new Context();
         }
         return context;
@@ -247,7 +250,7 @@ public class Context {
     public FormSubmissionService formSubmissionService() {
         initRepository();
         if (formSubmissionService == null) {
-            if(commonFtsObject != null){
+            if (commonFtsObject != null) {
                 formSubmissionService = new FormSubmissionService(ziggyService(), formDataRepository(), allSettings(), allCommonsRepositoryMap());
             } else {
                 formSubmissionService = new FormSubmissionService(ziggyService(), formDataRepository(), allSettings());
@@ -257,7 +260,7 @@ public class Context {
     }
 
     public AllFormVersionSyncService allFormVersionSyncService() {
-        if(allFormVersionSyncService == null) {
+        if (allFormVersionSyncService == null) {
             allFormVersionSyncService = new AllFormVersionSyncService(httpAgent(),
                     configuration(), formsVersionRepository());
         }
@@ -483,7 +486,7 @@ public class Context {
     }
 
     protected Repository initRepository() {
-        if(configuration().appName().equals(AllConstants.APP_NAME_INDONESIA)) {
+        if (configuration().appName().equals(AllConstants.APP_NAME_INDONESIA)) {
             return null;
         }
         if (repository == null) {
@@ -500,13 +503,13 @@ public class Context {
             drishtireposotorylist.add(serviceProvidedRepository());
             drishtireposotorylist.add(formsVersionRepository());
             drishtireposotorylist.add(imageRepository());
-            for(int i = 0;i < bindtypes.size();i++){
+            for (int i = 0; i < bindtypes.size(); i++) {
                 drishtireposotorylist.add(commonrepository(bindtypes.get(i).getBindtypename()));
             }
             DrishtiRepository[] drishtireposotoryarray = drishtireposotorylist.toArray(new DrishtiRepository[drishtireposotorylist.size()]);
-            if(commonFtsObject != null){
+            if (commonFtsObject != null) {
                 repository = new Repository(this.applicationContext, session(), this.commonFtsObject, drishtireposotoryarray);
-            }else {
+            } else {
                 repository = new Repository(this.applicationContext, session(), drishtireposotoryarray);
             }
         }
@@ -646,6 +649,7 @@ public class Context {
         }
         return formsVersionRepository;
     }
+
     public static DrishtiRepository imageRepository() {
         if (imageRepository == null) {
             imageRepository = new ImageRepository();
@@ -656,7 +660,7 @@ public class Context {
     public UserService userService() {
         if (userService == null) {
             Repository repo = initRepository();
-            userService = new UserService(repo, allSettings(), allSharedPreferences(), httpAgent(), session(), configuration(), saveANMLocationTask(),saveUserInfoTask());
+            userService = new UserService(repo, allSettings(), allSharedPreferences(), httpAgent(), session(), configuration(), saveANMLocationTask(), saveUserInfoTask());
         }
         return userService;
     }
@@ -669,7 +673,7 @@ public class Context {
     }
 
     private SaveUserInfoTask saveUserInfoTask() {
-        if(saveUserInfoTask == null) {
+        if (saveUserInfoTask == null) {
             saveUserInfoTask = new SaveUserInfoTask(allSettings());
         }
         return saveUserInfoTask;
@@ -677,9 +681,9 @@ public class Context {
 
     public AlertService alertService() {
         if (alertService == null) {
-            if(commonFtsObject() != null) {
+            if (commonFtsObject() != null) {
                 alertService = new AlertService(alertRepository(), commonFtsObject(), allCommonsRepositoryMap());
-            }else {
+            } else {
                 alertService = new AlertService(alertRepository());
             }
         }
@@ -847,60 +851,61 @@ public class Context {
 
 
     ///////////////////////////////// common methods ///////////////////////////////
-    public Cache<CommonPersonObjectClients> personObjectClientsCache(){
+    public Cache<CommonPersonObjectClients> personObjectClientsCache() {
         this.personObjectClientsCache = null;
         personObjectClientsCache = new Cache<CommonPersonObjectClients>();
         return personObjectClientsCache;
     }
-    public AllCommonsRepository allCommonsRepositoryobjects(String tablename){
+
+    public AllCommonsRepository allCommonsRepositoryobjects(String tablename) {
         initRepository();
-        allCommonPersonObjectsRepository = new AllCommonsRepository(commonrepository(tablename),alertRepository(),timelineEventRepository());
+        allCommonPersonObjectsRepository = new AllCommonsRepository(commonrepository(tablename), alertRepository(), timelineEventRepository());
         return allCommonPersonObjectsRepository;
     }
 
-    private HashMap <String ,CommonRepository> MapOfCommonRepository;
+    private HashMap<String, CommonRepository> MapOfCommonRepository;
 
-    public long countofcommonrepositroy(String tablename){
+    public long countofcommonrepositroy(String tablename) {
         return commonrepository(tablename).count();
     }
 
-    public CommonRepository commonrepository(String tablename){
-        if(MapOfCommonRepository == null){
+    public CommonRepository commonrepository(String tablename) {
+        if (MapOfCommonRepository == null) {
             MapOfCommonRepository = new HashMap<String, CommonRepository>();
         }
-        if(MapOfCommonRepository.get(tablename) == null){
+        if (MapOfCommonRepository.get(tablename) == null) {
             int index = 0;
-            for(int i = 0;i<bindtypes.size();i++){
-                if(bindtypes.get(i).getBindtypename().equalsIgnoreCase(tablename)){
+            for (int i = 0; i < bindtypes.size(); i++) {
+                if (bindtypes.get(i).getBindtypename().equalsIgnoreCase(tablename)) {
                     index = i;
                 }
             }
-            if(commonFtsObject != null && commonFtsObject.containsTable(tablename)){
+            if (commonFtsObject != null && commonFtsObject.containsTable(tablename)) {
                 MapOfCommonRepository.put(bindtypes.get(index).getBindtypename(), new CommonRepository(commonFtsObject, bindtypes.get(index).getBindtypename(), bindtypes.get(index).getColumnNames()));
             } else {
                 MapOfCommonRepository.put(bindtypes.get(index).getBindtypename(), new CommonRepository(bindtypes.get(index).getBindtypename(), bindtypes.get(index).getColumnNames()));
             }
         }
-
-        return  MapOfCommonRepository.get(tablename);
+        return MapOfCommonRepository.get(tablename);
     }
-    public void assignbindtypes(){
+
+    public void assignbindtypes() {
         bindtypes = new ArrayList<CommonRepositoryInformationHolder>();
         AssetManager assetManager = getInstance().applicationContext().getAssets();
 
         try {
-            String str = ReadFromfile("bindtypes.json",getInstance().applicationContext);
+            String str = ReadFromfile("bindtypes.json", getInstance().applicationContext);
             JSONObject jsonObject = new JSONObject(str);
             JSONArray bindtypeObjects = jsonObject.getJSONArray("bindobjects");
 
-            for(int i = 0 ;i<bindtypeObjects.length();i++){
+            for (int i = 0; i < bindtypeObjects.length(); i++) {
                 String bindname = bindtypeObjects.getJSONObject(i).getString("name");
-                String [] columNames = new String[ bindtypeObjects.getJSONObject(i).getJSONArray("columns").length()];
-                for(int j = 0 ; j < columNames.length;j++){
-                  columNames[j] =  bindtypeObjects.getJSONObject(i).getJSONArray("columns").getJSONObject(j).getString("name");
+                String[] columNames = new String[bindtypeObjects.getJSONObject(i).getJSONArray("columns").length()];
+                for (int j = 0; j < columNames.length; j++) {
+                    columNames[j] = bindtypeObjects.getJSONObject(i).getJSONArray("columns").getJSONObject(j).getString("name");
                 }
-                bindtypes.add(new CommonRepositoryInformationHolder(bindname,columNames));
-                Log.v("bind type logs",bindtypeObjects.getJSONObject(i).getString("name"));
+                bindtypes.add(new CommonRepositoryInformationHolder(bindname, columNames));
+                Log.v("bind type logs", bindtypeObjects.getJSONObject(i).getString("name"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -908,6 +913,7 @@ public class Context {
 
 
     }
+
     public String ReadFromfile(String fileName, android.content.Context context) {
         StringBuilder returnString = new StringBuilder();
         InputStream fIn = null;
@@ -955,7 +961,7 @@ public class Context {
         return httpAgent;
     }
 
-    public Context updateCommonFtsObject(CommonFtsObject commonFtsObject){
+    public Context updateCommonFtsObject(CommonFtsObject commonFtsObject) {
         this.commonFtsObject = commonFtsObject;
         return this;
     }

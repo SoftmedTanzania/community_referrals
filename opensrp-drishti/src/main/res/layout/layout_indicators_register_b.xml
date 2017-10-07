@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
     android:layout_marginTop="8dp"
 
     app:cardBackgroundColor="@android:color/white"
@@ -47,7 +49,8 @@
             android:paddingTop="12dp"
             android:text="Mimba 4 au zaidi"
             android:textColor="@color/secondary_text"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:visibility="gone" />
 
         <CheckBox
             android:id="@+id/checkbox1stPregAbove35Yrs"
@@ -67,7 +70,8 @@
             android:paddingTop="12dp"
             android:text="Kimo chini ya cm 150"
             android:textColor="@color/secondary_text"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:visibility="gone" />
 
         <!--<CheckBox-->
         <!--android:layout_width="wrap_content"-->

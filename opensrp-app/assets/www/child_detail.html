@@ -37,8 +37,8 @@
         child.bindToCamera("#childPhoto");
         child.bindPhoto("#childPhoto");
 
-        pageView.onReloadPhoto(function (caseId, photoPath) {
-            child.reloadPhoto("#childPhoto", caseId, photoPath);
+        pageView.onReloadPhoto(function (id, photoPath) {
+            child.reloadPhoto("#childPhoto", id, photoPath);
         });
 
         new Modal().bindToClick();

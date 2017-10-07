@@ -5,87 +5,40 @@
     android:layout_height="match_parent"
     android:background="#f5f5f5"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="org.ei.opensrp.mcare.fragment.AncRegister1stFragment">
-    <include  layout="@layout/ancdetail_nav_bar" />
+    tools:context="com.softmed.uzazisalama.Fragments.AncRegister1stFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/editTextClinicName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:hint="Jina la kliniki"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:textColor="@color/primary_text"
-            android:textColorHint="@color/hint_text"
-            android:textSize="14sp" />
+
         <include layout="@layout/layout_mother_register" />
 
         <include layout="@layout/layout_husband_register" />
 
         <include layout="@layout/layout_previous_birth" />
-
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="16dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:text="Urefu wa mama"-->
-        <!--android:textColor="@color/secondary_text"-->
-        <!--android:textSize="14sp" />-->
-
-        <!--<RadioGroup-->
-        <!--android:id="@+id/radioGroupHeight"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:paddingLeft="16dp"-->
-        <!--android:paddingRight="16dp">-->
-
-        <!--<RadioButton-->
-        <!--android:id="@+id/radioAbove150"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:paddingBottom="8dp"-->
-        <!--android:paddingTop="8dp"-->
-        <!--android:text="Juu ya 150 cm"-->
-        <!--android:textColor="@color/primary_text" />-->
-
-        <!--<RadioButton-->
-        <!--android:id="@+id/radioBelow150"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:paddingBottom="8dp"-->
-        <!--android:paddingTop="8dp"-->
-        <!--android:text="Chini ya 150 cm"-->
-        <!--android:textColor="@color/primary_text" />-->
-        <!--</RadioGroup>-->
-
-        <!--<EditText-->
-        <!--android:id="@+id/editTextPartnerName"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="16dp"-->
-        <!--android:layout_marginRight="16dp"-->
-        <!--android:layout_marginTop="24dp"-->
-        <!--android:hint="Jina la Mume/Mwenzi"-->
-        <!--android:paddingLeft="16dp"-->
-        <!--android:paddingRight="16dp"-->
-        <!--android:textColor="@color/primary_text"-->
-        <!--android:textColorHint="@color/hint_text"-->
-        <!--android:textSize="14sp" />-->
-
-        <!--<include layout="@layout/layout_previous_birth" />-->
-
+        <EditText
+            android:id="@+id/editTextClinicName"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="480dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:hint="Jina la kliniki aliyoshauriwa kwenda"
+            android:textColor="@color/primary_text"
+            android:textColorHint="@color/hint_text"
+            android:textSize="14sp" />
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:textColor="#a12727"
+            android:text="TUNZA"/>
         <View
             android:layout_width="wrap_content"
             android:layout_height="128dp"
             android:clickable="false" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
-

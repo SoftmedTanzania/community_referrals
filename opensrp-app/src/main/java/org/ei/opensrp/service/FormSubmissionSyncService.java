@@ -50,8 +50,12 @@ public class FormSubmissionSyncService {
 
     public FetchStatus sync() {
         pushToServer();
-        Intent intent = new Intent(DrishtiApplication.getInstance().getApplicationContext(), ImageUploadSyncService.class);
-        DrishtiApplication.getInstance().getApplicationContext().startService(intent);
+        try {
+            Intent intent = new Intent(DrishtiApplication.getInstance().getApplicationContext(), ImageUploadSyncService.class);
+            DrishtiApplication.getInstance().getApplicationContext().startService(intent);
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
         return pullFromServer();
     }
 
@@ -73,11 +77,11 @@ public class FormSubmissionSyncService {
                             FORM_SUBMISSIONS_PATH),
                     jsonPayload);
             if (response.isFailure()) {
-                logError(format("Form submissions sync failed. Submissions:  {0}", pendingFormSubmissions));
+                Log.d("Formsubmission",format("Form submissions sync failed. Submissions:  {0}", pendingFormSubmissions));
                 return;
             }
             formDataRepository.markFormSubmissionsAsSynced(pendingFormSubmissions);
-            logInfo(format("Form submissions sync successfully. Submissions:  {0}", pendingFormSubmissions));
+            Log.d("Formsubmission",format("Form submissions sync successfully. Submissions:  {0}", pendingFormSubmissions));
         }
     }
 
@@ -95,18 +99,27 @@ public class FormSubmissionSyncService {
                     downloadBatchSize);
             Response<String> response = httpAgent.fetch(uri);
             if (response.isFailure()) {
-                logError(format("Form submissions pull failed."));
+                Log.d("Formsubmission",format("Form submissions pull failed."));
                 return fetchedFailed;
             }
-            List<FormSubmissionDTO> formSubmissions = new Gson().fromJson(response.payload(),
-                    new TypeToken<List<FormSubmissionDTO>>() {
-                    }.getType());
-            if (formSubmissions.isEmpty()) {
+            List<FormSubmissionDTO> formSubmissions = new ArrayList<>();
+            try {
+                formSubmissions = new Gson().fromJson(response.payload(),
+                        new TypeToken<List<FormSubmissionDTO>>() {
+                        }.getType());
+
+                if (formSubmissions.isEmpty()) {
+                    return dataStatus;
+                } else {
+                    formSubmissionService.processSubmissions(toDomain(formSubmissions));
+                    dataStatus = fetched;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
                 return dataStatus;
-            } else {
-                formSubmissionService.processSubmissions(toDomain(formSubmissions));
-                dataStatus = fetched;
             }
+
+
         }
     }
 
