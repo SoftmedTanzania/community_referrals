@@ -41,7 +41,7 @@
         android:tint="@android:color/white"
 
 
-        app:backgroundTint="?attr/colorAccent"
+        app:backgroundTint="@color/accent"
         app:elevation="6dp"
         app:fabSize="normal"
         app:pressedTranslationZ="14dp"

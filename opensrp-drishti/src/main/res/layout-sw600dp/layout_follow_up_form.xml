@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="Chunguza Vidokezo Vifuatavyo Kwa Mama.Weka alama (&#x2713;) panapohusika."
+            android:text="@string/choose_indicators_title"
             android:textAllCaps="true"
             android:textColor="@color/light_blue"
             android:textSize="18sp"
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="bp 140/90 au zaidi"
+            android:text="@string/indicator_high_bp"
             android:textColor="@color/secondary_text"
             android:textSize="16sp" />
 
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="hb chini ya 60%"
+            android:text="@string/indicator_hb_below_60"
             android:textColor="@color/secondary_text"
             android:textSize="16sp" />
 
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="albumin kwenye mkojo"
+            android:text="@string/indicator_albumin"
             android:textColor="@color/secondary_text"
             android:textSize="16sp" />
 
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="sukari kweny mkojo"
+            android:text="@string/indicator_sugar"
             android:textColor="@color/secondary_text"
             android:textSize="16sp" />
 
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="umri wa mimba zaidi ya wiki 40"
+            android:text="@string/indicator_pregrancy_above_40_weeks"
             android:textColor="@color/secondary_text"
             android:textSize="16sp" />
 
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="mtoto kufia tumboni"
+            android:text="@string/indicator_baby_dealth"
             android:textColor="@color/secondary_text"
             android:textSize="16sp" />
 
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="mtoto amelala vibaya baada ya wiki 40"
+            android:text="@string/indicator_bad_baby_position"
             android:textColor="@color/secondary_text"
             android:textSize="16sp" />
 
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="kimo cha mimba kikubwa/kidogo zaidi kuliko umri wake"
+            android:text="@string/indicator_unproportional_pregnancy_height"
             android:textColor="@color/secondary_text"
             android:textSize="16sp" />
 
@@ -111,7 +111,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:gravity="center_horizontal"
-            android:text="Mama ameshauriwa azalie wapi"
+            android:text="@string/mama_ameshauriwa_akajifungue_wapi"
             android:textAllCaps="true"
             android:textColor="@color/light_blue"
             android:textSize="16sp"
@@ -119,14 +119,14 @@
 
         <EditText
             android:id="@+id/facility"
-            android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:hint="Jina la hospitali"
+            android:hint="@string/jina_la_hospitali"
             android:paddingLeft="16dp"
-            android:paddingRight="16dp" />
+            android:paddingRight="16dp"
+            android:textSize="18sp" />
 
         <!--<Button-->
         <!--android:id="@+id/submit"-->

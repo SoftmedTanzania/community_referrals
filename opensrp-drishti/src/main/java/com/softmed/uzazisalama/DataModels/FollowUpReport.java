@@ -16,6 +16,7 @@ public class FollowUpReport {
             highSugar,
             badChildPosition,
             hbBelow60;
+    private int followUpNumber; // 0=early (for mom on risk), 1=first, 2=second, 3=third, 4=fourth
 
     public long getDate() {
         return date;
@@ -103,5 +104,13 @@ public class FollowUpReport {
 
     public void setHbBelow60(boolean hbBelow60) {
         this.hbBelow60 = hbBelow60;
+    }
+
+    public int getFollowUpNumber() {
+        return followUpNumber;
+    }
+
+    public void setFollowUpNumber(int followUpNumber) {
+        this.followUpNumber = followUpNumber;
     }
 }
