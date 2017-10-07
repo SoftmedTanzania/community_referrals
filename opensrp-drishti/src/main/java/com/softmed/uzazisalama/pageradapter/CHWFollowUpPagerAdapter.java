@@ -97,7 +97,7 @@ public class CHWFollowUpPagerAdapter extends
                 || pregnantMom.isHeightBelow150()
                 || pregnantMom.isKondoKukwama()
                 || pregnantMom.isKilemaChaNyonga()
-                || pregnantMom.getHivStatus() == 0
+                || pregnantMom.getHivStatus() == 1
                 || pregnantMom.isFirstPregAbove35Yrs()
                 )
         {
