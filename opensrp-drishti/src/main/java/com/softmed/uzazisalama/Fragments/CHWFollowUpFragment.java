@@ -28,6 +28,8 @@ import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.softmed.uzazisalama.util.Utils.isTablet;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -122,7 +124,10 @@ public class CHWFollowUpFragment extends SecuredNativeSmartRegisterCursorAdapter
         pager = new CHWFollowUpPagerAdapter(getActivity(), motherPersonList);
 
 
-        int numberOfColumns = 3;
+        int numberOfColumns=2;
+        if(isTablet(getActivity())){
+            numberOfColumns = 3;
+        }
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 

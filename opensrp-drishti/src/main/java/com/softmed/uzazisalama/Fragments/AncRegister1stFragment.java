@@ -371,12 +371,6 @@ public class AncRegister1stFragment extends Fragment {
 
             return false;
 
-        } else if (radioGroupPregnancyAge.getCheckedRadioButtonId() == -1) {
-            // no radio checked
-            message = "Tafadhali chagua umri wa ujauzito.";
-            makeToast();
-            return false;
-
         } else if (radioGroupHIV.getCheckedRadioButtonId() == -1) {
             // no radio checked
             message = "Tafadhali weka taarifa kuhusu maambukizi ya UKIMWI.";
@@ -411,7 +405,7 @@ public class AncRegister1stFragment extends Fragment {
         mom.setPreviousFertilityCount(Integer.valueOf(editTextPregCount.getText().toString()));
         mom.setSuccessfulBirths(Integer.valueOf(editTextBirthCount.getText().toString()));
         mom.setLivingChildren(Integer.valueOf(editTextChildrenCount.getText().toString()));
-        mom.setAbove20WeeksPregnant(radioGroupPregnancyAge.getCheckedRadioButtonId() == R.id.radioAbove20);
+        mom.setAbove20WeeksPregnant(DatesHelper.isAbove20(lnmp));
         mom.setDiscountId(editTextDiscountId.getText().toString());
         mom.setEducation(spinnerMotherEducation.getSelectedItem().toString());
         mom.setOccupation(editTextMotherOccupation.getText().toString());
@@ -475,11 +469,7 @@ public class AncRegister1stFragment extends Fragment {
         textDateLNMP.setText(lnmpDate);
         textEDD.setText(edd);
 
-        if (mom.isAbove20WeeksPregnant()) {
-            radioGroupPregnancyAge.check(R.id.radioAbove20);
-        } else {
-            radioGroupPregnancyAge.check(R.id.radioBelow20);
-        }
+
 
         if (mom.getHivStatus() == 1)
             radioGroupHIV.check(R.id.radioYesHIV);
@@ -520,9 +510,9 @@ public class AncRegister1stFragment extends Fragment {
         textDateLNMP.setText("");
         textEDD.setText("");
         int motherSelected = -1;
-        spinnerMotherEducation.setSelection(motherSelected);
+        spinnerMotherEducation.setFloatingLabelText("Elimu Ya Mama");
         int husbandSelected = -1;
-        spinnerHusbandEducation.setSelection(husbandSelected);
+        spinnerHusbandEducation.setFloatingLabelText("Elimu Ya Mume/Mwenza");
         editTextMotherName.setText("");
         editTextMotherId.setText("");
         editTextMotherAge.setText("");

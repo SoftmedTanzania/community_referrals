@@ -554,7 +554,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     @Override
     public void OnLocationSelected(String locationSelected) {
         // set registration fragment
-        Log.d(TAG,"Location selected");
+        Log.d(TAG,"Location selected ="+locationSelected);
         mPager.setCurrentItem(2);
         currentPage = 2;
     }
@@ -628,7 +628,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                         displayFormFragment.setRecordId(entityId);
                         displayFormFragment.setFieldOverides(metaData);
                     }
-
+                    displayFormFragment.setEmptyDetails();
                 }
             }
         } catch (Exception e) {

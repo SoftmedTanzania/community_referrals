@@ -334,6 +334,7 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                 "EXPECTED_DELIVERY_DATE",
                 "IS_VALID",
                 "Is_PNC",
+                "CreatedBy",
                 "FACILITY_ID"};
 
         CommonRepository motherRepository = context().commonrepository("wazazi_salama_mother");

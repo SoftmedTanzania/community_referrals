@@ -93,6 +93,7 @@
                         android:id="@+id/appointment_one"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
+                        android:tint="#ff0000"
                         android:src="@drawable/shape_circle_green"/>
                     <TextView
                         android:layout_alignLeft="@+id/appointment_one"
@@ -118,6 +119,7 @@
                         android:id="@+id/appointment_two"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
+                        android:tint="#ff0000"
                         android:src="@drawable/shape_circle_green"/>
                     <TextView
                         android:layout_alignLeft="@+id/appointment_one"
@@ -143,7 +145,8 @@
                         android:id="@+id/appointment_three"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
-                        android:src="@drawable/shape_circle_red"/>
+                        android:tint="#ff0000"
+                        android:src="@drawable/shape_circle_green"/>
                     <TextView
                         android:layout_alignLeft="@+id/appointment_one"
                         android:layout_below="@+id/appointment_three"
@@ -167,7 +170,8 @@
                         android:id="@+id/appointment_four"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
-                        android:src="@drawable/shape_circle_blue"/>
+                        android:tint="#ff0000"
+                        android:src="@drawable/shape_circle_green"/>
 
                     <TextView
                         android:id="@+id/date_four"

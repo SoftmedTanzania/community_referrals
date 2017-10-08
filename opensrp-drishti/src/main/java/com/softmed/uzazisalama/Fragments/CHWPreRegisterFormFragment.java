@@ -327,13 +327,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
 
             return false;
 
-        } else if (radioGroupPregnancyAge.getCheckedRadioButtonId() == -1) {
-            // no radio checked
-            message = "Tafadhali chagua umri wa ujauzito.";
-            makeToast();
-            return false;
-
-        } else if (spinnerMotherEducation.getSelectedItemPosition() < 0
+        }  else if (spinnerMotherEducation.getSelectedItemPosition() < 0
                 || spinnerHusbandEducation.getSelectedItemPosition() < 0) {
 
             message = "Tafadhali chagua elimu ya mama na mwenza.";
@@ -362,7 +356,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
         mom.setPreviousFertilityCount(Integer.valueOf(editTextPregCount.getText().toString()));
         mom.setSuccessfulBirths(Integer.valueOf(editTextBirthCount.getText().toString()));
         mom.setLivingChildren(Integer.valueOf(editTextChildrenCount.getText().toString()));
-        mom.setAbove20WeeksPregnant(radioGroupPregnancyAge.getCheckedRadioButtonId() == R.id.radioAbove20);
+        mom.setAbove20WeeksPregnant(DatesHelper.isAbove20(lnmp));
         mom.setDiscountId(editTextDiscountId.getText().toString());
         mom.setEducation(spinnerMotherEducation.getSelectedItem().toString());
         mom.setOccupation(editTextMotherOccupation.getText().toString());
@@ -412,6 +406,35 @@ public class CHWPreRegisterFormFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+    public void setEmptyDetails() {
+       setEmptyValues();
+    }
+    public void setEmptyValues() {
+
+        //empty the data
+
+        textDate.setText("");
+        textPhone.setText("");
+        textDateLNMP.setText("");
+        textEDD.setText("");
+        int motherSelected = -1;
+        spinnerMotherEducation.setSelection(motherSelected);
+        spinnerHusbandEducation.setFloatingLabelText("Elimu Ya Mume/Mwenza");
+        editTextMotherName.setText("");
+        editTextMotherId.setText("");
+        editTextMotherAge.setText("");
+        editTextHeight.setText("");
+        editTextPregCount.setText("");
+        editTextBirthCount.setText("");
+        editTextChildrenCount.setText("");
+        editTextDiscountId.setText("");
+        editTextMotherOccupation.setText("");
+        editTextPhysicalAddress.setText("");
+        editTextHusbandName.setText("");
+        editTextHusbandOccupation.setText("");
+        editTextClinicName.setText("");
 
     }
 }
