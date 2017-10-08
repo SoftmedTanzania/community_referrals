@@ -92,6 +92,7 @@ public class Utils {
                     commonPersonObject.getColumnmaps().get("IS_VALID"),
                     commonPersonObject.getColumnmaps().get("details"),
                     commonPersonObject.getColumnmaps().get("CreatedBy"),
+                    commonPersonObject.getColumnmaps().get("ModifyBy"),
                     commonPersonObject.getColumnmaps().get("type")
             );
         } catch (Exception e) {

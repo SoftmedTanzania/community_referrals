@@ -7,7 +7,7 @@ package com.softmed.uzazisalama.DataModels;
 public class FollowUpReport {
 
     private long date;
-    private String motherId, facilityName;
+    private String motherId, facilityId, createdBy, modifyBy;
     private boolean childDealth,
             albumin,
             over40WeeksPregnancy,
@@ -35,11 +35,11 @@ public class FollowUpReport {
     }
 
     public String getFacilityName() {
-        return facilityName;
+        return facilityId;
     }
 
     public void setFacilityName(String facilityName) {
-        this.facilityName = facilityName;
+        this.facilityId = facilityName;
     }
 
     public boolean isChildDealth() {
@@ -112,5 +112,21 @@ public class FollowUpReport {
 
     public void setFollowUpNumber(int followUpNumber) {
         this.followUpNumber = followUpNumber;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getModifyBy() {
+        return modifyBy;
+    }
+
+    public void setModifyBy(String modifyBy) {
+        this.modifyBy = modifyBy;
     }
 }

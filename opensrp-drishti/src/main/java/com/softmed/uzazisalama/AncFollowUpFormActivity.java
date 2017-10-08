@@ -12,13 +12,27 @@ import com.google.gson.Gson;
 
 import com.softmed.uzazisalama.DataModels.FollowUpReport;
 import com.softmed.uzazisalama.DataModels.PregnantMom;
+import com.softmed.uzazisalama.Repository.CustomFollowUpRepository;
+import com.softmed.uzazisalama.Repository.FollowUpReportObject;
 import com.softmed.uzazisalama.util.DatesHelper;
+import com.softmed.uzazisalama.util.Utils;
 
+import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
+import org.ei.opensrp.domain.SyncStatus;
+import org.ei.opensrp.domain.form.FormData;
+import org.ei.opensrp.domain.form.FormField;
+import org.ei.opensrp.domain.form.FormInstance;
+import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.softmed.uzazisalama.util.Utils.generateRandomUUIDString;
 
 public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity {
     private static final String TAG = AncFollowUpFormActivity.class.getSimpleName();
@@ -29,7 +43,7 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
     private String formName = "anc_follow_up_report";
     private EditText editTextFacilityName;
 
-    private PregnantMom pregnantMom;
+    private static PregnantMom pregnantMom;
     private Gson gson = new Gson();
 
 
@@ -78,6 +92,8 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
         Log.d(TAG, "mom=" + gsonMom);
 
         pregnantMom = gsonMom != null ? gson.fromJson(gsonMom, PregnantMom.class) : null;
+        Log.d(TAG, "preganantMom  =" + gsonMom);
+
 
         findViews();
         setListeners();
@@ -115,7 +131,7 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
             @Override
             public void onClick(View view) {
                 // TODO: 10/2/17 get id and fieldOverrides for follow up report submission
-                saveFormSubmission(getFollowUpReport(), "id", formName, null);
+                saveFormSubmission(getFollowUpReport(), pregnantMom.getId(), formName, null);
             }
         });
 
@@ -184,30 +200,88 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
 
 
     @Override
-    public void saveFormSubmission(String formSubmision, String id, String formName, JSONObject fieldOverrides) {
+    public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
         // TODO: 10/7/17 complete this implementation to save report to database
-        FollowUpReport report = gson.fromJson(formSubmision, FollowUpReport.class);
+        final FollowUpReport followUpReport = gson.fromJson(formSubmission, FollowUpReport.class);
 
-        ContentValues reportValues = new ContentValues();
-        reportValues.put("MOTHER_ID", report.getMotherId());
-        reportValues.put("REPORT_DATE", report.getDate());
-        reportValues.put("FOLLOW_UP_DATA", formSubmision); // follow up data contains the whole report in
-
-        if (report.isAlbumin()
-                || report.isBadChildPosition()
-                || report.isChildDealth()
-                || report.isHbBelow60()
-                || report.isHighBloodPressure()
-                || report.isHighSugar()
-                || report.isOver40WeeksPregnancy()
-                || report.isUnproportionalPregnancyHeight())
-            reportValues.put("IS_ON_RISK", true);
-        else
-            reportValues.put("IS_ON_RISK", false);
-
+        FollowUpReportObject followUpReportObject = new FollowUpReportObject(id, null, followUpReport);
+        ContentValues values = new CustomFollowUpRepository().createValuesFor(followUpReportObject);
+        Log.d(TAG, "followUpReportObject = " + gson.toJson(followUpReportObject));
+        Log.d(TAG, "values = " + gson.toJson(values));
 
         CommonRepository commonRepository = context().commonrepository("uzazi_salama_follow_up_report");
-        commonRepository.customInsert(reportValues);
+        commonRepository.customInsert(values);
+
+        CommonPersonObject c = commonRepository.findByCaseID(id);
+        List<FormField> formFields = new ArrayList<>();
+
+
+        formFields.add(new FormField("id", c.getCaseId(), commonRepository.TABLE_NAME + "." + "id"));
+
+
+        formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
+
+        for ( String key : c.getDetails().keySet() ) {
+            Log.d(TAG,"key = "+key);
+            FormField f = null;
+            if(!key.equals("facilityId")) {
+                f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
+            }else{
+                f = new FormField(key, c.getDetails().get(key), "facility.id");
+            }
+            formFields.add(f);
+        }
+
+        for ( String key : c.getColumnmaps().keySet() ) {
+            Log.d(TAG,"key = "+key);
+            FormField f = null;
+            if(!key.equals("facilityId")) {
+                f = new FormField(key, c.getColumnmaps().get(key), commonRepository.TABLE_NAME + "." + key);
+            }else{
+                f = new FormField(key, c.getColumnmaps().get(key), "facility.id");
+            }
+
+            formFields.add(f);
+
+
+        }
+
+        Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
+// // TODO: 08/10/2017 coze finishing up saving in the form submission
+//        FormData formData = new FormData("wazazi_salama_mother","/model/instance/Wazazi_Salama_ANC_Registration/",formFields,null);
+//        FormInstance formInstance = new FormInstance(formData,"1");
+//        FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"wazazi_salama_pregnant_mothers_registration",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
+//        context().formDataRepository().saveFormSubmission(submission);
+//
+//        Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
+
+
+//        TODO finish this better implementation for saving data to the database
+//        FormSubmission formSubmission1 = null;
+//        try {
+//            formSubmission1 = FormUtils.getInstance(getApplicationContext()).generateFormSubmisionFromJSONString(id,new Gson().toJson(pregnantMom),"wazazi_salama_pregnant_mothers_registration",fieldOverrides);
+//            Log.d(TAG,"form submission generated successfully");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        try {
+//            context().ziggyService().saveForm(getParams(formSubmission1), formSubmission1.instance());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+
+        new  com.softmed.uzazisalama.util.AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+                if(!pregnantMom.getPhone().equals(""))
+                    Utils.sendRegistrationAlert(pregnantMom.getPhone());
+                return null;
+            }
+        }.execute();
+
 
     }
 }
