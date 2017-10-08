@@ -221,23 +221,12 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 pregnantMom.setDateLastVisited(Calendar.getInstance().getTimeInMillis());
 
                 mother.setDetails(new Gson().toJson(pregnantMom));
+                Log.d(TAG, " mother "+ gson.toJson(mother));
+                Log.d(TAG, " pregnant mother "+ gson.toJson(pregnantMom));
+
                 updateFormSubmission(mother,mother.getId());
 //todo how to refresh the  pre registartion  fragment after updating
-//                mBaseFragment = new CHWPreRegistrationFragment();
-//                // Instantiate a ViewPager and a PagerAdapter.
-//                mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
-//                mPager.setOffscreenPageLimit(formNames.length);
-//                mPager.setAdapter(mPagerAdapter);
-//                mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-//                    @Override
-//                    public void onPageSelected(int position) {
-//                        currentPage = position;
-//                        // onPageChanged(position);
-//                    }
-//                });
-//
-//                mPager.setCurrentItem(1);
-//                currentPage = 1;
+
                 Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + mother.getMOTHERS_FIRST_NAME() +" "+mother.getMOTHERS_LAST_NAME(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
@@ -249,8 +238,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             }
         });
 
-        // TODO: findviewbyid that are on the dialog layout
-        // example
+
         TextView textName = (TextView) dialogView.findViewById(R.id.name);
         textName.setText(mother.getMOTHERS_FIRST_NAME()+" "+ mother.getMOTHERS_LAST_NAME());
     }
@@ -566,7 +554,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     @Override
     public void OnLocationSelected(String locationSelected) {
         // set registration fragment
-        Log.d(TAG,"Location selected");
+        Log.d(TAG,"Location selected ="+locationSelected);
         mPager.setCurrentItem(2);
         currentPage = 2;
     }
@@ -640,7 +628,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                         displayFormFragment.setRecordId(entityId);
                         displayFormFragment.setFieldOverides(metaData);
                     }
-
+                    displayFormFragment.setEmptyDetails();
                 }
             }
         } catch (Exception e) {

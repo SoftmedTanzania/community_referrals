@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class MotherPersonObject {
     private String id,IS_PNC, IS_VALID, REG_TYPE, relationalId, MOTHERS_FIRST_NAME, MOTHERS_LAST_NAME, MOTHERS_SORTVALUE,
-            EXPECTED_DELIVERY_DATE, MOTHERS_LAST_MENSTRUATION_DATE, FACILITY_ID,  PNC_STATUS, MOTHERS_ID;
+            EXPECTED_DELIVERY_DATE, MOTHERS_LAST_MENSTRUATION_DATE, FACILITY_ID,CreatedBy,  PNC_STATUS, MOTHERS_ID;
     private String details;
     private Map<String, String> columnMap;
 
@@ -30,6 +30,7 @@ public class MotherPersonObject {
                               String IS_PNC,
                               String IS_VALID,
                               String details,
+                              String CreatedBy,
                               String type) {
         this.details = details;
         this.id = id;
@@ -44,6 +45,7 @@ public class MotherPersonObject {
         this.FACILITY_ID = FACILITY_ID;
         this.IS_PNC = IS_PNC;
         this.IS_VALID = IS_VALID;
+        this.CreatedBy = CreatedBy;
     }
 
     // alternative constructor so you don't pass bucha stuff, PregnantMom contains everything
@@ -68,6 +70,7 @@ public class MotherPersonObject {
         this.IS_VALID = pregnantMom.getIs_valid();
         this.FACILITY_ID = pregnantMom.getFacilityId();
         this.details = new Gson().toJson(pregnantMom);
+        this.CreatedBy = pregnantMom.getCreatedBy();
 
     }
 
@@ -201,5 +204,13 @@ public class MotherPersonObject {
 
     public String IS_VALID() {
         return IS_VALID;
+    }
+
+    public String getCreatedBy() {
+        return CreatedBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        CreatedBy = createdBy;
     }
 }

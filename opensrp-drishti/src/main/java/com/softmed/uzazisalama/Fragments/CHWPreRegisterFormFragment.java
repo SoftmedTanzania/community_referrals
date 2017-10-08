@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.softmed.uzazisalama.Application.UzaziSalamaApplication;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import com.softmed.uzazisalama.AncSmartRegisterActivity;
@@ -54,7 +55,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
             editTextDiscountId, editTextMotherOccupation, editTextPhysicalAddress,
             editTextHusbandName, editTextHusbandOccupation;
     public static Button button;
-    public static RadioGroup radioGroupPregnancyAge;
+    public static RadioGroup radioGroupPregnancyAge,radioGroupHIV;
     public static MaterialSpinner spinnerMotherEducation, spinnerHusbandEducation;
     private ArrayAdapter<String> educationAdapter;
 
@@ -163,6 +164,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
 
 
         radioGroupPregnancyAge = (RadioGroup) fragmentView.findViewById(R.id.radioGroupPregnancyAge);
+        radioGroupHIV = (RadioGroup) fragmentView.findViewById(R.id.radioGroupHIV);
 
         // initialize date to today's date
         textDate.setText(dateFormat.format(today.getTimeInMillis()));
@@ -305,6 +307,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
     }
 
     public boolean isFormSubmissionOk() {
+        int value = editTextBirthCount.getText().toString().compareTo(editTextChildrenCount.getText().toString());
         if (TextUtils.isEmpty(editTextMotherName.getText())
                 || TextUtils.isEmpty(editTextClinicName.getText())
                 || TextUtils.isEmpty(editTextMotherId.getText())
@@ -326,9 +329,14 @@ public class CHWPreRegisterFormFragment extends Fragment {
 
             return false;
 
-        } else if (radioGroupPregnancyAge.getCheckedRadioButtonId() == -1) {
+        }else if(value < 0){
+            message = "Mama hawezi kuwa na watoto zaidi ya idadi aliyojifunguwa";
+            makeToast();
+            return false;
+        }
+        else if (radioGroupHIV.getCheckedRadioButtonId() == -1) {
             // no radio checked
-            message = "Tafadhali chagua umri wa ujauzito.";
+            message = "Tafadhali weka taarifa kuhusu maambukizi ya UKIMWI.";
             makeToast();
             return false;
 
@@ -361,7 +369,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
         mom.setPreviousFertilityCount(Integer.valueOf(editTextPregCount.getText().toString()));
         mom.setSuccessfulBirths(Integer.valueOf(editTextBirthCount.getText().toString()));
         mom.setLivingChildren(Integer.valueOf(editTextChildrenCount.getText().toString()));
-        mom.setAbove20WeeksPregnant(radioGroupPregnancyAge.getCheckedRadioButtonId() == R.id.radioAbove20);
+        mom.setAbove20WeeksPregnant(DatesHelper.isAbove20(lnmp));
         mom.setDiscountId(editTextDiscountId.getText().toString());
         mom.setEducation(spinnerMotherEducation.getSelectedItem().toString());
         mom.setOccupation(editTextMotherOccupation.getText().toString());
@@ -371,8 +379,20 @@ public class CHWPreRegisterFormFragment extends Fragment {
         mom.setHusbandOccupation(editTextHusbandOccupation.getText().toString());
         mom.setDateLNMP(lnmp);
         mom.setEdd(edd);
+        mom.setCreatedBy(((UzaziSalamaApplication) getActivity().getApplication()).getCurrentUserID());
         mom.setDateRegistration(today.getTimeInMillis());
-
+        int checkedStatusHIV = radioGroupHIV.getCheckedRadioButtonId();
+        // hiv statuses 0=no 1=yes 2=unknown
+        mom.setHivStatus(checkedStatusHIV == R.id.radioNoHIV ? 0 : checkedStatusHIV == R.id.radioYesHIV ? 1 : 2);
+        if (mom.getAge() < 20
+                || mom.getAge() > 35
+                || mom.getHeight() < 150
+                || mom.getPreviousFertilityCount() >= 4
+                || mom.getHivStatus() == 1)
+            // for either of above indicators, mother is on risk
+            mom.setOnRisk(true);
+        if(mom.getSuccessfulBirths() > mom.getLivingChildren())
+            mom.setOnRisk(true);
         Log.d(TAG, "mom ="+ new Gson().toJson(mom));
         return mom;
     }
@@ -410,6 +430,35 @@ public class CHWPreRegisterFormFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+    public void setEmptyDetails() {
+       setEmptyValues();
+    }
+    public void setEmptyValues() {
+
+        //empty the data
+
+        textDate.setText("");
+        textPhone.setText("");
+        textDateLNMP.setText("");
+        textEDD.setText("");
+        int motherSelected = -1;
+        spinnerMotherEducation.setSelection(motherSelected);
+        spinnerHusbandEducation.setFloatingLabelText("Elimu Ya Mume/Mwenza");
+        editTextMotherName.setText("");
+        editTextMotherId.setText("");
+        editTextMotherAge.setText("");
+        editTextHeight.setText("");
+        editTextPregCount.setText("");
+        editTextBirthCount.setText("");
+        editTextChildrenCount.setText("");
+        editTextDiscountId.setText("");
+        editTextMotherOccupation.setText("");
+        editTextPhysicalAddress.setText("");
+        editTextHusbandName.setText("");
+        editTextHusbandOccupation.setText("");
+        editTextClinicName.setText("");
 
     }
 }

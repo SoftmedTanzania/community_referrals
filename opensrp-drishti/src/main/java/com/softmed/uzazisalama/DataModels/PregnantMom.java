@@ -7,7 +7,7 @@ package com.softmed.uzazisalama.DataModels;
 public class PregnantMom {
     private String mother_name, cardid, phone, discountId, education, occupation, lastSmsToken, chwComment, reg_type,
             is_pnc,
-            is_valid,
+            is_valid, createdBy,
             husbandName, husbandEducation, husbandOccupation, physicalAddress, facilityId;
 
     private long dateReg, dateLNMP, edd, dateRegistration, dateLastVisited;
@@ -409,5 +409,13 @@ public class PregnantMom {
 
     public void setHivStatus(int hivStatus) {
         this.hivStatus = hivStatus;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 }

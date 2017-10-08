@@ -149,6 +149,16 @@ public class NativeHomeActivity extends SecuredActivity {
             }
         }
 
+        // gettting the logged user person_id
+        JSONObject personId = null;
+
+        try {
+            personId = userSettings.getJSONObject("attributes");
+            ((UzaziSalamaApplication)getApplication()).setCurrentUserID(personId.getString("_PERSON_UUID"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void setupViews() {

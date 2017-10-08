@@ -1,8 +1,10 @@
 package com.softmed.uzazisalama.pageradapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +24,8 @@ import com.softmed.uzazisalama.util.Utils;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
+
+import static org.ei.opensrp.R.color.smart_register_client_divider_color;
 
 
 /**
@@ -60,10 +64,11 @@ public class CHWRegisterRecyclerAdapter extends
         mother = mothers.get(position);
         String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
         PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
         String reg_date = dateFormat.format(pregnantMom.getDateLastVisited());
 
-        // Set item views based on your views and data model
+
         TextView name = viewHolder.nameTextView;
         TextView edd = viewHolder.eddTextView;
         TextView visited = viewHolder.visitedTextView;
@@ -72,8 +77,32 @@ public class CHWRegisterRecyclerAdapter extends
         visited.setText(reg_date);
         edd.setText(mother.getEXPECTED_DELIVERY_DATE());
         name.setText(mother.getMOTHERS_FIRST_NAME() +" "+mother.getMOTHERS_LAST_NAME());
-        //todo check the risk level factor from the indicators
-        risk.setText("high");
+
+        if(pregnantMom.isBleedingOnDelivery()
+                || pregnantMom.isCsDelivery()
+                || pregnantMom.isFourOrMorePreg()
+                || pregnantMom.isHadStillBirth()
+                || pregnantMom.isHas2orMoreBBA()
+                || pregnantMom.isHas10YrsPassedSinceLastPreg()
+                || pregnantMom.isHasDiabetes()
+                || pregnantMom.isHasHeartProblem()
+                || pregnantMom.isHasTB()
+                || pregnantMom.isHeightBelow150()
+                || pregnantMom.isKondoKukwama()
+                || pregnantMom.isKilemaChaNyonga()
+                || pregnantMom.isFirstPregAbove35Yrs()
+                )
+        {
+            risk.setText("high");
+        }else if(pregnantMom.isOnRisk()){
+            viewHolder.riskTextView.setText("high");
+        }else{
+
+            String moderate = "moderate";
+            risk.setText(moderate);
+            risk.setTextColor(Color.parseColor("#389cc8"));
+        }
+
 
     }
 

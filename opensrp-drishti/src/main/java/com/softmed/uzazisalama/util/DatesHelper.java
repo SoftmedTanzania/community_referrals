@@ -31,4 +31,13 @@ public class DatesHelper {
     public static long calculateEarlyVisitFromLNMP(long lnmp) {
         return (WEEK * 16) + lnmp; // 20th week
     }
+    public static boolean isAbove20(long lnmp) {
+        boolean value;
+        if(lnmp > (WEEK * 20) ){
+           value = true;
+        }else{
+            value = false;
+        }
+        return value;
+    }
 }

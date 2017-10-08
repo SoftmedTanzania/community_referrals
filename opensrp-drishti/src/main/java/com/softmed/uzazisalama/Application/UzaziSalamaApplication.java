@@ -37,6 +37,7 @@ import static org.ei.opensrp.util.Log.logInfo;
 )
 public class UzaziSalamaApplication extends DrishtiApplication {
     private int userType=0;//0=CHW and 1=Facility health care worker
+    public  String currentUserID;
 
     @Override
     public void onCreate() {
@@ -170,5 +171,13 @@ public class UzaziSalamaApplication extends DrishtiApplication {
 
     public void setUserType(int userType) {
         this.userType = userType;
+    }
+
+    public String getCurrentUserID() {
+        return currentUserID;
+    }
+
+    public  void setCurrentUserID(String currentUserID) {
+       this.currentUserID = currentUserID;
     }
 }

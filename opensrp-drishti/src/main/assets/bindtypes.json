@@ -3,7 +3,7 @@
     {
       "name": "wazazi_salama_mother",
       "columns": [
-        {"name":"MOTHERS_FIRST_NAME"},{"name":"MOTHERS_LAST_NAME"},{"name":"MOTHERS_LAST_MENSTRUATION_DATE"},{"name":"MOTHERS_SORTVALUE"},{"name":"MOTHERS_ID"},{"name":"PNC_STATUS"},{"name":"EXPECTED_DELIVERY_DATE"},{"name":"IS_VALID"},{"name":"REG_TYPE"},{"name":"Is_PNC"},{"name":"FACILITY_ID"}
+        {"name":"MOTHERS_FIRST_NAME"},{"name":"MOTHERS_LAST_NAME"},{"name":"MOTHERS_LAST_MENSTRUATION_DATE"},{"name":"MOTHERS_SORTVALUE"},{"name":"MOTHERS_ID"},{"name":"PNC_STATUS"},{"name":"EXPECTED_DELIVERY_DATE"},{"name":"IS_VALID"},{"name":"REG_TYPE"},{"name":"Is_PNC"},{"name":"FACILITY_ID"},{"name":"CreatedBy"}
       ]
     },
     {
@@ -16,6 +16,12 @@
       "name": "facility",
       "columns": [
         {"name":"FACILITY_NAME"},{"name":"FACILITY_ID"}
+      ]
+    },
+    {
+      "name": "uzazi_salama_follow_up_report",
+      "columns": [
+        {"name":"MOTHER_ID"},{"name":"REPORT_DATE"}, {"name":"IS_ON_RISK"},{"name":"FOLLOW_UP_DATA"}
       ]
     }
   ]
