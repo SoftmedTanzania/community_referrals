@@ -55,7 +55,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
             editTextDiscountId, editTextMotherOccupation, editTextPhysicalAddress,
             editTextHusbandName, editTextHusbandOccupation;
     public static Button button;
-    public static RadioGroup radioGroupPregnancyAge;
+    public static RadioGroup radioGroupPregnancyAge,radioGroupHIV;
     public static MaterialSpinner spinnerMotherEducation, spinnerHusbandEducation;
     private ArrayAdapter<String> educationAdapter;
 
@@ -164,6 +164,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
 
 
         radioGroupPregnancyAge = (RadioGroup) fragmentView.findViewById(R.id.radioGroupPregnancyAge);
+        radioGroupHIV = (RadioGroup) fragmentView.findViewById(R.id.radioGroupHIV);
 
         // initialize date to today's date
         textDate.setText(dateFormat.format(today.getTimeInMillis()));
@@ -306,6 +307,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
     }
 
     public boolean isFormSubmissionOk() {
+        int value = editTextBirthCount.getText().toString().compareTo(editTextChildrenCount.getText().toString());
         if (TextUtils.isEmpty(editTextMotherName.getText())
                 || TextUtils.isEmpty(editTextClinicName.getText())
                 || TextUtils.isEmpty(editTextMotherId.getText())
@@ -327,7 +329,18 @@ public class CHWPreRegisterFormFragment extends Fragment {
 
             return false;
 
-        }  else if (spinnerMotherEducation.getSelectedItemPosition() < 0
+        }else if(value < 0){
+            message = "Mama hawezi kuwa na watoto zaidi ya idadi aliyojifunguwa";
+            makeToast();
+            return false;
+        }
+        else if (radioGroupHIV.getCheckedRadioButtonId() == -1) {
+            // no radio checked
+            message = "Tafadhali weka taarifa kuhusu maambukizi ya UKIMWI.";
+            makeToast();
+            return false;
+
+        } else if (spinnerMotherEducation.getSelectedItemPosition() < 0
                 || spinnerHusbandEducation.getSelectedItemPosition() < 0) {
 
             message = "Tafadhali chagua elimu ya mama na mwenza.";
@@ -368,7 +381,18 @@ public class CHWPreRegisterFormFragment extends Fragment {
         mom.setEdd(edd);
         mom.setCreatedBy(((UzaziSalamaApplication) getActivity().getApplication()).getCurrentUserID());
         mom.setDateRegistration(today.getTimeInMillis());
-
+        int checkedStatusHIV = radioGroupHIV.getCheckedRadioButtonId();
+        // hiv statuses 0=no 1=yes 2=unknown
+        mom.setHivStatus(checkedStatusHIV == R.id.radioNoHIV ? 0 : checkedStatusHIV == R.id.radioYesHIV ? 1 : 2);
+        if (mom.getAge() < 20
+                || mom.getAge() > 35
+                || mom.getHeight() < 150
+                || mom.getPreviousFertilityCount() >= 4
+                || mom.getHivStatus() == 1)
+            // for either of above indicators, mother is on risk
+            mom.setOnRisk(true);
+        if(mom.getSuccessfulBirths() > mom.getLivingChildren())
+            mom.setOnRisk(true);
         Log.d(TAG, "mom ="+ new Gson().toJson(mom));
         return mom;
     }

@@ -90,11 +90,12 @@ public class CHWRegisterRecyclerAdapter extends
                 || pregnantMom.isHeightBelow150()
                 || pregnantMom.isKondoKukwama()
                 || pregnantMom.isKilemaChaNyonga()
-                || pregnantMom.getHivStatus() == 0
                 || pregnantMom.isFirstPregAbove35Yrs()
                 )
         {
             risk.setText("high");
+        }else if(pregnantMom.isOnRisk()){
+            viewHolder.riskTextView.setText("high");
         }else{
 
             String moderate = "moderate";

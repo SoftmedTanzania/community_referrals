@@ -138,12 +138,14 @@ public class CHWFollowUpPagerAdapter extends
                 || pregnantMom.isHeightBelow150()
                 || pregnantMom.isKondoKukwama()
                 || pregnantMom.isKilemaChaNyonga()
-                || pregnantMom.getHivStatus() == 0
                 || pregnantMom.isFirstPregAbove35Yrs()
                 )
         {
             viewHolder.riskTextView.setText("high");
-        }else{
+        }else if(pregnantMom.isOnRisk()){
+            viewHolder.riskTextView.setText("high");
+        }
+        else{
 
             String moderate = "moderate";
             viewHolder.riskTextView.setText(moderate);
