@@ -81,18 +81,27 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name="com.softmed.uzazisalama.chw.CHWFormRegistrationActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name="com.softmed.uzazisalama.chw.CHWFormFollowActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name="com.softmed.uzazisalama.chw.CHWEditPreRegistrationActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name="com.softmed.uzazisalama.WazaziRegisterActivity" android:theme="@style/AppTheme.NoActionBar"
+        <activity
+            android:name="com.softmed.uzazisalama.chw.CHWFormRegistrationActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:name="com.softmed.uzazisalama.chw.CHWFormFollowActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="com.softmed.uzazisalama.chw.CHWEditPreRegistrationActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="com.softmed.uzazisalama.WazaziRegisterActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="ee4140a3b1692ec32e688110a280538c7b44e10e" />
+
+        <activity
+            android:name="com.softmed.uzazisalama.PncDetailActivity"
+            android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
     </application>
 
 </manifest>
