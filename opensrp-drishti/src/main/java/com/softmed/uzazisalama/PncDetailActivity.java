@@ -17,7 +17,8 @@ import org.ei.opensrp.drishti.R;
 public class PncDetailActivity extends AppCompatActivity {
 
     private TextView textName, textId, textAge, textGravida, textPara,
-            textDeliveryMethod, textProblems, textMotherHealthOnPermission;
+            textDeliveryMethod, textProblemDuringDelivery, textMotherHealth,
+            textBabyGender, textBabyWeight, textApgarScore, textBabyProblems, textBabyHealth;
     private LinearLayout layoutBBA;
     private CardView cardBabyDetails;
 
@@ -51,8 +52,13 @@ public class PncDetailActivity extends AppCompatActivity {
         textDeliveryMethod = (TextView) findViewById(R.id.textDeliveryMethod);
         textPara = (TextView) findViewById(R.id.textPara);
         textGravida = (TextView) findViewById(R.id.textGravida);
-        textProblems = (TextView) findViewById(R.id.textProblemDuringDelivery);
-        textMotherHealthOnPermission = (TextView) findViewById(R.id.textMotherHealthOnPermission);
+        textProblemDuringDelivery = (TextView) findViewById(R.id.textProblemDuringDelivery);
+        textMotherHealth = (TextView) findViewById(R.id.textMotherHealthOnPermission);
+        textBabyGender = (TextView) findViewById(R.id.textBabyGender);
+        textBabyWeight = (TextView) findViewById(R.id.textBabyWeight);
+        textApgarScore = (TextView) findViewById(R.id.textApgarScore);
+        textBabyProblems = (TextView) findViewById(R.id.textBabyProblems);
+        textBabyHealth = (TextView) findViewById(R.id.textBabyHealthOnPermission);
         cardBabyDetails = (CardView) findViewById(R.id.cardBabyDetails);
         layoutBBA = (LinearLayout) findViewById(R.id.layoutBBA);
 
