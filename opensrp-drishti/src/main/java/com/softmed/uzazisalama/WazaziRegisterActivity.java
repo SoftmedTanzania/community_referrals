@@ -44,17 +44,17 @@ import static com.softmed.uzazisalama.util.Utils.generateRandomUUIDString;
 
 public class WazaziRegisterActivity extends AppCompatActivity {
     private static final String TAG = WazaziRegisterActivity.class.getSimpleName();
-    private  String gsonMom,id;
+    private String id;
     private PregnantMom pregnantMom;
     private TextView textName, textId,
-            textAge,textDeliveryDate,textDateKulazwa;
-    private CardView cardPickCheckInDate,cardPickDeliveryDate;
+            textAge, textDeliveryDate, textDateKulazwa;
+    private CardView cardPickCheckInDate, cardPickDeliveryDate;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-    private EditText editTextGravida,editTextMotherStatus,editTextPara,editTextNjiaYaKujifungua,
-            editTextBba,editTextDeliveryProblems,editTextChildWeight,editTextApgar,editTextChildProblems;
+    private EditText editTextGravida, editTextMotherStatus, editTextPara, editTextNjiaYaKujifungua,
+            editTextBba, editTextDeliveryProblems, editTextChildWeight, editTextApgar, editTextChildProblems;
 
-    private RadioGroup childStatusRadioGroup,typeOfDeadChildRadioGroup;
-    private int childStatus =1,childDeathType;
+    private RadioGroup childStatusRadioGroup, typeOfDeadChildRadioGroup;
+    private int childStatus = 1, childDeathType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +63,7 @@ public class WazaziRegisterActivity extends AppCompatActivity {
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 pregnantMom.setIs_pnc("true");
@@ -72,13 +71,13 @@ public class WazaziRegisterActivity extends AppCompatActivity {
             }
         });
         setUpViews();
-        gsonMom = getIntent().getStringExtra("mom");
+        final String gsonMom = getIntent().getStringExtra("mom");
         id = getIntent().getStringExtra("id");
         Log.d(TAG, "mom=" + gsonMom);
 
         if (gsonMom != null) {
             pregnantMom = new Gson().fromJson(gsonMom, PregnantMom.class);
-            Log.d(TAG,"id ="+id);
+            Log.d(TAG, "id =" + id);
             // set values
             setMotherProfileDetails();
         }
@@ -122,11 +121,11 @@ public class WazaziRegisterActivity extends AppCompatActivity {
         childStatusRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                if(i==R.id.alive){
-                    childStatus =1;
+                if (i == R.id.alive) {
+                    childStatus = 1;
                     findViewById(R.id.hali_ya_mtoto).setVisibility(View.GONE);
-                }else{
-                    childStatus =0;
+                } else {
+                    childStatus = 0;
                     findViewById(R.id.hali_ya_mtoto).setVisibility(View.VISIBLE);
                 }
             }
@@ -134,10 +133,10 @@ public class WazaziRegisterActivity extends AppCompatActivity {
         childStatusRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                if(i==R.id.fbs){
-                    childDeathType =0;
-                }else if (i==R.id.msb){
-                    childDeathType =1;
+                if (i == R.id.fbs) {
+                    childDeathType = 0;
+                } else if (i == R.id.msb) {
+                    childDeathType = 1;
 
                 }
             }
@@ -147,8 +146,8 @@ public class WazaziRegisterActivity extends AppCompatActivity {
     private void setMotherProfileDetails() {
         // todo set all profile details
         textName.setText(pregnantMom.getName());
-        textId.setText("Mother ID : "+pregnantMom.getId());
-        textAge.setText(String.valueOf(pregnantMom.getAge())+" years");
+        textId.setText("Mother ID : " + pregnantMom.getId());
+        textAge.setText(String.valueOf(pregnantMom.getAge()) + " years");
 
     }
 
@@ -162,7 +161,7 @@ public class WazaziRegisterActivity extends AppCompatActivity {
                 // update view
                 GregorianCalendar pickedDate = new GregorianCalendar(year, monthOfYear, dayOfMonth);
 
-                ((TextView)findViewById(id)).setText(dateFormat.format(pickedDate.getTimeInMillis()));
+                ((TextView) findViewById(id)).setText(dateFormat.format(pickedDate.getTimeInMillis()));
 
             }
         };
@@ -181,24 +180,24 @@ public class WazaziRegisterActivity extends AppCompatActivity {
         datePickerDialog.show(getFragmentManager(), "DatePickerDialog");
     }
 
-    private void saveData(){
+    private void saveData() {
         // save the form
 
         MotherPersonObject motherPersonObject = new MotherPersonObject(id, null, pregnantMom);
-        updateFormSubmission(motherPersonObject,id);
+        updateFormSubmission(motherPersonObject, id);
 
 
     }
 
-    public void updateFormSubmission(MotherPersonObject motherPersonObject, String id){
+    public void updateFormSubmission(MotherPersonObject motherPersonObject, String id) {
 
 
         ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
-        Log.d(TAG,"values to be updated ="+ new Gson().toJson(values));
-        Log.d(TAG," mother id to be updated ="+ id);
-        Log.d(TAG," mother id to be updated ="+ motherPersonObject.getId());
+        Log.d(TAG, "values to be updated =" + new Gson().toJson(values));
+        Log.d(TAG, " mother id to be updated =" + id);
+        Log.d(TAG, " mother id to be updated =" + motherPersonObject.getId());
         CommonRepository commonRepository = Context.getInstance().updateApplicationContext(this.getApplicationContext()).commonrepository("wazazi_salama_mother");
-        commonRepository.customUpdateTable("wazazi_salama_mother",values,motherPersonObject.getId());
+        commonRepository.customUpdateTable("wazazi_salama_mother", values, motherPersonObject.getId());
 
         CommonRepository cRepository = Context.getInstance().updateApplicationContext(this.getApplicationContext()).commonrepository("wazazi_salama_mother");
 
@@ -211,23 +210,23 @@ public class WazaziRegisterActivity extends AppCompatActivity {
 
         formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
 
-        for ( String key : c.getDetails().keySet() ) {
-            Log.d(TAG,"key = "+key);
+        for (String key : c.getDetails().keySet()) {
+            Log.d(TAG, "key = " + key);
             FormField f = null;
-            if(!key.equals("FACILITY_ID")) {
+            if (!key.equals("FACILITY_ID")) {
                 f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
-            }else{
+            } else {
                 f = new FormField(key, c.getDetails().get(key), "facility.id");
             }
             formFields.add(f);
         }
 
-        for ( String key : c.getColumnmaps().keySet() ) {
-            Log.d(TAG,"key = "+key);
+        for (String key : c.getColumnmaps().keySet()) {
+            Log.d(TAG, "key = " + key);
             FormField f = null;
-            if(!key.equals("FACILITY_ID")) {
+            if (!key.equals("FACILITY_ID")) {
                 f = new FormField(key, c.getColumnmaps().get(key), commonRepository.TABLE_NAME + "." + key);
-            }else{
+            } else {
                 f = new FormField(key, c.getColumnmaps().get(key), "facility.id");
             }
 
@@ -235,17 +234,17 @@ public class WazaziRegisterActivity extends AppCompatActivity {
 
 
         }
-        Log.d(TAG,"fieldes = "+ new Gson().toJson(formFields));
+        Log.d(TAG, "fieldes = " + new Gson().toJson(formFields));
 
-        FormData formData = new FormData("wazazi_salama_mother","/model/instance/Wazazi_Salama_ANC_Registration/",formFields,null);
-        FormInstance formInstance = new FormInstance(formData,"1");
+        FormData formData = new FormData("wazazi_salama_mother", "/model/instance/Wazazi_Salama_ANC_Registration/", formFields, null);
+        FormInstance formInstance = new FormInstance(formData, "1");
         FormSubmission submission = Context.getInstance().updateApplicationContext(this.getApplicationContext()).formDataRepository().fetchFromSubmissionByEntity(motherPersonObject.getId());
 
-        Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
+        Log.d(TAG, "submission content = " + new Gson().toJson(submission));
 
-        FormSubmission updatedSubmission = new FormSubmission(submission.instanceId(), submission.entityId(), submission.formName(), new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
+        FormSubmission updatedSubmission = new FormSubmission(submission.instanceId(), submission.entityId(), submission.formName(), new Gson().toJson(formInstance), "4", SyncStatus.PENDING, "4");
         Context.getInstance().updateApplicationContext(this.getApplicationContext()).formDataRepository().updateFormSubmission(updatedSubmission);
 
-        Log.d(TAG,"submission content = "+ new Gson().toJson(updatedSubmission));
+        Log.d(TAG, "submission content = " + new Gson().toJson(updatedSubmission));
     }
 }

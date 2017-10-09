@@ -21,34 +21,38 @@
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
             <LinearLayout
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_collapseMode="pin"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_collapseMode="pin">
+
                 <TextView
                     android:id="@+id/textName"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginLeft="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:text="Jane Doe"/>
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Jane Doe"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/textAge"
-                    android:layout_marginLeft="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:text="36 years"/>
+                    android:layout_marginLeft="16dp"
+                    android:text="36 years"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/textId"
-                    android:layout_marginLeft="16dp"
                     android:layout_width="wrap_content"
-                    android:textStyle="bold"
                     android:layout_height="wrap_content"
-                    android:text="Registration No. 12232"/>
+                    android:layout_marginLeft="16dp"
+                    android:text="Registration No. 12232"
+                    android:textStyle="bold" />
             </LinearLayout>
 
 
@@ -61,9 +65,14 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:tint="@android:color/white"
+
+        app:backgroundTint="@color/accent"
+        app:elevation="6dp"
+        app:fabSize="normal"
+        app:pressedTranslationZ="14dp"
+        app:srcCompat="@drawable/ic_check" />
 
 </android.support.design.widget.CoordinatorLayout>

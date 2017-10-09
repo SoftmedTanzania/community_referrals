@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.softmed.uzazisalama.Fragments.WazaziRegistationFragment"
     tools:showIn="@layout/activity_wazazi_register">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,10 +20,10 @@
             android:layout_margin="16dp">
 
             <LinearLayout
-                android:padding="16dp"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -42,17 +42,17 @@
                         android:layout_marginTop="16dp"
                         android:text="Tarehe ya Kujifungua"
                         android:textColor="@color/primary"
-                        android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                     <android.support.v7.widget.CardView
                         android:id="@+id/card_pick_delivery_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="2dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="16dp"
 
                         app:cardBackgroundColor="@android:color/white"
                         app:cardCornerRadius="2dp"
@@ -89,17 +89,17 @@
                         android:layout_height="wrap_content"
                         android:text="Tarehe ya kulazwa"
                         android:textColor="@color/primary"
-                        android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                     <android.support.v7.widget.CardView
                         android:id="@+id/card_pick_check_in_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="2dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="16dp"
 
                         app:cardBackgroundColor="@android:color/white"
                         app:cardCornerRadius="2dp"
@@ -139,9 +139,9 @@
                     <EditText
                         android:id="@+id/gravida"
                         android:layout_width="96dp"
-                        android:textSize="15sp"
                         android:layout_height="wrap_content"
-                        android:hint="Gravida" />
+                        android:hint="Gravida"
+                        android:textSize="15sp" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -152,23 +152,23 @@
                     <EditText
                         android:id="@+id/para"
                         android:layout_width="150dp"
-                        android:textSize="15sp"
                         android:layout_height="wrap_content"
-                        android:hint="Para" />
+                        android:hint="Para"
+                        android:textSize="15sp" />
 
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_marginRight="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp">
 
                     <EditText
                         android:id="@+id/mothers_status"
-                        android:textSize="15sp"
                         android:layout_width="350dp"
                         android:layout_height="wrap_content"
-                        android:hint="Hali ya mama wakati anaruhusiwa" />
+                        android:hint="Hali ya mama wakati anaruhusiwa"
+                        android:textSize="15sp" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -185,10 +185,10 @@
             android:layout_marginRight="16dp">
 
             <LinearLayout
-                android:padding="16dp"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -197,45 +197,46 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_marginRight="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp">
 
                     <EditText
                         android:id="@+id/bba"
-                        android:textSize="15sp"
                         android:layout_width="350dp"
                         android:layout_height="wrap_content"
-                        android:hint="BBA/Kuharibika Mimba" />
+                        android:hint="BBA/Kuharibika Mimba"
+                        android:textSize="15sp" />
 
                 </android.support.design.widget.TextInputLayout>
+
                 <android.support.design.widget.TextInputLayout
-                    android:layout_marginRight="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp">
 
                     <EditText
                         android:id="@+id/njia_ya_kujifungua"
-                        android:textSize="15sp"
                         android:layout_width="350dp"
                         android:layout_height="wrap_content"
-                        android:hint="Njia ya Kujifungua" />
+                        android:hint="Njia ya Kujifungua"
+                        android:textSize="15sp" />
 
                 </android.support.design.widget.TextInputLayout>
+
                 <android.support.design.widget.TextInputLayout
-                    android:layout_marginRight="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp">
 
                     <EditText
                         android:id="@+id/delivery_problems"
-                        android:textSize="15sp"
                         android:layout_width="350dp"
                         android:layout_height="wrap_content"
-                        android:hint="Matatizo wakati wa kujifungua" />
+                        android:hint="Matatizo wakati wa kujifungua"
+                        android:textSize="15sp" />
 
                 </android.support.design.widget.TextInputLayout>
-
 
 
             </LinearLayout>
@@ -251,10 +252,10 @@
             android:layout_marginRight="16dp">
 
             <LinearLayout
-                android:padding="16dp"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -263,111 +264,117 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                 <Spinner
-                    android:layout_marginLeft="-4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:entries="@array/gender"/>
+                    android:layout_marginLeft="-4dp"
+                    android:entries="@array/gender" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_marginRight="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp">
 
                     <EditText
                         android:id="@+id/child_weight"
-                        android:textSize="15sp"
                         android:layout_width="350dp"
                         android:layout_height="wrap_content"
                         android:hint="Uzito"
-                        android:inputType="numberDecimal"/>
+                        android:inputType="numberDecimal"
+                        android:textSize="15sp" />
 
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_marginRight="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp">
 
                     <EditText
                         android:id="@+id/apgar"
-                        android:textSize="15sp"
                         android:layout_width="350dp"
                         android:layout_height="wrap_content"
-                        android:hint="Apgar Score"/>
+                        android:hint="Apgar Score"
+                        android:textSize="15sp" />
 
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_marginRight="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp">
 
                     <EditText
                         android:id="@+id/child_problems"
-                        android:textSize="15sp"
                         android:layout_width="350dp"
                         android:layout_height="wrap_content"
-                        android:hint="Matatizo ya mtoto"/>
+                        android:hint="Matatizo ya mtoto"
+                        android:textSize="15sp" />
 
                 </android.support.design.widget.TextInputLayout>
 
 
                 <TextView
-                    android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="Hali ya mtoto wakati anaruhusiwa"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
                 <RadioGroup
                     android:id="@+id/child_status_radio_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <RadioButton
                         android:id="@+id/alive"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
                         android:checked="true"
-                        android:text="Nzuri"/>
+                        android:text="Nzuri" />
+
                     <RadioButton
                         android:id="@+id/dead"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Amefariki"/>
+                        android:text="Amefariki" />
                 </RadioGroup>
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/hali_ya_mtoto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
                     <TextView
-                        android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="Aina ya mtoto aliyezaliwa MFU"/>
+                        android:layout_marginTop="8dp"
+                        android:text="Aina ya mtoto aliyezaliwa MFU"
+                        android:textSize="16sp" />
+
                     <RadioGroup
                         android:id="@+id/type_of_dead_child_radio_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <RadioButton
                             android:id="@+id/fbs"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="16dp"
-                            android:text="FBS"/>
+                            android:text="FBS" />
+
                         <RadioButton
                             android:id="@+id/msb"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="MSB"/>
+                            android:text="MSB" />
                     </RadioGroup>
                 </LinearLayout>
-
 
 
             </LinearLayout>
