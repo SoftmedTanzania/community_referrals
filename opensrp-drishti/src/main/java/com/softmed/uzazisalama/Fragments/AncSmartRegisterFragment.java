@@ -338,8 +338,7 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                 "FACILITY_ID"};
 
         CommonRepository motherRepository = context().commonrepository("wazazi_salama_mother");
-        Cursor cursor = motherRepository.RawCustomQueryForAdapter("select * from wazazi_salama_mother");
-//        Cursor cursor = motherRepository.CustomQueryForAdapter(columns, "wazazi_salama_mother", "", "");
+        Cursor cursor = motherRepository.RawCustomQueryForAdapter("select * from wazazi_salama_mother WHERE Is_PNC = 'false' ");
         clientAdapter = new AncRegisterListAdapter(context(), motherRepository, cursor, getContext());
 
 

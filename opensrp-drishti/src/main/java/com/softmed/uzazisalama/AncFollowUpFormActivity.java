@@ -259,7 +259,7 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
         Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
 
 // // TODO: 08/10/2017 coze finishing up saving in the form submission
-        FormData formData = new FormData("uzazi_salama_follow_up_report","/model/instance/Wazazi_Salama_ANC_Registration/",formFields,null);
+        FormData formData = new FormData("uzazi_salama_follow_up_report","/model/instance/Wazazi_Salama_ANC_Followup/",formFields,null);
         FormInstance formInstance = new FormInstance(formData,"1");
         FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"wazazi_salama_pregnant_mothers_follow_up",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
         context().formDataRepository().saveFormSubmission(submission);
@@ -282,7 +282,6 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-
 
         new  com.softmed.uzazisalama.util.AsyncTask<Void, Void, Void>(){
             @Override

@@ -75,6 +75,7 @@ public class AncDetailActivityAlt extends AppCompatActivity {
 
     private CardView cardRiskIndicatiors;
     private LinearLayout layoutRiskAge, layoutRiskHeight, layoutRiskFertility, layoutRiskHIV;
+    private  String gsonMom,id;
 
 
     private PregnantMom mom;
@@ -108,8 +109,8 @@ public class AncDetailActivityAlt extends AppCompatActivity {
 
         setUpViews();
 
-        final String gsonMom = getIntent().getStringExtra("mom");
-        final String id = getIntent().getStringExtra("id");
+        gsonMom = getIntent().getStringExtra("mom");
+        id = getIntent().getStringExtra("id");
         Log.d(TAG, "mom=" + gsonMom);
 
         if (gsonMom != null) {
@@ -118,19 +119,6 @@ public class AncDetailActivityAlt extends AppCompatActivity {
             // set values
             setMotherProfileDetails();
         }
-
-
-        findViewById(R.id.fabFollowUp).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent =new Intent(AncDetailActivityAlt.this, AncFollowUpFormActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("mom", gsonMom);
-                intent.putExtra("id", id);
-                startActivity(intent);
-
-            }
-        });
 
     }
 
@@ -310,6 +298,21 @@ public class AncDetailActivityAlt extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                return true;
+
+            case R.id.action_followup:
+                Intent intent =new Intent(AncDetailActivityAlt.this, AncFollowUpFormActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("mom", gsonMom);
+                intent.putExtra("id", id);
+                startActivity(intent);
+                return true;
+            case R.id.action_pnc:
+                Intent intent2 =new Intent(AncDetailActivityAlt.this, WazaziRegisterActivity.class);
+                intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent2.putExtra("mom", gsonMom);
+                intent2.putExtra("id", id);
+                startActivity(intent2);
                 return true;
 
             default:
@@ -521,7 +524,7 @@ public class AncDetailActivityAlt extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_follow_up_details, menu);
+        inflater.inflate(R.menu.menu_anc_details, menu);
         return true;
     }
 

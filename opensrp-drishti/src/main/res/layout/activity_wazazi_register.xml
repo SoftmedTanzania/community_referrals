@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.softmed.uzazisalama.Fragments.WazaziRegistationFragment">
+    tools:context="com.softmed.uzazisalama.WazaziRegisterActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -28,19 +28,25 @@
                 app:layout_collapseMode="pin"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/textName"
                     android:layout_marginTop="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:text="Jane Doe"/>
                 <TextView
+                    android:id="@+id/textAge"
                     android:layout_marginLeft="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:text="36 years"/>
                 <TextView
+                    android:id="@+id/textId"
                     android:layout_marginLeft="16dp"
                     android:layout_width="wrap_content"
+                    android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:text="Registration No. 12232"/>
             </LinearLayout>

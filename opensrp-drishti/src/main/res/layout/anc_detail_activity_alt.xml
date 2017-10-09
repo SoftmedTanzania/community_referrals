@@ -10,18 +10,6 @@
     android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus"
     tools:context="com.softmed.uzazisalama.AncDetailActivityAlt">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabFollowUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_file_assignment"
-
-        app:backgroundTint="@color/accent"
-        app:elevation="6dp"
-        app:fabSize="mini"
-        app:pressedTranslationZ="14dp" />
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"

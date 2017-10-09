@@ -81,10 +81,14 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name="com.softmed.uzazisalama.chw.CHWFormRegistrationActivity" />
-        <activity android:name="com.softmed.uzazisalama.chw.CHWFormFollowActivity" />
-        <activity android:name="com.softmed.uzazisalama.chw.CHWEditPreRegistrationActivity" />
-        <activity android:name="com.softmed.uzazisalama.WazaziRegisterActivity" />
+        <activity android:name="com.softmed.uzazisalama.chw.CHWFormRegistrationActivity"
+            android:screenOrientation="landscape"/>
+        <activity android:name="com.softmed.uzazisalama.chw.CHWFormFollowActivity"
+            android:screenOrientation="landscape"/>
+        <activity android:name="com.softmed.uzazisalama.chw.CHWEditPreRegistrationActivity"
+            android:screenOrientation="landscape"/>
+        <activity android:name="com.softmed.uzazisalama.WazaziRegisterActivity" android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
