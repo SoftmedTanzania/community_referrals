@@ -1,13 +1,8 @@
 package com.softmed.uzazisalama.Repository;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.softmed.uzazisalama.DataModels.FollowUpReport;
-import com.softmed.uzazisalama.DataModels.PregnantMom;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -16,44 +11,43 @@ import java.util.Map;
 
 public class FollowUpReportObject {
     private String id,relationalId,
-            FACILITY_ID,CreatedBy, ModifyBy, MOTHER_ID;
+            facilityId,CreatedBy, ModifyBy, motherId;
     private String details;
-    private int FOLLOW_UP_DATA;
-    private long  REPORT_DATE;
-    private boolean  IS_ON_RISK;
+    private int followUpData;
+    private long reportDate;
+    private boolean onRisk;
     private Map<String, String> columnMap;
 
     public FollowUpReportObject(String id,
                                 String relationalId,
-                                long REPORT_DATE,
-                                boolean IS_ON_RISK,
-                                String MOTHERS_ID,
-                                String FACILITY_ID,
-                                int FOLLOW_UP_DATA,
+                                long reportDate,
+                                boolean onRisk,
+                                String motherId,
+                                String facilityId,
+                                int followUpData,
                                 String details,
                                 String CreatedBy,
                                 String ModifyBy) {
         this.details = details;
         this.id = id;
         this.relationalId = relationalId;
-        this.REPORT_DATE = REPORT_DATE;
-        this.IS_ON_RISK = IS_ON_RISK;
-        this.MOTHER_ID = MOTHERS_ID;
-        this.FOLLOW_UP_DATA = FOLLOW_UP_DATA;
-        this.FACILITY_ID = FACILITY_ID;
+        this.reportDate = reportDate;
+        this.onRisk = onRisk;
+        this.motherId = motherId;
+        this.followUpData = followUpData;
+        this.facilityId = facilityId;
         this.CreatedBy = CreatedBy;
         this.ModifyBy = ModifyBy;
     }
 
-    // alternative constructor so you don't pass bucha stuff, PregnantMom contains everything
+    // alternative constructor so you don't pass bucha stuff, FollowUpReport contains everything
     public FollowUpReportObject(String id, String relationalId, FollowUpReport followUpReport) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyy", Locale.getDefault());
 
         this.id = id;
         this.relationalId = relationalId;
-        this.REPORT_DATE = followUpReport.getDate();
-        this.FOLLOW_UP_DATA = followUpReport.getFollowUpNumber();
-        this.MOTHER_ID = followUpReport.getMotherId();
+        this.reportDate = followUpReport.getDate();
+        this.followUpData = followUpReport.getFollowUpNumber();
+        this.motherId = followUpReport.getMotherId();
         if (followUpReport.isAlbumin()
                 || followUpReport.isBadChildPosition()
                 || followUpReport.isChildDealth()
@@ -62,11 +56,11 @@ public class FollowUpReportObject {
                 || followUpReport.isHighSugar()
                 || followUpReport.isOver40WeeksPregnancy()
                 || followUpReport.isUnproportionalPregnancyHeight())
-            this.IS_ON_RISK =  true;
+            this.onRisk =  true;
         else
-            this.IS_ON_RISK =  false;
+            this.onRisk =  false;
 
-        this.FACILITY_ID = followUpReport.getFacilityName();
+        this.facilityId = followUpReport.getFacilityName();
         this.details = new Gson().toJson(followUpReport);
         this.CreatedBy = followUpReport.getCreatedBy();
         this.ModifyBy = followUpReport.getModifyBy();
@@ -95,28 +89,28 @@ public class FollowUpReportObject {
         return relationalId;
     }
 
-    public boolean getIS_ON_RISK() {
-        return IS_ON_RISK;
+    public boolean getOnRisk() {
+        return onRisk;
     }
 
-    public void setIS_ON_RISK(boolean IS_ON_RISK) {
-        this.IS_ON_RISK = IS_ON_RISK;
+    public void setOnRisk(boolean onRisk) {
+        this.onRisk = onRisk;
     }
 
-    public int getFOLLOW_UP_DATA() {
-        return FOLLOW_UP_DATA;
+    public int getFollowUpData() {
+        return followUpData;
     }
 
-    public void setFOLLOW_UP_DATA(int FOLLOW_UP_DATA) {
-        this.FOLLOW_UP_DATA = FOLLOW_UP_DATA;
+    public void setFollowUpData(int followUpData) {
+        this.followUpData = followUpData;
     }
 
-    public long getREPORT_DATE() {
-        return REPORT_DATE;
+    public long getReportDate() {
+        return reportDate;
     }
 
-    public void setREPORT_DATE(long REPORT_DATE) {
-        this.REPORT_DATE = REPORT_DATE;
+    public void setReportDate(long reportDate) {
+        this.reportDate = reportDate;
     }
 
     public Map<String, String> getColumnMap() {
@@ -127,20 +121,20 @@ public class FollowUpReportObject {
         this.columnMap = columnMap;
     }
 
-    public String getFACILITY_ID() {
-        return FACILITY_ID;
+    public String getFacilityId() {
+        return facilityId;
     }
 
-    public void setFACILITY_ID(String FACILITY_ID) {
-        this.FACILITY_ID = FACILITY_ID;
+    public void setFacilityId(String facilityId) {
+        this.facilityId = facilityId;
     }
 
-    public String getMOTHERS_ID() {
-        return MOTHER_ID;
+    public String getMotherId() {
+        return motherId;
     }
 
-    public void setMOTHERS_ID(String MOTHERS_ID) {
-        this.MOTHER_ID = MOTHERS_ID;
+    public void setMotherId(String motherId) {
+        this.motherId = motherId;
     }
 
     public void setRelationalId(String relationalId) {
