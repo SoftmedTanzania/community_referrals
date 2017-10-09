@@ -78,10 +78,14 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
                 @Override
                 public void onClick(View view) {
                     // go to AncDetailActivity
-
+                    MotherPersonObject mother = motherPersonList.get(getAdapterPosition());
+                    Log.d(TAG,"first string ="+gson.toJson(mother));
                     String gsonMom = Utils.convertStandardJSONString(motherPersonList.get(getAdapterPosition()).getDetails());
                     final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
-                    Log.d(TAG, "commonPersonList type= " + pregnantMom.getReg_type());
+                    Log.d(TAG, "commonPersonList id= " + pregnantMom.getId());
+                    Log.d(TAG, "commonPersonList string= " + gson.toJson(pregnantMom));
+                    Log.d(TAG, "commonPersonList1 string= " + gsonMom);
+                    Log.d(TAG, "commonPersonList2 string= " + gsonMom+gson.toJson(mother));
                     if(pregnantMom.getReg_type().equals("2")){
                         Log.d(TAG, "am in side for pre registration");
                         int index = ((AncSmartRegisterActivity) appContext).getFormIndex("pregnant_mothers_registration");
@@ -93,9 +97,12 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
 
                     }else{
                         Log.d(TAG, "am in side for details");
-                        appContext.startActivity(new Intent(appContext, AncDetailActivityAlt.class)
-                                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                .putExtra("mom", gsonMom));
+
+                                Intent intent =new Intent(appContext, AncDetailActivityAlt.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("mom", gsonMom);
+                                intent.putExtra("id", mother.getId());
+                        appContext.startActivity(intent);
                     }
 
 

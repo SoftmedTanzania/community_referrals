@@ -18,146 +18,53 @@
                 "name": "REPORT_DATE"
             },
             {
-                "name": "ancAppointment2"
+                "name": "IS_ON_RISK"
             },
             {
-                "name": "ancAppointment3"
+                "name": "FOLLOW_UP_DATA"
             },
             {
-                "name": "ancAppointment4"
+                "name": "date"
             },
             {
-                "name": "kondoKukwama"
+                "name": "motherId"
             },
             {
-                "name": "bleedingOnDelivery"
+                "name": "createdBy"
             },
             {
-                "name": "kilemaChaNyonga"
+                "name": "modifyBy"
             },
             {
-                "name": "csDelivery"
+                "name": "childDealth"
             },
             {
-                "name": "heightBelow150"
+                "name": "albumin"
             },
             {
-                "name": "firstPregAbove35Yrs"
+                "name": "over40WeeksPregnancy"
             },
             {
-                "name": "fourOrMorePreg"
+                "name": "unproportionalPregnancyHeight"
             },
             {
-                "name": "hasTB"
+                "name": "highBloodPressure"
             },
             {
-                "name": "hasDiabetes"
+                "name": "highSugar"
             },
             {
-                "name": "hasHeartProblem"
+                "name": "badChildPosition"
             },
             {
-                "name": "has2orMoreBBA"
+                "name": "hbBelow60"
             },
             {
-                "name": "hadStillBirth"
-            },
-            {
-                "name": "has10YrsPassedSinceLastPreg"
-            },
-            {
-                "name": "isAbove20WeeksPregnant"
-            },
-            {
-                "name": "height"
-            },
-            {
-                "name": "previousFertilityCount"
-            },
-            {
-                "name": "successfulBirths"
-            },
-            {
-                "name": "livingChildren"
-            },
-            {
-                "name": "dateReg"
-            },
-            {
-                "name": "dateLNMP"
-            },
-            {
-                "name": "edd"
-            },
-            {
-                "name": "dateRegistration"
-            },
-            {
-                "name": "dateLastVisited"
-            },
-            {
-                "name": "husbandName"
-            },
-            {
-                "name": "husbandEducation"
-            },
-            {
-                "name": "husbandOccupation"
-            },
-            {
-                "name": "physicalAddress"
+                "name": "followUpNumber"
             },
             {
                 "name": "facilityId",
                 "source":"facility.id"
-            },
-            {
-                "name": "mother_name"
-            },
-            {
-                "name": "phone"
-            },
-            {
-                "name": "discountId"
-            },
-            {
-                "name": "education"
-            },
-            {
-                "name": "occupation"
-            },
-            {
-                "name": "REG_TYPE"
-            },
-            {
-                "name": "Is_PNC"
-            },
-            {
-                "name": "IS_VALID"
-            },
-            {
-                "name": "lastSmsToken"
-            },
-            {
-                "name": "chwComment"
-            },
-            {
-                "name": "FACILITY_ID"
-            },
-            {
-                "name": "EXPECTED_DELIVERY_DATE"
-            },
-            {
-                "name": "MOTHERS_ID"
-            },
-            {
-                "name": "MOTHERS_SORTVALUE"
-            },
-            {
-                "name": "MOTHERS_LAST_MENSTRUATION_DATE"
-            },
-            {
-                "name": "MOTHERS_LAST_NAME"
             },
             {
                 "name": "ModifyBy"

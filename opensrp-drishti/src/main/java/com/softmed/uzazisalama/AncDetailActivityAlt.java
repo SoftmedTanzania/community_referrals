@@ -109,10 +109,12 @@ public class AncDetailActivityAlt extends AppCompatActivity {
         setUpViews();
 
         final String gsonMom = getIntent().getStringExtra("mom");
+        final String id = getIntent().getStringExtra("id");
         Log.d(TAG, "mom=" + gsonMom);
 
         if (gsonMom != null) {
             mom = new Gson().fromJson(gsonMom, PregnantMom.class);
+            Log.d(TAG,"id ="+id);
             // set values
             setMotherProfileDetails();
         }
@@ -121,8 +123,12 @@ public class AncDetailActivityAlt extends AppCompatActivity {
         findViewById(R.id.fabFollowUp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AncDetailActivityAlt.this, AncFollowUpFormActivity.class)
-                        .putExtra("mom", gsonMom));
+                Intent intent =new Intent(AncDetailActivityAlt.this, AncFollowUpFormActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("mom", gsonMom);
+                intent.putExtra("id", id);
+                startActivity(intent);
+
             }
         });
 

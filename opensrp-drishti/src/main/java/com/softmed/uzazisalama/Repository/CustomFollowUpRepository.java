@@ -16,7 +16,7 @@ public class CustomFollowUpRepository {
     public static final String REPORT_DATE = "REPORT_DATE";
     public static final String IS_ON_RISK = "IS_ON_RISK";
     public static final String FACILITY_ID = "FACILITY_ID";
-    public static final String MOTHERS_ID = "MOTHERS_ID";
+    public static final String MOTHER_ID = "MOTHER_ID";
     public static final String CREATEDBY = "CreatedBy";
     public static final String MODIFYBY = "ModifyBy";
 
@@ -26,8 +26,8 @@ public class CustomFollowUpRepository {
         ContentValues values = new ContentValues();
         values.put(ID_COLUMN, followUpReportObject.getId());
         values.put(Relational_ID, followUpReportObject.getRelationalId());
-        values.put(MOTHERS_ID, followUpReportObject.getMOTHERS_ID());
-        values.put(FOLLOW_UP_DATA, followUpReportObject.getREPORT_DATE());
+        values.put(MOTHER_ID, followUpReportObject.getMOTHERS_ID());
+        values.put(FOLLOW_UP_DATA, followUpReportObject.getFOLLOW_UP_DATA());
         values.put(REPORT_DATE, followUpReportObject.getREPORT_DATE());
         values.put(IS_ON_RISK, followUpReportObject.getIS_ON_RISK());
         values.put(FACILITY_ID, followUpReportObject.getFACILITY_ID());

@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.google.gson.Gson;
 
+import com.softmed.uzazisalama.Application.UzaziSalamaApplication;
 import com.softmed.uzazisalama.DataModels.FollowUpReport;
 import com.softmed.uzazisalama.DataModels.PregnantMom;
 import com.softmed.uzazisalama.Repository.CustomFollowUpRepository;
@@ -31,13 +32,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static com.softmed.uzazisalama.util.Utils.generateRandomUUIDString;
 
 public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity {
     private static final String TAG = AncFollowUpFormActivity.class.getSimpleName();
 
-
+    static String id;
     private CheckBox checkBoxPressure, checkboxHb, chechboxAlbumini, checkboxSugar, checkboxUmriWaMimba,
             checkboxChildDeath, chechkboxMlaloWaMtoto, checkboxKimo;
     private String formName = "anc_follow_up_report";
@@ -89,7 +91,9 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
 
 
         String gsonMom = getIntent().getStringExtra("mom");
+        id = getIntent().getStringExtra("id");
         Log.d(TAG, "mom=" + gsonMom);
+        Log.d(TAG, "id=" + id);
 
         pregnantMom = gsonMom != null ? gson.fromJson(gsonMom, PregnantMom.class) : null;
         Log.d(TAG, "preganantMom  =" + gsonMom);
@@ -114,6 +118,7 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
     }
 
     private void findViews() {
+        Log.d(TAG,"am in findview");
         editTextFacilityName = (EditText) findViewById(R.id.facility);
         checkBoxPressure = (CheckBox) findViewById(R.id.checkbox_pressure);
         chechboxAlbumini = (CheckBox) findViewById(R.id.checkbox_albumin);
@@ -126,12 +131,14 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
     }
 
     private void setListeners() {
-
+        Log.d(TAG,"am in setListerners");
         findViewById(R.id.fabSubmit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // TODO: 10/2/17 get id and fieldOverrides for follow up report submission
-                saveFormSubmission(getFollowUpReport(), pregnantMom.getId(), formName, null);
+                saveFormSubmission(getFollowUpReport(), UUID.randomUUID().toString(),id, null);
+                onBackPressed();
+
             }
         });
 
@@ -140,6 +147,8 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
         findViewById(R.id.buttonHome).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG,"am in setListerners2");
+
                 onBackPressed();
             }
         });
@@ -150,7 +159,7 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
         FollowUpReport report = new FollowUpReport();
         long today = System.currentTimeMillis();
         report.setDate(today);
-        report.setMotherId(pregnantMom.getId());
+        report.setMotherId(id);
         report.setFacilityName(editTextFacilityName.getText().toString());
 
         report.setAlbumin(chechboxAlbumini.isChecked());
@@ -161,6 +170,8 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
         report.setHighSugar(checkboxSugar.isChecked());
         report.setHbBelow60(checkboxHb.isChecked());
         report.setUnproportionalPregnancyHeight(checkboxKimo.isChecked());
+        report.setCreatedBy(((UzaziSalamaApplication)getApplication()).getCurrentUserID());
+        report.setModifyBy(((UzaziSalamaApplication)getApplication()).getCurrentUserID());
 
         // automate follow up number
         long lnmp = pregnantMom.getDateLNMP();
@@ -200,11 +211,13 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
 
 
     @Override
-    public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
+    public void saveFormSubmission(String formSubmission, String id,String relId, JSONObject fieldOverrides) {
         // TODO: 10/7/17 complete this implementation to save report to database
+        Log.d(TAG, "am in save");
+        Log.d(TAG, "formsubmission ="+formSubmission);
         final FollowUpReport followUpReport = gson.fromJson(formSubmission, FollowUpReport.class);
 
-        FollowUpReportObject followUpReportObject = new FollowUpReportObject(id, null, followUpReport);
+        FollowUpReportObject followUpReportObject = new FollowUpReportObject(id, relId, followUpReport);
         ContentValues values = new CustomFollowUpRepository().createValuesFor(followUpReportObject);
         Log.d(TAG, "followUpReportObject = " + gson.toJson(followUpReportObject));
         Log.d(TAG, "values = " + gson.toJson(values));
@@ -219,7 +232,7 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
         formFields.add(new FormField("id", c.getCaseId(), commonRepository.TABLE_NAME + "." + "id"));
 
 
-        formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
+        formFields.add(new FormField("relationalid", c.getRelationalId(), commonRepository.TABLE_NAME + "." + "relationalid"));
 
         for ( String key : c.getDetails().keySet() ) {
             Log.d(TAG,"key = "+key);
@@ -242,18 +255,16 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
             }
 
             formFields.add(f);
-
-
         }
-
         Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
+
 // // TODO: 08/10/2017 coze finishing up saving in the form submission
-//        FormData formData = new FormData("wazazi_salama_mother","/model/instance/Wazazi_Salama_ANC_Registration/",formFields,null);
-//        FormInstance formInstance = new FormInstance(formData,"1");
-//        FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"wazazi_salama_pregnant_mothers_registration",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
-//        context().formDataRepository().saveFormSubmission(submission);
-//
-//        Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
+        FormData formData = new FormData("uzazi_salama_follow_up_report","/model/instance/Wazazi_Salama_ANC_Registration/",formFields,null);
+        FormInstance formInstance = new FormInstance(formData,"1");
+        FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"wazazi_salama_pregnant_mothers_follow_up",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
+        context().formDataRepository().saveFormSubmission(submission);
+
+        Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
 
 
 //        TODO finish this better implementation for saving data to the database
@@ -282,6 +293,16 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
             }
         }.execute();
 
+
+    }
+
+    @Override
+    protected void setupViews() {
+
+    }
+
+    @Override
+    protected void onResumption() {
 
     }
 }

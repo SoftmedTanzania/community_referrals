@@ -470,48 +470,6 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
     public void processFormSubmission(String formSubmission) {
         Log.d(TAG, "submitted data = " + formSubmission);
-//        JSONObject formSubmissionJson = null;
-//        HashMap<String, String> dataHash = new HashMap<String, String>();
-//        dataHash.put("mother_id", "1");
-//        dataHash.put("reg_date", "2017-09-04");
-//        dataHash.put("reg_place", "Sinza");
-//
-//        dataHash.put("MOTHERS_FIRST_NAME", "Jane");
-//        dataHash.put("FWWOMLNAME", "Doe");
-//        dataHash.put("FWHUSNAME", "John Doe");
-//        dataHash.put("FWHOHBIRTHDATE", "07-09-1990");
-//        dataHash.put("FWHOHGENDER", "2");
-//        dataHash.put("FWWOMAGE", "27");
-//
-//
-//
-//        dataHash.put("case_num_pregnancies", "0");
-//        dataHash.put("case_would_be_high_risk", "1");
-//
-//        dataHash.put("FWEDD", "2018-05-04");
-//        dataHash.put("height", "190");
-//        dataHash.put("weight_startofpregnancy", "80");
-//
-//        dataHash.put("user_type", "1");
-//
-//        Log.d(TAG, "formname = " + formName);
-//        String modelString = readFileAssets("www/form/" + formName + "/model.xml").replaceAll("\"", "'").replaceAll("\n", "").replaceAll("\r", "").replaceAll("/", "/");
-//
-//        try {
-//            formSubmissionJson = XML.toJSONObject(modelString);
-//
-//            for (Map.Entry<String, String> entry : dataHash.entrySet()) {
-//                String key = entry.getKey();
-//                String value = (String) entry.getValue();
-//                populateJSONWithData(formSubmissionJson, key, value);
-//            }
-//
-//            Log.d(TAG, "Results : " + formSubmissionJson.toString());
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//
 //        ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(formSubmissionJson.toString(), recordId, formName, getFormFieldsOverrides());
     }
 
