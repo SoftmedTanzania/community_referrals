@@ -226,22 +226,16 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
         for (String key : c.getDetails().keySet()) {
             Log.d(TAG, "key = " + key);
             FormField f = null;
-            if (!key.equals("facilityId")) {
-                f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
-            } else {
-                f = new FormField(key, c.getDetails().get(key), "facility.id");
-            }
+            f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
+
             formFields.add(f);
         }
 
         for (String key : c.getColumnmaps().keySet()) {
             Log.d(TAG, "key = " + key);
             FormField f = null;
-            if (!key.equals("facilityId")) {
-                f = new FormField(key, c.getColumnmaps().get(key), commonRepository.TABLE_NAME + "." + key);
-            } else {
-                f = new FormField(key, c.getColumnmaps().get(key), "facility.id");
-            }
+            f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
+
 
             formFields.add(f);
         }

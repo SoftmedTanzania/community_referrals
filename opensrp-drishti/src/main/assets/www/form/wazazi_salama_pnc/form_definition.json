@@ -12,10 +12,12 @@
                 "name": "relationalid"
             },
             {
-                "name": "childCaseId"
+                "name": "childCaseId",
+                "source":"child.id"
             },
             {
-                "name": "motherCaseId"
+                "name": "motherCaseId",
+                "source":"wazazi_salama_mother.id"
             },
             {
                 "name": "DELIVERY_TYPE"

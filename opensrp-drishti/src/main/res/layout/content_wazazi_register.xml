@@ -264,6 +264,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                 <Spinner
+                    android:id="@+id/gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="-4dp"

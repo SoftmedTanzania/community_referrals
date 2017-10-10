@@ -6,7 +6,9 @@ package com.softmed.uzazisalama.DataModels;
 
 public class PncMother {
     private String childCaseId, motherCaseId, deliveryType, deliveryComplication, deliveryDate, admissionDate,CreatedBy,ModifyBy;
+    public  PncMother(){
 
+     }
     public PncMother(String childCaseId, String motherCaseId, String deliveryType, String deliveryComplication,String deliveryDate,String admissionDate ,String CreatedBy, String ModifyBy) {
         childCaseId = childCaseId;
         motherCaseId = motherCaseId;

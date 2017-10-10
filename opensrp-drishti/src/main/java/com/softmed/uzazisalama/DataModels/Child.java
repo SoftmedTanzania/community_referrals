@@ -9,6 +9,9 @@ import java.util.ArrayList;
 public class Child {
     private String gender, status, weight, problem, CreatedBy, ModifyBy;
 
+    public Child(){
+
+    }
     public Child(String gender, String status, String weight, String problem, String CreatedBy, String ModifyBy) {
         gender = gender;
         status = status;

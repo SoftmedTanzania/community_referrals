@@ -42,14 +42,14 @@ public class PncPersonObject {
     }
 
     // alternative constructor so you don't pass bucha stuff, pncMother contains everything
-    public PncPersonObject(String id, String relationalId, PncMother pncMother) {
+    public PncPersonObject(String id, String childCaseId, String motherCaseId,PncMother pncMother) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyy", Locale.getDefault());
 
         this.id = id;
-        this.relationalId = relationalId; 
-        this.motherCaseId = pncMother.getMotherCaseId();
-        this.childCaseId = pncMother.getChildCaseId();
+        this.relationalId = id;
+        this.motherCaseId = motherCaseId;
+        this.childCaseId = childCaseId;
         this.DELIVERY_TYPE = pncMother.getDeliveryType();
         this.DELIVERY_COMPLICATION = pncMother.getDeliveryComplication();
         this.DELIVERY_DATE = sdf.format(pncMother.getDeliveryDate());

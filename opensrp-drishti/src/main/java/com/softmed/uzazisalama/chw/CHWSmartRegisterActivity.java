@@ -139,7 +139,7 @@ public class CHWSmartRegisterActivity extends AppCompatActivity {
         textName.setText(mother.getName());
     }
 
-    public void showFollowUpDetailsDialog(Child mother) {
+    public void showFollowUpDetailsDialog(PreRegisteredMother mother) {
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_details, null);
 
@@ -163,7 +163,7 @@ public class CHWSmartRegisterActivity extends AppCompatActivity {
         textName.setText(mother.getName());
     }
 
-    public void showFollowUpFormDialog(final Child mother){
+    public void showFollowUpFormDialog(final PreRegisteredMother mother){
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
 

@@ -15,13 +15,22 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.softmed.uzazisalama.Application.UzaziSalamaApplication;
+import com.softmed.uzazisalama.DataModels.Child;
+import com.softmed.uzazisalama.DataModels.PncMother;
 import com.softmed.uzazisalama.DataModels.PregnantMom;
+import com.softmed.uzazisalama.Repository.ChildPersonObject;
+import com.softmed.uzazisalama.Repository.CustomChildRepository;
 import com.softmed.uzazisalama.Repository.CustomMotherRepository;
+import com.softmed.uzazisalama.Repository.CustomPncRepository;
 import com.softmed.uzazisalama.Repository.MotherPersonObject;
+import com.softmed.uzazisalama.Repository.PncPersonObject;
 import com.softmed.uzazisalama.util.DatesHelper;
+import com.softmed.uzazisalama.util.Utils;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.Context;
@@ -33,18 +42,27 @@ import org.ei.opensrp.domain.form.FormField;
 import org.ei.opensrp.domain.form.FormInstance;
 import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.provider.SmartRegisterClientsProvider;
+import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
+import org.ei.opensrp.view.dialog.DialogOption;
+import org.ei.opensrp.view.dialog.DialogOptionModel;
+import org.ei.opensrp.view.dialog.OpenFormOption;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 import static com.softmed.uzazisalama.util.Utils.generateRandomUUIDString;
 
-public class WazaziRegisterActivity extends AppCompatActivity {
+public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
     private static final String TAG = WazaziRegisterActivity.class.getSimpleName();
     private String id;
+    private static String childId;
     private PregnantMom pregnantMom;
     private TextView textName, textId,
             textAge, textDeliveryDate, textDateKulazwa;
@@ -54,6 +72,7 @@ public class WazaziRegisterActivity extends AppCompatActivity {
             editTextBba, editTextDeliveryProblems, editTextChildWeight, editTextApgar, editTextChildProblems;
 
     private RadioGroup childStatusRadioGroup, typeOfDeadChildRadioGroup;
+    private Spinner genderSpinner;
     private int childStatus = 1, childDeathType;
 
     @Override
@@ -82,6 +101,72 @@ public class WazaziRegisterActivity extends AppCompatActivity {
             setMotherProfileDetails();
         }
     }
+    @Override
+    protected void onInitialization() {
+    }
+    @Override
+    public void startRegistration() {
+    }
+
+    @Override
+    public void showFragmentDialog(DialogOptionModel dialogOptionModel, Object tag) {
+        try {
+            LoginActivity.setLanguage();
+        } catch (Exception e) {
+
+        }
+        super.showFragmentDialog(dialogOptionModel, tag);
+    }
+
+    @Override
+    protected DefaultOptionsProvider getDefaultOptionsProvider() {
+        return null;
+    }
+
+    @Override
+    protected NavBarOptionsProvider getNavBarOptionsProvider() {
+        return null;
+    }
+
+    @Override
+    protected SmartRegisterClientsProvider clientsProvider() {
+        return null;
+    }
+
+
+    public DialogOption[] getEditOptions() {
+        return new DialogOption[]{
+
+                new OpenFormOption(getResources().getString(R.string.nbnf), "birthnotificationpregnancystatusfollowup", formController)
+        };
+    }
+
+    public DialogOption[] getEditOptionsforanc(String visittext, String alertstatus) {
+        String ancvisittext = "Not Synced";
+        String ancalertstatus = alertstatus;
+        ancvisittext = visittext;
+
+        HashMap<String, String> overridemap = new HashMap<String, String>();
+
+
+        if (ancvisittext.contains("ANC4")) {
+            overridemap.put("ANC4_current_formStatus", alertstatus);
+            return new DialogOption[]{new OpenFormOption(getResources().getString(R.string.anc4form), "anc_reminder_visit_4", formController, overridemap, OpenFormOption.ByColumnAndByDetails.bydefault)};
+        } else if (ancvisittext.contains("ANC3")) {
+            Log.v("anc3 form status", alertstatus);
+            overridemap.put("ANC3_current_formStatus", alertstatus);
+            return new DialogOption[]{new OpenFormOption(getResources().getString(R.string.anc3form), "anc_reminder_visit_3", formController, overridemap, OpenFormOption.ByColumnAndByDetails.bydefault)};
+        } else if (ancvisittext.contains("ANC2")) {
+            overridemap.put("ANC2_current_formStatus", alertstatus);
+            return new DialogOption[]{new OpenFormOption(getResources().getString(R.string.anc2form), "anc_reminder_visit_2", formController, overridemap, OpenFormOption.ByColumnAndByDetails.bydefault)};
+        } else if (ancvisittext.contains("ANC1")) {
+            Log.v("anc1 form status", alertstatus);
+            overridemap.put("anc1_current_formStatus", alertstatus);
+            return new DialogOption[]{new OpenFormOption(getResources().getString(R.string.anc1form), "anc_reminder_visit_1", formController, overridemap, OpenFormOption.ByColumnAndByDetails.bydefault)};
+        } else {
+            return new DialogOption[]{};
+        }
+    }
 
     private void setUpViews() {
         textName = (TextView) findViewById(R.id.textName);
@@ -98,6 +183,7 @@ public class WazaziRegisterActivity extends AppCompatActivity {
         editTextChildWeight = (EditText) findViewById(R.id.child_weight);
         editTextApgar = (EditText) findViewById(R.id.apgar);
         editTextChildProblems = (EditText) findViewById(R.id.child_problems);
+        genderSpinner = (Spinner) findViewById(R.id.gender);
         childStatusRadioGroup = (RadioGroup) findViewById(R.id.child_status_radio_group);
         typeOfDeadChildRadioGroup = (RadioGroup) findViewById(R.id.type_of_dead_child_radio_group);
 
@@ -151,6 +237,35 @@ public class WazaziRegisterActivity extends AppCompatActivity {
 
     }
 
+    private String getChild(){
+        Child child = new Child();
+        child.setCreatedBy(((UzaziSalamaApplication)getApplication()).getCurrentUserID());
+        child.setGender(genderSpinner.getSelectedItem().toString());
+        child.setProblem(editTextChildProblems.getText().toString());
+        if(childStatus == 1)
+            child.setStatus("alive");
+        else
+            child.setStatus("dead");
+        child.setWeight(editTextChildWeight.getText().toString());
+        String gsonChild = new Gson().toJson(child);
+        Log.d(TAG, "new child =" + gsonChild);
+        return gsonChild;
+    }
+
+    private String getPncMother(){
+        PncMother pncMother = new PncMother();
+        pncMother.setCreatedBy(((UzaziSalamaApplication)getApplication()).getCurrentUserID());
+//        pncMother.setGender(genderSpinner.getSelectedItem().toString());
+//        pncMother.setProblem(editTextChildProblems.getText().toString());
+//        if(childStatus == 1)
+//            pncMother.setStatus("alive");
+//        else
+//            pncMother.setStatus("dead");
+//        pncMother.setWeight(editTextChildWeight.getText().toString());
+        String gsonPncMother = new Gson().toJson(pncMother);
+        Log.d(TAG, "new Pnc Mother =" + gsonPncMother);
+        return gsonPncMother;
+    }
     private void pickDate(final int id) {
         // listener
         DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -182,10 +297,171 @@ public class WazaziRegisterActivity extends AppCompatActivity {
 
     private void saveData() {
         // save the form
-
+        Log.d(TAG, "pnc mother id =" + id);
+        //updating mother information
         MotherPersonObject motherPersonObject = new MotherPersonObject(id, null, pregnantMom);
         updateFormSubmission(motherPersonObject, id);
 
+        //creating a new born child
+        childId = UUID.randomUUID().toString();
+        saveChildFormSubmission(getChild(),childId );
+
+        //registering delivery information about a mother
+        savePNCFormSubmission(getPncMother(),UUID.randomUUID().toString(),childId,id );
+
+    }
+    public void saveChildFormSubmission(String formSubmission, String id) {
+        // save the form
+        final Child child = new Gson().fromJson(formSubmission, Child.class);
+
+        ChildPersonObject childPersonObject = new ChildPersonObject(id, null, child );
+        ContentValues values = new CustomChildRepository().createValuesFor(childPersonObject);
+        Log.d(TAG, "childPersonObject = " + new Gson().toJson(childPersonObject));
+        Log.d(TAG, "values = " + new Gson().toJson(values));
+
+        CommonRepository commonRepository = context().commonrepository("child");
+        commonRepository.customInsert(values);
+
+        CommonPersonObject c = commonRepository.findByCaseID(id);
+        List<FormField> formFields = new ArrayList<>();
+
+
+        formFields.add(new FormField("id", c.getCaseId(), commonRepository.TABLE_NAME + "." + "id"));
+
+
+        formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
+
+        for ( String key : c.getDetails().keySet() ) {
+            Log.d(TAG,"key = "+key);
+            FormField f = null;
+            f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
+
+            formFields.add(f);
+        }
+
+        for ( String key : c.getColumnmaps().keySet() ) {
+            Log.d(TAG,"key = "+key);
+            FormField f = null;
+            f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
+
+            formFields.add(f);
+
+
+        }
+
+        Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
+
+        FormData formData = new FormData("child","/model/instance/Child/",formFields,null);
+        FormInstance formInstance = new FormInstance(formData,"1");
+        FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"child",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
+        context().formDataRepository().saveFormSubmission(submission);
+
+        Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
+
+
+//        TODO finish this better implementation for saving data to the database
+//        FormSubmission formSubmission1 = null;
+//        try {
+//            formSubmission1 = FormUtils.getInstance(getApplicationContext()).generateFormSubmisionFromJSONString(id,new Gson().toJson(pregnantMom),"wazazi_salama_pregnant_mothers_registration",fieldOverrides);
+//            Log.d(TAG,"form submission generated successfully");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        try {
+//            context().ziggyService().saveForm(getParams(formSubmission1), formSubmission1.instance());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+    }
+
+    public void savePNCFormSubmission(String formSubmission, String id, String childId, String motherid) {
+        // save the form
+        final PncMother pncMother = new Gson().fromJson(formSubmission, PncMother.class);
+
+        PncPersonObject pncPersonObject = new PncPersonObject(id,childId, motherid, pncMother);
+        ContentValues values = new CustomPncRepository().createValuesFor(pncPersonObject);
+        Log.d(TAG, "pncPersonObject = " + new Gson().toJson(pncPersonObject));
+        Log.d(TAG, "values = " + new Gson().toJson(values));
+
+        CommonRepository commonRepository = context().commonrepository("uzazi_salama_pnc");
+        commonRepository.customInsert(values);
+
+        CommonPersonObject c = commonRepository.findByCaseID(id);
+        List<FormField> formFields = new ArrayList<>();
+
+
+        formFields.add(new FormField("id", c.getCaseId(), commonRepository.TABLE_NAME + "." + "id"));
+
+
+        formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
+
+        for ( String key : c.getDetails().keySet() ) {
+            Log.d(TAG,"key = "+key);
+            FormField f = null;
+            if(key.equals("childCaseId")) {
+                f = new FormField(key, c.getDetails().get(key), "child.id");
+            }else if(key.equals("motherCaseId")) {
+                f = new FormField(key, c.getDetails().get(key), "wazazi_salama_mother.id");
+            }else{
+                f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
+            }
+            formFields.add(f);
+        }
+
+        for ( String key : c.getColumnmaps().keySet() ) {
+            Log.d(TAG,"key = "+key);
+            FormField f = null;
+            if(key.equals("childCaseId")) {
+                f = new FormField(key, c.getDetails().get(key), "child.id");
+            }else if(key.equals("motherCaseId")) {
+                f = new FormField(key, c.getDetails().get(key), "wazazi_salama_mother.id");
+            }else{
+                f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
+            }
+
+            formFields.add(f);
+
+
+        }
+
+        Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
+
+        FormData formData = new FormData("uzazi_salama_pnc","/model/instance/Wazazi_Salama_PNC_Registration/",formFields,null);
+        FormInstance formInstance = new FormInstance(formData,"1");
+        FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"uzazi_salama_pnc",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
+        context().formDataRepository().saveFormSubmission(submission);
+
+        Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
+
+
+//        TODO finish this better implementation for saving data to the database
+//        FormSubmission formSubmission1 = null;
+//        try {
+//            formSubmission1 = FormUtils.getInstance(getApplicationContext()).generateFormSubmisionFromJSONString(id,new Gson().toJson(pregnantMom),"wazazi_salama_pregnant_mothers_registration",fieldOverrides);
+//            Log.d(TAG,"form submission generated successfully");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        try {
+//            context().ziggyService().saveForm(getParams(formSubmission1), formSubmission1.instance());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+
+        new  com.softmed.uzazisalama.util.AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+                if(!pregnantMom.getPhone().equals(""))
+                    Utils.sendRegistrationAlert(pregnantMom.getPhone());
+                return null;
+            }
+        }.execute();
 
     }
 
