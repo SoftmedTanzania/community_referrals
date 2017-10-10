@@ -5,18 +5,22 @@ package com.softmed.uzazisalama.DataModels;
  */
 
 public class PncMother {
-    private String childCaseId, motherCaseId, deliveryType, deliveryComplication, deliveryDate, admissionDate,CreatedBy,ModifyBy;
+    private String childCaseId, motherCaseId, deliveryType, para,gravida,mother_status,bba,deliveryComplication,CreatedBy,ModifyBy;
+    private long deliveryDate, admissionDate;
     public  PncMother(){
 
      }
-    public PncMother(String childCaseId, String motherCaseId, String deliveryType, String deliveryComplication,String deliveryDate,String admissionDate ,String CreatedBy, String ModifyBy) {
+    public PncMother(String childCaseId, String motherCaseId, String deliveryType,String para, String gravida, String bba,String mother_status, String deliveryComplication,long deliveryDate,long admissionDate ,String CreatedBy, String ModifyBy) {
         childCaseId = childCaseId;
         motherCaseId = motherCaseId;
         deliveryType = deliveryType;
         deliveryComplication = deliveryComplication;
         deliveryDate = deliveryDate;
         admissionDate = admissionDate;
-        CreatedBy = CreatedBy;
+        para = para;
+        bba = bba;
+        gravida = gravida;
+        mother_status = mother_status;
         ModifyBy = ModifyBy;
     }
 
@@ -52,19 +56,19 @@ public class PncMother {
         this.deliveryComplication = deliveryComplication;
     }
 
-    public String getDeliveryDate() {
+    public long getDeliveryDate() {
         return deliveryDate;
     }
 
-    public void setDeliveryDate(String deliveryDate) {
+    public void setDeliveryDate(long deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 
-    public String getAdmissionDate() {
+    public long getAdmissionDate() {
         return admissionDate;
     }
 
-    public void setAdmissionDate(String admissionDate) {
+    public void setAdmissionDate(long admissionDate) {
         this.admissionDate = admissionDate;
     }
 
@@ -82,5 +86,37 @@ public class PncMother {
 
     public void setModifyBy(String modifyBy) {
         ModifyBy = modifyBy;
+    }
+
+    public String getPara() {
+        return para;
+    }
+
+    public void setPara(String para) {
+        this.para = para;
+    }
+
+    public String getGravida() {
+        return gravida;
+    }
+
+    public void setGravida(String gravida) {
+        this.gravida = gravida;
+    }
+
+    public String getMother_status() {
+        return mother_status;
+    }
+
+    public void setMother_status(String mother_status) {
+        this.mother_status = mother_status;
+    }
+
+    public String getBba() {
+        return bba;
+    }
+
+    public void setBba(String bba) {
+        this.bba = bba;
     }
 }

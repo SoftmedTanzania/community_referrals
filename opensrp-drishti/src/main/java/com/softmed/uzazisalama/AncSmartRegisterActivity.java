@@ -139,6 +139,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         Log.d(TAG, "table columns ="+new Gson().toJson(context().commonrepository("uzazi_salama_follow_up_report").common_TABLE_COLUMNS));
         Log.d(TAG, "table columns ="+new Gson().toJson(context().commonrepository("wazazi_salama_mother").common_TABLE_COLUMNS));
+        Log.d(TAG, "table columns child="+new Gson().toJson(context().commonrepository("child").common_TABLE_COLUMNS));
 
     }
 

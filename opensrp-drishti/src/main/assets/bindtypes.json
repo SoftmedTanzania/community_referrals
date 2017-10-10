@@ -3,13 +3,13 @@
     {
       "name": "wazazi_salama_mother",
       "columns": [
-        {"name":"MOTHERS_FIRST_NAME"},{"name":"MOTHERS_LAST_NAME"},{"name":"MOTHERS_LAST_MENSTRUATION_DATE"},{"name":"MOTHERS_SORTVALUE"},{"name":"MOTHERS_ID"},{"name":"PNC_STATUS"},{"name":"EXPECTED_DELIVERY_DATE"},{"name":"IS_VALID"},{"name":"REG_TYPE"},{"name":"Is_PNC"},{"name":"FACILITY_ID"},{"name":"CreatedBy"},{"name":"ModifyBy"}
+        {"name":"MOTHERS_FIRST_NAME"},{"name":"MOTHERS_LAST_NAME"},{"name":"MOTHERS_LAST_MENSTRUATION_DATE"},{"name":"MOTHERS_SORTVALUE"},{"name":"MOTHERS_ID"},{"name":"PNC_STATUS"},{"name":"EXPECTED_DELIVERY_DATE"},{"name":"IS_VALID"},{"name":"REG_TYPE"},{"name":"Is_PNC"},{"name":"FACILITY_ID"},{"name":"CATCHMENT_AREA"},{"name":"CreatedBy"},{"name":"ModifyBy"}
       ]
     },
     {
       "name": "child",
       "columns": [
-        {"name":"GENDER"},{"name":"STATUS"},{"name":"WEIGHT"},{"name":"PROBLEM"},{"name":"CreatedBy"},{"name":"ModifyBy"}
+        {"name":"GENDER"},{"name":"WEIGHT"},{"name":"PROBLEM"},{"name":"STATUS"},{"name":"CreatedBy"},{"name":"ModifyBy"}
       ]
     },
     {

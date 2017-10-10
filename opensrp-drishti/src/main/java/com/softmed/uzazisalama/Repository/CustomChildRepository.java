@@ -24,11 +24,11 @@ public class CustomChildRepository {
     public ContentValues createValuesFor(ChildPersonObject childPersonObject) {
         ContentValues values = new ContentValues();
         values.put(ID_COLUMN, childPersonObject.getId());
-        values.put(Relational_ID, childPersonObject.getRelationalId());
-        values.put(WEIGHT, childPersonObject.getWEIGHT());
+        values.put(Relational_ID, childPersonObject.getId());
         values.put(GENDER, childPersonObject.getGENDER());
-        values.put(STATUS, childPersonObject.getSTATUS());
+        values.put(WEIGHT, childPersonObject.getWEIGHT());
         values.put(PROBLEM, childPersonObject.getPROBLEM());
+        values.put(STATUS, childPersonObject.getSTATUS());
         values.put(CREATEDBY, childPersonObject.getCreatedBy());
         values.put(MODIFYBY, childPersonObject.getModifyBy());
         values.put(DETAILS_COLUMN, childPersonObject.getDetails());

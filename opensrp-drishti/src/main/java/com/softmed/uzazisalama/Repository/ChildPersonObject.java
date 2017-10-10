@@ -39,11 +39,8 @@ public class ChildPersonObject {
 
     public ChildPersonObject(String id, String relationalId, Child child) {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyy", Locale.getDefault());
-
         this.id = id;
         this.relationalId = relationalId;
-
         this.GENDER = child.getGender();
         this.STATUS = child.getStatus();
         this.WEIGHT = child.getWeight();

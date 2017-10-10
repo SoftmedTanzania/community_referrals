@@ -62,6 +62,7 @@ import static com.softmed.uzazisalama.util.Utils.generateRandomUUIDString;
 public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
     private static final String TAG = WazaziRegisterActivity.class.getSimpleName();
     private String id;
+    public static long addmissionDate, deliveryDate;
     private static String childId;
     private PregnantMom pregnantMom;
     private TextView textName, textId,
@@ -126,6 +127,14 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
     @Override
     protected NavBarOptionsProvider getNavBarOptionsProvider() {
         return null;
+    }
+
+    @Override
+    protected void setupViews() {
+    }
+
+    @Override
+    protected void onResumption() {
     }
 
     @Override
@@ -216,7 +225,7 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
                 }
             }
         });
-        childStatusRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        typeOfDeadChildRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
                 if (i == R.id.fbs) {
@@ -242,6 +251,7 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
         child.setCreatedBy(((UzaziSalamaApplication)getApplication()).getCurrentUserID());
         child.setGender(genderSpinner.getSelectedItem().toString());
         child.setProblem(editTextChildProblems.getText().toString());
+        child.setApgarScore(editTextApgar.getText().toString());
         if(childStatus == 1)
             child.setStatus("alive");
         else
@@ -255,17 +265,20 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
     private String getPncMother(){
         PncMother pncMother = new PncMother();
         pncMother.setCreatedBy(((UzaziSalamaApplication)getApplication()).getCurrentUserID());
-//        pncMother.setGender(genderSpinner.getSelectedItem().toString());
-//        pncMother.setProblem(editTextChildProblems.getText().toString());
-//        if(childStatus == 1)
-//            pncMother.setStatus("alive");
-//        else
-//            pncMother.setStatus("dead");
-//        pncMother.setWeight(editTextChildWeight.getText().toString());
+        pncMother.setAdmissionDate(addmissionDate);
+        pncMother.setDeliveryDate(deliveryDate);
+        pncMother.setDeliveryComplication(editTextDeliveryProblems.getText().toString());
+        pncMother.setDeliveryType(editTextNjiaYaKujifungua.getText().toString());
+        pncMother.setBba(editTextBba.getText().toString());
+        pncMother.setPara(editTextPara.getText().toString());
+        pncMother.setGravida(editTextGravida.getText().toString());
+        pncMother.setMother_status(editTextMotherStatus.getText().toString());
+
         String gsonPncMother = new Gson().toJson(pncMother);
         Log.d(TAG, "new Pnc Mother =" + gsonPncMother);
         return gsonPncMother;
     }
+
     private void pickDate(final int id) {
         // listener
         DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -275,8 +288,15 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
                 // get picked date
                 // update view
                 GregorianCalendar pickedDate = new GregorianCalendar(year, monthOfYear, dayOfMonth);
+                if (id == R.id.textDeliveryDate) {
+                    textDeliveryDate.setText(dateFormat.format(pickedDate.getTimeInMillis()));
+                    addmissionDate = pickedDate.getTimeInMillis();
+                }
+                else if (id == R.id.textDateKulazwa) {
+                    textDateKulazwa.setText(dateFormat.format(pickedDate.getTimeInMillis()));
+                    deliveryDate = pickedDate.getTimeInMillis();
+                }
 
-                ((TextView) findViewById(id)).setText(dateFormat.format(pickedDate.getTimeInMillis()));
 
             }
         };
@@ -298,23 +318,31 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
     private void saveData() {
         // save the form
         Log.d(TAG, "pnc mother id =" + id);
+
         //updating mother information
         MotherPersonObject motherPersonObject = new MotherPersonObject(id, null, pregnantMom);
         updateFormSubmission(motherPersonObject, id);
 
+
+
         //creating a new born child
         childId = UUID.randomUUID().toString();
-        saveChildFormSubmission(getChild(),childId );
-
+        //todo martha fix error in saving child details
+//        saveChildFormSubmission(getChild(),childId );
         //registering delivery information about a mother
         savePNCFormSubmission(getPncMother(),UUID.randomUUID().toString(),childId,id );
 
+
+
+
+
     }
+
     public void saveChildFormSubmission(String formSubmission, String id) {
         // save the form
         final Child child = new Gson().fromJson(formSubmission, Child.class);
 
-        ChildPersonObject childPersonObject = new ChildPersonObject(id, null, child );
+        ChildPersonObject childPersonObject = new ChildPersonObject(id, id, child );
         ContentValues values = new CustomChildRepository().createValuesFor(childPersonObject);
         Log.d(TAG, "childPersonObject = " + new Gson().toJson(childPersonObject));
         Log.d(TAG, "values = " + new Gson().toJson(values));
@@ -346,7 +374,6 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
 
             formFields.add(f);
 
-
         }
 
         Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
@@ -357,7 +384,6 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
         context().formDataRepository().saveFormSubmission(submission);
 
         Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
-
 
 //        TODO finish this better implementation for saving data to the database
 //        FormSubmission formSubmission1 = null;

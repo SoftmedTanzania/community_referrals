@@ -7,18 +7,19 @@ import java.util.ArrayList;
  */
 
 public class Child {
-    private String gender, status, weight, problem, CreatedBy, ModifyBy;
+    private String gender, status,apgarScore ,weight, problem, CreatedBy, ModifyBy;
 
     public Child(){
 
     }
-    public Child(String gender, String status, String weight, String problem, String CreatedBy, String ModifyBy) {
+    public Child(String gender, String status, String weight, String apgarScore,String problem, String CreatedBy, String ModifyBy) {
         gender = gender;
         status = status;
         weight = weight;
         problem =problem;
         CreatedBy = CreatedBy;
         ModifyBy = ModifyBy;
+        apgarScore = apgarScore;
     }
 
     public String getGender() {
@@ -67,5 +68,13 @@ public class Child {
 
     public void setModifyBy(String modifyBy) {
         ModifyBy = modifyBy;
+    }
+
+    public String getApgarScore() {
+        return apgarScore;
+    }
+
+    public void setApgarScore(String apgarScore) {
+        this.apgarScore = apgarScore;
     }
 }
