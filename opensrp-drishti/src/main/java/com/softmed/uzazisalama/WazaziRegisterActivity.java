@@ -208,7 +208,7 @@ public class WazaziRegisterActivity extends AppCompatActivity {
         formFields.add(new FormField("id", c.getCaseId(), commonRepository.TABLE_NAME + "." + "id"));
 
 
-        formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
+        formFields.add(new FormField("relationalid", c.getRelationalId(), commonRepository.TABLE_NAME + "." + "relationalid"));
 
         for (String key : c.getDetails().keySet()) {
             Log.d(TAG, "key = " + key);

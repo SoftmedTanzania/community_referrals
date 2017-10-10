@@ -9,10 +9,26 @@
     },
     {
         "parent": "wazazi_salama_mother",
-        "child": "child",
-        "field": "children",
+        "child": "uzazi_salama_follow_up_report",
+        "field": "pregnant women",
         "kind": "one_to_many",
-        "from": "mother.id",
-        "to": "child.motherCaseId"
+        "from": "wazazi_salama_mother.id",
+        "to": "uzazi_salama_follow_up_report.relationalid"
+    },
+    {
+        "parent": "wazazi_salama_mother",
+        "child": "wazazi_salama_pnc",
+        "field": "new mother",
+        "kind": "one_to_many",
+        "from": "wazazi_salama_mother.id",
+        "to": "wazazi_salama_pnc.motherCaseId"
+    },
+    {
+        "parent": "child",
+        "child": "wazazi_salama_pnc",
+        "field": "mothers child",
+        "kind": "one_to_many",
+        "from": "child.id",
+        "to": "wazazi_salama_pnc.childCaseId"
     }
 ]

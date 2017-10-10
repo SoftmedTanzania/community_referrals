@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class MotherPersonObject {
     private String id,IS_PNC, IS_VALID, REG_TYPE, relationalId, MOTHERS_FIRST_NAME, MOTHERS_LAST_NAME, MOTHERS_SORTVALUE,
-            EXPECTED_DELIVERY_DATE, MOTHERS_LAST_MENSTRUATION_DATE, FACILITY_ID,CreatedBy, ModifyBy, PNC_STATUS, MOTHERS_ID;
+            EXPECTED_DELIVERY_DATE,CATCHMENT_AREA, MOTHERS_LAST_MENSTRUATION_DATE, FACILITY_ID,CreatedBy, ModifyBy, PNC_STATUS, MOTHERS_ID;
     private String details;
     private Map<String, String> columnMap;
 
@@ -30,6 +30,7 @@ public class MotherPersonObject {
                               String IS_PNC,
                               String IS_VALID,
                               String details,
+                              String CATCHMENT_AREA,
                               String CreatedBy,
                               String ModifyBy,
                               String type) {
@@ -46,6 +47,7 @@ public class MotherPersonObject {
         this.FACILITY_ID = FACILITY_ID;
         this.IS_PNC = IS_PNC;
         this.IS_VALID = IS_VALID;
+        this.CATCHMENT_AREA = CATCHMENT_AREA;
         this.CreatedBy = CreatedBy;
         this.ModifyBy = ModifyBy;
     }
@@ -72,6 +74,7 @@ public class MotherPersonObject {
         this.IS_VALID = pregnantMom.getIs_valid();
         this.FACILITY_ID = pregnantMom.getFacilityId();
         this.details = new Gson().toJson(pregnantMom);
+        this.CATCHMENT_AREA = pregnantMom.getCatchmentArea();
         this.CreatedBy = pregnantMom.getCreatedBy();
         this.ModifyBy = pregnantMom.getModifyBy();
 
@@ -223,5 +226,13 @@ public class MotherPersonObject {
 
     public void setModifyBy(String modifyBy) {
         ModifyBy = modifyBy;
+    }
+
+    public String getCATCHMENT_AREA() {
+        return CATCHMENT_AREA;
+    }
+
+    public void setCATCHMENT_AREA(String CATCHMENT_AREA) {
+        this.CATCHMENT_AREA = CATCHMENT_AREA;
     }
 }

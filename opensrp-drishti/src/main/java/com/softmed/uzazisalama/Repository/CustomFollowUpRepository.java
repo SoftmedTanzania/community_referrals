@@ -32,7 +32,7 @@ public class CustomFollowUpRepository {
         values.put(IS_ON_RISK, followUpReportObject.getOnRisk());
         values.put(FACILITY_ID, followUpReportObject.getFacilityId());
         values.put(CREATEDBY, followUpReportObject.getCreatedBy());
-        values.put(MODIFYBY, followUpReportObject.getCreatedBy());
+        values.put(MODIFYBY, followUpReportObject.getModifyBy());
         values.put(DETAILS_COLUMN, followUpReportObject.getDetails());
         return values;
     }

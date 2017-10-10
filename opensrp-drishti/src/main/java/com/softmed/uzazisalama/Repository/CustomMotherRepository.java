@@ -24,6 +24,7 @@ public class CustomMotherRepository{
     public static final String MOTHERS_ID = "MOTHERS_ID";
     public static final String TYPE = "REG_TYPE";
     public static final String CREATEDBY = "CreatedBy";
+    public static final String CATCHMENT_AREA = "CATCHMENT_AREA";
     public static final String MODIFYBY = "ModifyBy";
 
 
@@ -44,6 +45,7 @@ public class CustomMotherRepository{
         values.put(IS_VALID, motherPersonObject.getIS_VALID());
         values.put(FACILITY_ID, motherPersonObject.getFACILITY_ID());
         values.put(CREATEDBY, motherPersonObject.getCreatedBy());
+        values.put(CATCHMENT_AREA, motherPersonObject.getCATCHMENT_AREA());
         values.put(MODIFYBY, motherPersonObject.getCreatedBy());
         values.put(DETAILS_COLUMN, motherPersonObject.getDetails());
         return values;
