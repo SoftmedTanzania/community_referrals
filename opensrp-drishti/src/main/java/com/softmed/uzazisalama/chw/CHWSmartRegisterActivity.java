@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.ei.opensrp.drishti.R;
-import com.softmed.uzazisalama.DataModels.ChwFollowUpMother;
+import com.softmed.uzazisalama.DataModels.Child;
 import com.softmed.uzazisalama.DataModels.PreRegisteredMother;
 import com.softmed.uzazisalama.pageradapter.CHWPagerAdapter;
 
@@ -139,7 +139,7 @@ public class CHWSmartRegisterActivity extends AppCompatActivity {
         textName.setText(mother.getName());
     }
 
-    public void showFollowUpDetailsDialog(ChwFollowUpMother mother) {
+    public void showFollowUpDetailsDialog(PreRegisteredMother mother) {
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_details, null);
 
@@ -163,7 +163,7 @@ public class CHWSmartRegisterActivity extends AppCompatActivity {
         textName.setText(mother.getName());
     }
 
-    public void showFollowUpFormDialog(final ChwFollowUpMother mother){
+    public void showFollowUpFormDialog(final PreRegisteredMother mother){
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
 

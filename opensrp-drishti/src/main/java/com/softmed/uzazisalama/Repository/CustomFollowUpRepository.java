@@ -26,13 +26,13 @@ public class CustomFollowUpRepository {
         ContentValues values = new ContentValues();
         values.put(ID_COLUMN, followUpReportObject.getId());
         values.put(Relational_ID, followUpReportObject.getRelationalId());
-        values.put(MOTHER_ID, followUpReportObject.getMOTHERS_ID());
-        values.put(FOLLOW_UP_DATA, followUpReportObject.getFOLLOW_UP_DATA());
-        values.put(REPORT_DATE, followUpReportObject.getREPORT_DATE());
-        values.put(IS_ON_RISK, followUpReportObject.getIS_ON_RISK());
-        values.put(FACILITY_ID, followUpReportObject.getFACILITY_ID());
+        values.put(MOTHER_ID, followUpReportObject.getMotherId());
+        values.put(FOLLOW_UP_DATA, followUpReportObject.getFollowUpData());
+        values.put(REPORT_DATE, followUpReportObject.getReportDate());
+        values.put(IS_ON_RISK, followUpReportObject.getOnRisk());
+        values.put(FACILITY_ID, followUpReportObject.getFacilityId());
         values.put(CREATEDBY, followUpReportObject.getCreatedBy());
-        values.put(MODIFYBY, followUpReportObject.getCreatedBy());
+        values.put(MODIFYBY, followUpReportObject.getModifyBy());
         values.put(DETAILS_COLUMN, followUpReportObject.getDetails());
         return values;
     }

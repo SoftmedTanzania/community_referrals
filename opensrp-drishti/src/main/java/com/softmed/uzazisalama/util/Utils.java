@@ -91,6 +91,7 @@ public class Utils {
                     commonPersonObject.getColumnmaps().get("IS_PNC"),
                     commonPersonObject.getColumnmaps().get("IS_VALID"),
                     commonPersonObject.getColumnmaps().get("details"),
+                    commonPersonObject.getColumnmaps().get("CATCHMENT_AREA"),
                     commonPersonObject.getColumnmaps().get("CreatedBy"),
                     commonPersonObject.getColumnmaps().get("ModifyBy"),
                     commonPersonObject.getColumnmaps().get("type")

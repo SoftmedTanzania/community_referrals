@@ -106,19 +106,8 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     private void findViews() {
-        Log.d(TAG,"am in findview");
+        Log.d(TAG, "am in findview");
         editTextFacilityName = (EditText) findViewById(R.id.facility);
         checkBoxPressure = (CheckBox) findViewById(R.id.checkbox_pressure);
         chechboxAlbumini = (CheckBox) findViewById(R.id.checkbox_albumin);
@@ -131,12 +120,12 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
     }
 
     private void setListeners() {
-        Log.d(TAG,"am in setListerners");
+        Log.d(TAG, "am in setListerners");
         findViewById(R.id.fabSubmit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // TODO: 10/2/17 get id and fieldOverrides for follow up report submission
-                saveFormSubmission(getFollowUpReport(), UUID.randomUUID().toString(),id, null);
+                saveFormSubmission(getFollowUpReport(), UUID.randomUUID().toString(), id, null);
                 onBackPressed();
 
             }
@@ -147,7 +136,7 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
         findViewById(R.id.buttonHome).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG,"am in setListerners2");
+                Log.d(TAG, "am in setListerners2");
 
                 onBackPressed();
             }
@@ -170,8 +159,8 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
         report.setHighSugar(checkboxSugar.isChecked());
         report.setHbBelow60(checkboxHb.isChecked());
         report.setUnproportionalPregnancyHeight(checkboxKimo.isChecked());
-        report.setCreatedBy(((UzaziSalamaApplication)getApplication()).getCurrentUserID());
-        report.setModifyBy(((UzaziSalamaApplication)getApplication()).getCurrentUserID());
+        report.setCreatedBy(((UzaziSalamaApplication) getApplication()).getCurrentUserID());
+        report.setModifyBy(((UzaziSalamaApplication) getApplication()).getCurrentUserID());
 
         // automate follow up number
         long lnmp = pregnantMom.getDateLNMP();
@@ -211,10 +200,10 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
 
 
     @Override
-    public void saveFormSubmission(String formSubmission, String id,String relId, JSONObject fieldOverrides) {
+    public void saveFormSubmission(String formSubmission, String id, String relId, JSONObject fieldOverrides) {
         // TODO: 10/7/17 complete this implementation to save report to database
         Log.d(TAG, "am in save");
-        Log.d(TAG, "formsubmission ="+formSubmission);
+        Log.d(TAG, "formsubmission =" + formSubmission);
         final FollowUpReport followUpReport = gson.fromJson(formSubmission, FollowUpReport.class);
 
         FollowUpReportObject followUpReportObject = new FollowUpReportObject(id, relId, followUpReport);
@@ -234,37 +223,31 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
 
         formFields.add(new FormField("relationalid", c.getRelationalId(), commonRepository.TABLE_NAME + "." + "relationalid"));
 
-        for ( String key : c.getDetails().keySet() ) {
-            Log.d(TAG,"key = "+key);
+        for (String key : c.getDetails().keySet()) {
+            Log.d(TAG, "key = " + key);
             FormField f = null;
-            if(!key.equals("facilityId")) {
-                f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
-            }else{
-                f = new FormField(key, c.getDetails().get(key), "facility.id");
-            }
-            formFields.add(f);
-        }
-
-        for ( String key : c.getColumnmaps().keySet() ) {
-            Log.d(TAG,"key = "+key);
-            FormField f = null;
-            if(!key.equals("facilityId")) {
-                f = new FormField(key, c.getColumnmaps().get(key), commonRepository.TABLE_NAME + "." + key);
-            }else{
-                f = new FormField(key, c.getColumnmaps().get(key), "facility.id");
-            }
+            f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
 
             formFields.add(f);
         }
-        Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
+
+        for (String key : c.getColumnmaps().keySet()) {
+            Log.d(TAG, "key = " + key);
+            FormField f = null;
+            f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
+
+
+            formFields.add(f);
+        }
+        Log.d(TAG, "form field = " + gson.toJson(formFields));
 
 // // TODO: 08/10/2017 coze finishing up saving in the form submission
-        FormData formData = new FormData("uzazi_salama_follow_up_report","/model/instance/Wazazi_Salama_ANC_Followup/",formFields,null);
-        FormInstance formInstance = new FormInstance(formData,"1");
-        FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"wazazi_salama_pregnant_mothers_follow_up",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
+        FormData formData = new FormData("uzazi_salama_follow_up_report", "/model/instance/Wazazi_Salama_ANC_Followup/", formFields, null);
+        FormInstance formInstance = new FormInstance(formData, "1");
+        FormSubmission submission = new FormSubmission(generateRandomUUIDString(), id, "wazazi_salama_pregnant_mothers_follow_up", gson.toJson(formInstance), "4", SyncStatus.PENDING, "4");
         context().formDataRepository().saveFormSubmission(submission);
 
-        Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
+        Log.d(TAG, "submission content = " + gson.toJson(submission));
 
 
 //        TODO finish this better implementation for saving data to the database
@@ -283,10 +266,10 @@ public class AncFollowUpFormActivity extends SecuredNativeSmartRegisterActivity 
 //            e.printStackTrace();
 //        }
 
-        new  com.softmed.uzazisalama.util.AsyncTask<Void, Void, Void>(){
+        new com.softmed.uzazisalama.util.AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                if(!pregnantMom.getPhone().equals(""))
+                if (!pregnantMom.getPhone().equals(""))
                     Utils.sendRegistrationAlert(pregnantMom.getPhone());
                 return null;
             }

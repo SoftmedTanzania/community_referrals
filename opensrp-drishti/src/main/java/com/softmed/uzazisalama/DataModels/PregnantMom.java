@@ -7,10 +7,11 @@ package com.softmed.uzazisalama.DataModels;
 public class PregnantMom {
     private String mother_name, cardid, phone, discountId, education, occupation, lastSmsToken, chwComment, reg_type,
             is_pnc,
-            is_valid, createdBy, ModifyBy,
+            is_valid,catchmentArea, createdBy, ModifyBy,
             husbandName, husbandEducation, husbandOccupation, physicalAddress, facilityId;
 
     private long dateReg, dateLNMP, edd, dateRegistration, dateLastVisited;
+
     private int age, height, previousFertilityCount,
             hivStatus, // 0=no, 1=yes, 2=unknown
             successfulBirths, livingChildren;
@@ -425,5 +426,13 @@ public class PregnantMom {
 
     public void setModifyBy(String modifyBy) {
         ModifyBy = modifyBy;
+    }
+
+    public String getCatchmentArea() {
+        return catchmentArea;
+    }
+
+    public void setCatchmentArea(String catchmentArea) {
+        this.catchmentArea = catchmentArea;
     }
 }
