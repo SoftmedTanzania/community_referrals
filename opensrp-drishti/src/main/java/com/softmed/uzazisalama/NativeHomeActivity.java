@@ -328,9 +328,9 @@ public class NativeHomeActivity extends SecuredActivity {
                     navigationController.startANCSmartRegistry();
                     break;
 
-//                case R.id.btn_pnc_register:
-//                    navigationController.startPNCSmartRegistry();
-//                    break;
+                case R.id.btn_pnc_register:
+                    navigationController.startPNCActivity();
+                    break;
 
 //                case R.id.btn_chw_register:
 //                    navigationController1.startCHWSmartRegistry();

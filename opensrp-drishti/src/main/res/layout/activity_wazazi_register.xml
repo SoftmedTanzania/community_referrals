@@ -20,7 +20,7 @@
             app:contentScrim="?attr/colorPrimary"
             app:collapsedTitleTextAppearance="@style/CollapsedTitleTextAppearance"
             app:expandedTitleTextAppearance="@style/ExpandedTitleTextAppearance"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:layout_scrollFlags="scroll"
             tools:targetApi="lollipop">
 
             <ImageView

@@ -65,8 +65,8 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
     public static long addmissionDate, deliveryDate;
     private static String childId;
     private PregnantMom pregnantMom;
-    private TextView textName, textId,
-            textAge, textDeliveryDate, textDateKulazwa;
+    private TextView textName, textId,textPhone,
+            textAge, textDeliveryDate, textDateKulazwa,textPhysicalAddress;
     private CardView cardPickCheckInDate, cardPickDeliveryDate;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private EditText editTextGravida, editTextMotherStatus, editTextPara, editTextNjiaYaKujifungua,
