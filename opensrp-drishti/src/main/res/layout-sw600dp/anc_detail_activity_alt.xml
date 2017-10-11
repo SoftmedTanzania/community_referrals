@@ -35,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
+            app:contentScrim="?attr/colorPrimary"
             app:collapsedTitleTextAppearance="@style/CollapsedTitleTextAppearance"
             app:expandedTitleTextAppearance="@style/ExpandedTitleTextAppearance"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"

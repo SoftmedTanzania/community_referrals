@@ -47,7 +47,7 @@ public class WazaziRegisterActivity extends AppCompatActivity {
     private  String gsonMom,id;
     private PregnantMom pregnantMom;
     private TextView textName, textId,
-            textAge,textDeliveryDate,textDateKulazwa;
+            textAge,textDeliveryDate,textDateKulazwa,textPhysicalAddress,textPhone;
     private CardView cardPickCheckInDate,cardPickDeliveryDate;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private EditText editTextGravida,editTextMotherStatus,editTextPara,editTextNjiaYaKujifungua,
@@ -101,6 +101,8 @@ public class WazaziRegisterActivity extends AppCompatActivity {
         editTextChildProblems = (EditText) findViewById(R.id.child_problems);
         childStatusRadioGroup = (RadioGroup) findViewById(R.id.child_status_radio_group);
         typeOfDeadChildRadioGroup = (RadioGroup) findViewById(R.id.type_of_dead_child_radio_group);
+        textPhysicalAddress = (TextView) findViewById(R.id.textPhysicalAddress);
+        textPhone = (TextView) findViewById(R.id.textPhone);
 
         cardPickDeliveryDate = (CardView) findViewById(R.id.card_pick_delivery_date);
         cardPickCheckInDate = (CardView) findViewById(R.id.card_pick_check_in_date);
@@ -149,7 +151,8 @@ public class WazaziRegisterActivity extends AppCompatActivity {
         textName.setText(pregnantMom.getName());
         textId.setText("Mother ID : "+pregnantMom.getId());
         textAge.setText(String.valueOf(pregnantMom.getAge())+" years");
-
+        textPhysicalAddress.setText(pregnantMom.getPhysicalAddress());
+        textPhone.setText(pregnantMom.getPhone());
     }
 
     private void pickDate(final int id) {

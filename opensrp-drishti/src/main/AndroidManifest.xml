@@ -72,14 +72,8 @@
             android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
         <activity
             android:name="com.softmed.uzazisalama.chw.CHWSmartRegisterActivity"
-            android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name="com.softmed.uzazisalama.chw.CHWFormRegistrationActivity"
             android:screenOrientation="landscape"/>
