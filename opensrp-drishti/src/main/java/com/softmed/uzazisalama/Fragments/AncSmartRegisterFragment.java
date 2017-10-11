@@ -31,6 +31,7 @@ import com.softmed.uzazisalama.AncFollowUpFormActivity;
 import com.softmed.uzazisalama.AncRegisterListAdapter;
 import com.softmed.uzazisalama.AncSmartRegisterActivity;
 import com.softmed.uzazisalama.LoginActivity;
+
 import org.ei.opensrp.drishti.R;
 
 import com.softmed.uzazisalama.Repository.LocationSelectorDialogFragment;
@@ -201,7 +202,8 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
     @Override
     protected void onResumption() {
-        super.onResumption();
+        // super.onResumption();
+        // todo to show publish progress while running query on AsyncTask
         getDefaultOptionsProvider();
         if (isPausedOrRefreshList()) {
             initializeQueries();
@@ -218,7 +220,7 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     @Override
     public void setupViews(View view) {
         super.setupViews(view);
-        ((Toolbar)view.findViewById(R.id.toolbar)).setTitle("AnC Register");
+        ((Toolbar) view.findViewById(R.id.toolbar)).setTitle("AnC Register");
         view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
         view.findViewById(R.id.service_mode_selection).setVisibility(INVISIBLE);
 
@@ -324,26 +326,28 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 //        updateSearchView();
 //        refresh();
 
-
-        String[] columns = {"MOTHERS_FIRST_NAME",
-                "MOTHERS_LAST_NAME",
-                "MOTHERS_LAST_MENSTRUATION_DATE",
-                "MOTHERS_SORTVALUE",
-                "MOTHERS_ID",
-                "PNC_STATUS",
-                "EXPECTED_DELIVERY_DATE",
-                "IS_VALID",
-                "Is_PNC",
-                "CreatedBy",
-                "FACILITY_ID"};
+//
+//        String[] columns = {"MOTHERS_FIRST_NAME",
+//                "MOTHERS_LAST_NAME",
+//                "MOTHERS_LAST_MENSTRUATION_DATE",
+//                "MOTHERS_SORTVALUE",
+//                "MOTHERS_ID",
+//                "PNC_STATUS",
+//                "EXPECTED_DELIVERY_DATE",
+//                "IS_VALID",
+//                "Is_PNC",
+//                "CreatedBy",
+//                "FACILITY_ID"};
 
         CommonRepository motherRepository = context().commonrepository("wazazi_salama_mother");
-        Cursor cursor = motherRepository.RawCustomQueryForAdapter("select * from wazazi_salama_mother WHERE Is_PNC = 'false' ");
+        String query = "SELECT * FROM wazazi_salama_mother WHERE Is_PNC = 'false'";
+        Cursor cursor = motherRepository.RawCustomQueryForAdapter(query);
+        Log.d(TAG, "query = " + query);
         clientAdapter = new AncRegisterListAdapter(context(), motherRepository, cursor, getContext());
 
 
-        int numberOfColumns=2;
-        if(isTablet(getActivity())){
+        int numberOfColumns = 2;
+        if (isTablet(getActivity())) {
             numberOfColumns = 3;
         }
         clientsView.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));

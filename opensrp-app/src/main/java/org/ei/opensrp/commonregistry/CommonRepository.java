@@ -113,7 +113,7 @@ public class CommonRepository extends DrishtiRepository {
 
     public void customUpdateTable(String tableName,ContentValues contentValues, String caseId) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
-        Log.d("customInsert", "tableName = " + TABLE_NAME);
+        Log.d("customUpdateTable", "tableName = " + TABLE_NAME);
         database.update(tableName, contentValues, ID_COLUMN + " = ?", new String[]{caseId});
         Cursor cursor = database.rawQuery("select * from wazazi_salama_mother",null);
 

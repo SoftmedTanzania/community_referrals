@@ -102,9 +102,11 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
             setMotherProfileDetails();
         }
     }
+
     @Override
     protected void onInitialization() {
     }
+
     @Override
     public void startRegistration() {
     }
@@ -246,13 +248,13 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
 
     }
 
-    private String getChild(){
+    private String getChild() {
         Child child = new Child();
-        child.setCreatedBy(((UzaziSalamaApplication)getApplication()).getCurrentUserID());
+        child.setCreatedBy(((UzaziSalamaApplication) getApplication()).getCurrentUserID());
         child.setGender(genderSpinner.getSelectedItem().toString());
         child.setProblem(editTextChildProblems.getText().toString());
         child.setApgarScore(editTextApgar.getText().toString());
-        if(childStatus == 1)
+        if (childStatus == 1)
             child.setStatus("alive");
         else
             child.setStatus("dead");
@@ -262,9 +264,9 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
         return gsonChild;
     }
 
-    private String getPncMother(){
+    private String getPncMother() {
         PncMother pncMother = new PncMother();
-        pncMother.setCreatedBy(((UzaziSalamaApplication)getApplication()).getCurrentUserID());
+        pncMother.setCreatedBy(((UzaziSalamaApplication) getApplication()).getCurrentUserID());
         pncMother.setAdmissionDate(addmissionDate);
         pncMother.setDeliveryDate(deliveryDate);
         pncMother.setDeliveryComplication(editTextDeliveryProblems.getText().toString());
@@ -291,8 +293,7 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
                 if (id == R.id.textDeliveryDate) {
                     textDeliveryDate.setText(dateFormat.format(pickedDate.getTimeInMillis()));
                     addmissionDate = pickedDate.getTimeInMillis();
-                }
-                else if (id == R.id.textDateKulazwa) {
+                } else if (id == R.id.textDateKulazwa) {
                     textDateKulazwa.setText(dateFormat.format(pickedDate.getTimeInMillis()));
                     deliveryDate = pickedDate.getTimeInMillis();
                 }
@@ -324,13 +325,12 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
         updateFormSubmission(motherPersonObject, id);
 
 
-
         //creating a new born child
         childId = UUID.randomUUID().toString();
-        saveChildFormSubmission(getChild(),childId );
+        saveChildFormSubmission(getChild(), childId);
 
         //registering delivery information about a mother
-        savePNCFormSubmission(getPncMother(),UUID.randomUUID().toString(),childId,id );
+        savePNCFormSubmission(getPncMother(), UUID.randomUUID().toString(), childId, id);
 
         onBackPressed();
 
@@ -340,7 +340,7 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
         // save the form
         final Child child = new Gson().fromJson(formSubmission, Child.class);
 
-        ChildPersonObject childPersonObject = new ChildPersonObject(id, id, child );
+        ChildPersonObject childPersonObject = new ChildPersonObject(id, id, child);
         ContentValues values = new CustomChildRepository().createValuesFor(childPersonObject);
         Log.d(TAG, "childPersonObject = " + new Gson().toJson(childPersonObject));
         Log.d(TAG, "values = " + new Gson().toJson(values));
@@ -357,16 +357,16 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
 
         formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
 
-        for ( String key : c.getDetails().keySet() ) {
-            Log.d(TAG,"key = "+key);
+        for (String key : c.getDetails().keySet()) {
+            Log.d(TAG, "key = " + key);
             FormField f = null;
             f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
 
             formFields.add(f);
         }
 
-        for ( String key : c.getColumnmaps().keySet() ) {
-            Log.d(TAG,"key = "+key);
+        for (String key : c.getColumnmaps().keySet()) {
+            Log.d(TAG, "key = " + key);
             FormField f = null;
             f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
 
@@ -374,14 +374,14 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
 
         }
 
-        Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
+        Log.d(TAG, "form field = " + new Gson().toJson(formFields));
 
-        FormData formData = new FormData("uzazi_salama_child","/model/instance/Child/",formFields,null);
-        FormInstance formInstance = new FormInstance(formData,"1");
-        FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"uzazi_salama_child",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
+        FormData formData = new FormData("uzazi_salama_child", "/model/instance/Child/", formFields, null);
+        FormInstance formInstance = new FormInstance(formData, "1");
+        FormSubmission submission = new FormSubmission(generateRandomUUIDString(), id, "uzazi_salama_child", new Gson().toJson(formInstance), "4", SyncStatus.PENDING, "4");
         context().formDataRepository().saveFormSubmission(submission);
 
-        Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
+        Log.d(TAG, "submission content = " + new Gson().toJson(submission));
 
 //        TODO finish this better implementation for saving data to the database
 //        FormSubmission formSubmission1 = null;
@@ -405,7 +405,7 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
         // save the form
         final PncMother pncMother = new Gson().fromJson(formSubmission, PncMother.class);
 
-        PncPersonObject pncPersonObject = new PncPersonObject(id,childId, motherid, pncMother);
+        PncPersonObject pncPersonObject = new PncPersonObject(id, childId, motherid, pncMother);
         ContentValues values = new CustomPncRepository().createValuesFor(pncPersonObject);
         Log.d(TAG, "pncPersonObject = " + new Gson().toJson(pncPersonObject));
         Log.d(TAG, "values = " + new Gson().toJson(values));
@@ -422,27 +422,27 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
 
         formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
 
-        for ( String key : c.getDetails().keySet() ) {
-            Log.d(TAG,"key = "+key);
+        for (String key : c.getDetails().keySet()) {
+            Log.d(TAG, "key = " + key);
             FormField f = null;
-            if(key.equals("childCaseId")) {
+            if (key.equals("childCaseId")) {
                 f = new FormField(key, c.getDetails().get(key), "child.id");
-            }else if(key.equals("motherCaseId")) {
+            } else if (key.equals("motherCaseId")) {
                 f = new FormField(key, c.getDetails().get(key), "wazazi_salama_mother.id");
-            }else{
+            } else {
                 f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
             }
             formFields.add(f);
         }
 
-        for ( String key : c.getColumnmaps().keySet() ) {
-            Log.d(TAG,"key = "+key);
+        for (String key : c.getColumnmaps().keySet()) {
+            Log.d(TAG, "key = " + key);
             FormField f = null;
-            if(key.equals("childCaseId")) {
+            if (key.equals("childCaseId")) {
                 f = new FormField(key, c.getDetails().get(key), "child.id");
-            }else if(key.equals("motherCaseId")) {
+            } else if (key.equals("motherCaseId")) {
                 f = new FormField(key, c.getDetails().get(key), "wazazi_salama_mother.id");
-            }else{
+            } else {
                 f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
             }
 
@@ -451,14 +451,14 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
 
         }
 
-        Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
+        Log.d(TAG, "form field = " + new Gson().toJson(formFields));
 
-        FormData formData = new FormData("uzazi_salama_pnc","/model/instance/Wazazi_Salama_PNC_Registration/",formFields,null);
-        FormInstance formInstance = new FormInstance(formData,"1");
-        FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"uzazi_salama_pnc",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
+        FormData formData = new FormData("uzazi_salama_pnc", "/model/instance/Wazazi_Salama_PNC_Registration/", formFields, null);
+        FormInstance formInstance = new FormInstance(formData, "1");
+        FormSubmission submission = new FormSubmission(generateRandomUUIDString(), id, "uzazi_salama_pnc", new Gson().toJson(formInstance), "4", SyncStatus.PENDING, "4");
         context().formDataRepository().saveFormSubmission(submission);
 
-        Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
+        Log.d(TAG, "submission content = " + new Gson().toJson(submission));
 
 
 //        TODO finish this better implementation for saving data to the database
@@ -478,10 +478,10 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
 //        }
 
 
-        new  com.softmed.uzazisalama.util.AsyncTask<Void, Void, Void>(){
+        new com.softmed.uzazisalama.util.AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                if(!pregnantMom.getPhone().equals(""))
+                if (!pregnantMom.getPhone().equals(""))
                     Utils.sendRegistrationAlert(pregnantMom.getPhone());
                 return null;
             }
@@ -538,6 +538,8 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
 
         FormData formData = new FormData("wazazi_salama_mother", "/model/instance/Wazazi_Salama_ANC_Registration/", formFields, null);
         FormInstance formInstance = new FormInstance(formData, "1");
+        // todo fix this error on the next line
+        // DatabaseObjectNotClosedException: Application did not close the cursor or database object that was opened here
         FormSubmission submission = Context.getInstance().updateApplicationContext(this.getApplicationContext()).formDataRepository().fetchFromSubmissionByEntity(motherPersonObject.getId());
 
         Log.d(TAG, "submission content = " + new Gson().toJson(submission));
