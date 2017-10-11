@@ -12,6 +12,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.softmed.uzazisalama.Anc.AncServiceModeOption;
 import com.softmed.uzazisalama.AncDetailActivity;
@@ -60,6 +61,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Map;
 
+import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static com.softmed.uzazisalama.util.Utils.isTablet;
