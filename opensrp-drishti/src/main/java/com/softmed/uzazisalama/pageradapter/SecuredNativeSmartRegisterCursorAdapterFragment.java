@@ -188,6 +188,7 @@ public abstract class SecuredNativeSmartRegisterCursorAdapterFragment extends co
                     CommonRepository motherRepository = context().commonrepository("wazazi_salama_mother");
                     String query = "SELECT * FROM wazazi_salama_mother";
                     Cursor cursor = motherRepository.RawCustomQueryForAdapter(query);
+                    Log.d("onResumption", "query = " + query);
                     listAdapter = new AncRegisterListAdapter(context(), motherRepository, cursor, getContext());
 
                     return null;

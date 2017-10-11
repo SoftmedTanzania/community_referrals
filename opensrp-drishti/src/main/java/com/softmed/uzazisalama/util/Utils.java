@@ -88,7 +88,7 @@ public class Utils {
                     commonPersonObject.getColumnmaps().get("EXPECTED_DELIVERY_DATE"),
                     commonPersonObject.getColumnmaps().get("MOTHERS_LAST_MENSTRUATION_DATE"),
                     commonPersonObject.getColumnmaps().get("FACILITY_ID"),
-                    commonPersonObject.getColumnmaps().get("IS_PNC"),
+                    commonPersonObject.getColumnmaps().get("Is_PNC"),
                     commonPersonObject.getColumnmaps().get("IS_VALID"),
                     commonPersonObject.getColumnmaps().get("details"),
                     commonPersonObject.getColumnmaps().get("CATCHMENT_AREA"),

@@ -7,7 +7,7 @@
       ]
     },
     {
-      "name": "child",
+      "name": "uzazi_salama_child",
       "columns": [
         {"name":"GENDER"},{"name":"WEIGHT"},{"name":"PROBLEM"},{"name":"STATUS"},{"name":"CreatedBy"},{"name":"ModifyBy"}
       ]
