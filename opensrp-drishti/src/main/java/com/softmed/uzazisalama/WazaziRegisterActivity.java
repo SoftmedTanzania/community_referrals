@@ -327,14 +327,12 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
 
         //creating a new born child
         childId = UUID.randomUUID().toString();
-        //todo martha fix error in saving child details
-//        saveChildFormSubmission(getChild(),childId );
+        saveChildFormSubmission(getChild(),childId );
+
         //registering delivery information about a mother
         savePNCFormSubmission(getPncMother(),UUID.randomUUID().toString(),childId,id );
 
-
-
-
+        onBackPressed();
 
     }
 
@@ -347,7 +345,7 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
         Log.d(TAG, "childPersonObject = " + new Gson().toJson(childPersonObject));
         Log.d(TAG, "values = " + new Gson().toJson(values));
 
-        CommonRepository commonRepository = context().commonrepository("child");
+        CommonRepository commonRepository = context().commonrepository("uzazi_salama_child");
         commonRepository.customInsert(values);
 
         CommonPersonObject c = commonRepository.findByCaseID(id);
@@ -378,9 +376,9 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
 
         Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
 
-        FormData formData = new FormData("child","/model/instance/Child/",formFields,null);
+        FormData formData = new FormData("uzazi_salama_child","/model/instance/Child/",formFields,null);
         FormInstance formInstance = new FormInstance(formData,"1");
-        FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"child",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
+        FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"uzazi_salama_child",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
         context().formDataRepository().saveFormSubmission(submission);
 
         Log.d(TAG,"submission content = "+ new Gson().toJson(submission));

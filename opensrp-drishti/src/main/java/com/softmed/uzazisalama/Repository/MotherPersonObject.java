@@ -13,7 +13,7 @@ import java.util.Map;
  */
 
 public class MotherPersonObject {
-    private String id,IS_PNC, IS_VALID, REG_TYPE, relationalId, MOTHERS_FIRST_NAME, MOTHERS_LAST_NAME, MOTHERS_SORTVALUE,
+    private String id,Is_PNC, IS_VALID, REG_TYPE, relationalId, MOTHERS_FIRST_NAME, MOTHERS_LAST_NAME, MOTHERS_SORTVALUE,
             EXPECTED_DELIVERY_DATE,CATCHMENT_AREA, MOTHERS_LAST_MENSTRUATION_DATE, FACILITY_ID,CreatedBy, ModifyBy, PNC_STATUS, MOTHERS_ID;
     private String details;
     private Map<String, String> columnMap;
@@ -45,7 +45,7 @@ public class MotherPersonObject {
         this.MOTHERS_LAST_MENSTRUATION_DATE = MOTHERS_LAST_MENSTRUATION_DATE;
         this.EXPECTED_DELIVERY_DATE = EXPECTED_DELIVERY_DATE;
         this.FACILITY_ID = FACILITY_ID;
-        this.IS_PNC = IS_PNC;
+        this.Is_PNC = IS_PNC;
         this.IS_VALID = IS_VALID;
         this.CATCHMENT_AREA = CATCHMENT_AREA;
         this.CreatedBy = CreatedBy;
@@ -70,7 +70,7 @@ public class MotherPersonObject {
 
         this.MOTHERS_SORTVALUE = "";
         this.REG_TYPE = pregnantMom.getReg_type();
-        this.IS_PNC = pregnantMom.getIs_pnc();
+        this.Is_PNC = pregnantMom.getIs_pnc();
         this.IS_VALID = pregnantMom.getIs_valid();
         this.FACILITY_ID = pregnantMom.getFacilityId();
         this.details = new Gson().toJson(pregnantMom);
@@ -153,11 +153,11 @@ public class MotherPersonObject {
     }
 
     public String getIS_PNC() {
-        return IS_PNC;
+        return Is_PNC;
     }
 
     public void setIS_PNC(String IS_PNC) {
-        this.IS_PNC = IS_PNC;
+        this.Is_PNC = IS_PNC;
     }
 
     public String getIS_VALID() {
@@ -205,7 +205,7 @@ public class MotherPersonObject {
     }
 
     public String IS_PNC() {
-        return IS_PNC;
+        return Is_PNC;
     }
 
     public String IS_VALID() {
