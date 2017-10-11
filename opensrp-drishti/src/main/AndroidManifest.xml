@@ -102,6 +102,8 @@
         <activity
             android:name="com.softmed.uzazisalama.PncDetailActivity"
             android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
+        <activity android:name="com.softmed.uzazisalama.util.FollowUpDetailActivity"
+            android:theme="@style/AppTheme.MaterialDesign.NoActionBar"/>
     </application>
 
 </manifest>
