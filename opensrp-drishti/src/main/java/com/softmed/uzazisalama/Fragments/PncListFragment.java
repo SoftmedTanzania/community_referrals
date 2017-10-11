@@ -213,7 +213,7 @@ public class PncListFragment extends SecuredNativeSmartRegisterCursorAdapterFrag
         view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
         view.findViewById(R.id.service_mode_selection).setVisibility(INVISIBLE);
         view.findViewById(R.id.register_client).setVisibility(GONE);
-        ((TextView)view.findViewById(R.id.title)).settext("PNC Mothers List");
+        ((TextView)view.findViewById(R.id.title)).setText("PNC Mothers List");
 
         ImageButton startregister = (ImageButton) view.findViewById(org.ei.opensrp.R.id.register_client);
         startregister.setVisibility(View.VISIBLE);
