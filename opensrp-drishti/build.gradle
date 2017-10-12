@@ -54,12 +54,12 @@ android {
     buildToolsVersion androidBuildToolsVersion
 
     defaultConfig {
-        applicationId "com.softmed.uzazisalama"
+        applicationId "org.ei.opensrp.drishti"
         minSdkVersion 16
         targetSdkVersion 22
 
-        versionCode 3
-        versionName "0.0.3"
+        versionCode 4
+        versionName "0.0.4"
 
 
         multiDexEnabled true
