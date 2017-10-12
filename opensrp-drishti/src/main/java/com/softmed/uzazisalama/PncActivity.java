@@ -102,7 +102,7 @@ public class PncActivity extends SecuredNativeSmartRegisterActivity implements L
     private android.content.Context appContext;
     private List<MotherPersonObject> motherPersonList = new ArrayList<>();
     private Cursor cursor;
-    private static final String TABLE_NAME = "wazazi_salama_mother";
+    private static final String TABLE_NAME = "uzazi_salama_pnc";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -283,48 +283,7 @@ public class PncActivity extends SecuredNativeSmartRegisterActivity implements L
 
     @Override
     public void startFormActivity(String formName, String entityId, String metaData) {
-        Log.d(TAG, "starting form = "+formName);
-        Log.d(TAG, "recordId form = "+entityId);
-
-        int formIndex = FormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
-        Log.d(TAG, "starting form index = "+formIndex);
-        mPager.setCurrentItem(formIndex, true);
-        try {
-            if (entityId != null || metaData != null) {
-                String data = null;
-                //check if there is previously saved data for the form
-                data = getPreviouslySavedDataForForm(formName, metaData, entityId);
-                if (data == null) {
-                    data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
-                }
-                if (formName.equals("pregnant_mothers_registration")) {
-                    AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) getDisplayFormFragmentAtIndex(formIndex);
-                    if (displayFormFragment != null) {
-                        Log.d(TAG, "form data = " + data);
-                        displayFormFragment.setFormData(data);
-                        displayFormFragment.setRecordId(entityId);
-                        displayFormFragment.setFieldOverides(metaData);
-
-                        if((displayFormFragment.getRegistrationType()).equals("2")){
-                            displayFormFragment.setEmptyDetails();
-                        }
-                    }
-                } else if(formName.equals("pregnant_mothers_pre_registration")){
-                    CHWPreRegisterFormFragment displayFormFragment = (CHWPreRegisterFormFragment) getDisplayFormFragmentAtIndex(formIndex);
-                    if (displayFormFragment != null) {
-                        Log.d(TAG, "form data = " + data);
-                        displayFormFragment.setFormData(data);
-                        displayFormFragment.setRecordId(entityId);
-                        displayFormFragment.setFieldOverides(metaData);
-                    }
-                    displayFormFragment.setEmptyDetails();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
+         }
 
 
     public void updateSearchView() {

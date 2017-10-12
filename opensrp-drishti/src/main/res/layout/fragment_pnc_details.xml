@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="0dp"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp">
+    <LinearLayout
+        android:id="@+id/mToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primary"
+        android:elevation="4dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/buttonHome"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="16dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:id="@+id/textToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Wazazi Waliojifunguwa"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/pre_reg_listView"
+        android:layout_marginTop="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</FrameLayout>

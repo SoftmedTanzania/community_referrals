@@ -23,7 +23,11 @@ import android.os.Build.VERSION_CODES;
 import android.util.Log;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
+
+import com.softmed.uzazisalama.Repository.ChildPersonObject;
 import com.softmed.uzazisalama.Repository.MotherPersonObject;
+import com.softmed.uzazisalama.Repository.PncPersonObject;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -101,7 +105,58 @@ public class Utils {
             return null;
         }
     }
+    public static PncPersonObject convertToPncPersonObject(CommonPersonObject commonPersonObject) {
+        String details = commonPersonObject.getColumnmaps().get("details");
+        Log.d(TAG, "details string = " + convertStandardJSONString(details));
+        try {
+            return new PncPersonObject(
+                    commonPersonObject.getColumnmaps().get("id"),
+                    commonPersonObject.getColumnmaps().get("relationalid"),
+                    commonPersonObject.getColumnmaps().get("childCaseId"),
+                    commonPersonObject.getColumnmaps().get("motherCaseId"),
+                    commonPersonObject.getColumnmaps().get("DELIVERY_TYPE"),
+                    commonPersonObject.getColumnmaps().get("DELIVERY_COMPLICATION"),
+                    commonPersonObject.getColumnmaps().get("DELIVERY_DATE"),
+                    commonPersonObject.getColumnmaps().get("ADMISSION_DATE"),
+                    commonPersonObject.getColumnmaps().get("details"),
+                    commonPersonObject.getColumnmaps().get("CreatedBy"),
+                    commonPersonObject.getColumnmaps().get("ModifyBy")
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
+    public static ChildPersonObject convertToChildPersonObject(CommonPersonObject commonPersonObject) {
+        String details = commonPersonObject.getColumnmaps().get("details");
+        Log.d(TAG, "details string = " + convertStandardJSONString(details));
+        try {
+            return new ChildPersonObject(
+                    commonPersonObject.getColumnmaps().get("id"),
+                    commonPersonObject.getColumnmaps().get("relationalid"),
+                    commonPersonObject.getColumnmaps().get("GENDER"),
+                    commonPersonObject.getColumnmaps().get("STATUS"),
+                    commonPersonObject.getColumnmaps().get("WEIGHT"),
+                    commonPersonObject.getColumnmaps().get("PROBLEM"),
+                    commonPersonObject.getColumnmaps().get("details"),
+                    commonPersonObject.getColumnmaps().get("CreatedBy"),
+                    commonPersonObject.getColumnmaps().get("ModifyBy")
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public static List<PncPersonObject> convertToPncPersonObjectList(List<CommonPersonObject> commonPersonObjectsList) {
+        List<PncPersonObject> mothers = new ArrayList<>();
+        for (CommonPersonObject common : commonPersonObjectsList) {
+            mothers.add(convertToPncPersonObject(common));
+        }
+
+
+        return mothers;
+    }
 
     public static List<MotherPersonObject> convertToMotherPersonObjectList(List<CommonPersonObject> commonPersonObjectsList) {
         List<MotherPersonObject> mothers = new ArrayList<>();

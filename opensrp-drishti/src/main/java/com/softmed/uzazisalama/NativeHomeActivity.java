@@ -329,16 +329,16 @@ public class NativeHomeActivity extends SecuredActivity {
                     break;
 
                 case R.id.btn_pnc_register:
-                    navigationController.startPNCActivity();
+                    navigationController1.startPNCActivity();
                     break;
-
+//
 //                case R.id.btn_chw_register:
 //                    navigationController1.startCHWSmartRegistry();
 //                    break;
 
-//                case R.id.btn_reporting:
-//                    navigationController.startFPSmartRegistry();
-//                    break;
+                case R.id.btn_reporting:
+                    navigationController.startFPSmartRegistry();
+                    break;
             }
         }
     };

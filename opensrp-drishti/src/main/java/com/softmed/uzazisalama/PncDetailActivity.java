@@ -7,23 +7,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.softmed.uzazisalama.DataModels.Child;
+import com.softmed.uzazisalama.DataModels.PncMother;
+import com.softmed.uzazisalama.DataModels.PregnantMom;
+
 import org.ei.opensrp.drishti.R;
 
 public class PncDetailActivity extends AppCompatActivity {
 
-    private TextView textName, textId, textAge, textGravida, textPara,
+    private static TextView textName, textId, textAge, textGravida, textPara,
             textDeliveryMethod, textProblemDuringDelivery, textMotherHealth,
             textBabyGender, textBabyWeight, textApgarScore, textBabyProblems, textBabyHealth;
     private LinearLayout layoutBBA;
     private CardView cardBabyDetails;
-
+    private  String gsonMom,gsonChild,gsonPncMom;
     private static final String TAG = PncDetailActivity.class.getSimpleName();
-
+    private PregnantMom mom;
+    private PncMother pncMother;
+    private Child child;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +73,7 @@ public class PncDetailActivity extends AppCompatActivity {
 
         setDetails();
 
+
     }
 
 
@@ -83,6 +92,9 @@ public class PncDetailActivity extends AppCompatActivity {
 
     private void setDetails() {
         // todo get from intent and set mother & baby details
+        gsonMom = getIntent().getStringExtra("mom");
+        gsonChild = getIntent().getStringExtra("child");
+        gsonPncMom = getIntent().getStringExtra("pncMom");
 
         boolean isBBA = false; // check from mother details if mimba imehibika or not
         if (isBBA) {
@@ -92,7 +104,42 @@ public class PncDetailActivity extends AppCompatActivity {
             cardBabyDetails.setVisibility(View.VISIBLE);
             layoutBBA.setVisibility(View.GONE);
         }
+        if (gsonMom != null) {
+            mom = new Gson().fromJson(gsonMom, PregnantMom.class);
+            setMotherProfileDetails();
+        }
+        if (gsonPncMom != null) {
+            pncMother = new Gson().fromJson(gsonPncMom, PncMother.class);
+            setPncProfileDetails();
+        }
+        if (gsonChild != null) {
+            child = new Gson().fromJson(gsonChild, Child.class);
+            setChildProfileDetails();
+        }
+
     }
 
+    public void setMotherProfileDetails(){
+        textName.setText(mom.getName());
+//        textAge.setText(mom.getAge());
+//        textAge.append("-Years Old");
+        textId.setText(mom.getId());
+    }
+    public void setChildProfileDetails(){
+        textBabyGender.setText(child.getGender());
+        textBabyHealth.setText(child.getStatus());
+        textBabyProblems.setText(child.getProblem());
+        textBabyWeight.setText(child.getWeight());
+        textApgarScore.setText(child.getApgarScore());
+
+    }
+    public void setPncProfileDetails(){
+        textDeliveryMethod.setText(pncMother.getDeliveryType());
+        textProblemDuringDelivery.setText(pncMother.getDeliveryComplication());
+        textMotherHealth.setText(pncMother.getMother_status());
+        textPara.setText(pncMother.getPara());
+        textGravida.setText(pncMother.getGravida());
+
+    }
 
 }
