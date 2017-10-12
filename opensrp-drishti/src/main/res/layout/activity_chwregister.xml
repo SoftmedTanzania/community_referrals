@@ -37,19 +37,5 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/fabDone"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|end"-->
-        <!--android:layout_margin="16dp"-->
-        <!--android:src="@drawable/ic_check"-->
-        <!--android:tint="@android:color/white"-->
 
-
-        <!--app:backgroundTint="?attr/colorAccent"-->
-        <!--app:elevation="6dp"-->
-        <!--app:fabSize="normal"-->
-        <!--app:pressedTranslationZ="14dp"-->
-        <!--app:rippleColor="@android:color/white" />-->
 </android.support.design.widget.CoordinatorLayout>

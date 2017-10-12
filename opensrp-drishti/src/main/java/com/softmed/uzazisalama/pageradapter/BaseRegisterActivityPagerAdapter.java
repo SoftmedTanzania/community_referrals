@@ -8,6 +8,8 @@ import android.util.Log;
 import com.softmed.uzazisalama.Fragments.AncRegisterFormFragment;
 import com.softmed.uzazisalama.Fragments.CHWPreRegisterFormFragment;
 import com.softmed.uzazisalama.Fragments.CHWSmartRegisterFragment;
+import com.softmed.uzazisalama.Fragments.PncListFragment;
+
 import org.ei.opensrp.view.fragment.DisplayFormFragment;
 
 /**
@@ -54,6 +56,10 @@ public class BaseRegisterActivityPagerAdapter extends FragmentPagerAdapter {
             case 3:
                 Log.d(TAG,"setting Chw women list fragment");
                 fragment = new CHWSmartRegisterFragment();
+                break;
+            case 4:
+                Log.d(TAG,"setting pnc women list fragment");
+                fragment = new PncListFragment();
                 break;
 
             default:

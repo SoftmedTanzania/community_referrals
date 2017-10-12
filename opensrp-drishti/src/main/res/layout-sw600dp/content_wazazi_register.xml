@@ -6,383 +6,392 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_wazazi_register">
-
     <LinearLayout
-        android:layout_width="400dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingTop="24dp">
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView1"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Taarifa za mama"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="Tarehe ya Kujifungua"
-                        android:textColor="@color/primary"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/card_pick_delivery_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_marginTop="16dp"
-
-                        app:cardBackgroundColor="@android:color/white"
-                        app:cardCornerRadius="2dp"
-                        app:cardElevation="2dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp">
-
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_marginLeft="4dp"
-                                android:src="@drawable/ic_calendar_today"
-                                android:tint="@color/primary" />
-
-                            <TextView
-                                android:id="@+id/textDeliveryDate"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginRight="16dp"
-                                android:hint="Weka tarehe"
-                                android:textColor="@color/primary"
-                                android:textColorHint="@color/hint_text"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-                    </android.support.v7.widget.CardView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tarehe ya kulazwa"
-                        android:textColor="@color/primary"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/card_pick_check_in_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_marginTop="16dp"
-
-                        app:cardBackgroundColor="@android:color/white"
-                        app:cardCornerRadius="2dp"
-                        app:cardElevation="2dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp">
-
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_marginLeft="4dp"
-                                android:src="@drawable/ic_calendar_today"
-                                android:tint="@color/primary" />
-
-                            <TextView
-                                android:id="@+id/textDateKulazwa"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginRight="16dp"
-                                android:hint="Weka tarehe"
-                                android:textColor="@color/primary"
-                                android:textColorHint="@color/hint_text"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-                    </android.support.v7.widget.CardView>
-                </LinearLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/gravida"
-                        android:layout_width="96dp"
-                        android:layout_height="wrap_content"
-                        android:hint="Gravida"
-                        android:textSize="15sp" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/para"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:hint="Para"
-                        android:textSize="15sp" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp">
-
-                    <EditText
-                        android:id="@+id/mothers_status"
-                        android:layout_width="350dp"
-                        android:layout_height="wrap_content"
-                        android:hint="Hali ya mama wakati anaruhusiwa"
-                        android:textSize="15sp" />
-
-                </android.support.design.widget.TextInputLayout>
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Matokeo ya Mimba"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp">
-
-                    <EditText
-                        android:id="@+id/bba"
-                        android:layout_width="350dp"
-                        android:layout_height="wrap_content"
-                        android:hint="BBA/Kuharibika Mimba"
-                        android:textSize="15sp" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp">
-
-                    <EditText
-                        android:id="@+id/njia_ya_kujifungua"
-                        android:layout_width="350dp"
-                        android:layout_height="wrap_content"
-                        android:hint="Njia ya Kujifungua"
-                        android:textSize="15sp" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp">
-
-                    <EditText
-                        android:id="@+id/delivery_problems"
-                        android:layout_width="350dp"
-                        android:layout_height="wrap_content"
-                        android:hint="Matatizo wakati wa kujifungua"
-                        android:textSize="15sp" />
-
-                </android.support.design.widget.TextInputLayout>
-
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Watoto waliozaliwa hai"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-                <Spinner
-                    android:id="@+id/gender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="-4dp"
-                    android:entries="@array/gender" />
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp">
-
-                    <EditText
-                        android:id="@+id/child_weight"
-                        android:layout_width="350dp"
-                        android:layout_height="wrap_content"
-                        android:hint="Uzito"
-                        android:inputType="numberDecimal"
-                        android:textSize="15sp" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp">
-
-                    <EditText
-                        android:id="@+id/apgar"
-                        android:layout_width="350dp"
-                        android:layout_height="wrap_content"
-                        android:hint="Apgar Score"
-                        android:textSize="15sp" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp">
-
-                    <EditText
-                        android:id="@+id/child_problems"
-                        android:layout_width="350dp"
-                        android:layout_height="wrap_content"
-                        android:hint="Matatizo ya mtoto"
-                        android:textSize="15sp" />
-
-                </android.support.design.widget.TextInputLayout>
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Hali ya mtoto wakati anaruhusiwa"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-                <RadioGroup
-                    android:id="@+id/child_status_radio_group"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/alive"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
-                        android:checked="true"
-                        android:text="Nzuri" />
-
-                    <RadioButton
-                        android:id="@+id/dead"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Amefariki" />
-                </RadioGroup>
+                android:layout_margin="16dp">
 
                 <LinearLayout
-                    android:id="@+id/hali_ya_mtoto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:padding="16dp"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Taarifa za mama"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Tarehe ya Kujifungua"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            android:textSize="14sp" />
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card_pick_delivery_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginBottom="16dp"
+
+                            app:cardBackgroundColor="@android:color/white"
+                            app:cardCornerRadius="2dp"
+                            app:cardElevation="2dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginLeft="4dp"
+                                    android:src="@drawable/ic_calendar_today"
+                                    android:tint="@color/primary" />
+
+                                <TextView
+                                    android:id="@+id/textDeliveryDate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_marginRight="16dp"
+                                    android:hint="Weka tarehe"
+                                    android:textColor="@color/primary"
+                                    android:textColorHint="@color/hint_text"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tarehe ya kulazwa"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            android:textSize="14sp" />
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card_pick_check_in_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginBottom="16dp"
+
+                            app:cardBackgroundColor="@android:color/white"
+                            app:cardCornerRadius="2dp"
+                            app:cardElevation="2dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginLeft="4dp"
+                                    android:src="@drawable/ic_calendar_today"
+                                    android:tint="@color/primary" />
+
+                                <TextView
+                                    android:id="@+id/textDateKulazwa"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_marginRight="16dp"
+                                    android:hint="Weka tarehe"
+                                    android:textColor="@color/primary"
+                                    android:textColorHint="@color/hint_text"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+                    </LinearLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/gravida"
+                            android:layout_width="96dp"
+                            android:textSize="15sp"
+                            android:layout_height="wrap_content"
+                            android:hint="Gravida" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/para"
+                            android:layout_width="150dp"
+                            android:textSize="15sp"
+                            android:layout_height="wrap_content"
+                            android:hint="Para" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_marginRight="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/mothers_status"
+                            android:textSize="15sp"
+                            android:layout_width="350dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Hali ya mama wakati anaruhusiwa" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+                <LinearLayout
+                    android:padding="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Matokeo ya Mimba"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_marginRight="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/bba"
+                            android:textSize="15sp"
+                            android:layout_width="350dp"
+                            android:layout_height="wrap_content"
+                            android:hint="BBA/Kuharibika Mimba" />
+
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_marginRight="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/njia_ya_kujifungua"
+                            android:textSize="15sp"
+                            android:layout_width="350dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Njia ya Kujifungua" />
+
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_marginRight="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/delivery_problems"
+                            android:textSize="15sp"
+                            android:layout_width="350dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Matatizo wakati wa kujifungua" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingTop="24dp">
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+                <LinearLayout
+                    android:padding="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Watoto waliozaliwa hai"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+                    <Spinner
+                        android:layout_marginLeft="-4dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Aina ya mtoto aliyezaliwa MFU"
-                        android:textSize="16sp" />
+                        android:entries="@array/gender"/>
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_marginRight="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/child_weight"
+                            android:textSize="15sp"
+                            android:layout_width="350dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Uzito"
+                            android:inputType="numberDecimal"/>
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_marginRight="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/apgar"
+                            android:textSize="15sp"
+                            android:layout_width="350dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Apgar Score"/>
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_marginRight="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/child_problems"
+                            android:textSize="15sp"
+                            android:layout_width="350dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Matatizo ya mtoto"/>
+
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hali ya mtoto wakati anaruhusiwa"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
                     <RadioGroup
-                        android:id="@+id/type_of_dead_child_radio_group"
+                        android:id="@+id/child_status_radio_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-
                         <RadioButton
-                            android:id="@+id/fbs"
+                            android:id="@+id/alive"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="16dp"
-                            android:text="FBS" />
-
+                            android:layout_marginRight="8dp"
+                            android:checked="true"
+                            android:text="Nzuri"/>
                         <RadioButton
-                            android:id="@+id/msb"
+                            android:id="@+id/dead"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="MSB" />
+                            android:text="Amefariki"/>
                     </RadioGroup>
+
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/hali_ya_mtoto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_marginTop="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:text="Aina ya mtoto aliyezaliwa MFU"/>
+                        <RadioGroup
+                            android:id="@+id/type_of_dead_child_radio_group"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <RadioButton
+                                android:id="@+id/fbs"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="16dp"
+                                android:text="FBS"/>
+                            <RadioButton
+                                android:id="@+id/msb"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="MSB"/>
+                        </RadioGroup>
+                    </LinearLayout>
+
+
+
                 </LinearLayout>
 
+            </android.support.v7.widget.CardView>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
 
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
+        </LinearLayout>
     </LinearLayout>
+
 
 </android.support.v4.widget.NestedScrollView>

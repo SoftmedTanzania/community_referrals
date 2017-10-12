@@ -65,8 +65,8 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
     public static long addmissionDate, deliveryDate;
     private static String childId;
     private PregnantMom pregnantMom;
-    private TextView textName, textId,
-            textAge, textDeliveryDate, textDateKulazwa;
+    private TextView textName, textId,textPhone,
+            textAge, textDeliveryDate, textDateKulazwa,textPhysicalAddress;
     private CardView cardPickCheckInDate, cardPickDeliveryDate;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private EditText editTextGravida, editTextMotherStatus, editTextPara, editTextNjiaYaKujifungua,
@@ -197,6 +197,8 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
         genderSpinner = (Spinner) findViewById(R.id.gender);
         childStatusRadioGroup = (RadioGroup) findViewById(R.id.child_status_radio_group);
         typeOfDeadChildRadioGroup = (RadioGroup) findViewById(R.id.type_of_dead_child_radio_group);
+        textPhysicalAddress = (TextView) findViewById(R.id.textPhysicalAddress);
+        textPhone = (TextView) findViewById(R.id.textPhone);
 
         cardPickDeliveryDate = (CardView) findViewById(R.id.card_pick_delivery_date);
         cardPickCheckInDate = (CardView) findViewById(R.id.card_pick_check_in_date);
@@ -246,6 +248,8 @@ public class WazaziRegisterActivity extends SecuredNativeSmartRegisterActivity {
         textId.setText("Mother ID : " + pregnantMom.getId());
         textAge.setText(String.valueOf(pregnantMom.getAge()) + " years");
 
+        textPhysicalAddress.setText(pregnantMom.getPhysicalAddress());
+        textPhone.setText(pregnantMom.getPhone());
     }
 
     private String getChild() {
