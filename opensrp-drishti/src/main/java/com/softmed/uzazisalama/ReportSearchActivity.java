@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import com.google.gson.Gson;
 import com.softmed.uzazisalama.DataModels.PregnantMom;
 
 import org.ei.opensrp.Context;
@@ -29,6 +30,8 @@ public class ReportSearchActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     MaterialSpinner spinnerType;
     ArrayAdapter<String> typeAdapter;
+
+    private Gson gson = new Gson();
 
     private final static String TAG = ReportSearchActivity.class.getSimpleName(),
             TABLE_ANC = "wazazi_salama_mother",
@@ -164,26 +167,27 @@ public class ReportSearchActivity extends AppCompatActivity {
 
     private List<PregnantMom> processCursorResult(Cursor cursor) {
 
-        List<PregnantMom> moms = new ArrayList<>();
-
         if (cursor.getCount() == 0) {
             Log.d(TAG, "Query result is empty!");
-            return moms;
+            return new ArrayList<>();
         }
         Log.d(TAG, "Result = " + cursor.getCount() + " rows.");
 
         try {
+            cursor.moveToFirst();
             switch (tableName) {
                 case TABLE_ANC:
+                    List<PregnantMom> pregnantMoms = new ArrayList<>();
                     while (!cursor.isAfterLast()) {
-                        // todo get anc mothers from query result and add them to
-                        int detailsIndex = cursor.getColumnIndex("details");
-                        Log.d(TAG, "details index: " + detailsIndex);
-                        String details = cursor.getString(detailsIndex);
+                        // get anc mothers from query result and add them to list
+                        String details = cursor.getString(cursor.getColumnIndex("details"));
                         Log.d(TAG, "column details = " + details);
+                        // add
+                        pregnantMoms.add(gson.fromJson(details, PregnantMom.class));
                         cursor.moveToNext();
                     }
-                    break;
+                    return pregnantMoms;
+
 
                 case TABLE_PNC:
                     while (!cursor.isAfterLast()) {
@@ -194,6 +198,7 @@ public class ReportSearchActivity extends AppCompatActivity {
                     }
                     break;
             }
+
         } catch (Exception e) {
             Log.d(TAG, "error: " + e.getMessage());
 
@@ -202,7 +207,7 @@ public class ReportSearchActivity extends AppCompatActivity {
         }
 
 
-        return moms;
+        return new ArrayList<>();
     }
 
 
