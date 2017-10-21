@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.RadioGroup;
 
 import com.google.gson.Gson;
 import com.softmed.uzazisalama.DataModels.PncMother;
@@ -34,6 +35,7 @@ public class ReportSearchActivity extends AppCompatActivity {
     AlertDialog.Builder dialogBuilder;
     MaterialSpinner spinnerType;
     ArrayAdapter<String> typeAdapter;
+    RadioGroup radioGroupMotherType;
 
     private Gson gson = new Gson();
 
@@ -56,12 +58,14 @@ public class ReportSearchActivity extends AppCompatActivity {
         actionBar.setTitle("Report Search");
 
 
-        typeAdapter = new ArrayAdapter<>(ReportSearchActivity.this,
-                android.R.layout.simple_spinner_dropdown_item, MOTHER_TYPES);
-        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        typeAdapter = new ArrayAdapter<>(ReportSearchActivity.this,
+//                android.R.layout.simple_spinner_dropdown_item, MOTHER_TYPES);
+//        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spinnerType = (MaterialSpinner) findViewById(R.id.spinnerType);
-        spinnerType.setAdapter(typeAdapter);
+//        spinnerType = (MaterialSpinner) findViewById(R.id.spinnerType);
+//        spinnerType.setAdapter(typeAdapter);
+
+        radioGroupMotherType = (RadioGroup) findViewById(R.id.radioGroupMotherType);
 
 
         progressDialog = new ProgressDialog(ReportSearchActivity.this);
@@ -87,23 +91,20 @@ public class ReportSearchActivity extends AppCompatActivity {
                 if (isQueryInitializationOk()) {
                     StringBuilder queryBuilder = new StringBuilder("SELECT * FROM ");
 
-                    if (spinnerType.getSelectedItemPosition() == 1) {
-                        // anc
-                        tableName = TABLE_ANC;
-                        queryBuilder.append(tableName).append(" WHERE Is_PNC = 'false' ");
-                    } else {
-                        // pnc
-                        tableName = TABLE_PNC;
-                        queryBuilder.append(tableName);
-                    }
-
-                    // choose which task to execute
-                    switch (tableName) {
-                        case TABLE_ANC:
+                    switch (radioGroupMotherType.getCheckedRadioButtonId()) {
+                        case R.id.radioTypeANC:
+                            // anc
+                            tableName = TABLE_ANC;
+                            queryBuilder.append(tableName).append(" WHERE Is_PNC = 'false' ");
+                            // execute query
                             new QueryAncTask().execute(queryBuilder.toString(), tableName);
                             break;
 
-                        case TABLE_PNC:
+                        case R.id.radioTypePNC:
+                            // pnc
+                            tableName = TABLE_PNC;
+                            queryBuilder.append(tableName);
+                            // execute query
                             new QueryPncTask().execute(queryBuilder.toString(), tableName);
                             break;
                     }
@@ -129,9 +130,9 @@ public class ReportSearchActivity extends AppCompatActivity {
 
 
     private boolean isQueryInitializationOk() {
-        if (spinnerType.getSelectedItemPosition() == 0) {
+        if (radioGroupMotherType.getCheckedRadioButtonId() == -1) {
             // nothing selected
-            makeSnackbar("Chagua ripoti unazohitaji kuona.");
+            makeSnackbar("Chagua ripoti unayohitaji kuona.");
             return false;
         }
 

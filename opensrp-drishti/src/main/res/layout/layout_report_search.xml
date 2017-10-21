@@ -1,29 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="?attr/actionBarSize"
-    android:orientation="vertical">
+    android:layout_marginTop="?attr/actionBarSize">
 
-
-    <fr.ganfra.materialspinner.MaterialSpinner
-        android:id="@+id/spinnerType"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
+        android:orientation="vertical">
 
-        app:ms_arrowColor="@color/accent"
-        app:ms_arrowSize="14dp"
-        app:ms_baseColor="@color/accent"
-        app:ms_enableFloatingLabel="false"
-        app:ms_hint="Chagua waja wazito/walio jifungua"
-        app:ms_hintColor="@color/hint_text"
-        app:ms_multiline="false"
-        app:ms_thickness="1dp"
-        app:paddingEnd="16dp"
-        app:paddingStart="16dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:text="Chagua aina ya ripoti kutokana na taarifa zifautazo"
+            android:textAllCaps="true"
+            android:textColor="@color/primary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-</LinearLayout>
+        <RadioGroup
+            android:id="@+id/radioGroupMotherType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp">
+
+            <RadioButton
+                android:id="@+id/radioTypeANC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:text="Mama Waja Wazito"
+                android:textColor="@color/secondary_text"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioTypePNC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:text="Mama Waliojifungua"
+                android:textColor="@color/secondary_text"
+                android:textSize="16sp" />
+        </RadioGroup>
+
+        <!--<fr.ganfra.materialspinner.MaterialSpinner-->
+        <!--android:id="@+id/spinnerType"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:layout_marginTop="16dp"-->
+
+        <!--app:ms_arrowColor="@color/accent"-->
+        <!--app:ms_arrowSize="14dp"-->
+        <!--app:ms_baseColor="@color/accent"-->
+        <!--app:ms_enableFloatingLabel="false"-->
+        <!--app:ms_hint="Chagua waja wazito/walio jifungua"-->
+        <!--app:ms_hintColor="@color/hint_text"-->
+        <!--app:ms_multiline="false"-->
+        <!--app:ms_thickness="1dp"-->
+        <!--app:paddingEnd="16dp"-->
+        <!--app:paddingStart="16dp" />-->
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="128dp"
+            android:clickable="false"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
