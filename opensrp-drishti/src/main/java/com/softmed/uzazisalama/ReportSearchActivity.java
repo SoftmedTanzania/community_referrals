@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.support.annotation.IdRes;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
 import com.google.gson.Gson;
@@ -35,7 +37,8 @@ public class ReportSearchActivity extends AppCompatActivity {
     AlertDialog.Builder dialogBuilder;
     MaterialSpinner spinnerType;
     ArrayAdapter<String> typeAdapter;
-    RadioGroup radioGroupMotherType;
+    RadioGroup radioGroupMotherType, radioGroupRiskStatus, radioGroupDeliveryResult;
+    LinearLayout layoutRiskStatus, layoutDeliveryStatus;
 
     private Gson gson = new Gson();
 
@@ -66,7 +69,27 @@ public class ReportSearchActivity extends AppCompatActivity {
 //        spinnerType.setAdapter(typeAdapter);
 
         radioGroupMotherType = (RadioGroup) findViewById(R.id.radioGroupMotherType);
+        radioGroupRiskStatus = (RadioGroup) findViewById(R.id.radioGroupRiskStatus);
+        radioGroupDeliveryResult = (RadioGroup) findViewById(R.id.radioGroupDeliveryResult);
+        layoutRiskStatus = (LinearLayout) findViewById(R.id.layoutRiskStatus);
+        layoutRiskStatus.setVisibility(View.GONE);
+        layoutDeliveryStatus = (LinearLayout) findViewById(R.id.layoutDeliveryStatus);
+        layoutDeliveryStatus.setVisibility(View.GONE);
 
+
+        radioGroupMotherType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int id) {
+                if (id == R.id.radioTypeANC) {
+                    layoutRiskStatus.setVisibility(View.VISIBLE);
+                    layoutDeliveryStatus.setVisibility(View.GONE);
+
+                } else if (id == R.id.radioTypePNC) {
+                    layoutDeliveryStatus.setVisibility(View.VISIBLE);
+                    layoutRiskStatus.setVisibility(View.GONE);
+                }
+            }
+        });
 
         progressDialog = new ProgressDialog(ReportSearchActivity.this);
         progressDialog.setCancelable(false);
@@ -97,7 +120,10 @@ public class ReportSearchActivity extends AppCompatActivity {
                             tableName = TABLE_ANC;
                             queryBuilder.append(tableName).append(" WHERE Is_PNC = 'false' ");
                             // execute query
-                            new QueryAncTask().execute(queryBuilder.toString(), tableName);
+                            new QueryAncTask().execute(
+                                    queryBuilder.toString(),
+                                    tableName,
+                                    getRiskStatus());
                             break;
 
                         case R.id.radioTypePNC:
@@ -105,7 +131,10 @@ public class ReportSearchActivity extends AppCompatActivity {
                             tableName = TABLE_PNC;
                             queryBuilder.append(tableName);
                             // execute query
-                            new QueryPncTask().execute(queryBuilder.toString(), tableName);
+                            new QueryPncTask().execute(
+                                    queryBuilder.toString(),
+                                    tableName,
+                                    getDeliveryResult());
                             break;
                     }
                 }
@@ -139,6 +168,22 @@ public class ReportSearchActivity extends AppCompatActivity {
         return true;
     }
 
+    private String getRiskStatus() {
+        return radioGroupRiskStatus.getCheckedRadioButtonId() == R.id.radioYesOnRisk ? "yes" :
+                radioGroupRiskStatus.getCheckedRadioButtonId() == R.id.radioNotOnRisk ? "no" :
+                        "n/a";
+        // the last one means no radio check so will show all mothers
+        // without filtering by using their risk status
+    }
+
+    private String getDeliveryResult() {
+        return radioGroupDeliveryResult.getCheckedRadioButtonId() == R.id.radioSuccessfulDelivery ? "yes" :
+                radioGroupDeliveryResult.getCheckedRadioButtonId() == R.id.radioUnsuccessfulDelivery ? "no" :
+                        "n/a";
+        // the last one means no radio check so will show all mothers
+        // without filtering by using their delivery result
+    }
+
 
     private class QueryAncTask extends AsyncTask<String, Void, List<PregnantMom>> {
 
@@ -147,8 +192,9 @@ public class ReportSearchActivity extends AppCompatActivity {
             publishProgress();
             String query = params[0];
             String tableName = params[1];
+            String riskStatus = params[2];
             Log.d(TAG, "query = " + query);
-            Log.d(TAG, "tableName = " + tableName);
+            Log.d(TAG, "tableName = " + tableName + ", riskStatus = " + riskStatus);
 
             Context context = Context.getInstance().updateApplicationContext(getApplicationContext());
             CommonRepository commonRepository = context.commonrepository(tableName);
@@ -215,8 +261,9 @@ public class ReportSearchActivity extends AppCompatActivity {
             publishProgress();
             String query = params[0];
             String tableName = params[1];
+            String deliveryStatus = params[2];
             Log.d(TAG, "query = " + query);
-            Log.d(TAG, "tableName = " + tableName);
+            Log.d(TAG, "tableName = " + tableName + ", deliveryStatus =  " + deliveryStatus);
 
             Context context = Context.getInstance().updateApplicationContext(getApplicationContext());
             CommonRepository commonRepository = context.commonrepository(tableName);
