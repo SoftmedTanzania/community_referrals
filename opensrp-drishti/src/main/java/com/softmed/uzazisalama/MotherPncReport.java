@@ -15,32 +15,45 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.softmed.uzazisalama.DataModels.PncMother;
 import com.softmed.uzazisalama.DataModels.PregnantMom;
-import com.softmed.uzazisalama.util.Utils;
 
-import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.drishti.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MotherPncReport extends AppCompatActivity {
     private PregnantMom pregnantMom;
-    private List<PregnantMom> moms;
+    private List<Object> motherList;
 
     private Gson gson = new Gson();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.table);
 
-        moms = (ArrayList<PregnantMom>) getIntent().getSerializableExtra("mom");
+        String gsonMoms = getIntent().getStringExtra("moms");
+        String type = getIntent().getStringExtra("type");
+
+        if (type.equals("anc"))
+            motherList = gson.fromJson(gsonMoms, new TypeToken<List<PregnantMom>>() {
+            }.getType());
+
+        else {
+            motherList = gson.fromJson(gsonMoms, new TypeToken<List<PncMother>>() {
+            }.getType());
+        }
+
+        Log.d("MotherPncReport", "list count = " + motherList.size());
+
         fillTable();
     }
 
 
     public void fillTable() {
-        int rowCount = moms.size();
+        int rowCount = motherList.size();
         Log.d("Fill Table", "rowCount = " + rowCount);
         TableLayout table = (TableLayout) this.findViewById(R.id.tablelayout);
         for (int i = 0; i < rowCount; i++) {

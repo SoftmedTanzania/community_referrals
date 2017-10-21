@@ -261,11 +261,12 @@ public class ReportSearchActivity extends AppCompatActivity {
 
             else if (resultList.size() > 0) {
                 Log.d(TAG, "resultList " + resultList.size());
-                makeSnackbar("Result: " + resultList.size() + " items.");
-                Intent intent =new Intent(getApplication(), MotherPncReport.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("mom", resultList);
-                getApplication().startActivity(intent);
+                //  makeSnackbar("Result: " + resultList.size() + " items.");
+                Intent reportIntent = new Intent(ReportSearchActivity.this, MotherPncReport.class);
+                reportIntent.putExtra("moms", gson.toJson(resultList));
+                reportIntent.putExtra("type", "anc");
+                startActivity(reportIntent);
+
             } else {
                 Log.d(TAG, "Query result is empty!");
                 showDialog(getString(R.string.no_results_found));
