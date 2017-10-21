@@ -1,10 +1,12 @@
 package com.softmed.uzazisalama;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import com.google.gson.Gson;
+import com.softmed.uzazisalama.DataModels.PncMother;
 import com.softmed.uzazisalama.DataModels.PregnantMom;
 
 import org.ei.opensrp.Context;
@@ -28,6 +31,7 @@ import fr.ganfra.materialspinner.MaterialSpinner;
 public class ReportSearchActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
+    AlertDialog.Builder dialogBuilder;
     MaterialSpinner spinnerType;
     ArrayAdapter<String> typeAdapter;
 
@@ -65,6 +69,14 @@ public class ReportSearchActivity extends AppCompatActivity {
         progressDialog.setMessage("Tafadhali subiri....");
         progressDialog.setIndeterminate(true);
 
+        dialogBuilder = new AlertDialog.Builder(ReportSearchActivity.this);
+        dialogBuilder.setCancelable(true)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
 
         // fab listener
         findViewById(R.id.fabSearch).setOnClickListener(new View.OnClickListener() {
@@ -85,9 +97,16 @@ public class ReportSearchActivity extends AppCompatActivity {
                         queryBuilder.append(tableName);
                     }
 
+                    // choose which task to execute
+                    switch (tableName) {
+                        case TABLE_ANC:
+                            new QueryAncTask().execute(queryBuilder.toString(), tableName);
+                            break;
 
-                    // execute task
-                    new QueryTask().execute(queryBuilder.toString(), tableName);
+                        case TABLE_PNC:
+                            new QueryPncTask().execute(queryBuilder.toString(), tableName);
+                            break;
+                    }
                 }
             }
         });
@@ -110,8 +129,9 @@ public class ReportSearchActivity extends AppCompatActivity {
 
 
     private boolean isQueryInitializationOk() {
-        if (spinnerType.getSelectedItemPosition() == -1) {
+        if (spinnerType.getSelectedItemPosition() == 0) {
             // nothing selected
+            makeSnackbar("Chagua ripoti unazohitaji kuona.");
             return false;
         }
 
@@ -119,16 +139,10 @@ public class ReportSearchActivity extends AppCompatActivity {
     }
 
 
-    private class QueryTask extends AsyncTask<String, Void, List<PregnantMom>> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
+    private class QueryAncTask extends AsyncTask<String, Void, List<PregnantMom>> {
 
         @Override
         protected List<PregnantMom> doInBackground(String... params) {
-            // todo run query
             publishProgress();
             String query = params[0];
             String tableName = params[1];
@@ -139,8 +153,28 @@ public class ReportSearchActivity extends AppCompatActivity {
             CommonRepository commonRepository = context.commonrepository(tableName);
             Cursor cursor = commonRepository.RawCustomQueryForAdapter(query);
 
+            // obtains mothers from result
+            List<PregnantMom> pregnantMoms = new ArrayList<>();
+            try {
+                if (cursor.moveToFirst()) {
+                    while (!cursor.isAfterLast()) {
+                        // get anc mothers from query result and add them to list
+                        String details = cursor.getString(cursor.getColumnIndex("details"));
+                        Log.d(TAG, "column details = " + details);
+                        // convert and add to list
+                        pregnantMoms.add(gson.fromJson(details, PregnantMom.class));
+                        cursor.moveToNext();
+                    }
+                }
+            } catch (Exception e) {
+                Log.d(TAG, "error: " + e.getMessage());
+                return null;
 
-            return processCursorResult(cursor);
+            } finally {
+                cursor.close();
+            }
+
+            return pregnantMoms;
         }
 
         @Override
@@ -154,60 +188,90 @@ public class ReportSearchActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<PregnantMom> resultList) {
             super.onPostExecute(resultList);
-            // todo hide progress and process the result
-            Log.d(TAG, "resultList " + resultList.size());
-
+            // hide progress and process the result
             if (progressDialog.isShowing())
                 progressDialog.dismiss();
 
-            makeSnackbar("Result: " + resultList.size() + " items.");
+            if (resultList == null)
+                showDialog(getString(R.string.failed_please_try_again));
+
+            else if (resultList.size() > 0) {
+                Log.d(TAG, "resultList " + resultList.size());
+                makeSnackbar("Result: " + resultList.size() + " items.");
+
+            } else {
+                Log.d(TAG, "Query result is empty!");
+                showDialog(getString(R.string.no_results_found));
+            }
         }
     }
 
 
-    private List<PregnantMom> processCursorResult(Cursor cursor) {
+    private class QueryPncTask extends AsyncTask<String, Void, List<PncMother>> {
 
-        if (cursor.getCount() == 0) {
-            Log.d(TAG, "Query result is empty!");
-            return new ArrayList<>();
-        }
-        Log.d(TAG, "Result = " + cursor.getCount() + " rows.");
+        @Override
+        protected List<PncMother> doInBackground(String... params) {
+            publishProgress();
+            String query = params[0];
+            String tableName = params[1];
+            Log.d(TAG, "query = " + query);
+            Log.d(TAG, "tableName = " + tableName);
 
-        try {
-            cursor.moveToFirst();
-            switch (tableName) {
-                case TABLE_ANC:
-                    List<PregnantMom> pregnantMoms = new ArrayList<>();
+            Context context = Context.getInstance().updateApplicationContext(getApplicationContext());
+            CommonRepository commonRepository = context.commonrepository(tableName);
+            Cursor cursor = commonRepository.RawCustomQueryForAdapter(query);
+
+            // obtains mothers from result
+            List<PncMother> pncMoms = new ArrayList<>();
+            try {
+                if (cursor.moveToFirst()) {
                     while (!cursor.isAfterLast()) {
                         // get anc mothers from query result and add them to list
                         String details = cursor.getString(cursor.getColumnIndex("details"));
                         Log.d(TAG, "column details = " + details);
-                        // add
-                        pregnantMoms.add(gson.fromJson(details, PregnantMom.class));
+                        // convert and add to list
+                        pncMoms.add(gson.fromJson(details, PncMother.class));
                         cursor.moveToNext();
                     }
-                    return pregnantMoms;
+                }
+            } catch (Exception e) {
+                Log.d(TAG, "error: " + e.getMessage());
+                return null;
 
-
-                case TABLE_PNC:
-                    while (!cursor.isAfterLast()) {
-                        // todo get pnc mothers from query result and add them to list
-                        String details = cursor.getString(cursor.getColumnIndex("details"));
-                        Log.d(TAG, "column details = " + details);
-                        cursor.moveToNext();
-                    }
-                    break;
+            } finally {
+                cursor.close();
             }
 
-        } catch (Exception e) {
-            Log.d(TAG, "error: " + e.getMessage());
-
-        } finally {
-            cursor.close();
+            return pncMoms;
         }
 
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+            // show progress
+            if (!progressDialog.isShowing())
+                progressDialog.show();
+        }
 
-        return new ArrayList<>();
+        @Override
+        protected void onPostExecute(List<PncMother> resultList) {
+            super.onPostExecute(resultList);
+            // hide progress and process the result
+            if (progressDialog.isShowing())
+                progressDialog.dismiss();
+
+            if (resultList == null)
+                showDialog(getString(R.string.failed_please_try_again));
+
+            else if (resultList.size() > 0) {
+                Log.d(TAG, "resultList " + resultList.size());
+                makeSnackbar("Result: " + resultList.size() + " items.");
+
+            } else {
+                Log.d(TAG, "Query result is empty!");
+                showDialog(getString(R.string.no_results_found));
+            }
+        }
     }
 
 
@@ -216,5 +280,10 @@ public class ReportSearchActivity extends AppCompatActivity {
                 message,
                 3000).show();
 
+    }
+
+
+    private void showDialog(String message) {
+        dialogBuilder.setMessage(message).create().show();
     }
 }
