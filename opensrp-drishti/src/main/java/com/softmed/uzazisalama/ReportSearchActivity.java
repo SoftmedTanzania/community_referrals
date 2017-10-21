@@ -2,6 +2,7 @@ package com.softmed.uzazisalama;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
@@ -36,7 +37,7 @@ public class ReportSearchActivity extends AppCompatActivity {
     MaterialSpinner spinnerType;
     ArrayAdapter<String> typeAdapter;
     RadioGroup radioGroupMotherType;
-
+    List<String> moms= new ArrayList<>();;
     private Gson gson = new Gson();
 
     private final static String TAG = ReportSearchActivity.class.getSimpleName(),
@@ -198,8 +199,12 @@ public class ReportSearchActivity extends AppCompatActivity {
 
             else if (resultList.size() > 0) {
                 Log.d(TAG, "resultList " + resultList.size());
+                Log.d(TAG, "resultList " + gson.toJson(resultList));
                 makeSnackbar("Result: " + resultList.size() + " items.");
-
+                Intent intent =new Intent(getApplication(), MotherPncReport.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("mom", gson.toJson(resultList));
+                getApplication().startActivity(intent);
             } else {
                 Log.d(TAG, "Query result is empty!");
                 showDialog(getString(R.string.no_results_found));
