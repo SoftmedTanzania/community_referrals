@@ -2,6 +2,7 @@ package com.softmed.uzazisalama;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.annotation.IdRes;
@@ -261,7 +262,10 @@ public class ReportSearchActivity extends AppCompatActivity {
             else if (resultList.size() > 0) {
                 Log.d(TAG, "resultList " + resultList.size());
                 makeSnackbar("Result: " + resultList.size() + " items.");
-
+                Intent intent =new Intent(getApplication(), MotherPncReport.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("mom", resultList);
+                getApplication().startActivity(intent);
             } else {
                 Log.d(TAG, "Query result is empty!");
                 showDialog(getString(R.string.no_results_found));

@@ -24,6 +24,7 @@ import android.util.Log;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 
+import com.softmed.uzazisalama.DataModels.PregnantMom;
 import com.softmed.uzazisalama.Repository.ChildPersonObject;
 import com.softmed.uzazisalama.Repository.MotherPersonObject;
 import com.softmed.uzazisalama.Repository.PncPersonObject;
@@ -48,7 +49,7 @@ import java.util.UUID;
  */
 public class Utils {
     private static final String TAG = Utils.class.getSimpleName();
-
+private static PregnantMom mom;
     private Utils() {
     }
 
@@ -152,6 +153,15 @@ public class Utils {
         List<PncPersonObject> mothers = new ArrayList<>();
         for (CommonPersonObject common : commonPersonObjectsList) {
             mothers.add(convertToPncPersonObject(common));
+        }
+
+
+        return mothers;
+    }
+    public static List<PregnantMom> convertToPregnantMomList(List<CommonPersonObject> commonPersonObjectsList) {
+        List<PregnantMom> mothers = new ArrayList<>();
+        for (CommonPersonObject common : commonPersonObjectsList) {
+//            mothers.add(convertToPncPersonObject(common));
         }
 
 
