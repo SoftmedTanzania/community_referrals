@@ -30,7 +30,7 @@ import java.util.List;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 
-public class ReportSearchActivity extends AppCompatActivity {
+public class ReportSearchActivity extends AppCompatActivity implements java.io.Serializable  {
 
     ProgressDialog progressDialog;
     AlertDialog.Builder dialogBuilder;
@@ -141,10 +141,10 @@ public class ReportSearchActivity extends AppCompatActivity {
     }
 
 
-    private class QueryAncTask extends AsyncTask<String, Void, List<PregnantMom>> {
+    private class QueryAncTask extends AsyncTask<String, Void, ArrayList<PregnantMom>> {
 
         @Override
-        protected List<PregnantMom> doInBackground(String... params) {
+        protected ArrayList<PregnantMom> doInBackground(String... params) {
             publishProgress();
             String query = params[0];
             String tableName = params[1];
@@ -156,7 +156,7 @@ public class ReportSearchActivity extends AppCompatActivity {
             Cursor cursor = commonRepository.RawCustomQueryForAdapter(query);
 
             // obtains mothers from result
-            List<PregnantMom> pregnantMoms = new ArrayList<>();
+            ArrayList<PregnantMom> pregnantMoms = new ArrayList<>();
             try {
                 if (cursor.moveToFirst()) {
                     while (!cursor.isAfterLast()) {
@@ -188,7 +188,7 @@ public class ReportSearchActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<PregnantMom> resultList) {
+        protected void onPostExecute(ArrayList<PregnantMom> resultList) {
             super.onPostExecute(resultList);
             // hide progress and process the result
             if (progressDialog.isShowing())
@@ -203,7 +203,7 @@ public class ReportSearchActivity extends AppCompatActivity {
                 makeSnackbar("Result: " + resultList.size() + " items.");
                 Intent intent =new Intent(getApplication(), MotherPncReport.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("mom", gson.toJson(resultList));
+                intent.putExtra("mom", resultList);
                 getApplication().startActivity(intent);
             } else {
                 Log.d(TAG, "Query result is empty!");
