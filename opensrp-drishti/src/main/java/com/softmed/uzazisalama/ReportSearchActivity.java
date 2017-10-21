@@ -209,7 +209,23 @@ public class ReportSearchActivity extends AppCompatActivity {
                         String details = cursor.getString(cursor.getColumnIndex("details"));
                         Log.d(TAG, "column details = " + details);
                         // convert and add to list
-                        pregnantMoms.add(gson.fromJson(details, PregnantMom.class));
+                        if (riskStatus.equals("n/a"))
+                            // add all
+                            pregnantMoms.add(gson.fromJson(details, PregnantMom.class));
+
+                        else if (riskStatus.equals("yes")) {
+                            // add mothers on risk
+                            PregnantMom mom = gson.fromJson(details, PregnantMom.class);
+                            if (mom.isOnRisk())
+                                pregnantMoms.add(mom);
+
+                        } else if (riskStatus.equals("no")) {
+                            // add mothers not on risk
+                            PregnantMom mom = gson.fromJson(details, PregnantMom.class);
+                            if (!mom.isOnRisk())
+                                pregnantMoms.add(mom);
+                        }
+
                         cursor.moveToNext();
                     }
                 }
