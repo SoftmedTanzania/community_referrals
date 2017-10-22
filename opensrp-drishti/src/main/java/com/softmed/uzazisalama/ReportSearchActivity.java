@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -62,14 +63,14 @@ public class ReportSearchActivity extends AppCompatActivity {
         actionBar.setTitle("Report Search");
 
 
-//        typeAdapter = new ArrayAdapter<>(ReportSearchActivity.this,
-//                android.R.layout.simple_spinner_dropdown_item, MOTHER_TYPES);
-//        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeAdapter = new ArrayAdapter<>(ReportSearchActivity.this,
+                android.R.layout.simple_spinner_dropdown_item, MOTHER_TYPES);
+        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-//        spinnerType = (MaterialSpinner) findViewById(R.id.spinnerType);
-//        spinnerType.setAdapter(typeAdapter);
+        spinnerType = (MaterialSpinner) findViewById(R.id.spinnerType);
+        spinnerType.setAdapter(typeAdapter);
 
-        radioGroupMotherType = (RadioGroup) findViewById(R.id.radioGroupMotherType);
+        // radioGroupMotherType = (RadioGroup) findViewById(R.id.radioGroupMotherType);
         radioGroupRiskStatus = (RadioGroup) findViewById(R.id.radioGroupRiskStatus);
         radioGroupDeliveryResult = (RadioGroup) findViewById(R.id.radioGroupDeliveryResult);
         layoutRiskStatus = (LinearLayout) findViewById(R.id.layoutRiskStatus);
@@ -78,17 +79,42 @@ public class ReportSearchActivity extends AppCompatActivity {
         layoutDeliveryStatus.setVisibility(View.GONE);
 
 
-        radioGroupMotherType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int id) {
-                if (id == R.id.radioTypeANC) {
-                    layoutRiskStatus.setVisibility(View.VISIBLE);
-                    layoutDeliveryStatus.setVisibility(View.GONE);
+//        radioGroupMotherType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int id) {
+//                if (id == R.id.radioTypeANC) {
+//                    layoutRiskStatus.setVisibility(View.VISIBLE);
+//                    layoutDeliveryStatus.setVisibility(View.GONE);
+//
+//                } else if (id == R.id.radioTypePNC) {
+//                    layoutDeliveryStatus.setVisibility(View.VISIBLE);
+//                    layoutRiskStatus.setVisibility(View.GONE);
+//                }
+//            }
+//        });
 
-                } else if (id == R.id.radioTypePNC) {
-                    layoutDeliveryStatus.setVisibility(View.VISIBLE);
+        spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d(TAG, "onItemSelected index = " + i);
+
+                if (i == 0) {
+                    layoutDeliveryStatus.setVisibility(View.GONE);
+                    layoutRiskStatus.setVisibility(View.VISIBLE);
+                } else if (i == 1) {
                     layoutRiskStatus.setVisibility(View.GONE);
+                    layoutDeliveryStatus.setVisibility(View.VISIBLE);
+                } else {
+                    if (layoutRiskStatus.getVisibility() == View.VISIBLE)
+                        layoutRiskStatus.setVisibility(View.GONE);
+
+                    if (layoutDeliveryStatus.getVisibility() == View.VISIBLE)
+                        layoutDeliveryStatus.setVisibility(View.GONE);
                 }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
 
@@ -110,13 +136,39 @@ public class ReportSearchActivity extends AppCompatActivity {
         findViewById(R.id.fabSearch).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //todo build query string and  initiate query async task
+                // build query string and  initiate query async task
+                Log.d(TAG, "Selected item position = " + spinnerType.getSelectedItemPosition());
 
                 if (isQueryInitializationOk()) {
                     StringBuilder queryBuilder = new StringBuilder("SELECT * FROM ");
 
-                    switch (radioGroupMotherType.getCheckedRadioButtonId()) {
-                        case R.id.radioTypeANC:
+//                    switch (radioGroupMotherType.getCheckedRadioButtonId()) {
+//                        case R.id.radioTypeANC:
+//                            // anc
+//                            tableName = TABLE_ANC;
+//                            queryBuilder.append(tableName).append(" WHERE Is_PNC = 'false' ");
+//                            // execute query
+//                            new QueryAncTask().execute(
+//                                    queryBuilder.toString(),
+//                                    tableName,
+//                                    getRiskStatus());
+//                            break;
+//
+//                        case R.id.radioTypePNC:
+//                            // pnc
+//                            tableName = TABLE_PNC;
+//                            queryBuilder.append(tableName);
+//                            // execute query
+//                            new QueryPncTask().execute(
+//                                    queryBuilder.toString(),
+//                                    tableName,
+//                                    getDeliveryResult());
+//                            break;
+//                    }
+
+
+                    switch (spinnerType.getSelectedItemPosition()) {
+                        case 1:
                             // anc
                             tableName = TABLE_ANC;
                             queryBuilder.append(tableName).append(" WHERE Is_PNC = 'false' ");
@@ -127,7 +179,7 @@ public class ReportSearchActivity extends AppCompatActivity {
                                     getRiskStatus());
                             break;
 
-                        case R.id.radioTypePNC:
+                        case 2:
                             // pnc
                             tableName = TABLE_PNC;
                             queryBuilder.append(tableName);
@@ -160,7 +212,7 @@ public class ReportSearchActivity extends AppCompatActivity {
 
 
     private boolean isQueryInitializationOk() {
-        if (radioGroupMotherType.getCheckedRadioButtonId() == -1) {
+        if (spinnerType.getSelectedItemPosition() == 0) {
             // nothing selected
             makeSnackbar("Chagua ripoti unayohitaji kuona.");
             return false;
@@ -173,15 +225,15 @@ public class ReportSearchActivity extends AppCompatActivity {
         return radioGroupRiskStatus.getCheckedRadioButtonId() == R.id.radioYesOnRisk ? "yes" :
                 radioGroupRiskStatus.getCheckedRadioButtonId() == R.id.radioNotOnRisk ? "no" :
                         "n/a";
-        // the last one means no radio check so will show all mothers
+        // the last one means radio for "all" is checked so will show all mothers
         // without filtering by using their risk status
     }
 
     private String getDeliveryResult() {
-        return radioGroupDeliveryResult.getCheckedRadioButtonId() == R.id.radioSuccessfulDelivery ? "yes" :
-                radioGroupDeliveryResult.getCheckedRadioButtonId() == R.id.radioUnsuccessfulDelivery ? "no" :
-                        "n/a";
-        // the last one means no radio check so will show all mothers
+        return radioGroupDeliveryResult.getCheckedRadioButtonId() == R.id.radioSuccessfulDelivery ? "yes"
+                : radioGroupDeliveryResult.getCheckedRadioButtonId() == R.id.radioUnsuccessfulDelivery ? "no" :
+                "n/a";
+        // the last one means radio for "all" is checked so will show all mothers
         // without filtering by using their delivery result
     }
 
