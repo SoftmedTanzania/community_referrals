@@ -5,8 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
-import android.support.annotation.IdRes;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -23,12 +23,14 @@ import android.widget.RadioGroup;
 import com.google.gson.Gson;
 import com.softmed.uzazisalama.DataModels.PncMother;
 import com.softmed.uzazisalama.DataModels.PregnantMom;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.R;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
@@ -334,9 +336,9 @@ public class ReportSearchActivity extends AppCompatActivity {
             publishProgress();
             String query = params[0];
             String tableName = params[1];
-            String deliveryStatus = params[2];
+            String deliveryResult = params[2];
             Log.d(TAG, "query = " + query);
-            Log.d(TAG, "tableName = " + tableName + ", deliveryStatus =  " + deliveryStatus);
+            Log.d(TAG, "tableName = " + tableName + ", deliveryResult =  " + deliveryResult);
 
             Context context = Context.getInstance().updateApplicationContext(getApplicationContext());
             CommonRepository commonRepository = context.commonrepository(tableName);
@@ -351,7 +353,19 @@ public class ReportSearchActivity extends AppCompatActivity {
                         String details = cursor.getString(cursor.getColumnIndex("details"));
                         Log.d(TAG, "column details = " + details);
                         // convert and add to list
-                        pncMoms.add(gson.fromJson(details, PncMother.class));
+                        if (deliveryResult.equals("n/a"))
+                            // add all
+                            pncMoms.add(gson.fromJson(details, PncMother.class));
+
+                        else if (deliveryResult.equals("yes")) {
+                            // todo add mothers with successful birth
+                            pncMoms.add(gson.fromJson(details, PncMother.class));
+
+                        } else if (deliveryResult.equals("no")) {
+                            //todo add mothers with unsuccessful birth
+                            pncMoms.add(gson.fromJson(details, PncMother.class));
+                        }
+
                         cursor.moveToNext();
                     }
                 }
@@ -406,5 +420,32 @@ public class ReportSearchActivity extends AppCompatActivity {
 
     private void showDialog(String message) {
         dialogBuilder.setMessage(message).create().show();
+    }
+
+
+    private void pickDate(final int id) {
+        // listener
+        DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @SuppressWarnings("deprecation")
+            @Override
+            public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                // get picked date
+                // update view
+                GregorianCalendar pickedDate = new GregorianCalendar(year, monthOfYear, dayOfMonth);
+            }
+        };
+
+        // dialog
+        DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
+                onDateSetListener);
+
+        datePickerDialog.setOkColor(ContextCompat.getColor(getApplicationContext(), android.R.color.holo_blue_light));
+        datePickerDialog.setCancelColor(ContextCompat.getColor(getApplicationContext(), android.R.color.holo_red_light));
+
+        datePickerDialog.setVersion(DatePickerDialog.Version.VERSION_1);
+        datePickerDialog.setAccentColor(ContextCompat.getColor(getApplicationContext(), R.color.primary));
+
+        // show dialog
+        datePickerDialog.show(getFragmentManager(), "DatePickerDialog");
     }
 }
