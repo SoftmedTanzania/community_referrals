@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.softmed.uzazisalama.DataModels.PncMother;
@@ -29,9 +31,11 @@ import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 
@@ -43,13 +47,17 @@ public class ReportSearchActivity extends AppCompatActivity {
     ArrayAdapter<String> typeAdapter;
     RadioGroup radioGroupMotherType, radioGroupRiskStatus, radioGroupDeliveryResult;
     LinearLayout layoutRiskStatus, layoutDeliveryStatus;
+    CardView cardPickStartDate, cardPickEndDate;
+    TextView textStartDate, textEndDate;
 
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private Gson gson = new Gson();
 
     private final static String TAG = ReportSearchActivity.class.getSimpleName(),
             TABLE_ANC = "wazazi_salama_mother",
             TABLE_PNC = "uzazi_salama_pnc";
     private String tableName;
+    private long startDate = 0, endDate = 0;
     private final static String[] MOTHER_TYPES = {"Mama Waja Wazito", "Mama Waliojifungua"};
 
     @Override
@@ -75,6 +83,10 @@ public class ReportSearchActivity extends AppCompatActivity {
         // radioGroupMotherType = (RadioGroup) findViewById(R.id.radioGroupMotherType);
         radioGroupRiskStatus = (RadioGroup) findViewById(R.id.radioGroupRiskStatus);
         radioGroupDeliveryResult = (RadioGroup) findViewById(R.id.radioGroupDeliveryResult);
+        cardPickStartDate = (CardView) findViewById(R.id.cardPickStartDate);
+        cardPickEndDate = (CardView) findViewById(R.id.cardPickEndDate);
+        textStartDate = (TextView) findViewById(R.id.textStartDate);
+        textEndDate = (TextView) findViewById(R.id.textEndDate);
         layoutRiskStatus = (LinearLayout) findViewById(R.id.layoutRiskStatus);
         layoutRiskStatus.setVisibility(View.GONE);
         layoutDeliveryStatus = (LinearLayout) findViewById(R.id.layoutDeliveryStatus);
@@ -133,6 +145,21 @@ public class ReportSearchActivity extends AppCompatActivity {
                         dialogInterface.dismiss();
                     }
                 });
+
+
+        cardPickStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickDate(0);
+            }
+        });
+
+        cardPickEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickDate(1);
+            }
+        });
 
         // fab listener
         findViewById(R.id.fabSearch).setOnClickListener(new View.OnClickListener() {
@@ -217,6 +244,16 @@ public class ReportSearchActivity extends AppCompatActivity {
         if (spinnerType.getSelectedItemPosition() == 0) {
             // nothing selected
             makeSnackbar("Chagua ripoti unayohitaji kuona.");
+            return false;
+
+        } else if ((int) startDate != 0 && (int) endDate == 0) {
+            // date range not defined properly
+            makeSnackbar("Chagua tarehe ya kuishia.");
+            return false;
+
+        } else if ((int) startDate == 0 && (int) endDate != 0) {
+            // date range not defined properly
+            makeSnackbar("Chagua tarehe ya kuanzia.");
             return false;
         }
 
@@ -429,9 +466,20 @@ public class ReportSearchActivity extends AppCompatActivity {
             @SuppressWarnings("deprecation")
             @Override
             public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-                // get picked date
-                // update view
+                // todo get picked date update view
                 GregorianCalendar pickedDate = new GregorianCalendar(year, monthOfYear, dayOfMonth);
+                Log.d(TAG, "pickedDate = " + pickedDate.getTimeInMillis());
+
+                if (id == 0) {
+                    // start date
+                    startDate = pickedDate.getTimeInMillis();
+                    textStartDate.setText(dateFormat.format(startDate));
+
+                } else if (id == 1) {
+                    // end date
+                    endDate = pickedDate.getTimeInMillis();
+                    textEndDate.setText(dateFormat.format(endDate));
+                }
             }
         };
 
