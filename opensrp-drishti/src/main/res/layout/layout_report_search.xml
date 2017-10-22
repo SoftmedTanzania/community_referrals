@@ -24,34 +24,182 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <RadioGroup
-            android:id="@+id/radioGroupMotherType"
-            android:layout_width="wrap_content"
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:id="@+id/spinnerType"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp">
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
 
-            <RadioButton
-                android:id="@+id/radioTypeANC"
+            app:ms_arrowColor="@color/accent"
+            app:ms_arrowSize="14dp"
+            app:ms_baseColor="@color/accent"
+            app:ms_enableFloatingLabel="false"
+            app:ms_hint="Chagua waja wazito/walio jifungua"
+            app:ms_hintColor="@color/hint_text"
+            app:ms_multiline="false"
+            app:ms_thickness="1dp"
+            app:paddingEnd="16dp"
+            app:paddingStart="16dp" />
+
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:text="Kundi la kina mama"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:textColor="@color/primary_text"-->
+        <!--android:textSize="16sp" />-->
+
+        <!--<RadioGroup-->
+        <!--android:id="@+id/radioGroupMotherType"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:layout_marginTop="0dp">-->
+
+        <!--<RadioButton-->
+        <!--android:id="@+id/radioTypeANC"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingBottom="8dp"-->
+        <!--android:paddingTop="8dp"-->
+        <!--android:text="Waja Wazito"-->
+        <!--android:textColor="@color/secondary_text"-->
+        <!--android:textSize="16sp" />-->
+
+        <!--<RadioButton-->
+        <!--android:id="@+id/radioTypePNC"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingBottom="8dp"-->
+        <!--android:paddingTop="8dp"-->
+        <!--android:text="Waliojifungua"-->
+        <!--android:textColor="@color/secondary_text"-->
+        <!--android:textSize="16sp" />-->
+        <!--</RadioGroup>-->
+
+        <LinearLayout
+            android:id="@+id/layoutRiskStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:text="Mama Waja Wazito"
-                android:textColor="@color/secondary_text"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Kuhusu vidokezo vya hatari"
+                android:textAllCaps="false"
+                android:textColor="@color/primary_text"
                 android:textSize="16sp" />
 
-            <RadioButton
-                android:id="@+id/radioTypePNC"
+            <RadioGroup
+                android:id="@+id/radioGroupRiskStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="0dp">
+
+                <RadioButton
+                    android:id="@+id/radioAllRiskStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:text="Wote"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/radioYesOnRisk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:text="Walio hatarini"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/radioNotOnRisk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:text="Walio salama"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="16sp" />
+            </RadioGroup>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layoutDeliveryStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:text="Mama Waliojifungua"
-                android:textColor="@color/secondary_text"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Kuhusu matokeo ya kujifungua"
+                android:textAllCaps="false"
+                android:textColor="@color/primary_text"
                 android:textSize="16sp" />
-        </RadioGroup>
 
+            <RadioGroup
+                android:id="@+id/radioGroupDeliveryResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="0dp">
+
+                <RadioButton
+                    android:id="@+id/radioAllDeliveryResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:text="Wote"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/radioSuccessfulDelivery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:text="Waliojifungua salama"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/radioUnsuccessfulDelivery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:text="Hawakujifungua salama"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="16sp" />
+            </RadioGroup>
+        </LinearLayout>
         <!--<fr.ganfra.materialspinner.MaterialSpinner-->
         <!--android:id="@+id/spinnerType"-->
         <!--android:layout_width="match_parent"-->
