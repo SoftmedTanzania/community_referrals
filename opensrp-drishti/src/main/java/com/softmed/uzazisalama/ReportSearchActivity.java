@@ -205,7 +205,8 @@ public class ReportSearchActivity extends AppCompatActivity {
                             new QueryAncTask().execute(
                                     queryBuilder.toString(),
                                     tableName,
-                                    getRiskStatus());
+                                    getRiskStatus(),
+                                    isDateRangeSet());
                             break;
 
                         case 2:
@@ -216,7 +217,8 @@ public class ReportSearchActivity extends AppCompatActivity {
                             new QueryPncTask().execute(
                                     queryBuilder.toString(),
                                     tableName,
-                                    getDeliveryResult());
+                                    getDeliveryResult(),
+                                    isDateRangeSet());
                             break;
                     }
                 }
@@ -276,6 +278,10 @@ public class ReportSearchActivity extends AppCompatActivity {
         // without filtering by using their delivery result
     }
 
+    private String isDateRangeSet() {
+        return ((int) startDate != 0 && (int) endDate != 0) ? "yes" : "no";
+    }
+
 
     private class QueryAncTask extends AsyncTask<String, Void, List<PregnantMom>> {
 
@@ -285,8 +291,10 @@ public class ReportSearchActivity extends AppCompatActivity {
             String query = params[0];
             String tableName = params[1];
             String riskStatus = params[2];
+            String isDateRangeSet = params[3];
             Log.d(TAG, "query = " + query);
-            Log.d(TAG, "tableName = " + tableName + ", riskStatus = " + riskStatus);
+            Log.d(TAG, "tableName = " + tableName + ", riskStatus = " + riskStatus
+                    + ", isDateRangeSet = " + isDateRangeSet);
 
             Context context = Context.getInstance().updateApplicationContext(getApplicationContext());
             CommonRepository commonRepository = context.commonrepository(tableName);
@@ -319,6 +327,13 @@ public class ReportSearchActivity extends AppCompatActivity {
                         }
 
                         cursor.moveToNext();
+                    }
+                    // check date range
+                    if (isDateRangeSet.equals("yes")) {
+                        for (PregnantMom mom : pregnantMoms) {
+                            if (mom.getDateReg() < startDate || mom.getDateReg() > endDate)
+                                pregnantMoms.remove(mom); // remove mother
+                        }
                     }
                 }
             } catch (Exception e) {
