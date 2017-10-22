@@ -2,9 +2,11 @@
 
 
 <TableRow
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content">
 <TextView
+    android:padding="4dp"
     android:id="@+id/visitorSN"
     android:text="0"
     android:background="@drawable/cell_shape_header"
@@ -12,6 +14,7 @@
     android:layout_height="wrap_content"
     />
 <TextView
+    android:padding="4dp"
     android:id="@+id/visitorMothersName"
     android:text="0"
     android:background="@drawable/cell_shape"
@@ -19,48 +22,56 @@
     android:layout_height="wrap_content"
     />
 <TextView
+    android:padding="4dp"
     android:id="@+id/visitorVillage"
     android:text="0"
     android:background="@drawable/cell_shape"
     android:gravity="center"
     android:layout_height="wrap_content"
-    /><TextView
+    />
+    <TextView
     android:id="@+id/visitorMobile"
     android:text="0"
     android:background="@drawable/cell_shape"
     android:gravity="center"
     android:layout_height="wrap_content"
-    /><TextView
+    />
+    <TextView
     android:id="@+id/visitorSpouse"
     android:text="0"
     android:background="@drawable/cell_shape"
     android:gravity="center"
     android:layout_height="wrap_content"
-    /><TextView
+    />
+    <TextView
     android:id="@+id/visitorRisk"
     android:text="0"
     android:background="@drawable/cell_shape"
     android:gravity="center"
     android:layout_height="wrap_content"
-    /><TextView
+    />
+    <TextView
     android:id="@+id/visitorApp1"
     android:text="0"
     android:background="@drawable/cell_shape"
     android:gravity="center"
     android:layout_height="wrap_content"
-    /><TextView
+    />
+    <TextView
     android:id="@+id/visitorApp2"
     android:text="0"
     android:background="@drawable/cell_shape"
     android:gravity="center"
     android:layout_height="wrap_content"
-    /><TextView
+    />
+    <TextView
     android:id="@+id/visitorApp3"
     android:text="0"
     android:background="@drawable/cell_shape"
     android:gravity="center"
     android:layout_height="wrap_content"
-    /><TextView
+    />
+    <TextView
     android:id="@+id/visitorApp4"
     android:text="0"
     android:background="@drawable/cell_shape"

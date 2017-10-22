@@ -21,10 +21,12 @@ import com.softmed.uzazisalama.util.Utils;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.drishti.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-public class MotherPncReport extends AppCompatActivity {
+public class MotherPncReport extends AppCompatActivity implements java.io.Serializable  {
     private PregnantMom pregnantMom;
     private List<PregnantMom> moms;
 
@@ -42,6 +44,7 @@ public class MotherPncReport extends AppCompatActivity {
     public void fillTable() {
         int rowCount = moms.size();
         Log.d("Fill Table", "rowCount = " + rowCount);
+        Log.d("Fill Table", "mom = " + gson.toJson(moms));
         TableLayout table = (TableLayout) this.findViewById(R.id.tablelayout);
         for (int i = 0; i < rowCount; i++) {
 
@@ -51,15 +54,31 @@ public class MotherPncReport extends AppCompatActivity {
 
 
     public void fillRow2(TableLayout table, int noRow) {
+        pregnantMom = moms.get(noRow);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View fullRow = inflater.inflate(R.layout.row, null, false);
         TextView nr = (TextView) fullRow.findViewById(R.id.visitorSN);
-        nr.setText(noRow + 1);
+        nr.setText(String.valueOf(noRow + 1));
+
         TextView Name = (TextView) fullRow.findViewById(R.id.visitorMothersName);
         Name.setText(pregnantMom.getName());
 
-        TextView lName = (TextView) fullRow.findViewById(R.id.visitorMobile);
-        lName.setText(pregnantMom.getPhone());
+        TextView phone = (TextView) fullRow.findViewById(R.id.visitorMobile);
+        phone.setText(pregnantMom.getPhone());
+
+        TextView spouseNumber = (TextView) fullRow.findViewById(R.id.visitorSpouse);
+        spouseNumber.setText(pregnantMom.getHusbandName());
+
+        TextView location = (TextView) fullRow.findViewById(R.id.visitorVillage);
+        location.setText(pregnantMom.getPhysicalAddress());
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+        TextView edd = (TextView) fullRow.findViewById(R.id.visitorEDD);
+        edd.setText(dateFormat.format(pregnantMom.getEdd()));
+
+        TextView app1 = (TextView) fullRow.findViewById(R.id.visitorApp1);
+        app1.setText(pregnantMom.getPhysicalAddress());
+
         table.addView(fullRow);
     }
 }

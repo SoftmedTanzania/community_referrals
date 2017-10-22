@@ -201,10 +201,10 @@ public class ReportSearchActivity extends AppCompatActivity implements java.io.S
                 Log.d(TAG, "resultList " + resultList.size());
                 Log.d(TAG, "resultList " + gson.toJson(resultList));
                 makeSnackbar("Result: " + resultList.size() + " items.");
-                Intent intent =new Intent(getApplication(), MotherPncReport.class);
+                Intent intent = new Intent(getApplication(), MotherPncReport.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("mom", resultList);
-                getApplication().startActivity(intent);
+                startActivity(intent);
             } else {
                 Log.d(TAG, "Query result is empty!");
                 showDialog(getString(R.string.no_results_found));
