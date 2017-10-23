@@ -393,7 +393,6 @@ public class ReportSearchActivity extends AppCompatActivity {
             publishProgress();
             String query = params[0];
             String tableName = params[1];
-            String deliveryResult =
             delivery = params[2];
             String deliveryResult = params[2];
             String isDateRangeSet = params[3];
@@ -445,36 +444,36 @@ public class ReportSearchActivity extends AppCompatActivity {
 //            } finally {
 //                cursor.close();
 //            }
-
-                        else if (deliveryResult.equals("yes")) {
-                            // todo add mothers with successful birth
-                            pncMoms.add(gson.fromJson(details, PncMother.class));
-
-                        } else if (deliveryResult.equals("no")) {
-                            //todo add mothers with unsuccessful birth
-                            pncMoms.add(gson.fromJson(details, PncMother.class));
-                        }
-
-                        cursor.moveToNext();
-                    }
-
-                    // check date range
-                    if (isDateRangeSet.equals("yes")) {
-                        for (PncMother mom : pncMoms) {
-                            if (mom.getDeliveryDate() < startDate || mom.getDeliveryDate() > endDate)
-                                pncMoms.remove(mom); // remove mother
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                Log.d(TAG, "error: " + e.getMessage());
-                return null;
-
-            } finally {
-                cursor.close();
-            }
-
-            return pncMoms;
+//
+//                        else if (deliveryResult.equals("yes")) {
+//                            // todo add mothers with successful birth
+//                            pncMoms.add(gson.fromJson(details, PncMother.class));
+//
+//                        } else if (deliveryResult.equals("no")) {
+//                            //todo add mothers with unsuccessful birth
+//                            pncMoms.add(gson.fromJson(details, PncMother.class));
+//                        }
+//
+//                        cursor.moveToNext();
+//                    }
+//
+//                    // check date range
+//                    if (isDateRangeSet.equals("yes")) {
+//                        for (PncMother mom : pncMoms) {
+//                            if (mom.getDeliveryDate() < startDate || mom.getDeliveryDate() > endDate)
+//                                pncMoms.remove(mom); // remove mother
+//                        }
+//                    }
+//                }
+//            } catch (Exception e) {
+//                Log.d(TAG, "error: " + e.getMessage());
+//                return null;
+//
+//            } finally {
+//                cursor.close();
+//            }
+//
+//            return pncMoms;
             return motherPersonList;
         }
 
