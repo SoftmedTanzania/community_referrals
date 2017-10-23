@@ -389,8 +389,10 @@ public class ReportSearchActivity extends AppCompatActivity {
             String query = params[0];
             String tableName = params[1];
             String deliveryResult = params[2];
+            String isDateRangeSet = params[3];
             Log.d(TAG, "query = " + query);
-            Log.d(TAG, "tableName = " + tableName + ", deliveryResult =  " + deliveryResult);
+            Log.d(TAG, "tableName = " + tableName + ", deliveryResult =  " + deliveryResult
+                    + ", isDateRangeSet = " + isDateRangeSet);
 
             Context context = Context.getInstance().updateApplicationContext(getApplicationContext());
             CommonRepository commonRepository = context.commonrepository(tableName);
@@ -419,6 +421,14 @@ public class ReportSearchActivity extends AppCompatActivity {
                         }
 
                         cursor.moveToNext();
+                    }
+
+                    // check date range
+                    if (isDateRangeSet.equals("yes")) {
+                        for (PncMother mom : pncMoms) {
+                            if (mom.getDeliveryDate() < startDate || mom.getDeliveryDate() > endDate)
+                                pncMoms.remove(mom); // remove mother
+                        }
                     }
                 }
             } catch (Exception e) {
