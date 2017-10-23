@@ -23,9 +23,12 @@ import android.widget.RadioGroup;
 import com.google.gson.Gson;
 import com.softmed.uzazisalama.DataModels.PncMother;
 import com.softmed.uzazisalama.DataModels.PregnantMom;
+import com.softmed.uzazisalama.Repository.PncPersonObject;
+import com.softmed.uzazisalama.util.Utils;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.Context;
+import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.R;
 
@@ -45,7 +48,7 @@ public class ReportSearchActivity extends AppCompatActivity {
     LinearLayout layoutRiskStatus, layoutDeliveryStatus;
 
     private Gson gson = new Gson();
-
+    private String risk,delivery = "n/a";
     private final static String TAG = ReportSearchActivity.class.getSimpleName(),
             TABLE_ANC = "wazazi_salama_mother",
             TABLE_PNC = "uzazi_salama_pnc";
@@ -248,6 +251,7 @@ public class ReportSearchActivity extends AppCompatActivity {
             String query = params[0];
             String tableName = params[1];
             String riskStatus = params[2];
+            risk = params[2];
             Log.d(TAG, "query = " + query);
             Log.d(TAG, "tableName = " + tableName + ", riskStatus = " + riskStatus);
 
@@ -316,9 +320,10 @@ public class ReportSearchActivity extends AppCompatActivity {
             else if (resultList.size() > 0) {
                 Log.d(TAG, "resultList " + resultList.size());
                 //  makeSnackbar("Result: " + resultList.size() + " items.");
-                Intent reportIntent = new Intent(ReportSearchActivity.this, MotherPncReport.class);
+                Intent reportIntent = new Intent(ReportSearchActivity.this, UzaziSalamaReport.class);
                 reportIntent.putExtra("moms", gson.toJson(resultList));
                 reportIntent.putExtra("type", "anc");
+                reportIntent.putExtra("risk", risk);
                 startActivity(reportIntent);
 
             } else {
@@ -329,55 +334,64 @@ public class ReportSearchActivity extends AppCompatActivity {
     }
 
 
-    private class QueryPncTask extends AsyncTask<String, Void, List<PncMother>> {
+    private class QueryPncTask extends AsyncTask<String, Void, List<PncPersonObject>> {
 
         @Override
-        protected List<PncMother> doInBackground(String... params) {
+        protected List<PncPersonObject> doInBackground(String... params) {
             publishProgress();
             String query = params[0];
             String tableName = params[1];
-            String deliveryResult = params[2];
+            String deliveryResult =
+            delivery = params[2];
             Log.d(TAG, "query = " + query);
             Log.d(TAG, "tableName = " + tableName + ", deliveryResult =  " + deliveryResult);
 
             Context context = Context.getInstance().updateApplicationContext(getApplicationContext());
             CommonRepository commonRepository = context.commonrepository(tableName);
             Cursor cursor = commonRepository.RawCustomQueryForAdapter(query);
+            List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, tableName);
+            Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
+
 
             // obtains mothers from result
+            List<PncPersonObject> motherPersonList = new ArrayList<>();
             List<PncMother> pncMoms = new ArrayList<>();
-            try {
-                if (cursor.moveToFirst()) {
-                    while (!cursor.isAfterLast()) {
-                        // get anc mothers from query result and add them to list
-                        String details = cursor.getString(cursor.getColumnIndex("details"));
-                        Log.d(TAG, "column details = " + details);
-                        // convert and add to list
-                        if (deliveryResult.equals("n/a"))
-                            // add all
-                            pncMoms.add(gson.fromJson(details, PncMother.class));
+            motherPersonList = Utils.convertToPncPersonObjectList(commonPersonObjectList);
+            Log.d(TAG, "repo count = " + gson.toJson(motherPersonList));
+//            try {
+//                if (cursor.moveToFirst()) {
+//                    while (!cursor.isAfterLast()) {
+//                        // get anc mothers from query result and add them to list
+//                        String details = cursor.getString(cursor.getColumnIndex("details"));
+//                        Log.d(TAG, "column details = " + details);
+//                        // convert and add to list
+//                        if (deliveryResult.equals("n/a"))
+//                            // add all
+//                            pncMoms.add(gson.fromJson(details, PncMother.class));
+//
+//                        else if (deliveryResult.equals("yes")) {
+//                            // todo add mothers with successful birth
+//                            pncMoms.add(gson.fromJson(details, PncMother.class));
+//
+//                        } else if (deliveryResult.equals("no")) {
+//                            //todo add mothers with unsuccessful birth
+//                            pncMoms.add(gson.fromJson(details, PncMother.class));
+//                        }
+//
+//                        cursor.moveToNext();
+//                    }
+//
+//
+//                }
+//            } catch (Exception e) {
+//                Log.d(TAG, "error: " + e.getMessage());
+//                return null;
+//
+//            } finally {
+//                cursor.close();
+//            }
 
-                        else if (deliveryResult.equals("yes")) {
-                            // todo add mothers with successful birth
-                            pncMoms.add(gson.fromJson(details, PncMother.class));
-
-                        } else if (deliveryResult.equals("no")) {
-                            //todo add mothers with unsuccessful birth
-                            pncMoms.add(gson.fromJson(details, PncMother.class));
-                        }
-
-                        cursor.moveToNext();
-                    }
-                }
-            } catch (Exception e) {
-                Log.d(TAG, "error: " + e.getMessage());
-                return null;
-
-            } finally {
-                cursor.close();
-            }
-
-            return pncMoms;
+            return motherPersonList;
         }
 
         @Override
@@ -389,7 +403,7 @@ public class ReportSearchActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<PncMother> resultList) {
+        protected void onPostExecute(List<PncPersonObject> resultList) {
             super.onPostExecute(resultList);
             // hide progress and process the result
             if (progressDialog.isShowing())
@@ -400,7 +414,12 @@ public class ReportSearchActivity extends AppCompatActivity {
 
             else if (resultList.size() > 0) {
                 Log.d(TAG, "resultList " + resultList.size());
-                makeSnackbar("Result: " + resultList.size() + " items.");
+                Log.d(TAG, "resultList " + gson.toJson(resultList));
+                Intent reportIntent = new Intent(ReportSearchActivity.this, UzaziSalamaReport.class);
+                reportIntent.putExtra("moms", gson.toJson(resultList));
+                reportIntent.putExtra("type", "pnc");
+                reportIntent.putExtra("delivery", delivery);
+                startActivity(reportIntent);
 
             } else {
                 Log.d(TAG, "Query result is empty!");

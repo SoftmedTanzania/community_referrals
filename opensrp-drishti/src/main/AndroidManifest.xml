@@ -103,7 +103,7 @@
             android:name="com.softmed.uzazisalama.FollowUpDetailActivity"
             android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
 
-        <activity android:name="com.softmed.uzazisalama.MotherPncReport"
+        <activity android:name="com.softmed.uzazisalama.UzaziSalamaReport"
             android:theme="@style/AppTheme.MaterialDesign.NoActionBar">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->

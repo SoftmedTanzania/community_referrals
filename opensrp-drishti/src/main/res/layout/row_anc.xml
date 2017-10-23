@@ -2,18 +2,20 @@
 
 
 <TableRow
-
+    android:layout_weight="1"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content">
-<TextView
+    <TextView
     android:padding="4dp"
+    android:layout_weight="0.1"
     android:id="@+id/visitorSN"
     android:text="0"
     android:background="@drawable/cell_shape_header"
     android:gravity="center"
     android:layout_height="wrap_content"
     />
-<TextView
+    <TextView
+    android:layout_weight="0.1"
     android:padding="4dp"
     android:id="@+id/visitorMothersName"
     android:text="0"
@@ -21,7 +23,8 @@
     android:gravity="center"
     android:layout_height="wrap_content"
     />
-<TextView
+    <TextView
+    android:layout_weight="0.1"
     android:padding="4dp"
     android:id="@+id/visitorVillage"
     android:text="0"
@@ -30,6 +33,8 @@
     android:layout_height="wrap_content"
     />
     <TextView
+        android:layout_weight="0.1"
+        android:padding="4dp"
     android:id="@+id/visitorMobile"
     android:text="0"
     android:background="@drawable/cell_shape"
@@ -37,48 +42,50 @@
     android:layout_height="wrap_content"
     />
     <TextView
-    android:id="@+id/visitorSpouse"
-    android:text="0"
-    android:background="@drawable/cell_shape"
-    android:gravity="center"
-    android:layout_height="wrap_content"
-    />
-    <TextView
+        android:layout_weight="0.1"
+        android:padding="4dp"
     android:id="@+id/visitorRisk"
     android:text="0"
     android:background="@drawable/cell_shape"
     android:gravity="center"
     android:layout_height="wrap_content"
     />
-    <TextView
+
+    <ImageView
+        android:layout_weight="0.1"
     android:id="@+id/visitorApp1"
-    android:text="0"
+        android:src="@drawable/ic_calendar_check"
     android:background="@drawable/cell_shape"
     android:gravity="center"
     android:layout_height="wrap_content"
     />
-    <TextView
+    <ImageView
+        android:layout_weight="0.1"
     android:id="@+id/visitorApp2"
-    android:text="0"
+        android:src="@drawable/ic_calendar_check"
     android:background="@drawable/cell_shape"
     android:gravity="center"
     android:layout_height="wrap_content"
     />
-    <TextView
+    <ImageView
+        android:layout_weight="0.1"
     android:id="@+id/visitorApp3"
-    android:text="0"
+        android:src="@drawable/ic_calendar_check"
+    android:background="@drawable/cell_shape"
+    android:gravity="center"
+    android:layout_height="wrap_content"
+    />
+    <ImageView
+        android:layout_weight="0.1"
+    android:id="@+id/visitorApp4"
+        android:src="@drawable/ic_calendar_check"
     android:background="@drawable/cell_shape"
     android:gravity="center"
     android:layout_height="wrap_content"
     />
     <TextView
-    android:id="@+id/visitorApp4"
-    android:text="0"
-    android:background="@drawable/cell_shape"
-    android:gravity="center"
-    android:layout_height="wrap_content"
-    />
-<TextView
+    android:layout_weight="0.1"
+    android:padding="4dp"
     android:id="@+id/visitorEDD"
     android:text="0"
     android:background="@drawable/cell_shape"
