@@ -51,24 +51,7 @@
         android:layout_height="wrap_content"
     />
 
-    <TextView
-        android:layout_weight="0.1"
-        android:padding="4dp"
-        android:id="@+id/visitorPlaceOfBirth"
-        android:text="0"
-        android:background="@drawable/cell_shape"
-        android:gravity="center"
-        android:layout_height="wrap_content"
-    />
-    <TextView
-        android:layout_weight="0.1"
-        android:padding="4dp"
-        android:id="@+id/visitorDeliveryType"
-        android:text="0"
-        android:background="@drawable/cell_shape"
-        android:gravity="center"
-        android:layout_height="wrap_content"
-        />
+
     <TextView
         android:layout_weight="0.1"
         android:padding="4dp"
@@ -89,8 +72,9 @@
         android:layout_height="wrap_content"
         />
     <TextView
+        android:layout_weight="0.1"
         android:padding="4dp"
-        android:id="@+id/visitorEDD"
+        android:id="@+id/visitorDD"
         android:text="0"
         android:background="@drawable/cell_shape"
         android:gravity="center"

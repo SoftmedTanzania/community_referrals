@@ -196,7 +196,8 @@ public class UzaziSalamaReport extends AppCompatActivity implements java.io.Seri
     public void fillRowAncIsRiskMother(TableLayout table, int noRow) {
         pregnantMom = (PregnantMom) motherList.get(noRow);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View fullRow = inflater.inflate(R.layout.row_anc, null, false);
+
+        View fullRow = inflater.inflate(R.layout.row_anc_isrisk, null, false);
         TextView nr = (TextView) fullRow.findViewById(R.id.visitorSN);
         nr.setText(String.valueOf(noRow + 1));
 
@@ -207,49 +208,6 @@ public class UzaziSalamaReport extends AppCompatActivity implements java.io.Seri
         phone.setText(pregnantMom.getPhone());
 
         // automate follow up number
-        long lnmp = pregnantMom.getDateLNMP();
-        long firstVisit = DatesHelper.calculate1stVisitFromLNMP(lnmp);
-        long secondVisit = DatesHelper.calculate2ndVisitFromLNMP(lnmp);
-        long thirdVisit = DatesHelper.calculate3rdVisitFromLNMP(lnmp);
-        long fourthVisit = DatesHelper.calculate4thVisitFromLNMP(lnmp);
-        ImageView app1 = (ImageView) fullRow.findViewById(R.id.visitorApp1);
-        ImageView app2 = (ImageView) fullRow.findViewById(R.id.visitorApp2);
-        ImageView app3 = (ImageView) fullRow.findViewById(R.id.visitorApp3);
-        ImageView app4 = (ImageView) fullRow.findViewById(R.id.visitorApp4);
-
-        if(pregnantMom.isAncAppointment1()){
-            app1.setImageResource(R.drawable.ic_check_black_24dp);
-        }else if(System.currentTimeMillis()>firstVisit && !pregnantMom.isAncAppointment1() ){
-            app1.setImageResource(R.drawable.ic_clear_black_24dp);
-        }else{
-            app1.setImageResource(R.drawable.ic_remove_black_24dp);
-        }
-
-        if(pregnantMom.isAncAppointment2()){
-            app2.setImageResource(R.drawable.ic_check_black_24dp);
-        }else if(System.currentTimeMillis()>secondVisit && !pregnantMom.isAncAppointment2() ){
-            app2.setImageResource(R.drawable.ic_clear_black_24dp);
-        }else{
-            app2.setImageResource(R.drawable.ic_remove_black_24dp);
-        }
-
-        if(pregnantMom.isAncAppointment3()){
-            app3.setImageResource(R.drawable.ic_check_black_24dp);
-        }else if(System.currentTimeMillis()>thirdVisit && !pregnantMom.isAncAppointment3() ){
-            app3.setImageResource(R.drawable.ic_clear_black_24dp);
-        }else{
-            app3.setImageResource(R.drawable.ic_remove_black_24dp);
-        }
-
-        if(pregnantMom.isAncAppointment4()){
-            app4.setImageResource(R.drawable.ic_check_black_24dp);
-        }else if(System.currentTimeMillis()>fourthVisit && !pregnantMom.isAncAppointment4() ){
-            app4.setImageResource(R.drawable.ic_clear_black_24dp);
-        }else{
-            app4.setImageResource(R.drawable.ic_remove_black_24dp);
-        }
-
-
 
         TextView location = (TextView) fullRow.findViewById(R.id.visitorVillage);
         location.setText(pregnantMom.getPhysicalAddress());
@@ -291,13 +249,10 @@ public class UzaziSalamaReport extends AppCompatActivity implements java.io.Seri
         Log.d(TAG, "child details afterwards = " + gson.toJson(child));
 
         TextView age = (TextView) fullRow.findViewById(R.id.visitorAge);
-//        age.setText(mother.getAge());
+        age.setText(String.valueOf(mother.getAge()));
 
         TextView location = (TextView) fullRow.findViewById(R.id.visitorVillage);
-//        location.setText(mother.getPhysicalAddress());
-
-        TextView birthLocation = (TextView) fullRow.findViewById(R.id.visitorPlaceOfBirth);
-        birthLocation.setText(pncMom.getBba());
+        location.setText(mother.getPhysicalAddress());
 
         TextView risk = (TextView) fullRow.findViewById(R.id.visitorRisk);
         if(mother.isOnRisk()){
@@ -310,17 +265,14 @@ public class UzaziSalamaReport extends AppCompatActivity implements java.io.Seri
         }
 
         TextView childStatus = (TextView) fullRow.findViewById(R.id.visitorChildStatus);
-//        childStatus.setText(child.getStatus());
-
-        TextView deliveryType = (TextView) fullRow.findViewById(R.id.visitorDeliveryType);
-        deliveryType.setText(pncMom.getDeliveryType());
+        childStatus.setText(child.getStatus());
 
         TextView placeOfBirth = (TextView) fullRow.findViewById(R.id.visitorMotherStatus);
         placeOfBirth.setText(pncMom.getMother_status());
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-        TextView edd = (TextView) fullRow.findViewById(R.id.dateofbirth);
-//        edd.setText(dateFormat.format(pncMom.getDeliveryDate()));
+        TextView edd = (TextView) fullRow.findViewById(R.id.visitorDD);
+        edd.setText(dateFormat.format(pncMom.getDeliveryDate()));
 
 
         table.addView(fullRow);

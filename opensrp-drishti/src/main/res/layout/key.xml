@@ -7,12 +7,25 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
         android:textColor="#c61515"
+        android:layout_marginBottom="16dp"
         android:text="Risks Selected :- "
         />
     <TextView
+        android:id="@+id/pressure"
+        android:padding="8dp"
+        android:gravity="left"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
+        android:textColor="#c61515"
         android:text=" High blood pressure"/>
+    <TextView
+        android:id="@+id/sugar"
+        android:padding="8dp"
+        android:gravity="left"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:textColor="#c61515"
+        android:text="Height below 150cm"/>
 </TableRow>
 
 
