@@ -339,7 +339,7 @@ public class AncSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 //                "CreatedBy",
 //                "FACILITY_ID"};
 
-        CommonRepository motherRepository = context().commonrepository("wazazi_salama_mother");
+        CommonRepository motherRepository = context().updateApplicationContext(getContext()).commonrepository("wazazi_salama_mother");
         String query = "SELECT * FROM wazazi_salama_mother WHERE Is_PNC = 'false'";
         Cursor cursor = motherRepository.RawCustomQueryForAdapter(query);
         Log.d(TAG, "query = " + query);

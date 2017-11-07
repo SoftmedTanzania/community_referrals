@@ -1,5 +1,6 @@
 package com.softmed.uzazisalama;
 
+import android.content.Intent;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
@@ -13,6 +14,7 @@ import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.ControllerFilterMap;
 import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
+
 import com.softmed.uzazisalama.Anc.Anc1handler;
 import com.softmed.uzazisalama.Anc.Anc2handler;
 import com.softmed.uzazisalama.Anc.Anc3handler;
@@ -22,6 +24,7 @@ import com.softmed.uzazisalama.Application.UzaziSalamaApplication;
 import org.ei.opensrp.drishti.R;
 
 import com.softmed.uzazisalama.util.OrientationHelper;
+
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.service.PendingFormSubmissionService;
 import org.ei.opensrp.sync.SyncAfterFetchListener;
@@ -121,7 +124,7 @@ public class NativeHomeActivity extends SecuredActivity {
         OrientationHelper.setProperOrientationForDevice(NativeHomeActivity.this);
 
 
-        String userDetailsString = context().allSettings().settingsRepository.querySetting("userInformation","");
+        String userDetailsString = context().allSettings().settingsRepository.querySetting("userInformation", "");
         JSONObject userSettings = null;
         try {
             userSettings = new JSONObject(userDetailsString);
@@ -137,12 +140,12 @@ public class NativeHomeActivity extends SecuredActivity {
         }
 
         int count = roles.length();
-        for (int i =0 ; i<count ; i++){
+        for (int i = 0; i < count; i++) {
             try {
-                if(roles.getString(i).equals("facilityworker")){
-                    ((UzaziSalamaApplication)getApplication()).setUserType(1);
-                }else if (roles.getString(i).equals("communityworker")){
-                    ((UzaziSalamaApplication)getApplication()).setUserType(0);
+                if (roles.getString(i).equals("facilityworker")) {
+                    ((UzaziSalamaApplication) getApplication()).setUserType(1);
+                } else if (roles.getString(i).equals("communityworker")) {
+                    ((UzaziSalamaApplication) getApplication()).setUserType(0);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -154,7 +157,7 @@ public class NativeHomeActivity extends SecuredActivity {
 
         try {
             personId = userSettings.getJSONObject("attributes");
-            ((UzaziSalamaApplication)getApplication()).setCurrentUserID(personId.getString("_PERSON_UUID"));
+            ((UzaziSalamaApplication) getApplication()).setCurrentUserID(personId.getString("_PERSON_UUID"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -195,7 +198,7 @@ public class NativeHomeActivity extends SecuredActivity {
             @Override
             public void afterFetch(HomeContext anmDetails) {
                 // TODO: 9/14/17 update counts after fetch
-               // updateRegisterCounts(anmDetails);
+                // updateRegisterCounts(anmDetails);
             }
         });
     }
@@ -222,19 +225,19 @@ public class NativeHomeActivity extends SecuredActivity {
 //                pnccountcursor.close();
 
 
-                    Handler mainHandler = new Handler(getMainLooper());
+                Handler mainHandler = new Handler(getMainLooper());
 
-                    Runnable myRunnable = new Runnable() {
-                        @Override
-                        public void run() {
+                Runnable myRunnable = new Runnable() {
+                    @Override
+                    public void run() {
 //                        pncRegisterClientCountView.setText(valueOf(pnccount));
 //                        ecRegisterClientCountView.setText(valueOf(hhcount));
 //                        ancRegisterClientCountView.setText(valueOf(anccount));
 //                        fpRegisterClientCountView.setText(valueOf(elcocount));
 //                        childRegisterClientCountView.setText(valueOf(childcount));
-                        }
-                    };
-                    mainHandler.post(myRunnable);
+                    }
+                };
+                mainHandler.post(myRunnable);
 //                } else {
 //
 //                }
@@ -337,7 +340,9 @@ public class NativeHomeActivity extends SecuredActivity {
 //                    break;
 
                 case R.id.btn_reporting:
-                    navigationController.startFPSmartRegistry();
+                   // navigationController.startFPSmartRegistry();
+                    // goto report search activity
+                    startActivity(new Intent(NativeHomeActivity.this, ReportSearchActivity.class));
                     break;
             }
         }

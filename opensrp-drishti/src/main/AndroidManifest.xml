@@ -77,8 +77,7 @@
         <activity
             android:name="com.softmed.uzazisalama.chw.CHWSmartRegisterActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.softmed.uzazisalama.chw.CHWFormRegistrationActivity"
             android:screenOrientation="landscape" />
@@ -100,8 +99,22 @@
         <activity
             android:name="com.softmed.uzazisalama.PncDetailActivity"
             android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
-        <activity android:name="com.softmed.uzazisalama.util.FollowUpDetailActivity"
-            android:theme="@style/AppTheme.MaterialDesign.NoActionBar"/>
+        <activity
+            android:name="com.softmed.uzazisalama.FollowUpDetailActivity"
+            android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
+
+        <activity android:name="com.softmed.uzazisalama.UzaziSalamaReport"
+            android:theme="@style/AppTheme.MaterialDesign.NoActionBar">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <activity
+            android:name="com.softmed.uzazisalama.ReportSearchActivity"
+            android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
     </application>
 
 </manifest>
