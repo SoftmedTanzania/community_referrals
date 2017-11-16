@@ -88,6 +88,7 @@ public class FormSubmissionSyncService {
     public FetchStatus pullFromServer() {
         FetchStatus dataStatus = nothingFetched;
         String anmId = allSharedPreferences.fetchRegisteredANM();
+        Log.d("anmid","the current anmid ="+anmId);
         int downloadBatchSize = configuration.syncDownloadBatchSize();
         String baseURL = configuration.dristhiBaseURL();
         while (true) {

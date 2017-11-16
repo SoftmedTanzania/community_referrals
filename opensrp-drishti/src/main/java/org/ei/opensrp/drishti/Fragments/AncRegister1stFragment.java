@@ -514,10 +514,8 @@ public class AncRegister1stFragment extends Fragment {
         textPhone.setText("");
         textDateLNMP.setText("");
         textEDD.setText("");
-        int motherSelected = -1;
-        spinnerMotherEducation.setSelection(motherSelected);
-        int husbandSelected = -1;
-        spinnerHusbandEducation.setSelection(husbandSelected);
+        spinnerMotherEducation.setFloatingLabelText("Elimu Ya Mama");
+        spinnerHusbandEducation.setFloatingLabelText("Elimu Ya Mume/Mwenza");
         editTextMotherName.setText("");
         editTextMotherId.setText("");
         editTextMotherAge.setText("");

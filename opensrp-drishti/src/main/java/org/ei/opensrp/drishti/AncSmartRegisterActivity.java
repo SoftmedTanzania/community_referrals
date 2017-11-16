@@ -135,8 +135,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //            mPager.setCurrentItem(3);
 //            currentPage = 3;
 //        }
-        mPager.setCurrentItem(0);
-        currentPage = 0;
+        mPager.setCurrentItem(3);
+        currentPage = 3;
 
         Log.d(TAG, "table columns ="+new Gson().toJson(context().commonrepository("wazazi_salama_mother").common_TABLE_COLUMNS));
 
