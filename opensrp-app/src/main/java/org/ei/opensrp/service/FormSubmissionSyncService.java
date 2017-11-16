@@ -36,6 +36,7 @@ public class FormSubmissionSyncService {
     private FormSubmissionService formSubmissionService;
     private DristhiConfiguration configuration;
     private final int MAX_SIZE = 50;
+    private static final String TAG = FormSubmissionSyncService.class.getSimpleName();
 
     public FormSubmissionSyncService(FormSubmissionService formSubmissionService, HTTPAgent httpAgent,
                                      FormDataRepository formDataRepository, AllSettings allSettings,
@@ -88,6 +89,7 @@ public class FormSubmissionSyncService {
     public FetchStatus pullFromServer() {
         FetchStatus dataStatus = nothingFetched;
         String anmId = allSharedPreferences.fetchRegisteredANM();
+        Log.d(TAG,"anmId = "+anmId);
         int downloadBatchSize = configuration.syncDownloadBatchSize();
         String baseURL = configuration.dristhiBaseURL();
         while (true) {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="light_blue">#1a93d2</color>
+    <color name="boresha_theme">#2CDCD0</color>
 
     <color name="smart_register_client_divider_color">#d9d9d9</color>
     <color name="status_bar_background_dark_grey">#494949</color>
