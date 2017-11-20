@@ -142,7 +142,7 @@ public class NativeHomeActivity extends SecuredActivity {
         for (int i =0 ; i<count ; i++){
             try {
                 if(roles.getString(i).equals("Organizational: Health Facility User")){
-                    ((UzaziSalamaApplication)getApplication()).setUserType(1);
+                    ((UzaziSalamaApplication)getApplication()).setUserType(0);
                 }else if (roles.getString(i).equals("Organizational: CHW")){
                     ((UzaziSalamaApplication)getApplication()).setUserType(0);
                 }
@@ -169,7 +169,7 @@ public class NativeHomeActivity extends SecuredActivity {
         ACTION_HANDLED.addListener(updateANMDetailsListener);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Uzazi Salama");
+        getSupportActionBar().setTitle("HTM-Referrals");
         LoginActivity.setLanguage();
     }
 

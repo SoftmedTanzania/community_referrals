@@ -7,6 +7,12 @@
       ]
     },
     {
+      "name": "client_referral",
+      "columns": [
+        {"name":"ClientName"},{"name":"CBHS"},{"name":"ReferralDate"},{"name":"ReferralFacility"},{"name":"ReferralReason"},{"name":"Service"},{"name":"IS_VALID"}
+      ]
+    },
+    {
       "name": "child",
       "columns": [
         {"name":"GENDER"},{"name":"motherCaseId"}

@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
+import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.util.DatesHelper;
@@ -45,28 +46,27 @@ import fr.ganfra.materialspinner.MaterialSpinner;
  */
 public class CHWPreRegisterFormFragment extends Fragment {
     private static final String TAG = AncRegisterFormFragment.class.getSimpleName();
-    public static TextView textDate, textPhone, textDateLNMP, textEDD;
+    public static TextView textDate, textPhone;
     LinearLayout layoutDatePick, layoutEditPhone;
     CardView cardDatePickLNMP;
-    public static EditText editTextMotherName,editTextClinicName, editTextMotherId, editTextMotherAge,
-            editTextHeight, editTextPregCount, editTextBirthCount, editTextChildrenCount,
-            editTextDiscountId, editTextMotherOccupation, editTextPhysicalAddress,
-            editTextHusbandName, editTextHusbandOccupation;
+    public static EditText editTextClientName,editTextClinicName, editTextVillageLeader, editTextAge, editTextChildrenCount,
+            editTextDiscountId, editTextKataAddress,editTextKijiji,editTextKijitongoji,editTextReferralReason,editTextReferralFacility;
+    public static TextView textviewReferralProviderSupportGroup,textviewReferralProvider;
     public static Button button;
-    public static RadioGroup radioGroupPregnancyAge;
-    public static MaterialSpinner spinnerMotherEducation, spinnerHusbandEducation;
-    private ArrayAdapter<String> educationAdapter;
+    public static RadioGroup radioGroupGender;
+    public static MaterialSpinner spinnerService;
+    private ArrayAdapter<String>  serviceAdapter;
 
     private Calendar today;
     private List<String> educationList = new ArrayList<>();
+    private List<String> serviceList = new ArrayList<>();
     public String message = "";
-    public static long edd, lnmp;
     public static Context context;
-    public static int motherEduSelection = -1, husbandEduSelection = -1;
+    public static int clientEduSelection = -1, clientServiceSelection = -1;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-    private String formName = "pregnant_mothers_pre_registration";
+    private String formName = "client_hiv_referral_form";
     private String recordId;
-    private PregnantMom pregnantMom;
+    private ClientReferral clientReferral;
     private Gson gson = new Gson();
     private JSONObject fieldOverides = new JSONObject();
 
@@ -79,11 +79,17 @@ public class CHWPreRegisterFormFragment extends Fragment {
         super.onCreate(savedInstanceState);
         today = Calendar.getInstance();
 
-        educationList.add("Primary Education");
-        educationList.add("Ordinary Secondary Education");
-        educationList.add("Advanced Secondary Education");
-        educationList.add("College Education");
-        educationList.add("Higher Education");
+
+        serviceList.add("Ushauri nasaha na kupima");
+        serviceList.add("Rufaa kwenda kliniki ya TB na Matunzo (CTC)");
+        serviceList.add("Rufaa kwenda kituo cha kutoa huduma za afya kutokana na magonjwa nyemelezi");
+        serviceList.add("Kliniki ya kutibu kifua kikuu");
+        serviceList.add("Huduma za kuzuia maambukizi toka kwa mama kwenda mtoto");
+        serviceList.add("Huduma ya afya ya uzazi na mtoto (RCH) ");
+        serviceList.add("Huduma ya Tohara (VMMC)");
+        serviceList.add("Msaada wa kisheria");
+        serviceList.add("Huduma za kuzuia ukatili wa kijinsia(DAwati la jinsia)");
+        serviceList.add("Huduma za kuzuia maambukizi toka kwa mama kwenda mtoto");
 
         context = getContext();
     }
@@ -97,57 +103,37 @@ public class CHWPreRegisterFormFragment extends Fragment {
 
         textDate = (TextView) fragmentView.findViewById(R.id.textDate);
         textPhone = (TextView) fragmentView.findViewById(R.id.textPhone);
-        textDateLNMP = (TextView) fragmentView.findViewById(R.id.textDateLNMP);
-        textEDD = (TextView) fragmentView.findViewById(R.id.textEDD);
         layoutDatePick = (LinearLayout) fragmentView.findViewById(R.id.layoutDatePick);
         layoutEditPhone = (LinearLayout) fragmentView.findViewById(R.id.layoutEditPhone);
         cardDatePickLNMP = (CardView) fragmentView.findViewById(R.id.cardPickDateLNMP);
 
 
         editTextClinicName = (EditText) fragmentView.findViewById(R.id.editTextClinicName);
-        editTextMotherName = (EditText) fragmentView.findViewById(R.id.editTextMotherName);
-        editTextMotherId = (EditText) fragmentView.findViewById(R.id.editTextMotherId);
-        editTextMotherAge = (EditText) fragmentView.findViewById(R.id.editTextMotherAge);
-        editTextHeight = (EditText) fragmentView.findViewById(R.id.editTextHeight);
-        editTextPregCount = (EditText) fragmentView.findViewById(R.id.editTextPregCount);
-        editTextBirthCount = (EditText) fragmentView.findViewById(R.id.editTextBirthCount);
-        editTextChildrenCount = (EditText) fragmentView.findViewById(R.id.editTextChildrenCount);
+        editTextClientName = (EditText) fragmentView.findViewById(R.id.editTextClientName);
+        editTextAge = (EditText) fragmentView.findViewById(R.id.editTextMotherAge);
+        editTextReferralReason = (EditText) fragmentView.findViewById(R.id.reason_for_referral);
+        editTextVillageLeader = (EditText) fragmentView.findViewById(R.id.editTextVillageLeader);
+        textviewReferralProvider = (TextView) fragmentView.findViewById(R.id.provider_name);
+        textviewReferralProviderSupportGroup = (TextView) fragmentView.findViewById(R.id.provider_support_group);
         editTextDiscountId = (EditText) fragmentView.findViewById(R.id.editTextDiscountId);
-        editTextMotherOccupation = (EditText) fragmentView.findViewById(R.id.editTextMotherOccupation);
-        editTextPhysicalAddress = (EditText) fragmentView.findViewById(R.id.editTextPhysicalAddress);
-        editTextHusbandName = (EditText) fragmentView.findViewById(R.id.editTextHusbandName);
-        editTextHusbandOccupation = (EditText) fragmentView.findViewById(R.id.editTextHusbandOccupation);
+        editTextKataAddress = (EditText) fragmentView.findViewById(R.id.editTextKataAddress);
+        editTextKijiji = (EditText) fragmentView.findViewById(R.id.editTextKijiji);
+        editTextKijitongoji = (EditText) fragmentView.findViewById(R.id.editTextKijitongoji);
 
         button = (Button) fragmentView.findViewById(R.id.save);
 
-        educationAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, educationList);
-        educationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        serviceAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, serviceList);
+        serviceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerService = (MaterialSpinner) fragmentView.findViewById(R.id.spinnerService);
+        spinnerService.setAdapter(serviceAdapter);
 
-        spinnerMotherEducation = (MaterialSpinner) fragmentView.findViewById(R.id.spinnerMotherEducation);
-        spinnerHusbandEducation = (MaterialSpinner) fragmentView.findViewById(R.id.spinnerHusbandEducation);
-        spinnerMotherEducation.setAdapter(educationAdapter);
-        spinnerHusbandEducation.setAdapter(educationAdapter);
 
-        spinnerMotherEducation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerService.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i >= 0) {
-                    spinnerMotherEducation.setFloatingLabelText("Elimu Ya Mama");
-                    motherEduSelection = i;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-        spinnerHusbandEducation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i >= 0) {
-                    spinnerHusbandEducation.setFloatingLabelText("Elimu Ya Mume/Mwenza");
-                    husbandEduSelection = i;
+                    spinnerService.setFloatingLabelText("Aina za Huduma");
+                    clientServiceSelection = i;
 
                 }
             }
@@ -157,11 +143,10 @@ public class CHWPreRegisterFormFragment extends Fragment {
             }
         });
 
-        spinnerMotherEducation.setSelection(motherEduSelection);
-        spinnerHusbandEducation.setSelection(husbandEduSelection);
+        spinnerService.setSelection(clientServiceSelection);
 
 
-        radioGroupPregnancyAge = (RadioGroup) fragmentView.findViewById(R.id.radioGroupPregnancyAge);
+        radioGroupGender = (RadioGroup) fragmentView.findViewById(R.id.radioGroupGender);
 
         // initialize date to today's date
         textDate.setText(dateFormat.format(today.getTimeInMillis()));
@@ -182,37 +167,23 @@ public class CHWPreRegisterFormFragment extends Fragment {
             }
         });
 
-        cardDatePickLNMP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pickDate(R.id.textDateLNMP);
-            }
-        });
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isFormSubmissionOk()) {
                     //setting default values
-                    pregnantMom = getPregnantMom();
-                    pregnantMom.setDateLastVisited(today.getTimeInMillis());
-                    pregnantMom.setLastSmsToken("0");
-                    pregnantMom.setChwComment("no comment");
-                    pregnantMom.setAncAppointment1(false);
-                    pregnantMom.setAncAppointment2(false);
-                    pregnantMom.setAncAppointment3(false);
-                    pregnantMom.setAncAppointment4(false);
-                    pregnantMom.setReg_type("2");
-                    pregnantMom.setIs_pnc("false");
-                    pregnantMom.setIs_valid("true");
+                    clientReferral = getClientReferral();
+                    
 
                     // convert to json
-                    String gsonMom = gson.toJson(pregnantMom);
-                    Log.d(TAG, "mom = " + gsonMom);
+                    String gsonReferral = gson.toJson(clientReferral);
+                    Log.d(TAG, "referral = " + gsonReferral);
 
                     // todo start form submission
 
-                    ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(gsonMom, recordId, formName, getFormFieldsOverrides());
+                    ((SecuredNativeSmartRegisterActivity) getActivity()).saveFormSubmission(gsonReferral, recordId, formName, getFormFieldsOverrides());
                     getActivity().finish();
                 }
 
@@ -235,13 +206,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
                 if (id == R.id.textDate)
                     textDate.setText(dateFormat.format(pickedDate.getTimeInMillis()));
 
-                else if (id == R.id.textDateLNMP) {
-                    lnmp = pickedDate.getTimeInMillis();
-                    textDateLNMP.setText(dateFormat.format(lnmp));
-                    // update edd
-                    edd = DatesHelper.calculateEDDFromLNMP(lnmp);
-                    textEDD.setText(dateFormat.format(edd));
-                }
+
             }
         };
 
@@ -304,76 +269,63 @@ public class CHWPreRegisterFormFragment extends Fragment {
     }
 
     public boolean isFormSubmissionOk() {
-        if (TextUtils.isEmpty(editTextMotherName.getText())
-                || TextUtils.isEmpty(editTextClinicName.getText())
-                || TextUtils.isEmpty(editTextMotherId.getText())
-                || TextUtils.isEmpty(editTextMotherAge.getText())
-                || TextUtils.isEmpty(editTextHeight.getText())
-                || TextUtils.isEmpty(editTextPregCount.getText())
-                || TextUtils.isEmpty(editTextBirthCount.getText())
-                || TextUtils.isEmpty(editTextChildrenCount.getText())
+        if (
+                TextUtils.isEmpty(editTextClinicName.getText())
+                || TextUtils.isEmpty(editTextClientName.getText())
+                || TextUtils.isEmpty(editTextKataAddress.getText())
+                || TextUtils.isEmpty(editTextKijitongoji.getText())
+                || TextUtils.isEmpty(editTextKijiji.getText())
+                || TextUtils.isEmpty(editTextReferralReason.getText())
+                || TextUtils.isEmpty(editTextVillageLeader.getText())
                 || TextUtils.isEmpty(textPhone.getText())
-                || TextUtils.isEmpty(textDateLNMP.getText())
                 || TextUtils.isEmpty(editTextDiscountId.getText())
-                || TextUtils.isEmpty(editTextMotherOccupation.getText())
-                || TextUtils.isEmpty(editTextPhysicalAddress.getText())
-                || TextUtils.isEmpty(editTextHusbandName.getText())
-                || TextUtils.isEmpty(editTextHusbandOccupation.getText())) {
+                ) {
 
             message = "Tafadhali jaza taarifa zote muhimu";
             makeToast();
 
             return false;
 
-        } else if (radioGroupPregnancyAge.getCheckedRadioButtonId() == -1) {
+        } else if (radioGroupGender.getCheckedRadioButtonId() == -1) {
             // no radio checked
             message = "Tafadhali chagua umri wa ujauzito.";
             makeToast();
             return false;
 
-        } else if (spinnerMotherEducation.getSelectedItemPosition() < 0
-                || spinnerHusbandEducation.getSelectedItemPosition() < 0) {
+        } else if (spinnerService.getSelectedItemPosition() < 0) {
 
-            message = "Tafadhali chagua elimu ya mama na mwenza.";
+            message = "Tafadhali chagua aina ya huduma";
             makeToast();
             return false;
 
-        } else if ((int) lnmp == 0) {
-            message = "Tafadhali chagua tarehe ya LNMP.";
-            makeToast();
-            return false;
-
-        } else
+        }  else
             // all good
             return true;
     }
 
-    public PregnantMom getPregnantMom() {
-        PregnantMom mom = new PregnantMom();
+    public ClientReferral getClientReferral() {
+        ClientReferral referral = new ClientReferral();
 
-        mom.setFacilityId(editTextClinicName.getText().toString());
-        mom.setName(editTextMotherName.getText().toString());
-        mom.setId(editTextMotherId.getText().toString());
-        mom.setPhone(textPhone.getText().toString());
-        mom.setAge(Integer.valueOf(editTextMotherAge.getText().toString()));
-        mom.setHeight(Integer.valueOf(editTextHeight.getText().toString()));
-        mom.setPreviousFertilityCount(Integer.valueOf(editTextPregCount.getText().toString()));
-        mom.setSuccessfulBirths(Integer.valueOf(editTextBirthCount.getText().toString()));
-        mom.setLivingChildren(Integer.valueOf(editTextChildrenCount.getText().toString()));
-        mom.setAbove20WeeksPregnant(radioGroupPregnancyAge.getCheckedRadioButtonId() == R.id.radioAbove20);
-        mom.setDiscountId(editTextDiscountId.getText().toString());
-        mom.setEducation(spinnerMotherEducation.getSelectedItem().toString());
-        mom.setOccupation(editTextMotherOccupation.getText().toString());
-        mom.setPhysicalAddress(editTextPhysicalAddress.getText().toString());
-        mom.setHusbandName(editTextHusbandName.getText().toString());
-        mom.setHusbandEducation(spinnerHusbandEducation.getSelectedItem().toString());
-        mom.setHusbandOccupation(editTextHusbandOccupation.getText().toString());
-        mom.setDateLNMP(lnmp);
-        mom.setEdd(edd);
-        mom.setDateRegistration(today.getTimeInMillis());
+        referral.setReferralDate(textDate.getText().toString());
+        referral.setCBHS(editTextDiscountId.getText().toString());
+        referral.setClientName(editTextClientName.getText().toString());
+        if(radioGroupGender.getCheckedRadioButtonId() == R.id.male)
+            referral.setGender("me");
+        else
+            referral.setGender("fe");
+        referral.setKata(editTextKataAddress.getText().toString());
+        referral.setKijiji(editTextKijiji.getText().toString());
+        referral.setKijitongoji(editTextKijitongoji.getText().toString());
+        referral.setIsValid("true");
+        referral.setPhoneNumber(textPhone.getText().toString());
+        referral.setReferralFacility(editTextClinicName.getText().toString());
+        referral.setVillageLeader(editTextDiscountId.getText().toString());
+        referral.setReferralService(spinnerService.getSelectedItem().toString());
+        referral.setServiceProviderName(textviewReferralProvider.getText().toString());
+        referral.setServiceProviderGroup(textviewReferralProviderSupportGroup.getText().toString());
 
-        Log.d(TAG, "mom ="+ new Gson().toJson(mom));
-        return mom;
+        Log.d(TAG, "referral 1 ="+ new Gson().toJson(referral));
+        return referral;
     }
 
     public JSONObject getFormFieldsOverrides() {

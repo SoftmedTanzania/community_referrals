@@ -3,7 +3,7 @@ package org.ei.opensrp.repository;
 import android.content.SharedPreferences;
 
 import static org.ei.opensrp.AllConstants.*;
-g
+
 public class AllSharedPreferences {
     public static final String ANM_IDENTIFIER_PREFERENCE_KEY = "anmIdentifier";
     private static final String HOST = "HOST";

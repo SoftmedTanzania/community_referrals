@@ -36,12 +36,15 @@ import org.ei.opensrp.domain.form.FormInstance;
 import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.Application.UzaziSalamaApplication;
+import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
 import org.ei.opensrp.drishti.Fragments.AncSmartRegisterFragment;
 import org.ei.opensrp.drishti.Fragments.CHWFollowUpFragment;
 import org.ei.opensrp.drishti.Fragments.CHWPreRegisterFormFragment;
 import org.ei.opensrp.drishti.Fragments.CHWPreRegistrationFragment;
+import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
+import org.ei.opensrp.drishti.Repository.ClientReferralRepository;
 import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
@@ -138,7 +141,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         mPager.setCurrentItem(3);
         currentPage = 3;
 
-        Log.d(TAG, "table columns ="+new Gson().toJson(context().commonrepository("wazazi_salama_mother").common_TABLE_COLUMNS));
+        Log.d(TAG, "table columns ="+new Gson().toJson(context().commonrepository("client_referral").common_TABLE_COLUMNS));
+
 
     }
 
@@ -715,58 +719,129 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     @Override
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
         // save the form
-        final PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
 
-        MotherPersonObject motherPersonObject = new MotherPersonObject(id, null, pregnantMom);
-        ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
-        Log.d(TAG, "motherPersonObject = " + gson.toJson(motherPersonObject));
-        Log.d(TAG, "values = " + gson.toJson(values));
+        if(formName.equals("client_hiv_referral_form")){
+            final ClientReferral clientReferral = gson.fromJson(formSubmission, ClientReferral.class);
 
-        CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
-        commonRepository.customInsert(values);
+            ClientReferralPersonObject clientReferralPersonObject = new ClientReferralPersonObject(id, null, clientReferral);
+            ContentValues values = new ClientReferralRepository().createValuesFor(clientReferralPersonObject);
+            Log.d(TAG, "clientReferralPersonObject = " + gson.toJson(clientReferralPersonObject));
+            Log.d(TAG, "values = " + gson.toJson(values));
 
-        CommonPersonObject c = commonRepository.findByCaseID(id);
-        List<FormField> formFields = new ArrayList<>();
+            CommonRepository commonRepository = context().commonrepository("client_referral");
+            commonRepository.customInsert(values);
+
+            CommonPersonObject c = commonRepository.findByCaseID(id);
+            List<FormField> formFields = new ArrayList<>();
 
 
-        formFields.add(new FormField("id", c.getCaseId(), commonRepository.TABLE_NAME + "." + "id"));
+            formFields.add(new FormField("id", c.getCaseId(), commonRepository.TABLE_NAME + "." + "id"));
 
 
-        formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
+            formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
 
-        for ( String key : c.getDetails().keySet() ) {
-            Log.d(TAG,"key = "+key);
-            FormField f = null;
-            if(!key.equals("FACILITY_ID")) {
-                f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
-            }else{
-                f = new FormField(key, c.getDetails().get(key), "facility.id");
-            }
-            formFields.add(f);
-        }
-
-        for ( String key : c.getColumnmaps().keySet() ) {
-            Log.d(TAG,"key = "+key);
-            FormField f = null;
-            if(!key.equals("FACILITY_ID")) {
-                f = new FormField(key, c.getColumnmaps().get(key), commonRepository.TABLE_NAME + "." + key);
-            }else{
-                f = new FormField(key, c.getColumnmaps().get(key), "facility.id");
+            for ( String key : c.getDetails().keySet() ) {
+                Log.d(TAG,"key = "+key);
+                FormField f = null;
+                if(!key.equals("ReferralFacility")) {
+                    f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
+                }else{
+                    f = new FormField(key, c.getDetails().get(key), "facility.id");
+                }
+                formFields.add(f);
             }
 
-            formFields.add(f);
+            for ( String key : c.getColumnmaps().keySet() ) {
+                Log.d(TAG,"key = "+key);
+                FormField f = null;
+                if(!key.equals("ReferralFacility")) {
+                    f = new FormField(key, c.getColumnmaps().get(key), commonRepository.TABLE_NAME + "." + key);
+                }else{
+                    f = new FormField(key, c.getColumnmaps().get(key), "facility.id");
+                }
+
+                formFields.add(f);
+
+
+            }
+
+            Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
+
+            FormData formData = new FormData("client_referral","/model/instance/client_referral_form/",formFields,null);
+            FormInstance formInstance = new FormInstance(formData,"1");
+            FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"client_hiv_referral_form",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
+            context().formDataRepository().saveFormSubmission(submission);
+
+            Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
+
+
+
+            new  org.ei.opensrp.drishti.util.AsyncTask<Void, Void, Void>(){
+                @Override
+                protected Void doInBackground(Void... params) {
+                    if(!clientReferral.getPhoneNumber().equals(""))
+                        Utils.sendRegistrationAlert(clientReferral.getPhoneNumber());
+                    return null;
+                }
+            }.execute();
 
 
         }
+        else
+        {
 
-        Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
+            final PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
 
-        FormData formData = new FormData("wazazi_salama_mother","/model/instance/Wazazi_Salama_ANC_Registration/",formFields,null);
-        FormInstance formInstance = new FormInstance(formData,"1");
-        FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"wazazi_salama_pregnant_mothers_registration",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
-        context().formDataRepository().saveFormSubmission(submission);
+            MotherPersonObject motherPersonObject = new MotherPersonObject(id, null, pregnantMom);
+            ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
+            Log.d(TAG, "motherPersonObject = " + gson.toJson(motherPersonObject));
+            Log.d(TAG, "values = " + gson.toJson(values));
 
-        Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
+            CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
+            commonRepository.customInsert(values);
+
+            CommonPersonObject c = commonRepository.findByCaseID(id);
+            List<FormField> formFields = new ArrayList<>();
+
+
+            formFields.add(new FormField("id", c.getCaseId(), commonRepository.TABLE_NAME + "." + "id"));
+
+
+            formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
+
+            for ( String key : c.getDetails().keySet() ) {
+                Log.d(TAG,"key = "+key);
+                FormField f = null;
+                if(!key.equals("FACILITY_ID")) {
+                    f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
+                }else{
+                    f = new FormField(key, c.getDetails().get(key), "facility.id");
+                }
+                formFields.add(f);
+            }
+
+            for ( String key : c.getColumnmaps().keySet() ) {
+                Log.d(TAG,"key = "+key);
+                FormField f = null;
+                if(!key.equals("FACILITY_ID")) {
+                    f = new FormField(key, c.getColumnmaps().get(key), commonRepository.TABLE_NAME + "." + key);
+                }else{
+                    f = new FormField(key, c.getColumnmaps().get(key), "facility.id");
+                }
+
+                formFields.add(f);
+
+
+            }
+
+            Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
+
+            FormData formData = new FormData("wazazi_salama_mother","/model/instance/Wazazi_Salama_ANC_Registration/",formFields,null);
+            FormInstance formInstance = new FormInstance(formData,"1");
+            FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"wazazi_salama_pregnant_mothers_registration",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
+            context().formDataRepository().saveFormSubmission(submission);
+
+            Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
 
 
 //        TODO finish this better implementation for saving data to the database
@@ -786,16 +861,18 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //        }
 
 
-        new  org.ei.opensrp.drishti.util.AsyncTask<Void, Void, Void>(){
-            @Override
-            protected Void doInBackground(Void... params) {
-                if(!pregnantMom.getPhone().equals(""))
-                Utils.sendRegistrationAlert(pregnantMom.getPhone());
-                return null;
-            }
-        }.execute();
+            new  org.ei.opensrp.drishti.util.AsyncTask<Void, Void, Void>(){
+                @Override
+                protected Void doInBackground(Void... params) {
+                    if(!pregnantMom.getPhone().equals(""))
+                        Utils.sendRegistrationAlert(pregnantMom.getPhone());
+                    return null;
+                }
+            }.execute();
 
-    }
+        }
+        }
+
 
     public void updateFormSubmission(MotherPersonObject motherPersonObject, String id){
 

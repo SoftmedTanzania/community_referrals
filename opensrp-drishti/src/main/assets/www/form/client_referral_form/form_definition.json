@@ -1,0 +1,61 @@
+{
+    "form_data_definition_version": "4",
+    "form": {
+        "bind_type": "client_referral",
+        "default_bind_path": "/model/instance/client_referral_form/",
+        "fields": [
+            {
+                "name": "id",
+                "shouldLoadValue": true
+            },
+            {
+                "name": "relationalid"
+            },
+            {
+                "name": "ClientName"
+            },
+            {
+                "name": "CBHS"
+            },
+            {
+                "name": "ReferralDate"
+            },
+            {
+                "name": "IS_VALID"
+            },
+            {
+                "name": "ReferralFacility"
+            },
+            {
+                "name": "ReferralReason"
+            },
+            {
+                "name": "Service"
+            },
+            {
+                "name": "Gender"
+            },
+            {
+                "name": "PhoneNumber"
+            },
+            {
+                "name": "Kata"
+            },
+            {
+                "name": "Kijiji"
+            },
+            {
+                "name": "kijitongoji"
+            },
+            {
+                "name": "VillageLeader"
+            },
+            {
+                "name": "ServiceProviderName"
+            },
+            {
+                "name": "ServiceProviderGroup"
+            }
+        ]
+    }
+}
