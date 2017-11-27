@@ -3,7 +3,6 @@ package org.ei.opensrp.drishti.pageradapter;
 import android.content.Context;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,12 +14,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import org.ei.opensrp.drishti.AncSmartRegisterActivity;
-import org.ei.opensrp.drishti.DataModels.PregnantMom;
+import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.R;
-import org.ei.opensrp.drishti.Repository.MotherPersonObject;
-import org.ei.opensrp.drishti.chw.CHWSmartRegisterActivity;
-import org.ei.opensrp.drishti.DataModels.PreRegisteredMother;
-import org.ei.opensrp.drishti.util.DatesHelper;
+import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.util.Utils;
 
 import java.text.SimpleDateFormat;
@@ -35,12 +31,12 @@ import java.util.Locale;
 public class CHWRegisterRecyclerAdapter extends
         RecyclerView.Adapter<CHWRegisterRecyclerAdapter.ViewHolder> {
 
-    private List<MotherPersonObject> mothers;
+    private List<ClientReferralPersonObject> clients;
     private Context mContext;
-    private MotherPersonObject mother;
+    private ClientReferralPersonObject client;
 
-    public CHWRegisterRecyclerAdapter(Context context, List<MotherPersonObject> mothers) {
-        this.mothers = mothers;
+    public CHWRegisterRecyclerAdapter(Context context, List<ClientReferralPersonObject> clients) {
+        this.clients = clients;
         this.mContext = context;
     }
 
@@ -61,50 +57,49 @@ public class CHWRegisterRecyclerAdapter extends
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
-        mother = mothers.get(position);
-        String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
-        PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
+        client = clients.get(position);
+        String gsonReferral = Utils.convertStandardJSONString(client.getDetails());
+        ClientReferral clientReferral = new Gson().fromJson(gsonReferral,ClientReferral.class);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-        String reg_date = dateFormat.format(pregnantMom.getDateLastVisited());
+//        String reg_date = dateFormat.format(clientReferral.getDateLastVisited());
 
         // Set item views based on your views and data model
         TextView name = viewHolder.nameTextView;
-        TextView edd = viewHolder.eddTextView;
+        TextView referralDate = viewHolder.referralDateTextView;
         TextView visited = viewHolder.visitedTextView;
-        TextView risk = viewHolder.riskTextView;
+        TextView CBHS = viewHolder.CBHSTextView;
 
-        visited.setText(reg_date);
-        edd.setText(mother.getEXPECTED_DELIVERY_DATE());
-        name.setText(mother.getMOTHERS_FIRST_NAME() +" "+mother.getMOTHERS_LAST_NAME());
-        //todo check the risk level factor from the indicators
-        risk.setText("high");
+        visited.setText("once");
+        referralDate.setText(clientReferral.getReferralDate());
+        name.setText(clientReferral.getfName());
+        CBHS.setText(clientReferral.getCBHS());
 
     }
 
     @Override
     public int getItemCount() {
-        return mothers.size();
+        return clients.size();
     }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView nameTextView, eddTextView, visitedTextView, riskTextView;
+        TextView nameTextView, referralDateTextView, visitedTextView, CBHSTextView;
         ImageView iconOptions;
 
         public ViewHolder(View itemView) {
             super(itemView);
             nameTextView = (TextView) itemView.findViewById(R.id.name);
-            eddTextView = (TextView) itemView.findViewById(R.id.edd);
+            referralDateTextView = (TextView) itemView.findViewById(R.id.referralDate);
             visitedTextView = (TextView) itemView.findViewById(R.id.visited);
-            riskTextView = (TextView) itemView.findViewById(R.id.risk);
+            CBHSTextView = (TextView) itemView.findViewById(R.id.CBHS);
             iconOptions = (ImageView) itemView.findViewById(R.id.iconOptions);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // pass mother to show details
-                    ((AncSmartRegisterActivity) mContext).showPreRegistrationDetailsDialog(mothers.get(getAdapterPosition()));
+//                    ((AncSmartRegisterActivity) mContext).showPreRegistrationDetailsDialog(clients.get(getAdapterPosition()));
                 }
             });
 
@@ -135,7 +130,7 @@ public class CHWRegisterRecyclerAdapter extends
                 switch (item.getItemId()) {
                     // TODO: handle option selected
                     case R.id.popOpt1:
-                        ((AncSmartRegisterActivity) mContext).showPreRegistrationVisitDialog(mothers.get(position));
+//                        ((AncSmartRegisterActivity) mContext).showPreRegistrationVisitDialog(clients.get(position));
                         return true;
 
                     case R.id.popOpt2:
@@ -144,7 +139,7 @@ public class CHWRegisterRecyclerAdapter extends
 
                     case R.id.popOpt3:
                         // delete mother
-                        ((AncSmartRegisterActivity) mContext).confirmDelete(mothers.get(position));
+//                        ((AncSmartRegisterActivity) mContext).confirmDelete(clients.get(position));
                         return true;
 
                     default:

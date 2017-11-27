@@ -18,6 +18,7 @@ import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.AncRegisterListAdapter;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.DataModels.PreRegisteredMother;
+import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.pageradapter.CHWRegisterRecyclerAdapter;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
@@ -44,10 +45,10 @@ public class CHWPreRegistrationFragment extends SecuredNativeSmartRegisterCursor
     private CommonRepository commonRepository;
     private Gson gson = new Gson();
     private android.content.Context appContext;
-    private List<MotherPersonObject> motherPersonList = new ArrayList<>();
+    private List<ClientReferralPersonObject> clientReferralPersonObjectList = new ArrayList<>();
     private Cursor cursor;
     private static final String TAG = CHWPreRegistrationFragment.class.getSimpleName(),
-            TABLE_NAME = "wazazi_salama_mother";
+            TABLE_NAME = "client_referral";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -94,16 +95,17 @@ public class CHWPreRegistrationFragment extends SecuredNativeSmartRegisterCursor
         View v= inflater.inflate(R.layout.fragment_chwregistration, container, false);
 
         RecyclerView recyclerView = (RecyclerView)v.findViewById(R.id.pre_reg_listView);
-        commonRepository = context().commonrepository("wazazi_salama_mother");
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where IS_VALID='true'" );
+        commonRepository = context().commonrepository("client_referral");
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME );
+//        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where IS_VALID ='true'" );
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
 
-        this.motherPersonList = Utils.convertToMotherPersonObjectList(commonPersonObjectList);
-        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + motherPersonList.size());
+        this.clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
+        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + clientReferralPersonObjectList.size());
 
-        CHWRegisterRecyclerAdapter pager = new CHWRegisterRecyclerAdapter(getActivity(),motherPersonList);
+        CHWRegisterRecyclerAdapter pager = new CHWRegisterRecyclerAdapter(getActivity(),clientReferralPersonObjectList);
 
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());

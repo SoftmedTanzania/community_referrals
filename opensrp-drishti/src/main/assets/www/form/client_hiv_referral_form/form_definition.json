@@ -2,7 +2,7 @@
     "form_data_definition_version": "4",
     "form": {
         "bind_type": "client_referral",
-        "default_bind_path": "/model/instance/client_referral_form/",
+        "default_bind_path": "/model/instance/client_hiv_referral_form/",
         "fields": [
             {
                 "name": "id",
@@ -28,6 +28,9 @@
             },
             {
                 "name": "CBHS"
+            },
+            {
+                "name": "CTCNumber"
             },
             {
                 "name": "ReferralDate"

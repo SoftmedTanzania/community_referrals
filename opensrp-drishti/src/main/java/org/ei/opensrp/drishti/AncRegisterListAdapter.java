@@ -10,17 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
+import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
-import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
-import org.ei.opensrp.drishti.Repository.MotherPersonObject;
+import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.util.Utils;
 
 import java.util.ArrayList;
@@ -38,10 +36,10 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
     private Cursor cursor;
     private Gson gson = new Gson();
     private android.content.Context appContext;
-    private List<MotherPersonObject> motherPersonList = new ArrayList<>();
+    private List<ClientReferralPersonObject> clientReferralPersonObjectList = new ArrayList<>();
 
     private static final String TAG = AncRegisterListAdapter.class.getSimpleName(),
-            TABLE_NAME = "wazazi_salama_mother";
+            TABLE_NAME = "client_referral";
 
 
     public AncRegisterListAdapter(Context context, CommonRepository commonRepository, Cursor cursor, android.content.Context appContext) {
@@ -50,11 +48,11 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
 
-        this.motherPersonList = Utils.convertToMotherPersonObjectList(commonPersonObjectList);
+        this.clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
 
-        Log.d(TAG, "mother list = " + gson.toJson(motherPersonList));
+        Log.d(TAG, "mother list = " + gson.toJson(clientReferralPersonObjectList));
 
-        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + motherPersonList.size());
+        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + clientReferralPersonObjectList.size());
 
     }
 
@@ -78,7 +76,7 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
                 public void onClick(View view) {
                     // go to AncDetailActivity
 
-                    String gsonMom = Utils.convertStandardJSONString(motherPersonList.get(getAdapterPosition()).getDetails());
+                    String gsonMom = Utils.convertStandardJSONString(clientReferralPersonObjectList.get(getAdapterPosition()).getDetails());
                     final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
                     Log.d(TAG, "commonPersonList type= " + pregnantMom.getReg_type());
                     if(pregnantMom.getReg_type().equals("2")){
@@ -86,7 +84,7 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
                         int index = ((AncSmartRegisterActivity) appContext).getFormIndex("pregnant_mothers_registration");
                         AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) ((AncSmartRegisterActivity) appContext).getDisplayFormFragmentAtIndex(index);
 
-                            displayFormFragment.setMotherDetails(motherPersonList.get(getAdapterPosition()));
+//                            displayFormFragment.setMotherDetails(clientReferralPersonObjectList.get(getAdapterPosition()));
                         ((AncSmartRegisterActivity) appContext).switchToPage(1);
 
 
@@ -112,14 +110,13 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         // todo get item form list
-        MotherPersonObject motherPersonObject = motherPersonList.get(position);
-        PregnantMom mom = gson.fromJson(convertStandardJSONString(motherPersonObject.getDetails()), PregnantMom.class);
+        ClientReferralPersonObject clientReferralPersonObject = clientReferralPersonObjectList.get(position);
+        ClientReferral clientReferral = gson.fromJson(convertStandardJSONString(clientReferralPersonObject.getDetails()), ClientReferral.class);
 
-        holder.textName.setText(mom.getName());
-        holder.textEDD.setText(motherPersonObject.getEXPECTED_DELIVERY_DATE());
-        holder.textPhysicalAddress.setText(mom.getPhysicalAddress());
-        holder.textAge.setText("Miaka");
-        holder.textAge.append(" " + mom.getAge());
+        holder.textName.setText(clientReferral.getfName());
+        holder.textEDD.setText(clientReferral.getReferralDate());
+        holder.textPhysicalAddress.setText(clientReferral.getKata());
+
         //  Glide.with(appContext).load("photoUrl").into(holder.imageProfilePic);
 
     }
@@ -127,7 +124,7 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
     @Override
     public int getItemCount() {
         //  int itemCount = (int) commonRepository.count();
-        int itemCount = motherPersonList.size();
+        int itemCount = clientReferralPersonObjectList.size();
         Log.d(TAG, "item count = " + itemCount);
         return itemCount;
     }

@@ -15,10 +15,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import org.ei.opensrp.drishti.AncSmartRegisterActivity;
-import org.ei.opensrp.drishti.DataModels.PregnantMom;
+import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.R;
-import org.ei.opensrp.drishti.Repository.MotherPersonObject;
-import org.ei.opensrp.drishti.util.DatesHelper;
+import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.util.Utils;
 
 import java.text.SimpleDateFormat;
@@ -33,11 +32,11 @@ import java.util.Locale;
 public class CHWFollowUpPagerAdapter extends
         RecyclerView.Adapter<CHWFollowUpPagerAdapter.ViewHolder> {
 
-    private List<MotherPersonObject> fMother;
+    private List<ClientReferralPersonObject> client;
     private Context mContext;
 
-    public CHWFollowUpPagerAdapter(Context context, List<MotherPersonObject> mothers) {
-        fMother = mothers;
+    public CHWFollowUpPagerAdapter(Context context, List<ClientReferralPersonObject> clients) {
+        client = clients;
         mContext = context;
 
     }
@@ -59,66 +58,53 @@ public class CHWFollowUpPagerAdapter extends
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
-        MotherPersonObject mother = fMother.get(position);
-        String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
-        Log.d("CHWFollowUpPagerAdapter", "gsonMom = " + gsonMom);
-        PregnantMom pregnantMom = new Gson().fromJson(gsonMom, PregnantMom.class);
+        ClientReferralPersonObject clientReferralPersonObject = client.get(position);
+        String gsonReferral = Utils.convertStandardJSONString(clientReferralPersonObject.getDetails());
+        Log.d("CHWFollowUpPagerAdapter", "gsonReferral = " + gsonReferral);
+        ClientReferral clientReferral = new Gson().fromJson(gsonReferral, ClientReferral.class);
 
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-        long lnmp = pregnantMom.getDateLNMP();
-        String anc1 = dateFormat.format(DatesHelper.calculate1stVisitFromLNMP(lnmp));
-        String anc2 = dateFormat.format(DatesHelper.calculate2ndVisitFromLNMP(lnmp));
-        String anc3 = dateFormat.format(DatesHelper.calculate3rdVisitFromLNMP(lnmp));
-        String anc4 = dateFormat.format(DatesHelper.calculate4thVisitFromLNMP(lnmp));
 
-        viewHolder.nameTextView.setText(mother.getMOTHERS_FIRST_NAME() + " " + mother.getMOTHERS_LAST_NAME());
-        viewHolder.ageTextView.setText(String.valueOf(pregnantMom.getAge()) +" years");
-        viewHolder.riskTextView.setText("high");
-        viewHolder.villageTextView.setText(pregnantMom.getPhysicalAddress());
-        viewHolder.uniqueIDTextView.setText(pregnantMom.getId());
-        viewHolder.facilityTextView.setText(pregnantMom.getFacilityId());
-        viewHolder.anc1TextView.setText(anc1);
-        viewHolder.anc2TextView.setText(anc2);
-        viewHolder.anc3TextView.setText(anc3);
-        viewHolder.anc4TextView.setText(anc4);
+
+        viewHolder.nameTextView.setText(clientReferral.getfName());
+        viewHolder.ageTextView.setText(clientReferral.getClientDOB() +" years");
+        viewHolder.communicationTextView.setText(clientReferral.getPhoneNumber());
+        viewHolder.villageTextView.setText(clientReferral.getKijiji() +"/ "+clientReferral.getKijitongoji());
+        viewHolder.scheduleDateTextView.setText(clientReferral.getReferralDate());
+        viewHolder.facilityTextView.setText(clientReferral.getFacilityId());
 
     }
 
     @Override
     public int getItemCount() {
-        return fMother.size();
+        return client.size();
     }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView nameTextView, riskTextView, uniqueIDTextView, villageTextView, ageTextView, numberTextView, facilityTextView, anc1TextView, anc2TextView, anc3TextView, anc4TextView;
+        public TextView nameTextView, communicationTextView, scheduleDateTextView, villageTextView, ageTextView,facilityTextView;
         public ImageView iconOptions;
 
         public ViewHolder(View itemView) {
 
             super(itemView);
 
-            iconOptions = (ImageView) itemView.findViewById(R.id.action_options);
-            nameTextView = (TextView) itemView.findViewById(R.id.name);
-            riskTextView = (TextView) itemView.findViewById(R.id.risk);
-            uniqueIDTextView = (TextView) itemView.findViewById(R.id.unique);
-            villageTextView = (TextView) itemView.findViewById(R.id.location);
-            ageTextView = (TextView) itemView.findViewById(R.id.age);
-            numberTextView = (TextView) itemView.findViewById(R.id.communication);
+            nameTextView = (TextView) itemView.findViewById(R.id.textName);
+            communicationTextView = (TextView) itemView.findViewById(R.id.communication);
+            villageTextView = (TextView) itemView.findViewById(R.id.textPhysicalAddress);
+            ageTextView = (TextView) itemView.findViewById(R.id.textAge);
+            scheduleDateTextView = (TextView) itemView.findViewById(R.id.textNextVisitDate);
             facilityTextView = (TextView) itemView.findViewById(R.id.facility);
-            anc1TextView = (TextView) itemView.findViewById(R.id.date_one);
-            anc2TextView = (TextView) itemView.findViewById(R.id.date_two);
-            anc3TextView = (TextView) itemView.findViewById(R.id.date_three);
-            anc4TextView = (TextView) itemView.findViewById(R.id.date_four);
+            iconOptions = (ImageView) itemView.findViewById(R.id.imageProfilePic);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // pass mother to show details
-                    ((AncSmartRegisterActivity) mContext).showFollowUpDetailsDialog(fMother.get(getAdapterPosition()));
+//                    ((AncSmartRegisterActivity) mContext).showFollowUpDetailsDialog(client.get(getAdapterPosition()));
                 }
             });
 
@@ -147,7 +133,7 @@ public class CHWFollowUpPagerAdapter extends
                 switch (item.getItemId()) {
                     // TODO: handle option selected
                     case R.id.popOpt1:
-                        ((AncSmartRegisterActivity) mContext).showFollowUpFormDialog(fMother.get(position));
+//                        ((AncSmartRegisterActivity) mContext).showFollowUpFormDialog(fMother.get(position));
                         return true;
 
                     case R.id.popOpt2:

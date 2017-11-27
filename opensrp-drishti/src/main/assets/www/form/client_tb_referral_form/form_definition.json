@@ -2,7 +2,7 @@
     "form_data_definition_version": "4",
     "form": {
         "bind_type": "client_referral",
-        "default_bind_path": "/model/instance/client_referral_form/",
+        "default_bind_path": "/model/instance/client_tb_referral_form/",
         "fields": [
             {
                 "name": "id",
@@ -21,13 +21,13 @@
                 "name": "lName"
             },
             {
-                "name": "Status"
-            },
-            {
                 "name": "clientDOB"
             },
             {
                 "name": "CBHS"
+            },
+            {
+                "name": "CTCNumber"
             },
             {
                 "name": "ReferralDate"
@@ -36,10 +36,31 @@
                 "name": "IS_VALID"
             },
             {
-                "name": "ReferralFacility"
+                "name": "Status"
+            },
+            {
+                "name": "FacilityId"
             },
             {
                 "name": "ReferralReason"
+            },
+            {
+                "name": "has2WeekCough"
+            },
+            {
+                "name": "hasFever"
+            },
+            {
+                "name": "hadWeightLoss"
+            },
+            {
+                "name": "hasSevereSweating"
+            },
+            {
+                "name": "hasBloodCough"
+            },
+            {
+                "name": "isLostFollowUp"
             },
             {
                 "name": "Service"
@@ -63,7 +84,7 @@
                 "name": "VillageLeader"
             },
             {
-                "name": "ServiceProviderName"
+                "name": "ServiceProviderId"
             },
             {
                 "name": "ServiceProviderGroup"

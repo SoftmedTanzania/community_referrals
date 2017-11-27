@@ -25,6 +25,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 import org.apache.http.protocol.HTTP;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
+import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -112,6 +113,31 @@ public class Utils {
             return null;
         }
     }
+    public static ClientReferralPersonObject convertToClientPersonObject(CommonPersonObject commonPersonObject) {
+        String details = commonPersonObject.getColumnmaps().get("details");
+        Log.d(TAG, "details string = " + convertStandardJSONString(details));
+        try {
+            return new ClientReferralPersonObject(
+                    commonPersonObject.getColumnmaps().get("id"),
+                    commonPersonObject.getColumnmaps().get("relationalid"),
+                    commonPersonObject.getColumnmaps().get("fName"),
+                    commonPersonObject.getColumnmaps().get("mName"),
+                    commonPersonObject.getColumnmaps().get("lName"),
+                    commonPersonObject.getColumnmaps().get("CBHS"),
+                    commonPersonObject.getColumnmaps().get("CTCNumber"),
+                    commonPersonObject.getColumnmaps().get("ReferralDate"),
+                    commonPersonObject.getColumnmaps().get("FacilityId"),
+                    commonPersonObject.getColumnmaps().get("ReferralReason"),
+                    commonPersonObject.getColumnmaps().get("ReferralService"),
+                    commonPersonObject.getColumnmaps().get("Status"),
+                    commonPersonObject.getColumnmaps().get("isValid"),
+                    commonPersonObject.getColumnmaps().get("details")
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 
     public static List<MotherPersonObject> convertToMotherPersonObjectList(List<CommonPersonObject> commonPersonObjectsList) {
@@ -124,6 +150,15 @@ public class Utils {
         return mothers;
     }
 
+    public static List<ClientReferralPersonObject> convertToClientReferralPersonObjectList(List<CommonPersonObject> commonPersonObjectsList) {
+        List<ClientReferralPersonObject> clientReferralPersonObjects = new ArrayList<>();
+        for (CommonPersonObject common : commonPersonObjectsList) {
+            clientReferralPersonObjects.add(convertToClientPersonObject(common));
+        }
+
+
+        return clientReferralPersonObjects;
+    }
     public static String convertStandardJSONString(String data_json) {
         data_json = data_json.replaceAll("\\\\r\\\\n", "");
         data_json = data_json.replace("\"{", "{");

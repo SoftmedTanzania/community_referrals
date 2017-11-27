@@ -9,7 +9,7 @@
     {
       "name": "client_referral",
       "columns": [
-        {"name":"ClientName"},{"name":"CBHS"},{"name":"ReferralDate"},{"name":"ReferralFacility"},{"name":"ReferralReason"},{"name":"Service"},{"name":"IS_VALID"}
+        {"name":"fName"},{"name":"mName"},{"name":"lName"},{"name":"CBHS"},{"name":"CTCNumber"},{"name":"ReferralDate"},{"name":"FacilityId"},{"name":"ReferralReason"},{"name":"Service"},{"name":"IS_VALID"},{"name":"Status"}
       ]
     },
     {
@@ -21,7 +21,13 @@
     {
       "name": "facility",
       "columns": [
-        {"name":"FACILITY_NAME"},{"name":"FACILITY_ID"}
+        {"name":"Name"}
+      ]
+    },
+    {
+      "name": "follow_up",
+      "columns": [
+        {"name":"Reason"},{"name":"Date"},{"name":"IsValid"}
       ]
     }
   ]

@@ -40,10 +40,10 @@ public class CHWPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Mama wajawazito";
+                return "wakufuatilia";
 
             case 1:
-                return "usaili wa awali";
+                return "rufaa ya awali";
 
             default:
                 return String.valueOf(position + 1);

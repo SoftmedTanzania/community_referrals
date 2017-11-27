@@ -14,9 +14,9 @@
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="     Wazazi Salama Registry"
+            android:text="    HTM-Referrals"
             android:textColor="#fff"
-            android:textSize="16sp"/>
+            android:textSize="18sp"/>
 
         <ImageButton
             android:visibility="gone"

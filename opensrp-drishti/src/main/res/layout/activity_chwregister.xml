@@ -21,11 +21,11 @@
                 android:layout_height="wrap_content"
                 app:tabBackground="@color/light_blue"
                 app:tabGravity="fill"
-                app:tabIndicatorColor="#FFFF"
+                app:tabIndicatorColor="#f72c1d"
                 app:tabIndicatorHeight="2dp"
                 app:tabMode="fixed"
-                app:tabSelectedTextColor="#FFFF"
-                app:tabTextColor="@android:color/white" />
+                app:tabSelectedTextColor="#f72c1d"
+                app:tabTextColor="#f72c1d" />
         </LinearLayout>
 
 

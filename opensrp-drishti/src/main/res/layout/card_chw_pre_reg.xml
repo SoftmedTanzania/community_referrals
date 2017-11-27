@@ -20,13 +20,15 @@
             android:background="#fff">
 
             <ImageView
+                android:tintMode="multiply"
                 android:id="@+id/profilePic"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:padding="16dp"
                 android:layout_alignParentLeft="true"
                 android:layout_margin="8dp"
                 android:background="@drawable/shape_circle"
-                android:src="@drawable/unfpa_anc" />
+                android:src="@drawable/black_h" />
 
             <ImageView
                 android:id="@+id/iconOptions"
@@ -51,7 +53,7 @@
                 android:text="Tarehe ya Rufaa:" />
 
             <org.ei.opensrp.view.customControls.CustomFontTextView
-                android:id="@+id/edd"
+                android:id="@+id/referralDate"
                 style="@style/CustomFontTextViewStyle.noPadding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,7 +73,7 @@
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="16dp"
                 android:layout_toRightOf="@+id/profilePic"
-                android:text="JIna Kamili: " />
+                android:text="Jina Kamili: " />
 
             <org.ei.opensrp.view.customControls.CustomFontTextView
                 android:id="@+id/name"
@@ -85,7 +87,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <org.ei.opensrp.view.customControls.CustomFontTextView
-                android:id="@+id/risk"
+                android:id="@+id/CBHS"
                 style="@style/CustomFontTextViewStyle.ListView.Small.NoPadding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -100,9 +102,9 @@
                 android:id="@+id/textRisk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/risk"
+                android:layout_alignTop="@+id/CBHS"
                 android:layout_marginRight="0dp"
-                android:layout_toLeftOf="@+id/risk"
+                android:layout_toLeftOf="@+id/CBHS"
                 android:text="CBHS: " />
 
             <TextView

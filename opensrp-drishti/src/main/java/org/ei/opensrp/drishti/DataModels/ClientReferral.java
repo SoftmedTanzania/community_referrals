@@ -6,10 +6,104 @@ package org.ei.opensrp.drishti.DataModels;
 
 public class ClientReferral {
 
-    private String clientName,ReferralDate,ReferralFacility,ReferralReason,isValid, ReferralService,kata,Kijiji,Kijitongoji,VillageLeader,ServiceProviderGroup,ServiceProviderName,PhoneNumber,Service,Gender,CBHS;
+    private String fName,mName,lName,clientDOB,ReferralDate, FacilityId,ReferralReason,isValid, ProviderMobileNumber,kata,Kijiji,Kijitongoji,VillageLeader,ServiceProviderGroup, ServiceProviderId,PhoneNumber,Service,Gender,CBHS,CTCNumber,Status;
+    private boolean has2WeekCough,
+            hasFever,
+            hadWeightLoss,
+            hasSevereSweating,
+            hasBloodCough,
+            isLostFollowUp;
 
-    public String getClientName() {
-        return clientName;
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
+
+    public String getmName() {
+        return mName;
+    }
+
+    public void setmName(String mName) {
+        this.mName = mName;
+    }
+
+    public String getlName() {
+        return lName;
+    }
+
+    public void setlName(String lName) {
+        this.lName = lName;
+    }
+
+    public String getClientDOB() {
+        return clientDOB;
+    }
+
+    public String getCTCNumber() {
+        return CTCNumber;
+    }
+
+    public boolean isHas2WeekCough() {
+        return has2WeekCough;
+    }
+
+    public void setHas2WeekCough(boolean has2WeekCough) {
+        this.has2WeekCough = has2WeekCough;
+    }
+
+    public boolean isHasFever() {
+        return hasFever;
+    }
+
+    public void setHasFever(boolean hasFever) {
+        this.hasFever = hasFever;
+    }
+
+    public boolean isHadWeightLoss() {
+        return hadWeightLoss;
+    }
+
+    public void setHadWeightLoss(boolean hadWeightLoss) {
+        this.hadWeightLoss = hadWeightLoss;
+    }
+
+    public boolean isHasSevereSweating() {
+        return hasSevereSweating;
+    }
+
+    public void setHasSevereSweating(boolean hasSevereSweating) {
+        this.hasSevereSweating = hasSevereSweating;
+    }
+
+    public boolean isHasBloodCough() {
+        return hasBloodCough;
+    }
+
+    public void setHasBloodCough(boolean hasBloodCough) {
+        this.hasBloodCough = hasBloodCough;
+    }
+
+    public boolean isLostFollowUp() {
+        return isLostFollowUp;
+    }
+
+    public void setLostFollowUp(boolean lostFollowUp) {
+        isLostFollowUp = lostFollowUp;
+    }
+
+    public void setCTCNumber(String CTCNumber) {
+        this.CTCNumber = CTCNumber;
+    }
+
+    public void setClientDOB(String clientDOB) {
+        this.clientDOB = clientDOB;
+    }
+
+    public String getfName() {
+        return fName;
     }
 
     public String getIsValid() {
@@ -28,8 +122,8 @@ public class ClientReferral {
         this.isValid = isValid;
     }
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
+    public void setfName(String fName) {
+        this.fName = fName;
     }
 
     public String getReferralDate() {
@@ -40,20 +134,20 @@ public class ClientReferral {
         ReferralDate = referralDate;
     }
 
-    public String getReferralFacility() {
-        return ReferralFacility;
+    public String getFacilityId() {
+        return FacilityId;
     }
 
-    public void setReferralFacility(String referralFacility) {
-        ReferralFacility = referralFacility;
+    public void setFacilityId(String facilityId) {
+        FacilityId = facilityId;
     }
 
-    public String getReferralService() {
-        return ReferralService;
+    public String getProviderMobileNumber() {
+        return ProviderMobileNumber;
     }
 
-    public void setReferralService(String referralService) {
-        ReferralService = referralService;
+    public void setProviderMobileNumber(String providerMobileNumber) {
+        this.ProviderMobileNumber = providerMobileNumber;
     }
 
     public String getKata() {
@@ -96,12 +190,12 @@ public class ClientReferral {
         ServiceProviderGroup = serviceProviderGroup;
     }
 
-    public String getServiceProviderName() {
-        return ServiceProviderName;
+    public String getServiceProviderId() {
+        return ServiceProviderId;
     }
 
-    public void setServiceProviderName(String serviceProviderName) {
-        ServiceProviderName = serviceProviderName;
+    public void setServiceProviderId(String serviceProviderId) {
+        ServiceProviderId = serviceProviderId;
     }
 
     public String getPhoneNumber() {

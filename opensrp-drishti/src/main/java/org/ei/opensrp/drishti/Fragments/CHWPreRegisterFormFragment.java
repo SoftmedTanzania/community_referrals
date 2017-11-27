@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -26,9 +27,7 @@ import com.google.gson.Gson;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.drishti.DataModels.ClientReferral;
-import org.ei.opensrp.drishti.DataModels.PregnantMom;
 import org.ei.opensrp.drishti.R;
-import org.ei.opensrp.drishti.util.DatesHelper;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
 
@@ -45,27 +44,30 @@ import fr.ganfra.materialspinner.MaterialSpinner;
  * A simple {@link Fragment} subclass.
  */
 public class CHWPreRegisterFormFragment extends Fragment {
-    private static final String TAG = AncRegisterFormFragment.class.getSimpleName();
+    private static final String TAG = CHWPreRegisterFormFragment.class.getSimpleName();
     public static TextView textDate, textPhone;
     LinearLayout layoutDatePick, layoutEditPhone;
     CardView cardDatePickLNMP;
-    public static EditText editTextClientName,editTextClinicName, editTextVillageLeader, editTextAge, editTextChildrenCount,
+    public static EditText editTextfName,editTextmName,editTextlName,editTextClinicName, editTextVillageLeader, editTextAge, editTextCTCNumber,
             editTextDiscountId, editTextKataAddress,editTextKijiji,editTextKijitongoji,editTextReferralReason,editTextReferralFacility;
-    public static TextView textviewReferralProviderSupportGroup,textviewReferralProvider;
+    public static TextView textviewReferralProviderSupportGroup,textviewReferralProvider,textviewReferralNumber,textDOB;
     public static Button button;
     public static RadioGroup radioGroupGender;
     public static MaterialSpinner spinnerService;
     private ArrayAdapter<String>  serviceAdapter;
 
     private Calendar today;
-    private List<String> educationList = new ArrayList<>();
+    private static CheckBox checkBoxAreasonOne, checkBoxreasonTwo, checkBoxreasonThree,
+            checkBoxreasonFour, checkBoxresonFive, checkBoxreasonSix;
+
+    private LinearLayout CTCLayout,tbLayout,layoutDatePickLDob;
     private List<String> serviceList = new ArrayList<>();
     public String message = "";
     public static Context context;
-    public static int clientEduSelection = -1, clientServiceSelection = -1;
+    public static int clientServiceSelection = -1;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-    private String formName = "client_hiv_referral_form";
-    private String recordId;
+    private String  formName = "client_referral_form";
+    private String recordId,fName ="";
     private ClientReferral clientReferral;
     private Gson gson = new Gson();
     private JSONObject fieldOverides = new JSONObject();
@@ -84,11 +86,12 @@ public class CHWPreRegisterFormFragment extends Fragment {
         serviceList.add("Rufaa kwenda kliniki ya TB na Matunzo (CTC)");
         serviceList.add("Rufaa kwenda kituo cha kutoa huduma za afya kutokana na magonjwa nyemelezi");
         serviceList.add("Kliniki ya kutibu kifua kikuu");
+        serviceList.add("Rufaa kwenda kliniki ya kutibu Malaria");
         serviceList.add("Huduma za kuzuia maambukizi toka kwa mama kwenda mtoto");
         serviceList.add("Huduma ya afya ya uzazi na mtoto (RCH) ");
         serviceList.add("Huduma ya Tohara (VMMC)");
         serviceList.add("Msaada wa kisheria");
-        serviceList.add("Huduma za kuzuia ukatili wa kijinsia(DAwati la jinsia)");
+        serviceList.add("Huduma za kuzuia ukatili wa kijinsia(Dawati la jinsia)");
         serviceList.add("Huduma za kuzuia maambukizi toka kwa mama kwenda mtoto");
 
         context = getContext();
@@ -103,22 +106,31 @@ public class CHWPreRegisterFormFragment extends Fragment {
 
         textDate = (TextView) fragmentView.findViewById(R.id.textDate);
         textPhone = (TextView) fragmentView.findViewById(R.id.textPhone);
+        textDOB = (TextView) fragmentView.findViewById(R.id.textDOB);
         layoutDatePick = (LinearLayout) fragmentView.findViewById(R.id.layoutDatePick);
         layoutEditPhone = (LinearLayout) fragmentView.findViewById(R.id.layoutEditPhone);
-        cardDatePickLNMP = (CardView) fragmentView.findViewById(R.id.cardPickDateLNMP);
+        layoutDatePickLDob = (LinearLayout) fragmentView.findViewById(R.id.layoutDatePick2);
+        tbLayout = (LinearLayout)fragmentView.findViewById(R.id.outlayer);
+        CTCLayout = (LinearLayout)fragmentView.findViewById(R.id.extra);
+
+
 
 
         editTextClinicName = (EditText) fragmentView.findViewById(R.id.editTextClinicName);
-        editTextClientName = (EditText) fragmentView.findViewById(R.id.editTextClientName);
+        editTextfName = (EditText) fragmentView.findViewById(R.id.editTextfName);
+        editTextmName = (EditText) fragmentView.findViewById(R.id.editTextmName);
+        editTextlName = (EditText) fragmentView.findViewById(R.id.editTextlName);
         editTextAge = (EditText) fragmentView.findViewById(R.id.editTextMotherAge);
         editTextReferralReason = (EditText) fragmentView.findViewById(R.id.reason_for_referral);
         editTextVillageLeader = (EditText) fragmentView.findViewById(R.id.editTextVillageLeader);
         textviewReferralProvider = (TextView) fragmentView.findViewById(R.id.provider_name);
+        textviewReferralNumber = (TextView) fragmentView.findViewById(R.id.provider_number);
         textviewReferralProviderSupportGroup = (TextView) fragmentView.findViewById(R.id.provider_support_group);
         editTextDiscountId = (EditText) fragmentView.findViewById(R.id.editTextDiscountId);
         editTextKataAddress = (EditText) fragmentView.findViewById(R.id.editTextKataAddress);
         editTextKijiji = (EditText) fragmentView.findViewById(R.id.editTextKijiji);
         editTextKijitongoji = (EditText) fragmentView.findViewById(R.id.editTextKijitongoji);
+        editTextCTCNumber = (EditText) fragmentView.findViewById(R.id.editTextOthers);
 
         button = (Button) fragmentView.findViewById(R.id.save);
 
@@ -127,6 +139,13 @@ public class CHWPreRegisterFormFragment extends Fragment {
         spinnerService = (MaterialSpinner) fragmentView.findViewById(R.id.spinnerService);
         spinnerService.setAdapter(serviceAdapter);
 
+        checkBoxAreasonOne = (CheckBox) fragmentView.findViewById(R.id.checkbox2weekCough);
+        checkBoxreasonTwo = (CheckBox) fragmentView.findViewById(R.id.checkboxfever);
+        checkBoxreasonThree = (CheckBox) fragmentView.findViewById(R.id.checkboxWeightLoss);
+        checkBoxreasonFour = (CheckBox) fragmentView.findViewById(R.id.checkboxSevereSweating);
+        checkBoxresonFive = (CheckBox) fragmentView.findViewById(R.id.checkboxBloodCough);
+        checkBoxreasonSix = (CheckBox) fragmentView.findViewById(R.id.checkboxLostFollowup);
+
 
         spinnerService.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -134,6 +153,20 @@ public class CHWPreRegisterFormFragment extends Fragment {
                 if (i >= 0) {
                     spinnerService.setFloatingLabelText("Aina za Huduma");
                     clientServiceSelection = i;
+                }
+
+
+                if((spinnerService.getSelectedItem().toString()).equals("Kliniki ya kutibu kifua kikuu")){
+                    tbLayout.setVisibility(View.VISIBLE);
+                    CTCLayout.setVisibility(View.VISIBLE);
+                    fName = "client_tb_referral_form";
+
+                }
+
+                if((spinnerService.getSelectedItem().toString()).equals("Rufaa kwenda kliniki ya TB na Matunzo (CTC)")){
+                    tbLayout.setVisibility(View.GONE);
+                    CTCLayout.setVisibility(View.VISIBLE);
+                    fName = "client_hiv_referral_form";
 
                 }
             }
@@ -158,6 +191,13 @@ public class CHWPreRegisterFormFragment extends Fragment {
                 pickDate(R.id.textDate);
             }
         });
+        layoutDatePickLDob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // pick date
+                pickDate(R.id.textDOB);
+            }
+        });
 
         layoutEditPhone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,13 +209,14 @@ public class CHWPreRegisterFormFragment extends Fragment {
 
 
 
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isFormSubmissionOk()) {
                     //setting default values
                     clientReferral = getClientReferral();
-                    
+                    clientReferral.setStatus("0");
 
                     // convert to json
                     String gsonReferral = gson.toJson(clientReferral);
@@ -205,6 +246,9 @@ public class CHWPreRegisterFormFragment extends Fragment {
                 GregorianCalendar pickedDate = new GregorianCalendar(year, monthOfYear, dayOfMonth);
                 if (id == R.id.textDate)
                     textDate.setText(dateFormat.format(pickedDate.getTimeInMillis()));
+                if (id == R.id.textDOB)
+                    textDOB.setText(dateFormat.format(pickedDate.getTimeInMillis()));
+
 
 
             }
@@ -271,7 +315,8 @@ public class CHWPreRegisterFormFragment extends Fragment {
     public boolean isFormSubmissionOk() {
         if (
                 TextUtils.isEmpty(editTextClinicName.getText())
-                || TextUtils.isEmpty(editTextClientName.getText())
+                || TextUtils.isEmpty(editTextfName.getText())
+                || TextUtils.isEmpty(editTextlName.getText())
                 || TextUtils.isEmpty(editTextKataAddress.getText())
                 || TextUtils.isEmpty(editTextKijitongoji.getText())
                 || TextUtils.isEmpty(editTextKijiji.getText())
@@ -288,7 +333,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
 
         } else if (radioGroupGender.getCheckedRadioButtonId() == -1) {
             // no radio checked
-            message = "Tafadhali chagua umri wa ujauzito.";
+            message = "Tafadhali chagua jinsia ya mteja";
             makeToast();
             return false;
 
@@ -307,8 +352,20 @@ public class CHWPreRegisterFormFragment extends Fragment {
         ClientReferral referral = new ClientReferral();
 
         referral.setReferralDate(textDate.getText().toString());
+        if(textDOB.equals("")){
+            int age = (int) Integer.parseInt(editTextAge.getText().toString());
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+            int Byear = year - age;
+            referral.setClientDOB("1 Jul "+Byear);
+
+        }else{
+            referral.setClientDOB(textDOB.getText().toString());
+        }
+
         referral.setCBHS(editTextDiscountId.getText().toString());
-        referral.setClientName(editTextClientName.getText().toString());
+        referral.setfName(editTextfName.getText().toString());
+        referral.setmName(editTextmName.getText().toString());
+        referral.setlName(editTextlName.getText().toString());
         if(radioGroupGender.getCheckedRadioButtonId() == R.id.male)
             referral.setGender("me");
         else
@@ -318,11 +375,26 @@ public class CHWPreRegisterFormFragment extends Fragment {
         referral.setKijitongoji(editTextKijitongoji.getText().toString());
         referral.setIsValid("true");
         referral.setPhoneNumber(textPhone.getText().toString());
-        referral.setReferralFacility(editTextClinicName.getText().toString());
-        referral.setVillageLeader(editTextDiscountId.getText().toString());
-        referral.setReferralService(spinnerService.getSelectedItem().toString());
-        referral.setServiceProviderName(textviewReferralProvider.getText().toString());
+        referral.setFacilityId(editTextClinicName.getText().toString());
+        referral.setVillageLeader(editTextVillageLeader.getText().toString());
+        referral.setReferralReason(editTextReferralReason.getText().toString());
+        referral.setService(spinnerService.getSelectedItem().toString());
+        referral.setServiceProviderId(textviewReferralProvider.getText().toString());
+        referral.setProviderMobileNumber(textviewReferralNumber.getText().toString());
         referral.setServiceProviderGroup(textviewReferralProviderSupportGroup.getText().toString());
+        if(fName.equals("client_tb_referral_form")){
+            referral.setCTCNumber(editTextCTCNumber.getText().toString());
+            referral.setHas2WeekCough(checkBoxAreasonOne.isChecked());
+            referral.setHasFever(checkBoxreasonTwo.isChecked());
+            referral.setHadWeightLoss(checkBoxreasonThree.isChecked());
+            referral.setHasSevereSweating(checkBoxreasonFour.isChecked());
+            referral.setHasBloodCough(checkBoxresonFive.isChecked());
+            referral.setLostFollowUp(checkBoxreasonSix.isChecked());
+        }
+        if(fName.equals("client_hiv_referral_form")){
+            referral.setCTCNumber(editTextCTCNumber.getText().toString());
+        }
+
 
         Log.d(TAG, "referral 1 ="+ new Gson().toJson(referral));
         return referral;

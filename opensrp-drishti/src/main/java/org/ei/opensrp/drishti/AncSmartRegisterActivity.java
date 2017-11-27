@@ -106,7 +106,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private android.content.Context appContext;
     private List<MotherPersonObject> motherPersonList = new ArrayList<>();
     private Cursor cursor;
-    private static final String TABLE_NAME = "wazazi_salama_mother";
+    private static final String TABLE_NAME = "client_referral";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -581,7 +581,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     @Override
     public void OnLocationSelected(String locationSelected) {
         // set registration fragment
-        Log.d(TAG,"Location selected");
+        Log.d(TAG,"Location selected"+locationSelected);
         mPager.setCurrentItem(2);
         currentPage = 2;
     }
@@ -720,7 +720,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
         // save the form
 
-        if(formName.equals("client_hiv_referral_form")){
+        if(formName.equals("client_referral_form")){
             final ClientReferral clientReferral = gson.fromJson(formSubmission, ClientReferral.class);
 
             ClientReferralPersonObject clientReferralPersonObject = new ClientReferralPersonObject(id, null, clientReferral);
@@ -740,36 +740,70 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
             formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
 
-            for ( String key : c.getDetails().keySet() ) {
-                Log.d(TAG,"key = "+key);
-                FormField f = null;
-                if(!key.equals("ReferralFacility")) {
+
+
+            FormData formData;
+            FormInstance formInstance;
+            FormSubmission submission;
+            if(clientReferral.getService().equals("Kliniki ya kutibu kifua kikuu")){
+                for ( String key : c.getDetails().keySet() ) {
+                    Log.d(TAG,"key = "+key);
+                    FormField f = null;
                     f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
-                }else{
-                    f = new FormField(key, c.getDetails().get(key), "facility.id");
-                }
-                formFields.add(f);
-            }
-
-            for ( String key : c.getColumnmaps().keySet() ) {
-                Log.d(TAG,"key = "+key);
-                FormField f = null;
-                if(!key.equals("ReferralFacility")) {
-                    f = new FormField(key, c.getColumnmaps().get(key), commonRepository.TABLE_NAME + "." + key);
-                }else{
-                    f = new FormField(key, c.getColumnmaps().get(key), "facility.id");
+                    if(key.equals("FacilityId")){
+                        f = new FormField(key, c.getDetails().get(key), "facility.id");
+                    }
+                    formFields.add(f);
                 }
 
-                formFields.add(f);
 
+                Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
+                Log.d(TAG,"am in tb");
+                formData = new FormData("client_referral","/model/instance/client_tb_referral_form/",formFields,null);
+                formInstance  = new FormInstance(formData,"1");
+                submission= new FormSubmission(generateRandomUUIDString(),id,"client_tb_referral_form",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
 
+            }else if(clientReferral.getService().equals("Rufaa kwenda kliniki ya TB na Matunzo (CTC)")){
+                Log.d(TAG,"am in hiv");
+                for ( String key : c.getDetails().keySet() ) {
+                    Log.d(TAG,"key = "+key);
+
+                    if(key.equals("has2WeekCough")||key.equals("hasFever")||key.equals("hadWeightLoss")||key.equals("hasSevereSweating")||key.equals("hasBloodCough")||key.equals("isLostFollowUp")){
+
+                    }else if(key.equals("FacilityId")){
+                        FormField f = new FormField(key, c.getDetails().get(key), "facility.id");
+                        formFields.add(f);
+                    }else{
+                        FormField f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
+                        formFields.add(f);
+                    }
+
+                }
+                Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
+                formData = new FormData("client_referral","/model/instance/client_hiv_referral_form/",formFields,null);
+                formInstance  = new FormInstance(formData,"1");
+                submission= new FormSubmission(generateRandomUUIDString(),id,"client_hiv_referral_form",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
+
+            }else{
+                Log.d(TAG,"am in general");
+                for ( String key : c.getDetails().keySet() ) {
+                    Log.d(TAG,"key = "+key);
+                    if(key.equals("has2WeekCough")||key.equals("CTCNumber")||key.equals("hasFever")||key.equals("hadWeightLoss")||key.equals("hasSevereSweating")||key.equals("hasBloodCough")||key.equals("isLostFollowUp")){
+
+                    }else if(key.equals("FacilityId")){
+                        FormField f = new FormField(key, c.getDetails().get(key), "facility.id");
+                        formFields.add(f);
+                    }else{
+                        FormField f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
+                        formFields.add(f);
+                    }
+                }
+                Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
+                formData = new FormData("client_referral","/model/instance/client_referral_form/",formFields,null);
+                formInstance  = new FormInstance(formData,"1");
+                submission= new FormSubmission(generateRandomUUIDString(),id,"client_referral_form",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
             }
 
-            Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
-
-            FormData formData = new FormData("client_referral","/model/instance/client_referral_form/",formFields,null);
-            FormInstance formInstance = new FormInstance(formData,"1");
-            FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"client_hiv_referral_form",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
             context().formDataRepository().saveFormSubmission(submission);
 
             Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
@@ -788,7 +822,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         }
         else
-        {
+         {
 
             final PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
 
@@ -820,19 +854,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 formFields.add(f);
             }
 
-            for ( String key : c.getColumnmaps().keySet() ) {
-                Log.d(TAG,"key = "+key);
-                FormField f = null;
-                if(!key.equals("FACILITY_ID")) {
-                    f = new FormField(key, c.getColumnmaps().get(key), commonRepository.TABLE_NAME + "." + key);
-                }else{
-                    f = new FormField(key, c.getColumnmaps().get(key), "facility.id");
-                }
-
-                formFields.add(f);
-
-
-            }
 
             Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
 
@@ -871,7 +892,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             }.execute();
 
         }
-        }
+    }
 
 
     public void updateFormSubmission(MotherPersonObject motherPersonObject, String id){
