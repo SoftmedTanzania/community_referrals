@@ -161,7 +161,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public void showPreRegistrationDetailsDialog(ClientReferralPersonObject mother) {
         String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
         Log.d(TAG, "gsonMom = " + gsonMom);
-        PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
+        ClientReferral clientReferral = new Gson().fromJson(gsonMom,ClientReferral.class);
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
@@ -183,21 +183,38 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //        String edd = dateFormat.format(DatesHelper.calculateEDDFromLNMP(lnmp));
 //        String reg_date = dateFormat.format(pregnantMom.getDateReg());
 
+        Calendar today = Calendar.getInstance();
+        int Cyear = today.get(Calendar.YEAR);
+        int year = 0;
+
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd mmm yyyy");
+            Date d = sdf.parse(clientReferral.getClientDOB());
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(d);
+            year = cal.get(Calendar.YEAR);
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         TextView textName = (TextView) dialogView.findViewById(R.id.name);
-//        TextView textAge = (TextView) dialogView.findViewById(R.id.mom_age);
-//        TextView textSpouseName = (TextView) dialogView.findViewById(R.id.spouseName);
-//        TextView textSpousetel = (TextView) dialogView.findViewById(R.id.spouseTel);
-//        TextView textvillage = (TextView) dialogView.findViewById(R.id.village);
-//        TextView textfacility = (TextView) dialogView.findViewById(R.id.facility);
-//        TextView textvisit = (TextView) dialogView.findViewById(R.id.visit);
-//        TextView textrisk = (TextView) dialogView.findViewById(R.id .risk);
-//        TextView textedd = (TextView) dialogView.findViewById(R.id.EDD);
-//        TextView textlnmp = (TextView) dialogView.findViewById(R.id.lnmp);
-//        TextView textPregnancyAge = (TextView) dialogView.findViewById(R.id.age);
+        TextView textAge = (TextView) dialogView.findViewById(R.id.mom_age);
+        TextView textSpouseName = (TextView) dialogView.findViewById(R.id.spouseName);
+        TextView textSpousetel = (TextView) dialogView.findViewById(R.id.spouseTel);
+        TextView textvillage = (TextView) dialogView.findViewById(R.id.village);
+        TextView textfacility = (TextView) dialogView.findViewById(R.id.facility);
+        TextView textvisit = (TextView) dialogView.findViewById(R.id.visit);
+        TextView textReason = (TextView) dialogView.findViewById(R.id .rufaa);
+        TextView textDate = (TextView) dialogView.findViewById(R.id.rufaaDate);
+        TextView textcbhs = (TextView) dialogView.findViewById(R.id.cbhs);
+        TextView textPregnancyAge = (TextView) dialogView.findViewById(R.id.age);
 
 
         textName.setText(mother.getfName() +" "+mother.getlName());
-//        textAge.setText(String.valueOf(pregnantMom.getAge())+" years");
+        textAge.setText((Cyear-year)+" years");
 //        textSpouseName.setText(pregnantMom.getHusbandName()+"["+ pregnantMom.getHusbandOccupation() +"]");
 //        textSpousetel.setText(pregnantMom.getPhone());
 //        textvillage.setText(pregnantMom.getPhysicalAddress());

@@ -102,12 +102,12 @@
 
                     <TextView
                         android:id="@+id/spouseName"
-                        android:layout_marginLeft="16dp"
+                        android:layout_marginLeft="24dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@+id/textSpouse"
                         android:layout_toRightOf="@+id/textSpouse"
-                        android:text="King Kive" />
+                        android:text=" - " />
                     <TextView
                         android:id="@+id/spouseMobile"
                         android:layout_marginLeft="16dp"
@@ -116,7 +116,7 @@
                         android:layout_alignTop="@+id/textSpouse"
                         android:layout_toRightOf="@+id/spouseName"
                         android:textStyle="italic"
-                        android:text="[0712763363]" />
+                        android:text="" />
 
                     <TextView
                         android:id="@+id/textSpouseTel"
@@ -132,7 +132,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@+id/textSpouseTel"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginLeft="16dp"
                         android:layout_toRightOf="@+id/textSpouseTel"
                         android:text="0712763362" />
                     <!--<TextView-->
@@ -163,7 +163,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@+id/textVillage"
-                        android:layout_marginLeft="16dp"
+                        android:layout_marginLeft="26dp"
                         android:layout_toRightOf="@+id/textVillage"
                         android:text="Kwembe" />
 
@@ -229,7 +229,7 @@
                     <TextView
 
                         android:id="@+id/visit"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginLeft="9dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@+id/textVisit"
@@ -250,7 +250,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@+id/textRisk"
-                        android:layout_marginLeft="24dp"
+                        android:layout_marginLeft="26dp"
                         android:layout_toRightOf="@+id/textRisk"
                         android:text="High" />
 
@@ -298,7 +298,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@+id/textDate"
-                        android:layout_marginLeft="12dp"
+                        android:layout_marginLeft="30dp"
                         android:layout_toRightOf="@+id/textDate"
                         android:text="2-Jan-2017" />
 
@@ -312,7 +312,7 @@
                         android:textColor="#236c71" />
 
                     <TextView
-                        android:layout_marginLeft="32dp"
+                        android:layout_marginLeft="47dp"
                         android:id="@+id/cbhs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
