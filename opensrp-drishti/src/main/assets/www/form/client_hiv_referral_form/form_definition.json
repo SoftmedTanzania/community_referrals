@@ -39,7 +39,7 @@
                 "name": "IS_VALID"
             },
             {
-                "name": "ReferralFacility"
+                "name": "FacilityId"
             },
             {
                 "name": "ReferralReason"
@@ -66,7 +66,7 @@
                 "name": "VillageLeader"
             },
             {
-                "name": "ServiceProviderName"
+                "name": "ServiceProviderId"
             },
             {
                 "name": "ServiceProviderGroup"

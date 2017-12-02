@@ -97,14 +97,14 @@ public class CHWFollowUpPagerAdapter extends
             ageTextView = (TextView) itemView.findViewById(R.id.textAge);
             scheduleDateTextView = (TextView) itemView.findViewById(R.id.textNextVisitDate);
             facilityTextView = (TextView) itemView.findViewById(R.id.facility);
-            iconOptions = (ImageView) itemView.findViewById(R.id.imageProfilePic);
+            iconOptions = (ImageView) itemView.findViewById(R.id.iconOptions);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // pass mother to show details
-//                    ((AncSmartRegisterActivity) mContext).showFollowUpDetailsDialog(client.get(getAdapterPosition()));
+                    ((AncSmartRegisterActivity) mContext).showFollowUpDetailsDialog(client.get(getAdapterPosition()));
                 }
             });
 
@@ -133,11 +133,11 @@ public class CHWFollowUpPagerAdapter extends
                 switch (item.getItemId()) {
                     // TODO: handle option selected
                     case R.id.popOpt1:
-//                        ((AncSmartRegisterActivity) mContext).showFollowUpFormDialog(fMother.get(position));
+                        ((AncSmartRegisterActivity) mContext).showFollowUpFormDialog(client.get(position));
                         return true;
 
                     case R.id.popOpt2:
-                        Toast.makeText(mContext, item.getTitle() + " clicked", Toast.LENGTH_SHORT).show();
+                        ((AncSmartRegisterActivity) mContext).showFollowUpDetailsDialog(client.get(position));
                         return true;
 
                     default:

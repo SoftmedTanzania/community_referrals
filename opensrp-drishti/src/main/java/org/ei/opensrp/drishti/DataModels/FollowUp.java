@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public class FollowUp {
-    private String Comment,Date,Token,reason,IsValid;
+    private String Comment,Date,Token,reason,IsValid,sponserName, sponserNumber;
 
     public String getComment() {
         return Comment;
@@ -50,5 +50,21 @@ public class FollowUp {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public String getSponserName() {
+        return sponserName;
+    }
+
+    public void setSponserName(String sponserName) {
+        this.sponserName = sponserName;
+    }
+
+    public String getSponserNumber() {
+        return sponserNumber;
+    }
+
+    public void setSponserNumber(String sponserNumber) {
+        this.sponserNumber = sponserNumber;
     }
 }

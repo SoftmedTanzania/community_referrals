@@ -25,7 +25,9 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 import org.apache.http.protocol.HTTP;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
+import org.ei.opensrp.drishti.DataModels.Facility;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
+import org.ei.opensrp.drishti.Repository.FacilityObject;
 import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -138,6 +140,21 @@ public class Utils {
             return null;
         }
     }
+    public static FacilityObject convertToFacilityObject(CommonPersonObject commonPersonObject) {
+        String details = commonPersonObject.getColumnmaps().get("details");
+        Log.d(TAG, "details string = " + convertStandardJSONString(details));
+        try {
+            return new FacilityObject(
+                    commonPersonObject.getColumnmaps().get("id"),
+                    commonPersonObject.getColumnmaps().get("relationalid"),
+                    commonPersonObject.getColumnmaps().get("Name"),
+                    commonPersonObject.getColumnmaps().get("details")
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 
     public static List<MotherPersonObject> convertToMotherPersonObjectList(List<CommonPersonObject> commonPersonObjectsList) {
@@ -158,6 +175,15 @@ public class Utils {
 
 
         return clientReferralPersonObjects;
+    }
+    public static List<FacilityObject> convertToFacilityObjectList(List<CommonPersonObject> commonPersonObjectsList) {
+        List<FacilityObject> facilityObjects = new ArrayList<>();
+        for (CommonPersonObject common : commonPersonObjectsList) {
+            facilityObjects.add(convertToFacilityObject(common));
+        }
+
+
+        return facilityObjects;
     }
     public static String convertStandardJSONString(String data_json) {
         data_json = data_json.replaceAll("\\\\r\\\\n", "");

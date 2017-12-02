@@ -14,13 +14,25 @@ import java.util.List;
  * Created by ali on 9/5/17.
  */
 
-public class Facility {
-    private String name;
-    private List<MotherPersonObject> motherPersonList = new ArrayList<>();
+public class Facility  {
+    private String name, id;
+
+    public Facility() {
+
+    }
 
     public Facility(String id, String relationID, String name) {
-        name = name;
+        this.id = id;
+        this.name = name;
 
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

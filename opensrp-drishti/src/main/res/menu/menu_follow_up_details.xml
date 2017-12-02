@@ -8,6 +8,6 @@
 
     <item
         android:id="@+id/popOpt2"
-        android:title="Edit" />
+        android:title="Details" />
 
 </menu>

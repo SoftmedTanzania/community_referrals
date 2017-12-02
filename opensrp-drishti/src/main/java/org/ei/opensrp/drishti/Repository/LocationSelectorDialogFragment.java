@@ -3,12 +3,14 @@ package org.ei.opensrp.drishti.Repository;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.google.common.base.Strings;
+import com.google.gson.Gson;
 
 import org.ei.opensrp.R;
 import org.ei.opensrp.domain.form.FieldOverrides;
@@ -16,6 +18,7 @@ import org.ei.opensrp.drishti.AncSmartRegisterActivity;
 import org.ei.opensrp.view.activity.ANCSmartRegisterActivity;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.ei.opensrp.view.dialog.DialogOptionModel;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
@@ -121,14 +124,22 @@ public class LocationSelectorDialogFragment extends DialogFragment {
                 if(node.isLeaf()){
                     JSONObject locationjson = new JSONObject();
                     TreeNode traversingnode = node;
-                    while(!traversingnode.isRoot()){
-                        try {
-                            locationjson.put(traversingnode.getlocationlevel(), traversingnode.getName());
-                        }catch(Exception e){
-                            e.printStackTrace();
-                        }
-                        traversingnode = traversingnode.getParent();
+                    Log.d("jason","traversingnode ="+new Gson().toJson(traversingnode));
+                    try {
+//                        Log.d("jason","traversingnode ="+new Gson().toJson(traversingnode));
+                        locationjson.put(traversingnode.getlocationlevel(), traversingnode.getId());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
+//                    while(!traversingnode.isRoot()){
+//                        try {
+//                            Log.d("logs","traversing nodes ="+traversingnode.getName());
+//                            locationjson.put(traversingnode.getlocationlevel(), traversingnode.getName());
+//                        }catch(Exception e){
+//                            e.printStackTrace();
+//                        }
+//                        traversingnode = traversingnode.getParent();
+//                    }
                     if(mCallback != null) {
                         mCallback.OnLocationSelected(locationjson.toString());
                     }

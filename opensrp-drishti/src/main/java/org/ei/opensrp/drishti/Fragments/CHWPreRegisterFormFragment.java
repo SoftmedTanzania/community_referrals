@@ -3,6 +3,7 @@ package org.ei.opensrp.drishti.Fragments;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,8 +27,15 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
+import org.ei.opensrp.commonregistry.CommonPersonObject;
+import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.DataModels.ClientReferral;
+import org.ei.opensrp.drishti.DataModels.Facility;
 import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.drishti.Repository.FacilityObject;
+import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
+import org.ei.opensrp.drishti.util.Utils;
+import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
 
@@ -43,7 +51,7 @@ import fr.ganfra.materialspinner.MaterialSpinner;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CHWPreRegisterFormFragment extends Fragment {
+public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     private static final String TAG = CHWPreRegisterFormFragment.class.getSimpleName();
     public static TextView textDate, textPhone;
     LinearLayout layoutDatePick, layoutEditPhone;
@@ -53,24 +61,30 @@ public class CHWPreRegisterFormFragment extends Fragment {
     public static TextView textviewReferralProviderSupportGroup,textviewReferralProvider,textviewReferralNumber,textDOB;
     public static Button button;
     public static RadioGroup radioGroupGender;
-    public static MaterialSpinner spinnerService;
+    public static MaterialSpinner spinnerService, spinnerFacility;
     private ArrayAdapter<String>  serviceAdapter;
+    private ArrayAdapter<String>  facilityAdapter;
+    private ArrayList<Facility> facilities;
 
     private Calendar today;
     private static CheckBox checkBoxAreasonOne, checkBoxreasonTwo, checkBoxreasonThree,
             checkBoxreasonFour, checkBoxresonFive, checkBoxreasonSix;
 
     private LinearLayout CTCLayout,tbLayout,layoutDatePickLDob;
+    private List<String> facilityList = new ArrayList<>();
     private List<String> serviceList = new ArrayList<>();
     public String message = "";
     public static Context context;
-    public static int clientServiceSelection = -1;
+    public static int clientServiceSelection = -1,facilitySelection = -1;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private String  formName = "client_referral_form";
     private String recordId,fName ="";
     private ClientReferral clientReferral;
     private Gson gson = new Gson();
     private JSONObject fieldOverides = new JSONObject();
+    private CommonRepository commonRepository;
+    private Cursor cursor;
+    private List<FacilityObject> facility = new ArrayList<>();
 
     public CHWPreRegisterFormFragment() {
         // Required empty public constructor
@@ -82,6 +96,9 @@ public class CHWPreRegisterFormFragment extends Fragment {
         today = Calendar.getInstance();
 
 
+
+        facilityList.add("facility A");
+        facilityList.add("facility b");
         serviceList.add("Ushauri nasaha na kupima");
         serviceList.add("Rufaa kwenda kliniki ya TB na Matunzo (CTC)");
         serviceList.add("Rufaa kwenda kituo cha kutoa huduma za afya kutokana na magonjwa nyemelezi");
@@ -95,6 +112,11 @@ public class CHWPreRegisterFormFragment extends Fragment {
         serviceList.add("Huduma za kuzuia maambukizi toka kwa mama kwenda mtoto");
 
         context = getContext();
+    }
+
+    @Override
+    protected void onCreation() {
+
     }
 
     @Override
@@ -114,9 +136,6 @@ public class CHWPreRegisterFormFragment extends Fragment {
         CTCLayout = (LinearLayout)fragmentView.findViewById(R.id.extra);
 
 
-
-
-        editTextClinicName = (EditText) fragmentView.findViewById(R.id.editTextClinicName);
         editTextfName = (EditText) fragmentView.findViewById(R.id.editTextfName);
         editTextmName = (EditText) fragmentView.findViewById(R.id.editTextmName);
         editTextlName = (EditText) fragmentView.findViewById(R.id.editTextlName);
@@ -138,6 +157,11 @@ public class CHWPreRegisterFormFragment extends Fragment {
         serviceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerService = (MaterialSpinner) fragmentView.findViewById(R.id.spinnerService);
         spinnerService.setAdapter(serviceAdapter);
+
+        facilityAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, facilityList);
+        facilityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerFacility = (MaterialSpinner) fragmentView.findViewById(R.id.spinnerFacility);
+        spinnerFacility.setAdapter(facilityAdapter);
 
         checkBoxAreasonOne = (CheckBox) fragmentView.findViewById(R.id.checkbox2weekCough);
         checkBoxreasonTwo = (CheckBox) fragmentView.findViewById(R.id.checkboxfever);
@@ -176,7 +200,23 @@ public class CHWPreRegisterFormFragment extends Fragment {
             }
         });
 
+        spinnerFacility.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i >= 0) {
+                    spinnerFacility.setFloatingLabelText("Jina la kliniki aliyoshauriwa kwenda");
+                    facilitySelection = i;
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
         spinnerService.setSelection(clientServiceSelection);
+        spinnerFacility.setSelection(facilitySelection);
 
 
         radioGroupGender = (RadioGroup) fragmentView.findViewById(R.id.radioGroupGender);
@@ -232,6 +272,31 @@ public class CHWPreRegisterFormFragment extends Fragment {
         });
 
         return fragmentView;
+    }
+
+    @Override
+    protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
+        return null;
+    }
+
+    @Override
+    protected SecuredNativeSmartRegisterActivity.NavBarOptionsProvider getNavBarOptionsProvider() {
+        return null;
+    }
+
+    @Override
+    protected SmartRegisterClientsProvider clientsProvider() {
+        return null;
+    }
+
+    @Override
+    protected void onInitialization() {
+
+    }
+
+    @Override
+    protected void startRegistration() {
+
     }
 
 
@@ -313,9 +378,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
     }
 
     public boolean isFormSubmissionOk() {
-        if (
-                TextUtils.isEmpty(editTextClinicName.getText())
-                || TextUtils.isEmpty(editTextfName.getText())
+        if (     TextUtils.isEmpty(editTextfName.getText())
                 || TextUtils.isEmpty(editTextlName.getText())
                 || TextUtils.isEmpty(editTextKataAddress.getText())
                 || TextUtils.isEmpty(editTextKijitongoji.getText())
@@ -337,7 +400,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
             makeToast();
             return false;
 
-        } else if (spinnerService.getSelectedItemPosition() < 0) {
+        } else if (spinnerService.getSelectedItemPosition() < 0 ||spinnerFacility.getSelectedItemPosition() < 0) {
 
             message = "Tafadhali chagua aina ya huduma";
             makeToast();
@@ -352,8 +415,9 @@ public class CHWPreRegisterFormFragment extends Fragment {
         ClientReferral referral = new ClientReferral();
 
         referral.setReferralDate(textDate.getText().toString());
-        if(textDOB.equals("")){
-            int age = (int) Integer.parseInt(editTextAge.getText().toString());
+        if((textDOB.getText().toString()).equals("dd mmm yyyy")){
+            Log.d(TAG,"am in age");
+            int age = Integer.parseInt(editTextAge.getText().toString());
             int year = Calendar.getInstance().get(Calendar.YEAR);
             int Byear = year - age;
             referral.setClientDOB("1 Jul "+Byear);
@@ -375,7 +439,7 @@ public class CHWPreRegisterFormFragment extends Fragment {
         referral.setKijitongoji(editTextKijitongoji.getText().toString());
         referral.setIsValid("true");
         referral.setPhoneNumber(textPhone.getText().toString());
-        referral.setFacilityId(editTextClinicName.getText().toString());
+        referral.setFacilityId(getFAcilityId(spinnerFacility.getSelectedItem().toString()));
         referral.setVillageLeader(editTextVillageLeader.getText().toString());
         referral.setReferralReason(editTextReferralReason.getText().toString());
         referral.setService(spinnerService.getSelectedItem().toString());
@@ -404,6 +468,21 @@ public class CHWPreRegisterFormFragment extends Fragment {
         return fieldOverides;
     }
 
+    public String getFAcilityId(String name){
+//        commonRepository = context().commonrepository("facility");
+//        //todo martha edit the query
+//        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility where Name ='"+name+"'" );
+//
+//        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
+//        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
+//
+//        this.facility = Utils.convertToFacilityObjectList(commonPersonObjectList);
+//        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + facility.size());
+//        String id = facility.get(0).getId();
+//        Log.d(TAG,"facility id selected ="+id);
+        String id = name;
+        return id;
+    }
     public void setRecordId(String recordId) {
 
         Log.d("TAG","record id = "+recordId);

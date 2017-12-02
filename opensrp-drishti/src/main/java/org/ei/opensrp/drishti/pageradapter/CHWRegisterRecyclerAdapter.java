@@ -99,7 +99,7 @@ public class CHWRegisterRecyclerAdapter extends
                 @Override
                 public void onClick(View view) {
                     // pass mother to show details
-//                    ((AncSmartRegisterActivity) mContext).showPreRegistrationDetailsDialog(clients.get(getAdapterPosition()));
+                    ((AncSmartRegisterActivity) mContext).showPreRegistrationDetailsDialog(clients.get(getAdapterPosition()));
                 }
             });
 
@@ -130,7 +130,7 @@ public class CHWRegisterRecyclerAdapter extends
                 switch (item.getItemId()) {
                     // TODO: handle option selected
                     case R.id.popOpt1:
-//                        ((AncSmartRegisterActivity) mContext).showPreRegistrationVisitDialog(clients.get(position));
+                        ((AncSmartRegisterActivity) mContext).showPreRegistrationVisitDialog(clients.get(position));
                         return true;
 
                     case R.id.popOpt2:
@@ -139,7 +139,7 @@ public class CHWRegisterRecyclerAdapter extends
 
                     case R.id.popOpt3:
                         // delete mother
-//                        ((AncSmartRegisterActivity) mContext).confirmDelete(clients.get(position));
+                        ((AncSmartRegisterActivity) mContext).confirmDelete(clients.get(position));
                         return true;
 
                     default:

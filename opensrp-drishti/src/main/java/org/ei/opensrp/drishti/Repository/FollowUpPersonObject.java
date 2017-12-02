@@ -14,7 +14,7 @@ import java.util.Map;
  */
 
 public class FollowUpPersonObject {
-    private String id, relationalId, Comment,Token,Date, Reason,IsValid ;
+    private String id, relationalId, Comment,Token,Date, Reason,IsValid,sponserNumber,sponserName ;
 
     private String details;
     private Map<String, String> columnMap;
@@ -23,6 +23,8 @@ public class FollowUpPersonObject {
                                 String relationalId,
                                 String Comment,
                                 String Token,
+                                String SponserName,
+                                String SponserNumber,
                                 String Date,
                                 String Reason,
                                 String IsValid,
@@ -32,6 +34,8 @@ public class FollowUpPersonObject {
         this.id = id;
         this.Comment = Comment;
         this.Token = Token;
+        this.sponserName = SponserName;
+        this.sponserNumber = SponserNumber;
         this.Reason = Reason;
         this.Date = Date;
         this.relationalId = relationalId;
@@ -50,6 +54,8 @@ public class FollowUpPersonObject {
         this.Comment = followUp.getComment();
         this.Reason= followUp.getReason();
         this.Token = followUp.getToken();
+        this.sponserNumber = followUp.getSponserNumber();
+        this.sponserName = followUp.getSponserName();
         this.IsValid = followUp.getIsValid();
         this.details = new Gson().toJson(followUp);
 
