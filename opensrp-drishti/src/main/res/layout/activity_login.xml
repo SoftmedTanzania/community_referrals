@@ -8,7 +8,7 @@
     android:background="#f5f5f5"
     android:fitsSystemWindows="false"
     android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus"
-    tools:context=".LoginActivity">
+    tools:context="com.softmed.uzazisalama.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

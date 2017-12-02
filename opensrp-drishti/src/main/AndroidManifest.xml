@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.ei.opensrp.drishti">
+
     <compatible-screens>
         <screen
             android:screenDensity="ldpi"
@@ -13,7 +15,6 @@
         <screen
             android:screenDensity="xhdpi"
             android:screenSize="large" />
-
         <screen
             android:screenDensity="ldpi"
             android:screenSize="xlarge" />
@@ -31,70 +32,89 @@
         <screen
             android:screenDensity="213"
             android:screenSize="large" />
-
-
     </compatible-screens>
 
     <application
-        android:name=".Application.UzaziSalamaApplication"
+        android:name="com.softmed.uzazisalama.Application.UzaziSalamaApplication"
         android:allowBackup="true"
         android:label="@string/app_name">
-        <!--android:icon="@drawable/opensrp_logo" >-->
+
+        <!-- android:icon="@drawable/opensrp_logo" > -->
         <activity
-            android:name=".LoginActivity"
+            android:name="com.softmed.uzazisalama.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus"
             android:windowSoftInputMode="adjustResize|stateHidden">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".NativeHomeActivity"
+            android:name="com.softmed.uzazisalama.NativeHomeActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme" />
-
         <activity
-            android:name=".AncFollowUpFormActivity"
+            android:name="com.softmed.uzazisalama.AncFollowUpFormActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.softmed.uzazisalama.AncSmartRegisterActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme" />
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AncSmartRegisterActivity"
+            android:name="com.softmed.uzazisalama.PncActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.softmed.uzazisalama.AncDetailActivityAlt"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
+        <activity
+            android:name="com.softmed.uzazisalama.AncDetailActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
+        <activity
+            android:name="com.softmed.uzazisalama.chw.CHWSmartRegisterActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.softmed.uzazisalama.chw.CHWFormRegistrationActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="com.softmed.uzazisalama.chw.CHWFormFollowActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="com.softmed.uzazisalama.chw.CHWEditPreRegistrationActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="com.softmed.uzazisalama.WazaziRegisterActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity
-            android:name=".AncDetailActivityAlt"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ee4140a3b1692ec32e688110a280538c7b44e10e" />
 
         <activity
-            android:name=".AncDetailActivity"
-            android:screenOrientation="landscape"
+            android:name="com.softmed.uzazisalama.PncDetailActivity"
             android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
         <activity
-            android:name=".chw.CHWSmartRegisterActivity"
-            android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus">
+            android:name="com.softmed.uzazisalama.FollowUpDetailActivity"
+            android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
+
+        <activity android:name="com.softmed.uzazisalama.UzaziSalamaReport"
+            android:theme="@style/AppTheme.MaterialDesign.NoActionBar">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".chw.CHWFormRegistrationActivity" />
-        <activity android:name=".chw.CHWFormFollowActivity" />
-        <activity android:name=".chw.CHWEditPreRegistrationActivity"></activity>
 
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="ee4140a3b1692ec32e688110a280538c7b44e10e" />
+        <activity
+            android:name="com.softmed.uzazisalama.ReportSearchActivity"
+            android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
     </application>
-
 
 </manifest>

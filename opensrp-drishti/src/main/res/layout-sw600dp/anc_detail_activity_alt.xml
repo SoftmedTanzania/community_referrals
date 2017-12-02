@@ -8,7 +8,20 @@
     android:fitsSystemWindows="false"
     android:orientation="vertical"
     android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus"
-    tools:context=".AncDetailActivity">
+    tools:context="com.softmed.uzazisalama.AncDetailActivityAlt">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabFollowUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="24dp"
+        android:src="@drawable/ic_file_assignment"
+
+        app:backgroundTint="@color/accent"
+        app:elevation="6dp"
+        app:fabSize="normal"
+        app:pressedTranslationZ="14dp" />
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -22,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
+            app:contentScrim="?attr/colorPrimary"
             app:collapsedTitleTextAppearance="@style/CollapsedTitleTextAppearance"
             app:expandedTitleTextAppearance="@style/ExpandedTitleTextAppearance"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"

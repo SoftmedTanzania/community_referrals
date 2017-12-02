@@ -98,7 +98,8 @@ public class CommonRepository extends DrishtiRepository {
         Log.d("customInsert", "tableName = " + TABLE_NAME);
         database.insert(TABLE_NAME, null, contentValues);
 
-       // Cursor cursor = database.rawQuery("select * from wazazi_salama_mother",null);
+//        Cursor cursor = database.rawQuery("select * from uzazi_salama_follow_up_report",null);
+//        Log.d("customInsert", "inserted values = " +new Gson().toJson(readAllcommon(cursor)));
     }
 
     public void customUpdate(ContentValues contentValues, String caseId) {
@@ -112,11 +113,11 @@ public class CommonRepository extends DrishtiRepository {
 
     public void customUpdateTable(String tableName,ContentValues contentValues, String caseId) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
-        Log.d("customInsert", "tableName = " + TABLE_NAME);
+        Log.d("customUpdateTable", "tableName = " + TABLE_NAME);
         database.update(tableName, contentValues, ID_COLUMN + " = ?", new String[]{caseId});
         Cursor cursor = database.rawQuery("select * from wazazi_salama_mother",null);
 
-        List<CommonPersonObject> commonPersonObjectList = readAllcommonForField(cursor, "wazazi_salama_mother");
+        List<CommonPersonObject> commonPersonObjectList = readAllcommonForField(cursor, TABLE_NAME);
         Log.d("customInsert","commonPersonList = " + new Gson().toJson(commonPersonObjectList));
 
     }

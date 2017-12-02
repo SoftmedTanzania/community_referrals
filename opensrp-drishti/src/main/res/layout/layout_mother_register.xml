@@ -242,21 +242,14 @@
             android:textColorHint="@color/hint_text"
             android:textSize="14sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Muda wa ujauzito katika wiki"
-            android:textColor="@color/secondary_text"
-            android:textSize="14sp" />
+
 
         <RadioGroup
             android:id="@+id/radioGroupPregnancyAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
+            android:visibility="gone"
             android:paddingRight="16dp">
 
             <RadioButton
@@ -301,7 +294,7 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="4dp"
                 android:paddingTop="4dp"
-                android:text="Ndio"
+                android:text="1"
                 android:textColor="@color/primary_text"
                 android:textSize="16sp" />
 
@@ -311,7 +304,17 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="4dp"
                 android:paddingTop="4dp"
-                android:text="Hapana"
+                android:text="2"
+                android:textColor="@color/primary_text"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioUnknownHIV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:text="U"
                 android:textColor="@color/primary_text"
                 android:textSize="16sp" />
         </RadioGroup>

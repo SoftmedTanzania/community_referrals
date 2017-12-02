@@ -1,0 +1,77 @@
+{
+    "form_data_definition_version": "4",
+    "form": {
+        "bind_type": "uzazi_salama_follow_up_report",
+        "default_bind_path": "/model/instance/Wazazi_Salama_ANC_Followup/",
+        "fields": [
+            {
+                "name": "id",
+                "shouldLoadValue": true
+            },
+            {
+                "name": "relationalid"
+            },
+            {
+                "name": "MOTHER_ID"
+            },
+            {
+                "name": "REPORT_DATE"
+            },
+            {
+                "name": "IS_ON_RISK"
+            },
+            {
+                "name": "FOLLOW_UP_DATA"
+            },
+            {
+                "name": "date"
+            },
+            {
+                "name": "motherId"
+            },
+            {
+                "name": "createdBy"
+            },
+            {
+                "name": "modifyBy"
+            },
+            {
+                "name": "childDealth"
+            },
+            {
+                "name": "albumin"
+            },
+            {
+                "name": "over40WeeksPregnancy"
+            },
+            {
+                "name": "unproportionalPregnancyHeight"
+            },
+            {
+                "name": "highBloodPressure"
+            },
+            {
+                "name": "highSugar"
+            },
+            {
+                "name": "badChildPosition"
+            },
+            {
+                "name": "hbBelow60"
+            },
+            {
+                "name": "followUpNumber"
+            },
+            {
+                "name": "facilityId",
+                "source":"facility.id"
+            },
+            {
+                "name": "ModifyBy"
+            },
+            {
+                "name": "CreatedBy"
+            }
+        ]
+    }
+}

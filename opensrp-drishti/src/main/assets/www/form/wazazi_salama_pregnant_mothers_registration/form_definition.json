@@ -112,7 +112,7 @@
                 "source":"facility.id"
             },
             {
-                "name": "name"
+                "name": "mother_name"
             },
             {
                 "name": "phone"
@@ -161,6 +161,9 @@
             },
             {
                 "name": "MOTHERS_FIRST_NAME"
+            },
+            {
+                "name": "CreatedBy"
             }
         ]
     }
