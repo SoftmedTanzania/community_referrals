@@ -124,7 +124,7 @@ public class LocationSelectorDialogFragment extends DialogFragment {
                 if(node.isLeaf()){
                     JSONObject locationjson = new JSONObject();
                     TreeNode traversingnode = node;
-                    Log.d("jason","traversingnode ="+new Gson().toJson(traversingnode));
+//                    Log.d("jason","traversingnode ="+new Gson().toJson(traversingnode));
                     try {
 //                        Log.d("jason","traversingnode ="+new Gson().toJson(traversingnode));
                         locationjson.put(traversingnode.getlocationlevel(), traversingnode.getId());

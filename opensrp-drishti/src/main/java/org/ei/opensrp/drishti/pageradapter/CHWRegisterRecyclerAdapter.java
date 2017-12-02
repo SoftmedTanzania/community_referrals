@@ -69,7 +69,7 @@ public class CHWRegisterRecyclerAdapter extends
         TextView visited = viewHolder.visitedTextView;
         TextView CBHS = viewHolder.CBHSTextView;
 
-        visited.setText("once");
+        visited.setText("moja");
         referralDate.setText(clientReferral.getReferralDate());
         name.setText(clientReferral.getfName());
         CBHS.setText(clientReferral.getCBHS());

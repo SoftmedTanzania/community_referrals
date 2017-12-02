@@ -27,14 +27,12 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.DataModels.Facility;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.Repository.FacilityObject;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
-import org.ei.opensrp.drishti.util.Utils;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
@@ -439,7 +437,7 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         referral.setKijitongoji(editTextKijitongoji.getText().toString());
         referral.setIsValid("true");
         referral.setPhoneNumber(textPhone.getText().toString());
-        referral.setFacilityId(getFAcilityId(spinnerFacility.getSelectedItem().toString()));
+        referral.setFacilityId(getFacilityId(spinnerFacility.getSelectedItem().toString()));
         referral.setVillageLeader(editTextVillageLeader.getText().toString());
         referral.setReferralReason(editTextReferralReason.getText().toString());
         referral.setService(spinnerService.getSelectedItem().toString());
@@ -468,7 +466,7 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         return fieldOverides;
     }
 
-    public String getFAcilityId(String name){
+    public String getFacilityId(String name){
 //        commonRepository = context().commonrepository("facility");
 //        //todo martha edit the query
 //        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility where Name ='"+name+"'" );
@@ -483,6 +481,7 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         String id = name;
         return id;
     }
+
     public void setRecordId(String recordId) {
 
         Log.d("TAG","record id = "+recordId);
