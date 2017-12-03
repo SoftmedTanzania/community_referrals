@@ -13,7 +13,7 @@
             lang="Bahasa">Alasan penutupan Kartu Ibu?
         </span>
         <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/close_reason:label"
-            lang="en">Reason for Mother Card's
+            lang="en">follow_up_reason for Mother Card's
             closure?
         </span>
         <span class="required">*</span>
@@ -71,7 +71,7 @@
             jika ada
         </span>
         <span class="or-hint " data-itext-id="/penutupan_ibu_reviewed/close_reason_other:hint"
-            lang="en">Write other reason, if
+            lang="en">Write other follow_up_reason, if
             available
         </span>
         <input name="/penutupan_ibu_reviewed/close_reason_other" data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'others'"
@@ -84,14 +84,14 @@
             kematian ibu hari ini atau hari-hari sebelumnya
         </span>
         <span class="or-constraint-msg " data-itext-id="/penutupan_ibu_reviewed/maternal_death_date:jr:constraintMsg"
-            lang="en">Date of
+            lang="en">follow_up_date of
             mother's death today or the days before
         </span>
         <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/maternal_death_date:label"
             lang="Bahasa">Tanggal kematian ibu?
         </span>
         <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/maternal_death_date:label"
-            lang="en">Date of maternal
+            lang="en">follow_up_date of maternal
             death?
         </span>
         <span class="or-hint active" data-itext-id="/penutupan_ibu_reviewed/maternal_death_date:hint"
@@ -99,13 +99,13 @@
             kematian Ibu
         </span>
         <span class="or-hint " data-itext-id="/penutupan_ibu_reviewed/maternal_death_date:hint"
-            lang="en">Enter date of maternal
+            lang="en">Enter follow_up_date of maternal
             death
         </span>
         <input name="/penutupan_ibu_reviewed/maternal_death_date" data-constraint=".&lt;= /penutupan_ibu_reviewed/today "
             data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'Penyebab langsung' or  /penutupan_ibu_reviewed/close_reason  = 'Penyebab tidak langsung'"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
@@ -354,7 +354,7 @@
         </span>
         <span class="or-hint " data-itext-id="/penutupan_ibu_reviewed/other_maternal_death_cause:hint"
             lang="en">Write other
-            reason, if available
+            follow_up_reason, if available
         </span>
         <input name="/penutupan_ibu_reviewed/other_maternal_death_cause" data-relevant=" /penutupan_ibu_reviewed/maternal_death_cause  = 'others'"
             data-type-xml="string"
@@ -395,8 +395,8 @@
                 data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/penutupan_ibu_reviewed/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/penutupan_ibu_reviewed/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/penutupan_ibu_reviewed/deviceid" data-preload="property" data-preload-params="deviceid"

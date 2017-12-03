@@ -708,8 +708,8 @@
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input autocomplete="off" type="hidden" name="/Delivery_Plan_EngKan/today" data-preload="date"
-                   data-preload-params="today" data-type-xml="date"/>
+            <input autocomplete="off" type="hidden" name="/Delivery_Plan_EngKan/today" data-preload="follow_up_date"
+                   data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">

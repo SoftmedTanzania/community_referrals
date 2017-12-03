@@ -109,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="0dp"
                     android:layout_marginRight="0dp"
-                    android:hint="Namba ya mteja ya CBHS"
+                    android:hint="Namba ya mteja ya community_based_hiv_service"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:textColor="@color/primary_text"

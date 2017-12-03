@@ -54,19 +54,19 @@
         </fieldset>
     </fieldset>
     <label class="question non-select ">
-        <span lang="" class="question-label active">Vitamin A date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD; '&#xC8E;'
+        <span lang="" class="question-label active">Vitamin A follow_up_date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD; '&#xC8E;'
             &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
         <span class="required">*</span>
-        <input autocomplete="off" type="date" name="/Child_Vitamin_A_EngKan/vit_a_date" required="required"
+        <input autocomplete="off" type="follow_up_date" name="/Child_Vitamin_A_EngKan/vit_a_date" required="required"
                data-constraint=".&gt;=  /Child_Vitamin_A_EngKan/eight_months  and .&lt;= /Child_Vitamin_A_EngKan/today "
-               data-type-xml="date"/>
+               data-type-xml="follow_up_date"/>
     </label>
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input autocomplete="off" type="hidden" name="/Child_Vitamin_A_EngKan/today" data-preload="date"
-                   data-preload-params="today" data-type-xml="date"/>
+            <input autocomplete="off" type="hidden" name="/Child_Vitamin_A_EngKan/today" data-preload="follow_up_date"
+                   data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">

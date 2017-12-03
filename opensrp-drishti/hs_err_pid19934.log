@@ -220,16 +220,16 @@ Event: 39.496 GC heap before
   class space    used 641K, capacity 656K, committed 768K, reserved 1048576K
 
 Deoptimization events (10 events):
-Event: 36.029 Thread 0x00007f7f98182000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f7f89465c5c method=java.util.Arrays.hashCode([Ljava/lang/Object;)I @ 43
-Event: 36.029 Thread 0x00007f7f98182000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f7f89465c5c method=java.util.Arrays.hashCode([Ljava/lang/Object;)I @ 43
-Event: 36.029 Thread 0x00007f7f98182000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f7f8947c93c method=java.util.Arrays.hashCode([Ljava/lang/Object;)I @ 43
-Event: 36.115 Thread 0x00007f7f981a2000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f7f8910c4c4 method=com.android.dx.cf.code.ByteCatchList.typeNotFound(Lcom/android/dx/cf/code/ByteCatchList$Item;[Lcom/android/dx/cf/code/ByteCatchList$Item;I)Z @ 34
-Event: 36.766 Thread 0x00007f7f981a4000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f7f892b2004 method=com.android.dx.cf.code.Ropper.labelToResultIndex(I)I @ 34
-Event: 37.659 Thread 0x00007f7f9800a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f7f893ab67c method=com.android.dx.dex.code.OutputFinisher.hasLocalInfo(Lcom/android/dx/dex/code/DalvInsn;)Z @ 24
-Event: 38.173 Thread 0x00007f7f981a5800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f7f893ff760 method=com.android.dx.ssa.SCCP.replaceBranches()V @ 14
-Event: 38.174 Thread 0x00007f7f981a5800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f7f891ef17c method=com.android.dx.ssa.SsaBasicBlock.scheduleMovesFromPhis()V @ 63
-Event: 38.380 Thread 0x00007f7f98182000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f7f894f6548 method=com.android.dx.dex.code.OutputFinisher.addConstants(Ljava/util/HashSet;Lcom/android/dx/rop/code/RegisterSpec;)V @ 57
-Event: 38.766 Thread 0x00007f7f9819f000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f7f89b07e24 method=com.android.dx.ssa.SCCP.simulateBranch(Lcom/android/dx/ssa/SsaInsn;)V @ 339
+Event: 36.029 Thread 0x00007f7f98182000 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007f7f89465c5c method=java.util.Arrays.hashCode([Ljava/lang/Object;)I @ 43
+Event: 36.029 Thread 0x00007f7f98182000 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007f7f89465c5c method=java.util.Arrays.hashCode([Ljava/lang/Object;)I @ 43
+Event: 36.029 Thread 0x00007f7f98182000 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007f7f8947c93c method=java.util.Arrays.hashCode([Ljava/lang/Object;)I @ 43
+Event: 36.115 Thread 0x00007f7f981a2000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f7f8910c4c4 method=com.android.dx.cf.code.ByteCatchList.typeNotFound(Lcom/android/dx/cf/code/ByteCatchList$Item;[Lcom/android/dx/cf/code/ByteCatchList$Item;I)Z @ 34
+Event: 36.766 Thread 0x00007f7f981a4000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f7f892b2004 method=com.android.dx.cf.code.Ropper.labelToResultIndex(I)I @ 34
+Event: 37.659 Thread 0x00007f7f9800a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f7f893ab67c method=com.android.dx.dex.code.OutputFinisher.hasLocalInfo(Lcom/android/dx/dex/code/DalvInsn;)Z @ 24
+Event: 38.173 Thread 0x00007f7f981a5800 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f7f893ff760 method=com.android.dx.ssa.SCCP.replaceBranches()V @ 14
+Event: 38.174 Thread 0x00007f7f981a5800 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f7f891ef17c method=com.android.dx.ssa.SsaBasicBlock.scheduleMovesFromPhis()V @ 63
+Event: 38.380 Thread 0x00007f7f98182000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f7f894f6548 method=com.android.dx.dex.code.OutputFinisher.addConstants(Ljava/util/HashSet;Lcom/android/dx/rop/code/RegisterSpec;)V @ 57
+Event: 38.766 Thread 0x00007f7f9819f000 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007f7f89b07e24 method=com.android.dx.ssa.SCCP.simulateBranch(Lcom/android/dx/ssa/SsaInsn;)V @ 339
 
 Internal exceptions (10 events):
 Event: 1.112 Thread 0x00007f7f981a4000 Implicit null exception at 0x00007f7f89369975 to 0x00007f7f8936c0f9

@@ -534,10 +534,10 @@ ACTIVITY MANAGER BROADCAST STATE (dumpsys activity broadcasts)
     extras: Bundle[{portStatus=UsbPortStatus{connected=false, currentMode=none, currentPowerRole=no-power, currentDataRole=no-data, supportedRoleCombinations=[no-power:no-data]}, port=UsbPort{id=otg_default, supportedModes=dual}}]
   #16: BroadcastRecord{e48d1fb u-1 android.intent.action.CLOSE_SYSTEM_DIALOGS
     act=android.intent.action.CLOSE_SYSTEM_DIALOGS flg=0x50000010 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
-    extras: Bundle[{reason=homekey}]
+    extras: Bundle[{follow_up_reason=homekey}]
   #17: BroadcastRecord{81e1218 u-1 android.intent.action.CLOSE_SYSTEM_DIALOGS
     act=android.intent.action.CLOSE_SYSTEM_DIALOGS flg=0x50000010 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
-    extras: Bundle[{reason=recentapps}]
+    extras: Bundle[{follow_up_reason=recentapps}]
   #18: BroadcastRecord{243f256 u-1 android.intent.action.TIME_TICK
     act=android.intent.action.TIME_TICK flg=0x50000014 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
     extras: Bundle[{android.intent.extra.ALARM_TARGET_TIME=8973568, android.intent.extra.ALARM_COUNT=1}]
@@ -593,7 +593,7 @@ ACTIVITY MANAGER BROADCAST STATE (dumpsys activity broadcasts)
     extras: Bundle[{android.intent.extra.ALARM_TARGET_TIME=8673568, android.intent.extra.ALARM_COUNT=1}]
   #35: BroadcastRecord{508951d u-1 android.intent.action.CLOSE_SYSTEM_DIALOGS
     act=android.intent.action.CLOSE_SYSTEM_DIALOGS flg=0x50000010 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
-    extras: Bundle[{reason=homekey}]
+    extras: Bundle[{follow_up_reason=homekey}]
   #36: BroadcastRecord{3848392 u0 com.samsung.android.app.aodservice.ClockTimer.TICK
     act=com.samsung.android.app.aodservice.ClockTimer.TICK flg=0x10000014 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
     extras: Bundle[{android.intent.extra.ALARM_TARGET_TIME=1510221420962, android.intent.extra.ALARM_COUNT=1}]
@@ -653,7 +653,7 @@ ACTIVITY MANAGER BROADCAST STATE (dumpsys activity broadcasts)
     extras: Bundle[{LteRsrp=-94, LteRsrq=-13, LteRssnr=-60, LteCqi=6, CdmaDbm=-9, CdmaEcio=-200, GsmSignalStrength=9, SignalBar=12288, slot=1, isGsm=true, TdScdma=2147483647, EvdoDbm=-9, EvdoSnr=-1, EvdoEcio=-200, subscription=3, GsmBitErrorRate=99, LteSignalStrength=17}]
   #3: BroadcastRecord{9780789 u-1 android.intent.action.BATTERY_CHANGED
     act=android.intent.action.BATTERY_CHANGED flg=0x60000010 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
-    extras: Bundle[{misc_event=0, technology=Li-ion, icon-small=17303693, max_charging_voltage=0, health=2, max_charging_current=0, online=4, status=2, plugged=2, present=true, pogo_plugged=0, capacity=280000, charge_counter=0, level=34, scale=100, temperature=361, current_now=86, voltage=3808, charge_type=1, self_discharging=false, hv_charger=false, power_sharing=false, invalid_charger=0}]
+    extras: Bundle[{misc_event=0, technology=Li-ion, icon-small=17303693, max_charging_voltage=0, health=2, max_charging_current=0, online=4, referral_status=2, plugged=2, present=true, pogo_plugged=0, capacity=280000, charge_counter=0, level=34, scale=100, temperature=361, current_now=86, voltage=3808, charge_type=1, self_discharging=false, hv_charger=false, power_sharing=false, invalid_charger=0}]
   #4: BroadcastRecord{75d238e u-1 android.intent.action.SIG_STR
     act=android.intent.action.SIG_STR flg=0x20000010 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
     extras: Bundle[{LteRsrp=2147483647, LteRsrq=2147483647, LteRssnr=2147483647, LteCqi=2147483647, CdmaDbm=-25, CdmaEcio=-200, GsmSignalStrength=25, SignalBar=4, slot=0, isGsm=true, TdScdma=2147483647, EvdoDbm=-25, EvdoSnr=-1, EvdoEcio=-200, subscription=2, GsmBitErrorRate=99, LteSignalStrength=99}]
@@ -665,7 +665,7 @@ ACTIVITY MANAGER BROADCAST STATE (dumpsys activity broadcasts)
     extras: Bundle[{LteRsrp=-92, LteRsrq=-13, LteRssnr=0, LteCqi=7, CdmaDbm=-10, CdmaEcio=-200, GsmSignalStrength=10, SignalBar=12288, slot=1, isGsm=true, TdScdma=2147483647, EvdoDbm=-10, EvdoSnr=-1, EvdoEcio=-200, subscription=3, GsmBitErrorRate=99, LteSignalStrength=19}]
   #7: BroadcastRecord{e509345 u-1 android.intent.action.BATTERY_CHANGED
     act=android.intent.action.BATTERY_CHANGED flg=0x60000010 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
-    extras: Bundle[{misc_event=0, technology=Li-ion, icon-small=17303693, max_charging_voltage=0, health=2, max_charging_current=0, online=4, status=2, plugged=2, present=true, pogo_plugged=0, capacity=280000, charge_counter=0, level=34, scale=100, temperature=362, current_now=231, voltage=3817, charge_type=1, self_discharging=false, hv_charger=false, power_sharing=false, invalid_charger=0}]
+    extras: Bundle[{misc_event=0, technology=Li-ion, icon-small=17303693, max_charging_voltage=0, health=2, max_charging_current=0, online=4, referral_status=2, plugged=2, present=true, pogo_plugged=0, capacity=280000, charge_counter=0, level=34, scale=100, temperature=362, current_now=231, voltage=3817, charge_type=1, self_discharging=false, hv_charger=false, power_sharing=false, invalid_charger=0}]
   #8: BroadcastRecord{18bea9a u0 com.samsung.action.EVERY_MINUTE_CLOCK_UPDATE
     act=com.samsung.action.EVERY_MINUTE_CLOCK_UPDATE flg=0x14 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
     extras: Bundle[{android.intent.extra.ALARM_TARGET_TIME=1510222080000, android.intent.extra.ALARM_COUNT=1}]
@@ -692,7 +692,7 @@ ACTIVITY MANAGER BROADCAST STATE (dumpsys activity broadcasts)
     extras: Bundle[{LteRsrp=2147483647, LteRsrq=2147483647, LteRssnr=2147483647, LteCqi=2147483647, CdmaDbm=-24, CdmaEcio=-200, GsmSignalStrength=24, SignalBar=4, slot=0, isGsm=true, TdScdma=2147483647, EvdoDbm=-24, EvdoSnr=-1, EvdoEcio=-200, subscription=2, GsmBitErrorRate=99, LteSignalStrength=99}]
   #16: BroadcastRecord{e7532f2 u-1 android.intent.action.BATTERY_CHANGED
     act=android.intent.action.BATTERY_CHANGED flg=0x60000010 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
-    extras: Bundle[{misc_event=0, technology=Li-ion, icon-small=17303693, max_charging_voltage=0, health=2, max_charging_current=0, online=4, status=2, plugged=2, present=true, pogo_plugged=0, capacity=280000, charge_counter=0, level=34, scale=100, temperature=362, current_now=297, voltage=3805, charge_type=1, self_discharging=false, hv_charger=false, power_sharing=false, invalid_charger=0}]
+    extras: Bundle[{misc_event=0, technology=Li-ion, icon-small=17303693, max_charging_voltage=0, health=2, max_charging_current=0, online=4, referral_status=2, plugged=2, present=true, pogo_plugged=0, capacity=280000, charge_counter=0, level=34, scale=100, temperature=362, current_now=297, voltage=3805, charge_type=1, self_discharging=false, hv_charger=false, power_sharing=false, invalid_charger=0}]
   #17: BroadcastRecord{6989d43 u-1 android.intent.action.SIG_STR
     act=android.intent.action.SIG_STR flg=0x20000010 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
     extras: Bundle[{LteRsrp=2147483647, LteRsrq=2147483647, LteRssnr=2147483647, LteCqi=2147483647, CdmaDbm=-23, CdmaEcio=-200, GsmSignalStrength=23, SignalBar=4, slot=0, isGsm=true, TdScdma=2147483647, EvdoDbm=-23, EvdoSnr=-1, EvdoEcio=-200, subscription=2, GsmBitErrorRate=99, LteSignalStrength=99}]
@@ -707,7 +707,7 @@ ACTIVITY MANAGER BROADCAST STATE (dumpsys activity broadcasts)
     extras: Bundle[{LteRsrp=-92, LteRsrq=-12, LteRssnr=-10, LteCqi=7, CdmaDbm=-10, CdmaEcio=-200, GsmSignalStrength=10, SignalBar=12288, slot=1, isGsm=true, TdScdma=2147483647, EvdoDbm=-10, EvdoSnr=-1, EvdoEcio=-200, subscription=3, GsmBitErrorRate=99, LteSignalStrength=19}]
   #21: BroadcastRecord{61dca9f u-1 android.intent.action.BATTERY_CHANGED
     act=android.intent.action.BATTERY_CHANGED flg=0x60000010 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
-    extras: Bundle[{misc_event=0, technology=Li-ion, icon-small=17303693, max_charging_voltage=0, health=2, max_charging_current=0, online=4, status=2, plugged=2, present=true, pogo_plugged=0, capacity=280000, charge_counter=0, level=34, scale=100, temperature=363, current_now=250, voltage=3815, charge_type=1, self_discharging=false, hv_charger=false, power_sharing=false, invalid_charger=0}]
+    extras: Bundle[{misc_event=0, technology=Li-ion, icon-small=17303693, max_charging_voltage=0, health=2, max_charging_current=0, online=4, referral_status=2, plugged=2, present=true, pogo_plugged=0, capacity=280000, charge_counter=0, level=34, scale=100, temperature=363, current_now=250, voltage=3815, charge_type=1, self_discharging=false, hv_charger=false, power_sharing=false, invalid_charger=0}]
   #22: BroadcastRecord{465e7ec u-1 com.samsung.intent.action.CHECK_SIOP_LEVEL
     act=com.samsung.intent.action.CHECK_SIOP_LEVEL flg=0x10 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
     extras: Bundle[{siop_level_broadcast=-2}]
@@ -728,7 +728,7 @@ ACTIVITY MANAGER BROADCAST STATE (dumpsys activity broadcasts)
     extras: Bundle[{LteRsrp=-96, LteRsrq=-14, LteRssnr=-40, LteCqi=6, CdmaDbm=-8, CdmaEcio=-200, GsmSignalStrength=8, SignalBar=12288, slot=1, isGsm=true, TdScdma=2147483647, EvdoDbm=-8, EvdoSnr=-1, EvdoEcio=-200, subscription=3, GsmBitErrorRate=99, LteSignalStrength=15}]
   #28: BroadcastRecord{ddee516 u-1 android.intent.action.BATTERY_CHANGED
     act=android.intent.action.BATTERY_CHANGED flg=0x60000010 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
-    extras: Bundle[{misc_event=0, technology=Li-ion, icon-small=17303693, max_charging_voltage=0, health=2, max_charging_current=0, online=4, status=2, plugged=2, present=true, pogo_plugged=0, capacity=280000, charge_counter=0, level=34, scale=100, temperature=363, current_now=19, voltage=3813, charge_type=1, self_discharging=false, hv_charger=false, power_sharing=false, invalid_charger=0}]
+    extras: Bundle[{misc_event=0, technology=Li-ion, icon-small=17303693, max_charging_voltage=0, health=2, max_charging_current=0, online=4, referral_status=2, plugged=2, present=true, pogo_plugged=0, capacity=280000, charge_counter=0, level=34, scale=100, temperature=363, current_now=19, voltage=3813, charge_type=1, self_discharging=false, hv_charger=false, power_sharing=false, invalid_charger=0}]
   #29: BroadcastRecord{6b86e97 u-1 android.intent.action.SIG_STR
     act=android.intent.action.SIG_STR flg=0x20000010 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
     extras: Bundle[{LteRsrp=-91, LteRsrq=-12, LteRssnr=-70, LteCqi=7, CdmaDbm=-11, CdmaEcio=-200, GsmSignalStrength=11, SignalBar=12288, slot=1, isGsm=true, TdScdma=2147483647, EvdoDbm=-11, EvdoSnr=-1, EvdoEcio=-200, subscription=3, GsmBitErrorRate=99, LteSignalStrength=20}]
@@ -740,7 +740,7 @@ ACTIVITY MANAGER BROADCAST STATE (dumpsys activity broadcasts)
     extras: Bundle[{LteRsrp=2147483647, LteRsrq=2147483647, LteRssnr=2147483647, LteCqi=2147483647, CdmaDbm=-26, CdmaEcio=-200, GsmSignalStrength=26, SignalBar=4, slot=0, isGsm=true, TdScdma=2147483647, EvdoDbm=-26, EvdoSnr=-1, EvdoEcio=-200, subscription=2, GsmBitErrorRate=99, LteSignalStrength=99}]
   #32: BroadcastRecord{85c3ca2 u-1 android.intent.action.BATTERY_CHANGED
     act=android.intent.action.BATTERY_CHANGED flg=0x60000010 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
-    extras: Bundle[{misc_event=0, technology=Li-ion, icon-small=17303693, max_charging_voltage=0, health=2, max_charging_current=0, online=4, status=2, plugged=2, present=true, pogo_plugged=0, capacity=280000, charge_counter=0, level=34, scale=100, temperature=364, current_now=283, voltage=3816, charge_type=1, self_discharging=false, hv_charger=false, power_sharing=false, invalid_charger=0}]
+    extras: Bundle[{misc_event=0, technology=Li-ion, icon-small=17303693, max_charging_voltage=0, health=2, max_charging_current=0, online=4, referral_status=2, plugged=2, present=true, pogo_plugged=0, capacity=280000, charge_counter=0, level=34, scale=100, temperature=364, current_now=283, voltage=3816, charge_type=1, self_discharging=false, hv_charger=false, power_sharing=false, invalid_charger=0}]
   #33: BroadcastRecord{10b5d33 u-1 android.intent.action.SIG_STR
     act=android.intent.action.SIG_STR flg=0x20000010 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
     extras: Bundle[{LteRsrp=2147483647, LteRsrq=2147483647, LteRssnr=2147483647, LteCqi=2147483647, CdmaDbm=-25, CdmaEcio=-200, GsmSignalStrength=25, SignalBar=4, slot=0, isGsm=true, TdScdma=2147483647, EvdoDbm=-25, EvdoSnr=-1, EvdoEcio=-200, subscription=2, GsmBitErrorRate=99, LteSignalStrength=99}]
@@ -749,7 +749,7 @@ ACTIVITY MANAGER BROADCAST STATE (dumpsys activity broadcasts)
     extras: Bundle[{android.intent.extra.ALARM_TARGET_TIME=1510221997075, android.intent.extra.ALARM_COUNT=1}]
   #35: BroadcastRecord{7dbfe69 u-1 android.intent.action.BATTERY_CHANGED
     act=android.intent.action.BATTERY_CHANGED flg=0x60000010 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
-    extras: Bundle[{misc_event=0, technology=Li-ion, icon-small=17303693, max_charging_voltage=0, health=2, max_charging_current=0, online=4, status=2, plugged=2, present=true, pogo_plugged=0, capacity=280000, charge_counter=0, level=34, scale=100, temperature=364, current_now=542, voltage=3834, charge_type=1, self_discharging=false, hv_charger=false, power_sharing=false, invalid_charger=0}]
+    extras: Bundle[{misc_event=0, technology=Li-ion, icon-small=17303693, max_charging_voltage=0, health=2, max_charging_current=0, online=4, referral_status=2, plugged=2, present=true, pogo_plugged=0, capacity=280000, charge_counter=0, level=34, scale=100, temperature=364, current_now=542, voltage=3834, charge_type=1, self_discharging=false, hv_charger=false, power_sharing=false, invalid_charger=0}]
   #36: BroadcastRecord{e6580ee u0 com.samsung.keyguard.KEYGUARD_STATE_UPDATE
     act=com.samsung.keyguard.KEYGUARD_STATE_UPDATE flg=0x10 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
     extras: Bundle[mParcelledData.dataSize=144]
@@ -778,16 +778,16 @@ ACTIVITY MANAGER BROADCAST STATE (dumpsys activity broadcasts)
     extras: Bundle[{RECEIVER=GPS}]
   #44: BroadcastRecord{2f8bfc6 u-1 android.intent.action.BATTERY_CHANGED
     act=android.intent.action.BATTERY_CHANGED flg=0x60000010 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
-    extras: Bundle[{misc_event=0, technology=Li-ion, icon-small=17303693, max_charging_voltage=0, health=2, max_charging_current=0, online=4, status=2, plugged=2, present=true, pogo_plugged=0, capacity=280000, charge_counter=0, level=34, scale=100, temperature=364, current_now=-62, voltage=3781, charge_type=1, self_discharging=false, hv_charger=false, power_sharing=false, invalid_charger=0}]
+    extras: Bundle[{misc_event=0, technology=Li-ion, icon-small=17303693, max_charging_voltage=0, health=2, max_charging_current=0, online=4, referral_status=2, plugged=2, present=true, pogo_plugged=0, capacity=280000, charge_counter=0, level=34, scale=100, temperature=364, current_now=-62, voltage=3781, charge_type=1, self_discharging=false, hv_charger=false, power_sharing=false, invalid_charger=0}]
   #45: BroadcastRecord{77c2b87 u-1 android.intent.action.ANY_DATA_STATE
     act=android.intent.action.ANY_DATA_STATE flg=0x10 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
-    extras: Bundle[{reason=SCREEN_OFF, apnType=default, linkProperties={InterfaceName: rmnet5 LinkAddresses: [10.19.45.43/32,]  Routes: [0.0.0.0/0 -> 10.19.45.1 rmnet5,] DnsAddresses: [196.1.55.3,196.1.53.246,] Domains: null MTU: 0 TcpBufferSizes: 1048576,3145728,4194304,524288,1572864,2097152}, apn=internet, iface=rmnet5, state=CONNECTED, subscription=3, networkCapabilities=[ Transports: CELLULAR Capabilities: MMS&SUPL&DUN&FOTA&IMS&CBS&IA&XCAP&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&BIP LinkUpBandwidth>=51200Kbps LinkDnBandwidth>=102400Kbps Specifier: <3>]}]
+    extras: Bundle[{follow_up_reason=SCREEN_OFF, apnType=default, linkProperties={InterfaceName: rmnet5 LinkAddresses: [10.19.45.43/32,]  Routes: [0.0.0.0/0 -> 10.19.45.1 rmnet5,] DnsAddresses: [196.1.55.3,196.1.53.246,] Domains: null MTU: 0 TcpBufferSizes: 1048576,3145728,4194304,524288,1572864,2097152}, apn=internet, iface=rmnet5, state=CONNECTED, subscription=3, networkCapabilities=[ Transports: CELLULAR Capabilities: MMS&SUPL&DUN&FOTA&IMS&CBS&IA&XCAP&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&BIP LinkUpBandwidth>=51200Kbps LinkDnBandwidth>=102400Kbps Specifier: <3>]}]
   #46: BroadcastRecord{68bdab4 u-1 android.intent.action.PRECISE_DATA_CONNECTION_STATE_CHANGED
     act=android.intent.action.PRECISE_DATA_CONNECTION_STATE_CHANGED flg=0x10 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
-    extras: Bundle[{networkType=13, reason=SCREEN_OFF, apnType=default, failCause=, linkProperties={InterfaceName: rmnet5 LinkAddresses: [10.19.45.43/32,]  Routes: [0.0.0.0/0 -> 10.19.45.1 rmnet5,] DnsAddresses: [196.1.55.3,196.1.53.246,] Domains: null MTU: 0 TcpBufferSizes: 1048576,3145728,4194304,524288,1572864,2097152}, apn=internet, state=2}]
+    extras: Bundle[{networkType=13, follow_up_reason=SCREEN_OFF, apnType=default, failCause=, linkProperties={InterfaceName: rmnet5 LinkAddresses: [10.19.45.43/32,]  Routes: [0.0.0.0/0 -> 10.19.45.1 rmnet5,] DnsAddresses: [196.1.55.3,196.1.53.246,] Domains: null MTU: 0 TcpBufferSizes: 1048576,3145728,4194304,524288,1572864,2097152}, apn=internet, state=2}]
   #47: BroadcastRecord{16726dd u-1 android.intent.action.ANY_DATA_STATE
     act=android.intent.action.ANY_DATA_STATE flg=0x10 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } (has extras)
-    extras: Bundle[{reason=SCREEN_OFF, apnType=default, linkProperties={InterfaceName: rmnet5 LinkAddresses: [10.19.45.43/32,]  Routes: [0.0.0.0/0 -> 10.19.45.1 rmnet5,] DnsAddresses: [196.1.55.3,196.1.53.246,] Domains: null MTU: 0 TcpBufferSizes: 1048576,3145728,4194304,524288,1572864,2097152}, apn=internet, iface=rmnet5, state=CONNECTED, subscription=3, networkCapabilities=[ Transports: CELLULAR Capabilities: MMS&SUPL&DUN&FOTA&IMS&CBS&IA&XCAP&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&BIP LinkUpBandwidth>=51200Kbps LinkDnBandwidth>=102400Kbps Specifier: <3>]}]
+    extras: Bundle[{follow_up_reason=SCREEN_OFF, apnType=default, linkProperties={InterfaceName: rmnet5 LinkAddresses: [10.19.45.43/32,]  Routes: [0.0.0.0/0 -> 10.19.45.1 rmnet5,] DnsAddresses: [196.1.55.3,196.1.53.246,] Domains: null MTU: 0 TcpBufferSizes: 1048576,3145728,4194304,524288,1572864,2097152}, apn=internet, iface=rmnet5, state=CONNECTED, subscription=3, networkCapabilities=[ Transports: CELLULAR Capabilities: MMS&SUPL&DUN&FOTA&IMS&CBS&IA&XCAP&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&BIP LinkUpBandwidth>=51200Kbps LinkDnBandwidth>=102400Kbps Specifier: <3>]}]
   #48: BroadcastRecord{2b11252 u-1 com.samsung.settings.action.directaccess.CLOSE_DIALOG
     act=com.samsung.settings.action.directaccess.CLOSE_DIALOG flg=0x4000010 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 }
   #49: BroadcastRecord{665f923 u-1 android.intent.action.DREAMING_STARTED
@@ -1000,7 +1000,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
     proc=ProcessRecord{26ea40c 5179:system/1000}
     singleton=true
     authority=com.sec.knox.rcppolicyprovider
-  * ContentProviderRecord{ac5ed4f u0 com.sec.imsservice/com.sec.internal.tapi.service.provider.VideoSharingProvider}
+  * ContentProviderRecord{ac5ed4f u0 com.sec.imsservice/com.sec.internal.tapi.referral_service_id.provider.VideoSharingProvider}
     proc=ProcessRecord{6a3ede4 6255:com.sec.imsservice/1000}
     singleton=true
     authority=com.gsma.services.rcs.provider.videoshare
@@ -1016,15 +1016,15 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
     proc=ProcessRecord{6a3ede4 6255:com.sec.imsservice/1000}
     singleton=true
     authority=com.samsung.rcs.urigenerator.provider
-  * ContentProviderRecord{1e0f6b u0 com.sec.imsservice/com.sec.internal.tapi.service.provider.ChatProvider}
+  * ContentProviderRecord{1e0f6b u0 com.sec.imsservice/com.sec.internal.tapi.referral_service_id.provider.ChatProvider}
     proc=ProcessRecord{6a3ede4 6255:com.sec.imsservice/1000}
     singleton=true
     authority=com.gsma.services.rcs.provider.chat
-  * ContentProviderRecord{d415ac8 u0 com.sec.imsservice/com.sec.internal.tapi.service.provider.IshProvider}
+  * ContentProviderRecord{d415ac8 u0 com.sec.imsservice/com.sec.internal.tapi.referral_service_id.provider.IshProvider}
     proc=ProcessRecord{6a3ede4 6255:com.sec.imsservice/1000}
     singleton=true
     authority=com.gsma.services.rcs.provider.imageshare
-  * ContentProviderRecord{d2cc761 u0 com.sec.imsservice/com.sec.internal.tapi.service.provider.HistoryLogProvider}
+  * ContentProviderRecord{d2cc761 u0 com.sec.imsservice/com.sec.internal.tapi.referral_service_id.provider.HistoryLogProvider}
     proc=ProcessRecord{6a3ede4 6255:com.sec.imsservice/1000}
     singleton=true
     authority=com.gsma.services.rcs.provider.history
@@ -1052,7 +1052,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
       -> 6692:com.sec.android.app.launcher/u0a81 s0/0 u1/1 +2h33m50s518ms
       -> 11837:com.samsung.android.incallui/1001 s0/0 u1/1 +2h18m36s690ms
       -> 5401:com.samsung.android.MtpApplication/1000 s0/0 u1/1 +4m46s487ms
-  * ContentProviderRecord{4cb00e3 u0 com.sec.imsservice/com.sec.internal.tapi.service.provider.CapsProvider}
+  * ContentProviderRecord{4cb00e3 u0 com.sec.imsservice/com.sec.internal.tapi.referral_service_id.provider.CapsProvider}
     proc=ProcessRecord{6a3ede4 6255:com.sec.imsservice/1000}
     singleton=true
     authority=com.gsma.services.rcs.provider.capability
@@ -1068,7 +1068,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
       -> 6274:com.android.phone/1001 s1/1 u0/0 +2h34m4s258ms
       -> 6244:com.android.nfc/1027 s1/1 u0/0 +2h34m4s248ms
       -> 6255:com.sec.imsservice/1000 s1/1 u0/0 +2h34m4s140ms
-      -> 6372:org.simalliance.openmobileapi.service:remote/u0a159 s1/1 u0/0 +2h34m3s859ms
+      -> 6372:org.simalliance.openmobileapi.referral_service_id:remote/u0a159 s1/1 u0/0 +2h34m3s859ms
       -> 6662:com.samsung.android.providers.context/u0a11 s1/1 u0/0 +2h33m55s938ms
       -> 6692:com.sec.android.app.launcher/u0a81 s1/1 u0/0 +2h33m55s808ms
       -> 6790:android.process.acore/u0a5 s1/1 u0/0 +2h33m55s407ms
@@ -1092,7 +1092,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
       -> 10049:com.facebook.services/u0a249 s1/1 u0/0 +2h33m20s297ms
       -> 11837:com.samsung.android.incallui/1001 s1/1 u0/0 +2h32m55s517ms
       -> 12913:com.sec.android.app.servicemodeapp/1000 s1/1 u0/0 +2h32m42s777ms
-      -> 14912:com.samsung.android.email.provider:service/u150a191 s2/2 u0/0 +2h32m22s583ms
+      -> 14912:com.samsung.android.email.provider:referral_service_id/u150a191 s2/2 u0/0 +2h32m22s583ms
       -> 15163:com.google.android.gms/u150a26 s2/2 u0/0 +2h32m16s985ms
       -> 24762:com.sec.android.daemonapp/u0a176 s1/1 u0/0 +2h16m59s622ms
       -> 31389:com.samsung.android.weather/u0a173 s1/1 u0/0 +1h46m43s587ms
@@ -1118,7 +1118,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
       -> 7693:com.handyapps.expenseiq/u150a269 s1/1 u0/0 +3m41s69ms
       -> 7724:com.samsung.android.calendar/u0a151 s1/1 u0/0 +3m40s168ms
       -> 7881:com.google.android.apps.inbox/u0a199 s1/1 u0/0 +2m56s454ms
-      -> 8042:com.samsung.android.mateagent:service/u0a43 s1/1 u0/0 +1m22s342ms
+      -> 8042:com.samsung.android.mateagent:referral_service_id/u0a43 s1/1 u0/0 +1m22s342ms
       -> 8061:com.samsung.android.mateagent/u0a43 s1/1 u0/0 +1m22s148ms
       -> 8138:com.samsung.android.scloud:contentsync/5009 s1/1 u0/0 +41s477ms
   * ContentProviderRecord{f4e0199 u0 com.sec.imsservice/com.sec.internal.ims.rcscore.RcsPreferencesProvider}
@@ -1149,7 +1149,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
     proc=ProcessRecord{39a9c03 6274:com.android.phone/1001}
     singleton=true
     authority=mms;spammms
-  * ContentProviderRecord{d6505f8 u0 com.sec.imsservice/com.sec.internal.tapi.service.provider.GroupDeliveryInfoProvider}
+  * ContentProviderRecord{d6505f8 u0 com.sec.imsservice/com.sec.internal.tapi.referral_service_id.provider.GroupDeliveryInfoProvider}
     proc=ProcessRecord{6a3ede4 6255:com.sec.imsservice/1000}
     singleton=true
     authority=com.gsma.services.rcs.provider.groupdeliveryinfo
@@ -1173,7 +1173,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
     proc=ProcessRecord{6a3ede4 6255:com.sec.imsservice/1000}
     singleton=true
     authority=com.samsung.rcs.im
-  * ContentProviderRecord{78932c2 u0 com.sec.imsservice/com.sec.internal.tapi.service.provider.GeolocProvider}
+  * ContentProviderRecord{78932c2 u0 com.sec.imsservice/com.sec.internal.tapi.referral_service_id.provider.GeolocProvider}
     proc=ProcessRecord{6a3ede4 6255:com.sec.imsservice/1000}
     singleton=true
     authority=com.gsma.services.rcs.provider.geolocshare
@@ -1213,11 +1213,11 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
     proc=ProcessRecord{26ea40c 5179:system/1000}
     singleton=true
     authority=com.samsung.android.hqm.provider
-  * ContentProviderRecord{abf9f4b u0 com.sec.imsservice/com.sec.internal.tapi.service.provider.RcsSettingsProvider}
+  * ContentProviderRecord{abf9f4b u0 com.sec.imsservice/com.sec.internal.tapi.referral_service_id.provider.RcsSettingsProvider}
     proc=ProcessRecord{6a3ede4 6255:com.sec.imsservice/1000}
     singleton=true
     authority=com.gsma.services.rcs.provider.settings
-  * ContentProviderRecord{521dd28 u0 com.sec.imsservice/com.sec.internal.tapi.service.provider.BlockedContactProvider}
+  * ContentProviderRecord{521dd28 u0 com.sec.imsservice/com.sec.internal.tapi.referral_service_id.provider.BlockedContactProvider}
     proc=ProcessRecord{6a3ede4 6255:com.sec.imsservice/1000}
     singleton=true
     authority=com.gsma.services.rcs.provider.blockedcontact
@@ -1312,7 +1312,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
   * ContentProviderRecord{82d9c34 u0 com.android.providers.telephony/.NwkInfoProvider}
     proc=ProcessRecord{39a9c03 6274:com.android.phone/1001}
     authority=nwkinfo
-  * ContentProviderRecord{53b8a5d u0 com.google.android.gms/com.google.android.location.reporting.service.ReportingContentProvider}
+  * ContentProviderRecord{53b8a5d u0 com.google.android.gms/com.google.android.location.reporting.referral_service_id.ReportingContentProvider}
     proc=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     authority=com.google.android.location.reporting
   * ContentProviderRecord{f706fd2 u0 com.google.android.gms/.phenotype.provider.ConfigurationProvider}
@@ -1327,21 +1327,21 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
   * ContentProviderRecord{d2b6f59 u0 com.samsung.android.lool/com.samsung.android.sm.database.lowpowercontext.LowpowerContextProvider}
     proc=ProcessRecord{f41b71e 447:com.samsung.android.sm.provider/1000}
     authority=com.samsung.android.sm.lowpowercontext
-  * ContentProviderRecord{3fa4bff u0 com.google.android.apps.inbox/com.google.android.apps.bigtop.service.TaskProvider}
+  * ContentProviderRecord{3fa4bff u0 com.google.android.apps.inbox/com.google.android.apps.bigtop.referral_service_id.TaskProvider}
     proc=ProcessRecord{4f863aa 7881:com.google.android.apps.inbox/u0a199}
     authority=com.google.android.apps.bigtop.provider.taskprovider
   * ContentProviderRecord{af43dcc u0 com.whatsapp/com.google.firebase.provider.FirebaseInitProvider}
     proc=ProcessRecord{f24816c 5142:com.whatsapp/u0a196}
     authority=com.whatsapp.firebaseinitprovider
-  * ContentProviderRecord{c9aa815 u0 com.sec.android.app.shealth/com.samsung.android.service.health.data.GenericContentProvider}
+  * ContentProviderRecord{c9aa815 u0 com.sec.android.app.shealth/com.samsung.android.referral_service_id.health.data.GenericContentProvider}
     proc=ProcessRecord{ef575b 8413:com.sec.android.app.shealth:remote/u0a193}
     authority=com.sec.android.app.shealth.datastore
   * ContentProviderRecord{24e272a u0 com.sec.android.inputmethod/.scloudsync.SipSyncProvider}
     proc=ProcessRecord{1d5a2a2 7152:com.sec.android.inputmethod/u0a158}
     authority=com.sec.android.inputmethod.scloudsync.SipSyncProvider
-  * ContentProviderRecord{fb1a91b u0 com.sec.android.app.shealth/com.samsung.android.app.shealth.sensor.accessory.service.provider.AccessoryContentProvider}
+  * ContentProviderRecord{fb1a91b u0 com.sec.android.app.shealth/com.samsung.android.app.shealth.sensor.accessory.referral_service_id.provider.AccessoryContentProvider}
     proc=ProcessRecord{ef575b 8413:com.sec.android.app.shealth:remote/u0a193}
-    authority=com.samsung.android.app.shealth.sensor.accessory.service.provider
+    authority=com.samsung.android.app.shealth.sensor.accessory.referral_service_id.provider
   * ContentProviderRecord{60d6ab8 u0 com.whatsapp/.MediaProvider}
     proc=ProcessRecord{f24816c 5142:com.whatsapp/u0a196}
     authority=com.whatsapp.provider.media
@@ -1673,13 +1673,13 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
   * ContentProviderRecord{40a5db4 u0 com.samsung.android.app.notes/.provider.SDocControlProvider}
     proc=ProcessRecord{b34494 7074:com.samsung.android.app.notes/u0a190}
     authority=com.samsung.android.app.notes.control
-  * ContentProviderRecord{e2eeddd u0 com.google.android.gms/.people.service.PeopleContentProvider}
+  * ContentProviderRecord{e2eeddd u0 com.google.android.gms/.people.referral_service_id.PeopleContentProvider}
     proc=ProcessRecord{57dff4f 6922:com.google.android.gms/u0a26}
     authority=com.google.android.gms.people
   * ContentProviderRecord{c62cd52 u0 com.google.android.apps.photos/.photoeditor.renderedimageprovider.RenderedImageContentProvider}
     proc=ProcessRecord{75aa8cd 7476:com.google.android.apps.photos/u0a186}
     authority=com.google.android.apps.photos.photoeditor.renderedimagecontentprovider
-  * ContentProviderRecord{c9823 u0 com.sec.imsservice/com.sec.internal.tapi.service.provider.UserConsentProvider}
+  * ContentProviderRecord{c9823 u0 com.sec.imsservice/com.sec.internal.tapi.referral_service_id.provider.UserConsentProvider}
     proc=ProcessRecord{6a3ede4 6255:com.sec.imsservice/1000}
     authority=com.sec.internal.userconsentprovider
   * ContentProviderRecord{9c9a120 u0 com.google.android.gms/.plus.provider.PlusProvider}
@@ -1719,7 +1719,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
     proc=ProcessRecord{57dff4f 6922:com.google.android.gms/u0a26}
     authority=com.google.android.gms.icing.proxy.apps
   * ContentProviderRecord{eec084d u0 com.samsung.android.mateagent/.model.provider.MateProvider}
-    proc=ProcessRecord{d952f02 8042:com.samsung.android.mateagent:service/u0a43}
+    proc=ProcessRecord{d952f02 8042:com.samsung.android.mateagent:referral_service_id/u0a43}
     authority=com.samsung.android.mateprovider
   * ContentProviderRecord{a63d013 u0 com.google.android.googlequicksearchbox/com.google.android.apps.gsa.voiceinteraction.dump.StateDumpProvider}
     proc=ProcessRecord{dcbaa51 6649:com.google.android.googlequicksearchbox:interactor/u0a89}
@@ -1727,7 +1727,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
   * ContentProviderRecord{7979250 u0 com.samsung.android.scloud/.sync.oem.ExternalOEMControlProvider}
     proc=ProcessRecord{aa6cd19 7855:com.samsung.android.scloud/5009}
     authority=com.samsung.android.scloud.sync.vendor
-  * ContentProviderRecord{3fddc49 u0 com.sec.imsservice/com.sec.internal.tapi.service.provider.FtProvider}
+  * ContentProviderRecord{3fddc49 u0 com.sec.imsservice/com.sec.internal.tapi.referral_service_id.provider.FtProvider}
     proc=ProcessRecord{6a3ede4 6255:com.sec.imsservice/1000}
     authority=com.gsma.services.rcs.provider.filetransfer
   * ContentProviderRecord{5ab394e u0 com.google.android.calendar/.CalendarRecentSuggestionsProvider}
@@ -1821,7 +1821,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
     proc=ProcessRecord{57dff4f 6922:com.google.android.gms/u0a26}
     authority=com.google.android.gms.games
   * ContentProviderRecord{95a78b0 u0 com.samsung.android.mateagent/android.support.v4.content.FileProvider}
-    proc=ProcessRecord{d952f02 8042:com.samsung.android.mateagent:service/u0a43}
+    proc=ProcessRecord{d952f02 8042:com.samsung.android.mateagent:referral_service_id/u0a43}
     authority=com.samsung.android.mateagent.model.provider.FileProvider
   * ContentProviderRecord{46b3329 u0 com.android.systemui/android.support.v4.content.FileProvider}
     proc=ProcessRecord{74212fe 5766:com.android.systemui/u0a7}
@@ -1985,13 +1985,13 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
   * ContentProviderRecord{23796ca u0 com.sec.android.app.launcher/com.android.launcher3.home.ZeroPageProvider}
     proc=ProcessRecord{76f868a 6692:com.sec.android.app.launcher/u0a81}
     authority=com.sec.android.app.launcher.zeropage
-  * ContentProviderRecord{bd8f03b u0 com.google.android.apps.inbox/com.google.android.apps.bigtop.service.BigTopProvider}
+  * ContentProviderRecord{bd8f03b u0 com.google.android.apps.inbox/com.google.android.apps.bigtop.referral_service_id.BigTopProvider}
     proc=ProcessRecord{4f863aa 7881:com.google.android.apps.inbox/u0a199}
     authority=com.google.android.apps.bigtop.provider.bigtopprovider
   * ContentProviderRecord{d327358 u0 com.samsung.android.bixby.wakeup/com.samsung.android.voicewakeup.setting.SettingsProvider}
     proc=ProcessRecord{bb01cb1 27660:com.samsung.android.bixby.wakeup/1000}
     authority=com.samsung.android.voicewakeup.setting.provider
-  * ContentProviderRecord{4a05596 u0 com.sec.android.app.shealth/com.samsung.android.service.health.smartswitch.SmartSwitchProvider}
+  * ContentProviderRecord{4a05596 u0 com.sec.android.app.shealth/com.samsung.android.referral_service_id.health.smartswitch.SmartSwitchProvider}
     proc=ProcessRecord{ef575b 8413:com.sec.android.app.shealth:remote/u0a193}
     authority=com.sec.android.app.shealth.smartswitch
   * ContentProviderRecord{a5c5517 u0 com.samsung.android.scloud/.requestinterface.RequestProvider}
@@ -2072,7 +2072,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
   * ContentProviderRecord{42422a u150 com.google.android.gms/.icing.proxy.SuggestQueryContentProvider}
     proc=ProcessRecord{249f406 15163:com.google.android.gms/u150a26}
     authority=com.google.android.gms.icing.proxy.suggest_query
-  * ContentProviderRecord{2db281b u150 com.google.android.gms/com.google.android.location.reporting.service.ReportingContentProvider}
+  * ContentProviderRecord{2db281b u150 com.google.android.gms/com.google.android.location.reporting.referral_service_id.ReportingContentProvider}
     proc=ProcessRecord{6891798 8810:com.google.android.gms.persistent/u150a26}
     authority=com.google.android.location.reporting
   * ContentProviderRecord{d6a7db8 u150 com.google.android.gms/.wallet.provider.WalletFileProvider}
@@ -2084,7 +2084,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
   * ContentProviderRecord{29a56f6 u150 com.google.android.gms/.security.provider.SecurityProvider}
     proc=ProcessRecord{6891798 8810:com.google.android.gms.persistent/u150a26}
     authority=com.google.android.gms.security.provider
-  * ContentProviderRecord{a7a2af7 u150 com.google.android.gms/.people.service.PeopleContentProvider}
+  * ContentProviderRecord{a7a2af7 u150 com.google.android.gms/.people.referral_service_id.PeopleContentProvider}
     proc=ProcessRecord{249f406 15163:com.google.android.gms/u150a26}
     authority=com.google.android.gms.people
   * ContentProviderRecord{125bd64 u150 com.google.android.gms/.plus.provider.PlusProvider}
@@ -2100,7 +2100,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
     proc=ProcessRecord{249f406 15163:com.google.android.gms/u150a26}
     authority=com.google.android.gms.icing.proxy.apps
   * ContentProviderRecord{8d0d7c9 u150 com.samsung.android.email.provider/com.samsung.android.email.sync.provider.FolderManageProvider}
-    proc=ProcessRecord{1214ece 14912:com.samsung.android.email.provider:service/u150a191}
+    proc=ProcessRecord{1214ece 14912:com.samsung.android.email.provider:referral_service_id/u150a191}
     authority=com.samsung.android.emailsync.folderprovider
   * ContentProviderRecord{28581ef u150 com.samsung.android.contacts/com.samsung.contacts.editor.sticker.AgifEditorHistoryProvider}
     proc=ProcessRecord{18cec82 9648:com.samsung.android.contacts/u150a5}
@@ -2136,7 +2136,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
     proc=ProcessRecord{6891798 8810:com.google.android.gms.persistent/u150a26}
     authority=com.google.android.gms.auth.accounts
   * ContentProviderRecord{2dd7a32 u150 com.samsung.android.email.provider/com.samsung.android.email.sync.homecard.OtherProvider}
-    proc=ProcessRecord{1214ece 14912:com.samsung.android.email.provider:service/u150a191}
+    proc=ProcessRecord{1214ece 14912:com.samsung.android.email.provider:referral_service_id/u150a191}
     authority=com.samsung.android.email.otherprovider
   * ContentProviderRecord{8347383 u150 com.android.providers.media/.MediaProvider}
     proc=ProcessRecord{b423890 8182:android.process.media/u150a42}
@@ -2182,7 +2182,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
     proc=ProcessRecord{249f406 15163:com.google.android.gms/u150a26}
     authority=com.google.android.gms.drive.sync
   * ContentProviderRecord{404d3e2 u150 com.samsung.android.email.provider/com.samsung.android.email.sync.exchange.provider.ExchangeDirectoryProvider}
-    proc=ProcessRecord{1214ece 14912:com.samsung.android.email.provider:service/u150a191}
+    proc=ProcessRecord{1214ece 14912:com.samsung.android.email.provider:referral_service_id/u150a191}
     authority=com.samsung.android.exchange.directory.provider
   * ContentProviderRecord{1694373 u150 com.samsung.android.contacts/com.samsung.contacts.common.ContactSettingsProvider}
     proc=ProcessRecord{18cec82 9648:com.samsung.android.contacts/u150a5}
@@ -2200,7 +2200,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
     proc=ProcessRecord{249f406 15163:com.google.android.gms/u150a26}
     authority=com.google.android.gms.people.profile.fileprovider
   * ContentProviderRecord{b0b015c u150 com.samsung.android.email.provider/com.samsung.android.email.sync.provider.EmailSyncProvider}
-    proc=ProcessRecord{1214ece 14912:com.samsung.android.email.provider:service/u150a191}
+    proc=ProcessRecord{1214ece 14912:com.samsung.android.email.provider:referral_service_id/u150a191}
     authority=com.samsung.android.emailsync.provider
   * ContentProviderRecord{741cc65 u150 com.google.android.gms/.instantapps.routing.InstantAppsContentProvider}
     proc=ProcessRecord{6891798 8810:com.google.android.gms.persistent/u150a26}
@@ -2229,7 +2229,7 @@ ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)
     proc=ProcessRecord{a7267a3 9104:android.process.acore/u150a5}
     authority=com.android.contacts.dumpfile
   * ContentProviderRecord{bd6231d u150 com.samsung.android.email.provider/com.samsung.android.email.sync.oauth.LogsProvider}
-    proc=ProcessRecord{1214ece 14912:com.samsung.android.email.provider:service/u150a191}
+    proc=ProcessRecord{1214ece 14912:com.samsung.android.email.provider:referral_service_id/u150a191}
     authority=com.samsung.android.email.logs.provider
   * ContentProviderRecord{e4df992 u150 com.bituniverse.portfolio/com.google.firebase.perf.provider.FirebasePerfProvider}
     proc=ProcessRecord{63f60a4 27000:com.bituniverse.portfolio/u150a183}
@@ -2250,13 +2250,13 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
     app=ProcessRecord{b99922e 6772:com.samsung.android.app.aodservice/u0a7}
     created=-1m22s299ms started=false connections=1
     Connections:
-      act=android.service.dreams.DreamService flg=0x800000 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
+      act=android.referral_service_id.dreams.DreamService flg=0x800000 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
   * ServiceRecord{cda8aa9 u0 com.breel.wallpapers/.celestialbodies.EarthWallpaperService}
     app=ProcessRecord{4e4b75c 6184:com.breel.wallpapers/u0a418}
     created=-2h34m4s943ms started=false connections=1
     Connections:
-      act=android.service.wallpaper.WallpaperService launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
-  * ServiceRecord{d983ab3 u0 com.truecaller/.service.DataManagerService}
+      act=android.referral_service_id.wallpaper.WallpaperService launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
+  * ServiceRecord{d983ab3 u0 com.truecaller/.referral_service_id.DataManagerService}
     app=ProcessRecord{2a40f24 6762:com.truecaller/u0a214}
     created=-26m47s103ms started=true connections=0
   * ServiceRecord{2b72b0e u0 com.samsung.android.rubin.app/com.samsung.android.rubin.controller.KeepAliveService}
@@ -2268,7 +2268,7 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
   * ServiceRecord{3b6d419 u0 com.google.android.music/.dial.DialMediaRouteProviderService}
     app=null
     created=-55m16s985ms started=false connections=0
-  * ServiceRecord{13857e2 u0 com.truecaller/.service.ClipboardService}
+  * ServiceRecord{13857e2 u0 com.truecaller/.referral_service_id.ClipboardService}
     app=ProcessRecord{2a40f24 6762:com.truecaller/u0a214}
     created=-2h33m53s981ms started=true connections=0
   * ServiceRecord{4f7c8ea u0 com.samsung.android.radiobasedlocation.manager/.RblManager}
@@ -2295,32 +2295,32 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
   * ServiceRecord{8935432 u0 com.samsung.oh/com.samsung.oep.services.RemovedFromRecentService}
     app=ProcessRecord{b84682 32261:com.samsung.oh/u0a276}
     created=-10m9s665ms started=true connections=0
-  * ServiceRecord{2951ef6 u0 com.google.android.gms/.deviceconnection.service.DeviceConnectionWatcherService}
+  * ServiceRecord{2951ef6 u0 com.google.android.gms/.deviceconnection.referral_service_id.DeviceConnectionWatcherService}
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h33m14s445ms started=true connections=0
-  * ServiceRecord{e684321 u0 com.google.android.gms/com.google.android.location.places.service.PlaceDetectionAsyncService}
+  * ServiceRecord{e684321 u0 com.google.android.gms/com.google.android.location.places.referral_service_id.PlaceDetectionAsyncService}
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h31m45s471ms started=true connections=0
-  * ServiceRecord{2ff0827 u0 com.truecaller/.service.CallStateService}
+  * ServiceRecord{2ff0827 u0 com.truecaller/.referral_service_id.CallStateService}
     app=ProcessRecord{2a40f24 6762:com.truecaller/u0a214}
     created=-2h33m54s521ms started=true connections=0
   * ServiceRecord{822d8c1 u0 com.google.android.googlequicksearchbox/com.google.android.apps.gsa.assist.GsaVoiceInteractionSessionService}
     app=ProcessRecord{980703c 6861:com.google.android.googlequicksearchbox:search/u0a89}
     created=-25m26s402ms started=false connections=1
     Connections:
-      act=android.service.voice.VoiceInteractionService launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
+      act=android.referral_service_id.voice.VoiceInteractionService launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
   * ServiceRecord{5949c32 u0 com.android.systemui/.keyguard.KeyguardService}
     app=ProcessRecord{74212fe 5766:com.android.systemui/u0a7}
     created=-2h34m3s984ms started=false connections=1
     Connections:
       flg=0x100 launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
-  * ServiceRecord{da207f3 u0 com.google.android.gms/.measurement.service.MeasurementBrokerService}
+  * ServiceRecord{da207f3 u0 com.google.android.gms/.measurement.referral_service_id.MeasurementBrokerService}
     app=ProcessRecord{57dff4f 6922:com.google.android.gms/u0a26}
     created=-2h33m55s136ms started=false connections=2
     Connections:
       act=com.google.android.gms.measurement.START pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6762:com.truecaller/u0a214
       act=com.google.android.gms.measurement.START pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5142:com.whatsapp/u0a196
-  * ServiceRecord{51d866d u0 com.sec.android.inputmethod/com.nuance.connect.service.ConnectClient}
+  * ServiceRecord{51d866d u0 com.sec.android.inputmethod/com.nuance.connect.referral_service_id.ConnectClient}
     app=ProcessRecord{1d5a2a2 7152:com.sec.android.inputmethod/u0a158}
     created=-2h33m37s640ms started=true connections=1
     Connections:
@@ -2337,7 +2337,7 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h32m2s226ms started=false connections=1
     Connections:
-      act=com.android.location.service.GeocodeProvider launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
+      act=com.android.location.referral_service_id.GeocodeProvider launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
   * ServiceRecord{9598e8f u0 com.samsung.enhanceservice/.EnhanceService}
     app=ProcessRecord{f421ebf 6858:com.samsung.enhanceservice/5004}
     created=-4m32s826ms started=false connections=1
@@ -2371,7 +2371,7 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
     created=-2h33m44s204ms started=false connections=1
     Connections:
        launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6274:com.android.phone/1001
-  * ServiceRecord{67d85c5 u0 com.sec.android.app.shealth/com.samsung.android.app.shealth.wearable.service.WearableService}
+  * ServiceRecord{67d85c5 u0 com.sec.android.app.shealth/com.samsung.android.app.shealth.wearable.referral_service_id.WearableService}
     app=ProcessRecord{ef575b 8413:com.sec.android.app.shealth:remote/u0a193}
     created=-2h31m49s557ms started=false connections=1
     Connections:
@@ -2385,15 +2385,15 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
        launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6255:com.sec.imsservice/1000
        launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6255:com.sec.imsservice/1000
        launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6255:com.sec.imsservice/1000
-  * ServiceRecord{71fc545 u0 com.google.android.gms/.analytics.service.AnalyticsService}
+  * ServiceRecord{71fc545 u0 com.google.android.gms/.analytics.referral_service_id.AnalyticsService}
     app=ProcessRecord{57dff4f 6922:com.google.android.gms/u0a26}
     created=-3m34s756ms started=false connections=1
     Connections:
-      act=com.google.android.gms.analytics.service.START launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 7760:com.google.android.calendar/u0a123
-  * ServiceRecord{31fb927 u0 com.sec.android.app.shealth/com.samsung.android.sleepdetectionlib.service.ServiceManager}
+      act=com.google.android.gms.analytics.referral_service_id.START launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 7760:com.google.android.calendar/u0a123
+  * ServiceRecord{31fb927 u0 com.sec.android.app.shealth/com.samsung.android.sleepdetectionlib.referral_service_id.ServiceManager}
     app=ProcessRecord{ef575b 8413:com.sec.android.app.shealth:remote/u0a193}
     created=-2h31m33s179ms started=true connections=0
-  * ServiceRecord{6875909 u0 com.google.android.gms/com.google.location.nearby.direct.service.NearbyDirectService}
+  * ServiceRecord{6875909 u0 com.google.android.gms/com.google.location.nearby.direct.referral_service_id.NearbyDirectService}
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h33m9s325ms started=true connections=1
     Connections:
@@ -2407,20 +2407,20 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h33m53s546ms started=false connections=8
     Connections:
-      act=com.google.android.gms.trustlet.nfc.service.BIND pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
-      act=com.google.android.gms.trustlet.voiceunlock.service.BIND pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
-      act=com.google.android.gms.trustlet.connectionlessble.service.BIND pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
-      act=com.google.android.gms.trustlet.onbody.service.BIND pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
+      act=com.google.android.gms.trustlet.nfc.referral_service_id.BIND pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
+      act=com.google.android.gms.trustlet.voiceunlock.referral_service_id.BIND pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
+      act=com.google.android.gms.trustlet.connectionlessble.referral_service_id.BIND pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
+      act=com.google.android.gms.trustlet.onbody.referral_service_id.BIND pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
       act=com.google.android.gms.carsetup.trust.BIND pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
-      act=com.google.android.gms.trustlet.place.service.BIND pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
-      act=com.google.android.gms.trustlet.face.service.BIND pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
-      act=com.google.android.gms.trustlet.bluetooth.service.BIND pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
+      act=com.google.android.gms.trustlet.place.referral_service_id.BIND pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
+      act=com.google.android.gms.trustlet.face.referral_service_id.BIND pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
+      act=com.google.android.gms.trustlet.bluetooth.referral_service_id.BIND pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
   * ServiceRecord{a1c9343 u0 com.android.bluetooth/.gatt.GattService}
     app=ProcessRecord{7c8ca9 5714:com.android.bluetooth/1002}
     created=-2h34m3s248ms started=true connections=1
     Connections:
       act=android.bluetooth.IBluetoothGatt launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
-  * ServiceRecord{cf473ff u0 com.google.android.gms/.auth.account.service.WorkAccountService}
+  * ServiceRecord{cf473ff u0 com.google.android.gms/.auth.account.referral_service_id.WorkAccountService}
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h33m18s36ms started=true connections=0
   * ServiceRecord{b3f798c u0 com.android.bluetooth/.sap.SapService}
@@ -2428,17 +2428,17 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
     created=-2h34m8s472ms started=false connections=1
     Connections:
       act=android.bluetooth.IBluetoothSap launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5766:com.android.systemui/u0a7
-  * ServiceRecord{889ed83 u0 org.simalliance.openmobileapi.service/.SmartcardService}
-    app=ProcessRecord{2bedf3a 6372:org.simalliance.openmobileapi.service:remote/u0a159}
+  * ServiceRecord{889ed83 u0 org.simalliance.openmobileapi.referral_service_id/.SmartcardService}
+    app=ProcessRecord{2bedf3a 6372:org.simalliance.openmobileapi.referral_service_id:remote/u0a159}
     created=-2h34m4s88ms started=false connections=1
     Connections:
-      act=org.simalliance.openmobileapi.BIND_SERVICE pkg=org.simalliance.openmobileapi.service launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6244:com.android.nfc/1027
-  * ServiceRecord{6bc8e05 u0 com.google.android.gms/.pseudonymous.service.PseudonymousIdService}
+      act=org.simalliance.openmobileapi.BIND_SERVICE pkg=org.simalliance.openmobileapi.referral_service_id launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6244:com.android.nfc/1027
+  * ServiceRecord{6bc8e05 u0 com.google.android.gms/.pseudonymous.referral_service_id.PseudonymousIdService}
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h33m22s960ms started=false connections=1
     Connections:
-      act=com.google.android.gms.pseudonymous.service.START pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6922:com.google.android.gms/u0a26
-  * ServiceRecord{3623c8 u0 com.osp.app.signin/com.msc.sa.service.RequestService}
+      act=com.google.android.gms.pseudonymous.referral_service_id.START pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6922:com.google.android.gms/u0a26
+  * ServiceRecord{3623c8 u0 com.osp.app.signin/com.msc.sa.referral_service_id.RequestService}
     app=ProcessRecord{2d281d7 32719:com.osp.app.signin/u0a56}
     created=-8m20s76ms started=false connections=1
     Connections:
@@ -2457,7 +2457,7 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
     app=ProcessRecord{88171cf 6544:com.google.android.ext.services/u0a29}
     created=-2h34m12s891ms started=false connections=1
     Connections:
-      act=android.service.notification.NotificationRankerService launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
+      act=android.referral_service_id.notification.NotificationRankerService launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
   * ServiceRecord{4f6f8ef u0 com.google.android.gms/.update.SystemUpdateService}
     app=ProcessRecord{57dff4f 6922:com.google.android.gms/u0a26}
     created=-2h33m8s614ms started=true connections=0
@@ -2465,20 +2465,20 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h32m2s228ms started=false connections=1
     Connections:
-      act=com.android.location.service.FusedLocationProvider launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
+      act=com.android.location.referral_service_id.FusedLocationProvider launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
   * ServiceRecord{7442297 u0 com.samsung.android.scloud/.sync.core.SyncService}
     app=ProcessRecord{aa6cd19 7855:com.samsung.android.scloud/5009}
     created=-1h48m7s911ms started=true connections=0
-  * ServiceRecord{6c46963 u0 org.simalliance.openmobileapi.service/org.simalliance.openmobileapi.uiccterminal.UiccTerminal}
-    app=ProcessRecord{2bedf3a 6372:org.simalliance.openmobileapi.service:remote/u0a159}
+  * ServiceRecord{6c46963 u0 org.simalliance.openmobileapi.referral_service_id/org.simalliance.openmobileapi.uiccterminal.UiccTerminal}
+    app=ProcessRecord{2bedf3a 6372:org.simalliance.openmobileapi.referral_service_id:remote/u0a159}
     created=-2h34m3s916ms started=false connections=1
     Connections:
-       launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6372:org.simalliance.openmobileapi.service:remote/u0a159
+       launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6372:org.simalliance.openmobileapi.referral_service_id:remote/u0a159
   * ServiceRecord{2801fa5 u0 com.truecaller/.notifications.NotificationHandlerService}
     app=ProcessRecord{2a40f24 6762:com.truecaller/u0a214}
     created=-2h33m55s955ms started=false connections=1
     Connections:
-      act=android.service.notification.NotificationListenerService launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
+      act=android.referral_service_id.notification.NotificationListenerService launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
   * ServiceRecord{bff90d5 u0 com.sec.imsservice/com.sec.internal.ims.imsservice.ImsService}
     app=ProcessRecord{6a3ede4 6255:com.sec.imsservice/1000}
     created=-2h34m3s315ms started=true connections=0
@@ -2491,19 +2491,19 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
   * ServiceRecord{756da5c u0 net.zedge.android/io.presage.PresageService}
     app=ProcessRecord{b6a1190 23475:net.zedge.android:remote/u0a225}
     created=-26m18s729ms started=true connections=0
-  * ServiceRecord{e0c45c u0 com.samsung.android.bio.face.service/.FaceService}
-    app=ProcessRecord{29b28ea 28551:com.samsung.android.bio.face.service/1000}
+  * ServiceRecord{e0c45c u0 com.samsung.android.bio.face.referral_service_id/.FaceService}
+    app=ProcessRecord{29b28ea 28551:com.samsung.android.bio.face.referral_service_id/1000}
     created=-18m9s0ms started=true connections=0
   * ServiceRecord{1d84ce4 u0 com.google.android.gms/.cast.media.CastMediaRouteProviderService}
     app=ProcessRecord{57dff4f 6922:com.google.android.gms/u0a26}
     created=-4m27s449ms started=false connections=1
     Connections:
       act=android.media.MediaRouteProviderService launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 7209:com.microsoft.skydrive/u0a53
-  * ServiceRecord{f3eda54 u0 com.google.android.gms/com.google.android.location.geofencer.service.GeofenceProviderService}
+  * ServiceRecord{f3eda54 u0 com.google.android.gms/com.google.android.location.geofencer.referral_service_id.GeofenceProviderService}
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h32m2s220ms started=false connections=1
     Connections:
-      act=com.android.location.service.GeofenceProvider launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
+      act=com.android.location.referral_service_id.GeofenceProvider launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
   * ServiceRecord{d982635 u0 com.samsung.sec.android.application.csc/.CscUpdateService}
     app=ProcessRecord{39a9c03 6274:com.android.phone/1001}
     created=-2h33m54s431ms started=true connections=0
@@ -2513,7 +2513,7 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
   * ServiceRecord{f526c94 u0 com.sec.spp.push/.PushClientService}
     app=ProcessRecord{f96270 7443:com.sec.spp.push/u0a50}
     created=-1h2m47s117ms started=true connections=0
-  * ServiceRecord{279632e u0 com.sec.sve/.service.SecVideoEngineService}
+  * ServiceRecord{279632e u0 com.sec.sve/.referral_service_id.SecVideoEngineService}
     app=ProcessRecord{430a278 6232:com.sec.sve/1000}
     created=-2h34m4s387ms started=true connections=0
   * ServiceRecord{4d3a0ed u0 com.android.systemui/.SystemUIService}
@@ -2523,7 +2523,7 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
     app=ProcessRecord{12dd8cd 6748:com.google.vr.vrcore/u0a242}
     created=-2h33m55s996ms started=false connections=1
     Connections:
-      act=android.service.notification.ConditionProviderService launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
+      act=android.referral_service_id.notification.ConditionProviderService launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
   * ServiceRecord{d691b8c u0 com.samsung.android.app.aodservice/.AODService}
     app=ProcessRecord{b99922e 6772:com.samsung.android.app.aodservice/u0a7}
     created=-2h24m5s113ms started=true connections=1
@@ -2537,7 +2537,7 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
   * ServiceRecord{d71a9b3 u0 com.samsung.android.themecenter/com.samsung.android.thememanager.ThemeManagerService}
     app=ProcessRecord{e7cb71 5783:com.samsung.android.themecenter/1000}
     created=-2h34m10s408ms started=true connections=0
-  * ServiceRecord{a65cbd7 u0 com.google.android.gms/com.google.android.location.reporting.service.DispatchingService}
+  * ServiceRecord{a65cbd7 u0 com.google.android.gms/com.google.android.location.reporting.referral_service_id.DispatchingService}
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h33m25s289ms started=true connections=0
   * ServiceRecord{5b33378 u0 com.samsung.android.bixby.agent/com.samsung.android.bixby.BixbyTrustAgentService}
@@ -2556,10 +2556,10 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
     created=-2h33m55s666ms started=false connections=1
     Connections:
        launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
-  * ServiceRecord{4645983 u0 com.samsung.android.app.spage/.service.DummyStickyService}
+  * ServiceRecord{4645983 u0 com.samsung.android.app.spage/.referral_service_id.DummyStickyService}
     app=ProcessRecord{254a061 7041:com.samsung.android.app.spage/u0a22}
     created=-2h33m4s224ms started=true connections=0
-  * ServiceRecord{420e3f u0 com.google.android.gms/.nearby.messages.service.NearbyMessagesService}
+  * ServiceRecord{420e3f u0 com.google.android.gms/.nearby.messages.referral_service_id.NearbyMessagesService}
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h33m9s506ms started=true connections=0
   * ServiceRecord{b704f5 u0 com.samsung.android.scloud/.auth.AuthService}
@@ -2568,10 +2568,10 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
   * ServiceRecord{ba970f8 u0 com.android.server.telecom/.components.BluetoothPhoneService}
     app=ProcessRecord{26ea40c 5179:system/1000}
     created=-2h34m3s430ms started=true connections=0
-  * ServiceRecord{e32f33b u0 com.google.android.googlequicksearchbox/com.google.android.apps.gsa.search.core.service.SearchService}
+  * ServiceRecord{e32f33b u0 com.google.android.googlequicksearchbox/com.google.android.apps.gsa.search.core.referral_service_id.SearchService}
     app=ProcessRecord{980703c 6861:com.google.android.googlequicksearchbox:search/u0a89}
     created=-1m22s413ms started=true connections=0
-  * ServiceRecord{cd20a41 u0 com.sec.android.daemonapp/com.samsung.android.weather.common.provider.service.WeatherDataService}
+  * ServiceRecord{cd20a41 u0 com.sec.android.daemonapp/com.samsung.android.weather.common.provider.referral_service_id.WeatherDataService}
     app=ProcessRecord{c90d81a 24762:com.sec.android.daemonapp/u0a176}
     created=-2h16m59s700ms started=false connections=2
     Connections:
@@ -2586,21 +2586,21 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
   * ServiceRecord{2c9593c u0 com.google.android.gms/com.google.android.location.internal.server.GoogleLocationService}
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h33m43s591ms started=true connections=0
-  * ServiceRecord{2a4636a u0 com.google.android.gms/com.google.android.contextmanager.service.ContextManagerService}
+  * ServiceRecord{2a4636a u0 com.google.android.gms/com.google.android.contextmanager.referral_service_id.ContextManagerService}
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h33m15s835ms started=true connections=1
     Connections:
-      act=com.google.android.contextmanager.service.ContextManagerService.START pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
+      act=com.google.android.contextmanager.referral_service_id.ContextManagerService.START pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
   * ServiceRecord{27de7ce u0 com.samsung.android.app.aodservice/.controller.notification.AODNotificationListenerService}
     app=ProcessRecord{b99922e 6772:com.samsung.android.app.aodservice/u0a7}
     created=-2h33m55s906ms started=false connections=1
     Connections:
-      act=android.service.notification.NotificationListenerService launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
+      act=android.referral_service_id.notification.NotificationListenerService launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
   * ServiceRecord{7d2afaf u0 com.google.android.gms/com.google.android.location.network.NetworkLocationService}
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h32m2s232ms started=false connections=1
     Connections:
-      act=com.android.location.service.v3.NetworkLocationProvider launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
+      act=com.android.location.referral_service_id.v3.NetworkLocationProvider launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
   * ServiceRecord{80f0d u0 com.android.stk/.StkAppService}
     app=ProcessRecord{39a9c03 6274:com.android.phone/1001}
     created=-2h33m32s259ms started=true connections=0
@@ -2609,7 +2609,7 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
     created=-2h33m44s409ms started=true connections=1
     Connections:
       act=com.google.android.location.internal.GoogleLocationManagerService.START pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6633:com.google.android.gms.persistent/u0a26
-  * ServiceRecord{b68efe5 u0 com.sec.android.app.shealth/com.samsung.android.service.health.HealthService}
+  * ServiceRecord{b68efe5 u0 com.sec.android.app.shealth/com.samsung.android.referral_service_id.health.HealthService}
     app=ProcessRecord{ef575b 8413:com.sec.android.app.shealth:remote/u0a193}
     created=-2h33m36s887ms started=false connections=7
     Connections:
@@ -2640,7 +2640,7 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
     app=ProcessRecord{dcbaa51 6649:com.google.android.googlequicksearchbox:interactor/u0a89}
     created=-2h33m57s564ms started=false connections=1
     Connections:
-      act=android.service.voice.VoiceInteractionService launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
+      act=android.referral_service_id.voice.VoiceInteractionService launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
   * ServiceRecord{c9e3cb7 u0 com.samsung.android.providers.context/.ContextService}
     app=ProcessRecord{897d072 6662:com.samsung.android.providers.context/u0a11}
     created=-2h33m56s912ms started=true connections=0
@@ -2649,7 +2649,7 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
     created=-2h34m3s463ms started=true connections=1
     Connections:
       act=com.samsung.bt.hfp.IBluetoothHeadsetVoIP launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6274:com.android.phone/1001
-  * ServiceRecord{231d0e2 u0 com.sec.android.app.shealth/com.samsung.android.app.shealth.tracker.pedometer.service.PedometerService}
+  * ServiceRecord{231d0e2 u0 com.sec.android.app.shealth/com.samsung.android.app.shealth.tracker.pedometer.referral_service_id.PedometerService}
     app=ProcessRecord{ef575b 8413:com.sec.android.app.shealth:remote/u0a193}
     created=-2h31m53s490ms started=true connections=0
   * ServiceRecord{7d2c5a2 u0 android/com.android.internal.backup.LocalTransportService}
@@ -2663,16 +2663,16 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
   * ServiceRecord{9c1fa35 u0 com.google.android.gms/.common.stats.GmsCoreStatsService}
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h33m15s507ms started=true connections=0
-  * ServiceRecord{e1031c2 u0 com.google.android.gms/.clearcut.service.ClearcutLoggerService}
+  * ServiceRecord{e1031c2 u0 com.google.android.gms/.clearcut.referral_service_id.ClearcutLoggerService}
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h33m54s567ms started=false connections=1
     Connections:
-      act=com.google.android.gms.clearcut.service.START pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6922:com.google.android.gms/u0a26
+      act=com.google.android.gms.clearcut.referral_service_id.START pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6922:com.google.android.gms/u0a26
   * ServiceRecord{1ce3543 u0 com.google.android.gms/com.google.android.location.internal.server.HardwareArProviderService}
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h32m2s214ms started=false connections=1
     Connections:
-      act=com.android.location.service.ActivityRecognitionProvider launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
+      act=com.android.location.referral_service_id.ActivityRecognitionProvider launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
   * ServiceRecord{62b751c u0 com.samsung.dcmservice/.DCMService}
     app=ProcessRecord{d7ae9b6 6878:com.samsung.dcmservice/5004}
     created=-4m32s799ms started=false connections=1
@@ -2690,7 +2690,7 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
   * ServiceRecord{9128ec2 u0 com.android.stk2/.StkAppService}
     app=ProcessRecord{39a9c03 6274:com.android.phone/1001}
     created=-2h33m32s215ms started=true connections=0
-  * ServiceRecord{f30e236 u0 com.android.mms.service/.MmsService}
+  * ServiceRecord{f30e236 u0 com.android.mms.referral_service_id/.MmsService}
     app=ProcessRecord{39a9c03 6274:com.android.phone/1001}
     created=-2h33m6s130ms started=false connections=1
     Connections:
@@ -2701,7 +2701,7 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
   * ServiceRecord{a2b7eb1 u0 com.samsung.oh/com.samsung.oep.services.SPlusService}
     app=ProcessRecord{b84682 32261:com.samsung.oh/u0a276}
     created=-10m10s310ms started=true connections=0
-  * ServiceRecord{2b7b7e2 u0 com.sec.android.app.shealth/com.samsung.android.app.shealth.goal.insights.service.InsightService}
+  * ServiceRecord{2b7b7e2 u0 com.sec.android.app.shealth/com.samsung.android.app.shealth.goal.insights.referral_service_id.InsightService}
     app=ProcessRecord{ef575b 8413:com.sec.android.app.shealth:remote/u0a193}
     created=-2h31m23s845ms started=true connections=0
   * ServiceRecord{727ca2c u0 com.sec.spp.push/.dlc.writer.WriterService}
@@ -2725,11 +2725,11 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
     Connections:
       act=android.bluetooth.IBluetoothPan launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5766:com.android.systemui/u0a7
       act=android.bluetooth.IBluetoothPan launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 5179:system/1000
-  * ServiceRecord{33893e1 u0 org.simalliance.openmobileapi.service/org.simalliance.openmobileapi.eseterminal.eSETerminal}
-    app=ProcessRecord{2bedf3a 6372:org.simalliance.openmobileapi.service:remote/u0a159}
+  * ServiceRecord{33893e1 u0 org.simalliance.openmobileapi.referral_service_id/org.simalliance.openmobileapi.eseterminal.eSETerminal}
+    app=ProcessRecord{2bedf3a 6372:org.simalliance.openmobileapi.referral_service_id:remote/u0a159}
     created=-2h34m3s922ms started=false connections=1
     Connections:
-       launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6372:org.simalliance.openmobileapi.service:remote/u0a159
+       launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 6372:org.simalliance.openmobileapi.referral_service_id:remote/u0a159
   * ServiceRecord{70fb6b0 u0 com.google.android.gms/.backup.BackupTransportService}
     app=ProcessRecord{b64e337 6633:com.google.android.gms.persistent/u0a26}
     created=-2h33m57s765ms started=false connections=1
@@ -2748,10 +2748,10 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
     created=-2h32m29s336ms started=true connections=0
 
   User 150 active services:
-  * ServiceRecord{ee6b811 u150 com.google.android.gms/.deviceconnection.service.DeviceConnectionWatcherService}
+  * ServiceRecord{ee6b811 u150 com.google.android.gms/.deviceconnection.referral_service_id.DeviceConnectionWatcherService}
     app=ProcessRecord{6891798 8810:com.google.android.gms.persistent/u150a26}
     created=-2h32m15s949ms started=true connections=0
-  * ServiceRecord{cdfebd3 u150 com.google.android.gms/.measurement.service.MeasurementBrokerService}
+  * ServiceRecord{cdfebd3 u150 com.google.android.gms/.measurement.referral_service_id.MeasurementBrokerService}
     app=ProcessRecord{249f406 15163:com.google.android.gms/u150a26}
     created=-23m38s632ms started=false connections=1
     Connections:
@@ -2759,44 +2759,44 @@ ACTIVITY MANAGER SERVICES (dumpsys activity services)
   * ServiceRecord{b70181d u150 com.google.android.gms/.auth.setup.devicesignals.LockScreenService}
     app=ProcessRecord{6891798 8810:com.google.android.gms.persistent/u150a26}
     created=-2h32m17s504ms started=true connections=0
-  * ServiceRecord{664fb78 u150 com.google.android.gms/.auth.account.service.WorkAccountService}
+  * ServiceRecord{664fb78 u150 com.google.android.gms/.auth.account.referral_service_id.WorkAccountService}
     app=ProcessRecord{6891798 8810:com.google.android.gms.persistent/u150a26}
     created=-2h32m17s359ms started=true connections=0
-  * ServiceRecord{c1a3b02 u150 com.google.android.gms/.usagereporting.service.UsageReportingService}
+  * ServiceRecord{c1a3b02 u150 com.google.android.gms/.usagereporting.referral_service_id.UsageReportingService}
     app=ProcessRecord{6891798 8810:com.google.android.gms.persistent/u150a26}
     created=-2h32m15s690ms started=false connections=1
     Connections:
-      act=com.google.android.gms.usagereporting.service.START pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 15163:com.google.android.gms/u150a26
-  * ServiceRecord{73eb511 u150 com.google.android.gms/.pseudonymous.service.PseudonymousIdService}
+      act=com.google.android.gms.usagereporting.referral_service_id.START pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 15163:com.google.android.gms/u150a26
+  * ServiceRecord{73eb511 u150 com.google.android.gms/.pseudonymous.referral_service_id.PseudonymousIdService}
     app=ProcessRecord{6891798 8810:com.google.android.gms.persistent/u150a26}
     created=-2h30m42s165ms started=false connections=1
     Connections:
-      act=com.google.android.gms.pseudonymous.service.START pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 15163:com.google.android.gms/u150a26
+      act=com.google.android.gms.pseudonymous.referral_service_id.START pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 15163:com.google.android.gms/u150a26
   * ServiceRecord{5a050c5 u150 com.google.android.gms/.update.SystemUpdateService}
     app=ProcessRecord{249f406 15163:com.google.android.gms/u150a26}
     created=-2h32m11s873ms started=true connections=0
-  * ServiceRecord{a907484 u150 com.samsung.android.email.provider/com.samsung.android.email.sync.service.EmailService}
-    app=ProcessRecord{1214ece 14912:com.samsung.android.email.provider:service/u150a191}
+  * ServiceRecord{a907484 u150 com.samsung.android.email.provider/com.samsung.android.email.sync.referral_service_id.EmailService}
+    app=ProcessRecord{1214ece 14912:com.samsung.android.email.provider:referral_service_id/u150a191}
     created=-2h32m22s851ms started=true connections=0
   * ServiceRecord{7a614e5 u150 com.google.android.gms/.herrevad.services.LightweightNetworkQualityAndroidService}
     app=ProcessRecord{6891798 8810:com.google.android.gms.persistent/u150a26}
     created=-2h32m15s98ms started=false connections=1
     Connections:
       act=com.google.android.gms.herrevad.services.LightweightNetworkQualityAndroidService.START pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 15163:com.google.android.gms/u150a26
-  * ServiceRecord{c31671a u150 com.bituniverse.portfolio/.market.service.MarketDataRefreshService}
+  * ServiceRecord{c31671a u150 com.bituniverse.portfolio/.market.referral_service_id.MarketDataRefreshService}
     app=ProcessRecord{63f60a4 27000:com.bituniverse.portfolio/u150a183}
     created=-23m38s549ms started=true connections=0
-  * ServiceRecord{7b9b1f5 u150 com.google.android.gms/com.google.android.location.reporting.service.DispatchingService}
+  * ServiceRecord{7b9b1f5 u150 com.google.android.gms/com.google.android.location.reporting.referral_service_id.DispatchingService}
     app=ProcessRecord{6891798 8810:com.google.android.gms.persistent/u150a26}
     created=-2h33m4s13ms started=true connections=0
   * ServiceRecord{646fbaf u150 com.google.android.gms/com.google.android.location.internal.server.GoogleLocationService}
     app=ProcessRecord{6891798 8810:com.google.android.gms.persistent/u150a26}
     created=-2h33m3s321ms started=true connections=0
-  * ServiceRecord{eaa59ab u150 com.google.android.gms/com.google.android.contextmanager.service.ContextManagerService}
+  * ServiceRecord{eaa59ab u150 com.google.android.gms/com.google.android.contextmanager.referral_service_id.ContextManagerService}
     app=ProcessRecord{6891798 8810:com.google.android.gms.persistent/u150a26}
     created=-2h32m13s466ms started=true connections=1
     Connections:
-      act=com.google.android.contextmanager.service.ContextManagerService.START pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 8810:com.google.android.gms.persistent/u150a26
+      act=com.google.android.contextmanager.referral_service_id.ContextManagerService.START pkg=com.google.android.gms launchParam=MultiScreenLaunchParams { mDisplayId=0 mBaseDisplayId=0 mFlags=0 } -> 8810:com.google.android.gms.persistent/u150a26
   * ServiceRecord{5e16030 u150 com.google.android.gms/com.google.android.location.internal.GoogleLocationManagerService}
     app=ProcessRecord{6891798 8810:com.google.android.gms.persistent/u150a26}
     created=-2h33m3s832ms started=true connections=1
@@ -3072,34 +3072,34 @@ ACTIVITY MANAGER RUNNING PROCESSES (dumpsys activity processes)
     PERS #82: pers  F/ /P  trm: 0 6285:com.sec.epdg/1000 (fixed)
     PERS #79: pers  F/ /P  trm: 0 6559:com.sec.downloadablekeystore/1000 (fixed)
     PERS #78: pers  F/ /P  trm: 0 6662:com.samsung.android.providers.context/u0a11 (fixed)
-    Proc #75: psvc  F/ /IF trm: 0 5714:com.android.bluetooth/1002 (service)
+    Proc #75: psvc  F/ /IF trm: 0 5714:com.android.bluetooth/1002 (referral_service_id)
         com.android.bluetooth/.gatt.GattService<=Proc{5179:system/1000}
     Proc # 0: fore  R/A/TS trm: 0 6692:com.sec.android.app.launcher/u0a81 (top-activity)
-    Proc #80: vis   F/ /SB trm: 0 6544:com.google.android.ext.services/u0a29 (service)
+    Proc #80: vis   F/ /SB trm: 0 6544:com.google.android.ext.services/u0a29 (referral_service_id)
         com.google.android.ext.services/android.ext.services.notification.Ranker<=Proc{5179:system/1000}
-    Proc #77: vis   F/ /SB trm: 0 6649:com.google.android.googlequicksearchbox:interactor/u0a89 (service)
+    Proc #77: vis   F/ /SB trm: 0 6649:com.google.android.googlequicksearchbox:interactor/u0a89 (referral_service_id)
         com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService<=Proc{5179:system/1000}
-    Proc #72: vis   F/ /SB trm: 0 6748:com.google.vr.vrcore/u0a242 (service)
+    Proc #72: vis   F/ /SB trm: 0 6748:com.google.vr.vrcore/u0a242 (referral_service_id)
         com.google.vr.vrcore/.common.VrCoreZenConditionProvider<=Proc{5179:system/1000}
-    Proc #20: vis   F/ /SB trm: 0 6772:com.samsung.android.app.aodservice/u0a7 (service)
+    Proc #20: vis   F/ /SB trm: 0 6772:com.samsung.android.app.aodservice/u0a7 (referral_service_id)
         com.samsung.android.app.aodservice/.DozeService<=Proc{5179:system/1000}
-    Proc #16: vis   F/ /SB trm: 0 6633:com.google.android.gms.persistent/u0a26 (service)
+    Proc #16: vis   F/ /SB trm: 0 6633:com.google.android.gms.persistent/u0a26 (referral_service_id)
         com.google.android.gms/com.google.android.location.fused.FusedLocationService<=Proc{5179:system/1000}
-    Proc #15: vis   F/ /SB trm: 0 6847:com.samsung.android.bixby.agent/5018 (service)
+    Proc #15: vis   F/ /SB trm: 0 6847:com.samsung.android.bixby.agent/5018 (referral_service_id)
         com.samsung.android.bixby.agent/com.samsung.android.bixby.BixbyTrustAgentService<=Proc{5179:system/1000}
-    Proc # 5: vis   F/ /SB trm: 0 6762:com.truecaller/u0a214 (service)
+    Proc # 5: vis   F/ /SB trm: 0 6762:com.truecaller/u0a214 (referral_service_id)
         com.truecaller/.notifications.NotificationHandlerService<=Proc{5179:system/1000}
-    Proc # 2: vis   F/ /SB trm: 0 6922:com.google.android.gms/u0a26 (service)
-        com.google.android.gms/.measurement.service.MeasurementBrokerService<=Proc{6762:com.truecaller/u0a214}
-    Proc # 6: vis   F/ /TS trm: 0 16854:com.sec.spp.push:RemoteDlcProcess/u0a50 (service)
+    Proc # 2: vis   F/ /SB trm: 0 6922:com.google.android.gms/u0a26 (referral_service_id)
+        com.google.android.gms/.measurement.referral_service_id.MeasurementBrokerService<=Proc{6762:com.truecaller/u0a214}
+    Proc # 6: vis   F/ /TS trm: 0 16854:com.sec.spp.push:RemoteDlcProcess/u0a50 (referral_service_id)
         com.sec.spp.push/.dlc.writer.WriterService<=Proc{6692:com.sec.android.app.launcher/u0a81}
-    Proc #88: vis   F/ /IF trm: 0 6184:com.breel.wallpapers/u0a418 (service)
+    Proc #88: vis   F/ /IF trm: 0 6184:com.breel.wallpapers/u0a418 (referral_service_id)
         com.breel.wallpapers/.celestialbodies.EarthWallpaperService<=Proc{5179:system/1000}
-    Proc #87: vis   F/ /IF trm: 0 6199:com.sec.location.nsflp2/5013 (service)
+    Proc #87: vis   F/ /IF trm: 0 6199:com.sec.location.nsflp2/5013 (referral_service_id)
         com.sec.location.nsflp2/.nsmonitor.NSMonitorService<=Proc{5179:system/1000}
-    Proc #81: vis   F/ /IF trm: 0 6372:org.simalliance.openmobileapi.service:remote/u0a159 (service)
-        org.simalliance.openmobileapi.service/.SmartcardService<=Proc{6244:com.android.nfc/1027}
-    Proc #73: vis   F/ /IF trm: 0 7738:com.sec.phone/1001 (service)
+    Proc #81: vis   F/ /IF trm: 0 6372:org.simalliance.openmobileapi.referral_service_id:remote/u0a159 (referral_service_id)
+        org.simalliance.openmobileapi.referral_service_id/.SmartcardService<=Proc{6244:com.android.nfc/1027}
+    Proc #73: vis   F/ /IF trm: 0 7738:com.sec.phone/1001 (referral_service_id)
         com.sec.phone/.SecPhoneService<=Proc{6274:com.android.phone/1001}
     Proc #76: prcp  F/ /IF trm: 0 8211:com.samsung.android.app.cocktailbarservice/u0a15 (force-fg)
         {null}<=android.os.BinderProxy@92bd10d
@@ -3107,15 +3107,15 @@ ACTIVITY MANAGER RUNNING PROCESSES (dumpsys activity processes)
         {null}<=android.os.BinderProxy@e6828c2
     Proc #28: prcp  F/ /IF trm: 0 5401:com.samsung.android.MtpApplication/1000 (force-fg)
         {null}<=android.os.BinderProxy@6d0a6d3
-    Proc # 4: prcp  B/ /IB trm: 0 7152:com.sec.android.inputmethod/u0a158 (service)
+    Proc # 4: prcp  B/ /IB trm: 0 7152:com.sec.android.inputmethod/u0a158 (referral_service_id)
         com.sec.android.inputmethod/.SamsungKeypad<=Proc{5179:system/1000}
     Proc #58: svc   B/ /S  trm: 0 27000:com.bituniverse.portfolio/u150a183 (started-services)
-    Proc #57: svc   B/ /S  trm: 0 15163:com.google.android.gms/u150a26 (service)
-        com.google.android.gms/.measurement.service.MeasurementBrokerService<=Proc{27000:com.bituniverse.portfolio/u150a183}
+    Proc #57: svc   B/ /S  trm: 0 15163:com.google.android.gms/u150a26 (referral_service_id)
+        com.google.android.gms/.measurement.referral_service_id.MeasurementBrokerService<=Proc{27000:com.bituniverse.portfolio/u150a183}
     Proc #41: svc   B/ /S  trm: 0 5142:com.whatsapp/u0a196 (started-services)
     Proc #24: svc   B/ /S  trm: 0 990:com.samsung.android.slinkcloud/5008 (started-services)
-    Proc #17: svc   B/ /S  trm: 0 8810:com.google.android.gms.persistent/u150a26 (service)
-        com.google.android.gms/.usagereporting.service.UsageReportingService<=Proc{15163:com.google.android.gms/u150a26}
+    Proc #17: svc   B/ /S  trm: 0 8810:com.google.android.gms.persistent/u150a26 (referral_service_id)
+        com.google.android.gms/.usagereporting.referral_service_id.UsageReportingService<=Proc{15163:com.google.android.gms/u150a26}
     Proc #13: svc   B/ /S  trm: 0 32261:com.samsung.oh/u0a276 (started-services)
     Proc # 9: svc   B/ /S  trm: 0 7443:com.sec.spp.push/u0a50 (started-services)
     Proc # 3: svc   B/ /S  trm: 0 8413:com.sec.android.app.shealth:remote/u0a193 (started-services)
@@ -3124,25 +3124,25 @@ ACTIVITY MANAGER RUNNING PROCESSES (dumpsys activity processes)
     Proc #69: svcb  B/ /S  trm: 0 27660:com.samsung.android.bixby.wakeup/1000 (started-services)
     Proc #68: svcb  B/ /S  trm: 0 27695:com.samsung.android.scloud:autobackupmgr/5009 (started-services)
     Proc #67: svcb  B/ /S  trm: 0 28302:com.samsung.android.rubin.app/5010 (started-services)
-    Proc #66: svcb  B/ /S  trm: 0 28346:com.samsung.android.radiobasedlocation.manager/5017 (service)
+    Proc #66: svcb  B/ /S  trm: 0 28346:com.samsung.android.radiobasedlocation.manager/5017 (referral_service_id)
         com.samsung.android.radiobasedlocation.manager/.RblManager<=Proc{28302:com.samsung.android.rubin.app/5010}
-    Proc #65: svcb  B/ /S  trm: 0 28551:com.samsung.android.bio.face.service/1000 (started-services)
-    Proc #61: svcb  B/ /S  trm: 0 14912:com.samsung.android.email.provider:service/u150a191 (started-services)
+    Proc #65: svcb  B/ /S  trm: 0 28551:com.samsung.android.bio.face.referral_service_id/1000 (started-services)
+    Proc #61: svcb  B/ /S  trm: 0 14912:com.samsung.android.email.provider:referral_service_id/u150a191 (started-services)
     Proc #59: svcb  B/ /S  trm: 0 8182:android.process.media/u150a42 (started-services)
     Proc #55: svcb  B/ /S  trm: 0 10049:com.facebook.services/u0a249 (started-services)
     Proc #54: svcb  B/ /S  trm: 0 7855:com.samsung.android.scloud/5009 (started-services)
     Proc #53: svcb  B/ /S  trm: 0 14151:com.tunnelbear.android/u0a474 (started-services)
     Proc #37: svcb  B/ /S  trm: 0 7481:android.process.media/u0a42 (started-services)
-    Proc #26: svcb  B/ /S  trm: 0 32719:com.osp.app.signin/u0a56 (service)
-        com.osp.app.signin/com.msc.sa.service.RequestService<=Proc{990:com.samsung.android.slinkcloud/5008}
+    Proc #26: svcb  B/ /S  trm: 0 32719:com.osp.app.signin/u0a56 (referral_service_id)
+        com.osp.app.signin/com.msc.sa.referral_service_id.RequestService<=Proc{990:com.samsung.android.slinkcloud/5008}
     Proc #25: svcb  B/ /S  trm: 0 6790:android.process.acore/u0a5 (provider)
         com.android.providers.contacts/.ContactsProvider2<=Proc{7855:com.samsung.android.scloud/5009}
-    Proc #11: cch   B/ /S  trm: 0 13017:com.sec.android.app.sns3/u0a49 (service)
+    Proc #11: cch   B/ /S  trm: 0 13017:com.sec.android.app.sns3/u0a49 (referral_service_id)
         com.sec.android.app.sns3/.svc.sp.linkedin.SnsLiServiceForAuthToken<=Proc{7041:com.samsung.android.app.spage/u0a22}
     Proc #10: cch   B/ /S  trm: 0 7041:com.samsung.android.app.spage/u0a22 (cch-started-ui-services)
     Proc # 1: cch   B/ /S  trm: 0 6861:com.google.android.googlequicksearchbox:search/u0a89 (cch-started-ui-services)
     Proc # 7: cch   B/ /CA trm: 0 31389:com.samsung.android.weather/u0a173 (cch-act)
-    Proc #18: cch   B/ /CE trm: 0 8042:com.samsung.android.mateagent:service/u0a43 (cch-empty)
+    Proc #18: cch   B/ /CE trm: 0 8042:com.samsung.android.mateagent:referral_service_id/u0a43 (cch-empty)
     Proc #14: cch   B/ /CE trm: 0 8138:com.samsung.android.scloud:contentsync/5009 (cch-empty)
     Proc #12: cch   B/ /CE trm: 0 12913:com.sec.android.app.servicemodeapp/1000 (cch-empty)
     Proc # 8: cch+1 B/ /Ca trm: 0 24762:com.sec.android.daemonapp/u0a176 (cch-client-act)
@@ -3166,9 +3166,9 @@ ACTIVITY MANAGER RUNNING PROCESSES (dumpsys activity processes)
     Proc #50: cch+6 B/ /CE trm: 0 32147:com.samsung.android.sm.devicesecurity/5012 (cch-empty)
     Proc #49: cch+6 B/ /CE trm: 0 7257:com.sec.android.app.shealth/u0a193 (cch-empty)
     Proc #48: cch+6 B/ /CE trm: 0 447:com.samsung.android.sm.provider/1000 (cch-empty)
-    Proc #47: cch+6 B/ /CE trm: 0 6878:com.samsung.dcmservice/5004 (service)
+    Proc #47: cch+6 B/ /CE trm: 0 6878:com.samsung.dcmservice/5004 (referral_service_id)
         com.samsung.dcmservice/.DCMService<=Proc{6689:com.samsung.cmh:CMH/5004}
-    Proc #46: cch+6 B/ /CE trm: 0 6858:com.samsung.enhanceservice/5004 (service)
+    Proc #46: cch+6 B/ /CE trm: 0 6858:com.samsung.enhanceservice/5004 (referral_service_id)
         com.samsung.enhanceservice/.EnhanceService<=Proc{6689:com.samsung.cmh:CMH/5004}
     Proc #45: cch+6 B/ /CE trm: 0 6689:com.samsung.cmh:CMH/5004 (cch-empty)
     Proc #44: cch+6 B/ /CE trm: 0 7209:com.microsoft.skydrive/u0a53 (cch-empty)

@@ -22,19 +22,19 @@
         </span>
     </label>
     <label class="question non-select ">
-        <span lang="" class="question-label active">Date of TT Booster injection?
+        <span lang="" class="question-label active">follow_up_date of TT Booster injection?
             &#xC9F;&#xCBF;.&#xC9F;&#xCBF; &#xCAC;&#xCC2;&#xCB8;&#xCCD;&#xC9F;&#xCB0;&#xCCD; &#xC9A;&#xCC1;&#xC9A;&#xCCD;&#xC9A;&#xCC1;&#xCAE;&#xCA6;&#xCCD;&#xCA6;&#xCA8;&#xCCD;&#xCA8;&#xCC1;
             &#xCA8;&#xCC0;&#xCA1;&#xCBF;&#xCA6; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
         <span class="required">*</span>
-        <input autocomplete="off" type="date" name="/TTBooster_EngKan/ttbooster_date" required="required"
-               data-constraint=".&lt;= /TTBooster_EngKan/today " data-type-xml="date"/>
+        <input autocomplete="off" type="follow_up_date" name="/TTBooster_EngKan/ttbooster_date" required="required"
+               data-constraint=".&lt;= /TTBooster_EngKan/today " data-type-xml="follow_up_date"/>
     </label>
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input autocomplete="off" type="hidden" name="/TTBooster_EngKan/today" data-preload="date"
-                   data-preload-params="today" data-type-xml="date"/>
+            <input autocomplete="off" type="hidden" name="/TTBooster_EngKan/today" data-preload="follow_up_date"
+                   data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">

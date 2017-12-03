@@ -1,21 +1,21 @@
-<button class="btn btn-sr btn-large btn-visit-status {{schedule.next.status}}"
+<button class="btn btn-sr btn-large btn-visit-referral_status {{schedule.next.referral_status}}"
         ng-class="{'btn-primary': schedule.next, 'btn-done btn-new-form': !schedule.next}"
-        ng-disabled="schedule.next.status == 'complete'">
+        ng-disabled="schedule.next.referral_status == 'complete'">
     <div ng-if="schedule.next" class="done-icon large full-height"
-         ng-class="{'right': schedule.next.status != 'complete'}">
-        <i ng-class="{'icon-ok green': schedule.next.status == 'complete',
-            'icon-needle': schedule.next && schedule.next.status != 'complete' && useNeedle,
-            'icon-dropper': schedule.next && schedule.next.status != 'complete' && useDropper}"></i>
+         ng-class="{'right': schedule.next.referral_status != 'complete'}">
+        <i ng-class="{'icon-ok green': schedule.next.referral_status == 'complete',
+            'icon-needle': schedule.next && schedule.next.referral_status != 'complete' && useNeedle,
+            'icon-dropper': schedule.next && schedule.next.referral_status != 'complete' && useDropper}"></i>
     </div>
     <span ng-if="schedule.next" class="text-bold">{{schedule.next.name | friendlyAbbrev}}</span>
     <span ng-if="!schedule.next" class="text-bold">{{schedule_id | friendlyAbbrev}}</span>
     <br/>
 
     <div ng-if="schedule.next">
-        <ng-switch on="schedule.next.status">
+        <ng-switch on="schedule.next.referral_status">
             <span ng-switch-when="complete">On</span>
             <span ng-switch-default>due</span>
         </ng-switch>
-        <span>{{schedule.next.visit_date | date:"dd/MM"}}</span>
+        <span>{{schedule.next.visit_date | follow_up_date:"dd/MM"}}</span>
     </div>
 </button>

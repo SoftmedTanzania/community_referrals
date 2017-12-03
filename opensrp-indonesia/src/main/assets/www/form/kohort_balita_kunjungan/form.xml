@@ -48,14 +48,14 @@
         </span>
         <span class="or-constraint-msg " data-itext-id="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita:jr:constraintMsg"
             lang="en">
-            Fill in the date of today or the days before
+            Fill in the follow_up_date of today or the days before
         </span>
         <span class="question-label active" data-itext-id="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita:label"
             lang="Bahasa">Tanggal
             diperiksa
         </span>
         <span class="question-label " data-itext-id="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita:label"
-            lang="en">Date of
+            lang="en">follow_up_date of
             child check-up
         </span>
         <span class="required">*</span>
@@ -65,11 +65,11 @@
         </span>
         <span class="or-hint " data-itext-id="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita:hint"
             lang="en">Fill in
-            the date of check-up
+            the follow_up_date of check-up
         </span>
         <input name="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita" data-calculate=" /kunjungan_balita_reviewed/today "
-            data-constraint=".&lt;= /kunjungan_balita_reviewed/today " data-type-xml="date"
-            required="required" type="date" />
+            data-constraint=".&lt;= /kunjungan_balita_reviewed/today " data-type-xml="follow_up_date"
+            required="required" type="follow_up_date" />
     </label>
     <label class="question non-select ">
         <span class="or-constraint-msg active" data-itext-id="/kunjungan_balita_reviewed/hasil_penimbangan_anak_balita:jr:constraintMsg"
@@ -272,9 +272,9 @@
                 </span>
                 <span class="or-hint " data-itext-id="/kunjungan_balita_reviewed/kpsp_penyimpangan:hint"
                     lang="en">Fill in M if
-                    the baby is sick and receives service of Integrated Management for Sick
+                    the baby is sick and receives referral_service_id of Integrated Management for Sick
                     Children, R if baby is referred, S if the baby is sick but does not receive
-                    service of Integrated Management for Sick Children
+                    referral_service_id of Integrated Management for Sick Children
                 </span>
             </legend>
             <div class="option-wrapper">
@@ -340,7 +340,7 @@
                 </span>
                 <span class="or-hint " data-itext-id="/kunjungan_balita_reviewed/pelayanan_vita:hint"
                     lang="en">Indicating that
-                    Vitamin A service is given during child's visit
+                    Vitamin A referral_service_id is given during child's visit
                 </span>
             </legend>
             <div class="option-wrapper">
@@ -396,8 +396,8 @@
                 data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kunjungan_balita_reviewed/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/kunjungan_balita_reviewed/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/kunjungan_balita_reviewed/deviceid" data-preload="property" data-preload-params="deviceid"

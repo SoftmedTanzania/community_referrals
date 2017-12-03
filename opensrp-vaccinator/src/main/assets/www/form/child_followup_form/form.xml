@@ -72,7 +72,7 @@
     <label class="note non-select ">
         <span class="question-label active" data-itext-id="/Child_Followup_Vaccination_Register/existing_child_reg_date_note:label"
             lang="en">
-            Child Registeration date:
+            Child Registeration follow_up_date:
             <span class="or-output"
                 data-value=" /Child_Followup_Vaccination_Register/existing_child_reg_date "></span>
         </span>
@@ -112,7 +112,7 @@
             &#x644;&#x6AF;&#x627;</span>
         <span class="or-hint " data-itext-id="/Child_Followup_Vaccination_Register/existing_child_reg_date_note:hint"
             lang="en">
-            date on which child was vaccinated
+            follow_up_date on which child was vaccinated
         </span>
         <span class="or-hint " data-itext-id="/Child_Followup_Vaccination_Register/existing_child_reg_date_note:hint"
             lang="ur">-
@@ -3730,8 +3730,8 @@
             </span>
             <input name="/Child_Followup_Vaccination_Register/vaccines_group/bcg_retro" data-constraint=".&gt;=  /Child_Followup_Vaccination_Register/existing_calc_dob  and .&lt;= /Child_Followup_Vaccination_Register/today "
                 data-relevant="selected( /Child_Followup_Vaccination_Register/vaccines , 'bcg')"
-                data-type-xml="date"
-                type="date" />
+                data-type-xml="follow_up_date"
+                type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg active" data-itext-id="/Child_Followup_Vaccination_Register/vaccines_group/opv_0_retro:jr:constraintMsg"
@@ -3788,8 +3788,8 @@
             <input name="/Child_Followup_Vaccination_Register/vaccines_group/opv_0_retro"
                 data-constraint=".&gt;=  /Child_Followup_Vaccination_Register/existing_calc_dob  and .&lt;= /Child_Followup_Vaccination_Register/today "
                 data-relevant="selected( /Child_Followup_Vaccination_Register/vaccines , 'opv_0')"
-                data-type-xml="date"
-                type="date" />
+                data-type-xml="follow_up_date"
+                type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg active" data-itext-id="/Child_Followup_Vaccination_Register/vaccines_group/pcv_1_retro:jr:constraintMsg"
@@ -3846,8 +3846,8 @@
             <input name="/Child_Followup_Vaccination_Register/vaccines_group/pcv_1_retro"
                 data-constraint=".&gt;=  /Child_Followup_Vaccination_Register/existing_calc_dob  and .&lt;= /Child_Followup_Vaccination_Register/today "
                 data-relevant="selected( /Child_Followup_Vaccination_Register/vaccines , 'pcv_1')"
-                data-type-xml="date"
-                type="date" />
+                data-type-xml="follow_up_date"
+                type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg active" data-itext-id="/Child_Followup_Vaccination_Register/vaccines_group/opv_1_retro:jr:constraintMsg"
@@ -3904,8 +3904,8 @@
             <input name="/Child_Followup_Vaccination_Register/vaccines_group/opv_1_retro"
                 data-constraint=".&gt;=  /Child_Followup_Vaccination_Register/existing_calc_dob  and .&lt;= /Child_Followup_Vaccination_Register/today "
                 data-relevant="selected( /Child_Followup_Vaccination_Register/vaccines , 'opv_1')"
-                data-type-xml="date"
-                type="date" />
+                data-type-xml="follow_up_date"
+                type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg active" data-itext-id="/Child_Followup_Vaccination_Register/vaccines_group/pentavalent_1_retro:jr:constraintMsg"
@@ -3962,8 +3962,8 @@
             <input name="/Child_Followup_Vaccination_Register/vaccines_group/pentavalent_1_retro"
                 data-constraint=".&gt;=  /Child_Followup_Vaccination_Register/existing_calc_dob  and .&lt;= /Child_Followup_Vaccination_Register/today "
                 data-relevant="selected( /Child_Followup_Vaccination_Register/vaccines , 'pentavalent_1')"
-                data-type-xml="date"
-                type="date" />
+                data-type-xml="follow_up_date"
+                type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg active" data-itext-id="/Child_Followup_Vaccination_Register/vaccines_group/pcv_2_retro:jr:constraintMsg"
@@ -4020,8 +4020,8 @@
             <input name="/Child_Followup_Vaccination_Register/vaccines_group/pcv_2_retro"
                 data-constraint=".&gt;=  /Child_Followup_Vaccination_Register/existing_calc_dob  and .&lt;= /Child_Followup_Vaccination_Register/today "
                 data-relevant="selected( /Child_Followup_Vaccination_Register/vaccines , 'pcv_2')"
-                data-type-xml="date"
-                type="date" />
+                data-type-xml="follow_up_date"
+                type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg active" data-itext-id="/Child_Followup_Vaccination_Register/vaccines_group/opv_2_retro:jr:constraintMsg"
@@ -4078,8 +4078,8 @@
             <input name="/Child_Followup_Vaccination_Register/vaccines_group/opv_2_retro"
                 data-constraint=".&gt;=  /Child_Followup_Vaccination_Register/existing_calc_dob  and .&lt;= /Child_Followup_Vaccination_Register/today "
                 data-relevant="selected( /Child_Followup_Vaccination_Register/vaccines , 'opv_2')"
-                data-type-xml="date"
-                type="date" />
+                data-type-xml="follow_up_date"
+                type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg active" data-itext-id="/Child_Followup_Vaccination_Register/vaccines_group/pentavalent_2_retro:jr:constraintMsg"
@@ -4136,8 +4136,8 @@
             <input name="/Child_Followup_Vaccination_Register/vaccines_group/pentavalent_2_retro"
                 data-constraint=".&gt;=  /Child_Followup_Vaccination_Register/existing_calc_dob  and .&lt;= /Child_Followup_Vaccination_Register/today "
                 data-relevant="selected( /Child_Followup_Vaccination_Register/vaccines , 'pentavalent_2')"
-                data-type-xml="date"
-                type="date" />
+                data-type-xml="follow_up_date"
+                type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg active" data-itext-id="/Child_Followup_Vaccination_Register/vaccines_group/pcv_3_retro:jr:constraintMsg"
@@ -4194,8 +4194,8 @@
             <input name="/Child_Followup_Vaccination_Register/vaccines_group/pcv_3_retro"
                 data-constraint=".&gt;=  /Child_Followup_Vaccination_Register/existing_calc_dob  and .&lt;= /Child_Followup_Vaccination_Register/today "
                 data-relevant="selected( /Child_Followup_Vaccination_Register/vaccines , 'pcv_3')"
-                data-type-xml="date"
-                type="date" />
+                data-type-xml="follow_up_date"
+                type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg active" data-itext-id="/Child_Followup_Vaccination_Register/vaccines_group/opv_3_retro:jr:constraintMsg"
@@ -4252,8 +4252,8 @@
             <input name="/Child_Followup_Vaccination_Register/vaccines_group/opv_3_retro"
                 data-constraint=".&gt;=  /Child_Followup_Vaccination_Register/existing_calc_dob  and .&lt;= /Child_Followup_Vaccination_Register/today "
                 data-relevant="selected( /Child_Followup_Vaccination_Register/vaccines , 'opv_3')"
-                data-type-xml="date"
-                type="date" />
+                data-type-xml="follow_up_date"
+                type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg active" data-itext-id="/Child_Followup_Vaccination_Register/vaccines_group/pentavalent_3_retro:jr:constraintMsg"
@@ -4310,8 +4310,8 @@
             <input name="/Child_Followup_Vaccination_Register/vaccines_group/pentavalent_3_retro"
                 data-constraint=".&gt;=  /Child_Followup_Vaccination_Register/existing_calc_dob  and .&lt;= /Child_Followup_Vaccination_Register/today "
                 data-relevant="selected( /Child_Followup_Vaccination_Register/vaccines , 'pentavalent_3')"
-                data-type-xml="date"
-                type="date" />
+                data-type-xml="follow_up_date"
+                type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg active" data-itext-id="/Child_Followup_Vaccination_Register/vaccines_group/measles_1_retro:jr:constraintMsg"
@@ -4368,8 +4368,8 @@
             <input name="/Child_Followup_Vaccination_Register/vaccines_group/measles_1_retro"
                 data-constraint=".&gt;=  /Child_Followup_Vaccination_Register/existing_calc_dob  and .&lt;= /Child_Followup_Vaccination_Register/today "
                 data-relevant="selected( /Child_Followup_Vaccination_Register/vaccines , 'measles_1')"
-                data-type-xml="date"
-                type="date" />
+                data-type-xml="follow_up_date"
+                type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg active" data-itext-id="/Child_Followup_Vaccination_Register/vaccines_group/measles_2_retro:jr:constraintMsg"
@@ -4426,8 +4426,8 @@
             <input name="/Child_Followup_Vaccination_Register/vaccines_group/measles_2_retro"
                 data-constraint=".&gt;=  /Child_Followup_Vaccination_Register/existing_calc_dob  and .&lt;= /Child_Followup_Vaccination_Register/today "
                 data-relevant="selected( /Child_Followup_Vaccination_Register/vaccines , 'measles_2')"
-                data-type-xml="date"
-                type="date" />
+                data-type-xml="follow_up_date"
+                type="follow_up_date" />
         </label>
     </section>
     <!--end of group -->
@@ -4679,7 +4679,7 @@
     <label class="question non-select ">
         <span class="question-label active" data-itext-id="/Child_Followup_Vaccination_Register/vaccination_date:label"
             lang="en">Vaccination
-            date
+            follow_up_date
         </span>
         <span class="question-label " data-itext-id="/Child_Followup_Vaccination_Register/vaccination_date:label"
             lang="Roman Urdu">Tareekh
@@ -4697,9 +4697,9 @@
         </span>
         <span class="required">*</span>
         <input name="/Child_Followup_Vaccination_Register/vaccination_date" data-constraint="if(selected( /Child_Followup_Vaccination_Register/vaccines_2 , 'bcg') or selected( /Child_Followup_Vaccination_Register/vaccines_2 , 'opv_0') , .&gt;=  /Child_Followup_Vaccination_Register/existing_calc_dob  and .&lt;= /Child_Followup_Vaccination_Register/today , if(selected( /Child_Followup_Vaccination_Register/vaccines_2 , 'opv_1') or selected( /Child_Followup_Vaccination_Register/vaccines_2 , 'pentavalent_1'), .&gt;=  /Child_Followup_Vaccination_Register/six_weeks  and .&lt;= /Child_Followup_Vaccination_Register/today , if(selected( /Child_Followup_Vaccination_Register/vaccines_2 , 'opv_2') or selected( /Child_Followup_Vaccination_Register/vaccines_2 , 'pentavalent_2'), .&gt;= /Child_Followup_Vaccination_Register/ten_weeks  and .&lt;= /Child_Followup_Vaccination_Register/today , if(selected( /Child_Followup_Vaccination_Register/vaccines_2 , 'opv_3') or selected( /Child_Followup_Vaccination_Register/vaccines_2 , 'pentavalent_3'), .&gt;= /Child_Followup_Vaccination_Register/forteen_weeks  and .&lt;= /Child_Followup_Vaccination_Register/today , if(selected( /Child_Followup_Vaccination_Register/vaccines_2 , 'measles1'), .&gt;= /Child_Followup_Vaccination_Register/nine_months  and .&lt;= /Child_Followup_Vaccination_Register/today , if(selected( /Child_Followup_Vaccination_Register/vaccines_2 , 'measles2'), .&gt;=  /Child_Followup_Vaccination_Register/fifteen_months  and .&lt;= /Child_Followup_Vaccination_Register/today ))))))"
-            data-type-xml="date"
+            data-type-xml="follow_up_date"
             required="required"
-            type="date" />
+            type="follow_up_date" />
     </label>
     <label class="note non-select or-appearance-minimal ">
         <span class="question-label active" data-itext-id="/Child_Followup_Vaccination_Register/child_was_suffering_from_a_disease_at_birth_note:label"
@@ -4863,8 +4863,8 @@
                 data-preload-params="end" data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Child_Followup_Vaccination_Register/today" data-preload="date"
-                data-preload-params="today" data-type-xml="date" type="hidden" />
+            <input name="/Child_Followup_Vaccination_Register/today" data-preload="follow_up_date"
+                data-preload-params="today" data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/Child_Followup_Vaccination_Register/deviceid" data-preload="property"

@@ -9,7 +9,7 @@
     {
       "name": "client_referral",
       "columns": [
-        {"name":"fName"},{"name":"mName"},{"name":"lName"},{"name":"CBHS"},{"name":"CTCNumber"},{"name":"ReferralDate"},{"name":"FacilityId"},{"name":"ReferralReason"},{"name":"Service"},{"name":"IS_VALID"},{"name":"Status"}
+        {"name":"first_name"},{"name":"middle_name"},{"name":"surname"},{"name":"community_based_hiv_service"},{"name":"ctc_number"},{"name":"referral_date"},{"name":"facility_id"},{"name":"referral_reason"},{"name":"referral_service_id"},{"name":"is_valid"},{"name":"referral_status"}
       ]
     },
     {
@@ -21,13 +21,13 @@
     {
       "name": "facility",
       "columns": [
-        {"name":"Name"}
+        {"name":"name"}
       ]
     },
     {
       "name": "follow_up",
       "columns": [
-        {"name":"Reason"},{"name":"Date"},{"name":"IsValid"}
+        {"name":"follow_up_reason"},{"name":"follow_up_date"},{"name":"is_valid"}
       ]
     }
   ]

@@ -125,8 +125,8 @@
                 data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/postpartum_kb_reviewed/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/postpartum_kb_reviewed/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/postpartum_kb_reviewed/deviceid" data-preload="property" data-preload-params="deviceid"

@@ -25,11 +25,11 @@
     <string name="home_videos_label">Videos</string>
     <string name="header_anak">Child</string>
     <string name="header_nama">Name</string>
-    <string name="header_tgl_periksa">Check Date</string>
+    <string name="header_tgl_periksa">Check follow_up_date</string>
     <string name="header_edd">EDD</string>
     <string name="header_kunjungan">VISIT</string>
     <string name="header_no_ibu">No Ibu</string>
-    <string name="header_status_b">Status</string>
+    <string name="header_status_b">referral_status</string>
     <string name="header_obsetri">Obsetri</string>
     <string name="mother_weight">Weight:</string>
     <string name="header_pemeriksaan">EXAMINATION</string>
@@ -100,7 +100,7 @@
 
     <string name="sort_by_name_label">Name (A to Z)</string>
     <string name="sort_by_ec_number_label">EC Number</string>
-    <string name="sort_by_date_of_delivery_label">Date of Delivery</string>
+    <string name="sort_by_date_of_delivery_label">follow_up_date of Delivery</string>
     <string name="sort_by_sc_label">SC</string>
     <string name="sort_by_st_label">ST</string>
     <string name="sort_by_high_priority_label">HighPriority (HP)</string>
@@ -183,7 +183,7 @@
     <string name="service_type_empty"/>
     <string name="sick_visit">Sick Visit</string>
     <string name="illness_report"><b>Illness Report:</b> %s</string>
-    <string name="illness_date">Date:</string>
+    <string name="illness_date">follow_up_date:</string>
     <string name="str_bcg">BCG</string>
     <string name="str_bcg_on">On</string>
     <string name="hep_b_birth">Hep B</string>
@@ -300,7 +300,7 @@
     <string name="sort_by_edd_label">EDD</string>
 
     <string name="sort_by_no_ibu_label">Mother Number</string>
-    <string name="str_pnc_delivery_date">Date:</string>
+    <string name="str_pnc_delivery_date">follow_up_date:</string>
     <string name="str_pnc_delivery_place">Place:</string>
     <string name="str_pnc_delivery_type">Type:</string>
     <string name="str_pp_fp">PP FP</string>
@@ -350,8 +350,8 @@
     <string name="elco_search_hint">Search</string>
     <string name="elco_woman_details">ELCO Details</string>
     <string name="elco_details_summary">Summary</string>
-    <string name="elco_mwra_registration_date_label">Registration Date</string>
-    <string name="elco_last_psf_date_label">Last PSF Date</string>
+    <string name="elco_mwra_registration_date_label">Registration follow_up_date</string>
+    <string name="elco_last_psf_date_label">Last PSF follow_up_date</string>
     <string name="all_eligible_couples">All Eligible Couples</string>
     <string name="hhid_gob">HHID - Government:</string>
     <string name="hhid_jivita">HHID - JiVitA:</string>
@@ -385,7 +385,7 @@
     <string name="okforminputerror">ok</string>
     <string name="pnc_outcome">OUTCOME</string>
     <string name="pnc_date_of_outcome">DATE of OUTCOME</string>
-    <string name="pnc_details_date_of_outcome">Date of Outcome</string>
+    <string name="pnc_details_date_of_outcome">follow_up_date of Outcome</string>
     <string name="pnc_reminder_status">PNC STATUS</string>
     <string name="pnc_reminder_due">PNC DUE</string>
     <string name="mcare_PNC_register_title_in_short">PNC</string>
@@ -427,9 +427,9 @@
     <string name="launch_mis_census_form">MIS Census</string>
     <string name="pregnancy_outcome">Pregnancy Outcome</string>
     <string name="pnc_typeofdelivery">Type of Delivery</string>
-    <string name="date_of_birth">Date of Birth</string>
+    <string name="date_of_birth">follow_up_date of Birth</string>
     <string name="child_details_mothers_name_label">Mother\'s Name:&#160;</string>
-    <string name="pnc_Details_date_of_outcome">Date of Outcome</string>
+    <string name="pnc_Details_date_of_outcome">follow_up_date of Outcome</string>
     <string name="str_gravida_full">Gravida</string>
     <string name="str_parity_full">Parity</string>
     <string name="str_abortus_full">Abortus</string>
@@ -453,9 +453,9 @@
     <string name="child_title">Child</string>
     <string name="dob_title">DOB:</string>
     <string name="header_dok_persalinan">DELIVERY DOCUMENTATION</string>
-    <string name="header_birth_status">Status</string>
+    <string name="header_birth_status">referral_status</string>
     <string name="birth_place_title">B.Place:</string>
-    <string name="date_visit_title">Visit Date:</string>
+    <string name="date_visit_title">Visit follow_up_date:</string>
     <string name="birth_weight_title">B.Weight:</string>
     <string name="hari_ke_kf">KF:</string>
     <string name="str_anak_neonatal">Neonatal Visit</string>
@@ -463,14 +463,14 @@
     <string name="str_anak_bayi_visit">Baby Visit</string>
     <string name="str_anak_balita_visit">Toddler Visit</string>
     <string name="height">Height:</string>
-    <string name="service_anc">Service Status: ANC</string>
-    <string name="service_pnc">Service Status: PNC</string>
+    <string name="service_anc">Service referral_status: ANC</string>
+    <string name="service_pnc">Service referral_status: PNC</string>
     <string name="anc_ke">ANC Number:&#160;</string>
     <string name="visit_number">Visit Number:&#160;</string>
     <string name="name">NAME:&#160; </string>
     <string name="nik">NIK:&#160; </string>
     <string name="husband_name">Husband Name: &#160;</string>
-    <string name="dob">Date of Birth:&#160; </string>
+    <string name="dob">follow_up_date of Birth:&#160; </string>
     <string name="phone">Phone Number: &#160;</string>
 
     <!-- Mother detail -->
@@ -532,18 +532,18 @@
     <string name="alkiims">ALKI /Ims</string>
     <string name="kb_ket">FP Note</string>
     <string name="ganti_cara">Change FP</string>
-    <string name="header_tt_usia_klinis">Clinical Status</string>
+    <string name="header_tt_usia_klinis">Clinical referral_status</string>
     <string name="usia">Clinical Age:&#160;</string>
-    <string name="header_klinis">Clinical Status</string>
-    <string name="sort_by_dob_label">Date Of Birth</string>
+    <string name="header_klinis">Clinical referral_status</string>
+    <string name="sort_by_dob_label">follow_up_date Of Birth</string>
     <string name="months_away" translatable="false">months away</string>
     <string name="this_month" translatable="false">this month</string>
     <string name="delivered">delivered</string>
     <string name="month">Month</string>
-    <string name="service_fp">Service Status: FP </string>
-    <string name="str_pnc_delivery">Delivery Date:&#160;</string>
+    <string name="service_fp">Service referral_status: FP </string>
+    <string name="str_pnc_delivery">Delivery follow_up_date:&#160;</string>
     <string name="edd_passed">EDD Passed</string>
     <string name="fe">FE:</string>
-    <string name="Nutrition_status">Nutrition Status:</string>
+    <string name="Nutrition_status">Nutrition referral_status:</string>
     <string name="lila">MUAC:</string>
 </resources>

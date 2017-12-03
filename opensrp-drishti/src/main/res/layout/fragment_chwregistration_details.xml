@@ -308,7 +308,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@+id/textDate"
                         android:layout_below="@+id/textDate"
-                        android:text="CBHS namba :"
+                        android:text="community_based_hiv_service namba :"
                         android:textColor="#236c71" />
 
                     <TextView

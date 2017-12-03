@@ -115,7 +115,7 @@
                     android:layout_below="@+id/facility_title"
                     android:layout_marginLeft="8dp"
                     android:textColor="#F7941D"
-                    android:text="Starting Date :- 8th Jan 2017"
+                    android:text="Starting follow_up_date :- 8th Jan 2017"
                     android:textSize="18sp" />
 
                 <TextView
@@ -128,7 +128,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/facility_title"
                     android:layout_marginRight="8dp"
-                    android:text="Ending Date :- 22nd Oct 2017"
+                    android:text="Ending follow_up_date :- 22nd Oct 2017"
                     android:textSize="18sp" />
             </LinearLayout>
         </RelativeLayout>
@@ -188,7 +188,7 @@
                     android:layout_weight="0.1"
                     android:padding="4dp"
                     android:id="@+id/risk"
-                    android:text="Risk Status"
+                    android:text="Risk referral_status"
                     android:background="@drawable/cell_shape_header"
                     android:layout_height="wrap_content"
                     />

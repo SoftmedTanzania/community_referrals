@@ -13,10 +13,10 @@
                data-type-xml="int"/>
     </label>
     <label class="question non-select ">
-        <span lang="" class="question-label active">ECP date? ECP &#xCA8;&#xCC0;&#xCA1;&#xCB2;&#xCBE;&#xCA6; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
+        <span lang="" class="question-label active">ECP follow_up_date? ECP &#xCA8;&#xCC0;&#xCA1;&#xCB2;&#xCBE;&#xCA6; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
         <span class="required">*</span>
-        <input autocomplete="off" type="date" name="/Family_Planning_ECPs_EngKan/ecp_date" required="required"
-               data-constraint=".&lt;= /Family_Planning_ECPs_EngKan/today " data-type-xml="date"/>
+        <input autocomplete="off" type="follow_up_date" name="/Family_Planning_ECPs_EngKan/ecp_date" required="required"
+               data-constraint=".&lt;= /Family_Planning_ECPs_EngKan/today " data-type-xml="follow_up_date"/>
     </label>
     <label class="note non-select ">
         <span lang="" class="question-label active">Encourage the couple to select a spacing or permanent FP method.
@@ -34,8 +34,8 @@
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input autocomplete="off" type="hidden" name="/Family_Planning_ECPs_EngKan/today" data-preload="date"
-                   data-preload-params="today" data-type-xml="date"/>
+            <input autocomplete="off" type="hidden" name="/Family_Planning_ECPs_EngKan/today" data-preload="follow_up_date"
+                   data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">

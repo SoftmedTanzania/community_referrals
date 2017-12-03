@@ -77,7 +77,7 @@
         <span class="or-constraint-msg active"
             data-itext-id="/Child_Enrollment_Vaccination_Register/child_reg_date:jr:constraintMsg"
             lang="en">
-            This date cannot be in the future
+            This follow_up_date cannot be in the future
         </span>
         <span class="or-constraint-msg "
             data-itext-id="/Child_Enrollment_Vaccination_Register/child_reg_date:jr:constraintMsg"
@@ -95,7 +95,7 @@
         <span class="question-label active"
             data-itext-id="/Child_Enrollment_Vaccination_Register/child_reg_date:label" lang="en">
             Child
-            Registeration date
+            Registeration follow_up_date
         </span>
         <span class="question-label "
             data-itext-id="/Child_Enrollment_Vaccination_Register/child_reg_date:label"
@@ -113,7 +113,7 @@
             &#x62F;&#x646; &#x628;&#x686;&#x6D2; &#x6A9;&#x648; &#x679;&#x6CC;&#x6A9;&#x6C1; &#x644;&#x6AF;&#x627;</span>
         <span class="or-hint active"
             data-itext-id="/Child_Enrollment_Vaccination_Register/child_reg_date:hint" lang="en">
-            Date on which
+            follow_up_date on which
             child was vaccinated
         </span>
         <span class="or-hint "
@@ -127,7 +127,7 @@
         </span>
         <input name="/Child_Enrollment_Vaccination_Register/child_reg_date"
             data-constraint=".&lt;= /Child_Enrollment_Vaccination_Register/today "
-            data-type-xml="date" required="required" type="date" />
+            data-type-xml="follow_up_date" required="required" type="follow_up_date" />
     </label>
     <label class="note non-select ">
         <span class="question-label "
@@ -304,7 +304,7 @@
         <span class="question-label active"
             data-itext-id="/Child_Enrollment_Vaccination_Register/member_birth_date:label"
             lang="en">Birth
-            date
+            follow_up_date
         </span>
         <span class="question-label "
             data-itext-id="/Child_Enrollment_Vaccination_Register/member_birth_date:label"
@@ -317,7 +317,7 @@
         </span>
         <input name="/Child_Enrollment_Vaccination_Register/member_birth_date"
             data-relevant="selected( /Child_Enrollment_Vaccination_Register/member_birth_date_known , 'yes')"
-            data-type-xml="date" type="date" />
+            data-type-xml="follow_up_date" type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label "
@@ -350,7 +350,7 @@
         <span class="question-label active"
             data-itext-id="/Child_Enrollment_Vaccination_Register/member_birth_date_note:label"
             lang="en">
-            Member Date of Birth:
+            Member follow_up_date of Birth:
             <span class="or-output"
                 data-value=" /Child_Enrollment_Vaccination_Register/calc_dob_confirm "></span>
         </span>
@@ -3268,7 +3268,7 @@
             <span class="or-constraint-msg active"
                 data-itext-id="/Child_Enrollment_Vaccination_Register/vaccines_group/bcg_retro:jr:constraintMsg"
                 lang="en">
-                The date of vaccination must be greater than the Childs birthdate and less than
+                The follow_up_date of vaccination must be greater than the Childs birthdate and less than
                 today.
             </span>
             <span class="or-constraint-msg "
@@ -3303,7 +3303,7 @@
             <input name="/Child_Enrollment_Vaccination_Register/vaccines_group/bcg_retro"
                 data-constraint=".&gt;=  /Child_Enrollment_Vaccination_Register/member_birth_date  and .&lt;= /Child_Enrollment_Vaccination_Register/today "
                 data-relevant="selected( /Child_Enrollment_Vaccination_Register/vaccines , 'bcg')"
-                data-type-xml="date" type="date" />
+                data-type-xml="follow_up_date" type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg "
@@ -3318,7 +3318,7 @@
             <span class="or-constraint-msg active"
                 data-itext-id="/Child_Enrollment_Vaccination_Register/vaccines_group/opv_0_retro:jr:constraintMsg"
                 lang="en">
-                The date of vaccination must be greater than the Childs birthdate and less than
+                The follow_up_date of vaccination must be greater than the Childs birthdate and less than
                 today.
             </span>
             <span class="or-constraint-msg "
@@ -3354,7 +3354,7 @@
             <input name="/Child_Enrollment_Vaccination_Register/vaccines_group/opv_0_retro"
                 data-constraint=".&gt;=  /Child_Enrollment_Vaccination_Register/member_birth_date  and .&lt;= /Child_Enrollment_Vaccination_Register/today "
                 data-relevant="selected( /Child_Enrollment_Vaccination_Register/vaccines , 'opv_0')"
-                data-type-xml="date" type="date" />
+                data-type-xml="follow_up_date" type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg "
@@ -3369,7 +3369,7 @@
             <span class="or-constraint-msg active"
                 data-itext-id="/Child_Enrollment_Vaccination_Register/vaccines_group/pcv_1_retro:jr:constraintMsg"
                 lang="en">
-                The date of vaccination must be greater than the Childs birthdate and less than
+                The follow_up_date of vaccination must be greater than the Childs birthdate and less than
                 today.
             </span>
             <span class="or-constraint-msg "
@@ -3405,7 +3405,7 @@
             <input name="/Child_Enrollment_Vaccination_Register/vaccines_group/pcv_1_retro"
                 data-constraint=".&gt;=  /Child_Enrollment_Vaccination_Register/member_birth_date  and .&lt;= /Child_Enrollment_Vaccination_Register/today "
                 data-relevant="selected( /Child_Enrollment_Vaccination_Register/vaccines , 'pcv_1')"
-                data-type-xml="date" type="date" />
+                data-type-xml="follow_up_date" type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg "
@@ -3420,7 +3420,7 @@
             <span class="or-constraint-msg active"
                 data-itext-id="/Child_Enrollment_Vaccination_Register/vaccines_group/opv_1_retro:jr:constraintMsg"
                 lang="en">
-                The date of vaccination must be greater than the Childs birthdate and less than
+                The follow_up_date of vaccination must be greater than the Childs birthdate and less than
                 today.
             </span>
             <span class="or-constraint-msg "
@@ -3456,7 +3456,7 @@
             <input name="/Child_Enrollment_Vaccination_Register/vaccines_group/opv_1_retro"
                 data-constraint=".&gt;=  /Child_Enrollment_Vaccination_Register/member_birth_date  and .&lt;= /Child_Enrollment_Vaccination_Register/today "
                 data-relevant="selected( /Child_Enrollment_Vaccination_Register/vaccines , 'opv_1')"
-                data-type-xml="date" type="date" />
+                data-type-xml="follow_up_date" type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg "
@@ -3471,7 +3471,7 @@
             <span class="or-constraint-msg active"
                 data-itext-id="/Child_Enrollment_Vaccination_Register/vaccines_group/pentavalent_1_retro:jr:constraintMsg"
                 lang="en">
-                The date of vaccination must be greater than the Childs birthdate and less than
+                The follow_up_date of vaccination must be greater than the Childs birthdate and less than
                 today.
             </span>
             <span class="or-constraint-msg "
@@ -3507,7 +3507,7 @@
             <input name="/Child_Enrollment_Vaccination_Register/vaccines_group/pentavalent_1_retro"
                 data-constraint=".&gt;=  /Child_Enrollment_Vaccination_Register/member_birth_date  and .&lt;= /Child_Enrollment_Vaccination_Register/today "
                 data-relevant="selected( /Child_Enrollment_Vaccination_Register/vaccines , 'pentavalent_1')"
-                data-type-xml="date" type="date" />
+                data-type-xml="follow_up_date" type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg "
@@ -3522,7 +3522,7 @@
             <span class="or-constraint-msg active"
                 data-itext-id="/Child_Enrollment_Vaccination_Register/vaccines_group/pcv_2_retro:jr:constraintMsg"
                 lang="en">
-                The date of vaccination must be greater than the Childs birthdate and less than
+                The follow_up_date of vaccination must be greater than the Childs birthdate and less than
                 today.
             </span>
             <span class="or-constraint-msg "
@@ -3558,7 +3558,7 @@
             <input name="/Child_Enrollment_Vaccination_Register/vaccines_group/pcv_2_retro"
                 data-constraint=".&gt;=  /Child_Enrollment_Vaccination_Register/member_birth_date  and .&lt;= /Child_Enrollment_Vaccination_Register/today "
                 data-relevant="selected( /Child_Enrollment_Vaccination_Register/vaccines , 'pcv_2')"
-                data-type-xml="date" type="date" />
+                data-type-xml="follow_up_date" type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg "
@@ -3573,7 +3573,7 @@
             <span class="or-constraint-msg active"
                 data-itext-id="/Child_Enrollment_Vaccination_Register/vaccines_group/opv_2_retro:jr:constraintMsg"
                 lang="en">
-                The date of vaccination must be greater than the Childs birthdate and less than
+                The follow_up_date of vaccination must be greater than the Childs birthdate and less than
                 today.
             </span>
             <span class="or-constraint-msg "
@@ -3609,7 +3609,7 @@
             <input name="/Child_Enrollment_Vaccination_Register/vaccines_group/opv_2_retro"
                 data-constraint=".&gt;=  /Child_Enrollment_Vaccination_Register/member_birth_date  and .&lt;= /Child_Enrollment_Vaccination_Register/today "
                 data-relevant="selected( /Child_Enrollment_Vaccination_Register/vaccines , 'opv_2')"
-                data-type-xml="date" type="date" />
+                data-type-xml="follow_up_date" type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg "
@@ -3624,7 +3624,7 @@
             <span class="or-constraint-msg active"
                 data-itext-id="/Child_Enrollment_Vaccination_Register/vaccines_group/pentavalent_2_retro:jr:constraintMsg"
                 lang="en">
-                The date of vaccination must be greater than the Childs birthdate and less than
+                The follow_up_date of vaccination must be greater than the Childs birthdate and less than
                 today.
             </span>
             <span class="or-constraint-msg "
@@ -3660,7 +3660,7 @@
             <input name="/Child_Enrollment_Vaccination_Register/vaccines_group/pentavalent_2_retro"
                 data-constraint=".&gt;=  /Child_Enrollment_Vaccination_Register/member_birth_date  and .&lt;= /Child_Enrollment_Vaccination_Register/today "
                 data-relevant="selected( /Child_Enrollment_Vaccination_Register/vaccines , 'pentavalent_2')"
-                data-type-xml="date" type="date" />
+                data-type-xml="follow_up_date" type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg "
@@ -3675,7 +3675,7 @@
             <span class="or-constraint-msg active"
                 data-itext-id="/Child_Enrollment_Vaccination_Register/vaccines_group/pcv_3_retro:jr:constraintMsg"
                 lang="en">
-                The date of vaccination must be greater than the Childs birthdate and less than
+                The follow_up_date of vaccination must be greater than the Childs birthdate and less than
                 today.
             </span>
             <span class="or-constraint-msg "
@@ -3711,7 +3711,7 @@
             <input name="/Child_Enrollment_Vaccination_Register/vaccines_group/pcv_3_retro"
                 data-constraint=".&gt;=  /Child_Enrollment_Vaccination_Register/member_birth_date  and .&lt;= /Child_Enrollment_Vaccination_Register/today "
                 data-relevant="selected( /Child_Enrollment_Vaccination_Register/vaccines , 'pcv_3')"
-                data-type-xml="date" type="date" />
+                data-type-xml="follow_up_date" type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg "
@@ -3726,7 +3726,7 @@
             <span class="or-constraint-msg active"
                 data-itext-id="/Child_Enrollment_Vaccination_Register/vaccines_group/opv_3_retro:jr:constraintMsg"
                 lang="en">
-                The date of vaccination must be greater than the Childs birthdate and less than
+                The follow_up_date of vaccination must be greater than the Childs birthdate and less than
                 today.
             </span>
             <span class="or-constraint-msg "
@@ -3762,7 +3762,7 @@
             <input name="/Child_Enrollment_Vaccination_Register/vaccines_group/opv_3_retro"
                 data-constraint=".&gt;=  /Child_Enrollment_Vaccination_Register/member_birth_date  and .&lt;= /Child_Enrollment_Vaccination_Register/today "
                 data-relevant="selected( /Child_Enrollment_Vaccination_Register/vaccines , 'opv_3')"
-                data-type-xml="date" type="date" />
+                data-type-xml="follow_up_date" type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg "
@@ -3777,7 +3777,7 @@
             <span class="or-constraint-msg active"
                 data-itext-id="/Child_Enrollment_Vaccination_Register/vaccines_group/pentavalent_3_retro:jr:constraintMsg"
                 lang="en">
-                The date of vaccination must be greater than the Childs birthdate and less than
+                The follow_up_date of vaccination must be greater than the Childs birthdate and less than
                 today.
             </span>
             <span class="or-constraint-msg "
@@ -3813,7 +3813,7 @@
             <input name="/Child_Enrollment_Vaccination_Register/vaccines_group/pentavalent_3_retro"
                 data-constraint=".&gt;=  /Child_Enrollment_Vaccination_Register/member_birth_date  and .&lt;= /Child_Enrollment_Vaccination_Register/today "
                 data-relevant="selected( /Child_Enrollment_Vaccination_Register/vaccines , 'pentavalent_3')"
-                data-type-xml="date" type="date" />
+                data-type-xml="follow_up_date" type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg "
@@ -3828,7 +3828,7 @@
             <span class="or-constraint-msg active"
                 data-itext-id="/Child_Enrollment_Vaccination_Register/vaccines_group/measles_1_retro:jr:constraintMsg"
                 lang="en">
-                The date of vaccination must be greater than the Childs birthdate and less than
+                The follow_up_date of vaccination must be greater than the Childs birthdate and less than
                 today.
             </span>
             <span class="or-constraint-msg "
@@ -3864,7 +3864,7 @@
             <input name="/Child_Enrollment_Vaccination_Register/vaccines_group/measles_1_retro"
                 data-constraint=".&gt;=  /Child_Enrollment_Vaccination_Register/member_birth_date  and .&lt;= /Child_Enrollment_Vaccination_Register/today "
                 data-relevant="selected( /Child_Enrollment_Vaccination_Register/vaccines , 'measles_1')"
-                data-type-xml="date" type="date" />
+                data-type-xml="follow_up_date" type="follow_up_date" />
         </label>
         <label class="question or-branch pre-init non-select ">
             <span class="or-constraint-msg "
@@ -3879,7 +3879,7 @@
             <span class="or-constraint-msg active"
                 data-itext-id="/Child_Enrollment_Vaccination_Register/vaccines_group/measles_2_retro:jr:constraintMsg"
                 lang="en">
-                The date of vaccination must be greater than the Childs birthdate and less than
+                The follow_up_date of vaccination must be greater than the Childs birthdate and less than
                 today.
             </span>
             <span class="or-constraint-msg "
@@ -3915,7 +3915,7 @@
             <input name="/Child_Enrollment_Vaccination_Register/vaccines_group/measles_2_retro"
                 data-constraint=".&gt;=  /Child_Enrollment_Vaccination_Register/member_birth_date  and .&lt;= /Child_Enrollment_Vaccination_Register/today "
                 data-relevant="selected( /Child_Enrollment_Vaccination_Register/vaccines , 'measles_2')"
-                data-type-xml="date" type="date" />
+                data-type-xml="follow_up_date" type="follow_up_date" />
         </label>
     </section>
     <!--end of group -->
@@ -4441,8 +4441,8 @@
                 data-preload-params="end" data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Child_Enrollment_Vaccination_Register/today" data-preload="date"
-                data-preload-params="today" data-type-xml="date" type="hidden" />
+            <input name="/Child_Enrollment_Vaccination_Register/today" data-preload="follow_up_date"
+                data-preload-params="today" data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/Child_Enrollment_Vaccination_Register/deviceid" data-preload="property"
@@ -4470,7 +4470,7 @@
         </label>
         <label class="calculation non-select ">
             <input name="/Child_Enrollment_Vaccination_Register/calc_dob"
-                data-calculate="date( /Child_Enrollment_Vaccination_Register/today  - int( /Child_Enrollment_Vaccination_Register/age  * 30.44))"
+                data-calculate="follow_up_date( /Child_Enrollment_Vaccination_Register/today  - int( /Child_Enrollment_Vaccination_Register/age  * 30.44))"
                 data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">

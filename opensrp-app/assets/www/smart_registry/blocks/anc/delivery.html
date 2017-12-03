@@ -1,10 +1,10 @@
 <div class="span7 full-height width-without-margins span-no-margin">
-    <div ng-if="client.visits.delivery_plan.next && client.visits.delivery_plan.next.status !== 'complete'"
+    <div ng-if="client.visits.delivery_plan.next && client.visits.delivery_plan.next.referral_status !== 'complete'"
          class="row-fluid full-height">
         <div class="span12 line-right full-height width-without-margins span-no-margin span-content">
             <!--VISITS-->
             <button class="btn btn-primary btn-sr full-height"
-                    ng-class="client.visits.delivery_plan.next.status"
+                    ng-class="client.visits.delivery_plan.next.referral_status"
                     ng-click="openForm('delivery_plan', client.entityId, {'entityId': client.entityId, 'alertName': 'Delivery Plan'});closeECFormModal();">
                 <span class="text-bold">Delivery Plan</span>
                 <br/>
@@ -12,7 +12,7 @@
             </button>
         </div>
     </div>
-    <div ng-if="(!client.visits.delivery_plan.next || client.visits.delivery_plan.next.status==='complete') && client.visits.delivery_plan['Delivery Plan']"
+    <div ng-if="(!client.visits.delivery_plan.next || client.visits.delivery_plan.next.referral_status==='complete') && client.visits.delivery_plan['Delivery Plan']"
          class="row-fluid full-height">
         <div class="span2 line-right full-height width-without-margins span-no-margin span-content">
             <i class="icon-bigger icon-block"
@@ -61,13 +61,13 @@
         </div>
         <div class="span2 line-right full-height width-without-margins span-no-margin span-content">
             <i class="icon-bigger icon-block"
-               ng-class="{'icon-ok green': client.visits.delivery_plan['Delivery Plan'].data.phoneNumber != null,
-                       'icon-remove red': client.visits.delivery_plan['Delivery Plan'].data.phoneNumber == null}"></i>
+               ng-class="{'icon-ok green': client.visits.delivery_plan['Delivery Plan'].data.phone_number != null,
+                       'icon-remove red': client.visits.delivery_plan['Delivery Plan'].data.phone_number == null}"></i>
             <span>Contact:</span>
-            <ng:switch on="client.visits.delivery_plan['Delivery Plan'].data.phoneNumber">
+            <ng:switch on="client.visits.delivery_plan['Delivery Plan'].data.phone_number">
                 <span ng-switch-default class="">none</span>
-                <span ng-switch-when ="client.visits.delivery_plan['Delivery Plan'].data.phoneNumber" >
-                    {{client.visits.delivery_plan['Delivery Plan'].data.phoneNumber}}</span>
+                <span ng-switch-when ="client.visits.delivery_plan['Delivery Plan'].data.phone_number" >
+                    {{client.visits.delivery_plan['Delivery Plan'].data.phone_number}}</span>
             </ng:switch>
         </div>
         <div class="span2 line-right full-height width-without-margins span-no-margin span-content">

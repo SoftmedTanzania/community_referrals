@@ -8,12 +8,12 @@
 
 
     <label class="question non-select ">
-        <span lang="" class="question-label active">Registration date? &#xCA6;&#xCBE;&#xC96;&#xCB2;&#xCBE;&#xCA4;&#xCBF;&#xCAF;
+        <span lang="" class="question-label active">Registration follow_up_date? &#xCA6;&#xCBE;&#xC96;&#xCB2;&#xCBE;&#xCA4;&#xCBF;&#xCAF;
             &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
         <span class="required">*</span>
-        <input type="date" name="/PNC_Child_Registration_EngKan/pnc_reg_date" required="required"
-               data-constraint=".&lt;= /PNC_Child_Registration_EngKan/today " data-type-xml="date"/>
+        <input type="follow_up_date" name="/PNC_Child_Registration_EngKan/pnc_reg_date" required="required"
+               data-constraint=".&lt;= /PNC_Child_Registration_EngKan/today " data-type-xml="follow_up_date"/>
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
@@ -2182,7 +2182,7 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span lang="" class="question-label active">Economic status, &#xC86;&#xCB0;&#xCCD;&#xCA5;&#xCBF;&#xC95;
+                <span lang="" class="question-label active">Economic referral_status, &#xC86;&#xCB0;&#xCCD;&#xCA5;&#xCBF;&#xC95;
                     &#xCB8;&#xCCD;&#xCA5;&#xCBF;&#xCA4;&#xCBF;:
                 </span>
             </legend>
@@ -2237,10 +2237,10 @@
         </fieldset>
     </fieldset>
     <label class="question non-select ">
-        <span lang="" class="question-label active">Delivery date? &#xCB9;&#xCC6;&#xCB0;&#xCBF;&#xC97;&#xCC6; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
+        <span lang="" class="question-label active">Delivery follow_up_date? &#xCB9;&#xCC6;&#xCB0;&#xCBF;&#xC97;&#xCC6; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
         <span class="required">*</span>
-        <input type="date" name="/PNC_Child_Registration_EngKan/delivery_date" required="required"
-               data-constraint=".&lt;= /PNC_Child_Registration_EngKan/today " data-type-xml="date"/>
+        <input type="follow_up_date" name="/PNC_Child_Registration_EngKan/delivery_date" required="required"
+               data-constraint=".&lt;= /PNC_Child_Registration_EngKan/today " data-type-xml="follow_up_date"/>
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -2788,8 +2788,8 @@
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input type="hidden" name="/PNC_Child_Registration_EngKan/today" data-preload="date"
-                   data-preload-params="today" data-type-xml="date"/>
+            <input type="hidden" name="/PNC_Child_Registration_EngKan/today" data-preload="follow_up_date"
+                   data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">

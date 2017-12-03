@@ -46,7 +46,7 @@
             lang="Bahasa">Tanggal kunjungan
         </span>
         <span class="question-label " data-itext-id="/kohort_pelayanan_kb_reviewed/tanggal_kunjungan:label"
-            lang="en">date of check-up
+            lang="en">follow_up_date of check-up
         </span>
         <span class="required">*</span>
         <span class="or-hint active" data-itext-id="/kohort_pelayanan_kb_reviewed/tanggal_kunjungan:hint"
@@ -54,12 +54,12 @@
             tanggal kunjungan/ pelayanan
         </span>
         <span class="or-hint " data-itext-id="/kohort_pelayanan_kb_reviewed/tanggal_kunjungan:hint"
-            lang="en">Fill in the date of
-            check-up/care service
+            lang="en">Fill in the follow_up_date of
+            check-up/care referral_service_id
         </span>
         <input name="/kohort_pelayanan_kb_reviewed/tanggal_kunjungan" data-calculate=" /kohort_pelayanan_kb_reviewed/today "
-            data-type-xml="date" required="required"
-            type="date" />
+            data-type-xml="follow_up_date" required="required"
+            type="follow_up_date" />
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -243,7 +243,7 @@
         </span>
         <span class="or-hint " data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_ganti_cara:hint"
             lang="en">Write the
-            reason for Method Change
+            follow_up_reason for Method Change
         </span>
         <input name="/kohort_pelayanan_kb_reviewed/keterangan_ganti_cara" data-relevant=" /kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2  = 'ganti_cara'"
             data-type-xml="string"
@@ -297,8 +297,8 @@
                 data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kohort_pelayanan_kb_reviewed/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/kohort_pelayanan_kb_reviewed/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/kohort_pelayanan_kb_reviewed/deviceid" data-preload="property"

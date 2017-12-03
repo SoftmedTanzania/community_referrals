@@ -1,70 +1,66 @@
 package org.ei.opensrp.drishti.DataModels;
 
-import org.ei.opensrp.drishti.Repository.MotherPersonObject;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by ali on 9/5/17.
  */
 
 public class FollowUp {
-    private String Comment,Date,Token,reason,IsValid,sponserName, sponserNumber;
+    private String comment, follow_up_date, token, follow_up_reason,is_valid, sponser_name, sponser_mobile_number;
 
     public String getComment() {
-        return Comment;
+        return comment;
     }
 
+
     public void setComment(String comment) {
-        Comment = comment;
+        this.comment = comment;
     }
 
     public String getIsValid() {
-        return IsValid;
+        return is_valid;
     }
 
     public void setIsValid(String isValid) {
-        IsValid = isValid;
+        is_valid = isValid;
     }
 
-    public String getDate() {
-        return Date;
+    public String getFollow_up_date() {
+        return follow_up_date;
     }
 
-    public void setDate(String date) {
-        Date = date;
+    public void setFollow_up_date(String follow_up_date) {
+        this.follow_up_date = follow_up_date;
     }
 
     public String getToken() {
-        return Token;
+        return token;
     }
 
     public void setToken(String token) {
-        Token = token;
+        this.token = token;
     }
 
-    public String getReason() {
-        return reason;
+    public String getFollow_up_reason() {
+        return follow_up_reason;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setFollow_up_reason(String follow_up_reason) {
+        this.follow_up_reason = follow_up_reason;
     }
 
-    public String getSponserName() {
-        return sponserName;
+    public String getSponser_name() {
+        return sponser_name;
     }
 
-    public void setSponserName(String sponserName) {
-        this.sponserName = sponserName;
+    public void setSponser_name(String sponser_name) {
+        this.sponser_name = sponser_name;
     }
 
-    public String getSponserNumber() {
-        return sponserNumber;
+    public String getSponser_mobile_number() {
+        return sponser_mobile_number;
     }
 
-    public void setSponserNumber(String sponserNumber) {
-        this.sponserNumber = sponserNumber;
+    public void setSponser_mobile_number(String sponser_mobile_number) {
+        this.sponser_mobile_number = sponser_mobile_number;
     }
 }

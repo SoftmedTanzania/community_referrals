@@ -195,16 +195,16 @@
             lang="Bahasa">Tanggal / Kala I Aktif
         </span>
         <span class="question-label " data-itext-id="/PNC_edit/tanggal__kala_i_aktif:label"
-            lang="en">Date/ Active Stage I
+            lang="en">follow_up_date/ Active Stage I
         </span>
         <span class="or-hint active" data-itext-id="/PNC_edit/tanggal__kala_i_aktif:hint"
             lang="Bahasa">Menunjukan Tanggal Kala I Aktif
         </span>
         <span class="or-hint " data-itext-id="/PNC_edit/tanggal__kala_i_aktif:hint" lang="en">
-            Indicating date of active stage 1
+            Indicating follow_up_date of active stage 1
         </span>
         <input name="/PNC_edit/tanggal__kala_i_aktif" data-relevant="selected( /PNC_edit/persalinan ,'kalasatu')"
-            data-type-xml="date" type="date" />
+            data-type-xml="follow_up_date" type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" data-itext-id="/PNC_edit/jam__kala_i_aktif:label"
@@ -227,16 +227,16 @@
             lang="Bahasa">Tanggal / Kala II
         </span>
         <span class="question-label " data-itext-id="/PNC_edit/tanggal__kala_ii:label" lang="en">
-            Date/ Stage II
+            follow_up_date/ Stage II
         </span>
         <span class="or-hint active" data-itext-id="/PNC_edit/tanggal__kala_ii:hint" lang="Bahasa">
             Menunjukkan Tanggal Terjadinya Kala II Pada Ibu
         </span>
         <span class="or-hint " data-itext-id="/PNC_edit/tanggal__kala_ii:hint" lang="en">Indicating
-            date of stage 2
+            follow_up_date of stage 2
         </span>
         <input name="/PNC_edit/tanggal__kala_ii" data-relevant="selected( /PNC_edit/persalinan ,'kaladua')"
-            data-type-xml="date" type="date" />
+            data-type-xml="follow_up_date" type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" data-itext-id="/PNC_edit/jam__kala_ii:label"
@@ -259,17 +259,17 @@
             lang="Bahasa">Tanggal / Plasenta Lahir
         </span>
         <span class="question-label " data-itext-id="/PNC_edit/tanggal__plasenta_lahir:label"
-            lang="en">Date/ Placenta Expulsion
+            lang="en">follow_up_date/ Placenta Expulsion
         </span>
         <span class="or-hint active" data-itext-id="/PNC_edit/tanggal__plasenta_lahir:hint"
             lang="Bahasa">Menunjukkan Tanggal Plasenta
             Lahir
         </span>
         <span class="or-hint " data-itext-id="/PNC_edit/tanggal__plasenta_lahir:hint" lang="en">
-            Indicating date when placenta is born
+            Indicating follow_up_date when placenta is born
         </span>
         <input name="/PNC_edit/tanggal__plasenta_lahir" data-relevant="selected( /PNC_edit/persalinan ,'kalatiga')"
-            data-type-xml="date" type="date" />
+            data-type-xml="follow_up_date" type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" data-itext-id="/PNC_edit/jam__plasenta_lahir:label"
@@ -910,8 +910,8 @@
                 data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/PNC_edit/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/PNC_edit/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/PNC_edit/deviceid" data-preload="property" data-preload-params="deviceid"

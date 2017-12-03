@@ -5,23 +5,23 @@
 
 
     <label class="question or-branch pre-init non-select ">
-        <span lang="" class="question-label active">Discharge date from delivery facility? &#xCB9;&#xCC6;&#xCB0;&#xCBF;&#xC97;&#xCC6;
+        <span lang="" class="question-label active">Discharge follow_up_date from delivery facility? &#xCB9;&#xCC6;&#xCB0;&#xCBF;&#xC97;&#xCC6;
             &#xCB8;&#xCCC;&#xCB2;&#xCAD;&#xCCD;&#xCAF;&#xC97;&#xCB3;&#xCBF;&#xC82;&#xCA6; &#xCA1;&#xCBF;&#xCB8;&#xCCD;&#x200D;&#xC9A;&#xCBE;&#xCB0;&#xCCD;&#xC9C;
             &#xC86;&#xCA6; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
         <span class="required">*</span>
-        <input type="date" name="/PNC_Visit_EngKan/discharge_date" required="required"
+        <input type="follow_up_date" name="/PNC_Visit_EngKan/discharge_date" required="required"
                data-constraint=".&lt;= /PNC_Visit_EngKan/today "
                data-relevant="( /PNC_Visit_EngKan/case_place_delivery  != 'home' and  /PNC_Visit_EngKan/case_discharge_date  = '')"
-               data-type-xml="date"/>
+               data-type-xml="follow_up_date"/>
     </label>
     <label class="question non-select ">
-        <span lang="" class="question-label active">PNC visit date? &#xCAC;&#xCBE;&#xCA3;&#xC82;&#xCA4;&#xCBF; &#xCAC;&#xCC7;&#xC9F;&#xCBF;&#xCAF;
+        <span lang="" class="question-label active">PNC visit follow_up_date? &#xCAC;&#xCBE;&#xCA3;&#xC82;&#xCA4;&#xCBF; &#xCAC;&#xCC7;&#xC9F;&#xCBF;&#xCAF;
             &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
         <span class="required">*</span>
-        <input type="date" name="/PNC_Visit_EngKan/pnc_visit_date" required="required"
-               data-constraint=".&lt;= /PNC_Visit_EngKan/today " data-type-xml="date"/>
+        <input type="follow_up_date" name="/PNC_Visit_EngKan/pnc_visit_date" required="required"
+               data-constraint=".&lt;= /PNC_Visit_EngKan/today " data-type-xml="follow_up_date"/>
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -874,8 +874,8 @@
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input type="hidden" name="/PNC_Visit_EngKan/today" data-preload="date" data-preload-params="today"
-                   data-type-xml="date"/>
+            <input type="hidden" name="/PNC_Visit_EngKan/today" data-preload="follow_up_date" data-preload-params="today"
+                   data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">

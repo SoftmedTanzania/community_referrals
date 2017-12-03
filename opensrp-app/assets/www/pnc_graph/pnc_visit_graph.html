@@ -77,7 +77,7 @@
                     .enter()
                     .append('text')
                     .text(function (d) {
-                        return d.status === 'MISSED' ? '\uf00d' : '\uf00c';
+                        return d.referral_status === 'MISSED' ? '\uf00d' : '\uf00c';
                     })
                     .style('font-family', 'FontAwesome')
                     .attr('x', function (d) {
@@ -87,7 +87,7 @@
                         return y_offset - radius * 1.5;
                     })
                     .attr('fill', function (d) {
-                        return d.status === 'DONE' ? colors.GREEN : colors.RED;
+                        return d.referral_status === 'DONE' ? colors.GREEN : colors.RED;
                     });
 
             g.selectAll('.day_nos')

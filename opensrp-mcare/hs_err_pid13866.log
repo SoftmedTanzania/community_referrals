@@ -208,16 +208,16 @@ Event: 24.132 GC heap before
   class space    used 576K, capacity 616K, committed 640K, reserved 1048576K
 
 Deoptimization events (10 events):
-Event: 6.276 Thread 0x00007f6cb8135800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f6ca92f9b44 method=com.android.dx.ssa.NormalSsaInsn.accept(Lcom/android/dx/ssa/SsaInsn$Visitor;)V @ 9
-Event: 6.276 Thread 0x00007f6cb8135800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f6ca92f9b44 method=com.android.dx.ssa.NormalSsaInsn.accept(Lcom/android/dx/ssa/SsaInsn$Visitor;)V @ 9
-Event: 6.278 Thread 0x00007f6cb8135800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f6ca92f9b44 method=com.android.dx.ssa.NormalSsaInsn.accept(Lcom/android/dx/ssa/SsaInsn$Visitor;)V @ 9
-Event: 6.278 Thread 0x00007f6cb8135800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f6ca92f9b44 method=com.android.dx.ssa.NormalSsaInsn.accept(Lcom/android/dx/ssa/SsaInsn$Visitor;)V @ 9
-Event: 6.308 Thread 0x00007f6cb8135800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f6ca92af988 method=com.android.dx.ssa.NormalSsaInsn.accept(Lcom/android/dx/ssa/SsaInsn$Visitor;)V @ 9
-Event: 10.634 Thread 0x00007f6cb8136800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f6ca93f022c method=com.android.dx.rop.code.RegisterSpec.withReg(I)Lcom/android/dx/rop/code/RegisterSpec; @ 5
-Event: 11.922 Thread 0x00007f6cb8138800 Uncommon trap: reason=null_check action=make_not_entrant pc=0x00007f6ca9405054 method=com.android.dx.ssa.SsaRenamer.getLocalForNewReg(I)Lcom/android/dx/rop/code/LocalItem; @ 19
-Event: 17.140 Thread 0x00007f6cb8136800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f6ca9341ac4 method=com.android.dx.util.IntList.binarysearch(I)I @ 105
-Event: 17.634 Thread 0x00007f6cb8136800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f6ca9496020 method=com.android.dx.ssa.SsaRenamer$BlockRenamer.addMapping(ILcom/android/dx/rop/code/RegisterSpec;)V @ 120
-Event: 17.974 Thread 0x00007f6cb800a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f6ca948fe08 method=com.android.dx.dex.code.OutputFinisher.hasLocalInfo(Lcom/android/dx/dex/code/DalvInsn;)Z @ 24
+Event: 6.276 Thread 0x00007f6cb8135800 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007f6ca92f9b44 method=com.android.dx.ssa.NormalSsaInsn.accept(Lcom/android/dx/ssa/SsaInsn$Visitor;)V @ 9
+Event: 6.276 Thread 0x00007f6cb8135800 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007f6ca92f9b44 method=com.android.dx.ssa.NormalSsaInsn.accept(Lcom/android/dx/ssa/SsaInsn$Visitor;)V @ 9
+Event: 6.278 Thread 0x00007f6cb8135800 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007f6ca92f9b44 method=com.android.dx.ssa.NormalSsaInsn.accept(Lcom/android/dx/ssa/SsaInsn$Visitor;)V @ 9
+Event: 6.278 Thread 0x00007f6cb8135800 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007f6ca92f9b44 method=com.android.dx.ssa.NormalSsaInsn.accept(Lcom/android/dx/ssa/SsaInsn$Visitor;)V @ 9
+Event: 6.308 Thread 0x00007f6cb8135800 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007f6ca92af988 method=com.android.dx.ssa.NormalSsaInsn.accept(Lcom/android/dx/ssa/SsaInsn$Visitor;)V @ 9
+Event: 10.634 Thread 0x00007f6cb8136800 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f6ca93f022c method=com.android.dx.rop.code.RegisterSpec.withReg(I)Lcom/android/dx/rop/code/RegisterSpec; @ 5
+Event: 11.922 Thread 0x00007f6cb8138800 Uncommon trap: follow_up_reason=null_check action=make_not_entrant pc=0x00007f6ca9405054 method=com.android.dx.ssa.SsaRenamer.getLocalForNewReg(I)Lcom/android/dx/rop/code/LocalItem; @ 19
+Event: 17.140 Thread 0x00007f6cb8136800 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f6ca9341ac4 method=com.android.dx.util.IntList.binarysearch(I)I @ 105
+Event: 17.634 Thread 0x00007f6cb8136800 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f6ca9496020 method=com.android.dx.ssa.SsaRenamer$BlockRenamer.addMapping(ILcom/android/dx/rop/code/RegisterSpec;)V @ 120
+Event: 17.974 Thread 0x00007f6cb800a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f6ca948fe08 method=com.android.dx.dex.code.OutputFinisher.hasLocalInfo(Lcom/android/dx/dex/code/DalvInsn;)Z @ 24
 
 Internal exceptions (3 events):
 Event: 0.222 Thread 0x00007f6cb800a000 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x00000000eab07c78) thrown at [/HUDSON3/workspace/8-2-build-linux-amd64/jdk8u102/7268/hotspot/src/sh

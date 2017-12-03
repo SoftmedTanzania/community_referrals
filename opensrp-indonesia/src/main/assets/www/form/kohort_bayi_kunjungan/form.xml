@@ -78,7 +78,7 @@
         </span>
         <span class="or-constraint-msg " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_kunjungan_bayi_perbulan:jr:constraintMsg"
             lang="en">
-            Fill in the date of today or the days before
+            Fill in the follow_up_date of today or the days before
         </span>
         <span class="question-label active" data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_kunjungan_bayi_perbulan:label"
             lang="Bahasa">
@@ -86,7 +86,7 @@
         </span>
         <span class="question-label " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_kunjungan_bayi_perbulan:label"
             lang="en">
-            Date of baby check-up per month
+            follow_up_date of baby check-up per month
         </span>
         <span class="required">*</span>
         <span class="or-hint active" data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_kunjungan_bayi_perbulan:hint"
@@ -95,11 +95,11 @@
         </span>
         <span class="or-hint " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_kunjungan_bayi_perbulan:hint"
             lang="en">
-            Fill in the date of check-up
+            Fill in the follow_up_date of check-up
         </span>
         <input name="/kohort_kunjungan_bayi_reviewed/tanggal_kunjungan_bayi_perbulan" data-calculate=" /kohort_kunjungan_bayi_reviewed/today "
-            data-constraint=".&lt;= /kohort_kunjungan_bayi_reviewed/today " data-type-xml="date"
-            required="required" type="date" />
+            data-constraint=".&lt;= /kohort_kunjungan_bayi_reviewed/today " data-type-xml="follow_up_date"
+            required="required" type="follow_up_date" />
     </label>
     <label class="question non-select ">
         <span class="or-constraint-msg active" data-itext-id="/kohort_kunjungan_bayi_reviewed/berat_badan_bayi_setiap_kunjungan_bayi_perbulan:jr:constraintMsg"
@@ -262,19 +262,19 @@
         <fieldset>
             <legend>
                 <span class="question-label active" data-itext-id="/kohort_kunjungan_bayi_reviewed/status_gizi:label"
-                    lang="Bahasa">Status Gizi
+                    lang="Bahasa">referral_status Gizi
                 </span>
                 <span class="question-label " data-itext-id="/kohort_kunjungan_bayi_reviewed/status_gizi:label"
                     lang="en">Nutritional
-                    Status
+                    referral_status
                 </span>
                 <span class="or-hint active" data-itext-id="/kohort_kunjungan_bayi_reviewed/status_gizi:hint"
-                    lang="Bahasa">Diisi status
+                    lang="Bahasa">Diisi referral_status
                     gizi menurut BB/TB (GB, GK, GR)
                 </span>
                 <span class="or-hint " data-itext-id="/kohort_kunjungan_bayi_reviewed/status_gizi:hint"
                     lang="en">Fill in baby's
-                    nutritional status according to weight/height (well-nourished, undernourished,
+                    nutritional referral_status according to weight/height (well-nourished, undernourished,
                     severely undernourished)
                 </span>
             </legend>
@@ -416,9 +416,9 @@
                 </span>
                 <span class="or-hint " data-itext-id="/kohort_kunjungan_bayi_reviewed/kpsp_penyimpangan:hint"
                     lang="en">Fill in M
-                    if the baby is sick and receives service of Integrated Management for Sick
+                    if the baby is sick and receives referral_service_id of Integrated Management for Sick
                     Children, R if baby is referred, S if the baby is sick but does not receive
-                    service of Integrated Management for Sick Children
+                    referral_service_id of Integrated Management for Sick Children
                 </span>
             </legend>
             <div class="option-wrapper">
@@ -484,7 +484,7 @@
                 </span>
                 <span class="or-hint " data-itext-id="/kohort_kunjungan_bayi_reviewed/pelayanan_vita:hint"
                     lang="en">Indicating
-                    that Vitamin A service is given during baby's visit
+                    that Vitamin A referral_service_id is given during baby's visit
                 </span>
             </legend>
             <div class="option-wrapper">
@@ -649,8 +649,8 @@
         </span>
         <input name="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_HB_0_7_hari"
             data-relevant="selected( /kohort_kunjungan_bayi_reviewed/dilakukan_imunisasi , 'imunisasi_HB_0_7_hari')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="or-constraint-msg active" data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_bcg_dan_Polio1:jr:constraintMsg"
@@ -659,7 +659,7 @@
         </span>
         <span class="or-constraint-msg " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_bcg_dan_Polio1:jr:constraintMsg"
             lang="en">
-            Fill in the date of today or the days before
+            Fill in the follow_up_date of today or the days before
         </span>
         <span class="question-label active" data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_bcg_dan_Polio1:label"
             lang="Bahasa">
@@ -667,7 +667,7 @@
         </span>
         <span class="question-label " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_bcg_dan_Polio1:label"
             lang="en">
-            Date of BCG and Polio 1 immunization
+            follow_up_date of BCG and Polio 1 immunization
         </span>
         <span class="or-hint active" data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_bcg_dan_Polio1:hint"
             lang="Bahasa">
@@ -675,13 +675,13 @@
         </span>
         <span class="or-hint " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_bcg_dan_Polio1:hint"
             lang="en">
-            Date and month when the baby receives BCG and Polio 1 immunization
+            follow_up_date and month when the baby receives BCG and Polio 1 immunization
         </span>
         <input name="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_bcg_dan_Polio1"
             data-constraint=".&lt;=  /kohort_kunjungan_bayi_reviewed/today "
             data-relevant="selected( /kohort_kunjungan_bayi_reviewed/dilakukan_imunisasi , 'imunisasi_BCG_dan_Polio_1')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="or-constraint-msg active" data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb1Polio2:jr:constraintMsg"
@@ -690,7 +690,7 @@
         </span>
         <span class="or-constraint-msg " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb1Polio2:jr:constraintMsg"
             lang="en">
-            Fill in the date of today or the days before
+            Fill in the follow_up_date of today or the days before
         </span>
         <span class="question-label active" data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb1Polio2:label"
             lang="Bahasa">
@@ -698,7 +698,7 @@
         </span>
         <span class="question-label " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb1Polio2:label"
             lang="en">
-            Date of DPT/HB1/ Polio 2 immunization
+            follow_up_date of DPT/HB1/ Polio 2 immunization
         </span>
         <span class="or-hint active" data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb1Polio2:hint"
             lang="Bahasa">
@@ -706,13 +706,13 @@
         </span>
         <span class="or-hint " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb1Polio2:hint"
             lang="en">
-            Date and month when the baby receives DPT 1, HB1 and Polio 2 immunization
+            follow_up_date and month when the baby receives DPT 1, HB1 and Polio 2 immunization
         </span>
         <input name="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb1Polio2"
             data-constraint=".&lt;=  /kohort_kunjungan_bayi_reviewed/today "
             data-relevant="selected( /kohort_kunjungan_bayi_reviewed/dilakukan_imunisasi , 'imunisasi_DPT_HB1_Polio_2')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="or-constraint-msg active" data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb2Polio3:jr:constraintMsg"
@@ -721,7 +721,7 @@
         </span>
         <span class="or-constraint-msg " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb2Polio3:jr:constraintMsg"
             lang="en">
-            Fill in the date of today or the days before
+            Fill in the follow_up_date of today or the days before
         </span>
         <span class="question-label active" data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb2Polio3:label"
             lang="Bahasa">
@@ -729,7 +729,7 @@
         </span>
         <span class="question-label " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb2Polio3:label"
             lang="en">
-            Date of DPT/HB2/ Polio 3 immunization
+            follow_up_date of DPT/HB2/ Polio 3 immunization
         </span>
         <span class="or-hint active" data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb2Polio3:hint"
             lang="Bahasa">
@@ -737,13 +737,13 @@
         </span>
         <span class="or-hint " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb2Polio3:hint"
             lang="en">
-            Date and month when the baby receives DPT 2, HB 2 and Polio 3 immunization
+            follow_up_date and month when the baby receives DPT 2, HB 2 and Polio 3 immunization
         </span>
         <input name="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb2Polio3"
             data-constraint=".&lt;=  /kohort_kunjungan_bayi_reviewed/today "
             data-relevant="selected( /kohort_kunjungan_bayi_reviewed/dilakukan_imunisasi , 'imunisasi_DPT_HB2_Polio_3')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="or-constraint-msg active" data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb3Polio4:jr:constraintMsg"
@@ -752,7 +752,7 @@
         </span>
         <span class="or-constraint-msg " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb3Polio4:jr:constraintMsg"
             lang="en">
-            Fill in the date of today or the days before
+            Fill in the follow_up_date of today or the days before
         </span>
         <span class="question-label active" data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb3Polio4:label"
             lang="Bahasa">
@@ -760,7 +760,7 @@
         </span>
         <span class="question-label " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb3Polio4:label"
             lang="en">
-            Date of DPT/HB3/ Polio 4 immunization
+            follow_up_date of DPT/HB3/ Polio 4 immunization
         </span>
         <span class="or-hint active" data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb3Polio4:hint"
             lang="Bahasa">
@@ -768,13 +768,13 @@
         </span>
         <span class="or-hint " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb3Polio4:hint"
             lang="en">
-            Date and month when the baby receives DPT 3, HB 3 and Polio 4 immunization
+            follow_up_date and month when the baby receives DPT 3, HB 3 and Polio 4 immunization
         </span>
         <input name="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_dpthb3Polio4"
             data-constraint=".&lt;=  /kohort_kunjungan_bayi_reviewed/today "
             data-relevant="selected( /kohort_kunjungan_bayi_reviewed/dilakukan_imunisasi , 'imunisasi_DPT_HB3_Polio_4')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="or-constraint-msg active" data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_campak:jr:constraintMsg"
@@ -783,7 +783,7 @@
         </span>
         <span class="or-constraint-msg " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_campak:jr:constraintMsg"
             lang="en">
-            Fill in the date of today or the days before
+            Fill in the follow_up_date of today or the days before
         </span>
         <span class="question-label active" data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_campak:label"
             lang="Bahasa">
@@ -791,7 +791,7 @@
         </span>
         <span class="question-label " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_campak:label"
             lang="en">
-            Date of measles immunization
+            follow_up_date of measles immunization
         </span>
         <span class="or-hint active" data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_campak:hint"
             lang="Bahasa">
@@ -799,12 +799,12 @@
         </span>
         <span class="or-hint " data-itext-id="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_campak:hint"
             lang="en">
-            Date and month when the baby receives measles immunization
+            follow_up_date and month when the baby receives measles immunization
         </span>
         <input name="/kohort_kunjungan_bayi_reviewed/tanggal_pemberian_imunisasi_campak" data-constraint=".&lt;=  /kohort_kunjungan_bayi_reviewed/today "
             data-relevant="selected( /kohort_kunjungan_bayi_reviewed/dilakukan_imunisasi , 'imunisasi_Campak')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question non-select ">
         <span class="question-label active" data-itext-id="/kohort_kunjungan_bayi_reviewed/keterangan:label"
@@ -831,8 +831,8 @@
                 data-preload-params="start" data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kohort_kunjungan_bayi_reviewed/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/kohort_kunjungan_bayi_reviewed/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/kohort_kunjungan_bayi_reviewed/deviceid" data-preload="property"

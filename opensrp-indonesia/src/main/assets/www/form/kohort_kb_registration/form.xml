@@ -152,10 +152,10 @@
             lang="Bahasa">Tanggal lahir Ibu
         </span>
         <span class="or-hint " data-itext-id="/tambah_kb_oa_reviewed/tanggal_lahir_ibu:hint"
-            lang="en">Mother's date of birth
+            lang="en">Mother's follow_up_date of birth
         </span>
-        <input name="/tambah_kb_oa_reviewed/tanggal_lahir_ibu" data-type-xml="date" required="required"
-            type="date" />
+        <input name="/tambah_kb_oa_reviewed/tanggal_lahir_ibu" data-type-xml="follow_up_date" required="required"
+            type="follow_up_date" />
     </label>
     <label class="note non-select ">
         <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/generated_note_name_19:label"
@@ -373,7 +373,7 @@
             Ibu pelayanan kesehatan
         </span>
         <span class="or-hint " data-itext-id="/tambah_kb_oa_reviewed/nama_kader:hint" lang="en">Name
-            of community health worker that gives health service
+            of community health worker that gives health referral_service_id
         </span>
         <input name="/tambah_kb_oa_reviewed/nama_kader" data-type-xml="string" type="text" />
     </label>
@@ -390,7 +390,7 @@
             saat menerima pelayanan kesehatan
         </span>
         <span class="or-hint " data-itext-id="/tambah_kb_oa_reviewed/nama_dukun:hint" lang="en">Name
-            of traditional birth attendant that accompany mother during health care service
+            of traditional birth attendant that accompany mother during health care referral_service_id
         </span>
         <input name="/tambah_kb_oa_reviewed/nama_dukun" data-type-xml="string" type="text" />
     </label>
@@ -574,7 +574,7 @@
             (Sistolik) Ibu pada saat kunjungan (mmHg)
         </span>
         <span class="or-hint " data-itext-id="/tambah_kb_oa_reviewed/td_sistolik:hint" lang="en">
-            Indicating blood pressure (systolic) on mother's visit for care service (mmHg)
+            Indicating blood pressure (systolic) on mother's visit for care referral_service_id (mmHg)
         </span>
         <input name="/tambah_kb_oa_reviewed/td_sistolik" data-constraint=".&gt;0 and .&lt;1000"
             data-type-xml="int" type="number" />
@@ -600,7 +600,7 @@
             (Diastolik) Ibu pada saat kunjungan (mmHg)
         </span>
         <span class="or-hint " data-itext-id="/tambah_kb_oa_reviewed/td_diastolik:hint" lang="en">
-            Indicating blood pressure (dyastolic) on mother's visit for care service (mmHg)
+            Indicating blood pressure (dyastolic) on mother's visit for care referral_service_id (mmHg)
         </span>
         <input name="/tambah_kb_oa_reviewed/td_diastolik" data-constraint=".&gt;0 and .&lt;1000"
             data-type-xml="decimal" step="any" type="number" />
@@ -887,8 +887,8 @@
                 data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/tambah_kb_oa_reviewed/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/tambah_kb_oa_reviewed/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/tambah_kb_oa_reviewed/deviceid" data-preload="property" data-preload-params="deviceid"

@@ -215,16 +215,16 @@ Event: 53.148 GC heap before
   class space    used 581K, capacity 616K, committed 640K, reserved 1048576K
 
 Deoptimization events (10 events):
-Event: 40.123 Thread 0x00007fdc1c00a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fdc0dab2e60 method=java.util.ArrayList.<init>(I)V @ 5
-Event: 40.129 Thread 0x00007fdc1c00a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fdc0db9a410 method=com.android.dx.dex.code.OutputFinisher.hasLocalInfo(Lcom/android/dx/rop/code/RegisterSpec;)Z @ 1
-Event: 41.635 Thread 0x00007fdc1c00a000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fdc0d3cf4c4 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 1501
-Event: 41.635 Thread 0x00007fdc1c00a000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fdc0d3cf4c4 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 1501
-Event: 50.025 Thread 0x00007fdc1c00a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fdc0d7f80b4 method=com.android.dx.ssa.SsaBasicBlock.getLiveOutRegs()Lcom/android/dx/util/IntSet; @ 4
-Event: 51.497 Thread 0x00007fdc1c00a000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fdc0d688bf4 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 1035
-Event: 51.497 Thread 0x00007fdc1c00a000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fdc0d688c70 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 1051
-Event: 51.497 Thread 0x00007fdc1c00a000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fdc0d688bf4 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 1035
-Event: 52.365 Thread 0x00007fdc1c00a000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fdc0d8c0518 method=com.android.dx.ssa.LiteralOpUpgrader.tryReplacingWithConstant(Lcom/android/dx/ssa/NormalSsaInsn;)Z @ 62
-Event: 52.371 Thread 0x00007fdc1c00a000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fdc0d8c0518 method=com.android.dx.ssa.LiteralOpUpgrader.tryReplacingWithConstant(Lcom/android/dx/ssa/NormalSsaInsn;)Z @ 62
+Event: 40.123 Thread 0x00007fdc1c00a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007fdc0dab2e60 method=java.util.ArrayList.<init>(I)V @ 5
+Event: 40.129 Thread 0x00007fdc1c00a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007fdc0db9a410 method=com.android.dx.dex.code.OutputFinisher.hasLocalInfo(Lcom/android/dx/rop/code/RegisterSpec;)Z @ 1
+Event: 41.635 Thread 0x00007fdc1c00a000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007fdc0d3cf4c4 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 1501
+Event: 41.635 Thread 0x00007fdc1c00a000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007fdc0d3cf4c4 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 1501
+Event: 50.025 Thread 0x00007fdc1c00a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007fdc0d7f80b4 method=com.android.dx.ssa.SsaBasicBlock.getLiveOutRegs()Lcom/android/dx/util/IntSet; @ 4
+Event: 51.497 Thread 0x00007fdc1c00a000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007fdc0d688bf4 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 1035
+Event: 51.497 Thread 0x00007fdc1c00a000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007fdc0d688c70 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 1051
+Event: 51.497 Thread 0x00007fdc1c00a000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007fdc0d688bf4 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 1035
+Event: 52.365 Thread 0x00007fdc1c00a000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007fdc0d8c0518 method=com.android.dx.ssa.LiteralOpUpgrader.tryReplacingWithConstant(Lcom/android/dx/ssa/NormalSsaInsn;)Z @ 62
+Event: 52.371 Thread 0x00007fdc1c00a000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007fdc0d8c0518 method=com.android.dx.ssa.LiteralOpUpgrader.tryReplacingWithConstant(Lcom/android/dx/ssa/NormalSsaInsn;)Z @ 62
 
 Internal exceptions (10 events):
 Event: 0.073 Thread 0x00007fdc1c00a000 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.prefetchRead(Ljava/lang/Object;J)V name or signature does not match> (0x00000000eab07f60) thrown at [/HUDSON3/workspace/8-2-build-linux-amd64/jdk8u102/7268/hotspot/src/share/vm/prims/jni.c

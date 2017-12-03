@@ -140,7 +140,7 @@
                 android:layout_marginLeft="2dp"
                 android:layout_marginTop="8dp"
                 android:alpha="0.8"
-                android:text="Expected Delivery Date"
+                android:text="Expected Delivery follow_up_date"
                 android:textColor="@color/secondary_text"
                 android:textSize="12sp" />
 
@@ -173,7 +173,7 @@
                 android:layout_marginLeft="2dp"
                 android:layout_marginTop="8dp"
                 android:alpha="0.8"
-                android:text="Last Visit Date"
+                android:text="Last Visit follow_up_date"
                 android:textColor="@color/secondary_text"
                 android:textSize="12sp" />
 
@@ -207,7 +207,7 @@
                 android:layout_marginLeft="2dp"
                 android:layout_marginTop="8dp"
                 android:alpha="0.8"
-                android:text="Next Visit Date"
+                android:text="Next Visit follow_up_date"
                 android:textColor="@color/secondary_text"
                 android:textSize="14sp" />
 

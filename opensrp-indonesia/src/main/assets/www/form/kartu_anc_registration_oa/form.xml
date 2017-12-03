@@ -9,7 +9,7 @@
    <label class="question non-select ">
       <span lang="Bahasa" class="question-label active" data-itext-id="/Register_ANC/tanggal_periksa:label">Tanggal Kunjungan</span>
       <span lang="" class="or-hint active">Tanggal pemeriksaan kehamilan pertama kali oleh Bidan</span>
-      <input type="date" name="/Register_ANC/tanggal_periksa" data-type-xml="date" />
+      <input type="follow_up_date" name="/Register_ANC/tanggal_periksa" data-type-xml="follow_up_date" />
    </label>
    <label class="note non-select ">
       <span lang="Bahasa" class="question-label active" data-itext-id="/Register_ANC/generated_note_name_8:label">Identitas Ibu</span>
@@ -41,7 +41,7 @@
       <span lang="Bahasa" class="question-label active" data-itext-id="/Register_ANC/tanggal_lahir_ibu:label">Tanggal lahir</span>
       <span class="required">*</span>
       <span lang="" class="or-hint active">Tanggal lahir Ibu</span>
-      <input type="date" name="/Register_ANC/tanggal_lahir_ibu" required="required" data-type-xml="date" />
+      <input type="follow_up_date" name="/Register_ANC/tanggal_lahir_ibu" required="required" data-type-xml="follow_up_date" />
    </label>
    <label class="note non-select ">
       <span lang="Bahasa" class="question-label active" data-itext-id="/Register_ANC/generated_note_name_15:label">
@@ -674,7 +674,7 @@
    <label class="question non-select ">
       <span lang="Bahasa" class="question-label active" data-itext-id="/Register_ANC/tanggal_hpht:label">Tanggal HPHT</span>
       <span lang="" class="or-hint active">Tanggal Hari Pertama Haid Terakhir Ibu</span>
-      <input type="date" name="/Register_ANC/tanggal_hpht" data-type-xml="date" />
+      <input type="follow_up_date" name="/Register_ANC/tanggal_hpht" data-type-xml="follow_up_date" />
    </label>
    <label class="note non-select ">
       <span lang="Bahasa" class="question-label active" data-itext-id="/Register_ANC/edd_note:label">
@@ -731,7 +731,7 @@
    </fieldset>
    <label class="question or-branch pre-init non-select ">
       <span lang="Bahasa" class="question-label active" data-itext-id="/Register_ANC/tanggal_memperoleh_buku_kia:label">Tanggal memperoleh Buku KIA</span>
-      <input type="date" name="/Register_ANC/tanggal_memperoleh_buku_kia" data-relevant=" /Register_ANC/buku_kia  = 'memiliki'" data-type-xml="date" />
+      <input type="follow_up_date" name="/Register_ANC/tanggal_memperoleh_buku_kia" data-relevant=" /Register_ANC/buku_kia  = 'memiliki'" data-type-xml="follow_up_date" />
    </label>
    <fieldset class="question ">
       <fieldset>
@@ -866,8 +866,8 @@
    <fieldset class="question ">
       <fieldset>
          <legend>
-            <span lang="Bahasa" class="question-label active" data-itext-id="/Register_ANC/status_gizi_ibu:label">Status Gizi ibu</span>
-            <span lang="" class="or-hint active">Menunjukkan status gizi Ibu pada saat kunjungan ANC (Kg)</span>
+            <span lang="Bahasa" class="question-label active" data-itext-id="/Register_ANC/status_gizi_ibu:label">referral_status Gizi ibu</span>
+            <span lang="" class="or-hint active">Menunjukkan referral_status gizi Ibu pada saat kunjungan ANC (Kg)</span>
          </legend>
          <div class="option-wrapper">
             <label class="">
@@ -979,8 +979,8 @@
       </fieldset>
    </fieldset>
    <label class="question or-appearance-minimal ">
-      <span lang="Bahasa" class="question-label active" data-itext-id="/Register_ANC/status_imunisasi_tt:label">Status Imunisasi TT</span>
-      <span lang="" class="or-hint active">Menunjukkan status Imunisasi TT yang diberikan kepada Ibu</span>
+      <span lang="Bahasa" class="question-label active" data-itext-id="/Register_ANC/status_imunisasi_tt:label">referral_status Imunisasi TT</span>
+      <span lang="" class="or-hint active">Menunjukkan referral_status Imunisasi TT yang diberikan kepada Ibu</span>
       <select name="/Register_ANC/status_imunisasi_tt" data-name="/Register_ANC/status_imunisasi_tt" data-type-xml="select1">
          <option value="">...</option>
          <option value="tt_ke_0">TT Ke 0 (T0)</option>
@@ -1561,7 +1561,7 @@
          <input type="hidden" name="/Register_ANC/start" data-preload="timestamp" data-preload-params="start" data-type-xml="dateTime" />
       </label>
       <label class="calculation non-select ">
-         <input type="hidden" name="/Register_ANC/today" data-preload="date" data-preload-params="today" data-type-xml="date" />
+         <input type="hidden" name="/Register_ANC/today" data-preload="follow_up_date" data-preload-params="today" data-type-xml="follow_up_date" />
       </label>
       <label class="calculation non-select ">
          <input type="hidden" name="/Register_ANC/deviceid" data-preload="property" data-preload-params="deviceid" data-type-xml="string" />
@@ -1578,7 +1578,7 @@
    </fieldset>
    <fieldset id="or-calculated-items" style="display:none;">
 	<label class="calculation non-select ">
-         <input autocomplete="off" type="hidden" name="/Register_ANC/reg_date" data-calculate=" /Register_ANC/today " data-type-xml="date" />
+         <input autocomplete="off" type="hidden" name="/Register_ANC/reg_date" data-calculate=" /Register_ANC/today " data-type-xml="follow_up_date" />
       </label>
       <label class="calculation non-select ">
          <input type="hidden" name="/Register_ANC/umur" data-calculate="int(( /Register_ANC/today  -  /Register_ANC/tanggal_lahir_ibu ) div 365)" data-type-xml="string" />
@@ -1590,10 +1590,10 @@
          <input type="hidden" name="/Register_ANC/dusun" data-calculate="if(( /Register_ANC/dusun1  != '' and  /Register_ANC/dusun1  != 'Lainnya'),  /Register_ANC/dusun1 ,  /Register_ANC/dusun2 )" data-type-xml="string" />
       </label>
       <label class="calculation non-select ">
-         <input type="hidden" name="/Register_ANC/edd" data-calculate="date( /Register_ANC/tanggal_hpht +280)" data-type-xml="string" />
+         <input type="hidden" name="/Register_ANC/edd" data-calculate="follow_up_date( /Register_ANC/tanggal_hpht +280)" data-type-xml="string" />
       </label>
       <label class="calculation non-select ">
-         <input type="hidden" name="/Register_ANC/htp" data-calculate="format-date( /Register_ANC/edd , '%Y-%n-%e')" data-type-xml="string" />
+         <input type="hidden" name="/Register_ANC/htp" data-calculate="format-follow_up_date( /Register_ANC/edd , '%Y-%n-%e')" data-type-xml="string" />
       </label>
       <label class="calculation non-select ">
          <input type="hidden" name="/Register_ANC/usia_klinis" data-calculate="int((( /Register_ANC/today  -  /Register_ANC/tanggal_hpht ) div 7)+1)" data-type-xml="string" />

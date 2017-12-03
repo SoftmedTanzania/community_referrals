@@ -162,19 +162,19 @@
         </fieldset>
     </fieldset>
     <label class="question non-select ">
-        <span lang="" class="question-label active">Immunization date? &#xC87;&#xCAE;&#xCCD;&#xCAF;&#xCC2;&#xCA8;&#xCC8;&#xC9C;&#xCC7;&#xCB7;&#xCA8;&#xCCD;
+        <span lang="" class="question-label active">Immunization follow_up_date? &#xC87;&#xCAE;&#xCCD;&#xCAF;&#xCC2;&#xCA8;&#xCC8;&#xC9C;&#xCC7;&#xCB7;&#xCA8;&#xCCD;
             &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
         <span class="required">*</span>
-        <input autocomplete="off" type="date" name="/Child_Immunizations_EngKan/immunization_date" required="required"
+        <input autocomplete="off" type="follow_up_date" name="/Child_Immunizations_EngKan/immunization_date" required="required"
                data-constraint="if(selected( /Child_Immunizations_EngKan/entity_immunizations_received , 'bcg') or selected( /Child_Immunizations_EngKan/entity_immunizations_received , 'opv_0') or selected( /Child_Immunizations_EngKan/entity_immunizations_received , 'hepb_0'), .&gt;=  /Child_Immunizations_EngKan/case_child_birth_date  and .&lt;= /Child_Immunizations_EngKan/today , if(selected( /Child_Immunizations_EngKan/entity_immunizations_received , 'opv_1') or selected( /Child_Immunizations_EngKan/entity_immunizations_received , 'pentavalent_1'), .&gt;=  /Child_Immunizations_EngKan/three_weeks  and .&lt;= /Child_Immunizations_EngKan/today , if(selected( /Child_Immunizations_EngKan/entity_immunizations_received , 'opv_2') or selected( /Child_Immunizations_EngKan/entity_immunizations_received , 'pentavalent_2'), .&gt;= /Child_Immunizations_EngKan/seven_weeks  and .&lt;= /Child_Immunizations_EngKan/today , if(selected( /Child_Immunizations_EngKan/entity_immunizations_received , 'opv_3') or selected( /Child_Immunizations_EngKan/entity_immunizations_received , 'pentavalent_3'), .&gt;= /Child_Immunizations_EngKan/eleven_weeks  and .&lt;= /Child_Immunizations_EngKan/today , if(selected( /Child_Immunizations_EngKan/entity_immunizations_received , 'measles'), .&gt;= /Child_Immunizations_EngKan/eight_months  and .&lt;= /Child_Immunizations_EngKan/today , if(selected( /Child_Immunizations_EngKan/entity_immunizations_received , 'mmr') or selected( /Child_Immunizations_EngKan/entity_immunizations_received , 'dptbooster_1') or selected( /Child_Immunizations_EngKan/entity_immunizations_received , 'opvbooster') or selected( /Child_Immunizations_EngKan/entity_immunizations_received , 'measlesbooster'), .&gt;=  /Child_Immunizations_EngKan/sixteen_months  and .&lt;= /Child_Immunizations_EngKan/today , if(selected( /Child_Immunizations_EngKan/entity_immunizations_received , 'dptbooster_2'), .&gt;= /Child_Immunizations_EngKan/four_years  and .&lt;= /Child_Immunizations_EngKan/today , .&lt;= /Child_Immunizations_EngKan/today )))))))"
-               data-type-xml="date"/>
+               data-type-xml="follow_up_date"/>
     </label>
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input autocomplete="off" type="hidden" name="/Child_Immunizations_EngKan/today" data-preload="date"
-                   data-preload-params="today" data-type-xml="date"/>
+            <input autocomplete="off" type="hidden" name="/Child_Immunizations_EngKan/today" data-preload="follow_up_date"
+                   data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">

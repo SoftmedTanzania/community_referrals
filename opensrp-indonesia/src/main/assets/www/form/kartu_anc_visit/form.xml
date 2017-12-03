@@ -96,7 +96,7 @@
             lang="Bahasa">Tanggal kunjungan ANC
         </span>
         <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_date:label"
-            lang="en">Date of ANC visit
+            lang="en">follow_up_date of ANC visit
         </span>
         <span class="required">*</span>
         <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_date:hint"
@@ -104,11 +104,11 @@
             periksa Ibu
         </span>
         <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_date:hint"
-            lang="en">Fill in the date of
+            lang="en">Fill in the follow_up_date of
             check-up
         </span>
-        <input name="/kunjungan_anc_reviewed_anc_visit/anc_date" data-type-xml="date" required="required"
-            type="date" />
+        <input name="/kunjungan_anc_reviewed_anc_visit/anc_date" data-type-xml="follow_up_date" required="required"
+            type="follow_up_date" />
     </label>
     <label class="note non-select ">
         <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_12:label"
@@ -409,7 +409,7 @@
         </span>
         <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/cara_masuk_tempat_pelayanan:hint"
             lang="en">
-            Mother's reason for seeking care service in the facility
+            Mother's follow_up_reason for seeking care referral_service_id in the facility
         </span>
         <select name="/kunjungan_anc_reviewed_anc_visit/cara_masuk_tempat_pelayanan"
             data-name="/kunjungan_anc_reviewed_anc_visit/cara_masuk_tempat_pelayanan"
@@ -590,20 +590,20 @@
         <fieldset>
             <legend>
                 <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu:label"
-                    lang="Bahasa">Status
+                    lang="Bahasa">referral_status
                     Gizi ibu
                 </span>
                 <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu:label"
                     lang="en">
-                    Nutritional status of mother
+                    Nutritional referral_status of mother
                 </span>
                 <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu:hint"
                     lang="Bahasa">
-                    Menunjukkan status gizi Ibu pada saat kunjungan ANC (Kg)
+                    Menunjukkan referral_status gizi Ibu pada saat kunjungan ANC (Kg)
                 </span>
                 <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu:hint"
                     lang="en">
-                    Indicating mother's nutritional status on ANC check-up
+                    Indicating mother's nutritional referral_status on ANC check-up
                 </span>
             </legend>
             <div class="option-wrapper">
@@ -937,21 +937,21 @@
     </fieldset>
     <label class="question or-appearance-minimal ">
         <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_imunisasi_tt:label"
-            lang="Bahasa">Status
+            lang="Bahasa">referral_status
             Imunisasi TT
         </span>
         <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_imunisasi_tt:label"
             lang="en">TT
-            immunization status
+            immunization referral_status
         </span>
         <span class="required">*</span>
         <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_imunisasi_tt:hint"
             lang="Bahasa">Menunjukkan
-            status imunisasi TT yang diberikan kepada Ibu
+            referral_status imunisasi TT yang diberikan kepada Ibu
         </span>
         <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_imunisasi_tt:hint"
             lang="en">Indicating
-            status of TT immunization that mother has received
+            referral_status of TT immunization that mother has received
         </span>
         <select name="/kunjungan_anc_reviewed_anc_visit/status_imunisasi_tt"
             data-name="/kunjungan_anc_reviewed_anc_visit/status_imunisasi_tt" data-type-xml="select1"
@@ -1106,7 +1106,7 @@
                 </span>
                 <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayananfe:hint"
                     lang="en">Indicating
-                    whether midwife provides Fe service
+                    whether midwife provides Fe referral_service_id
                 </span>
             </legend>
             <div class="option-wrapper">
@@ -1610,8 +1610,8 @@
                 data-preload-params="start" data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_anc_visit/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/kunjungan_anc_reviewed_anc_visit/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/kunjungan_anc_reviewed_anc_visit/deviceid" data-preload="property"

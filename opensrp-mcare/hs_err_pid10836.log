@@ -203,16 +203,16 @@ Event: 12.447 GC heap before
   class space    used 556K, capacity 616K, committed 640K, reserved 1048576K
 
 Deoptimization events (10 events):
-Event: 9.251 Thread 0x00007fd55c00a000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fd54c53a534 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 203
-Event: 9.251 Thread 0x00007fd55c00a000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fd54c456298 method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 126
-Event: 9.251 Thread 0x00007fd55c00a000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fd54c53a534 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 203
-Event: 11.553 Thread 0x00007fd55c00a000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fd54c664694 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 1161
-Event: 11.555 Thread 0x00007fd55c00a000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fd54c664694 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 1161
-Event: 11.639 Thread 0x00007fd55c00a000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fd54c456298 method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 126
-Event: 11.780 Thread 0x00007fd55c00a000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fd54c456298 method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 126
-Event: 11.834 Thread 0x00007fd55c00a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fd54c6a84f4 method=com.android.dx.cf.code.Merger.isPossiblyAssignableFrom(Lcom/android/dx/rop/type/TypeBearer;Lcom/android/dx/rop/type/TypeBearer;)Z @ 55
-Event: 12.190 Thread 0x00007fd55c00a000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fd54c53a534 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 203
-Event: 12.203 Thread 0x00007fd55c00a000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fd54c53a534 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 203
+Event: 9.251 Thread 0x00007fd55c00a000 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007fd54c53a534 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 203
+Event: 9.251 Thread 0x00007fd55c00a000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007fd54c456298 method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 126
+Event: 9.251 Thread 0x00007fd55c00a000 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007fd54c53a534 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 203
+Event: 11.553 Thread 0x00007fd55c00a000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007fd54c664694 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 1161
+Event: 11.555 Thread 0x00007fd55c00a000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007fd54c664694 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 1161
+Event: 11.639 Thread 0x00007fd55c00a000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007fd54c456298 method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 126
+Event: 11.780 Thread 0x00007fd55c00a000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007fd54c456298 method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 126
+Event: 11.834 Thread 0x00007fd55c00a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007fd54c6a84f4 method=com.android.dx.cf.code.Merger.isPossiblyAssignableFrom(Lcom/android/dx/rop/type/TypeBearer;Lcom/android/dx/rop/type/TypeBearer;)Z @ 55
+Event: 12.190 Thread 0x00007fd55c00a000 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007fd54c53a534 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 203
+Event: 12.203 Thread 0x00007fd55c00a000 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007fd54c53a534 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 203
 
 Internal exceptions (2 events):
 Event: 0.205 Thread 0x00007fd55c00a000 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x00000000eab07c78) thrown at [/HUDSON3/workspace/8-2-build-linux-amd64/jdk8u102/7268/hotspot/src/sh

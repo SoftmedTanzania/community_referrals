@@ -5,11 +5,11 @@
 
 
     <label class="question non-select ">
-        <span lang="" class="question-label active">Date of test result? &#xCAA;&#xCB0;&#xCC0;&#xC95;&#xCCD;&#xCB7;&#xCC6;
+        <span lang="" class="question-label active">follow_up_date of test result? &#xCAA;&#xCB0;&#xCC0;&#xC95;&#xCCD;&#xCB7;&#xCC6;
             &#xCAB;&#xCB2;&#xCBF;&#xCA4;&#xCBE;&#xC82;&#xCB6;&#xCA6; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
-        <input autocomplete="off" type="date" name="/ANC_Investigations_EngKan/test_date"
-               data-constraint=".&lt;=  /ANC_Investigations_EngKan/today " data-type-xml="date"/>
+        <input autocomplete="off" type="follow_up_date" name="/ANC_Investigations_EngKan/test_date"
+               data-constraint=".&lt;=  /ANC_Investigations_EngKan/today " data-type-xml="follow_up_date"/>
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -271,8 +271,8 @@
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input autocomplete="off" type="hidden" name="/ANC_Investigations_EngKan/today" data-preload="date"
-                   data-preload-params="today" data-type-xml="date"/>
+            <input autocomplete="off" type="hidden" name="/ANC_Investigations_EngKan/today" data-preload="follow_up_date"
+                   data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">

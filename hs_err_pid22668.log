@@ -222,16 +222,16 @@ Event: 18.020 GC heap before
   object space 75776K, 61% used [0x00000000b0000000,0x00000000b2dc1548,0x00000000b4a00000)
 
 Deoptimization events (10 events):
-Event: 17.516 Thread 0x00007fb00400d800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fb04941dc0c method=com.sun.tools.javac.tree.TreeScanner.visitSelect(Lcom/sun/tools/javac/tree/JCTree$JCFieldAccess;)V @ 5
-Event: 17.518 Thread 0x00007fb00400d800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fb04941dc0c method=com.sun.tools.javac.tree.TreeScanner.visitSelect(Lcom/sun/tools/javac/tree/JCTree$JCFieldAccess;)V @ 5
-Event: 17.666 Thread 0x00007fb00400d800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fb04942443c method=com.sun.tools.javac.code.Types$UnaryVisitor.visit(Lcom/sun/tools/javac/code/Type;)Ljava/lang/Object; @ 3
-Event: 17.669 Thread 0x00007fb00400d800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fb049428ff0 method=com.sun.tools.javac.code.Scope.lookup(Lcom/sun/tools/javac/util/Name;Lcom/sun/tools/javac/util/Filter;)Lcom/sun/tools/javac/code/Scope$Entry; @ 49
-Event: 17.669 Thread 0x00007fb00400d800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fb04942443c method=com.sun.tools.javac.code.Types$UnaryVisitor.visit(Lcom/sun/tools/javac/code/Type;)Ljava/lang/Object; @ 3
-Event: 17.670 Thread 0x00007fb00400d800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fb049428ff0 method=com.sun.tools.javac.code.Scope.lookup(Lcom/sun/tools/javac/util/Name;Lcom/sun/tools/javac/util/Filter;)Lcom/sun/tools/javac/code/Scope$Entry; @ 49
-Event: 17.699 Thread 0x00007fb00400d800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fb04941ba2c method=com.sun.tools.javac.tree.JCTree$JCMethodDecl.accept(Lcom/sun/tools/javac/tree/JCTree$Visitor;)V @ 2
-Event: 17.699 Thread 0x00007fb00400d800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fb04941ba2c method=com.sun.tools.javac.tree.JCTree$JCMethodDecl.accept(Lcom/sun/tools/javac/tree/JCTree$Visitor;)V @ 2
-Event: 17.699 Thread 0x00007fb00400d800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fb04941ba2c method=com.sun.tools.javac.tree.JCTree$JCMethodDecl.accept(Lcom/sun/tools/javac/tree/JCTree$Visitor;)V @ 2
-Event: 17.699 Thread 0x00007fb00400d800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fb04941ba2c method=com.sun.tools.javac.tree.JCTree$JCMethodDecl.accept(Lcom/sun/tools/javac/tree/JCTree$Visitor;)V @ 2
+Event: 17.516 Thread 0x00007fb00400d800 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007fb04941dc0c method=com.sun.tools.javac.tree.TreeScanner.visitSelect(Lcom/sun/tools/javac/tree/JCTree$JCFieldAccess;)V @ 5
+Event: 17.518 Thread 0x00007fb00400d800 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007fb04941dc0c method=com.sun.tools.javac.tree.TreeScanner.visitSelect(Lcom/sun/tools/javac/tree/JCTree$JCFieldAccess;)V @ 5
+Event: 17.666 Thread 0x00007fb00400d800 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007fb04942443c method=com.sun.tools.javac.code.Types$UnaryVisitor.visit(Lcom/sun/tools/javac/code/Type;)Ljava/lang/Object; @ 3
+Event: 17.669 Thread 0x00007fb00400d800 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007fb049428ff0 method=com.sun.tools.javac.code.Scope.lookup(Lcom/sun/tools/javac/util/Name;Lcom/sun/tools/javac/util/Filter;)Lcom/sun/tools/javac/code/Scope$Entry; @ 49
+Event: 17.669 Thread 0x00007fb00400d800 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007fb04942443c method=com.sun.tools.javac.code.Types$UnaryVisitor.visit(Lcom/sun/tools/javac/code/Type;)Ljava/lang/Object; @ 3
+Event: 17.670 Thread 0x00007fb00400d800 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007fb049428ff0 method=com.sun.tools.javac.code.Scope.lookup(Lcom/sun/tools/javac/util/Name;Lcom/sun/tools/javac/util/Filter;)Lcom/sun/tools/javac/code/Scope$Entry; @ 49
+Event: 17.699 Thread 0x00007fb00400d800 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007fb04941ba2c method=com.sun.tools.javac.tree.JCTree$JCMethodDecl.accept(Lcom/sun/tools/javac/tree/JCTree$Visitor;)V @ 2
+Event: 17.699 Thread 0x00007fb00400d800 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007fb04941ba2c method=com.sun.tools.javac.tree.JCTree$JCMethodDecl.accept(Lcom/sun/tools/javac/tree/JCTree$Visitor;)V @ 2
+Event: 17.699 Thread 0x00007fb00400d800 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007fb04941ba2c method=com.sun.tools.javac.tree.JCTree$JCMethodDecl.accept(Lcom/sun/tools/javac/tree/JCTree$Visitor;)V @ 2
+Event: 17.699 Thread 0x00007fb00400d800 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007fb04941ba2c method=com.sun.tools.javac.tree.JCTree$JCMethodDecl.accept(Lcom/sun/tools/javac/tree/JCTree$Visitor;)V @ 2
 
 Internal exceptions (10 events):
 Event: 17.048 Thread 0x00007fb00400d800 Threw 0x00000000f6d4b1e8 at /build/openjdk-7-HVzwJZ/openjdk-7-7u95-2.6.4/build/openjdk/hotspot/src/share/vm/prims/jvm.cpp:1322

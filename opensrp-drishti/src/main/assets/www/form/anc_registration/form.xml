@@ -5,12 +5,12 @@
 
 
     <label class="question non-select ">
-        <span lang="" class="question-label active">Registration date, &#xCA6;&#xCBE;&#xC96;&#xCB2;&#xCBE;&#xCA4;&#xCBF;
+        <span lang="" class="question-label active">Registration follow_up_date, &#xCA6;&#xCBE;&#xC96;&#xCB2;&#xCBE;&#xCA4;&#xCBF;
             &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;:
         </span>
         <span class="required">*</span>
-        <input autocomplete="off" type="date" name="/ANC_Registration_EngKan/reg_date" required="required"
-               data-constraint=".&lt;= /ANC_Registration_EngKan/today " data-type-xml="date"/>
+        <input autocomplete="off" type="follow_up_date" name="/ANC_Registration_EngKan/reg_date" required="required"
+               data-constraint=".&lt;= /ANC_Registration_EngKan/today " data-type-xml="follow_up_date"/>
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -98,8 +98,8 @@
             &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;:
         </span>
         <span class="required">*</span>
-        <input autocomplete="off" type="date" name="/ANC_Registration_EngKan/lmp_date" required="required"
-               data-constraint=".&lt;= /ANC_Registration_EngKan/today " data-type-xml="date"/>
+        <input autocomplete="off" type="follow_up_date" name="/ANC_Registration_EngKan/lmp_date" required="required"
+               data-constraint=".&lt;= /ANC_Registration_EngKan/today " data-type-xml="follow_up_date"/>
     </label>
     <label class="note non-select ">
         <span lang="" class="question-label active">EDD, &#xCA8;&#xCBF;&#xCB0;&#xCC0;&#xC95;&#xCCD;&#xCB7;&#xCBF;&#xCA4;&#xCBE;
@@ -367,8 +367,8 @@
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input autocomplete="off" type="hidden" name="/ANC_Registration_EngKan/today" data-preload="date"
-                   data-preload-params="today" data-type-xml="date"/>
+            <input autocomplete="off" type="hidden" name="/ANC_Registration_EngKan/today" data-preload="follow_up_date"
+                   data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">
@@ -382,11 +382,11 @@
         </label>
         <label class="calculation non-select ">
             <input autocomplete="off" type="hidden" name="/ANC_Registration_EngKan/edd"
-                   data-calculate="date( /ANC_Registration_EngKan/lmp_date +280)" data-type-xml="string"/>
+                   data-calculate="follow_up_date( /ANC_Registration_EngKan/lmp_date +280)" data-type-xml="string"/>
         </label>
         <label class="calculation non-select ">
             <input autocomplete="off" type="hidden" name="/ANC_Registration_EngKan/edd_formatted"
-                   data-calculate="format-date( /ANC_Registration_EngKan/edd , '%Y-%n-%e')" data-type-xml="string"/>
+                   data-calculate="format-follow_up_date( /ANC_Registration_EngKan/edd , '%Y-%n-%e')" data-type-xml="string"/>
         </label>
         <label class="calculation non-select ">
             <input autocomplete="off" type="hidden" name="/ANC_Registration_EngKan/weight_risk"

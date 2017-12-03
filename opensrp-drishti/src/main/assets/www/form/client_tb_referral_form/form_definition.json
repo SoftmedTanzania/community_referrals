@@ -12,85 +12,82 @@
                 "name": "relationalid"
             },
             {
-                "name": "fName"
+                "name": "first_name"
             },
             {
-                "name": "mName"
+                "name": "middle_name"
             },
             {
-                "name": "lName"
+                "name": "surname"
             },
             {
-                "name": "clientDOB"
+                "name": "date_of_birth"
             },
             {
-                "name": "CBHS"
+                "name": "community_based_hiv_service"
             },
             {
-                "name": "CTCNumber"
+                "name": "ctc_number"
             },
             {
-                "name": "ReferralDate"
+                "name": "referral_date"
             },
             {
-                "name": "IS_VALID"
+                "name": "is_valid"
             },
             {
-                "name": "Status"
+                "name": "referral_status"
             },
             {
-                "name": "FacilityId"
+                "name": "facility_id"
             },
             {
-                "name": "ReferralReason"
+                "name": "referral_reason"
             },
             {
-                "name": "has2WeekCough"
+                "name": "has_2Week_cough"
             },
             {
-                "name": "hasFever"
+                "name": "has_fever"
             },
             {
-                "name": "hadWeightLoss"
+                "name": "had_weight_loss"
             },
             {
-                "name": "hasSevereSweating"
+                "name": "has_severe_sweating"
             },
             {
-                "name": "hasBloodCough"
+                "name": "has_blood_cough"
             },
             {
-                "name": "isLostFollowUp"
+                "name": "is_lost_follow_up"
             },
             {
-                "name": "Service"
+                "name": "referral_service_id"
             },
             {
-                "name": "Gender"
+                "name": "gender"
             },
             {
-                "name": "PhoneNumber"
+                "name": "phone_number"
             },
             {
-                "name": "Kata"
+                "name": "ward"
             },
             {
-                "name": "Kijiji"
+                "name": "village"
             },
             {
-                "name": "kijitongoji"
+                "name": "village_leader"
             },
             {
-                "name": "VillageLeader"
+                "name": "service_provider_uiid"
             },
             {
-                "name": "ServiceProviderId"
+                "name": "service_provider_group"
             },
             {
-                "name": "ServiceProviderGroup"
-            },
-            {
-                "name": "ProviderMobileNumber"
+                "name": "service_provider_mobile_number"
             }
         ]
     }

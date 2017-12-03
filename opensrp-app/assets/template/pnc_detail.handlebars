@@ -20,7 +20,7 @@
 </div>
 
 <div id="content" class="content-detail">
-    <div class="status-bar">
+    <div class="referral_status-bar">
         {{#if coupleDetails.isInArea}}
         <span class="left-text">PNC</span>
         {{else}}
@@ -84,7 +84,7 @@
                         </div>
                         <div class="span6 text-center padded">
                             <span class="big-text">{{formatDate pncDetails.dateOfDelivery}}</span><br><span
-                                class="meta-summary-text">Date of Delivery</span>
+                                class="meta-summary-text">follow_up_date of Delivery</span>
                         </div>
                     </div>
                     {{#if details.deliveryComplications}}
@@ -127,7 +127,7 @@
                                     {{/each}}
                                 </div>
                                 <div class="span4 pull-right text-right">
-                                    {{date}}
+                                    {{follow_up_date}}
                                 </div>
                             </div>
                             {{/each}}

@@ -47,18 +47,18 @@
             lang="Bahasa">Tanggal Kunjungan
         </span>
         <span class="question-label " data-itext-id="/anc_registration/tanggal_periksa:label"
-            lang="en">Date of visit
+            lang="en">follow_up_date of visit
         </span>
         <span class="required">*</span>
         <span class="or-hint active" data-itext-id="/anc_registration/tanggal_periksa:hint"
             lang="Bahasa">Tanggal pemeriksaan kehamilan
             pertama kali oleh bidan
         </span>
-        <span class="or-hint " data-itext-id="/anc_registration/tanggal_periksa:hint" lang="en">Date
+        <span class="or-hint " data-itext-id="/anc_registration/tanggal_periksa:hint" lang="en">follow_up_date
             of first antenatal checkup by midwife
         </span>
-        <input name="/anc_registration/tanggal_periksa" data-type-xml="date" required="required"
-            type="date" />
+        <input name="/anc_registration/tanggal_periksa" data-type-xml="follow_up_date" required="required"
+            type="follow_up_date" />
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -215,14 +215,14 @@
             lang="Bahasa">Tanggal Lahir Anak Sebelumnya
         </span>
         <span class="question-label " data-itext-id="/anc_registration/tanggal_lahir_anak_sebelumnya:label"
-            lang="en">Birth date o previous child
+            lang="en">Birth follow_up_date o previous child
         </span>
         <span class="or-hint active" data-itext-id="/anc_registration/tanggal_lahir_anak_sebelumnya:hint"
             lang="Bahasa">Tanggal Lahir Anak Sebelumnya
         </span>
-        <span class="or-hint " data-itext-id="/anc_registration/tanggal_lahir_anak_sebelumnya:hint" lang="en">Birth date o previous child
+        <span class="or-hint " data-itext-id="/anc_registration/tanggal_lahir_anak_sebelumnya:hint" lang="en">Birth follow_up_date o previous child
         </span>
-        <input name="/anc_registration/tanggal_lahir_anak_sebelumnya" data-type-xml="date" type="date" />
+        <input name="/anc_registration/tanggal_lahir_anak_sebelumnya" data-type-xml="follow_up_date" type="follow_up_date" />
     </label>
     <label class="note non-select ">
         <span class="question-label active" data-itext-id="/anc_registration/generated_note_name_14:label"
@@ -239,16 +239,16 @@
             lang="Bahasa">Tanggal HPHT
         </span>
         <span class="question-label " data-itext-id="/anc_registration/hpht:label" lang="en">Last
-            Menstrual Period date
+            Menstrual Period follow_up_date
         </span>
         <span class="required">*</span>
         <span class="or-hint active" data-itext-id="/anc_registration/hpht:hint" lang="Bahasa">
             Tanggal Hari Pertama Haid Terakhir Ibu
         </span>
-        <span class="or-hint " data-itext-id="/anc_registration/hpht:hint" lang="en">Date of first
+        <span class="or-hint " data-itext-id="/anc_registration/hpht:hint" lang="en">follow_up_date of first
             day of last menstrual period
         </span>
-        <input name="/anc_registration/hpht" data-type-xml="date" required="required" type="date" />
+        <input name="/anc_registration/hpht" data-type-xml="follow_up_date" required="required" type="follow_up_date" />
     </label>
     <label class="note non-select ">
         <span class="question-label active" data-itext-id="/anc_registration/edd_note:label"
@@ -256,7 +256,7 @@
             <span class="or-output" data-value=" /anc_registration/htp "></span>
         </span>
         <span class="question-label " data-itext-id="/anc_registration/edd_note:label" lang="en">
-            Estimated Date of Delivery
+            Estimated follow_up_date of Delivery
         </span>
         <input name="/anc_registration/edd_note" data-type-xml="string" readonly="readonly"
             type="text" />
@@ -290,11 +290,11 @@
             Buku KIA
         </span>
         <span class="question-label " data-itext-id="/anc_registration/tanggal_memperoleh_buku_kia:label"
-            lang="en">Date of recieving
+            lang="en">follow_up_date of recieving
             Maternal and Child Health Booklet
         </span>
-        <input name="/anc_registration/tanggal_memperoleh_buku_kia" data-type-xml="date"
-            type="date" />
+        <input name="/anc_registration/tanggal_memperoleh_buku_kia" data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question non-select ">
         <span class="or-constraint-msg active" data-itext-id="/anc_registration/bb_kg:jr:constraintMsg"
@@ -749,8 +749,8 @@
                 data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/anc_registration/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/anc_registration/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/anc_registration/deviceid" data-preload="property" data-preload-params="deviceid"
@@ -771,11 +771,11 @@
     </fieldset>
     <fieldset style="display:none;" id="or-calculated-items">
         <label class="calculation non-select ">
-            <input name="/anc_registration/edd" data-calculate="date( /anc_registration/hpht +280)"
+            <input name="/anc_registration/edd" data-calculate="follow_up_date( /anc_registration/hpht +280)"
                 data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/anc_registration/htp" data-calculate="format-date( /anc_registration/edd , '%Y-%n-%e')"
+            <input name="/anc_registration/htp" data-calculate="format-follow_up_date( /anc_registration/edd , '%Y-%n-%e')"
                 data-type-xml="string"
                 type="hidden" />
         </label>

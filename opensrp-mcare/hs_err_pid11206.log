@@ -215,16 +215,16 @@ Event: 183.739 GC heap before
   class space    used 580K, capacity 616K, committed 640K, reserved 1048576K
 
 Deoptimization events (10 events):
-Event: 174.348 Thread 0x00007f538c00a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f537d510960 method=com.android.dx.rop.code.RegisterSpecSet.<init>(I)V @ 2
-Event: 177.844 Thread 0x00007f538c00a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f537d85123c method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 109
-Event: 179.464 Thread 0x00007f538c00a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f537d6d994c method=com.android.dx.rop.code.LocalItem.compareHandlesNulls(Lcom/android/dx/rop/cst/CstString;Lcom/android/dx/rop/cst/CstString;)I @ 14
-Event: 180.757 Thread 0x00007f538c00a000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f537d832628 method=com.android.dx.ssa.LiteralOpUpgrader.tryReplacingWithConstant(Lcom/android/dx/ssa/NormalSsaInsn;)Z @ 62
-Event: 180.779 Thread 0x00007f538c00a000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f537d832628 method=com.android.dx.ssa.LiteralOpUpgrader.tryReplacingWithConstant(Lcom/android/dx/ssa/NormalSsaInsn;)Z @ 62
-Event: 181.446 Thread 0x00007f538c00a000 Uncommon trap: reason=null_check action=make_not_entrant pc=0x00007f537da58998 method=com.android.dx.cf.code.Ropper$CatchInfo.getSetup(Lcom/android/dx/rop/type/Type;)Lcom/android/dx/cf/code/Ropper$ExceptionHandlerSetup; @ 10
-Event: 182.021 Thread 0x00007f538c00a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f537d960d80 method=java.util.BitSet.nextClearBit(I)I @ 70
-Event: 182.024 Thread 0x00007f538c00a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f537d9e9034 method=java.util.BitSet.nextClearBit(I)I @ 70
-Event: 183.040 Thread 0x00007f538c00a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f537d926f48 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 109
-Event: 183.376 Thread 0x00007f538c00a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f537d79d64c method=com.android.dx.ssa.SCCP.simulateBranch(Lcom/android/dx/ssa/SsaInsn;)V @ 548
+Event: 174.348 Thread 0x00007f538c00a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f537d510960 method=com.android.dx.rop.code.RegisterSpecSet.<init>(I)V @ 2
+Event: 177.844 Thread 0x00007f538c00a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f537d85123c method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 109
+Event: 179.464 Thread 0x00007f538c00a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f537d6d994c method=com.android.dx.rop.code.LocalItem.compareHandlesNulls(Lcom/android/dx/rop/cst/CstString;Lcom/android/dx/rop/cst/CstString;)I @ 14
+Event: 180.757 Thread 0x00007f538c00a000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007f537d832628 method=com.android.dx.ssa.LiteralOpUpgrader.tryReplacingWithConstant(Lcom/android/dx/ssa/NormalSsaInsn;)Z @ 62
+Event: 180.779 Thread 0x00007f538c00a000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007f537d832628 method=com.android.dx.ssa.LiteralOpUpgrader.tryReplacingWithConstant(Lcom/android/dx/ssa/NormalSsaInsn;)Z @ 62
+Event: 181.446 Thread 0x00007f538c00a000 Uncommon trap: follow_up_reason=null_check action=make_not_entrant pc=0x00007f537da58998 method=com.android.dx.cf.code.Ropper$CatchInfo.getSetup(Lcom/android/dx/rop/type/Type;)Lcom/android/dx/cf/code/Ropper$ExceptionHandlerSetup; @ 10
+Event: 182.021 Thread 0x00007f538c00a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f537d960d80 method=java.util.BitSet.nextClearBit(I)I @ 70
+Event: 182.024 Thread 0x00007f538c00a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f537d9e9034 method=java.util.BitSet.nextClearBit(I)I @ 70
+Event: 183.040 Thread 0x00007f538c00a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f537d926f48 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 109
+Event: 183.376 Thread 0x00007f538c00a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f537d79d64c method=com.android.dx.ssa.SCCP.simulateBranch(Lcom/android/dx/ssa/SsaInsn;)V @ 548
 
 Internal exceptions (9 events):
 Event: 0.180 Thread 0x00007f538c00a000 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x00000000eab07c78) thrown at [/HUDSON3/workspace/8-2-build-linux-amd64/jdk8u102/7268/hotspot/src/sh

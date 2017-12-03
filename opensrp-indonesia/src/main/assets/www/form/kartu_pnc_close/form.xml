@@ -13,7 +13,7 @@
             lang="Bahasa">Alasan menutup PNC
         </span>
         <span class="question-label " data-itext-id="/penutupan_pnc_reviewed/pnc_close_reason:label"
-            lang="en">Reason for PNC's closure
+            lang="en">follow_up_reason for PNC's closure
         </span>
         <span class="required">*</span>
         <span class="or-hint active" data-itext-id="/penutupan_pnc_reviewed/pnc_close_reason:hint"
@@ -21,7 +21,7 @@
             yang tersedia
         </span>
         <span class="or-hint " data-itext-id="/penutupan_pnc_reviewed/pnc_close_reason:hint"
-            lang="en">Select one of reason
+            lang="en">Select one of follow_up_reason
             available
         </span>
         <select name="/penutupan_pnc_reviewed/pnc_close_reason"
@@ -64,25 +64,25 @@
             hari ini atau hari-hari sebelumnya
         </span>
         <span class="or-constraint-msg " data-itext-id="/penutupan_pnc_reviewed/death_date:jr:constraintMsg"
-            lang="en">Date of mother's
+            lang="en">follow_up_date of mother's
             death today or the days before
         </span>
         <span class="question-label active" data-itext-id="/penutupan_pnc_reviewed/death_date:label"
             lang="Bahasa">Tanggal kematian
         </span>
         <span class="question-label " data-itext-id="/penutupan_pnc_reviewed/death_date:label"
-            lang="en">Date of death
+            lang="en">follow_up_date of death
         </span>
         <span class="or-hint active" data-itext-id="/penutupan_pnc_reviewed/death_date:hint"
             lang="Bahasa">masukkan tanggal kematian
         </span>
         <span class="or-hint " data-itext-id="/penutupan_pnc_reviewed/death_date:hint" lang="en">
-            Enter the date of mother's death
+            Enter the follow_up_date of mother's death
         </span>
         <input name="/penutupan_pnc_reviewed/death_date" data-constraint=".&lt;= /penutupan_pnc_reviewed/today "
             data-relevant=" /penutupan_pnc_reviewed/pnc_close_reason  = 'Penyebab langsung' or  /penutupan_pnc_reviewed/pnc_close_reason  = 'Penyebab tidak langsung'"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question or-appearance-minimal  or-branch pre-init ">
         <span class="question-label active" data-itext-id="/penutupan_pnc_reviewed/maternal_death_cause:label"
@@ -158,7 +158,7 @@
         </span>
         <span class="or-hint " data-itext-id="/penutupan_pnc_reviewed/other_maternal_death_cause:hint"
             lang="en">Write other
-            reason, if available
+            follow_up_reason, if available
         </span>
         <input name="/penutupan_pnc_reviewed/other_maternal_death_cause" data-relevant=" /penutupan_pnc_reviewed/maternal_death_cause  = 'others'"
             data-type-xml="string"
@@ -281,8 +281,8 @@
                 data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/penutupan_pnc_reviewed/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/penutupan_pnc_reviewed/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/penutupan_pnc_reviewed/deviceid" data-preload="property" data-preload-params="deviceid"

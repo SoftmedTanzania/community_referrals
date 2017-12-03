@@ -46,7 +46,7 @@
             lang="Bahasa">Tanggal Taksiran Persalinan
         </span>
         <span class="question-label " data-itext-id="/rencana_persalinan_reviewed/tanggal:label"
-            lang="en">Date of estimated delivery
+            lang="en">follow_up_date of estimated delivery
         </span>
         <span class="required">*</span>
         <span class="or-hint active" data-itext-id="/rencana_persalinan_reviewed/tanggal:hint"
@@ -54,10 +54,10 @@
             persalinan
         </span>
         <span class="or-hint " data-itext-id="/rencana_persalinan_reviewed/tanggal:hint" lang="en">
-            Fill in the estimated date of delivery
+            Fill in the estimated follow_up_date of delivery
         </span>
-        <input name="/rencana_persalinan_reviewed/tanggal" data-type-xml="date" required="required"
-            type="date" />
+        <input name="/rencana_persalinan_reviewed/tanggal" data-type-xml="follow_up_date" required="required"
+            type="follow_up_date" />
     </label>
     <label class="question or-appearance-minimal ">
         <span class="question-label active" data-itext-id="/rencana_persalinan_reviewed/rencana_penolong_persalinan:label"
@@ -470,8 +470,8 @@
                 data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/rencana_persalinan_reviewed/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/rencana_persalinan_reviewed/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/rencana_persalinan_reviewed/deviceid" data-preload="property"

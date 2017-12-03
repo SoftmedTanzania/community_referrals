@@ -47,8 +47,8 @@
             bayi harus diisi dengan sebelum tanggal pendaftaran
         </span>
         <span class="or-constraint-msg " data-itext-id="/tambah_bayi_reviewed/tanggal_lahir_anak:jr:constraintMsg"
-            lang="en">Date of baby's
-            birth should be filled in with the date before registration date
+            lang="en">follow_up_date of baby's
+            birth should be filled in with the follow_up_date before registration follow_up_date
         </span>
         <span class="question-label active" data-itext-id="/tambah_bayi_reviewed/tanggal_lahir_anak:label"
             lang="Bahasa">Tanggal lahir
@@ -63,11 +63,11 @@
         </span>
         <span class="or-hint " data-itext-id="/tambah_bayi_reviewed/tanggal_lahir_anak:hint"
             lang="en">Fill in baby's birth of
-            date
+            follow_up_date
         </span>
-        <input name="/tambah_bayi_reviewed/tanggal_lahir_anak" data-type-xml="date"
+        <input name="/tambah_bayi_reviewed/tanggal_lahir_anak" data-type-xml="follow_up_date"
             required="required"
-            type="date" />
+            type="follow_up_date" />
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -128,7 +128,7 @@
                 </span>
                 <span class="or-hint active" data-itext-id="/tambah_bayi_reviewed/kepemilikan_buku_kia:hint"
                     lang="Bahasa">Diisi dengan
-                    status kepemilikan buku KIA
+                    referral_status kepemilikan buku KIA
                 </span>
                 <span class="or-hint " data-itext-id="/tambah_bayi_reviewed/kepemilikan_buku_kia:hint"
                     lang="en">Fill in
@@ -195,8 +195,8 @@
                 data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/tambah_bayi_reviewed/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/tambah_bayi_reviewed/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/tambah_bayi_reviewed/deviceid" data-preload="property" data-preload-params="deviceid"

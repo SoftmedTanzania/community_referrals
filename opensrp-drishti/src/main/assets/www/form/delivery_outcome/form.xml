@@ -5,19 +5,19 @@
 
 
     <label class="question non-select ">
-        <span lang="" class="question-label active">Delivery date? &#xCB9;&#xCC6;&#xCB0;&#xCBF;&#xC97;&#xCC6; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
+        <span lang="" class="question-label active">Delivery follow_up_date? &#xCB9;&#xCC6;&#xCB0;&#xCBF;&#xC97;&#xCC6; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
         <span class="required">*</span>
-        <input autocomplete="off" type="date" name="/PNC_Registration_EngKan/delivery_date" required="required"
-               data-constraint=".&lt;= /PNC_Registration_EngKan/today " data-type-xml="date"/>
+        <input autocomplete="off" type="follow_up_date" name="/PNC_Registration_EngKan/delivery_date" required="required"
+               data-constraint=".&lt;= /PNC_Registration_EngKan/today " data-type-xml="follow_up_date"/>
     </label>
     <label class="question non-select ">
-        <span lang="" class="question-label active">PNC registration date? &#xCAC;&#xCBE;&#xCA3;&#xC82;&#xCA4;&#xCBF;
+        <span lang="" class="question-label active">PNC registration follow_up_date? &#xCAC;&#xCBE;&#xCA3;&#xC82;&#xCA4;&#xCBF;
             &#xCA6;&#xCBE;&#xC96;&#xCB2;&#xCBE;&#xCA4;&#xCBF; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
         <span class="required">*</span>
-        <input autocomplete="off" type="date" name="/PNC_Registration_EngKan/delivery_reg_date" required="required"
+        <input autocomplete="off" type="follow_up_date" name="/PNC_Registration_EngKan/delivery_reg_date" required="required"
                data-constraint=".&lt;= /PNC_Registration_EngKan/today  and .&gt;=  /PNC_Registration_EngKan/delivery_date "
-               data-type-xml="date"/>
+               data-type-xml="follow_up_date"/>
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -926,8 +926,8 @@
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input autocomplete="off" type="hidden" name="/PNC_Registration_EngKan/today" data-preload="date"
-                   data-preload-params="today" data-type-xml="date"/>
+            <input autocomplete="off" type="hidden" name="/PNC_Registration_EngKan/today" data-preload="follow_up_date"
+                   data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">
@@ -979,7 +979,7 @@
         </label>
         <label class="calculation non-select ">
             <input autocomplete="off" type="hidden" name="/PNC_Registration_EngKan/live_birth_group/child/num_preg_days"
-                   data-calculate="int(date( /PNC_Registration_EngKan/delivery_date ) - date( /PNC_Registration_EngKan/case_lmp ))"
+                   data-calculate="int(follow_up_date( /PNC_Registration_EngKan/delivery_date ) - follow_up_date( /PNC_Registration_EngKan/case_lmp ))"
                    data-type-xml="string"/>
         </label>
         <label class="calculation non-select ">

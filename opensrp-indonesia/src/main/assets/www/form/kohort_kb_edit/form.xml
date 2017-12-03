@@ -13,16 +13,16 @@
             lang="Bahasa">Tanggal kunjungan
         </span>
         <span class="question-label " data-itext-id="/tambah_kb_1/tanggal_kunjungan:label"
-            lang="en">Visit date
+            lang="en">Visit follow_up_date
         </span>
         <span class="or-hint active" data-itext-id="/tambah_kb_1/tanggal_kunjungan:hint"
             lang="Bahasa">Diisi dengan tanggal kunjungan/
             pelayanan
         </span>
         <span class="or-hint " data-itext-id="/tambah_kb_1/tanggal_kunjungan:hint" lang="en">Fill in
-            date of visit/care service
+            follow_up_date of visit/care referral_service_id
         </span>
-        <input name="/tambah_kb_1/tanggal_kunjungan" data-type-xml="date" type="date" />
+        <input name="/tambah_kb_1/tanggal_kunjungan" data-type-xml="follow_up_date" type="follow_up_date" />
     </label>
     <label class="note non-select ">
         <span class="question-label active"
@@ -79,7 +79,7 @@
             Menunjukkan tekanan darah (Sistolik) Ibu pada saat kunjungan (mmHg)
         </span>
         <span class="or-hint " data-itext-id="/tambah_kb_1/td_sistolik:hint" lang="en">Indicating
-            blood pressure (systolic) on mother's visit for care service (mmHg)
+            blood pressure (systolic) on mother's visit for care referral_service_id (mmHg)
         </span>
         <input name="/tambah_kb_1/td_sistolik" data-constraint=".&gt;0 and .&lt;1000"
             data-type-xml="int" type="number" />
@@ -104,7 +104,7 @@
             Menunjukkan tekanan darah (Diastolik) Ibu pada saat kunjungan (mmHg)
         </span>
         <span class="or-hint " data-itext-id="/tambah_kb_1/td_diastolik:hint" lang="en">Indicating
-            blood pressure (dyastolic) on mother's visit for care service (mmHg)
+            blood pressure (dyastolic) on mother's visit for care referral_service_id (mmHg)
         </span>
         <input name="/tambah_kb_1/td_diastolik" data-constraint=".&gt;0 and .&lt;1000"
             data-type-xml="int" type="number" />
@@ -468,8 +468,8 @@
                 data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/tambah_kb_1/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/tambah_kb_1/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/tambah_kb_1/deviceid" data-preload="property"

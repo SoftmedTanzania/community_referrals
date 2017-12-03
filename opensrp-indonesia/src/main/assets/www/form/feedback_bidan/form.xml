@@ -15,7 +15,7 @@
    </label>
    <label class="question non-select ">
       <span lang="" class="question-label active">Masukkan tanggal coaching:</span>
-      <input type="date" name="/data_entry_feedback_form/coaching_date" data-type-xml="date" />
+      <input type="follow_up_date" name="/data_entry_feedback_form/coaching_date" data-type-xml="follow_up_date" />
    </label>
 
    <fieldset class="question ">
@@ -723,7 +723,7 @@
          <input type="hidden" name="/data_entry_feedback_form/start" data-preload="timestamp" data-preload-params="start" data-type-xml="dateTime" />
       </label>
       <label class="calculation non-select ">
-         <input type="hidden" name="/data_entry_feedback_form/today" data-preload="date" data-preload-params="today" data-type-xml="date" />
+         <input type="hidden" name="/data_entry_feedback_form/today" data-preload="follow_up_date" data-preload-params="today" data-type-xml="follow_up_date" />
       </label>
       <label class="calculation non-select ">
          <input type="hidden" name="/data_entry_feedback_form/deviceid" data-preload="property" data-preload-params="deviceid" data-type-xml="string" />

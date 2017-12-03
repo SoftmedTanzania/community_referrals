@@ -5,7 +5,7 @@
    <label class="question non-select ">
       <span lang="" class="question-label active">Tanggal pendaftaran</span>
       <span lang="" class="or-hint active">Tanggal melakukan pendaftaran bayi</span>
-      <input type="date" name="/register_baby_only/tanggal_pendaftaran" data-type-xml="date" />
+      <input type="follow_up_date" name="/register_baby_only/tanggal_pendaftaran" data-type-xml="follow_up_date" />
    </label>
    <label class="question non-select ">
       <span lang="" class="question-label active">No. bayi</span>
@@ -23,7 +23,7 @@
       <span lang="" class="question-label active">Tanggal lahir</span>
       <span class="required">*</span>
       <span lang="" class="or-hint active">Diisi dengan tanggal lahir bayi</span>
-      <input type="date" name="/register_baby_only/tanggal_lahir_anak" data-constraint=".&lt;=  /register_baby_only/tanggal_pendaftaran " required="required" data-type-xml="date" />
+      <input type="follow_up_date" name="/register_baby_only/tanggal_lahir_anak" data-constraint=".&lt;=  /register_baby_only/tanggal_pendaftaran " required="required" data-type-xml="follow_up_date" />
    </label>
    <fieldset class="question ">
       <fieldset>
@@ -47,7 +47,7 @@
       <fieldset>
          <legend>
             <span lang="" class="question-label active">Kepemilikan buku KIA</span>
-            <span lang="" class="or-hint active">Diisi dengan status kepemilikan buku KIA</span>
+            <span lang="" class="or-hint active">Diisi dengan referral_status kepemilikan buku KIA</span>
          </legend>
          <div class="option-wrapper">
             <label class="">
@@ -72,7 +72,7 @@
          <input type="hidden" name="/register_baby_only/start" data-preload="timestamp" data-preload-params="start" data-type-xml="dateTime" />
       </label>
       <label class="calculation non-select ">
-         <input type="hidden" name="/register_baby_only/today" data-preload="date" data-preload-params="today" data-type-xml="date" />
+         <input type="hidden" name="/register_baby_only/today" data-preload="follow_up_date" data-preload-params="today" data-type-xml="follow_up_date" />
       </label>
       <label class="calculation non-select ">
          <input type="hidden" name="/register_baby_only/deviceid" data-preload="property" data-preload-params="deviceid" data-type-xml="string" />
@@ -89,7 +89,7 @@
    </fieldset>
    <fieldset id="or-calculated-items" style="display:none;">
    <label class="calculation non-select ">
-         <input autocomplete="off" type="hidden" name="/register_baby_only/reg_date" data-calculate=" /register_baby_only/today " data-type-xml="date" />
+         <input autocomplete="off" type="hidden" name="/register_baby_only/reg_date" data-calculate=" /register_baby_only/today " data-type-xml="follow_up_date" />
       </label>
       <label class="calculation non-select ">
          <input type="hidden" name="/register_baby_only/meta/instanceID" data-calculate="concat('uuid:', uuid())" data-type-xml="string" />

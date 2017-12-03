@@ -5,14 +5,14 @@
 
 
     <label class="question non-select ">
-        <span lang="" class="question-label active">Date of FP problem? &#xC95;&#xCC1;&#xC9F;&#xCC1;&#xC82;&#xCAC;
+        <span lang="" class="question-label active">follow_up_date of FP problem? &#xC95;&#xCC1;&#xC9F;&#xCC1;&#xC82;&#xCAC;
             &#xCAF;&#xCCB;&#xC9C;&#xCA8;&#xCC6;&#xCAF;&#xCBF;&#xC82;&#xCA6;&#xCBE;&#xCA6; &#xCB8;&#xCAE;&#xCB8;&#xCCD;&#xCAF;&#xCC6;&#xCAF;
             &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
         <span class="required">*</span>
-        <input autocomplete="off" type="date" name="/Family_Planning_Complications_EngKan/complication_date"
+        <input autocomplete="off" type="follow_up_date" name="/Family_Planning_Complications_EngKan/complication_date"
                required="required" data-constraint=".&lt;= /Family_Planning_Complications_EngKan/today "
-               data-type-xml="date"/>
+               data-type-xml="follow_up_date"/>
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
@@ -355,7 +355,7 @@
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
             <input autocomplete="off" type="hidden" name="/Family_Planning_Complications_EngKan/today"
-                   data-preload="date" data-preload-params="today" data-type-xml="date"/>
+                   data-preload="follow_up_date" data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">

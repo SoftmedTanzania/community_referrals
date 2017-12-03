@@ -2,7 +2,7 @@
 <resources>
 
     <string name="userNameEditText">Masukan user name</string>
-    <string name="passwordEditText">Masukan kata kunci</string>
+    <string name="passwordEditText">Masukan ward kunci</string>
     <string name="login_text">Log Masuk</string>
     <string name="image_description">logo</string>
     <string name="spacer">spacer</string>
@@ -38,7 +38,7 @@
     <string name="header_gplsa">GPLSA</string>
     <string name="header_fp">Metode FP</string>
     <string name="header_children">Anak</string>
-    <string name="header_status">Status</string>
+    <string name="header_status">referral_status</string>
     <string name="header_edit"></string>
 
     <string name="header_anak">Anak</string>
@@ -47,7 +47,7 @@
     <string name="header_edd">HTP</string>
     <string name="header_kunjungan">Kunjungan</string>
     <string name="header_no_ibu">No Ibu</string>
-    <string name="header_status_b">Status</string>
+    <string name="header_status_b">referral_status</string>
     <string name="header_obsetri">Obsetri</string>
 
     <string name="kartu_ibu_selection">Kartu Ibu</string>
@@ -239,7 +239,7 @@
     <string name="service_type_empty"/>
     <string name="sick_visit">Sick Visit</string>
     <string name="illness_report"><b>Illness Report:</b> %s</string>
-    <string name="illness_date">Date:</string>
+    <string name="illness_date">follow_up_date:</string>
     <string name="str_bcg">BCG</string>
     <string name="str_bcg_on">Pada</string>
     <string name="hep_b_birth">Hep B</string>
@@ -257,7 +257,7 @@
     <string name="service_type_dpt_booster_1_short">DPT B1</string>
     <string name="service_type_dpt_booster_2_short">DPT B2</string>
     <string name="pentavalent_short">Pentav</string>
-    <string name="header_birth_status">Status</string>
+    <string name="header_birth_status">referral_status</string>
 
     <string name="fp_register_title_in_short">FP</string>
     <string name="pnc_register_title_in_short">PNC</string>
@@ -400,8 +400,8 @@
 
     <string name="child_details_mothers_name_label">Nama Ibu:&#160;</string>
     <string name="child_details_fathers_name_label">Nama Ayah:&#160;</string>
-    <string name="service_anc">Status Pelayanan: ANC</string>
-    <string name="service_pnc">Status Pelayanan: PNC</string>
+    <string name="service_anc">referral_status Pelayanan: ANC</string>
+    <string name="service_pnc">referral_status Pelayanan: PNC</string>
     <string name="visit_number">Kunjungan Ke:&#160;</string>
     <string name="last_visit_date">Tgl Kunj:&#160;</string>
     <string name="name">NAMA: &#160;</string>
@@ -469,13 +469,13 @@
     <string name="ganti_cara">Keterangan Ganti Cara</string>
     <string name="elco_details_summary">Ringkasan</string>
     <string name="usia">Usia Klinis:</string>
-    <string name="header_klinis">Status Klinis</string>
+    <string name="header_klinis">referral_status Klinis</string>
     <string name="height">Tinggi:</string>
     <string name="month">Bln</string>
-    <string name="service_fp">Status Pelayanan: KB </string>
+    <string name="service_fp">referral_status Pelayanan: KB </string>
     <string name="str_pnc_delivery">Tgl Persalinan:</string>
     <string name="edd_passed">HTP sudah lewat</string>
     <string name="fe">FE:</string>
 
-    <string name="Nutrition_status">Status Gizi:</string>
+    <string name="Nutrition_status">referral_status Gizi:</string>
 </resources>

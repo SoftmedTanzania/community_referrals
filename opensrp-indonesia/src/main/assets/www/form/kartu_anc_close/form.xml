@@ -13,7 +13,7 @@
             lang="Bahasa">Alasan penutupan ANC?
         </span>
         <span class="question-label " data-itext-id="/penutupan_anc_reviewed/close_reason:label"
-            lang="en">Reason for ANC closure?
+            lang="en">follow_up_reason for ANC closure?
         </span>
         <span class="required">*</span>
         <span class="or-hint active" data-itext-id="/penutupan_anc_reviewed/close_reason:hint"
@@ -70,7 +70,7 @@
             </span>
             <span class="or-constraint-msg " data-itext-id="/penutupan_anc_reviewed/spontaneous_abortion_group/date_spontaneous:jr:constraintMsg"
                 lang="en">
-                Should be filled in with the date before today
+                Should be filled in with the follow_up_date before today
             </span>
             <span class="question-label active" data-itext-id="/penutupan_anc_reviewed/spontaneous_abortion_group/date_spontaneous:label"
                 lang="Bahasa">
@@ -78,7 +78,7 @@
             </span>
             <span class="question-label " data-itext-id="/penutupan_anc_reviewed/spontaneous_abortion_group/date_spontaneous:label"
                 lang="en">
-                Date of miscarriage?
+                follow_up_date of miscarriage?
             </span>
             <span class="or-hint active" data-itext-id="/penutupan_anc_reviewed/spontaneous_abortion_group/date_spontaneous:hint"
                 lang="Bahasa">
@@ -86,11 +86,11 @@
             </span>
             <span class="or-hint " data-itext-id="/penutupan_anc_reviewed/spontaneous_abortion_group/date_spontaneous:hint"
                 lang="en">
-                Enter date when mother had miscarriage
+                Enter follow_up_date when mother had miscarriage
             </span>
             <input name="/penutupan_anc_reviewed/spontaneous_abortion_group/date_spontaneous"
                 data-constraint=".&lt;= /penutupan_anc_reviewed/today "
-                data-type-xml="date" type="date" />
+                data-type-xml="follow_up_date" type="follow_up_date" />
         </label>
         <label class="question or-appearance-minimal ">
             <span class="question-label active" data-itext-id="/penutupan_anc_reviewed/spontaneous_abortion_group/spont_abortion_cause:label"
@@ -153,7 +153,7 @@
             </span>
             <span class="or-hint " data-itext-id="/penutupan_anc_reviewed/spontaneous_abortion_group/spont_abortion_cause_other:hint"
                 lang="en">
-                Write other reason, if available
+                Write other follow_up_reason, if available
             </span>
             <input name="/penutupan_anc_reviewed/spontaneous_abortion_group/spont_abortion_cause_other"
                 data-relevant=" /penutupan_anc_reviewed/spontaneous_abortion_group/spont_abortion_cause  = 'others'"
@@ -394,7 +394,7 @@
             </span>
             <span class="or-constraint-msg " data-itext-id="/penutupan_anc_reviewed/induced_abortion_group/date_induced:jr:constraintMsg"
                 lang="en">
-                Date of mother's death today or the days before
+                follow_up_date of mother's death today or the days before
             </span>
             <span class="question-label active" data-itext-id="/penutupan_anc_reviewed/induced_abortion_group/date_induced:label"
                 lang="Bahasa">
@@ -402,7 +402,7 @@
             </span>
             <span class="question-label " data-itext-id="/penutupan_anc_reviewed/induced_abortion_group/date_induced:label"
                 lang="en">
-                Date of abortion
+                follow_up_date of abortion
             </span>
             <span class="or-hint active" data-itext-id="/penutupan_anc_reviewed/induced_abortion_group/date_induced:hint"
                 lang="Bahasa">
@@ -410,10 +410,10 @@
             </span>
             <span class="or-hint " data-itext-id="/penutupan_anc_reviewed/induced_abortion_group/date_induced:hint"
                 lang="en">
-                Fill in the date when abortion happened
+                Fill in the follow_up_date when abortion happened
             </span>
             <input name="/penutupan_anc_reviewed/induced_abortion_group/date_induced" data-constraint=".&lt;= /penutupan_anc_reviewed/today "
-                data-type-xml="date" type="date" />
+                data-type-xml="follow_up_date" type="follow_up_date" />
         </label>
         <fieldset class="question or-branch pre-init ">
             <fieldset>
@@ -497,7 +497,7 @@
             </span>
             <span class="or-constraint-msg " data-itext-id="/penutupan_anc_reviewed/maternal_death_group/date_maternal_death:jr:constraintMsg"
                 lang="en">
-                Date of mother's death today or the days before
+                follow_up_date of mother's death today or the days before
             </span>
             <span class="question-label active" data-itext-id="/penutupan_anc_reviewed/maternal_death_group/date_maternal_death:label"
                 lang="Bahasa">
@@ -505,7 +505,7 @@
             </span>
             <span class="question-label " data-itext-id="/penutupan_anc_reviewed/maternal_death_group/date_maternal_death:label"
                 lang="en">
-                Date of maternal death?
+                follow_up_date of maternal death?
             </span>
             <span class="required">*</span>
             <span class="or-hint active" data-itext-id="/penutupan_anc_reviewed/maternal_death_group/date_maternal_death:hint"
@@ -514,12 +514,12 @@
             </span>
             <span class="or-hint " data-itext-id="/penutupan_anc_reviewed/maternal_death_group/date_maternal_death:hint"
                 lang="en">
-                Enter date of maternal death
+                Enter follow_up_date of maternal death
             </span>
             <input name="/penutupan_anc_reviewed/maternal_death_group/date_maternal_death"
                 data-constraint=".&lt;= /penutupan_anc_reviewed/today "
-                data-type-xml="date" required="required"
-                type="date" />
+                data-type-xml="follow_up_date" required="required"
+                type="follow_up_date" />
         </label>
         <label class="question or-appearance-minimal  or-branch pre-init ">
             <span class="question-label active" data-itext-id="/penutupan_anc_reviewed/maternal_death_group/maternal_death_cause:label"
@@ -602,7 +602,7 @@
             </span>
             <span class="or-hint " data-itext-id="/penutupan_anc_reviewed/maternal_death_group/other_maternal_death_cause:hint"
                 lang="en">
-                Write other reason, if available
+                Write other follow_up_reason, if available
             </span>
             <input name="/penutupan_anc_reviewed/maternal_death_group/other_maternal_death_cause"
                 data-relevant=" /penutupan_anc_reviewed/maternal_death_group/maternal_death_cause  = 'others'"
@@ -770,8 +770,8 @@
                 data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/penutupan_anc_reviewed/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/penutupan_anc_reviewed/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/penutupan_anc_reviewed/deviceid" data-preload="property" data-preload-params="deviceid"
@@ -811,13 +811,13 @@
         </label>
         <label class="calculation non-select ">
             <input name="/penutupan_anc_reviewed/spontaneous_abortion_group/threemonths_from_spont_abortion_date"
-                data-calculate="date( /penutupan_anc_reviewed/spontaneous_abortion_group/date_spontaneous  + 90)"
+                data-calculate="follow_up_date( /penutupan_anc_reviewed/spontaneous_abortion_group/date_spontaneous  + 90)"
                 data-type-xml="string"
                 type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/penutupan_anc_reviewed/spontaneous_abortion_group/threemonths_from_spont_abortion_date_formatted"
-                data-calculate="format-date( /penutupan_anc_reviewed/spontaneous_abortion_group/threemonths_from_spont_abortion_date , '%Y-%n-%e')"
+                data-calculate="format-follow_up_date( /penutupan_anc_reviewed/spontaneous_abortion_group/threemonths_from_spont_abortion_date , '%Y-%n-%e')"
                 data-type-xml="string"
                 type="hidden" />
         </label>

@@ -7,7 +7,7 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span lang="" class="question-label active">Reason for EC close? &#xC85;&#xCB0;&#xCCD;&#xCB9; &#xCA6;&#xC82;&#xCAA;&#xCA4;&#xCBF;&#xCAF;&#xCA8;&#xCCD;&#xCA8;&#xCC1;
+                <span lang="" class="question-label active">follow_up_reason for EC close? &#xC85;&#xCB0;&#xCCD;&#xCB9; &#xCA6;&#xC82;&#xCAA;&#xCA4;&#xCBF;&#xCAF;&#xCA8;&#xCCD;&#xCA8;&#xCC1;
                     &#xCAE;&#xCC1;&#xC9A;&#xCCD;&#xC9A;&#xCB2;&#xCC1; &#xC95;&#xCBE;&#xCB0;&#xCA3;&#xCB5;&#xCC7;&#xCA8;&#xCC1;?
                 </span>
                 <span class="required">*</span>
@@ -91,13 +91,13 @@
         </fieldset>
     </fieldset>
     <label class="question or-branch pre-init non-select ">
-        <span lang="" class="question-label active">Date of sterilization death? &#xCB8;&#xC82;&#xCA4;&#xCBE;&#xCA8;&#xCB9;&#xCB0;&#xCA3;
+        <span lang="" class="question-label active">follow_up_date of sterilization death? &#xCB8;&#xC82;&#xCA4;&#xCBE;&#xCA8;&#xCB9;&#xCB0;&#xCA3;
             &#xCB6;&#xCB8;&#xCCD;&#xCA4;&#xCCD;&#xCB0; &#xC9A;&#xCBF;&#xC95;&#xCBF;&#xCA4;&#xCCD;&#xCB8;&#xCC6;&#xCAF;
             &#xCB8;&#xCBE;&#xCB5;&#xCC1; &#xCB8;&#xC82;&#xCAD;&#xCB5;&#xCBF;&#xCB8;&#xCBF;&#xCA6; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
-        <input autocomplete="off" type="date" name="/EC_Close_EngKan/sterilization_death_date"
+        <input autocomplete="off" type="follow_up_date" name="/EC_Close_EngKan/sterilization_death_date"
                data-constraint=".&lt;= /EC_Close_EngKan/today "
-               data-relevant=" /EC_Close_EngKan/sterilization_death  = 'yes'" data-type-xml="date"/>
+               data-relevant=" /EC_Close_EngKan/sterilization_death  = 'yes'" data-type-xml="follow_up_date"/>
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
@@ -132,12 +132,12 @@
         </fieldset>
     </fieldset>
     <label class="question or-branch pre-init non-select ">
-        <span lang="" class="question-label active">Date of maternal death? &#xCA4;&#xCBE;&#xCAF;&#xCBF;&#xCAF; &#xCAE;&#xCB0;&#xCA3;
+        <span lang="" class="question-label active">follow_up_date of maternal death? &#xCA4;&#xCBE;&#xCAF;&#xCBF;&#xCAF; &#xCAE;&#xCB0;&#xCA3;
             &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
-        <input autocomplete="off" type="date" name="/EC_Close_EngKan/maternal_death_date"
+        <input autocomplete="off" type="follow_up_date" name="/EC_Close_EngKan/maternal_death_date"
                data-constraint=".&lt;= /EC_Close_EngKan/today "
-               data-relevant=" /EC_Close_EngKan/maternal_death  = 'yes'" data-type-xml="date"/>
+               data-relevant=" /EC_Close_EngKan/maternal_death  = 'yes'" data-type-xml="follow_up_date"/>
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
@@ -225,8 +225,8 @@
 
     <fieldset card="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input autocomplete="off" type="hidden" name="/EC_Close_EngKan/today" data-preload="date"
-                   data-preload-params="today" data-type-xml="date"/>
+            <input autocomplete="off" type="hidden" name="/EC_Close_EngKan/today" data-preload="follow_up_date"
+                   data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset card="or-calculated-items" style="display:none;">

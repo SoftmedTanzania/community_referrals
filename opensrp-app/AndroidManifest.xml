@@ -26,9 +26,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true">
-        <service
-            android:name=".service.ImageUploadSyncService"
-            android:enabled="true"></service>
+        <referral_service_id
+            android:name=".referral_service_id.ImageUploadSyncService"
+            android:enabled="true"></referral_service_id>
 
         <activity
             android:name=".view.activity.HomeActivity"

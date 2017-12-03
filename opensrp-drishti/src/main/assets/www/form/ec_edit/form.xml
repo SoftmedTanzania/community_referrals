@@ -373,19 +373,19 @@
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input autocomplete="off" type="hidden" name="/EC_Edit_EngKan/today" data-preload="date"
-                   data-preload-params="today" data-type-xml="date"/>
+            <input autocomplete="off" type="hidden" name="/EC_Edit_EngKan/today" data-preload="follow_up_date"
+                   data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">
         <label class="calculation non-select ">
             <input autocomplete="off" type="hidden" name="/EC_Edit_EngKan/ec_edit_group/woman_date_of_birth"
-                   data-calculate="format-date(date( /EC_Edit_EngKan/today -( /EC_Edit_EngKan/ec_edit_group/woman_age *365.25)), '%Y-%n-%e')"
+                   data-calculate="format-follow_up_date(follow_up_date( /EC_Edit_EngKan/today -( /EC_Edit_EngKan/ec_edit_group/woman_age *365.25)), '%Y-%n-%e')"
                    data-type-xml="string"/>
         </label>
         <label class="calculation non-select ">
             <input autocomplete="off" type="hidden" name="/EC_Edit_EngKan/ec_edit_group/husband_date_of_birth"
-                   data-calculate="format-date(date( /EC_Edit_EngKan/today -( /EC_Edit_EngKan/ec_edit_group/husband_age *365.25)), '%Y-%n-%e')"
+                   data-calculate="format-follow_up_date(follow_up_date( /EC_Edit_EngKan/today -( /EC_Edit_EngKan/ec_edit_group/husband_age *365.25)), '%Y-%n-%e')"
                    data-type-xml="string"/>
         </label>
         <label class="calculation non-select ">

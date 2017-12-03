@@ -33,14 +33,14 @@
     <section class="or-group-data or-branch pre-init " name="/Child_Sick_Visit_EngKan/child_sickness_management_group"
              data-relevant=" /Child_Sick_Visit_EngKan/sick_visit_option  = 'child_sickness_management'">
         <label class="question non-select ">
-            <span lang="" class="question-label active">Date of sickness visit? &#xC85;&#xCA8;&#xCBE;&#xCB0;&#xCCB;&#xC97;&#xCCD;&#xCAF;
+            <span lang="" class="question-label active">follow_up_date of sickness visit? &#xC85;&#xCA8;&#xCBE;&#xCB0;&#xCCB;&#xC97;&#xCCD;&#xCAF;
                 &#xCAD;&#xCC7;&#xC9F;&#xCBF;&#xCAF; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
             <span class="required">*</span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Sick_Visit_EngKan/child_sickness_management_group/sick_visit_date" required="required"
                    data-constraint=".&gt;=  /Child_Sick_Visit_EngKan/child_sickness_management_group/case_child_birth_date  and .&lt;= /Child_Sick_Visit_EngKan/today "
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <fieldset class="question ">
             <fieldset>
@@ -437,15 +437,15 @@
                    data-type-xml="string"/>
         </label>
         <label class="question non-select ">
-            <span lang="" class="question-label active">Reporting date? &#xCB5;&#xCB0;&#xCA6;&#xCBF; &#xCAE;&#xCBE;&#xCA1;&#xCBF;&#xCA6;
+            <span lang="" class="question-label active">Reporting follow_up_date? &#xCB5;&#xCB0;&#xCA6;&#xCBF; &#xCAE;&#xCBE;&#xCA1;&#xCBF;&#xCA6;
                 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
             <span class="required">*</span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Sick_Visit_EngKan/report_child_disease_group/report_child_disease_date"
                    required="required"
                    data-constraint=".&gt;=  /Child_Sick_Visit_EngKan/child_sickness_management_group/case_child_birth_date  and .&lt;= /Child_Sick_Visit_EngKan/today "
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <fieldset class="question ">
             <fieldset>
@@ -521,8 +521,8 @@
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input autocomplete="off" type="hidden" name="/Child_Sick_Visit_EngKan/today" data-preload="date"
-                   data-preload-params="today" data-type-xml="date"/>
+            <input autocomplete="off" type="hidden" name="/Child_Sick_Visit_EngKan/today" data-preload="follow_up_date"
+                   data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">

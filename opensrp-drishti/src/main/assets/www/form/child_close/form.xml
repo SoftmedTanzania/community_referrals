@@ -7,7 +7,7 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span lang="" class="question-label active">Reason for closing? &#xCAE;&#xCC1;&#xC9A;&#xCCD;&#xC9A;&#xCC1;&#xCB5;&#xCBF;&#xC95;&#xCC6;&#xC97;&#xCC6;
+                <span lang="" class="question-label active">follow_up_reason for closing? &#xCAE;&#xCC1;&#xC9A;&#xCCD;&#xC9A;&#xCC1;&#xCB5;&#xCBF;&#xC95;&#xCC6;&#xC97;&#xCC6;
                     &#xC95;&#xCBE;&#xCB0;&#xCA3;?
                 </span>
                 <span class="required">*</span>
@@ -200,12 +200,12 @@
                    data-type-xml="string"/>
         </label>
         <label class="question non-select ">
-            <span lang="" class="question-label active">Date of child's death? &#xCAE;&#xC97;&#xCC1; &#xCAE;&#xCB0;&#xCA3;
+            <span lang="" class="question-label active">follow_up_date of child's death? &#xCAE;&#xC97;&#xCC1; &#xCAE;&#xCB0;&#xCA3;
                 &#xCB9;&#xCCA;&#xC82;&#xCA6;&#xCBF;&#xCA6; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
             <span class="required">*</span>
-            <input autocomplete="off" type="date" name="/Child_Close_EngKan/death_child_group/child_death_date"
-                   required="required" data-constraint=".&lt;= /Child_Close_EngKan/today " data-type-xml="date"/>
+            <input autocomplete="off" type="follow_up_date" name="/Child_Close_EngKan/death_child_group/child_death_date"
+                   required="required" data-constraint=".&lt;= /Child_Close_EngKan/today " data-type-xml="follow_up_date"/>
         </label>
     </section>
     <!--end of group -->
@@ -230,8 +230,8 @@
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input autocomplete="off" type="hidden" name="/Child_Close_EngKan/today" data-preload="date"
-                   data-preload-params="today" data-type-xml="date"/>
+            <input autocomplete="off" type="hidden" name="/Child_Close_EngKan/today" data-preload="follow_up_date"
+                   data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">

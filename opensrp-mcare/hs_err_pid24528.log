@@ -215,16 +215,16 @@ Event: 102.738 GC heap before
   class space    used 581K, capacity 616K, committed 640K, reserved 1048576K
 
 Deoptimization events (10 events):
-Event: 99.780 Thread 0x00007f106400a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f10551fe924 method=com.android.dx.ssa.SsaMethod.getExitBlock()Lcom/android/dx/ssa/SsaBasicBlock; @ 4
-Event: 100.262 Thread 0x00007f106400a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f10551d1ee8 method=com.android.dx.ssa.LocalVariableExtractor.doit()Lcom/android/dx/ssa/LocalVariableInfo; @ 7
-Event: 100.262 Thread 0x00007f106400a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f10551c8aa4 method=java.util.ArrayList.<init>(I)V @ 5
-Event: 100.262 Thread 0x00007f106400a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f105520453c method=com.android.dx.rop.code.RegisterSpecSet.<init>(I)V @ 2
-Event: 100.262 Thread 0x00007f106400a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f10554c1d9c method=com.android.dx.rop.code.RegisterSpecSet.<init>(I)V @ 2
-Event: 101.208 Thread 0x00007f106400a000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f1055a3aa64 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 891
-Event: 101.208 Thread 0x00007f106400a000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f1055a3aa64 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 891
-Event: 101.230 Thread 0x00007f106400a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f10558e37f8 method=com.android.dx.ssa.back.IdenticalBlockCombiner.replaceSucc(Lcom/android/dx/rop/code/BasicBlock;II)V @ 30
-Event: 101.276 Thread 0x00007f106400a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f10551f68c4 method=java.util.ArrayList.<init>(I)V @ 5
-Event: 101.284 Thread 0x00007f106400a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f1055315758 method=com.android.dx.dex.code.OutputFinisher.hasLocalInfo(Lcom/android/dx/rop/code/RegisterSpec;)Z @ 1
+Event: 99.780 Thread 0x00007f106400a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f10551fe924 method=com.android.dx.ssa.SsaMethod.getExitBlock()Lcom/android/dx/ssa/SsaBasicBlock; @ 4
+Event: 100.262 Thread 0x00007f106400a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f10551d1ee8 method=com.android.dx.ssa.LocalVariableExtractor.doit()Lcom/android/dx/ssa/LocalVariableInfo; @ 7
+Event: 100.262 Thread 0x00007f106400a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f10551c8aa4 method=java.util.ArrayList.<init>(I)V @ 5
+Event: 100.262 Thread 0x00007f106400a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f105520453c method=com.android.dx.rop.code.RegisterSpecSet.<init>(I)V @ 2
+Event: 100.262 Thread 0x00007f106400a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f10554c1d9c method=com.android.dx.rop.code.RegisterSpecSet.<init>(I)V @ 2
+Event: 101.208 Thread 0x00007f106400a000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007f1055a3aa64 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 891
+Event: 101.208 Thread 0x00007f106400a000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007f1055a3aa64 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 891
+Event: 101.230 Thread 0x00007f106400a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f10558e37f8 method=com.android.dx.ssa.back.IdenticalBlockCombiner.replaceSucc(Lcom/android/dx/rop/code/BasicBlock;II)V @ 30
+Event: 101.276 Thread 0x00007f106400a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f10551f68c4 method=java.util.ArrayList.<init>(I)V @ 5
+Event: 101.284 Thread 0x00007f106400a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f1055315758 method=com.android.dx.dex.code.OutputFinisher.hasLocalInfo(Lcom/android/dx/rop/code/RegisterSpec;)Z @ 1
 
 Internal exceptions (9 events):
 Event: 0.077 Thread 0x00007f106400a000 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x00000000eab07c78) thrown at [/HUDSON3/workspace/8-2-build-linux-amd64/jdk8u102/7268/hotspot/src/sh

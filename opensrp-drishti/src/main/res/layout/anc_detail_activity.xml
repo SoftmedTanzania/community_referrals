@@ -8,7 +8,7 @@
     android:fitsSystemWindows="false"
     android:orientation="vertical"
     android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus"
-    tools:context="com.softmed.uzazisalama.AncDetailActivity">
+    tools:context=".AncDetailActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"

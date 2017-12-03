@@ -5,19 +5,19 @@
 
 
     <label class="question non-select ">
-        <span lang="" class="question-label active">Registration date? &#xCA6;&#xCBE;&#xC96;&#xCB2;&#xCBE;&#xCA6;
+        <span lang="" class="question-label active">Registration follow_up_date? &#xCA6;&#xCBE;&#xC96;&#xCB2;&#xCBE;&#xCA6;
             &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
         <span class="required">*</span>
-        <input autocomplete="off" type="date" name="/Child_Registration_EC_EngKan/child_reg_date" required="required"
-               data-constraint=".&lt;= /Child_Registration_EC_EngKan/today " data-type-xml="date"/>
+        <input autocomplete="off" type="follow_up_date" name="/Child_Registration_EC_EngKan/child_reg_date" required="required"
+               data-constraint=".&lt;= /Child_Registration_EC_EngKan/today " data-type-xml="follow_up_date"/>
     </label>
     <label class="question non-select ">
-        <span lang="" class="question-label active">Child birth date? &#xC9C;&#xCA8;&#xCA8; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
+        <span lang="" class="question-label active">Child birth follow_up_date? &#xC9C;&#xCA8;&#xCA8; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
         <span class="required">*</span>
-        <input autocomplete="off" type="date" name="/Child_Registration_EC_EngKan/child_birth_date" required="required"
+        <input autocomplete="off" type="follow_up_date" name="/Child_Registration_EC_EngKan/child_birth_date" required="required"
                data-constraint=".&gt; ( /Child_Registration_EC_EngKan/today  - 2191.5) and .&lt;= /Child_Registration_EC_EngKan/today  and .&lt;= /Child_Registration_EC_EngKan/child_reg_date "
-               data-type-xml="date"/>
+               data-type-xml="follow_up_date"/>
     </label>
     <label class="note non-select ">
         <span lang="" class="question-label active">Child age, &#xCAE;&#xC97;&#xCC1;&#xCB5;&#xCBF;&#xCA8; &#xCB5;&#xCAF;&#xCB8;&#xCCD;&#xCB8;&#xCC1;:
@@ -146,158 +146,158 @@
              name="/Child_Registration_EC_EngKan/child_immunization_history_group"
              data-relevant=" /Child_Registration_EC_EngKan/child_immunization_history  != ''">
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">BCG date? &#xCAC;&#xCBF;&#xCB8;&#xCBF;&#xC9C;&#xCBF; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
-            <input autocomplete="off" type="date"
+            <span lang="" class="question-label active">BCG follow_up_date? &#xCAC;&#xCBF;&#xCB8;&#xCBF;&#xC9C;&#xCBF; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_immunization_history_group/bcg_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_immunization_history , 'bcg')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">OPV 0 date? &#xC93;&#xCAA;&#xCBF;&#xCB5;&#xCBF; 0 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
-            <input autocomplete="off" type="date"
+            <span lang="" class="question-label active">OPV 0 follow_up_date? &#xC93;&#xCAA;&#xCBF;&#xCB5;&#xCBF; 0 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_immunization_history_group/opv_0_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_immunization_history , 'opv_0')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">Hep B 0 date? &#xCB9;&#xCC6;&#xCAA;&#xC9F;&#xCC8;&#xC9F;&#xCBF;&#xCB8;&#xCCD;
+            <span lang="" class="question-label active">Hep B 0 follow_up_date? &#xCB9;&#xCC6;&#xCAA;&#xC9F;&#xCC8;&#xC9F;&#xCBF;&#xCB8;&#xCCD;
                 &#xCAC;&#xCBF; 0 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_immunization_history_group/hepb_0_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_immunization_history , 'hepb_0')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">OPV 1 date? &#xC93;&#xCAA;&#xCBF;&#xCB5;&#xCBF; 1 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
-            <input autocomplete="off" type="date"
+            <span lang="" class="question-label active">OPV 1 follow_up_date? &#xC93;&#xCAA;&#xCBF;&#xCB5;&#xCBF; 1 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_immunization_history_group/opv_1_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_immunization_history , 'opv_1')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">Pentavalent 1 date? &#xCAA;&#xCC6;&#xC82;&#xC9F;&#xCB5;&#xCBE;&#xCB2;&#xCC6;&#xC82;&#xC9F;&#xCCD;
+            <span lang="" class="question-label active">Pentavalent 1 follow_up_date? &#xCAA;&#xCC6;&#xC82;&#xC9F;&#xCB5;&#xCBE;&#xCB2;&#xCC6;&#xC82;&#xC9F;&#xCCD;
                 1 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_immunization_history_group/pentavalent_1_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_immunization_history , 'pentavalent_1')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">OPV 2 date? &#xC93;&#xCAA;&#xCBF;&#xCB5;&#xCBF; 2 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
-            <input autocomplete="off" type="date"
+            <span lang="" class="question-label active">OPV 2 follow_up_date? &#xC93;&#xCAA;&#xCBF;&#xCB5;&#xCBF; 2 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_immunization_history_group/opv_2_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_immunization_history , 'opv_2')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">Pentavalent 2 date? &#xCAA;&#xCC6;&#xC82;&#xC9F;&#xCB5;&#xCBE;&#xCB2;&#xCC6;&#xC82;&#xC9F;&#xCCD;
+            <span lang="" class="question-label active">Pentavalent 2 follow_up_date? &#xCAA;&#xCC6;&#xC82;&#xC9F;&#xCB5;&#xCBE;&#xCB2;&#xCC6;&#xC82;&#xC9F;&#xCCD;
                 2 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_immunization_history_group/pentavalent_2_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_immunization_history , 'pentavalent_2')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">OPV 3 date? &#xC93;&#xCAA;&#xCBF;&#xCB5;&#xCBF; 3 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
-            <input autocomplete="off" type="date"
+            <span lang="" class="question-label active">OPV 3 follow_up_date? &#xC93;&#xCAA;&#xCBF;&#xCB5;&#xCBF; 3 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_immunization_history_group/opv_3_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_immunization_history , 'opv_3')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">Pentavalent 3 date? &#xCAA;&#xCC6;&#xC82;&#xC9F;&#xCB5;&#xCBE;&#xCB2;&#xCC6;&#xC82;&#xC9F;&#xCCD;
+            <span lang="" class="question-label active">Pentavalent 3 follow_up_date? &#xCAA;&#xCC6;&#xC82;&#xC9F;&#xCB5;&#xCBE;&#xCB2;&#xCC6;&#xC82;&#xC9F;&#xCCD;
                 3 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_immunization_history_group/pentavalent_3_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_immunization_history , 'pentavalent_3')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">Measles 1 date? &#xCA6;&#xCA1;&#xCBE;&#xCB0; 1 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
-            <input autocomplete="off" type="date"
+            <span lang="" class="question-label active">Measles 1 follow_up_date? &#xCA6;&#xCA1;&#xCBE;&#xCB0; 1 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_immunization_history_group/measles_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_immunization_history , 'measles')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">JE 1 date? JE 1 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
+            <span lang="" class="question-label active">JE 1 follow_up_date? JE 1 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_immunization_history_group/je_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_immunization_history , 'je')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">MMR date? &#xC8E;&#xCAE;&#xCCD;.&#xC8E;&#xCAE;&#xCCD;.&#xC86;&#xCB0;&#xCCD;
+            <span lang="" class="question-label active">MMR follow_up_date? &#xC8E;&#xCAE;&#xCCD;.&#xC8E;&#xCAE;&#xCCD;.&#xC86;&#xCB0;&#xCCD;
                 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_immunization_history_group/mmr_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_immunization_history , 'mmr')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">DPT Booster 1 date? &#xCA1;&#xCBF;&#xCAA;&#xCBF;&#xC9F;&#xCBF;
+            <span lang="" class="question-label active">DPT Booster 1 follow_up_date? &#xCA1;&#xCBF;&#xCAA;&#xCBF;&#xC9F;&#xCBF;
                 &#xCAC;&#xCB2;&#xCB5;&#xCB0;&#xCCD;&#xCA7;&#xC95; 1 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_immunization_history_group/dptbooster_1_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_immunization_history , 'dptbooster_1')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">OPV Booster date? &#xC93;&#xCAA;&#xCBF;&#xCB5;&#xCBF; &#xCAC;&#xCB2;&#xCB5;&#xCB0;&#xCCD;&#xCA7;&#xC95;
+            <span lang="" class="question-label active">OPV Booster follow_up_date? &#xC93;&#xCAA;&#xCBF;&#xCB5;&#xCBF; &#xCAC;&#xCB2;&#xCB5;&#xCB0;&#xCCD;&#xCA7;&#xC95;
                 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_immunization_history_group/opvbooster_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_immunization_history , 'opvbooster')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">Measles 2 date? &#xCA6;&#xCA1;&#xCBE;&#xCB0; 2 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
-            <input autocomplete="off" type="date"
+            <span lang="" class="question-label active">Measles 2 follow_up_date? &#xCA6;&#xCA1;&#xCBE;&#xCB0; 2 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_immunization_history_group/measlesbooster_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_immunization_history , 'measlesbooster')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">JE 2 date? JE 2 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
+            <span lang="" class="question-label active">JE 2 follow_up_date? JE 2 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_immunization_history_group/je_2_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_immunization_history , 'je_2')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">DPT Booster 2 (5 years) date? &#xCA1;&#xCA1;&#xCBF;&#xCAA;&#xCBF;&#xC9F;&#xCBF;
+            <span lang="" class="question-label active">DPT Booster 2 (5 years) follow_up_date? &#xCA1;&#xCA1;&#xCBF;&#xCAA;&#xCBF;&#xC9F;&#xCBF;
                 &#xCAC;&#xCB2;&#xCB5;&#xCB0;&#xCCD;&#xCA7;&#xC95; 2 (5 &#xCB5;&#xCB0;&#xCCD;&#xCB7;) &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_immunization_history_group/dptbooster_2_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_immunization_history , 'dptbooster_2')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
     </section>
     <!--end of group -->
@@ -324,102 +324,102 @@
              name="/Child_Registration_EC_EngKan/child_vitamin_a_history_group"
              data-relevant=" /Child_Registration_EC_EngKan/child_vitamin_a_history  != ''">
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">Vitamin A 1 date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
+            <span lang="" class="question-label active">Vitamin A 1 follow_up_date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
                 '&#xC8E;' 1 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_vitamin_a_history_group/vita1_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_vitamin_a_history , '1')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">Vitamin A 2 date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
+            <span lang="" class="question-label active">Vitamin A 2 follow_up_date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
                 '&#xC8E;' 2 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_vitamin_a_history_group/vita2_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_vitamin_a_history , '2')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">Vitamin A 3 date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
+            <span lang="" class="question-label active">Vitamin A 3 follow_up_date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
                 '&#xC8E;' 3 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_vitamin_a_history_group/vita3_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_vitamin_a_history , '3')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">Vitamin A 4 date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
+            <span lang="" class="question-label active">Vitamin A 4 follow_up_date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
                 '&#xC8E;' 4 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_vitamin_a_history_group/vita4_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_vitamin_a_history , '4')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">Vitamin A 5 date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
+            <span lang="" class="question-label active">Vitamin A 5 follow_up_date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
                 '&#xC8E;' 5 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_vitamin_a_history_group/vita5_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_vitamin_a_history , '5')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">Vitamin A 6 date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
+            <span lang="" class="question-label active">Vitamin A 6 follow_up_date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
                 '&#xC8E;' 6 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_vitamin_a_history_group/vita6_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_vitamin_a_history , '6')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">Vitamin A 7 date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
+            <span lang="" class="question-label active">Vitamin A 7 follow_up_date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
                 '&#xC8E;' 7 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_vitamin_a_history_group/vita7_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_vitamin_a_history , '7')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">Vitamin A 8 date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
+            <span lang="" class="question-label active">Vitamin A 8 follow_up_date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
                 '&#xC8E;' 8 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_vitamin_a_history_group/vita8_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_vitamin_a_history , '8')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
         <label class="question or-branch pre-init non-select ">
-            <span lang="" class="question-label active">Vitamin A 9 date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
+            <span lang="" class="question-label active">Vitamin A 9 follow_up_date? &#xCB5;&#xCBF;&#xC9F;&#xCAE;&#xCBF;&#xCA8;&#xCCD;
                 '&#xC8E;' 9 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date"
+            <input autocomplete="off" type="follow_up_date"
                    name="/Child_Registration_EC_EngKan/child_vitamin_a_history_group/vita9_date"
                    data-constraint=".&gt;=  /Child_Registration_EC_EngKan/child_birth_date  and .&lt;= /Child_Registration_EC_EngKan/today "
                    data-relevant="selected( /Child_Registration_EC_EngKan/child_vitamin_a_history , '9')"
-                   data-type-xml="date"/>
+                   data-type-xml="follow_up_date"/>
         </label>
     </section>
     <!--end of group -->
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input autocomplete="off" type="hidden" name="/Child_Registration_EC_EngKan/today" data-preload="date"
-                   data-preload-params="today" data-type-xml="date"/>
+            <input autocomplete="off" type="hidden" name="/Child_Registration_EC_EngKan/today" data-preload="follow_up_date"
+                   data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">

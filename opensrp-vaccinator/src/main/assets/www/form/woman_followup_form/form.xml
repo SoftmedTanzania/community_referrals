@@ -61,7 +61,7 @@
         </span>
         <span class="question-label active" data-itext-id="/Woman_TT_Followup_Form/client_reg_date_note:label"
             lang="en">Client Registeration
-            date:
+            follow_up_date:
             <span class="or-output"
                 data-value=" /Woman_TT_Followup_Form/existing_client_reg_date "></span>
         </span>
@@ -76,7 +76,7 @@
             lang="openmrs_code">-
         </span>
         <span class="or-hint active" data-itext-id="/Woman_TT_Followup_Form/client_reg_date_note:hint"
-            lang="en">date on which client
+            lang="en">follow_up_date on which client
             was vaccinated
         </span>
         <input name="/Woman_TT_Followup_Form/client_reg_date_note" data-constraint=".&lt;= /Woman_TT_Followup_Form/today " data-type-xml="string"
@@ -191,7 +191,7 @@
             lang="openmrs_code">-
         </span>
         <span class="question-label active" data-itext-id="/Woman_TT_Followup_Form/member_birth_date_note:label"
-            lang="en">Client birth date:
+            lang="en">Client birth follow_up_date:
             <span class="or-output"
                 data-value=" /Woman_TT_Followup_Form/existing_member_birth_date "></span>
             (<span class="or-output" data-value=" /Woman_TT_Followup_Form/client_age "></span>)
@@ -2987,8 +2987,8 @@
             lang="en">EDD
         </span>
         <input name="/Woman_TT_Followup_Form/edd" data-relevant="selected ( /Woman_TT_Followup_Form/edd_lmp , 'edd')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label " data-itext-id="/Woman_TT_Followup_Form/lmp:label" lang="ur">
@@ -3004,8 +3004,8 @@
             lang="en">LMP
         </span>
         <input name="/Woman_TT_Followup_Form/lmp" data-relevant="selected ( /Woman_TT_Followup_Form/edd_lmp , 'lmp')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label " data-itext-id="/Woman_TT_Followup_Form/ultrasound_date:label"
@@ -3018,11 +3018,11 @@
             lang="openmrs_code">-
         </span>
         <span class="question-label active" data-itext-id="/Woman_TT_Followup_Form/ultrasound_date:label"
-            lang="en">Ultrasound Date
+            lang="en">Ultrasound follow_up_date
         </span>
         <input name="/Woman_TT_Followup_Form/ultrasound_date" data-relevant="selected ( /Woman_TT_Followup_Form/edd_lmp , 'ultrasound')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label " data-itext-id="/Woman_TT_Followup_Form/ultrasound_weeks:label"
@@ -3170,8 +3170,8 @@
         </span>
         <input name="/Woman_TT_Followup_Form/tt1_retro" data-constraint="(.&lt;= /Woman_TT_Followup_Form/today  and .&lt;= /Woman_TT_Followup_Form/existing_client_reg_date )"
             data-relevant="selected( /Woman_TT_Followup_Form/vaccines ,'TT1')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label " data-itext-id="/Woman_TT_Followup_Form/tt2_retro:label"
@@ -3188,8 +3188,8 @@
         </span>
         <input name="/Woman_TT_Followup_Form/tt2_retro" data-constraint="(.&lt;= /Woman_TT_Followup_Form/today  and .&gt;= /Woman_TT_Followup_Form/tt1_retro )"
             data-relevant="selected( /Woman_TT_Followup_Form/vaccines ,'TT2')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label " data-itext-id="/Woman_TT_Followup_Form/tt3_retro:label"
@@ -3206,8 +3206,8 @@
         </span>
         <input name="/Woman_TT_Followup_Form/tt3_retro" data-constraint="(.&lt;= /Woman_TT_Followup_Form/today  and .&gt;= /Woman_TT_Followup_Form/tt2_retro  and if((selected( /Woman_TT_Followup_Form/pregnant , 'no'))))"
             data-relevant="selected( /Woman_TT_Followup_Form/vaccines ,'TT3')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label " data-itext-id="/Woman_TT_Followup_Form/tt4_retro:label"
@@ -3224,8 +3224,8 @@
         </span>
         <input name="/Woman_TT_Followup_Form/tt4_retro" data-constraint="(.&lt;= /Woman_TT_Followup_Form/today  and .&gt;= /Woman_TT_Followup_Form/tt3_retro  and if((selected( /Woman_TT_Followup_Form/pregnant , 'no'))))"
             data-relevant="selected( /Woman_TT_Followup_Form/vaccines ,'TT4')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -3330,8 +3330,8 @@
                 data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Woman_TT_Followup_Form/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/Woman_TT_Followup_Form/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/Woman_TT_Followup_Form/deviceid" data-preload="property" data-preload-params="deviceid"
@@ -3352,16 +3352,16 @@
     </fieldset>
     <fieldset style="display:none;" id="or-calculated-items">
         <label class="calculation non-select ">
-            <input name="/Woman_TT_Followup_Form/client_age" data-calculate="date( today() - ( /Woman_TT_Followup_Form/existing_member_birth_date  div 365))"
+            <input name="/Woman_TT_Followup_Form/client_age" data-calculate="follow_up_date( today() - ( /Woman_TT_Followup_Form/existing_member_birth_date  div 365))"
                 data-type-xml="string"
                 type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Woman_TT_Followup_Form/edd_calc_lmp" data-calculate="date( /Woman_TT_Followup_Form/lmp +280)"
+            <input name="/Woman_TT_Followup_Form/edd_calc_lmp" data-calculate="follow_up_date( /Woman_TT_Followup_Form/lmp +280)"
                 data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Woman_TT_Followup_Form/edd_calc_ultrasound" data-calculate="date((280-( /Woman_TT_Followup_Form/ultrasound_weeks *7)+ /Woman_TT_Followup_Form/ultrasound_date  ))"
+            <input name="/Woman_TT_Followup_Form/edd_calc_ultrasound" data-calculate="follow_up_date((280-( /Woman_TT_Followup_Form/ultrasound_weeks *7)+ /Woman_TT_Followup_Form/ultrasound_date  ))"
                 data-type-xml="string"
                 type="hidden" />
         </label>

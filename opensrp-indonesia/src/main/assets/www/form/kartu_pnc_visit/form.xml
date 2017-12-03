@@ -57,7 +57,7 @@
             lang="Bahasa">Tanggal kunjungan
         </span>
         <span class="question-label " data-itext-id="/PNC_visit_reviewed/tanggal_kunjungan:label"
-            lang="en">Check-up date
+            lang="en">Check-up follow_up_date
         </span>
         <span class="required">*</span>
         <span class="or-hint active" data-itext-id="/PNC_visit_reviewed/tanggal_kunjungan:hint"
@@ -65,10 +65,10 @@
             kunjungan nifas
         </span>
         <span class="or-hint " data-itext-id="/PNC_visit_reviewed/tanggal_kunjungan:hint" lang="en">
-            Date of post-partum check-up
+            follow_up_date of post-partum check-up
         </span>
-        <input name="/PNC_visit_reviewed/tanggal_kunjungan" data-calculate=" /PNC_visit_reviewed/today " data-type-xml="date"
-            required="required" type="date" />
+        <input name="/PNC_visit_reviewed/tanggal_kunjungan" data-calculate=" /PNC_visit_reviewed/today " data-type-xml="follow_up_date"
+            required="required" type="follow_up_date" />
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -283,7 +283,7 @@
                     lang="Bahasa">Pelayanan Fe
                 </span>
                 <span class="question-label " data-itext-id="/PNC_visit_reviewed/pelayananfe:label"
-                    lang="en">service/ Fe
+                    lang="en">referral_service_id/ Fe
                 </span>
                 <span class="or-hint active" data-itext-id="/PNC_visit_reviewed/pelayananfe:hint"
                     lang="Bahasa">Menunjukkan pelayanan Fe
@@ -291,7 +291,7 @@
                 </span>
                 <span class="or-hint " data-itext-id="/PNC_visit_reviewed/pelayananfe:hint"
                     lang="en">Indicating whether midwife
-                    provides Fe service
+                    provides Fe referral_service_id
                 </span>
             </legend>
             <div class="option-wrapper">
@@ -353,7 +353,7 @@
                     lang="Bahasa">Pelayanan Vit A
                 </span>
                 <span class="question-label " data-itext-id="/PNC_visit_reviewed/pelayanan_vita:label"
-                    lang="en">service/ Vit. A
+                    lang="en">referral_service_id/ Vit. A
                 </span>
                 <span class="or-hint active" data-itext-id="/PNC_visit_reviewed/pelayanan_vita:hint"
                     lang="Bahasa">Menunjukkan apakah
@@ -361,7 +361,7 @@
                 </span>
                 <span class="or-hint " data-itext-id="/PNC_visit_reviewed/pelayanan_vita:hint"
                     lang="en">Indicating whether
-                    midwife provides Vitamin A service on post-partum check-up
+                    midwife provides Vitamin A referral_service_id on post-partum check-up
                 </span>
             </legend>
             <div class="option-wrapper">
@@ -411,11 +411,11 @@
             lang="Bahasa">Tulis tanggal minumnya
         </span>
         <span class="or-hint " data-itext-id="/PNC_visit_reviewed/vitaminA2jamPP:hint" lang="en">
-            Enter date of receiving vitamin A
+            Enter follow_up_date of receiving vitamin A
         </span>
         <input name="/PNC_visit_reviewed/vitaminA2jamPP" data-relevant="selected( /PNC_visit_reviewed/pelayanan_vita , '2_jam_pp')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" data-itext-id="/PNC_visit_reviewed/vitaminA24jamPP:label"
@@ -428,11 +428,11 @@
             lang="Bahasa">Tulis tanggal minumnya
         </span>
         <span class="or-hint " data-itext-id="/PNC_visit_reviewed/vitaminA24jamPP:hint" lang="en">
-            Enter date of receiving vitamin A
+            Enter follow_up_date of receiving vitamin A
         </span>
         <input name="/PNC_visit_reviewed/vitaminA24jamPP" data-relevant="selected( /PNC_visit_reviewed/pelayanan_vita , '24_jam_pp')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -923,12 +923,12 @@
                 data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/PNC_visit_reviewed/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/PNC_visit_reviewed/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/PNC_visit_reviewed/tanggal_lahir_anak" data-preload="date" data-preload-params="tanggal_lahir_anak"
-                data-type-xml="date" type="hidden" />
+            <input name="/PNC_visit_reviewed/tanggal_lahir_anak" data-preload="follow_up_date" data-preload-params="tanggal_lahir_anak"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/PNC_visit_reviewed/deviceid" data-preload="property" data-preload-params="deviceid"
@@ -964,7 +964,7 @@
                 type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input autocomplete="off" type="hidden" name="/PNC_visit_reviewed/reg_date" data-calculate=" /PNC_visit_reviewed/today " data-type-xml="date" />
+            <input autocomplete="off" type="hidden" name="/PNC_visit_reviewed/reg_date" data-calculate=" /PNC_visit_reviewed/today " data-type-xml="follow_up_date" />
         </label>
         <label class="calculation non-select ">
             <input name="/PNC_visit_reviewed/high_risk_post-partum_Hemorrhage" data-calculate="(if(selected( /PNC_visit_reviewed/komplikasi ,'perdarahan_post-partum'), 'yes','no'))"

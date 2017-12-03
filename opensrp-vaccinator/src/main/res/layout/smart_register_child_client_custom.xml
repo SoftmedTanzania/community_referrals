@@ -86,7 +86,7 @@
             <org.ei.opensrp.view.customControls.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Date Of Birth"
+                android:text="follow_up_date Of Birth"
                 android:id="@+id/child_dob"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_marginLeft="5dp" />
@@ -134,7 +134,7 @@
             <org.ei.opensrp.view.customControls.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Last Vaccine Date"
+                android:text="Last Vaccine follow_up_date"
                 android:id="@+id/child_last_visit_date"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_marginLeft="5dp" />

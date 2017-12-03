@@ -1,19 +1,19 @@
 [
     {
         "parent": "facility",
-        "child": "wazazi_salama_mother",
-        "field": "pregnant women",
+        "child": "client_referral",
+        "field": "client referral",
         "kind": "one_to_many",
         "from": "facility.id",
-        "to": "wazazi_salama_mother.FACILITY_ID"
+        "to": "client_referral.facility_id"
     },
     {
-        "parent": "wazazi_salama_mother",
-        "child": "uzazi_salama_follow_up_report",
-        "field": "pregnant women",
+        "parent": "client_referral",
+        "child": "follow_up",
+        "field": "client follow up",
         "kind": "one_to_many",
-        "from": "wazazi_salama_mother.id",
-        "to": "uzazi_salama_follow_up_report.relationalid"
+        "from": "follow_up.id",
+        "to": "follow_up.relationalid"
     },
     {
         "parent": "wazazi_salama_mother",

@@ -67,6 +67,8 @@ public class LocationService {
         }
         return pullFromServer();
     }
+
+
     public void pushToServer() {
         boolean keepSyncing = true;
         while (keepSyncing) {

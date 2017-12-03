@@ -15,7 +15,7 @@
                     lang="Bahasa">Alasan penutupan
                 </span>
                 <span class="question-label " data-itext-id="/penutupan_anak_reviewed/close_reason:label"
-                    lang="en">Reason for closure?
+                    lang="en">follow_up_reason for closure?
                 </span>
                 <span class="required">*</span>
                 <span class="or-hint active" data-itext-id="/penutupan_anak_reviewed/close_reason:hint"
@@ -144,7 +144,7 @@
         </span>
         <span class="or-hint " data-itext-id="/penutupan_anak_reviewed/child_death_cause_other:hint"
             lang="en">Write other
-            reason, if available
+            follow_up_reason, if available
         </span>
         <input name="/penutupan_anak_reviewed/child_death_cause_other" data-relevant=" /penutupan_anak_reviewed/child_death_cause  = 'others'"
             data-type-xml="string"
@@ -156,20 +156,20 @@
             kematian ibu hari ini atau hari-hari sebelumnya
         </span>
         <span class="or-constraint-msg " data-itext-id="/penutupan_anak_reviewed/child_death_date:jr:constraintMsg"
-            lang="en">Date of
+            lang="en">follow_up_date of
             mother's death today or the days before
         </span>
         <span class="question-label active" data-itext-id="/penutupan_anak_reviewed/child_death_date:label"
             lang="Bahasa">Tanggal kematian anak
         </span>
         <span class="question-label " data-itext-id="/penutupan_anak_reviewed/child_death_date:label"
-            lang="en">Date of child death
+            lang="en">follow_up_date of child death
         </span>
         <span class="required">*</span>
         <input name="/penutupan_anak_reviewed/child_death_date" data-constraint=".&lt;= /penutupan_anak_reviewed/today " data-relevant=" /penutupan_anak_reviewed/close_reason  = 'death_of_child'"
-            data-type-xml="date"
+            data-type-xml="follow_up_date"
             required="required"
-            type="date" />
+            type="follow_up_date" />
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -206,8 +206,8 @@
                 data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/penutupan_anak_reviewed/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/penutupan_anak_reviewed/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/penutupan_anak_reviewed/deviceid" data-preload="property" data-preload-params="deviceid"

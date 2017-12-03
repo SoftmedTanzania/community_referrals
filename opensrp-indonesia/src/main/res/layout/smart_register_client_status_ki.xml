@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/txt_status_type"
             android:layout_alignParentLeft="true"
-            android:text="Date : "
+            android:text="follow_up_date : "
             style="@style/CustomFontTextViewStyle.ListView.Normal"/>
 
     <org.ei.opensrp.view.customControls.CustomFontTextView

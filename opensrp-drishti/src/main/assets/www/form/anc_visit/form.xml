@@ -48,10 +48,10 @@
         </fieldset>
     </fieldset>
     <label class="question non-select ">
-        <span lang="" class="question-label active">ANC visit date? ANC &#xCAD;&#xCC7;&#xC9F;&#xCBF; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
+        <span lang="" class="question-label active">ANC visit follow_up_date? ANC &#xCAD;&#xCC7;&#xC9F;&#xCBF; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?</span>
         <span class="required">*</span>
-        <input type="date" name="/ANC_Visit_EngKan/anc_visit_date" required="required"
-               data-constraint=".&lt;= /ANC_Visit_EngKan/today " data-type-xml="date"/>
+        <input type="follow_up_date" name="/ANC_Visit_EngKan/anc_visit_date" required="required"
+               data-constraint=".&lt;= /ANC_Visit_EngKan/today " data-type-xml="follow_up_date"/>
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -412,12 +412,12 @@
         </fieldset>
     </fieldset>
     <label class="question or-branch pre-init non-select ">
-        <span lang="" class="question-label active">Prasooti Araike payment 1 date? &#xCAA;&#xCCD;&#xCB0;&#xCB8;&#xCC2;&#xCA4;&#xCBF;
+        <span lang="" class="question-label active">Prasooti Araike payment 1 follow_up_date? &#xCAA;&#xCCD;&#xCB0;&#xCB8;&#xCC2;&#xCA4;&#xCBF;
             &#xC86;&#xCB0;&#xCC8;&#xC95;&#xCC6; 1 &#xCAA;&#xCBE;&#xCB5;&#xCA4;&#xCBF; &#xCAE;&#xCBE;&#xCA1;&#xCB2;&#xCBE;&#xCA6;
             &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
-        <input type="date" name="/ANC_Visit_EngKan/prasooti1_date" data-constraint=".&lt;= /ANC_Visit_EngKan/today "
-               data-relevant=" /ANC_Visit_EngKan/prasooti_payment1  = 'yes'" data-type-xml="date"/>
+        <input type="follow_up_date" name="/ANC_Visit_EngKan/prasooti1_date" data-constraint=".&lt;= /ANC_Visit_EngKan/today "
+               data-relevant=" /ANC_Visit_EngKan/prasooti_payment1  = 'yes'" data-type-xml="follow_up_date"/>
     </label>
     <label class="note or-branch pre-init non-select ">
         <span lang="" class="question-label active">
@@ -476,8 +476,8 @@
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input type="hidden" name="/ANC_Visit_EngKan/today" data-preload="date" data-preload-params="today"
-                   data-type-xml="date"/>
+            <input type="hidden" name="/ANC_Visit_EngKan/today" data-preload="follow_up_date" data-preload-params="today"
+                   data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">
@@ -492,7 +492,7 @@
         </label>
         <label class="calculation non-select ">
             <input type="hidden" name="/ANC_Visit_EngKan/num_days_since_lmp"
-                   data-calculate="int(date( /ANC_Visit_EngKan/today ) - date( /ANC_Visit_EngKan/case_lmp ))"
+                   data-calculate="int(follow_up_date( /ANC_Visit_EngKan/today ) - follow_up_date( /ANC_Visit_EngKan/case_lmp ))"
                    data-type-xml="string"/>
         </label>
         <label class="calculation non-select ">

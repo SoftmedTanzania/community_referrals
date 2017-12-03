@@ -77,7 +77,7 @@
 
     <string name="sort_by_name_label">Name (A to Z)</string>
     <string name="sort_by_ec_number_label">EC Number</string>
-    <string name="sort_by_date_of_delivery_label">Date of Delivery</string>
+    <string name="sort_by_date_of_delivery_label">follow_up_date of Delivery</string>
     <string name="sort_by_sc_label">SC</string>
     <string name="sort_by_st_label">ST</string>
     <string name="sort_by_high_priority_label">High Priority (HP)</string>
@@ -160,7 +160,7 @@
     <string name="service_type_empty" />
     <string name="sick_visit">Sick Visit</string>
     <string name="illness_report"><b>Illness Report:</b> %s</string>
-    <string name="illness_date">Date:</string>
+    <string name="illness_date">follow_up_date:</string>
     <string name="str_bcg">BCG</string>
     <string name="str_bcg_on">On</string>
     <string name="hep_b_birth">Hep B</string>
@@ -276,7 +276,7 @@
     <string name="str_risks_reviewed">Risks reviewed:</string>
     <string name="sort_by_edd_label">EDD</string>
 
-    <string name="str_pnc_delivery_date">Date:</string>
+    <string name="str_pnc_delivery_date">follow_up_date:</string>
     <string name="str_pnc_delivery_place">Place:</string>
     <string name="str_pnc_delivery_type">Type:</string>
     <string name="str_pp_fp">PP FP</string>
@@ -319,15 +319,15 @@
     <string name="hh_alphabetical_sort">Alphabetical (HoH Name)</string>
     <string name="hh_fwGobhhid_sort">HHID - Government</string>
     <string name="hh_fwJivhhid_sort">HHID - JiVitA</string>
-    <string name="due_status">Due Status</string>
+    <string name="due_status">Due referral_status</string>
     <string name="hh_search_hint">Search</string>
     <string name="hh_no_mwra">No ELCO</string>
     <string name="hh_has_mwra">Has one or more ELCO</string>
     <string name="elco_search_hint">Search</string>
     <string name="elco_woman_details">ELCO Details</string>
     <string name="elco_details_summary">Summary</string>
-    <string name="elco_mwra_registration_date_label">Registration Date</string>
-    <string name="elco_last_psf_date_label">Last PSF Date</string>
+    <string name="elco_mwra_registration_date_label">Registration follow_up_date</string>
+    <string name="elco_last_psf_date_label">Last PSF follow_up_date</string>
     <string name="all_eligible_couples">All Eligible Couples</string>
     <string name="hhid_gob">HHID - Government:</string>
     <string name="hhid_jivita">HHID - JiVitA:</string>
@@ -361,7 +361,7 @@
     <string name="okforminputerror">ok</string>
     <string name="pnc_outcome">OUTCOME</string>
     <string name="pnc_date_of_outcome">DATE of OUTCOME</string>
-    <string name="pnc_details_date_of_outcome">Date of Outcome</string>
+    <string name="pnc_details_date_of_outcome">follow_up_date of Outcome</string>
     <string name="pnc_reminder_status">PNC STATUS</string>
     <string name="pnc_reminder_due">PNC DUE</string>
     <string name="mcare_PNC_register_title_in_short">PNC</string>
@@ -403,9 +403,9 @@
     <string name="launch_mis_census_form">MIS Census</string>
     <string name="pregnancy_outcome">Pregnancy Outcome</string>
     <string name="pnc_typeofdelivery">Type of Delivery</string>
-    <string name="date_of_birth">Date of Birth</string>
+    <string name="date_of_birth">follow_up_date of Birth</string>
     <string name="child_details_mothers_name_label">Mother\'s Name:</string>
-    <string name="pnc_Details_date_of_outcome">Date of Outcome</string>
+    <string name="pnc_Details_date_of_outcome">follow_up_date of Outcome</string>
     <string name="yes">ndio</string>
     <string name="no">hapana</string>
 

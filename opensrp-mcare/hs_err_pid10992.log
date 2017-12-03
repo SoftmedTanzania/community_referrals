@@ -203,13 +203,13 @@ Event: 5.114 GC heap before
   class space    used 385K, capacity 488K, committed 512K, reserved 1048576K
 
 Deoptimization events (7 events):
-Event: 1.129 Thread 0x00007f576400a000 Uncommon trap: reason=unloaded action=reinterpret pc=0x00007f57551f4398 method=com.android.dx.cf.cst.ConstantPoolParser.parse0(ILjava/util/BitSet;)Lcom/android/dx/rop/cst/Constant; @ 176
-Event: 1.475 Thread 0x00007f576400a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f57552a3c7c method=com.android.dx.cf.direct.StdAttributeFactory.parse0(Lcom/android/dx/cf/direct/DirectClassFile;ILjava/lang/String;IILcom/android/dx/cf/iface/ParseObserver;)Lcom/android/dx/cf
-Event: 3.396 Thread 0x00007f576400a000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f5755336a58 method=com.android.dx.cf.attrib.AttConstantValue.<init>(Lcom/android/dx/rop/cst/TypedConstant;)V @ 28
-Event: 3.789 Thread 0x00007f576400a000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f5755336a58 method=com.android.dx.cf.attrib.AttConstantValue.<init>(Lcom/android/dx/rop/cst/TypedConstant;)V @ 28
-Event: 3.792 Thread 0x00007f576400a000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f5755336a58 method=com.android.dx.cf.attrib.AttConstantValue.<init>(Lcom/android/dx/rop/cst/TypedConstant;)V @ 28
-Event: 3.792 Thread 0x00007f576400a000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f5755336a58 method=com.android.dx.cf.attrib.AttConstantValue.<init>(Lcom/android/dx/rop/cst/TypedConstant;)V @ 28
-Event: 4.877 Thread 0x00007f576400a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f575538478c method=com.android.dx.cf.direct.StdAttributeFactory.parse0(Lcom/android/dx/cf/direct/DirectClassFile;ILjava/lang/String;IILcom/android/dx/cf/iface/ParseObserver;)Lcom/android/dx/cf
+Event: 1.129 Thread 0x00007f576400a000 Uncommon trap: follow_up_reason=unloaded action=reinterpret pc=0x00007f57551f4398 method=com.android.dx.cf.cst.ConstantPoolParser.parse0(ILjava/util/BitSet;)Lcom/android/dx/rop/cst/Constant; @ 176
+Event: 1.475 Thread 0x00007f576400a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f57552a3c7c method=com.android.dx.cf.direct.StdAttributeFactory.parse0(Lcom/android/dx/cf/direct/DirectClassFile;ILjava/lang/String;IILcom/android/dx/cf/iface/ParseObserver;)Lcom/android/dx/cf
+Event: 3.396 Thread 0x00007f576400a000 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007f5755336a58 method=com.android.dx.cf.attrib.AttConstantValue.<init>(Lcom/android/dx/rop/cst/TypedConstant;)V @ 28
+Event: 3.789 Thread 0x00007f576400a000 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007f5755336a58 method=com.android.dx.cf.attrib.AttConstantValue.<init>(Lcom/android/dx/rop/cst/TypedConstant;)V @ 28
+Event: 3.792 Thread 0x00007f576400a000 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007f5755336a58 method=com.android.dx.cf.attrib.AttConstantValue.<init>(Lcom/android/dx/rop/cst/TypedConstant;)V @ 28
+Event: 3.792 Thread 0x00007f576400a000 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007f5755336a58 method=com.android.dx.cf.attrib.AttConstantValue.<init>(Lcom/android/dx/rop/cst/TypedConstant;)V @ 28
+Event: 4.877 Thread 0x00007f576400a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f575538478c method=com.android.dx.cf.direct.StdAttributeFactory.parse0(Lcom/android/dx/cf/direct/DirectClassFile;ILjava/lang/String;IILcom/android/dx/cf/iface/ParseObserver;)Lcom/android/dx/cf
 
 Internal exceptions (2 events):
 Event: 0.137 Thread 0x00007f576400a000 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x00000000d7707c78) thrown at [/HUDSON3/workspace/8-2-build-linux-amd64/jdk8u102/7268/hotspot/src/sh

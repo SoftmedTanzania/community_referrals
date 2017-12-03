@@ -13,40 +13,40 @@ import java.util.Map;
  */
 
 public class ClientReferralPersonObject {
-    private String id, relationalId, fName,mName,lName, CBHS,CTCNumber,IS_VALID,ReferralDate,Referralreason, FacilityId, ReferralService,Status ;
+    private String id, relationalId, first_name, middle_name, surname, community_based_hiv_service, ctc_number, is_valid, referral_date, referral_reason, facility_id, referral_service_id, referral_status;
 
     private String details;
     private Map<String, String> columnMap;
 
     public ClientReferralPersonObject(String id,
                                       String relationalId,
-                                      String fName,
-                                      String mName,
-                                      String lName,
-                                      String CBHS,
-                                      String CTCNumber,
-                                      String ReferralDate,
-                                      String FacilityId,
+                                      String first_name,
+                                      String middle_name,
+                                      String surname,
+                                      String community_based_hiv_service,
+                                      String ctc_number,
+                                      String referral_date,
+                                      String facility_id,
                                       String ReferralReason,
-                                      String ReferralService,
-                                      String Status,
-                                      String IS_VALID,
+                                      String referral_service_id,
+                                      String referral_status,
+                                      String is_valid,
                                       String details
                                       ) {
         this.details = details;
         this.id = id;
-        this.Status = Status;
-        this.CBHS = CBHS;
-        this.CTCNumber = CTCNumber;
+        this.referral_status = referral_status;
+        this.community_based_hiv_service = community_based_hiv_service;
+        this.ctc_number = ctc_number;
         this.relationalId = relationalId;
-        this.fName = fName;
-        this.mName = mName;
-        this.lName = lName;
-        this.ReferralDate = ReferralDate;
-        this.FacilityId = FacilityId;
-        this.Referralreason = ReferralReason;
-        this.ReferralService = ReferralService;
-        this.IS_VALID = IS_VALID;
+        this.first_name = first_name;
+        this.middle_name = middle_name;
+        this.surname = surname;
+        this.referral_date = referral_date;
+        this.facility_id = facility_id;
+        this.referral_reason = ReferralReason;
+        this.referral_service_id = referral_service_id;
+        this.is_valid = is_valid;
     }
 
     // alternative constructor so you don't pass bucha stuff, PregnantMom contains everything
@@ -57,51 +57,51 @@ public class ClientReferralPersonObject {
 
         this.id = id;
         this.relationalId = relationalId;
-        this.fName = clientReferral.getfName();
-        this.mName = clientReferral.getmName();
-        this.lName= clientReferral.getlName();
-        this.ReferralService = clientReferral.getService();
-        this.CBHS = clientReferral.getCBHS();
-        this.CTCNumber = clientReferral.getCTCNumber();
-        this.ReferralDate = clientReferral.getReferralDate();
-        this.Referralreason = clientReferral.getReferralReason();
-        this.IS_VALID = clientReferral.getIsValid();
-        this.Status = clientReferral.getStatus();
-        this.FacilityId = clientReferral.getFacilityId();
+        this.first_name = clientReferral.getFirst_name();
+        this.middle_name = clientReferral.getMiddle_name();
+        this.surname = clientReferral.getSurname();
+        this.referral_service_id = clientReferral.getReferral_service_id();
+        this.community_based_hiv_service = clientReferral.getCommunity_based_hiv_service();
+        this.ctc_number = clientReferral.getCtc_number();
+        this.referral_date = clientReferral.getReferral_date();
+        this.referral_reason = clientReferral.getReferral_reason();
+        this.is_valid = clientReferral.getIs_valid();
+        this.referral_status = clientReferral.getStatus();
+        this.facility_id = clientReferral.getFacility_id();
         this.details = new Gson().toJson(clientReferral);
 
     }
 
-    public String getmName() {
-        return mName;
+    public String getMiddle_name() {
+        return middle_name;
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
+    public void setMiddle_name(String middle_name) {
+        this.middle_name = middle_name;
     }
 
-    public String getlName() {
-        return lName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setlName(String lName) {
-        this.lName = lName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public String getStatus() {
-        return Status;
+    public String getReferral_status() {
+        return referral_status;
     }
 
-    public void setStatus(String status) {
-        Status = status;
+    public void setReferral_status(String referral_status) {
+        this.referral_status = referral_status;
     }
 
-    public String getCTCNumber() {
-        return CTCNumber;
+    public String getCtc_number() {
+        return ctc_number;
     }
 
-    public void setCTCNumber(String CTCNumber) {
-        this.CTCNumber = CTCNumber;
+    public void setCtc_number(String ctc_number) {
+        this.ctc_number = ctc_number;
     }
 
     public String getId() {
@@ -120,60 +120,60 @@ public class ClientReferralPersonObject {
         this.relationalId = relationalId;
     }
 
-    public String getfName() {
-        return fName;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setfName(String fName) {
-        this.fName = fName;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public String getCBHS() {
-        return CBHS;
+    public String getCommunity_based_hiv_service() {
+        return community_based_hiv_service;
     }
 
-    public void setCBHS(String CBHS) {
-        this.CBHS = CBHS;
+    public void setCommunity_based_hiv_service(String community_based_hiv_service) {
+        this.community_based_hiv_service = community_based_hiv_service;
     }
 
-    public String getIS_VALID() {
-        return IS_VALID;
+    public String getIs_valid() {
+        return is_valid;
     }
 
-    public void setIS_VALID(String IS_VALID) {
-        this.IS_VALID = IS_VALID;
+    public void setIs_valid(String is_valid) {
+        this.is_valid = is_valid;
     }
 
-    public String getReferralDate() {
-        return ReferralDate;
+    public String getReferral_date() {
+        return referral_date;
     }
 
-    public void setReferralDate(String referralDate) {
-        ReferralDate = referralDate;
+    public void setReferral_date(String referral_date) {
+        this.referral_date = referral_date;
     }
 
-    public String getReferralreason() {
-        return Referralreason;
+    public String getReferral_reason() {
+        return referral_reason;
     }
 
-    public void setReferralreason(String referralreason) {
-        Referralreason = referralreason;
+    public void setReferral_reason(String referral_reason) {
+        this.referral_reason = referral_reason;
     }
 
-    public String getFacilityId() {
-        return FacilityId;
+    public String getFacility_id() {
+        return facility_id;
     }
 
-    public void setFacilityId(String facilityId) {
-        FacilityId = facilityId;
+    public void setFacility_id(String facility_id) {
+        this.facility_id = facility_id;
     }
 
-    public String getReferralService() {
-        return ReferralService;
+    public String getReferral_service_id() {
+        return referral_service_id;
     }
 
-    public void setReferralService(String referralService) {
-        ReferralService = referralService;
+    public void setReferral_service_id(String referral_service_id) {
+        this.referral_service_id = referral_service_id;
     }
 
     public String getDetails() {

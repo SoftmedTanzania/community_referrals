@@ -5,12 +5,12 @@
 
 
     <label class="question non-select ">
-        <span lang="" class="question-label active">Hb test date? &#xCB9;&#xCC6;&#xC9A;&#xCCD;.&#xCAC;&#xCBF; &#xCAA;&#xCB0;&#xCBF;&#xCD5;&#xC95;&#xCCD;&#xCB7;&#xCBE;
+        <span lang="" class="question-label active">Hb test follow_up_date? &#xCB9;&#xCC6;&#xC9A;&#xCCD;.&#xCAC;&#xCBF; &#xCAA;&#xCB0;&#xCBF;&#xCD5;&#xC95;&#xCCD;&#xCB7;&#xCBE;
             &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
         <span class="required">*</span>
-        <input type="date" name="/Hb_Test_EngKan/hb_test_date" required="required"
-               data-constraint=".&lt;= /Hb_Test_EngKan/today " data-type-xml="date"/>
+        <input type="follow_up_date" name="/Hb_Test_EngKan/hb_test_date" required="required"
+               data-constraint=".&lt;= /Hb_Test_EngKan/today " data-type-xml="follow_up_date"/>
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -110,8 +110,8 @@
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input type="hidden" name="/Hb_Test_EngKan/today" data-preload="date" data-preload-params="today"
-                   data-type-xml="date"/>
+            <input type="hidden" name="/Hb_Test_EngKan/today" data-preload="follow_up_date" data-preload-params="today"
+                   data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">

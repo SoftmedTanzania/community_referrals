@@ -220,16 +220,16 @@ Event: 31.954 GC heap before
   class space    used 634K, capacity 656K, committed 768K, reserved 1048576K
 
 Deoptimization events (10 events):
-Event: 28.977 Thread 0x00007f6ae41bf000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f6ad553f348 method=com.android.dx.cf.code.BaseMachine.getLocalTarget(Z)Lcom/android/dx/rop/code/RegisterSpec; @ 70
-Event: 28.977 Thread 0x00007f6ae41bf000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f6ad553f348 method=com.android.dx.cf.code.BaseMachine.getLocalTarget(Z)Lcom/android/dx/rop/code/RegisterSpec; @ 70
-Event: 28.977 Thread 0x00007f6ae41bf000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f6ad553f348 method=com.android.dx.cf.code.BaseMachine.getLocalTarget(Z)Lcom/android/dx/rop/code/RegisterSpec; @ 70
-Event: 28.977 Thread 0x00007f6ae41bf000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f6ad553f348 method=com.android.dx.cf.code.BaseMachine.getLocalTarget(Z)Lcom/android/dx/rop/code/RegisterSpec; @ 70
-Event: 29.453 Thread 0x00007f6ae41bf000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f6ad4c64c28 method=java.util.BitSet.clone()Ljava/lang/Object; @ 4
-Event: 29.730 Thread 0x00007f6ae41c5800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f6ad552ccc4 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 891
-Event: 29.730 Thread 0x00007f6ae41c5800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f6ad552ccc4 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 891
-Event: 29.764 Thread 0x00007f6ae41bf000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f6ad4d7e80c method=com.android.dx.util.BitIntSet.has(I)Z @ 8
-Event: 31.218 Thread 0x00007f6ae41c4000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f6ad4c6ac54 method=com.android.dx.rop.code.BasicBlockList.preferredSuccessorOf(Lcom/android/dx/rop/code/BasicBlock;)Lcom/android/dx/rop/code/BasicBlock; @ 58
-Event: 31.292 Thread 0x00007f6ae41c5800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f6ad4e9fb50 method=java.util.ArrayList.<init>(I)V @ 5
+Event: 28.977 Thread 0x00007f6ae41bf000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007f6ad553f348 method=com.android.dx.cf.code.BaseMachine.getLocalTarget(Z)Lcom/android/dx/rop/code/RegisterSpec; @ 70
+Event: 28.977 Thread 0x00007f6ae41bf000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007f6ad553f348 method=com.android.dx.cf.code.BaseMachine.getLocalTarget(Z)Lcom/android/dx/rop/code/RegisterSpec; @ 70
+Event: 28.977 Thread 0x00007f6ae41bf000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007f6ad553f348 method=com.android.dx.cf.code.BaseMachine.getLocalTarget(Z)Lcom/android/dx/rop/code/RegisterSpec; @ 70
+Event: 28.977 Thread 0x00007f6ae41bf000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007f6ad553f348 method=com.android.dx.cf.code.BaseMachine.getLocalTarget(Z)Lcom/android/dx/rop/code/RegisterSpec; @ 70
+Event: 29.453 Thread 0x00007f6ae41bf000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f6ad4c64c28 method=java.util.BitSet.clone()Ljava/lang/Object; @ 4
+Event: 29.730 Thread 0x00007f6ae41c5800 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007f6ad552ccc4 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 891
+Event: 29.730 Thread 0x00007f6ae41c5800 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007f6ad552ccc4 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 891
+Event: 29.764 Thread 0x00007f6ae41bf000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f6ad4d7e80c method=com.android.dx.util.BitIntSet.has(I)Z @ 8
+Event: 31.218 Thread 0x00007f6ae41c4000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f6ad4c6ac54 method=com.android.dx.rop.code.BasicBlockList.preferredSuccessorOf(Lcom/android/dx/rop/code/BasicBlock;)Lcom/android/dx/rop/code/BasicBlock; @ 58
+Event: 31.292 Thread 0x00007f6ae41c5800 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007f6ad4e9fb50 method=java.util.ArrayList.<init>(I)V @ 5
 
 Internal exceptions (9 events):
 Event: 0.034 Thread 0x00007f6ae400a000 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x000000076ab07ca8) thrown at [/HUDSON3/workspace/8-2-build-linux-amd64/jdk8u144/9417/hotspot/src/sh

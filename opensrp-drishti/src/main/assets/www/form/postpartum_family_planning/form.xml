@@ -75,14 +75,14 @@
         </fieldset>
     </fieldset>
     <label class="question non-select ">
-        <span lang="" class="question-label active">Date she started FP method? &#xC85;&#xCB5;&#xCB3;&#xCC1; &#xC95;&#xCC1;&#xC9F;&#xCC1;&#xC82;&#xCAC;
+        <span lang="" class="question-label active">follow_up_date she started FP method? &#xC85;&#xCB5;&#xCB3;&#xCC1; &#xC95;&#xCC1;&#xC9F;&#xCC1;&#xC82;&#xCAC;
             &#xCAF;&#xCCB;&#xC9C;&#xCA8;&#xCBE; &#xCB5;&#xCBF;&#xCA7;&#xCBE;&#xCA8;&#xCB5;&#xCA8;&#xCCD;&#xCA8;&#xCC1;
             &#xCAA;&#xCCD;&#xCB0;&#xCBE;&#xCB0;&#xC82;&#xCAD;&#xCBF;&#xCB8;&#xCBF;&#xCA6; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
         <span class="required">*</span>
-        <input autocomplete="off" type="date" name="/Postpartum_FamilyPlanning_EngKan/pp_fp_method_start_date"
+        <input autocomplete="off" type="follow_up_date" name="/Postpartum_FamilyPlanning_EngKan/pp_fp_method_start_date"
                required="required" data-constraint=".&lt;= /Postpartum_FamilyPlanning_EngKan/today "
-               data-type-xml="date"/>
+               data-type-xml="follow_up_date"/>
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
@@ -350,8 +350,8 @@
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input autocomplete="off" type="hidden" name="/Postpartum_FamilyPlanning_EngKan/today" data-preload="date"
-                   data-preload-params="today" data-type-xml="date"/>
+            <input autocomplete="off" type="hidden" name="/Postpartum_FamilyPlanning_EngKan/today" data-preload="follow_up_date"
+                   data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">

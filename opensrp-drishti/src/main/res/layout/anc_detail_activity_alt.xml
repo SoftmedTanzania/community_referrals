@@ -8,7 +8,7 @@
     android:fitsSystemWindows="false"
     android:orientation="vertical"
     android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus"
-    tools:context="com.softmed.uzazisalama.AncDetailActivityAlt">
+    tools:context=".AncDetailActivityAlt">
 
 
     <android.support.design.widget.AppBarLayout
@@ -639,7 +639,7 @@
                         android:layout_alignTop="@+id/iconEdd"
                         android:layout_marginTop="4dp"
                         android:layout_toRightOf="@+id/iconAnc1Date"
-                        android:text="Expected Delivery Date"
+                        android:text="Expected Delivery follow_up_date"
                         android:textColor="@color/secondary_text"
                         android:textSize="14sp" />
 

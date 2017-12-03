@@ -19,7 +19,7 @@
                 <div class="span5 line-right full-height span-no-margin width-without-margins span-content">
                     <button class="btn btn-primary btn-sr full-height"
                             ng-if="client.visits.hb.next"
-                            ng-class="client.visits.hb.next.status"
+                            ng-class="client.visits.hb.next.referral_status"
                             ng-click="openForm('hb_test', client.entityId, {'entityId': client.entityId, 'alertName': client.visits.hb.next.name})">
                         <div class="button-text-container">
                             <span class="text-bold">Hb Test</span>
@@ -56,8 +56,8 @@
                             ng-click="openForm('ifa', client.entityId, {'entityId': client.entityId})">IFA
                     </button>
                     <button class="btn btn-primary btn-sr full-height"
-                       ng-if="client.visits.ifa.next && client.visits.ifa.next.status != 'complete'"
-                       ng-class="client.visits.ifa.next.status"
+                       ng-if="client.visits.ifa.next && client.visits.ifa.next.referral_status != 'complete'"
+                       ng-class="client.visits.ifa.next.referral_status"
                        ng-click="openForm('ifa', client.entityId, {'entityId': client.entityId, 'alertName': client.visits.ifa.next.name})">
                         <div class="button-text-container">
                             <span class="text-bold">IFA Tablets</span>
@@ -66,7 +66,7 @@
                         </div>
                     </button>
                     <button class="btn btn-primary btn-sr full-height complete"
-                            ng-if="client.visits.ifa['IFA'] && ((client.visits.ifa.next && client.visits.ifa.next.status == 'complete') ||
+                            ng-if="client.visits.ifa['IFA'] && ((client.visits.ifa.next && client.visits.ifa.next.referral_status == 'complete') ||
                                 (!client.visits.ifa.next))">
                         <div class="done-icon full-height">
                             <i class="icon-ok green icon-large"></i>

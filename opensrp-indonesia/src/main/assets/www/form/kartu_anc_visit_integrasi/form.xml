@@ -48,7 +48,7 @@
             Program Integrasi
         </span>
         <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/reference_date:label"
-            lang="en">Date of
+            lang="en">follow_up_date of
             Integration Program visit
         </span>
         <span class="required">*</span>
@@ -57,11 +57,11 @@
             tanggal periksa Ibu
         </span>
         <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_integrasi/reference_date:hint"
-            lang="en">Fill in the date
+            lang="en">Fill in the follow_up_date
             of check-up
         </span>
-        <input name="/kunjungan_anc_reviewed_integrasi/reference_date" data-type-xml="date"
-            required="required" type="date" />
+        <input name="/kunjungan_anc_reviewed_integrasi/reference_date" data-type-xml="follow_up_date"
+            required="required" type="follow_up_date" />
     </label>
     <label class="note non-select ">
         <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_8:label"
@@ -748,8 +748,8 @@
                 data-preload-params="start" data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_integrasi/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/kunjungan_anc_reviewed_integrasi/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/kunjungan_anc_reviewed_integrasi/deviceid" data-preload="property"

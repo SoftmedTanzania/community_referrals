@@ -82,7 +82,7 @@
     <string name="sort_by_name_label">Name (A to Z)</string>
     <string name="sort_by_name_label_reverse">Name (Z to A)</string>
     <string name="sort_by_ec_number_label">EC Number</string>
-    <string name="sort_by_date_of_delivery_label">Date of Delivery</string>
+    <string name="sort_by_date_of_delivery_label">follow_up_date of Delivery</string>
     <string name="sort_by_sc_label">SC</string>
     <string name="sort_by_st_label">ST</string>
     <string name="sort_by_high_priority_label">High Priority (HP)</string>
@@ -165,7 +165,7 @@
     <string name="service_type_empty"/>
     <string name="sick_visit">Sick Visit</string>
     <string name="illness_report"><b>Illness Report:</b> %s</string>
-    <string name="illness_date">Date:</string>
+    <string name="illness_date">follow_up_date:</string>
     <string name="str_bcg">BCG</string>
     <string name="str_bcg_on">On</string>
     <string name="hep_b_birth">Hep B</string>
@@ -281,7 +281,7 @@
     <string name="str_risks_reviewed">Risks reviewed:</string>
     <string name="sort_by_edd_label">EDD</string>
 
-    <string name="str_pnc_delivery_date">Date:</string>
+    <string name="str_pnc_delivery_date">follow_up_date:</string>
     <string name="str_pnc_delivery_place">Place:</string>
     <string name="str_pnc_delivery_type">Type:</string>
     <string name="str_pp_fp">PP FP</string>

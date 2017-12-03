@@ -41,7 +41,7 @@
                         android:layout_weight="0.1"
                         android:padding="4dp"
                         android:id="@+id/risk"
-                        android:text="Risk Status"
+                        android:text="Risk referral_status"
                         android:background="@drawable/cell_shape_header"
                         android:layout_height="wrap_content"
                         />

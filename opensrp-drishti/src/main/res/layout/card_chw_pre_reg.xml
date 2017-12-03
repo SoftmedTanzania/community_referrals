@@ -53,7 +53,7 @@
                 android:text="Tarehe ya Rufaa:" />
 
             <org.ei.opensrp.view.customControls.CustomFontTextView
-                android:id="@+id/referralDate"
+                android:id="@+id/referral_date"
                 style="@style/CustomFontTextViewStyle.noPadding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <org.ei.opensrp.view.customControls.CustomFontTextView
-                android:id="@+id/CBHS"
+                android:id="@+id/community_based_hiv_service"
                 style="@style/CustomFontTextViewStyle.ListView.Small.NoPadding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -102,9 +102,9 @@
                 android:id="@+id/textRisk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/CBHS"
+                android:layout_alignTop="@+id/community_based_hiv_service"
                 android:layout_marginRight="0dp"
-                android:layout_toLeftOf="@+id/CBHS"
+                android:layout_toLeftOf="@+id/community_based_hiv_service"
                 android:text="CBHS: " />
 
             <TextView

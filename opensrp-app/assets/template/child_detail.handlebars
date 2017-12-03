@@ -20,7 +20,7 @@
 </div>
 
 <div id="content" class="content-detail">
-    <div class="status-bar">
+    <div class="referral_status-bar">
         <span class="left-text">Child</span>
         {{#ifFalse details.isChildHighRisk}}
         <span class="right-text high-risk">High Risk</span>
@@ -80,7 +80,7 @@
                             <span class="big-text">{{childDetails.age}}</span><br><span class="meta-summary-text">Age</span>
                         </div>
                         <div class="span6 text-center padded">
-                            <span class="big-text">{{formatDate childDetails.dateOfBirth}}</span><br><span class="meta-summary-text">Date of Birth</span>
+                            <span class="big-text">{{formatDate childDetails.dateOfBirth}}</span><br><span class="meta-summary-text">follow_up_date of Birth</span>
                         </div>
                     </div>
                     {{#ifFalse details.childWeight}}
@@ -120,7 +120,7 @@
                                         {{/each}}
                                     </div>
                                     <div class="span4 pull-right text-right">
-                                        {{date}}
+                                        {{follow_up_date}}
                                     </div>
                                 </div>
                                 {{/each}}

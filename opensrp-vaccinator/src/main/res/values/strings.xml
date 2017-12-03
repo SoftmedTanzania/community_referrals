@@ -4,7 +4,7 @@
     <string name="home_field_monitor_label">Field And\nMonitor</string>
     <string name="child_entries" >Child</string>
     <string name="child_profile" >Child Profile</string>
-    <string name="child_DOB" >Date Of Birth</string>
+    <string name="child_DOB" >follow_up_date Of Birth</string>
     <string name="child_last_vaccine" >Last Vaccine given </string>
     <string name="child_next_vaacine" >Next Vaccine Due</string>
     <string name="register_search_hint" >Search</string>

@@ -12,17 +12,17 @@ import static org.ei.opensrp.commonregistry.CommonRepository.Relational_ID;
 
 public class ClientReferralRepository {
 
-    public static final String fName = "fName";
-    public static final String mName = "mName";
-    public static final String lName = "lName";
-    public static final String CBHS = "CBHS";
-    public static final String CTCNumber = "CTCNumber";
-    public static final String ReferralDate = "ReferralDate";
-    public static final String ReferralFacility = "FacilityId";
-    public static final String ReferralReason = "ReferralReason";
-    public static final String Service = "Service";
-    public static final String Status = "Status";
-    public static final String IS_VALID = "IS_VALID";
+    public static final String fName = "first_name";
+    public static final String mName = "middle_name";
+    public static final String lName = "surname";
+    public static final String CBHS = "community_based_hiv_service";
+    public static final String CTCNumber = "ctc_number";
+    public static final String ReferralDate = "referral_date";
+    public static final String ReferralFacility = "facility_id";
+    public static final String ReferralReason = "referral_reason";
+    public static final String Service = "referral_service_id";
+    public static final String Status = "referral_status";
+    public static final String IS_VALID = "is_valid";
 
 
 
@@ -31,17 +31,17 @@ public class ClientReferralRepository {
         ContentValues values = new ContentValues();
         values.put(ID_COLUMN, clientReferralPersonObject.getId());
         values.put(Relational_ID, clientReferralPersonObject.getRelationalId());
-        values.put(fName, clientReferralPersonObject.getfName());
-        values.put(mName, clientReferralPersonObject.getmName());
-        values.put(lName, clientReferralPersonObject.getlName());
-        values.put(CBHS, clientReferralPersonObject.getCBHS());
-        values.put(CTCNumber, clientReferralPersonObject.getCTCNumber());
-        values.put(ReferralDate, clientReferralPersonObject.getReferralDate());
-        values.put(ReferralFacility, clientReferralPersonObject.getFacilityId());
-        values.put(ReferralReason, clientReferralPersonObject.getReferralreason());
-        values.put(Service, clientReferralPersonObject.getReferralService());
-        values.put(Status, clientReferralPersonObject.getStatus());
-        values.put(IS_VALID, clientReferralPersonObject.getIS_VALID());
+        values.put(fName, clientReferralPersonObject.getFirst_name());
+        values.put(mName, clientReferralPersonObject.getMiddle_name());
+        values.put(lName, clientReferralPersonObject.getSurname());
+        values.put(CBHS, clientReferralPersonObject.getCommunity_based_hiv_service());
+        values.put(CTCNumber, clientReferralPersonObject.getCtc_number());
+        values.put(ReferralDate, clientReferralPersonObject.getReferral_date());
+        values.put(ReferralFacility, clientReferralPersonObject.getFacility_id());
+        values.put(ReferralReason, clientReferralPersonObject.getReferral_reason());
+        values.put(Service, clientReferralPersonObject.getReferral_service_id());
+        values.put(Status, clientReferralPersonObject.getReferral_status());
+        values.put(IS_VALID, clientReferralPersonObject.getIs_valid());
         values.put(DETAILS_COLUMN, clientReferralPersonObject.getDetails());
         return values;
     }

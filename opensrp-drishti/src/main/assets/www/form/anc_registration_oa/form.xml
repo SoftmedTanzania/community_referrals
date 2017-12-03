@@ -8,12 +8,12 @@
 
 
     <label class="question non-select ">
-        <span lang="" class="question-label active">Registration date, &#xCA6;&#xCBE;&#xC96;&#xCB2;&#xCBE;&#xCA4;&#xCBF;
+        <span lang="" class="question-label active">Registration follow_up_date, &#xCA6;&#xCBE;&#xC96;&#xCB2;&#xCBE;&#xCA4;&#xCBF;
             &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;:
         </span>
         <span class="required">*</span>
-        <input type="date" name="/ANC_Registration_OA_EngKan/out_of_area_reg_date" required="required"
-               data-constraint=".&lt;= /ANC_Registration_OA_EngKan/today " data-type-xml="date"/>
+        <input type="follow_up_date" name="/ANC_Registration_OA_EngKan/out_of_area_reg_date" required="required"
+               data-constraint=".&lt;= /ANC_Registration_OA_EngKan/today " data-type-xml="follow_up_date"/>
     </label>
     <label class="question non-select ">
         <span lang="" class="question-label active">Name of original village? &#xCB8;&#xCCD;&#xCB5;&#xC82;&#xCA4;
@@ -2227,7 +2227,7 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span lang="" class="question-label active">Economic status, &#xC86;&#xCB0;&#xCCD;&#xCA5;&#xCBF;&#xC95;
+                <span lang="" class="question-label active">Economic referral_status, &#xC86;&#xCB0;&#xCCD;&#xCA5;&#xCBF;&#xC95;
                     &#xCB8;&#xCCD;&#xCA5;&#xCBF;&#xCA4;&#xCBF;:
                 </span>
             </legend>
@@ -2330,8 +2330,8 @@
             &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;:
         </span>
         <span class="required">*</span>
-        <input type="date" name="/ANC_Registration_OA_EngKan/lmp_date" required="required"
-               data-constraint=".&lt;= /ANC_Registration_OA_EngKan/today " data-type-xml="date"/>
+        <input type="follow_up_date" name="/ANC_Registration_OA_EngKan/lmp_date" required="required"
+               data-constraint=".&lt;= /ANC_Registration_OA_EngKan/today " data-type-xml="follow_up_date"/>
     </label>
     <label class="note non-select ">
         <span lang="" class="question-label active">EDD, &#xCA8;&#xCBF;&#xCB0;&#xCC0;&#xC95;&#xCCD;&#xCB7;&#xCA4;
@@ -2719,8 +2719,8 @@
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input type="hidden" name="/ANC_Registration_OA_EngKan/today" data-preload="date"
-                   data-preload-params="today" data-type-xml="date"/>
+            <input type="hidden" name="/ANC_Registration_OA_EngKan/today" data-preload="follow_up_date"
+                   data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">
@@ -2749,11 +2749,11 @@
         </label>
         <label class="calculation non-select ">
             <input type="hidden" name="/ANC_Registration_OA_EngKan/edd"
-                   data-calculate="date( /ANC_Registration_OA_EngKan/lmp_date +280)" data-type-xml="string"/>
+                   data-calculate="follow_up_date( /ANC_Registration_OA_EngKan/lmp_date +280)" data-type-xml="string"/>
         </label>
         <label class="calculation non-select ">
             <input type="hidden" name="/ANC_Registration_OA_EngKan/edd_formatted"
-                   data-calculate="format-date( /ANC_Registration_OA_EngKan/edd , '%Y-%n-%e')" data-type-xml="string"/>
+                   data-calculate="format-follow_up_date( /ANC_Registration_OA_EngKan/edd , '%Y-%n-%e')" data-type-xml="string"/>
         </label>
         <label class="calculation non-select ">
             <input type="hidden" name="/ANC_Registration_OA_EngKan/num_pregnancies"
@@ -2830,7 +2830,7 @@
         </label>
         <label class="calculation non-select ">
             <input type="hidden" name="/ANC_Registration_OA_EngKan/num_days_since_lmp"
-                   data-calculate="int(date( /ANC_Registration_OA_EngKan/today ) - date( /ANC_Registration_OA_EngKan/lmp_date ))"
+                   data-calculate="int(follow_up_date( /ANC_Registration_OA_EngKan/today ) - follow_up_date( /ANC_Registration_OA_EngKan/lmp_date ))"
                    data-type-xml="string"/>
         </label>
         <label class="calculation non-select ">

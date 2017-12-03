@@ -40,7 +40,7 @@
     </fieldset>
     <label class="question non-select ">
         <span lang="" class="question-label active">Tanggal pemeriksaan anak balita</span>
-        <input type="date" name="/balita_kunjungan/B05010" data-type-xml="date" />
+        <input type="follow_up_date" name="/balita_kunjungan/B05010" data-type-xml="follow_up_date" />
     </label>
     <label class="question non-select ">
         <span lang="" class="question-label active">Hasil penimbangan anak Balita</span>
@@ -73,12 +73,12 @@
     </label>
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input type="hidden" name="/balita_kunjungan/today" data-preload="date" data-preload-params="today" data-type-xml="date" />
+            <input type="hidden" name="/balita_kunjungan/today" data-preload="follow_up_date" data-preload-params="today" data-type-xml="follow_up_date" />
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">
         <label class="calculation non-select ">
-            <input autocomplete="off" type="hidden" name="/balita_kunjungan/reg_date" data-calculate=" /Bayi_Neonatal_Period/today " data-type-xml="date"/>
+            <input autocomplete="off" type="hidden" name="/balita_kunjungan/reg_date" data-calculate=" /Bayi_Neonatal_Period/today " data-type-xml="follow_up_date"/>
         </label>
         <label class="calculation non-select ">
             <input type="hidden" name="/balita_kunjungan/meta/instanceID" data-calculate="concat('uuid:', uuid())" data-type-xml="string" />

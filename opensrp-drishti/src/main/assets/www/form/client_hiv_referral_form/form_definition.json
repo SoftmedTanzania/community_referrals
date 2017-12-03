@@ -12,67 +12,64 @@
                 "name": "relationalid"
             },
             {
-                "name": "fName"
+                "name": "first_name"
             },
             {
-                "name": "mName"
+                "name": "middle_name"
             },
             {
-                "name": "lName"
+                "name": "surname"
             },
             {
-                "name": "Status"
+                "name": "date_of_birth"
             },
             {
-                "name": "clientDOB"
+                "name": "community_based_hiv_service"
             },
             {
-                "name": "CBHS"
+                "name": "ctc_number"
             },
             {
-                "name": "CTCNumber"
+                "name": "referral_date"
             },
             {
-                "name": "ReferralDate"
+                "name": "is_valid"
             },
             {
-                "name": "IS_VALID"
+                "name": "referral_status"
             },
             {
-                "name": "FacilityId"
+                "name": "facility_id"
             },
             {
-                "name": "ReferralReason"
+                "name": "referral_reason"
             },
             {
-                "name": "Service"
+                "name": "referral_service_id"
             },
             {
-                "name": "Gender"
+                "name": "gender"
             },
             {
-                "name": "PhoneNumber"
+                "name": "phone_number"
             },
             {
-                "name": "Kata"
+                "name": "ward"
             },
             {
-                "name": "Kijiji"
+                "name": "village"
             },
             {
-                "name": "kijitongoji"
+                "name": "village_leader"
             },
             {
-                "name": "VillageLeader"
+                "name": "service_provider_uiid"
             },
             {
-                "name": "ServiceProviderId"
+                "name": "service_provider_group"
             },
             {
-                "name": "ServiceProviderGroup"
-            },
-            {
-                "name": "ProviderMobileNumber"
+                "name": "service_provider_mobile_number"
             }
         ]
     }

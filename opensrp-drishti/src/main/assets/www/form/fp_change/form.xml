@@ -5,13 +5,13 @@
 
 
     <label class="question or-branch pre-init non-select ">
-        <span lang="" class="question-label active">IUCD removal date? &#xC90;.&#xCAF;&#xCC1;.&#xCB8;&#xCBF;.&#xCA1;&#xCBF;.
+        <span lang="" class="question-label active">IUCD removal follow_up_date? &#xC90;.&#xCAF;&#xCC1;.&#xCB8;&#xCBF;.&#xCA1;&#xCBF;.
             &#xCA4;&#xCC6;&#xC97;&#xCC6;&#xCAF;&#xCC1;&#xCB5; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
-        <input autocomplete="off" type="date" name="/Family_Planning_Change_Method_EngKan/iud_removal_date"
+        <input autocomplete="off" type="follow_up_date" name="/Family_Planning_Change_Method_EngKan/iud_removal_date"
                data-constraint=".&lt;= /Family_Planning_Change_Method_EngKan/today "
                data-relevant=" /Family_Planning_Change_Method_EngKan/case_familyplanning_method  = 'iud'"
-               data-type-xml="date"/>
+               data-type-xml="follow_up_date"/>
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
@@ -149,24 +149,24 @@
         </fieldset>
     </fieldset>
     <label class="question or-branch pre-init non-select ">
-        <span lang="" class="question-label active">Date FP method started? &#xC95;&#xCC1;&#xC9F;&#xCC1;&#xC82;&#xCAC;
+        <span lang="" class="question-label active">follow_up_date FP method started? &#xC95;&#xCC1;&#xC9F;&#xCC1;&#xC82;&#xCAC;
             &#xCAF;&#xCCB;&#xC9C;&#xCA8;&#xCC6;&#xCAF;&#xCA8;&#xCCD;&#xCA8;&#xCC1; &#xCAA;&#xCCD;&#xCB0;&#xCBE;&#xCB0;&#xC82;&#xCAD;&#xCBF;&#xCB8;&#xCBF;&#xCA6;
             &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
         <span class="required">*</span>
-        <input autocomplete="off" type="date" name="/Family_Planning_Change_Method_EngKan/date_familyplanningstart1"
+        <input autocomplete="off" type="follow_up_date" name="/Family_Planning_Change_Method_EngKan/date_familyplanningstart1"
                required="required" data-constraint=".&lt;= /Family_Planning_Change_Method_EngKan/today "
                data-relevant=" /Family_Planning_Change_Method_EngKan/familyplanning_method  != 'none'"
-               data-type-xml="date"/>
+               data-type-xml="follow_up_date"/>
     </label>
     <label class="question or-branch pre-init non-select ">
         <span lang="" class="question-label active">LMP, &#xC95;&#xCCA;&#xCA8;&#xCC6;&#xCAF; &#xCAE;&#xCC1;&#xC9F;&#xCCD;&#xC9F;&#xCBF;&#xCA8;
             &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;:
         </span>
-        <input autocomplete="off" type="date" name="/Family_Planning_Change_Method_EngKan/lmp_date"
+        <input autocomplete="off" type="follow_up_date" name="/Family_Planning_Change_Method_EngKan/lmp_date"
                data-constraint=".&lt;= /Family_Planning_Change_Method_EngKan/today "
                data-relevant=" /Family_Planning_Change_Method_EngKan/familyplanning_method  != 'none' and  /Family_Planning_Change_Method_EngKan/familyplanning_method  != 'male_sterilization'"
-               data-type-xml="date"/>
+               data-type-xml="follow_up_date"/>
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
@@ -364,7 +364,7 @@
              data-relevant=" /Family_Planning_Change_Method_EngKan/familyplanning_method  = 'male_sterilization'">
         <label class="note or-branch pre-init non-select ">
             <span lang="" class="question-label active">Pregnancy can still happen up to 3 months after male
-                sterilization. Tell the couple to use back-up FP method until 3 months from sterilization date, &#xCAA;&#xCC1;&#xCB0;&#xCC1;&#xCB7;
+                sterilization. Tell the couple to use back-up FP method until 3 months from sterilization follow_up_date, &#xCAA;&#xCC1;&#xCB0;&#xCC1;&#xCB7;
                 &#xCB8;&#xC82;&#xCA4;&#xCBE;&#xCA8;&#xCBE;&#xCB9;&#xCB0;&#xCA3; &#xCB6;&#xCB8;&#xCCD;&#xCA4;&#xCCD;&#xCB0;
                 &#xC9A;&#xCBF;&#xC95;&#xCBF;&#xCA4;&#xCCD;&#xCB8;&#xCC6;&#xCAF; &#xCA8;&#xC82;&#xCA4;&#xCB0; &#xC97;&#xCB0;&#xCCD;&#xCAD;&#xCB5;&#xCB8;&#xCCD;&#xCA5;&#xCC6;&#xCAF;&#xCC1;
                 &#xC87;&#xCA8;&#xCCD;&#xCA8;&#xCC2; 3 &#xCA4;&#xCBF;&#xC82;&#xC97;&#xCB3;&#xCB5;&#xCB0;&#xCC6;&#xC97;&#xCC6;
@@ -421,7 +421,7 @@
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
             <input autocomplete="off" type="hidden" name="/Family_Planning_Change_Method_EngKan/today"
-                   data-preload="date" data-preload-params="today" data-type-xml="date"/>
+                   data-preload="follow_up_date" data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">
@@ -434,13 +434,13 @@
         <label class="calculation non-select ">
             <input autocomplete="off" type="hidden"
                    name="/Family_Planning_Change_Method_EngKan/male_sterilizaton_group/threemonths_from_sterilization_date"
-                   data-calculate="date( /Family_Planning_Change_Method_EngKan/date_familyplanningstart  + 90)"
+                   data-calculate="follow_up_date( /Family_Planning_Change_Method_EngKan/date_familyplanningstart  + 90)"
                    data-type-xml="string"/>
         </label>
         <label class="calculation non-select ">
             <input autocomplete="off" type="hidden"
                    name="/Family_Planning_Change_Method_EngKan/male_sterilizaton_group/threemonths_from_sterilization_date_formatted"
-                   data-calculate="format-date( /Family_Planning_Change_Method_EngKan/male_sterilizaton_group/threemonths_from_sterilization_date , '%Y-%n-%e')"
+                   data-calculate="format-follow_up_date( /Family_Planning_Change_Method_EngKan/male_sterilizaton_group/threemonths_from_sterilization_date , '%Y-%n-%e')"
                    data-type-xml="string"/>
         </label>
         <label class="calculation non-select ">

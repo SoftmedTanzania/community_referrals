@@ -2,7 +2,6 @@ package org.ei.opensrp.drishti.Repository;
 
 import com.google.gson.Gson;
 
-import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.DataModels.FollowUp;
 
 import java.text.SimpleDateFormat;
@@ -14,7 +13,7 @@ import java.util.Map;
  */
 
 public class FollowUpPersonObject {
-    private String id, relationalId, Comment,Token,Date, Reason,IsValid,sponserNumber,sponserName ;
+    private String id, relationalId, comment, token, follow_up_date, follow_up_reason, is_valid, sponser_number, sponser_name;
 
     private String details;
     private Map<String, String> columnMap;
@@ -23,26 +22,26 @@ public class FollowUpPersonObject {
                                 String relationalId,
                                 String Comment,
                                 String Token,
-                                String SponserName,
-                                String SponserNumber,
-                                String Date,
-                                String Reason,
-                                String IsValid,
+                                String sponser_name,
+                                String sponser_number,
+                                String follow_up_date,
+                                String follow_up_reason,
+                                String is_valid,
                                 String details
                                       ) {
         this.details = details;
         this.id = id;
-        this.Comment = Comment;
-        this.Token = Token;
-        this.sponserName = SponserName;
-        this.sponserNumber = SponserNumber;
-        this.Reason = Reason;
-        this.Date = Date;
+        this.comment = Comment;
+        this.token = Token;
+        this.sponser_name = sponser_name;
+        this.sponser_number = sponser_number;
+        this.follow_up_reason = follow_up_reason;
+        this.follow_up_date = follow_up_date;
         this.relationalId = relationalId;
-        this.IsValid = IsValid;
+        this.is_valid = is_valid;
     }
 
-    // alternative constructor so you don't pass bucha stuff, PregnantMom contains everything
+    // alternative constructor so you don't pass bucha stuff, Follow Up contains everything
 
     public FollowUpPersonObject(String id, String relationalId, FollowUp followUp) {
 
@@ -50,13 +49,13 @@ public class FollowUpPersonObject {
 
         this.id = id;
         this.relationalId = relationalId;
-        this.Date = followUp.getDate();
-        this.Comment = followUp.getComment();
-        this.Reason= followUp.getReason();
-        this.Token = followUp.getToken();
-        this.sponserNumber = followUp.getSponserNumber();
-        this.sponserName = followUp.getSponserName();
-        this.IsValid = followUp.getIsValid();
+        this.follow_up_date = followUp.getFollow_up_date();
+        this.comment = followUp.getComment();
+        this.follow_up_reason = followUp.getFollow_up_reason();
+        this.token = followUp.getToken();
+        this.sponser_number = followUp.getSponser_mobile_number();
+        this.sponser_name = followUp.getSponser_name();
+        this.is_valid = followUp.getIsValid();
         this.details = new Gson().toJson(followUp);
 
     }
@@ -78,43 +77,59 @@ public class FollowUpPersonObject {
     }
 
     public String getComment() {
-        return Comment;
+        return comment;
     }
 
     public void setComment(String comment) {
-        Comment = comment;
+        this.comment = comment;
     }
 
     public String getToken() {
-        return Token;
+        return token;
     }
 
     public void setToken(String token) {
-        Token = token;
+        this.token = token;
     }
 
-    public String getDate() {
-        return Date;
+    public String getSponser_number() {
+        return sponser_number;
     }
 
-    public void setDate(String date) {
-        Date = date;
+    public void setSponser_number(String sponser_number) {
+        this.sponser_number = sponser_number;
     }
 
-    public String getReason() {
-        return Reason;
+    public String getSponser_name() {
+        return sponser_name;
     }
 
-    public void setReason(String reason) {
-        Reason = reason;
+    public void setSponser_name(String sponser_name) {
+        this.sponser_name = sponser_name;
     }
 
-    public String getIsValid() {
-        return IsValid;
+    public String getFollow_up_date() {
+        return follow_up_date;
     }
 
-    public void setIsValid(String isValid) {
-        IsValid = isValid;
+    public void setFollow_up_date(String follow_up_date) {
+        this.follow_up_date = follow_up_date;
+    }
+
+    public String getFollow_up_reason() {
+        return follow_up_reason;
+    }
+
+    public void setFollow_up_reason(String follow_up_reason) {
+        this.follow_up_reason = follow_up_reason;
+    }
+
+    public String getIs_valid() {
+        return is_valid;
+    }
+
+    public void setIs_valid(String is_valid) {
+        this.is_valid = is_valid;
     }
 
     public String getDetails() {

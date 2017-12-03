@@ -6,13 +6,13 @@ package org.ei.opensrp.drishti.DataModels;
 
 public class ClientReferral {
 
-    private String fName,mName,lName,clientDOB,ReferralDate, FacilityId,ReferralReason,isValid, ProviderMobileNumber,kata,Kijiji,Kijitongoji,VillageLeader,ServiceProviderGroup, ServiceProviderId,PhoneNumber,Service,Gender,CBHS,CTCNumber,Status;
-    private boolean has2WeekCough,
-            hasFever,
-            hadWeightLoss,
-            hasSevereSweating,
-            hasBloodCough,
-            isLostFollowUp;
+    private String first_name, middle_name, surname, date_of_birth, referral_date, facility_id, referral_reason, is_valid, service_provider_mobile_number, ward, village,Kijitongoji, village_leader, service_provider_group, service_provider_uiid, phone_number, referral_service_id, gender, community_based_hiv_service, ctc_number,Status;
+    private boolean has_2Week_cough,
+            has_fever,
+            had_weight_loss,
+            has_severe_sweating,
+            has_blood_cough,
+            is_lost_follow_up;
 
     public String getStatus() {
         return Status;
@@ -22,148 +22,149 @@ public class ClientReferral {
         Status = status;
     }
 
-    public String getmName() {
-        return mName;
+    public String getMiddle_name() {
+        return middle_name;
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
+    public void setMiddle_name(String middle_name) {
+        this.middle_name = middle_name;
     }
 
-    public String getlName() {
-        return lName;
+
+    public String getSurname() {
+        return surname;
     }
 
-    public void setlName(String lName) {
-        this.lName = lName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public String getClientDOB() {
-        return clientDOB;
+    public String getDate_of_birth() {
+        return date_of_birth;
     }
 
-    public String getCTCNumber() {
-        return CTCNumber;
+    public String getCtc_number() {
+        return ctc_number;
     }
 
-    public boolean isHas2WeekCough() {
-        return has2WeekCough;
+    public boolean isHas_2Week_cough() {
+        return has_2Week_cough;
     }
 
-    public void setHas2WeekCough(boolean has2WeekCough) {
-        this.has2WeekCough = has2WeekCough;
+    public void setHas_2Week_cough(boolean has_2Week_cough) {
+        this.has_2Week_cough = has_2Week_cough;
     }
 
-    public boolean isHasFever() {
-        return hasFever;
+    public boolean isHas_fever() {
+        return has_fever;
     }
 
-    public void setHasFever(boolean hasFever) {
-        this.hasFever = hasFever;
+    public void setHas_fever(boolean has_fever) {
+        this.has_fever = has_fever;
     }
 
-    public boolean isHadWeightLoss() {
-        return hadWeightLoss;
+    public boolean isHad_weight_loss() {
+        return had_weight_loss;
     }
 
-    public void setHadWeightLoss(boolean hadWeightLoss) {
-        this.hadWeightLoss = hadWeightLoss;
+    public void setHad_weight_loss(boolean had_weight_loss) {
+        this.had_weight_loss = had_weight_loss;
     }
 
-    public boolean isHasSevereSweating() {
-        return hasSevereSweating;
+    public boolean isHas_severe_sweating() {
+        return has_severe_sweating;
     }
 
-    public void setHasSevereSweating(boolean hasSevereSweating) {
-        this.hasSevereSweating = hasSevereSweating;
+    public void setHas_severe_sweating(boolean has_severe_sweating) {
+        this.has_severe_sweating = has_severe_sweating;
     }
 
-    public boolean isHasBloodCough() {
-        return hasBloodCough;
+    public boolean isHas_blood_cough() {
+        return has_blood_cough;
     }
 
-    public void setHasBloodCough(boolean hasBloodCough) {
-        this.hasBloodCough = hasBloodCough;
+    public void setHas_blood_cough(boolean has_blood_cough) {
+        this.has_blood_cough = has_blood_cough;
     }
 
-    public boolean isLostFollowUp() {
-        return isLostFollowUp;
+    public boolean isIs_lost_follow_up() {
+        return is_lost_follow_up;
     }
 
-    public void setLostFollowUp(boolean lostFollowUp) {
-        isLostFollowUp = lostFollowUp;
+    public void setIs_lost_follow_up(boolean is_lost_follow_up) {
+        this.is_lost_follow_up = is_lost_follow_up;
     }
 
-    public void setCTCNumber(String CTCNumber) {
-        this.CTCNumber = CTCNumber;
+    public void setCtc_number(String ctc_number) {
+        this.ctc_number = ctc_number;
     }
 
-    public void setClientDOB(String clientDOB) {
-        this.clientDOB = clientDOB;
+    public void setDate_of_birth(String date_of_birth) {
+        this.date_of_birth = date_of_birth;
     }
 
-    public String getfName() {
-        return fName;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public String getIsValid() {
-        return isValid;
+    public String getIs_valid() {
+        return is_valid;
     }
 
-    public String getReferralReason() {
-        return ReferralReason;
+    public String getReferral_reason() {
+        return referral_reason;
     }
 
-    public void setReferralReason(String referralReason) {
-        ReferralReason = referralReason;
+    public void setReferral_reason(String referral_reason) {
+        this.referral_reason = referral_reason;
     }
 
-    public void setIsValid(String isValid) {
-        this.isValid = isValid;
+    public void setIs_valid(String is_valid) {
+        this.is_valid = is_valid;
     }
 
-    public void setfName(String fName) {
-        this.fName = fName;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public String getReferralDate() {
-        return ReferralDate;
+    public String getReferral_date() {
+        return referral_date;
     }
 
-    public void setReferralDate(String referralDate) {
-        ReferralDate = referralDate;
+    public void setReferral_date(String referral_date) {
+        this.referral_date = referral_date;
     }
 
-    public String getFacilityId() {
-        return FacilityId;
+    public String getFacility_id() {
+        return facility_id;
     }
 
-    public void setFacilityId(String facilityId) {
-        FacilityId = facilityId;
+    public void setFacility_id(String facility_id) {
+        this.facility_id = facility_id;
     }
 
     public String getProviderMobileNumber() {
-        return ProviderMobileNumber;
+        return service_provider_mobile_number;
     }
 
     public void setProviderMobileNumber(String providerMobileNumber) {
-        this.ProviderMobileNumber = providerMobileNumber;
+        this.service_provider_mobile_number = providerMobileNumber;
     }
 
-    public String getKata() {
-        return kata;
+    public String getWard() {
+        return ward;
     }
 
-    public void setKata(String kata) {
-        this.kata = kata;
+    public void setWard(String ward) {
+        this.ward = ward;
     }
 
-    public String getKijiji() {
-        return Kijiji;
+    public String getVillage() {
+        return village;
     }
 
-    public void setKijiji(String kijiji) {
-        Kijiji = kijiji;
+    public void setVillage(String village) {
+        this.village = village;
     }
 
     public String getKijitongoji() {
@@ -174,59 +175,59 @@ public class ClientReferral {
         Kijitongoji = kijitongoji;
     }
 
-    public String getVillageLeader() {
-        return VillageLeader;
+    public String getVillage_leader() {
+        return village_leader;
     }
 
-    public void setVillageLeader(String villageLeader) {
-        VillageLeader = villageLeader;
+    public void setVillage_leader(String village_leader) {
+        this.village_leader = village_leader;
     }
 
-    public String getServiceProviderGroup() {
-        return ServiceProviderGroup;
+    public String getService_provider_group() {
+        return service_provider_group;
     }
 
-    public void setServiceProviderGroup(String serviceProviderGroup) {
-        ServiceProviderGroup = serviceProviderGroup;
+    public void setService_provider_group(String service_provider_group) {
+        this.service_provider_group = service_provider_group;
     }
 
-    public String getServiceProviderId() {
-        return ServiceProviderId;
+    public String getService_provider_uiid() {
+        return service_provider_uiid;
     }
 
-    public void setServiceProviderId(String serviceProviderId) {
-        ServiceProviderId = serviceProviderId;
+    public void setService_provider_uiid(String service_provider_uiid) {
+        this.service_provider_uiid = service_provider_uiid;
     }
 
-    public String getPhoneNumber() {
-        return PhoneNumber;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        PhoneNumber = phoneNumber;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
-    public String getService() {
-        return Service;
+    public String getReferral_service_id() {
+        return referral_service_id;
     }
 
-    public void setService(String service) {
-        Service = service;
+    public void setReferral_service_id(String referral_service_id) {
+        this.referral_service_id = referral_service_id;
     }
 
     public String getGender() {
-        return Gender;
+        return gender;
     }
 
     public void setGender(String gender) {
-        Gender = gender;
+        this.gender = gender;
     }
 
-    public String getCBHS() {
-        return CBHS;
+    public String getCommunity_based_hiv_service() {
+        return community_based_hiv_service;
     }
 
-    public void setCBHS(String CBHS) {
-        this.CBHS = CBHS;
+    public void setCommunity_based_hiv_service(String community_based_hiv_service) {
+        this.community_based_hiv_service = community_based_hiv_service;
     }
 }

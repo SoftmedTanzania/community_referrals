@@ -7,7 +7,7 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span lang="" class="question-label active">Reason for closing ANC case? ANC &#xC95;&#xCC7;&#xCB8;&#xCCD;
+                <span lang="" class="question-label active">follow_up_reason for closing ANC case? ANC &#xC95;&#xCC7;&#xCB8;&#xCCD;
                     &#xCAE;&#xCC1;&#xC9A;&#xCCD;&#xC9A;&#xCC1;&#xCB5;&#xCBF;&#xC95;&#xCC6;&#xC97;&#xCC6; &#xC95;&#xCBE;&#xCB0;&#xCA3;?
                 </span>
                 <span class="required">*</span>
@@ -83,11 +83,11 @@
     <section class="or-group-data or-branch pre-init " name="/ANC_Close_EngKan/spontaneous_abortion_group"
              data-relevant=" /ANC_Close_EngKan/close_reason  = 'spontaneous_abortion'">
         <label class="question non-select ">
-            <span lang="" class="question-label active">Date of spontaneous abortion? &#xCB8;&#xCCD;&#xCB5;&#xCBE;&#xCAD;&#xCBE;&#xCB5;&#xCBF;&#xC95;
+            <span lang="" class="question-label active">follow_up_date of spontaneous abortion? &#xCB8;&#xCCD;&#xCB5;&#xCBE;&#xCAD;&#xCBE;&#xCB5;&#xCBF;&#xC95;
                 &#xC97;&#xCB0;&#xCCD;&#xCAD;&#xCAA;&#xCBE;&#xCA4;&#xCA6; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date" name="/ANC_Close_EngKan/spontaneous_abortion_group/date_spontaneous"
-                   data-constraint=".&lt;= /ANC_Close_EngKan/today " data-type-xml="date"/>
+            <input autocomplete="off" type="follow_up_date" name="/ANC_Close_EngKan/spontaneous_abortion_group/date_spontaneous"
+                   data-constraint=".&lt;= /ANC_Close_EngKan/today " data-type-xml="follow_up_date"/>
         </label>
         <fieldset class="question ">
             <fieldset>
@@ -223,7 +223,7 @@
         <label class="note non-select ">
             <span lang="" class="question-label active">A woman should wait 3 months after spontaneous abortion before
                 trying to become pregnant again. Counsel EC couple on using family planning method until 3 months from
-                spontaneous abortion date, &#xCA4;&#xCBE;&#xCAF;&#xCBF;&#xCAF;&#xCC1; &#xCB8;&#xCCD;&#xCB5;&#xCBE;&#xCAD;&#xCBE;&#xCB5;&#xCBF;&#xC95;
+                spontaneous abortion follow_up_date, &#xCA4;&#xCBE;&#xCAF;&#xCBF;&#xCAF;&#xCC1; &#xCB8;&#xCCD;&#xCB5;&#xCBE;&#xCAD;&#xCBE;&#xCB5;&#xCBF;&#xC95;
                 &#xC97;&#xCB0;&#xCCD;&#xCAD;&#xCAA;&#xCBE;&#xCA4;&#xCA6; &#xCA8;&#xC82;&#xCA4;&#xCB0; &#xCAE;&#xCA4;&#xCCD;&#xCA4;&#xCCA;&#xCAE;&#xCCD;&#xCAE;&#xCC6;
                 &#xC97;&#xCB0;&#xCCD;&#xCAD;&#xCA7;&#xCB0;&#xCBF;&#xCB8;&#xCB2;&#xCC1; &#xCAA;&#xCCD;&#xCB0;&#xCAF;&#xCA4;&#xCCD;&#xCA8;&#xCBF;&#xCB8;&#xCC1;&#xCB5;&#xCBF;&#xC95;&#xCC6;&#xCAF;&#xCA8;&#xCCD;&#xCA8;&#xCC1;
                 3 &#xCA4;&#xCBF;&#xC82;&#xC97;&#xCB3; &#xC95;&#xCBE;&#xCB2; &#xC95;&#xCBE;&#xCAF;&#xCC1;&#xCB5;&#xCC1;&#xCA6;&#xCC1;.
@@ -281,11 +281,11 @@
             </fieldset>
         </fieldset>
         <label class="question non-select ">
-            <span lang="" class="question-label active">Date of abortion? &#xC97;&#xCB0;&#xCCD;&#xCAD;&#xCAA;&#xCBE;&#xCA4;&#xCA6;
+            <span lang="" class="question-label active">follow_up_date of abortion? &#xC97;&#xCB0;&#xCCD;&#xCAD;&#xCAA;&#xCBE;&#xCA4;&#xCA6;
                 &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
-            <input autocomplete="off" type="date" name="/ANC_Close_EngKan/induced_abortion_group/date_induced"
-                   data-constraint=".&lt;= /ANC_Close_EngKan/today " data-type-xml="date"/>
+            <input autocomplete="off" type="follow_up_date" name="/ANC_Close_EngKan/induced_abortion_group/date_induced"
+                   data-constraint=".&lt;= /ANC_Close_EngKan/today " data-type-xml="follow_up_date"/>
         </label>
         <fieldset class="question or-branch pre-init ">
             <fieldset>
@@ -328,12 +328,12 @@
     <section class="or-group-data or-branch pre-init " name="/ANC_Close_EngKan/maternal_death_group"
              data-relevant=" /ANC_Close_EngKan/maternal_death  = 'yes'">
         <label class="question non-select ">
-            <span lang="" class="question-label active">Date of maternal death? &#xCA4;&#xCBE;&#xCAF;&#xCBF;&#xCAF;
+            <span lang="" class="question-label active">follow_up_date of maternal death? &#xCA4;&#xCBE;&#xCAF;&#xCBF;&#xCAF;
                 &#xCAE;&#xCB0;&#xCA3; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
             </span>
             <span class="required">*</span>
-            <input autocomplete="off" type="date" name="/ANC_Close_EngKan/maternal_death_group/date_maternal_death"
-                   required="required" data-constraint=".&lt;= /ANC_Close_EngKan/today " data-type-xml="date"/>
+            <input autocomplete="off" type="follow_up_date" name="/ANC_Close_EngKan/maternal_death_group/date_maternal_death"
+                   required="required" data-constraint=".&lt;= /ANC_Close_EngKan/today " data-type-xml="follow_up_date"/>
         </label>
         <fieldset class="question ">
             <fieldset>
@@ -422,8 +422,8 @@
 
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
-            <input autocomplete="off" type="hidden" name="/ANC_Close_EngKan/today" data-preload="date"
-                   data-preload-params="today" data-type-xml="date"/>
+            <input autocomplete="off" type="hidden" name="/ANC_Close_EngKan/today" data-preload="follow_up_date"
+                   data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">
@@ -447,13 +447,13 @@
         <label class="calculation non-select ">
             <input autocomplete="off" type="hidden"
                    name="/ANC_Close_EngKan/spontaneous_abortion_group/threemonths_from_spont_abortion_date"
-                   data-calculate="date( /ANC_Close_EngKan/spontaneous_abortion_group/date_spontaneous  + 90)"
+                   data-calculate="follow_up_date( /ANC_Close_EngKan/spontaneous_abortion_group/date_spontaneous  + 90)"
                    data-type-xml="string"/>
         </label>
         <label class="calculation non-select ">
             <input autocomplete="off" type="hidden"
                    name="/ANC_Close_EngKan/spontaneous_abortion_group/threemonths_from_spont_abortion_date_formatted"
-                   data-calculate="format-date( /ANC_Close_EngKan/spontaneous_abortion_group/threemonths_from_spont_abortion_date , '%Y-%n-%e')"
+                   data-calculate="format-follow_up_date( /ANC_Close_EngKan/spontaneous_abortion_group/threemonths_from_spont_abortion_date , '%Y-%n-%e')"
                    data-type-xml="string"/>
         </label>
         <label class="calculation non-select ">

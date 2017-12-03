@@ -242,7 +242,7 @@
             Aktif
         </span>
         <span class="question-label " data-itext-id="/dok_persalinan_reviewed/tanggal__kala_i_aktif:label"
-            lang="en">Date/ Active Stage
+            lang="en">follow_up_date/ Active Stage
             I
         </span>
         <span class="or-hint active" data-itext-id="/dok_persalinan_reviewed/tanggal__kala_i_aktif:hint"
@@ -250,12 +250,12 @@
             Kala I Aktif
         </span>
         <span class="or-hint " data-itext-id="/dok_persalinan_reviewed/tanggal__kala_i_aktif:hint"
-            lang="en">Indicating date of
+            lang="en">Indicating follow_up_date of
             active stage 1
         </span>
         <input name="/dok_persalinan_reviewed/tanggal__kala_i_aktif" data-relevant="selected( /dok_persalinan_reviewed/persalinan ,'kalasatu')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" data-itext-id="/dok_persalinan_reviewed/jam__kala_i_aktif:label"
@@ -281,19 +281,19 @@
             lang="Bahasa">Tanggal / Kala II
         </span>
         <span class="question-label " data-itext-id="/dok_persalinan_reviewed/tanggal__kala_ii:label"
-            lang="en">Date/ Stage II
+            lang="en">follow_up_date/ Stage II
         </span>
         <span class="or-hint active" data-itext-id="/dok_persalinan_reviewed/tanggal__kala_ii:hint"
             lang="Bahasa">Menunjukkan Tanggal
             Terjadinya Kala II Pada Ibu
         </span>
         <span class="or-hint " data-itext-id="/dok_persalinan_reviewed/tanggal__kala_ii:hint"
-            lang="en">Indicating date of stage
+            lang="en">Indicating follow_up_date of stage
             2
         </span>
         <input name="/dok_persalinan_reviewed/tanggal__kala_ii" data-relevant="selected( /dok_persalinan_reviewed/persalinan ,'kaladua')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" data-itext-id="/dok_persalinan_reviewed/jam__kala_ii:label"
@@ -319,7 +319,7 @@
             Plasenta Lahir
         </span>
         <span class="question-label " data-itext-id="/dok_persalinan_reviewed/tanggal__plasenta_lahir:label"
-            lang="en">Date/ Placenta
+            lang="en">follow_up_date/ Placenta
             Expulsion
         </span>
         <span class="or-hint active" data-itext-id="/dok_persalinan_reviewed/tanggal__plasenta_lahir:hint"
@@ -327,12 +327,12 @@
             Tanggal Plasenta Lahir
         </span>
         <span class="or-hint " data-itext-id="/dok_persalinan_reviewed/tanggal__plasenta_lahir:hint"
-            lang="en">Indicating date
+            lang="en">Indicating follow_up_date
             when placenta is born
         </span>
         <input name="/dok_persalinan_reviewed/tanggal__plasenta_lahir" data-relevant="selected( /dok_persalinan_reviewed/persalinan ,'kalatiga')"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="follow_up_date"
+            type="follow_up_date" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" data-itext-id="/dok_persalinan_reviewed/jam__plasenta_lahir:label"
@@ -1049,10 +1049,10 @@
             lang="Bahasa">Tanggal lahir bayi
         </span>
         <span class="or-hint " data-itext-id="/dok_persalinan_reviewed/tanggal_lahir_anak:hint"
-            lang="en">Baby's date of birth
+            lang="en">Baby's follow_up_date of birth
         </span>
-        <input name="/dok_persalinan_reviewed/tanggal_lahir_anak" data-type-xml="date" required="required"
-            type="date" />
+        <input name="/dok_persalinan_reviewed/tanggal_lahir_anak" data-type-xml="follow_up_date" required="required"
+            type="follow_up_date" />
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -1179,8 +1179,8 @@
                 data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/dok_persalinan_reviewed/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/dok_persalinan_reviewed/today" data-preload="follow_up_date" data-preload-params="today"
+                data-type-xml="follow_up_date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/dok_persalinan_reviewed/deviceid" data-preload="property" data-preload-params="deviceid"
@@ -1199,7 +1199,7 @@
                 data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/dok_persalinan_reviewed/tanggalHPHT" data-preload="date" data-preload-params="tanggalHPHT"
+            <input name="/dok_persalinan_reviewed/tanggalHPHT" data-preload="follow_up_date" data-preload-params="tanggalHPHT"
                 data-type-xml="dateTime" type="hidden" />
         </label>
     </fieldset>

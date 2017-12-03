@@ -5,13 +5,13 @@
 
 
     <label class="question non-select ">
-        <span lang="" class="question-label active">Date of referral follow-up? &#xCB0;&#xCC6;&#xCAB;&#xCCD;&#x200D;&#xCB0;&#xCB2;&#xCCD;
+        <span lang="" class="question-label active">follow_up_date of referral follow-up? &#xCB0;&#xCC6;&#xCAB;&#xCCD;&#x200D;&#xCB0;&#xCB2;&#xCCD;
             &#xC85;&#xCA8;&#xCC1;&#xCB8;&#xCB0;&#xCA3;&#xCC6;&#xCAF; &#xCA6;&#xCBF;&#xCA8;&#xCBE;&#xC82;&#xC95;?
         </span>
         <span class="required">*</span>
-        <input autocomplete="off" type="date" name="/Family_Planning_Referral_Followup_EngKan/referral_followup_date"
+        <input autocomplete="off" type="follow_up_date" name="/Family_Planning_Referral_Followup_EngKan/referral_followup_date"
                required="required" data-constraint=".&lt;= /Family_Planning_Referral_Followup_EngKan/today "
-               data-type-xml="date"/>
+               data-type-xml="follow_up_date"/>
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -280,7 +280,7 @@
     <fieldset id="or-preload-items" style="display:none;">
         <label class="calculation non-select ">
             <input autocomplete="off" type="hidden" name="/Family_Planning_Referral_Followup_EngKan/today"
-                   data-preload="date" data-preload-params="today" data-type-xml="date"/>
+                   data-preload="follow_up_date" data-preload-params="today" data-type-xml="follow_up_date"/>
         </label>
     </fieldset>
     <fieldset id="or-calculated-items" style="display:none;">

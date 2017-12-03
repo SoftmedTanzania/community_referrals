@@ -221,16 +221,16 @@ Event: 52.137 GC heap before
   class space    used 640K, capacity 656K, committed 768K, reserved 1048576K
 
 Deoptimization events (10 events):
-Event: 40.211 Thread 0x00007fac501a7000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fac416e1988 method=com.android.dx.ssa.back.FirstFitLocalCombiningAllocator.findNextUnreservedRopReg(IILcom/android/dx/ssa/back/FirstFitLocalCombiningAllocator$Alignment;)I @ 60
-Event: 41.642 Thread 0x00007fac501aa000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fac419059ac method=com.android.dx.cf.code.Ropper.mergeAndWorkAsNecessary(IILcom/android/dx/cf/code/Ropper$Subroutine;Lcom/android/dx/cf/code/Frame;[I)V @ 68
-Event: 43.355 Thread 0x00007fac5000a000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fac41c38b0c method=com.android.dx.ssa.PhiTypeResolver.resolveResultType(Lcom/android/dx/ssa/PhiInsn;)Z @ 293
-Event: 43.367 Thread 0x00007fac501aa000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fac41338198 method=com.android.dx.cf.code.Merger.isPossiblyAssignableFrom(Lcom/android/dx/rop/type/TypeBearer;Lcom/android/dx/rop/type/TypeBearer;)Z @ 131
-Event: 50.068 Thread 0x00007fac5018c800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fac416bdcbc method=java.util.Arrays.hashCode([Ljava/lang/Object;)I @ 43
-Event: 50.068 Thread 0x00007fac5018c800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fac416bdcbc method=java.util.Arrays.hashCode([Ljava/lang/Object;)I @ 43
-Event: 50.068 Thread 0x00007fac5018c800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fac416bdcbc method=java.util.Arrays.hashCode([Ljava/lang/Object;)I @ 43
-Event: 50.069 Thread 0x00007fac5018c800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fac416bdcbc method=java.util.Arrays.hashCode([Ljava/lang/Object;)I @ 43
-Event: 51.479 Thread 0x00007fac501aa000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fac41c5ccac method=com.android.dx.ssa.SCCP.replaceBranches()V @ 14
-Event: 52.128 Thread 0x00007fac501aa000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fac41b87668 method=com.android.dx.ssa.SCCP.simulateBranch(Lcom/android/dx/ssa/SsaInsn;)V @ 339
+Event: 40.211 Thread 0x00007fac501a7000 Uncommon trap: follow_up_reason=bimorphic action=maybe_recompile pc=0x00007fac416e1988 method=com.android.dx.ssa.back.FirstFitLocalCombiningAllocator.findNextUnreservedRopReg(IILcom/android/dx/ssa/back/FirstFitLocalCombiningAllocator$Alignment;)I @ 60
+Event: 41.642 Thread 0x00007fac501aa000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007fac419059ac method=com.android.dx.cf.code.Ropper.mergeAndWorkAsNecessary(IILcom/android/dx/cf/code/Ropper$Subroutine;Lcom/android/dx/cf/code/Frame;[I)V @ 68
+Event: 43.355 Thread 0x00007fac5000a000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007fac41c38b0c method=com.android.dx.ssa.PhiTypeResolver.resolveResultType(Lcom/android/dx/ssa/PhiInsn;)Z @ 293
+Event: 43.367 Thread 0x00007fac501aa000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007fac41338198 method=com.android.dx.cf.code.Merger.isPossiblyAssignableFrom(Lcom/android/dx/rop/type/TypeBearer;Lcom/android/dx/rop/type/TypeBearer;)Z @ 131
+Event: 50.068 Thread 0x00007fac5018c800 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007fac416bdcbc method=java.util.Arrays.hashCode([Ljava/lang/Object;)I @ 43
+Event: 50.068 Thread 0x00007fac5018c800 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007fac416bdcbc method=java.util.Arrays.hashCode([Ljava/lang/Object;)I @ 43
+Event: 50.068 Thread 0x00007fac5018c800 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007fac416bdcbc method=java.util.Arrays.hashCode([Ljava/lang/Object;)I @ 43
+Event: 50.069 Thread 0x00007fac5018c800 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007fac416bdcbc method=java.util.Arrays.hashCode([Ljava/lang/Object;)I @ 43
+Event: 51.479 Thread 0x00007fac501aa000 Uncommon trap: follow_up_reason=unstable_if action=reinterpret pc=0x00007fac41c5ccac method=com.android.dx.ssa.SCCP.replaceBranches()V @ 14
+Event: 52.128 Thread 0x00007fac501aa000 Uncommon trap: follow_up_reason=class_check action=maybe_recompile pc=0x00007fac41b87668 method=com.android.dx.ssa.SCCP.simulateBranch(Lcom/android/dx/ssa/SsaInsn;)V @ 339
 
 Internal exceptions (10 events):
 Event: 1.405 Thread 0x00007fac501a7000 Implicit null exception at 0x00007fac413747ef to 0x00007fac41376f85

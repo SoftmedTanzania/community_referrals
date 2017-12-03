@@ -5,22 +5,22 @@
             <!--VISITS-->
             <button class="btn btn-primary btn-sr full-height"
                     ng-if="client.visits.tt[milestone]"
-                    ng-class="client.visits.tt[milestone].status"
-                    ng-click='client.visits.tt[milestone].status == "complete"
+                    ng-class="client.visits.tt[milestone].referral_status"
+                    ng-click='client.visits.tt[milestone].referral_status == "complete"
                         || openFormWithFieldOverridesAndMetaData("tt",
                         client.entityId,
                         {"entityId": client.entityId, "alertName": client.visits.tt.next.name},
                         "{\"ttDose\":\""+client.visits.tt.next.reminder_form_value+"\"}")'>
-                <ng-switch on="client.visits.tt[milestone].status">
+                <ng-switch on="client.visits.tt[milestone].referral_status">
                     <div ng-switch-when="complete" class="done-icon full-height">
                         <i class="icon-ok green icon-large"></i>
                     </div>
                 </ng-switch>
                 <div class="button-text-container"
-                     ng-class="client.visits.tt[milestone].status">
+                     ng-class="client.visits.tt[milestone].referral_status">
                     <span class="text-bold text-upper">{{milestone}}</span>
                     <br/>
-                    <ng:switch on="client.visits.tt[milestone].status">
+                    <ng:switch on="client.visits.tt[milestone].referral_status">
                         <span ng-switch-when="complete">On </span>
                         <span ng-switch-default>Due </span>
                     </ng:switch>
