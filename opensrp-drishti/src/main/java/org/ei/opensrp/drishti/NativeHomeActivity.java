@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
@@ -52,6 +54,7 @@ import static org.ei.opensrp.event.Event.SYNC_COMPLETED;
 import static org.ei.opensrp.event.Event.SYNC_STARTED;
 
 public class NativeHomeActivity extends SecuredActivity {
+    private static final String TAG = NativeHomeActivity.class.getSimpleName();
     private NavigationController navigationController1;
     private MenuItem updateMenuItem;
     private MenuItem remainingFormsToSyncMenuItem;
@@ -123,7 +126,41 @@ public class NativeHomeActivity extends SecuredActivity {
         OrientationHelper.setProperOrientationForDevice(NativeHomeActivity.this);
 
 
+        String userlocation = context().allSettings().settingsRepository.querySetting("anmLocation","");
         String userDetailsString = context().allSettings().settingsRepository.querySetting("userInformation","");
+        String teamDetailsString = context().allSettings().settingsRepository.querySetting("teamInformation","");
+        Log.d(TAG,"team details "+teamDetailsString);
+        JSONObject teamSettings = null;
+        try {
+            teamSettings = new JSONObject(teamDetailsString);
+
+
+            JSONObject team_details = null;
+            try {
+                Log.d(TAG,"teamSettings = "+teamSettings.toString());
+                team_details = teamSettings.getJSONObject("team");
+                Log.d(TAG,"team jason "+team_details.get("uuid").toString()+" "+team_details.get("teamName").toString());
+                ((UzaziSalamaApplication)getApplication()).setTeam_uuid(team_details.get("uuid").toString());
+                ((UzaziSalamaApplication)getApplication()).setTeam_name(team_details.get("teamName").toString());
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            JSONObject userLocationSettings = null;
+            try {
+                userLocationSettings = team_details.getJSONObject("location");
+                Log.d(TAG,"teamSettings location id= "+userLocationSettings.get("uuid").toString());
+                ((UzaziSalamaApplication)getApplication()).setTeam_location_id(userLocationSettings.get("uuid").toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
         JSONObject userSettings = null;
         try {
             userSettings = new JSONObject(userDetailsString);
@@ -133,10 +170,24 @@ public class NativeHomeActivity extends SecuredActivity {
 
         JSONArray roles = null;
         try {
+            Log.d(TAG,"usersettings = "+userSettings.toString());
             roles = userSettings.getJSONArray("roles");
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        JSONObject attributes = null;
+        try {
+            attributes = userSettings.getJSONObject("attributes");
+
+            ((UzaziSalamaApplication)getApplication()).setCurrentUserID(attributes.get("_PERSON_UUID").toString());
+            ((UzaziSalamaApplication)getApplication()).setUsername(userSettings.get("username").toString());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
 
         int count = roles.length();
         for (int i =0 ; i<count ; i++){
@@ -320,9 +371,9 @@ public class NativeHomeActivity extends SecuredActivity {
                     navigationController.startANCSmartRegistry();
                     break;
 
-                case R.id.btn_pnc_register:
-                    navigationController.startPNCSmartRegistry();
-                    break;
+//                case R.id.btn_pnc_register:
+//                    navigationController.startPNCSmartRegistry();
+//                    break;
 
 //                case R.id.btn_chw_register:
 //                    navigationController1.startCHWSmartRegistry();

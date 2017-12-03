@@ -130,7 +130,7 @@ public class Utils {
                     commonPersonObject.getColumnmaps().get("ReferralDate"),
                     commonPersonObject.getColumnmaps().get("FacilityId"),
                     commonPersonObject.getColumnmaps().get("ReferralReason"),
-                    commonPersonObject.getColumnmaps().get("ReferralService"),
+                    commonPersonObject.getColumnmaps().get("ReferralServiceDataModel"),
                     commonPersonObject.getColumnmaps().get("Status"),
                     commonPersonObject.getColumnmaps().get("isValid"),
                     commonPersonObject.getColumnmaps().get("details")

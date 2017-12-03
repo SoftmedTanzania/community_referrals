@@ -10,6 +10,7 @@ public class AllSettings {
     private static final String ANM_PASSWORD_PREFERENCE_KEY = "anmPassword";
     private static final String ANM_LOCATION = "anmLocation";
     private static final String USER_INFORMATION = "userInformation";
+    private static final String TEAM_INFORMATION = "teamInformation";
 
     protected AllSharedPreferences preferences;
     public SettingsRepository settingsRepository;
@@ -58,6 +59,14 @@ public class AllSettings {
 
     public String fetchANMLocation() {
         return settingsRepository.querySetting(ANM_LOCATION, "");
+    }
+
+    public void saveTeamInformation(String team) {
+        settingsRepository.updateSetting(TEAM_INFORMATION, team);
+    }
+
+    public String fetchTeamInformation() {
+        return settingsRepository.querySetting(TEAM_INFORMATION, "");
     }
 
     public void saveUserInformation(String userInformation) {

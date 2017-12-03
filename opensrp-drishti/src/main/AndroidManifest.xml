@@ -52,14 +52,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.softmed.uzazisalama.NativeHomeActivity"
+            android:name=".NativeHomeActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".AncFollowUpFormActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.softmed.uzazisalama.AncSmartRegisterActivity"
+            android:name=".AncSmartRegisterActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

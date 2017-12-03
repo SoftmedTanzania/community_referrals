@@ -37,7 +37,8 @@ import static org.ei.opensrp.util.Log.logInfo;
 )
 public class UzaziSalamaApplication extends DrishtiApplication {
     private int userType=0;//0=CHW and 1=Facility health care worker
-    public  String currentUserID;
+    public  String currentUserID,team_uuid, phone_number,username,team_name,team_location_id;
+
 
     @Override
     public void onCreate() {
@@ -179,5 +180,45 @@ public class UzaziSalamaApplication extends DrishtiApplication {
 
     public  void setCurrentUserID(String currentUserID) {
        this.currentUserID = currentUserID;
+    }
+
+    public String getTeam_uuid() {
+        return team_uuid;
+    }
+
+    public void setTeam_uuid(String team_uuid) {
+        this.team_uuid = team_uuid;
+    }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getTeam_name() {
+        return team_name;
+    }
+
+    public void setTeam_name(String team_name) {
+        this.team_name = team_name;
+    }
+
+    public String getTeam_location_id() {
+        return team_location_id;
+    }
+
+    public void setTeam_location_id(String team_location_id) {
+        this.team_location_id = team_location_id;
     }
 }

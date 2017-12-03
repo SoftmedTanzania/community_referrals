@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.commonregistry.CommonRepository;
+import org.ei.opensrp.drishti.Application.UzaziSalamaApplication;
 import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.DataModels.Facility;
 import org.ei.opensrp.drishti.R;
@@ -414,7 +415,6 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
 
         referral.setReferral_date(textDate.getText().toString());
         if((textDOB.getText().toString()).equals("dd mmm yyyy")){
-            Log.d(TAG,"am in age");
             int age = Integer.parseInt(editTextAge.getText().toString());
             int year = Calendar.getInstance().get(Calendar.YEAR);
             int Byear = year - age;
@@ -429,9 +429,9 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         referral.setMiddle_name(editTextmName.getText().toString());
         referral.setSurname(editTextlName.getText().toString());
         if(radioGroupGender.getCheckedRadioButtonId() == R.id.male)
-            referral.setGender("me");
+            referral.setGender("Male");
         else
-            referral.setGender("fe");
+            referral.setGender("Female");
         referral.setWard(editTextKataAddress.getText().toString());
         referral.setVillage(editTextKijiji.getText().toString());
         referral.setKijitongoji(editTextKijitongoji.getText().toString());
@@ -441,7 +441,7 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         referral.setVillage_leader(editTextVillageLeader.getText().toString());
         referral.setReferral_reason(editTextReferralReason.getText().toString());
         referral.setReferral_service_id(spinnerService.getSelectedItem().toString());
-        referral.setService_provider_uiid(textviewReferralProvider.getText().toString());
+//        referral.setService_provider_uiid(((UzaziSalamaApplication )getActivity()).getCurrentUserID);
         referral.setProviderMobileNumber(textviewReferralNumber.getText().toString());
         referral.setService_provider_group(textviewReferralProviderSupportGroup.getText().toString());
         if(fName.equals("client_tb_referral_form")){

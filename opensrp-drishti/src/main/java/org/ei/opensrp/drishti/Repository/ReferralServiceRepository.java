@@ -2,12 +2,10 @@ package org.ei.opensrp.drishti.Repository;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.hardware.camera2.params.Face;
 
 import net.sqlcipher.database.SQLiteDatabase;
 import org.apache.commons.lang3.StringUtils;
-import org.ei.opensrp.drishti.DataModels.Facility;
-import org.ei.opensrp.drishti.DataModels.Facility;
+import org.ei.opensrp.drishti.DataModels.ReferralServiceDataModel;
 import org.ei.opensrp.repository.DrishtiRepository;
 
 import java.util.ArrayList;
@@ -16,39 +14,39 @@ import java.util.List;
 import static net.sqlcipher.DatabaseUtils.longForQuery;
 import static org.apache.commons.lang3.StringUtils.repeat;
 
-public class FacilityRepository extends DrishtiRepository {
-    private static final String CHILD_SQL = "CREATE TABLE facility(id VARCHAR PRIMARY KEY, name VARCHAR)";
-    public static final String FACILITY = "facility";
+public class ReferralServiceRepository extends DrishtiRepository {
+    private static final String CHILD_SQL = "CREATE TABLE referral_service(id VARCHAR PRIMARY KEY, name VARCHAR)";
+    public static final String REFERRAL_SERVICE = "referral_service";
     private static final String ID_COLUMN = "id";
     private static final String NAME = "name";
-    public static final String[] FACILITY_TABLE_COLUMNS = {ID_COLUMN, NAME};
-    
+    public static final String[] REFERRAL_SERVICE_TABLE_COLUMNS = {ID_COLUMN, NAME};
+    public static final String NOT_CLOSED = "false";
 
     @Override
     protected void onCreate(SQLiteDatabase database) {
         database.execSQL(CHILD_SQL);
     }
 
-    public void add(Facility facility) {
+    public void add(ReferralServiceDataModel referralServiceDataModel) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
-        database.insert(FACILITY, null, createValuesFor(facility));
+        database.insert(REFERRAL_SERVICE, null, createValuesFor(referralServiceDataModel));
     }
 
-    public void update(Facility facility) {
+    public void update(ReferralServiceDataModel referralServiceDataModel) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
-        database.update(FACILITY, createValuesFor(facility), ID_COLUMN + " = ?", new String[]{facility.getId()});
+        database.update(REFERRAL_SERVICE, createValuesFor(referralServiceDataModel), ID_COLUMN + " = ?", new String[]{referralServiceDataModel.getId()});
     }
 
-//    public List<Facility> all() {
+//    public List<ReferralServiceDataModel> all() {
 //        SQLiteDatabase database = masterRepository.getReadableDatabase();
 //        Cursor cursor = database.query(FACILITY, FACILITY_TABLE_COLUMNS, IS_CLOSED_COLUMN + " = ?", new String[]{NOT_CLOSED}, null, null, null, null);
 //        return readAll(cursor);
 //    }
 
-    public Facility find(String caseId) {
+    public ReferralServiceDataModel find(String caseId) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
-        Cursor cursor = database.query(FACILITY, FACILITY_TABLE_COLUMNS, ID_COLUMN + " = ?", new String[]{caseId}, null, null, null, null);
-        List<Facility> children = readAll(cursor);
+        Cursor cursor = database.query(REFERRAL_SERVICE, REFERRAL_SERVICE_TABLE_COLUMNS, ID_COLUMN + " = ?", new String[]{caseId}, null, null, null, null);
+        List<ReferralServiceDataModel> children = readAll(cursor);
 
         if (children.isEmpty()) {
             return null;
@@ -56,9 +54,9 @@ public class FacilityRepository extends DrishtiRepository {
         return children.get(0);
     }
 
-    public List<Facility> findFacilityByCaseIds(String... caseIds) {
+    public List<ReferralServiceDataModel> findServiceByCaseIds(String... caseIds) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
-        Cursor cursor = database.rawQuery(String.format("SELECT * FROM %s WHERE %s IN (%s)", FACILITY, ID_COLUMN, insertPlaceholdersForInClause(caseIds.length)), caseIds);
+        Cursor cursor = database.rawQuery(String.format("SELECT * FROM %s WHERE %s IN (%s)", REFERRAL_SERVICE, ID_COLUMN, insertPlaceholdersForInClause(caseIds.length)), caseIds);
         return readAll(cursor);
     }
 
@@ -66,17 +64,17 @@ public class FacilityRepository extends DrishtiRepository {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(NAME, name);
-        database.update(FACILITY, values, ID_COLUMN + " = ?", new String[]{caseId});
+        database.update(REFERRAL_SERVICE, values, ID_COLUMN + " = ?", new String[]{caseId});
     }
 
-    public List<Facility> findByServiceCaseId(String caseId) {
+    public List<ReferralServiceDataModel> findByServiceCaseId(String caseId) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
-        Cursor cursor = database.query(FACILITY, FACILITY_TABLE_COLUMNS, NAME + " = ?", new String[]{caseId}, null, null, null, null);
+        Cursor cursor = database.query(REFERRAL_SERVICE, REFERRAL_SERVICE_TABLE_COLUMNS, NAME + " = ?", new String[]{caseId}, null, null, null, null);
         return readAll(cursor);
     }
 
     public long count() {
-        return longForQuery(masterRepository.getReadableDatabase(), "SELECT COUNT(1) FROM " + FACILITY, new String[0]);
+        return longForQuery(masterRepository.getReadableDatabase(), "SELECT COUNT(1) FROM " + REFERRAL_SERVICE, new String[0]);
     }
 
 
@@ -95,18 +93,18 @@ public class FacilityRepository extends DrishtiRepository {
 
 
 
-    private ContentValues createValuesFor(Facility facility) {
+    private ContentValues createValuesFor(ReferralServiceDataModel referralServiceDataModel) {
         ContentValues values = new ContentValues();
-        values.put(ID_COLUMN, facility.getId());
-        values.put(NAME, facility.getName());
+        values.put(ID_COLUMN, referralServiceDataModel.getId());
+        values.put(NAME, referralServiceDataModel.getName());
         return values;
     }
 
-    private List<Facility> readAll(Cursor cursor) {
+    private List<ReferralServiceDataModel> readAll(Cursor cursor) {
         cursor.moveToFirst();
-        List<Facility> referralServicesListDataModel = new ArrayList<Facility>();
+        List<ReferralServiceDataModel> referralServicesListDataModel = new ArrayList<ReferralServiceDataModel>();
         while (!cursor.isAfterLast()) {
-            referralServicesListDataModel.add(new Facility(cursor.getString(0), cursor.getString(1))
+            referralServicesListDataModel.add(new ReferralServiceDataModel(cursor.getString(0), cursor.getString(1))
 
             );
             cursor.moveToNext();
@@ -115,9 +113,9 @@ public class FacilityRepository extends DrishtiRepository {
         return referralServicesListDataModel;
     }
 
-    private List<Facility> readAllChildren(Cursor cursor) {
+    private List<ReferralServiceDataModel> readAllChildren(Cursor cursor) {
         cursor.moveToFirst();
-        List<Facility> children = new ArrayList<Facility>();
+        List<ReferralServiceDataModel> children = new ArrayList<ReferralServiceDataModel>();
         while (!cursor.isAfterLast()) {
             children.add(serviceFromCursor(cursor));
             cursor.moveToNext();
@@ -126,10 +124,10 @@ public class FacilityRepository extends DrishtiRepository {
         return children;
     }
 
-    private Facility serviceFromCursor(Cursor cursor) {
-        return new Facility(
-                getColumnValueByAlias(cursor, FACILITY, ID_COLUMN),
-                getColumnValueByAlias(cursor, FACILITY, NAME));
+    private ReferralServiceDataModel serviceFromCursor(Cursor cursor) {
+        return new ReferralServiceDataModel(
+                getColumnValueByAlias(cursor, REFERRAL_SERVICE, ID_COLUMN),
+                getColumnValueByAlias(cursor, REFERRAL_SERVICE, NAME));
     }
 
     private String getColumnValueByAlias(Cursor cursor, String table, String column) {
@@ -143,6 +141,6 @@ public class FacilityRepository extends DrishtiRepository {
 
     public void delete(String childId) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
-        database.delete(FACILITY, ID_COLUMN + "= ?", new String[]{childId});
+        database.delete(REFERRAL_SERVICE, ID_COLUMN + "= ?", new String[]{childId});
     }
 }

@@ -1,6 +1,5 @@
-package org.ei.opensrp.drishti.Service;
+package org.ei.opensrp.sync;
 
-import org.ei.opensrp.drishti.Repository.ReferralServiceRepository;
 import org.ei.opensrp.repository.AllSettings;
 import org.ei.opensrp.util.Log;
 import org.ei.opensrp.view.BackgroundAction;
@@ -10,13 +9,13 @@ import org.ei.opensrp.view.ProgressIndicator;
 /**
  * Created by Dimas Ciputra on 3/24/15.
  */
-public class LocationService {
+public class SaveTeamInfoTask {
 
     private LockingBackgroundTask lockingBackgroundTask;
-    private ReferralServiceRepository allSettings;
+    private AllSettings allSettings;
 
-    public LocationService(ReferralServiceRepository serviceRepository) {
-        this.allSettings = serviceRepository;
+    public SaveTeamInfoTask(AllSettings allSettings) {
+        this.allSettings = allSettings;
         lockingBackgroundTask = new LockingBackgroundTask(new ProgressIndicator() {
             @Override
             public void setVisible() {
@@ -24,17 +23,17 @@ public class LocationService {
 
             @Override
             public void setInvisible() {
-                Log.logInfo("Successfully saved referral service information");
+                Log.logInfo("Successfully saved team information");
             }
         });
     }
 
-    public void save(final String service) {
+    public void save(final String teamInfo) {
         lockingBackgroundTask.doActionInBackground(new BackgroundAction<Object>() {
             @Override
             public Object actionToDoInBackgroundThread() {
-                allSettings.saveTeamInformation(service);
-                return service;
+                allSettings.saveTeamInformation(teamInfo);
+                return teamInfo;
             }
 
             @Override

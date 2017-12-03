@@ -85,29 +85,29 @@ public class PncListFragment extends SecuredNativeSmartRegisterCursorAdapterFrag
     }
 
     public void populateData(){
-        commonRepository = context().commonrepository("uzazi_salama_pnc");
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME );
-
-        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
-        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
-
-//        this.motherPersonList = Utils.convertToPncPersonObjectList(commonPersonObjectList);
-        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + motherPersonList.size());
-
-        CommonRepository motherRepository = context().commonrepository("wazazi_salama_mother");
-        CommonRepository childRepository = context().commonrepository("uzazi_salama_child");
-        pager = new PncRegisterListAdapter(getActivity(),motherRepository,childRepository,motherPersonList,getContext());
-
-
-//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        int numberOfColumns=2;
-        if(isTablet(getActivity())){
-            numberOfColumns = 3;
-        }
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        recyclerView.setAdapter(pager);
+//        commonRepository = context().commonrepository("uzazi_salama_pnc");
+//        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME );
+//
+//        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
+//        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
+//
+////        this.motherPersonList = Utils.convertToPncPersonObjectList(commonPersonObjectList);
+//        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + motherPersonList.size());
+//
+//        CommonRepository motherRepository = context().commonrepository("wazazi_salama_mother");
+//        CommonRepository childRepository = context().commonrepository("uzazi_salama_child");
+//        pager = new PncRegisterListAdapter(getActivity(),motherRepository,childRepository,motherPersonList,getContext());
+//
+//
+////        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+//        int numberOfColumns=2;
+//        if(isTablet(getActivity())){
+//            numberOfColumns = 3;
+//        }
+//        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//
+//        recyclerView.setAdapter(pager);
     }
 
     @Override

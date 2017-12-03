@@ -21,7 +21,7 @@ public class Facility  {
 
     }
 
-    public Facility(String id, String relationID, String name) {
+    public Facility(String id, String name) {
         this.id = id;
         this.name = name;
 
@@ -47,10 +47,8 @@ public class Facility  {
         ArrayList<Facility> visitedMom = new ArrayList<Facility>();
 
 
-        visitedMom.add(new Facility("0001","null","facility A"));
-        visitedMom.add(new Facility("0002","null","facility B"));
-        visitedMom.add(new Facility("0003","null","facility C"));
-        visitedMom.add(new Facility("0004","null","facility D"));
+        visitedMom.add(new Facility("0001","facility A"));
+        visitedMom.add(new Facility("0002","facility B"));
 
 
         return visitedMom;
