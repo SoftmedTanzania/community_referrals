@@ -124,22 +124,12 @@ public class LocationSelectorDialogFragment extends DialogFragment {
                 if(node.isLeaf()){
                     JSONObject locationjson = new JSONObject();
                     TreeNode traversingnode = node;
-//                    Log.d("jason","traversingnode ="+new Gson().toJson(traversingnode));
                     try {
-//                        Log.d("jason","traversingnode ="+new Gson().toJson(traversingnode));
-                        locationjson.put(traversingnode.getlocationlevel(), traversingnode.getId());
+                        locationjson.put(traversingnode.getlocationlevel(), traversingnode.getName());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-//                    while(!traversingnode.isRoot()){
-//                        try {
-//                            Log.d("logs","traversing nodes ="+traversingnode.getName());
-//                            locationjson.put(traversingnode.getlocationlevel(), traversingnode.getName());
-//                        }catch(Exception e){
-//                            e.printStackTrace();
-//                        }
-//                        traversingnode = traversingnode.getParent();
-//                    }
+//
                     if(mCallback != null) {
                         mCallback.OnLocationSelected(locationjson.toString());
                     }
@@ -160,7 +150,7 @@ public class LocationSelectorDialogFragment extends DialogFragment {
                     Strings.isNullOrEmpty(locationTag)?"-":humanize(locationTag),
                     humanize(entry.getValue().getLabel()),
                     formName);
-            Log.d("jason","traversingnode ="+new Gson().toJson(tree));
+//            Log.d("jason","traversingnode ="+new Gson().toJson(tree));
             node.addChild(tree);
             if(entry.getValue().getChildren() != null) {
                 locationTreeToTreNode(tree, entry.getValue().getChildren(), formName);

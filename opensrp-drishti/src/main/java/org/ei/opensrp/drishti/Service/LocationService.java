@@ -33,7 +33,7 @@ public class LocationService {
         lockingBackgroundTask.doActionInBackground(new BackgroundAction<Object>() {
             @Override
             public Object actionToDoInBackgroundThread() {
-                allSettings.saveTeamInformation(service);
+//                allSettings.saveTeamInformation(service);
                 return service;
             }
 
