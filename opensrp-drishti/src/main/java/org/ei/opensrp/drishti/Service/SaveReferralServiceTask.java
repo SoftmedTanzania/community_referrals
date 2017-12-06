@@ -32,7 +32,7 @@ public class SaveReferralServiceTask {
         lockingBackgroundTask.doActionInBackground(new BackgroundAction<Object>() {
             @Override
             public Object actionToDoInBackgroundThread() {
-                repository.saveTeamInformation(service);
+//                repository.saveTeamInformation(service);
                 return service;
             }
 

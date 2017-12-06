@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.commonregistry.CommonRepository;
@@ -53,11 +54,11 @@ import fr.ganfra.materialspinner.MaterialSpinner;
 public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     private static final String TAG = CHWPreRegisterFormFragment.class.getSimpleName();
     public static TextView textDate, textPhone;
-    LinearLayout layoutDatePick, layoutEditPhone;
+    LinearLayout layoutDatePick;
     CardView cardDatePickLNMP;
     public static EditText editTextfName,editTextmName,editTextlName,editTextClinicName, editTextVillageLeader, editTextAge, editTextCTCNumber,
-            editTextDiscountId, editTextKataAddress,editTextKijiji,editTextKijitongoji,editTextReferralReason,editTextReferralFacility;
-    public static TextView textviewReferralProviderSupportGroup,textviewReferralProvider,textviewReferralNumber,textDOB;
+            editTextDiscountId,editTextKijiji,editTextReferralReason,editTextReferralFacility;
+    public static TextView textviewReferralProviderSupportGroup,textviewReferralProvider,textviewReferralNumber;
     public static Button button;
     public static RadioGroup radioGroupGender;
     public static MaterialSpinner spinnerService, spinnerFacility;
@@ -69,7 +70,7 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
     private static CheckBox checkBoxAreasonOne, checkBoxreasonTwo, checkBoxreasonThree,
             checkBoxreasonFour, checkBoxresonFive, checkBoxreasonSix;
 
-    private LinearLayout CTCLayout,tbLayout,layoutDatePickLDob;
+    private LinearLayout CTCLayout,tbLayout;
     private List<String> facilityList = new ArrayList<>();
     private List<String> serviceList = new ArrayList<>();
     public String message = "";
@@ -83,6 +84,7 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
     private JSONObject fieldOverides = new JSONObject();
     private CommonRepository commonRepository;
     private Cursor cursor;
+    private MaterialEditText dobTextView;
     private List<FacilityObject> facility = new ArrayList<>();
 
     public CHWPreRegisterFormFragment() {
@@ -127,10 +129,8 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
 
         textDate = (TextView) fragmentView.findViewById(R.id.textDate);
         textPhone = (TextView) fragmentView.findViewById(R.id.textPhone);
-        textDOB = (TextView) fragmentView.findViewById(R.id.textDOB);
         layoutDatePick = (LinearLayout) fragmentView.findViewById(R.id.layoutDatePick);
-        layoutEditPhone = (LinearLayout) fragmentView.findViewById(R.id.layoutEditPhone);
-        layoutDatePickLDob = (LinearLayout) fragmentView.findViewById(R.id.layoutDatePick2);
+        dobTextView = (MaterialEditText) fragmentView.findViewById(R.id.reg_dob);
         tbLayout = (LinearLayout)fragmentView.findViewById(R.id.outlayer);
         CTCLayout = (LinearLayout)fragmentView.findViewById(R.id.extra);
 
@@ -145,9 +145,7 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         textviewReferralNumber = (TextView) fragmentView.findViewById(R.id.provider_number);
         textviewReferralProviderSupportGroup = (TextView) fragmentView.findViewById(R.id.provider_support_group);
         editTextDiscountId = (EditText) fragmentView.findViewById(R.id.editTextDiscountId);
-        editTextKataAddress = (EditText) fragmentView.findViewById(R.id.editTextKataAddress);
         editTextKijiji = (EditText) fragmentView.findViewById(R.id.editTextKijiji);
-        editTextKijitongoji = (EditText) fragmentView.findViewById(R.id.editTextKijitongoji);
         editTextCTCNumber = (EditText) fragmentView.findViewById(R.id.editTextOthers);
 
         button = (Button) fragmentView.findViewById(R.id.save);
@@ -230,15 +228,15 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
                 pickDate(R.id.textDate);
             }
         });
-        layoutDatePickLDob.setOnClickListener(new View.OnClickListener() {
+        dobTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // pick date
-                pickDate(R.id.textDOB);
+                pickDate(R.id.reg_dob);
             }
         });
 
-        layoutEditPhone.setOnClickListener(new View.OnClickListener() {
+        textPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // show edit phone dialog
@@ -310,8 +308,8 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
                 GregorianCalendar pickedDate = new GregorianCalendar(year, monthOfYear, dayOfMonth);
                 if (id == R.id.textDate)
                     textDate.setText(dateFormat.format(pickedDate.getTimeInMillis()));
-                if (id == R.id.textDOB)
-                    textDOB.setText(dateFormat.format(pickedDate.getTimeInMillis()));
+                if (id == R.id.reg_dob)
+                    dobTextView.setText(dateFormat.format(pickedDate.getTimeInMillis()));
 
 
 
@@ -379,8 +377,6 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
     public boolean isFormSubmissionOk() {
         if (     TextUtils.isEmpty(editTextfName.getText())
                 || TextUtils.isEmpty(editTextlName.getText())
-                || TextUtils.isEmpty(editTextKataAddress.getText())
-                || TextUtils.isEmpty(editTextKijitongoji.getText())
                 || TextUtils.isEmpty(editTextKijiji.getText())
                 || TextUtils.isEmpty(editTextReferralReason.getText())
                 || TextUtils.isEmpty(editTextVillageLeader.getText())
@@ -414,14 +410,14 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         ClientReferral referral = new ClientReferral();
 
         referral.setReferral_date(textDate.getText().toString());
-        if((textDOB.getText().toString()).equals("dd mmm yyyy")){
+        if((dobTextView.getText().toString()).equals("dd mmm yyyy")){
             int age = Integer.parseInt(editTextAge.getText().toString());
             int year = Calendar.getInstance().get(Calendar.YEAR);
             int Byear = year - age;
             referral.setDate_of_birth("1 Jul "+Byear);
 
         }else{
-            referral.setDate_of_birth(textDOB.getText().toString());
+            referral.setDate_of_birth(dobTextView.getText().toString());
         }
 
         referral.setCommunity_based_hiv_service(editTextDiscountId.getText().toString());
@@ -432,16 +428,13 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
             referral.setGender("Male");
         else
             referral.setGender("Female");
-        referral.setWard(editTextKataAddress.getText().toString());
         referral.setVillage(editTextKijiji.getText().toString());
-        referral.setKijitongoji(editTextKijitongoji.getText().toString());
         referral.setIs_valid("true");
         referral.setPhone_number(textPhone.getText().toString());
         referral.setFacility_id(getFacilityId(spinnerFacility.getSelectedItem().toString()));
         referral.setVillage_leader(editTextVillageLeader.getText().toString());
         referral.setReferral_reason(editTextReferralReason.getText().toString());
         referral.setReferral_service_id(spinnerService.getSelectedItem().toString());
-//        referral.setService_provider_uiid(((UzaziSalamaApplication )getActivity()).getCurrentUserID);
         referral.setProviderMobileNumber(textviewReferralNumber.getText().toString());
         referral.setService_provider_group(textviewReferralProviderSupportGroup.getText().toString());
         if(fName.equals("client_tb_referral_form")){
