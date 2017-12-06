@@ -390,8 +390,9 @@
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal"
                 android:layout_marginLeft="16dp"
+                android:gravity="center_vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="48dp">
 
                 <TextView
                     android:id="@+id/provider_name"
