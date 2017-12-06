@@ -27,7 +27,7 @@ import atv.view.AndroidTreeView;
 import static org.ei.opensrp.util.StringUtil.*;
 
 public class LocationSelectorDialogFragment extends DialogFragment {
-
+    private static final String TAG = LocationSelectorDialogFragment.class.getSimpleName();
     private static final String LocationJSONString = "locationJSONString";
     private static final String FormName = "formName";
 
@@ -145,6 +145,7 @@ public class LocationSelectorDialogFragment extends DialogFragment {
                     Strings.isNullOrEmpty(locationTag)?"-":humanize(locationTag),
                     humanize(entry.getValue().getLabel()),
                     formName);
+            Log.d(TAG,"creating node"+new Gson().totree);
             node.addChild(tree);
             if(entry.getValue().getChildren() != null) {
                 locationTreeToTreNode(tree, entry.getValue().getChildren(), formName);
