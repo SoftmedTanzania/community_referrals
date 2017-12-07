@@ -9,7 +9,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/boresha_theme">
+        android:background="@color/primary_light">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabBackground="@color/boresha_theme"
+                app:tabBackground="@color/primary_light"
                 app:tabGravity="fill"
                 app:tabIndicatorColor="#f72c1d"
                 app:tabIndicatorHeight="2dp"

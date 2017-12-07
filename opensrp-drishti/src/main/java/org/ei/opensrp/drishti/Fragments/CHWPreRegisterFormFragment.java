@@ -53,7 +53,7 @@ import fr.ganfra.materialspinner.MaterialSpinner;
  */
 public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     private static final String TAG = CHWPreRegisterFormFragment.class.getSimpleName();
-    public static TextView textDate, textPhone;
+    public static TextView textDate;
     LinearLayout layoutDatePick;
     CardView cardDatePickLNMP;
     public static EditText editTextfName,editTextmName,editTextlName,editTextClinicName, editTextVillageLeader, editTextAge, editTextCTCNumber,
@@ -70,7 +70,8 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
     private static CheckBox checkBoxAreasonOne, checkBoxreasonTwo, checkBoxreasonThree,
             checkBoxreasonFour, checkBoxresonFive, checkBoxreasonSix;
 
-    private LinearLayout CTCLayout,tbLayout;
+    private LinearLayout tbLayout;
+    private EditText CTCLayout,textPhone;
     private List<String> facilityList = new ArrayList<>();
     private List<String> serviceList = new ArrayList<>();
     public String message = "";
@@ -128,11 +129,11 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
 
 
         textDate = (TextView) fragmentView.findViewById(R.id.textDate);
-        textPhone = (TextView) fragmentView.findViewById(R.id.textPhone);
+        textPhone = (EditText) fragmentView.findViewById(R.id.edittextPhone);
         layoutDatePick = (LinearLayout) fragmentView.findViewById(R.id.layoutDatePick);
         dobTextView = (MaterialEditText) fragmentView.findViewById(R.id.reg_dob);
         tbLayout = (LinearLayout)fragmentView.findViewById(R.id.outlayer);
-        CTCLayout = (LinearLayout)fragmentView.findViewById(R.id.ctc_number);
+        CTCLayout = (EditText)fragmentView.findViewById(R.id.editTextOthers);
 
 
         editTextfName = (EditText) fragmentView.findViewById(R.id.editTextfName);
@@ -243,13 +244,7 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
             }
         });
 
-        textPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // show edit phone dialog
-                showEditPhoneDialog();
-            }
-        });
+
 
 
 
@@ -338,54 +333,9 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
     }
 
 
-    public void showEditPhoneDialog() {
-        View dialogView = getActivity().getLayoutInflater().inflate(R.layout.layout_dialog_edit_phone, null);
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-        dialogBuilder.setView(dialogView);
-        dialogBuilder.setCancelable(true);
-
-        final AlertDialog dialog = dialogBuilder.create();
-        dialog.show();
-
-        final EditText editTextPhone = (EditText) dialogView.findViewById(R.id.editTextLocation);
-        // get previously entered location
-        if (textPhone.getText() != null)
-            editTextPhone.setText(textPhone.getText());
-
-        // positive button
-        dialogView.findViewById(R.id.textOk).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String phone = editTextPhone.getText().toString();
-
-                if (TextUtils.isEmpty(phone)) {
-                    editTextPhone.setError("Please enter a valid phone number.");
-                    return;
-                }
-
-                // update view
-                textPhone.setText(phone);
-
-                // close dialog
-                dialog.dismiss();
-            }
-        });
-
-        // negative button
-        dialogView.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // close dialog
-                dialog.dismiss();
-            }
-        });
-    }
-
     public boolean isFormSubmissionOk() {
         if (     TextUtils.isEmpty(editTextfName.getText())
                 || TextUtils.isEmpty(editTextlName.getText())
-                || TextUtils.isEmpty(editTextKijiji.getText())
-                || TextUtils.isEmpty(editTextReferralReason.getText())
                 || TextUtils.isEmpty(editTextVillageLeader.getText())
                 || TextUtils.isEmpty(textPhone.getText())
                 || TextUtils.isEmpty(editTextDiscountId.getText())
@@ -408,7 +358,19 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
             makeToast();
             return false;
 
-        }  else
+        } else if (TextUtils.isEmpty(textPhone.getText())) {
+            message = "Tafadhali andika namba ya simu sahihi";
+            makeToast();
+            return false;
+        } else if (TextUtils.isEmpty(editTextKijiji.getText())) {
+            message = "Tafadhali jaza mahali anapoishi";
+            makeToast();
+            return false;
+        } else  if (TextUtils.isEmpty(editTextReferralReason.getText())) {
+            message = "Tafadhali andika sababu ya rufaa ya mteja";
+            makeToast();
+            return false;
+        }else
             // all good
             return true;
     }
@@ -442,7 +404,7 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         referral.setVillage_leader(editTextVillageLeader.getText().toString());
         referral.setReferral_reason(editTextReferralReason.getText().toString());
         referral.setReferral_service_id(spinnerService.getSelectedItem().toString());
-        referral.setProviderMobileNumber(textviewReferralNumber.getText().toString());
+        referral.setProviderMobileNumber(getReferralServiceId(textviewReferralNumber.getText().toString()));
         referral.setWard(wardId);
         referral.setService_provider_uiid(((UzaziSalamaApplication)getActivity().getApplication()).getCurrentUserID());
         referral.setService_provider_group(((UzaziSalamaApplication)getActivity().getApplication()).getTeam_uuid());
@@ -483,6 +445,21 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         String id = name;
         return id;
     }
+    public String getReferralServiceId(String name){
+//        commonRepository = context().commonrepository("facility");
+//        //todo martha edit the query
+//        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility where Name ='"+name+"'" );
+//
+//        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
+//        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
+//
+//        this.facility = Utils.convertToFacilityObjectList(commonPersonObjectList);
+//        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + facility.size());
+//        String id = facility.get(0).getId();
+//        Log.d(TAG,"facility id selected ="+id);
+        String id = name;
+        return id;
+    }
 
     public void setRecordId(String recordId) {
 
@@ -493,7 +470,7 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
     public void setWardId(String locationId) {
 
         Log.d("TAG","ward id = "+locationId);
-        this.wardId = recordId;
+        this.wardId = locationId;
     }
     private void makeToast() {
         Toast.makeText(context,
