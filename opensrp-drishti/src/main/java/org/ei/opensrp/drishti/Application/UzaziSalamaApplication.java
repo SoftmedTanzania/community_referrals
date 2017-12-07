@@ -11,6 +11,7 @@ import org.acra.annotation.ReportsCrashes;
 import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonFtsObject;
 import org.ei.opensrp.drishti.LoginActivity;
+import org.ei.opensrp.drishti.Repository.ReferralServiceRepository;
 import org.ei.opensrp.sync.DrishtiSyncScheduler;
 import org.ei.opensrp.view.activity.DrishtiApplication;
 import org.ei.opensrp.view.receiver.SyncBroadcastReceiver;
@@ -36,6 +37,7 @@ import static org.ei.opensrp.util.Log.logInfo;
         mode = ReportingInteractionMode.SILENT
 )
 public class UzaziSalamaApplication extends DrishtiApplication {
+    private ReferralServiceRepository serviceRepository;
     private int userType=0;//0=CHW and 1=Facility health care worker
     public  String currentUserID,team_uuid, phone_number,username,team_name,team_location_id;
 
@@ -54,6 +56,10 @@ public class UzaziSalamaApplication extends DrishtiApplication {
         context.updateCommonFtsObject(createCommonFtsObject());
         applyUserLanguagePreference();
         cleanUpSyncState();
+
+        if (serviceRepository == null) {
+            serviceRepository = new ReferralServiceRepository();
+        }
     }
 
     @Override

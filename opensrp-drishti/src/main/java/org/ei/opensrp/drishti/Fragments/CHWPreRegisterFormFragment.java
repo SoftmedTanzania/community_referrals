@@ -32,8 +32,11 @@ import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.Application.UzaziSalamaApplication;
 import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.DataModels.Facility;
+import org.ei.opensrp.drishti.DataModels.ReferralServiceDataModel;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.Repository.FacilityObject;
+import org.ei.opensrp.drishti.Repository.FacilityRepository;
+import org.ei.opensrp.drishti.Repository.ReferralServiceRepository;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
@@ -87,6 +90,10 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
     private Cursor cursor;
     private MaterialEditText dobTextView;
     private List<FacilityObject> facility = new ArrayList<>();
+    private ReferralServiceRepository referralServiceRepository = new ReferralServiceRepository();
+    private FacilityRepository facilityRepository = new FacilityRepository();
+    private List<ReferralServiceDataModel> referralServiceList;
+    private List<Facility> facilitiesList;
 
     public CHWPreRegisterFormFragment() {
         // Required empty public constructor
@@ -101,17 +108,28 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
 
         facilityList.add("facility A");
         facilityList.add("facility b");
-        serviceList.add("Ushauri nasaha na kupima");
-        serviceList.add("Rufaa kwenda kliniki ya TB na Matunzo (CTC)");
-        serviceList.add("Rufaa kwenda kituo cha kutoa huduma za afya kutokana na magonjwa nyemelezi");
-        serviceList.add("Kliniki ya kutibu kifua kikuu");
-        serviceList.add("Rufaa kwenda kliniki ya kutibu Malaria");
-        serviceList.add("Huduma za kuzuia maambukizi toka kwa mama kwenda mtoto");
-        serviceList.add("Huduma ya afya ya uzazi na mtoto (RCH)");
-        serviceList.add("Huduma ya Tohara (VMMC)");
-        serviceList.add("Msaada wa kisheria");
-        serviceList.add("Huduma za kuzuia ukatili wa kijinsia(Dawati la jinsia)");
-        serviceList.add("Huduma za kuzuia maambukizi toka kwa mama kwenda mtoto");
+
+        if(referralServiceRepository != null){
+            referralServiceList = referralServiceRepository.all();
+            int size = referralServiceList.size();
+
+            for(int i =0; size > i; i++  ){
+
+                serviceList.add(referralServiceList.get(i).getName());
+            }
+        }
+        if(facilityRepository != null){
+            facilitiesList = facilityRepository.all();
+            int size = referralServiceList.size();
+
+            for(int i =0; size > i; i++  ){
+
+                facilityList.add(facilitiesList.get(i).getName());
+            }
+        }
+
+
+
 
         context = getContext();
     }
@@ -446,19 +464,9 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         return id;
     }
     public String getReferralServiceId(String name){
-//        commonRepository = context().commonrepository("facility");
-//        //todo martha edit the query
-//        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility where Name ='"+name+"'" );
-//
-//        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
-//        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
-//
-//        this.facility = Utils.convertToFacilityObjectList(commonPersonObjectList);
-//        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + facility.size());
-//        String id = facility.get(0).getId();
-//        Log.d(TAG,"facility id selected ="+id);
-        String id = name;
-        return id;
+
+        ReferralServiceDataModel id = referralServiceRepository.findByServiceName(name);
+        return id.getId();
     }
 
     public void setRecordId(String recordId) {

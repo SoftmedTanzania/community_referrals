@@ -41,6 +41,10 @@ public class Facility  {
 
         visitedMom.add(new Facility("0001","facility A"));
         visitedMom.add(new Facility("0002","facility B"));
+        visitedMom.add(new Facility("0003","facility C"));
+        visitedMom.add(new Facility("0004","facility D"));
+        visitedMom.add(new Facility("0005","facility E"));
+        visitedMom.add(new Facility("0007","facility F"));
 
 
         return visitedMom;

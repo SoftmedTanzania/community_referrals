@@ -2,6 +2,7 @@ package org.ei.opensrp.drishti.Repository;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import net.sqlcipher.database.SQLiteDatabase;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +16,7 @@ import static net.sqlcipher.DatabaseUtils.longForQuery;
 import static org.apache.commons.lang3.StringUtils.repeat;
 
 public class ReferralServiceRepository extends DrishtiRepository {
+    private static final String TAG = ReferralServiceRepository.class.getSimpleName();
     private static final String CHILD_SQL = "CREATE TABLE referral_service(id VARCHAR PRIMARY KEY, name VARCHAR)";
     public static final String REFERRAL_SERVICE = "referral_service";
     private static final String ID_COLUMN = "id";
@@ -30,6 +32,7 @@ public class ReferralServiceRepository extends DrishtiRepository {
     public void add(ReferralServiceDataModel referralServiceDataModel) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
         database.insert(REFERRAL_SERVICE, null, createValuesFor(referralServiceDataModel));
+        Log.d(TAG,"data base created successfully");
     }
 
     public void update(ReferralServiceDataModel referralServiceDataModel) {
@@ -37,11 +40,11 @@ public class ReferralServiceRepository extends DrishtiRepository {
         database.update(REFERRAL_SERVICE, createValuesFor(referralServiceDataModel), ID_COLUMN + " = ?", new String[]{referralServiceDataModel.getId()});
     }
 
-//    public List<ReferralServiceDataModel> all() {
-//        SQLiteDatabase database = masterRepository.getReadableDatabase();
-//        Cursor cursor = database.query(FACILITY, FACILITY_TABLE_COLUMNS, IS_CLOSED_COLUMN + " = ?", new String[]{NOT_CLOSED}, null, null, null, null);
-//        return readAll(cursor);
-//    }
+    public List<ReferralServiceDataModel> all() {
+        SQLiteDatabase database = masterRepository.getReadableDatabase();
+        Cursor cursor = database.query(REFERRAL_SERVICE, REFERRAL_SERVICE_TABLE_COLUMNS, null, null, null, null, null);
+        return readAll(cursor);
+    }
 
     public ReferralServiceDataModel find(String caseId) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
@@ -67,10 +70,16 @@ public class ReferralServiceRepository extends DrishtiRepository {
         database.update(REFERRAL_SERVICE, values, ID_COLUMN + " = ?", new String[]{caseId});
     }
 
-    public List<ReferralServiceDataModel> findByServiceCaseId(String caseId) {
+    public ReferralServiceDataModel findByServiceName(String name) {
+
         SQLiteDatabase database = masterRepository.getReadableDatabase();
-        Cursor cursor = database.query(REFERRAL_SERVICE, REFERRAL_SERVICE_TABLE_COLUMNS, NAME + " = ?", new String[]{caseId}, null, null, null, null);
-        return readAll(cursor);
+        Cursor cursor = database.query(REFERRAL_SERVICE, REFERRAL_SERVICE_TABLE_COLUMNS, NAME + " = ?", new String[]{name}, null, null, null, null);
+        List<ReferralServiceDataModel> children = readAll(cursor);
+
+        if (children.isEmpty()) {
+            return null;
+        }
+        return children.get(0);
     }
 
     public long count() {

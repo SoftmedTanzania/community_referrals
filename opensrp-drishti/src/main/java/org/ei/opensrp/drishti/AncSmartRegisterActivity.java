@@ -135,7 +135,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         mPager.setCurrentItem(3);
         currentPage = 3;
 
-        Log.d(TAG, "table columns ="+new Gson().toJson(context().commonrepository("client_referral").common_TABLE_COLUMNS));
+        Log.d(TAG, "table columns ="+new Gson().toJson(context().commonrepository("referral_service").common_TABLE_COLUMNS));
 
 
     }

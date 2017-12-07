@@ -1,5 +1,7 @@
 package org.ei.opensrp.drishti.Service;
 
+import org.ei.opensrp.drishti.DataModels.Facility;
+import org.ei.opensrp.drishti.Repository.FacilityRepository;
 import org.ei.opensrp.drishti.Repository.ReferralServiceRepository;
 import org.ei.opensrp.repository.AllSettings;
 import org.ei.opensrp.util.Log;
@@ -7,16 +9,19 @@ import org.ei.opensrp.view.BackgroundAction;
 import org.ei.opensrp.view.LockingBackgroundTask;
 import org.ei.opensrp.view.ProgressIndicator;
 
+import java.util.ArrayList;
+
 /**
  * Created by Dimas Ciputra on 3/24/15.
  */
-public class LocationService {
+public class FacilityService {
 
     private LockingBackgroundTask lockingBackgroundTask;
-    private ReferralServiceRepository allSettings;
+    private FacilityRepository facilityRepository;
 
-    public LocationService(ReferralServiceRepository serviceRepository) {
-        this.allSettings = serviceRepository;
+    ArrayList<Facility> referralList;
+    public FacilityService(FacilityRepository serviceRepository) {
+        this.facilityRepository = serviceRepository;
         lockingBackgroundTask = new LockingBackgroundTask(new ProgressIndicator() {
             @Override
             public void setVisible() {
@@ -33,7 +38,14 @@ public class LocationService {
         lockingBackgroundTask.doActionInBackground(new BackgroundAction<Object>() {
             @Override
             public Object actionToDoInBackgroundThread() {
-//                allSettings.saveTeamInformation(service);
+                Facility facility = new Facility();
+
+                referralList = facility.createFacilityList();
+                int size = referralList.size();
+                for(int i=0; size < i; i++){
+                    setFacility(referralList.get(i));
+                }
+                Log.logDebug("referral service is set in the database");
                 return service;
             }
 
@@ -43,4 +55,12 @@ public class LocationService {
             }
         });
     }
+
+
+    public void setFacility(Facility facility){
+
+        facilityRepository.add(facility);
+    }
+
+
 }

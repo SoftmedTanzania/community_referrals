@@ -39,11 +39,11 @@ public class FacilityRepository extends DrishtiRepository {
         database.update(FACILITY, createValuesFor(facility), ID_COLUMN + " = ?", new String[]{facility.getId()});
     }
 
-//    public List<Facility> all() {
-//        SQLiteDatabase database = masterRepository.getReadableDatabase();
-//        Cursor cursor = database.query(FACILITY, FACILITY_TABLE_COLUMNS, IS_CLOSED_COLUMN + " = ?", new String[]{NOT_CLOSED}, null, null, null, null);
-//        return readAll(cursor);
-//    }
+    public List<Facility> all() {
+        SQLiteDatabase database = masterRepository.getReadableDatabase();
+        Cursor cursor = database.query(FACILITY, FACILITY_TABLE_COLUMNS, null, null, null, null, null);
+        return readAll(cursor);
+    }
 
     public Facility find(String caseId) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
@@ -61,7 +61,17 @@ public class FacilityRepository extends DrishtiRepository {
         Cursor cursor = database.rawQuery(String.format("SELECT * FROM %s WHERE %s IN (%s)", FACILITY, ID_COLUMN, insertPlaceholdersForInClause(caseIds.length)), caseIds);
         return readAll(cursor);
     }
+    public Facility findByServiceName(String name) {
 
+        SQLiteDatabase database = masterRepository.getReadableDatabase();
+        Cursor cursor = database.query(FACILITY, FACILITY_TABLE_COLUMNS, NAME + " = ?", new String[]{name}, null, null, null, null);
+        List<Facility> children = readAll(cursor);
+
+        if (children.isEmpty()) {
+            return null;
+        }
+        return children.get(0);
+    }
     public void updateName(String caseId, String name ){
         SQLiteDatabase database = masterRepository.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -92,7 +102,6 @@ public class FacilityRepository extends DrishtiRepository {
         }
         return output;
     }
-
 
 
     private ContentValues createValuesFor(Facility facility) {

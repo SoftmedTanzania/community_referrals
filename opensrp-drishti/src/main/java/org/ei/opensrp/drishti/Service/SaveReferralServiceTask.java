@@ -10,7 +10,7 @@ import org.ei.opensrp.view.ProgressIndicator;
  * Created by Dimas Ciputra on 3/24/15.
  */
 public class SaveReferralServiceTask {
-
+    private ReferralService referralService;
     private LockingBackgroundTask lockingBackgroundTask;
     private ReferralServiceRepository repository;
 
@@ -32,7 +32,8 @@ public class SaveReferralServiceTask {
         lockingBackgroundTask.doActionInBackground(new BackgroundAction<Object>() {
             @Override
             public Object actionToDoInBackgroundThread() {
-//                repository.saveTeamInformation(service);
+                referralService = new ReferralService();
+                Log.logDebug("referral service is set in the database");
                 return service;
             }
 

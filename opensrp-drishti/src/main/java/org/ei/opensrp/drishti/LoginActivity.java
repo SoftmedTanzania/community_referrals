@@ -33,8 +33,12 @@ import org.ei.opensrp.domain.Response;
 import org.ei.opensrp.domain.ResponseStatus;
 import org.ei.opensrp.drishti.Application.UzaziSalamaApplication;
 
-import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.drishti.DataModels.ReferralServiceDataModel;
 
+import org.ei.opensrp.drishti.Repository.FacilityRepository;
+import org.ei.opensrp.drishti.Repository.ReferralServiceRepository;
+import org.ei.opensrp.drishti.Service.FacilityService;
+import org.ei.opensrp.drishti.Service.SaveReferralServiceTask;
 import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.repository.AllSharedPreferences;
@@ -47,6 +51,7 @@ import org.ei.opensrp.view.activity.SettingsActivity;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -68,6 +73,11 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private Button loginButton;
     private ProgressDialog progressDialog;
+    private FacilityService facilityService;
+    private SaveReferralServiceTask serviceTask;
+    private List<ReferralServiceDataModel> serviceData;
+    private ReferralServiceRepository serviceRepository;
+    private FacilityRepository facilityRepository;
     public static final String ENGLISH_LOCALE = "en";
     public static final String KANNADA_LOCALE = "kn";
     public static final String BENGALI_LOCALE = "bn";
@@ -160,8 +170,7 @@ public class LoginActivity extends AppCompatActivity {
         final String userName = userNameEditText.getText().toString();
 
         final String password = passwordEditText.getText().toString();
-        //TODO Coze Remove the hardcoded credentials
-        // final String password = "Admin123";
+
 
         if (context.userService().hasARegisteredUser()) {
             localLogin(view, userName, password);
@@ -223,6 +232,7 @@ public class LoginActivity extends AppCompatActivity {
                 android.util.Log.d("login","am in remote login");
                 if (loginResponse == SUCCESS) {
                     remoteLoginWith(userName, password, loginResponse.payload());
+
                 } else {
                     if (loginResponse == null) {
                         showErrorDialog("Login failed. Unknown reason. Try Again");
@@ -264,6 +274,20 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    private void setReferralService() {
+        if (serviceRepository == null) {
+            serviceRepository = new ReferralServiceRepository();
+            serviceTask = new SaveReferralServiceTask(serviceRepository);
+            serviceTask.save("saving referral service");
+        }
+    }
+    private void setFacilityService() {
+        if (facilityRepository == null) {
+            facilityRepository = new FacilityRepository();
+            facilityService = new FacilityService(facilityRepository);
+            facilityService.save("saving facility for referral");
+        }
     }
 
     private void tryGetLocation(final Listener<Response<String>> afterGet) {
@@ -342,6 +366,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void goToHome() {
         UzaziSalamaApplication.setCrashlyticsUser(context);
+        setReferralService();
+        setFacilityService();
         startActivity(new Intent(this, NativeHomeActivity.class));
         finish();
     }
