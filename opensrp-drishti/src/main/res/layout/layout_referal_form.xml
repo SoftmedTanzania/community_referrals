@@ -81,20 +81,7 @@
                         android:textColor="@color/secondary_text"
                         android:textSize="14sp" />
                 </LinearLayout>
-                <EditText
 
-                    android:id="@+id/editTextDiscountId"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.5"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginRight="0dp"
-                    android:hint="Namba ya mteja ya community_based_hiv_service"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:textColor="@color/primary_text"
-                    android:textColorHint="@color/hint_text"
-                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -339,10 +326,59 @@
                         android:textSize="14sp"
                         />
                 </LinearLayout>
+                <LinearLayout
+                    android:visibility="visible"
+                    android:id="@+id/ctc_number"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:layout_height="wrap_content">
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/editTextDiscountId"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:hint="Namba ya CBHS"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textColor="@color/primary_text"
+                        android:textColorHint="@color/hint_text"
+                        android:textSize="14sp"
+                        app:met_floatingLabelText="Namba ya mteja ya community_based_hiv_service"
+                        app:met_floatingLabel="normal"
+                        app:met_floatingLabelTextColor="@color/primary" />
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/editTextOthers"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:hint="Namba ya CTC"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textColor="@color/primary_text"
+                        android:textColorHint="@color/hint_text"
+                        android:textSize="14sp"
+                        app:met_floatingLabelText="Namba ya CTC"
+                        app:met_floatingLabel="normal"
+                        app:met_floatingLabelTextColor="@color/primary" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
 
+
+                </LinearLayout>
 
                 <fr.ganfra.materialspinner.MaterialSpinner
                     android:id="@+id/spinnerFacility"
+                    android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
@@ -357,10 +393,136 @@
                     app:paddingEnd="16dp"
                     app:paddingStart="16dp" />
 
+
+
             </LinearLayout>
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="8dp"
+        android:clipChildren="true"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/outlayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp">
+            <LinearLayout
+                android:visibility="visible"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:paddingLeft="16dp"
+                    android:layout_height="56dp"
+                    android:background="#a8f5ce0b"
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/text_black"
+                    android:text="Chunguza Vidokezo Vifuatavyo Kwa Mteja"
+                    android:layout_marginTop="0dp"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_margin="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Weka alama (&#x2713;) panapohusika."
+                    android:textAllCaps="false"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/checkbox2weekCough"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="12dp"
+                    android:paddingTop="12dp"
+                    android:text="Kikohozi zaidi ya wiki mbili"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/checkboxfever"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="12dp"
+                    android:paddingTop="12dp"
+                    android:text="Homa zaidi ya wiki mbili"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/checkboxWeightLoss"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="12dp"
+                    android:paddingTop="12dp"
+                    android:text="Kupungua uzito"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="14sp" />
+
+
+
+                <CheckBox
+                    android:id="@+id/checkboxSevereSweating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="12dp"
+                    android:paddingTop="12dp"
+                    android:text="Kutokwa na jasho usiku zaidi ya wiki mbili"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/checkboxBloodCough"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="12dp"
+                    android:paddingTop="12dp"
+                    android:text="Kukohoa makohozi yenye mchanganyiko na damu"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/checkboxLostFollowup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="12dp"
+                    android:paddingTop="12dp"
+                    android:text="Kusitisha dawa"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"

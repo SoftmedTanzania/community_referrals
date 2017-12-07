@@ -29,7 +29,7 @@ public class TreeNode {
     private TreeNodeClickListener mListener;
     private Object mValue;
     private boolean mExpanded;
-    private String locationlevel;
+    private String locationlevel,locationId;
     private String name;
 
     public String getName() {
@@ -48,17 +48,26 @@ public class TreeNode {
         this.locationlevel = level;
     }
 
+    public String getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(String locationId) {
+        this.locationId = locationId;
+    }
+
     public static atv.model.TreeNode root() {
-        TreeNode root = new TreeNode(null,null);
+        TreeNode root = new TreeNode(null,null,null);
         root.setSelectable(false);
         return root;
     }
 
-    public TreeNode(Object value,String level) {
+    public TreeNode(String id,Object value,String level) {
         children = new ArrayList<>();
         mValue = value;
         name = (String)value;
         locationlevel = level;
+        locationId = id;
     }
 
     public TreeNode addChild(TreeNode childNode) {

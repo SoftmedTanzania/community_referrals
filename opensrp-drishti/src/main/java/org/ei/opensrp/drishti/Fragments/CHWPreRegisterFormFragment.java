@@ -78,7 +78,7 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
     public static int clientServiceSelection = -1,facilitySelection = -1;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private String  formName = "client_referral_form";
-    private String recordId,fName ="";
+    private String recordId,wardId,fName ="";
     private ClientReferral clientReferral;
     private Gson gson = new Gson();
     private JSONObject fieldOverides = new JSONObject();
@@ -106,7 +106,7 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         serviceList.add("Kliniki ya kutibu kifua kikuu");
         serviceList.add("Rufaa kwenda kliniki ya kutibu Malaria");
         serviceList.add("Huduma za kuzuia maambukizi toka kwa mama kwenda mtoto");
-        serviceList.add("Huduma ya afya ya uzazi na mtoto (RCH) ");
+        serviceList.add("Huduma ya afya ya uzazi na mtoto (RCH)");
         serviceList.add("Huduma ya Tohara (VMMC)");
         serviceList.add("Msaada wa kisheria");
         serviceList.add("Huduma za kuzuia ukatili wa kijinsia(Dawati la jinsia)");
@@ -132,7 +132,7 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         layoutDatePick = (LinearLayout) fragmentView.findViewById(R.id.layoutDatePick);
         dobTextView = (MaterialEditText) fragmentView.findViewById(R.id.reg_dob);
         tbLayout = (LinearLayout)fragmentView.findViewById(R.id.outlayer);
-        CTCLayout = (LinearLayout)fragmentView.findViewById(R.id.extra);
+        CTCLayout = (LinearLayout)fragmentView.findViewById(R.id.ctc_number);
 
 
         editTextfName = (EditText) fragmentView.findViewById(R.id.editTextfName);
@@ -144,6 +144,12 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         textviewReferralProvider = (TextView) fragmentView.findViewById(R.id.provider_name);
         textviewReferralNumber = (TextView) fragmentView.findViewById(R.id.provider_number);
         textviewReferralProviderSupportGroup = (TextView) fragmentView.findViewById(R.id.provider_support_group);
+
+        //setting CHW details
+        textviewReferralProvider.setText(((UzaziSalamaApplication)getActivity().getApplication()).getUsername());
+        textviewReferralProviderSupportGroup.setText(((UzaziSalamaApplication)getActivity().getApplication()).getTeam_name());
+
+
         editTextDiscountId = (EditText) fragmentView.findViewById(R.id.editTextDiscountId);
         editTextKijiji = (EditText) fragmentView.findViewById(R.id.editTextKijiji);
         editTextCTCNumber = (EditText) fragmentView.findViewById(R.id.editTextOthers);
@@ -182,13 +188,14 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
                     CTCLayout.setVisibility(View.VISIBLE);
                     fName = "client_tb_referral_form";
 
-                }
-
-                if((spinnerService.getSelectedItem().toString()).equals("Rufaa kwenda kliniki ya TB na Matunzo (CTC)")){
+                }else if((spinnerService.getSelectedItem().toString()).equals("Rufaa kwenda kliniki ya TB na Matunzo (CTC)")||(spinnerService.getSelectedItem().toString()).equals("Huduma ya afya ya uzazi na mtoto (RCH)") ){
                     tbLayout.setVisibility(View.GONE);
                     CTCLayout.setVisibility(View.VISIBLE);
                     fName = "client_hiv_referral_form";
 
+                }else{
+                    tbLayout.setVisibility(View.GONE);
+                    CTCLayout.setVisibility(View.GONE);
                 }
             }
 
@@ -436,7 +443,9 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         referral.setReferral_reason(editTextReferralReason.getText().toString());
         referral.setReferral_service_id(spinnerService.getSelectedItem().toString());
         referral.setProviderMobileNumber(textviewReferralNumber.getText().toString());
-        referral.setService_provider_group(textviewReferralProviderSupportGroup.getText().toString());
+        referral.setWard(wardId);
+        referral.setService_provider_uiid(((UzaziSalamaApplication)getActivity().getApplication()).getCurrentUserID());
+        referral.setService_provider_group(((UzaziSalamaApplication)getActivity().getApplication()).getTeam_uuid());
         if(fName.equals("client_tb_referral_form")){
             referral.setCtc_number(editTextCTCNumber.getText().toString());
             referral.setHas_2Week_cough(checkBoxAreasonOne.isChecked());
@@ -481,6 +490,11 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         this.recordId = recordId;
     }
 
+    public void setWardId(String locationId) {
+
+        Log.d("TAG","ward id = "+locationId);
+        this.wardId = recordId;
+    }
     private void makeToast() {
         Toast.makeText(context,
                 message,

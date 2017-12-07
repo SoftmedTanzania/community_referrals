@@ -34,7 +34,7 @@ import static org.ei.opensrp.drishti.util.Utils.generateRandomUUIDString;
 import static org.ei.opensrp.util.StringUtil.*;
 
 public class LocationSelectorDialogFragment extends DialogFragment {
-
+    private static final String TAG = LocationSelectorDialogFragment.class.getSimpleName();
     private static final String LocationJSONString = "locationJSONString";
     private static final String FormName = "formName";
 
@@ -104,8 +104,8 @@ public class LocationSelectorDialogFragment extends DialogFragment {
         return dialogView;
     }
 
-    public TreeNode createNode(String locationlevel, String locationname, String formName){
-        TreeNode node = new TreeNode(locationname,locationlevel).setViewHolder(new SelectableItemHolder(getActivity(),locationlevel+": "));
+    public TreeNode createNode(String locationId,String locationlevel, String locationname, String formName){
+        TreeNode node = new TreeNode(locationId,locationname,locationlevel).setViewHolder(new SelectableItemHolder(getActivity(),locationlevel+": "));
         node.setSelectable(false);
         addselectlistener(node, formName);
         return node;
@@ -122,16 +122,12 @@ public class LocationSelectorDialogFragment extends DialogFragment {
             @Override
             public void onClick(TreeNode node, Object value) {
                 if(node.isLeaf()){
-                    JSONObject locationjson = new JSONObject();
+                    String locationjson = "";
                     TreeNode traversingnode = node;
-                    try {
-                        locationjson.put(traversingnode.getlocationlevel(), traversingnode.getName());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    locationjson = traversingnode.getLocationId();
 //
                     if(mCallback != null) {
-                        mCallback.OnLocationSelected(locationjson.toString());
+                        mCallback.OnLocationSelected(locationjson);
                     }
                     FieldOverrides fieldOverrides = new FieldOverrides(locationjson.toString());
                     ((AncSmartRegisterActivity)getActivity()).startFormActivity(formName, generateRandomUUIDString(), fieldOverrides.getJSONString());
@@ -145,8 +141,9 @@ public class LocationSelectorDialogFragment extends DialogFragment {
     public void locationTreeToTreNode(TreeNode node, Map<String,org.opensrp.api.util.TreeNode<String, Location>> location, String formName) {
 
         for(Map.Entry<String, org.opensrp.api.util.TreeNode<String, Location>> entry : location.entrySet()) {
+            String locationId = entry.getValue().getId();
             String locationTag = entry.getValue().getNode().getTags().iterator().next();
-            TreeNode tree = createNode(
+            TreeNode tree = createNode(locationId,
                     Strings.isNullOrEmpty(locationTag)?"-":humanize(locationTag),
                     humanize(entry.getValue().getLabel()),
                     formName);

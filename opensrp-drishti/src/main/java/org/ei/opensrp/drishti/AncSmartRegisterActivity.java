@@ -638,6 +638,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public void OnLocationSelected(String locationSelected) {
         // set registration fragment
         Log.d(TAG,"Location selected"+locationSelected);
+        CHWPreRegisterFormFragment displayFormFragment = (CHWPreRegisterFormFragment) getDisplayFormFragmentAtIndex(FormUtils.getIndexForFormName("pregnant_mothers_pre_registration", formNames) + 1);
+        displayFormFragment.setWardId(locationSelected);
         mPager.setCurrentItem(2);
         currentPage = 2;
     }

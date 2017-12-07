@@ -3,6 +3,7 @@ package org.ei.opensrp.view.dialog;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,8 +98,8 @@ public class LocationSelectorDialogFragment extends DialogFragment {
         return dialogView;
     }
 
-    public TreeNode createNode(String locationlevel, String locationname, String formName){
-        TreeNode node = new TreeNode(locationname,locationlevel).setViewHolder(new SelectableItemHolder(getActivity(),locationlevel+": "));
+    public TreeNode createNode(String locationId, String locationlevel, String locationname, String formName){
+        TreeNode node = new TreeNode(locationId,locationname,locationlevel).setViewHolder(new SelectableItemHolder(getActivity(),locationlevel+": "));
         node.setSelectable(false);
         addselectlistener(node, formName);
         return node;
@@ -140,8 +141,10 @@ public class LocationSelectorDialogFragment extends DialogFragment {
     public void locationTreeToTreNode(TreeNode node, Map<String,org.opensrp.api.util.TreeNode<String, Location>> location, String formName) {
 
         for(Map.Entry<String, org.opensrp.api.util.TreeNode<String, Location>> entry : location.entrySet()) {
+            String locationId = entry.getValue().getId();
             String locationTag = entry.getValue().getNode().getTags().iterator().next();
-            TreeNode tree = createNode(
+
+            TreeNode tree = createNode(locationId,
                     Strings.isNullOrEmpty(locationTag)?"-":humanize(locationTag),
                     humanize(entry.getValue().getLabel()),
                     formName);
