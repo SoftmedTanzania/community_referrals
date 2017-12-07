@@ -790,7 +790,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                     Log.d(TAG,"key = "+key);
                     FormField f = null;
                     f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
-                    if(key.equals("FacilityId")){
+                    if(key.equals("facility_id")){
                         f = new FormField(key, c.getDetails().get(key), "facility.id");
                     }
                     formFields.add(f);
@@ -810,7 +810,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
                     if(key.equals("has2WeekCough")||key.equals("hasFever")||key.equals("hadWeightLoss")||key.equals("hasSevereSweating")||key.equals("hasBloodCough")||key.equals("isIs_lost_follow_up")){
 
-                    }else if(key.equals("FacilityId")){
+                    }else if(key.equals("facility_id")){
                         FormField f = new FormField(key, c.getDetails().get(key), "facility.id");
                         formFields.add(f);
                     }else{
@@ -830,7 +830,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                     Log.d(TAG,"key = "+key);
                     if(key.equals("has2WeekCough")||key.equals("CTCNumber")||key.equals("hasFever")||key.equals("hadWeightLoss")||key.equals("hasSevereSweating")||key.equals("hasBloodCough")||key.equals("isIs_lost_follow_up")){
 
-                    }else if(key.equals("FacilityId")){
+                    }else if(key.equals("facility_id")){
                         FormField f = new FormField(key, c.getDetails().get(key), "facility.id");
                         formFields.add(f);
                     }else{
@@ -887,7 +887,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             for ( String key : c.getDetails().keySet() ) {
                 Log.d(TAG,"key = "+key);
                 FormField f = null;
-                if(!key.equals("FACILITY_ID")) {
+                if(!key.equals("facility_id")) {
                     f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
                 }else{
                     f = new FormField(key, c.getDetails().get(key), "facility.id");

@@ -79,7 +79,7 @@ public class UzaziSalamaApplication extends DrishtiApplication {
     @Override
     public void onTerminate() {
         super.onTerminate();
-        logInfo("UzaziSalamaApplication is terminating. Stopping Dristhi Sync scheduler and resetting isSyncInProgress setting.");
+        logInfo("HTM Referral Application is terminating. Stopping Dristhi Sync scheduler and resetting isSyncInProgress setting.");
         cleanUpSyncState();
     }
 

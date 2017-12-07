@@ -28,6 +28,12 @@ public class ReferralServiceObject {
         this.Name = name;
         this.relationalId = relationalId;
     }
+    public ReferralServiceObject(String id,
+                                     String name){
+
+            this.id = id;
+            this.Name = name;
+        }
 
     // alternative constructor so you don't pass bucha stuff, PregnantMom contains everything
 

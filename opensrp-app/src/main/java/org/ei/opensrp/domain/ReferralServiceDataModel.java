@@ -1,5 +1,7 @@
 package org.ei.opensrp.domain;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -7,6 +9,8 @@ import java.util.ArrayList;
  */
 
 public class ReferralServiceDataModel {
+
+    private static final String TAG = ReferralServiceDataModel.class.getSimpleName();
     private String name, id;
 
     public ReferralServiceDataModel() {
@@ -51,7 +55,7 @@ public class ReferralServiceDataModel {
         visitedMom.add(new ReferralServiceDataModel("0010","Huduma za kuzuia maambukizi toka kwa mama kwenda mtoto"));
 
 
-
+        Log.d(TAG,"service list ="+visitedMom.toString());
         return visitedMom;
     }
 }

@@ -41,6 +41,12 @@ public class FacilityObject {
         this.details = new Gson().toJson(facility);
 
     }
+    public FacilityObject(String id, String name) {
+
+        this.id = id;
+        this.Name = name;
+
+    }
 
     public String getId() {
         return id;

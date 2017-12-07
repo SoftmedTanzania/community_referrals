@@ -285,22 +285,26 @@ public class LoginActivity extends AppCompatActivity {
         commonRepository = context.commonrepository("referral_service");
         serviceTask = new SaveReferralServiceTask(commonRepository);
         long count = commonRepository.count();
-        if (count > 0 ) {
-
-        }
-        else{
-            ReferralServiceDataModel  serviceDataModel= new ReferralServiceDataModel();
+        android.util.Log.d(TAG,"count ="+count);
+        if (count == 0 ) {
+            ReferralServiceDataModel serviceDataModel= new ReferralServiceDataModel();
 
             serviceDataModelArrayList = serviceDataModel.createReferralList();
-            int size = referralList.size();
-            for(int i=0; size < i; i++){
-                ContentValues values = new ReferralServiceRepository().createValuesFor(serviceDataModel);
+
+            android.util.Log.d(TAG,"count ="+serviceDataModelArrayList.toString());
+            int size = serviceDataModelArrayList.size();
+            android.util.Log.d(TAG,"size ="+size);
+
+            for(int i=0; size > i; i++){
+                ContentValues values = new ReferralServiceRepository().createValuesFor(serviceDataModelArrayList.get(i));
                 android.util.Log.d(TAG, "values = " + new Gson().toJson(values));
 
-                CommonRepository commonRepository = context.commonrepository("facility");
                 commonRepository.customInsert(values);
             }
             serviceTask.save("saving referral service");
+        }
+        else{
+
         }
     }
     private void setFacilityService() {
@@ -308,21 +312,20 @@ public class LoginActivity extends AppCompatActivity {
         facilityService = new FacilityService(commonRepository);
 
         long count = commonRepository.count();
-        if (count > 0 ) {
-
-        }
-        else{
+        if (count == 0 ) {
             Facility facility = new Facility();
 
             referralList = facility.createFacilityList();
             int size = referralList.size();
-            for(int i=0; size < i; i++){
-                ContentValues values = new FacilityRepository().createValuesFor(facility);
-                android.util.Log.d(TAG, "values = " + new Gson().toJson(values));
+            for(int i=0; size > i; i++){
+                ContentValues values = new FacilityRepository().createValuesFor(referralList.get(i));
+                android.util.Log.d(TAG, "values facility = " + new Gson().toJson(values));
 
-                CommonRepository commonRepository = context.commonrepository("facility");
                 commonRepository.customInsert(values);
             }
+        }
+        else{
+
         }
 
     }

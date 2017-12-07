@@ -427,8 +427,8 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         referral.setFacility_id(getFacilityId(spinnerFacility.getSelectedItem().toString()));
         referral.setVillage_leader(editTextVillageLeader.getText().toString());
         referral.setReferral_reason(editTextReferralReason.getText().toString());
-        referral.setReferral_service_id(spinnerService.getSelectedItem().toString());
-        referral.setProviderMobileNumber(getReferralServiceId(textviewReferralNumber.getText().toString()));
+        referral.setReferral_service_id(getReferralServiceId(spinnerService.getSelectedItem().toString()));
+        referral.setProviderMobileNumber(textviewReferralNumber.getText().toString());
         referral.setWard(wardId);
         referral.setService_provider_uiid(((UzaziSalamaApplication)getActivity().getApplication()).getCurrentUserID());
         referral.setService_provider_group(((UzaziSalamaApplication)getActivity().getApplication()).getTeam_uuid());
@@ -460,7 +460,7 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
 
-        return commonPersonObjectList.get(0).getCaseId();
+        return commonPersonObjectList.get(0).getColumnmaps().get("id");
     }
     public String getReferralServiceId(String name){
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service where name ='"+ name +"'");
@@ -468,7 +468,7 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "referral_service");
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
 
-        return commonPersonObjectList.get(0).getCaseId();
+        return commonPersonObjectList.get(0).getColumnmaps().get("id");
     }
 
     public void setRecordId(String recordId) {

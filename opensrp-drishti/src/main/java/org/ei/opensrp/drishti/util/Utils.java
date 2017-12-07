@@ -126,14 +126,12 @@ public class Utils {
         }
     }
     public static FacilityObject convertToFacilityObject(CommonPersonObject commonPersonObject) {
-        String details = commonPersonObject.getColumnmaps().get("details");
-        Log.d(TAG, "details string = " + convertStandardJSONString(details));
+        String details = commonPersonObject.getColumnmaps().get("id");
+        Log.d(TAG, "details string = " + details);
         try {
             return new FacilityObject(
                     commonPersonObject.getColumnmaps().get("id"),
-                    commonPersonObject.getColumnmaps().get("relationalid"),
-                    commonPersonObject.getColumnmaps().get("Name"),
-                    commonPersonObject.getColumnmaps().get("details")
+                    commonPersonObject.getColumnmaps().get("name")
             );
         } catch (Exception e) {
             e.printStackTrace();
@@ -141,14 +139,12 @@ public class Utils {
         }
     }
     public static ReferralServiceObject convertToServiceObject(CommonPersonObject commonPersonObject) {
-        String details = commonPersonObject.getColumnmaps().get("details");
-        Log.d(TAG, "details string = " + convertStandardJSONString(details));
+        String details = commonPersonObject.getColumnmaps().get("name");
+        Log.d(TAG, "details string = " + details);
         try {
             return new ReferralServiceObject(
                     commonPersonObject.getColumnmaps().get("id"),
-                    commonPersonObject.getColumnmaps().get("relationalid"),
-                    commonPersonObject.getColumnmaps().get("Name"),
-                    commonPersonObject.getColumnmaps().get("details")
+                    commonPersonObject.getColumnmaps().get("name")
             );
         } catch (Exception e) {
             e.printStackTrace();
