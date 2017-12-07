@@ -56,24 +56,9 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".AncFollowUpFormActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".AncSmartRegisterActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".PncActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".AncDetailActivityAlt"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
-        <activity
-            android:name=".AncDetailActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
         <activity
             android:name=".chw.CHWSmartRegisterActivity"
             android:screenOrientation="landscape"
@@ -87,21 +72,10 @@
         <activity
             android:name=".chw.CHWEditPreRegistrationActivity"
             android:screenOrientation="landscape" />
-        <activity
-            android:name=".WazaziRegisterActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="ee4140a3b1692ec32e688110a280538c7b44e10e" />
-
-        <activity
-            android:name=".PncDetailActivity"
-            android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus" />
-        <activity
-            android:name=".FollowUpDetailActivity"
-            android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
 
         <activity android:name=".UzaziSalamaReport"
             android:theme="@style/AppTheme.MaterialDesign.NoActionBar">

@@ -2,7 +2,7 @@ package org.ei.opensrp.drishti.util;
 
 import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonFtsObject;
-import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
+import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 
 import java.util.HashMap;
 
@@ -12,9 +12,9 @@ import java.util.HashMap;
 
 public class CustomContext extends Context {
 
-    private HashMap<String, CustomMotherRepository> customRepoMap;
+    private HashMap<String, ClientReferralPersonObject> customRepoMap;
 
-    public CustomMotherRepository getCustomMotherRepo(String tableName) {
+    public ClientReferralPersonObject getCustomMotherRepo(String tableName) {
         // get commonFitsObject from super
         CommonFtsObject commonFtsObject = commonFtsObject();
 

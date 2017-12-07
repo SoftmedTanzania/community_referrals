@@ -23,16 +23,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import org.ei.opensrp.drishti.DataModels.PncMother;
-import org.ei.opensrp.drishti.DataModels.PregnantMom;
-import org.ei.opensrp.drishti.Repository.PncPersonObject;
-import org.ei.opensrp.drishti.util.Utils;
+
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.drishti.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -57,8 +53,8 @@ public class ReportSearchActivity extends AppCompatActivity {
     private Gson gson = new Gson();
     private String risk,delivery = "n/a";
     private final static String TAG = ReportSearchActivity.class.getSimpleName(),
-            TABLE_ANC = "wazazi_salama_mother",
-            TABLE_PNC = "uzazi_salama_pnc";
+            TABLE_ANC = "follow_up",
+            TABLE_PNC = "client_referral";
     private String tableName;
     private long startDate = 0, endDate = 0;
     private final static String[] MOTHER_TYPES = {"Mama Waja Wazito", "Mama Waliojifungua"};
@@ -205,11 +201,11 @@ public class ReportSearchActivity extends AppCompatActivity {
                             tableName = TABLE_ANC;
                             queryBuilder.append(tableName).append(" WHERE Is_PNC = 'false' ");
                             // execute query
-                            new QueryAncTask().execute(
-                                    queryBuilder.toString(),
-                                    tableName,
-                                    getRiskStatus(),
-                                    isDateRangeSet());
+//                            new QueryAncTask().execute(
+//                                    queryBuilder.toString(),
+//                                    tableName,
+//                                    getRiskStatus(),
+//                                    isDateRangeSet());
                             break;
 
                         case 2:
@@ -217,11 +213,11 @@ public class ReportSearchActivity extends AppCompatActivity {
                             tableName = TABLE_PNC;
                             queryBuilder.append(tableName);
                             // execute query
-                            new QueryPncTask().execute(
-                                    queryBuilder.toString(),
-                                    tableName,
-                                    getDeliveryResult(),
-                                    isDateRangeSet());
+//                            new QueryPncTask().execute(
+//                                    queryBuilder.toString(),
+//                                    tableName,
+//                                    getDeliveryResult(),
+//                                    isDateRangeSet());
                             break;
                     }
                 }
@@ -285,133 +281,27 @@ public class ReportSearchActivity extends AppCompatActivity {
         return ((int) startDate != 0 && (int) endDate != 0) ? "yes" : "no";
     }
 
-
-    private class QueryAncTask extends AsyncTask<String, Void, List<PregnantMom>> {
-
-        @Override
-        protected List<PregnantMom> doInBackground(String... params) {
-            publishProgress();
-            String query = params[0];
-            String tableName = params[1];
-            String riskStatus = params[2];
-            risk = params[2];
-            String isDateRangeSet = params[3];
-            Log.d(TAG, "query = " + query);
-            Log.d(TAG, "tableName = " + tableName + ", riskStatus = " + riskStatus
-                    + ", isDateRangeSet = " + isDateRangeSet);
-
-            Context context = Context.getInstance().updateApplicationContext(getApplicationContext());
-            CommonRepository commonRepository = context.commonrepository(tableName);
-            Cursor cursor = commonRepository.RawCustomQueryForAdapter(query);
-
-            // obtains mothers from result
-            List<PregnantMom> pregnantMoms = new ArrayList<>();
-            try {
-                if (cursor.moveToFirst()) {
-                    while (!cursor.isAfterLast()) {
-                        // get anc mothers from query result and add them to list
-                        String details = cursor.getString(cursor.getColumnIndex("details"));
-                        Log.d(TAG, "column details = " + details);
-                        // convert and add to list
-                        if (riskStatus.equals("n/a"))
-                            // add all
-                            pregnantMoms.add(gson.fromJson(details, PregnantMom.class));
-
-                        else if (riskStatus.equals("yes")) {
-                            // add mothers on risk
-                            PregnantMom mom = gson.fromJson(details, PregnantMom.class);
-                            if (mom.isOnRisk())
-                                pregnantMoms.add(mom);
-
-                        } else if (riskStatus.equals("no")) {
-                            // add mothers not on risk
-                            PregnantMom mom = gson.fromJson(details, PregnantMom.class);
-                            if (!mom.isOnRisk())
-                                pregnantMoms.add(mom);
-                        }
-
-                        cursor.moveToNext();
-                    }
-                    // check date range
-                    if (isDateRangeSet.equals("yes")) {
-                        for (PregnantMom mom : pregnantMoms) {
-                            if (mom.getDateReg() < startDate || mom.getDateReg() > endDate)
-                                pregnantMoms.remove(mom); // remove mother
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                Log.d(TAG, "error: " + e.getMessage());
-                return null;
-
-            } finally {
-                cursor.close();
-            }
-
-            return pregnantMoms;
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-            // show progress
-            if (!progressDialog.isShowing())
-                progressDialog.show();
-        }
-
-        @Override
-        protected void onPostExecute(List<PregnantMom> resultList) {
-            super.onPostExecute(resultList);
-            // hide progress and process the result
-            if (progressDialog.isShowing())
-                progressDialog.dismiss();
-
-            if (resultList == null)
-                showDialog(getString(R.string.failed_please_try_again));
-
-            else if (resultList.size() > 0) {
-                Log.d(TAG, "resultList " + resultList.size());
-                //  makeSnackbar("Result: " + resultList.size() + " items.");
-                Intent reportIntent = new Intent(ReportSearchActivity.this, UzaziSalamaReport.class);
-                reportIntent.putExtra("moms", gson.toJson(resultList));
-                reportIntent.putExtra("type", "anc");
-                reportIntent.putExtra("risk", risk);
-                startActivity(reportIntent);
-
-            } else {
-                Log.d(TAG, "Query result is empty!");
-                showDialog(getString(R.string.no_results_found));
-            }
-        }
-    }
-
-
-    private class QueryPncTask extends AsyncTask<String, Void, List<PncPersonObject>> {
-
-        @Override
-        protected List<PncPersonObject> doInBackground(String... params) {
-            publishProgress();
-            String query = params[0];
-            String tableName = params[1];
-            delivery = params[2];
-            String deliveryResult = params[2];
-            String isDateRangeSet = params[3];
-            Log.d(TAG, "query = " + query);
-            Log.d(TAG, "tableName = " + tableName + ", deliveryResult =  " + deliveryResult
-                    + ", isDateRangeSet = " + isDateRangeSet);
-
-            Context context = Context.getInstance().updateApplicationContext(getApplicationContext());
-            CommonRepository commonRepository = context.commonrepository(tableName);
-            Cursor cursor = commonRepository.RawCustomQueryForAdapter(query);
-            List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, tableName);
-            Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
-
-
-            // obtains mothers from result
-            List<PncPersonObject> motherPersonList = new ArrayList<>();
-            List<PncMother> pncMoms = new ArrayList<>();
-//            motherPersonList = Utils.convertToPncPersonObjectList(commonPersonObjectList);
-            Log.d(TAG, "repo count = " + gson.toJson(motherPersonList));
+//
+//    private class QueryAncTask extends AsyncTask<String, Void, List<PregnantMom>> {
+//
+//        @Override
+//        protected List<PregnantMom> doInBackground(String... params) {
+//            publishProgress();
+//            String query = params[0];
+//            String tableName = params[1];
+//            String riskStatus = params[2];
+//            risk = params[2];
+//            String isDateRangeSet = params[3];
+//            Log.d(TAG, "query = " + query);
+//            Log.d(TAG, "tableName = " + tableName + ", riskStatus = " + riskStatus
+//                    + ", isDateRangeSet = " + isDateRangeSet);
+//
+//            Context context = Context.getInstance().updateApplicationContext(getApplicationContext());
+//            CommonRepository commonRepository = context.commonrepository(tableName);
+//            Cursor cursor = commonRepository.RawCustomQueryForAdapter(query);
+//
+//            // obtains mothers from result
+//            List<PregnantMom> pregnantMoms = new ArrayList<>();
 //            try {
 //                if (cursor.moveToFirst()) {
 //                    while (!cursor.isAfterLast()) {
@@ -419,49 +309,30 @@ public class ReportSearchActivity extends AppCompatActivity {
 //                        String details = cursor.getString(cursor.getColumnIndex("details"));
 //                        Log.d(TAG, "column details = " + details);
 //                        // convert and add to list
-//                        if (deliveryResult.equals("n/a"))
+//                        if (riskStatus.equals("n/a"))
 //                            // add all
-//                            pncMoms.add(gson.fromJson(details, PncMother.class));
+//                            pregnantMoms.add(gson.fromJson(details, PregnantMom.class));
 //
-//                        else if (deliveryResult.equals("yes")) {
-//                            // todo add mothers with successful birth
-//                            pncMoms.add(gson.fromJson(details, PncMother.class));
+//                        else if (riskStatus.equals("yes")) {
+//                            // add mothers on risk
+//                            PregnantMom mom = gson.fromJson(details, PregnantMom.class);
+//                            if (mom.isOnRisk())
+//                                pregnantMoms.add(mom);
 //
-//                        } else if (deliveryResult.equals("no")) {
-//                            //todo add mothers with unsuccessful birth
-//                            pncMoms.add(gson.fromJson(details, PncMother.class));
+//                        } else if (riskStatus.equals("no")) {
+//                            // add mothers not on risk
+//                            PregnantMom mom = gson.fromJson(details, PregnantMom.class);
+//                            if (!mom.isOnRisk())
+//                                pregnantMoms.add(mom);
 //                        }
 //
 //                        cursor.moveToNext();
 //                    }
-//
-//
-//                }
-//            } catch (Exception e) {
-//                Log.d(TAG, "error: " + e.getMessage());
-//                return null;
-//
-//            } finally {
-//                cursor.close();
-//            }
-//
-//                        else if (deliveryResult.equals("yes")) {
-//                            // todo add mothers with successful birth
-//                            pncMoms.add(gson.fromJson(details, PncMother.class));
-//
-//                        } else if (deliveryResult.equals("no")) {
-//                            //todo add mothers with unsuccessful birth
-//                            pncMoms.add(gson.fromJson(details, PncMother.class));
-//                        }
-//
-//                        cursor.moveToNext();
-//                    }
-//
 //                    // check date range
 //                    if (isDateRangeSet.equals("yes")) {
-//                        for (PncMother mom : pncMoms) {
-//                            if (mom.getDeliveryDate() < startDate || mom.getDeliveryDate() > endDate)
-//                                pncMoms.remove(mom); // remove mother
+//                        for (PregnantMom mom : pregnantMoms) {
+//                            if (mom.getDateReg() < startDate || mom.getDateReg() > endDate)
+//                                pregnantMoms.remove(mom); // remove mother
 //                        }
 //                    }
 //                }
@@ -473,43 +344,168 @@ public class ReportSearchActivity extends AppCompatActivity {
 //                cursor.close();
 //            }
 //
-//            return pncMoms;
-            return motherPersonList;
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-            // show progress
-            if (!progressDialog.isShowing())
-                progressDialog.show();
-        }
-
-        @Override
-        protected void onPostExecute(List<PncPersonObject> resultList) {
-            super.onPostExecute(resultList);
-            // hide progress and process the result
-            if (progressDialog.isShowing())
-                progressDialog.dismiss();
-
-            if (resultList == null)
-                showDialog(getString(R.string.failed_please_try_again));
-
-            else if (resultList.size() > 0) {
-                Log.d(TAG, "resultList " + resultList.size());
-                Log.d(TAG, "resultList " + gson.toJson(resultList));
-                Intent reportIntent = new Intent(ReportSearchActivity.this, UzaziSalamaReport.class);
-                reportIntent.putExtra("moms", gson.toJson(resultList));
-                reportIntent.putExtra("type", "pnc");
-                reportIntent.putExtra("delivery", delivery);
-                startActivity(reportIntent);
-
-            } else {
-                Log.d(TAG, "Query result is empty!");
-                showDialog(getString(R.string.no_results_found));
-            }
-        }
-    }
+//            return pregnantMoms;
+//        }
+//
+//        @Override
+//        protected void onProgressUpdate(Void... values) {
+//            super.onProgressUpdate(values);
+//            // show progress
+//            if (!progressDialog.isShowing())
+//                progressDialog.show();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(List<PregnantMom> resultList) {
+//            super.onPostExecute(resultList);
+//            // hide progress and process the result
+//            if (progressDialog.isShowing())
+//                progressDialog.dismiss();
+//
+//            if (resultList == null)
+//                showDialog(getString(R.string.failed_please_try_again));
+//
+//            else if (resultList.size() > 0) {
+//                Log.d(TAG, "resultList " + resultList.size());
+//                //  makeSnackbar("Result: " + resultList.size() + " items.");
+//                Intent reportIntent = new Intent(ReportSearchActivity.this, UzaziSalamaReport.class);
+//                reportIntent.putExtra("moms", gson.toJson(resultList));
+//                reportIntent.putExtra("type", "anc");
+//                reportIntent.putExtra("risk", risk);
+//                startActivity(reportIntent);
+//
+//            } else {
+//                Log.d(TAG, "Query result is empty!");
+//                showDialog(getString(R.string.no_results_found));
+//            }
+//        }
+//    }
+//
+//
+//    private class QueryPncTask extends AsyncTask<String, Void, List<PncPersonObject>> {
+//
+//        @Override
+//        protected List<PncPersonObject> doInBackground(String... params) {
+//            publishProgress();
+//            String query = params[0];
+//            String tableName = params[1];
+//            delivery = params[2];
+//            String deliveryResult = params[2];
+//            String isDateRangeSet = params[3];
+//            Log.d(TAG, "query = " + query);
+//            Log.d(TAG, "tableName = " + tableName + ", deliveryResult =  " + deliveryResult
+//                    + ", isDateRangeSet = " + isDateRangeSet);
+//
+//            Context context = Context.getInstance().updateApplicationContext(getApplicationContext());
+//            CommonRepository commonRepository = context.commonrepository(tableName);
+//            Cursor cursor = commonRepository.RawCustomQueryForAdapter(query);
+//            List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, tableName);
+//            Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
+//
+//
+//            // obtains mothers from result
+//            List<PncPersonObject> motherPersonList = new ArrayList<>();
+//            List<PncMother> pncMoms = new ArrayList<>();
+////            motherPersonList = Utils.convertToPncPersonObjectList(commonPersonObjectList);
+//            Log.d(TAG, "repo count = " + gson.toJson(motherPersonList));
+////            try {
+////                if (cursor.moveToFirst()) {
+////                    while (!cursor.isAfterLast()) {
+////                        // get anc mothers from query result and add them to list
+////                        String details = cursor.getString(cursor.getColumnIndex("details"));
+////                        Log.d(TAG, "column details = " + details);
+////                        // convert and add to list
+////                        if (deliveryResult.equals("n/a"))
+////                            // add all
+////                            pncMoms.add(gson.fromJson(details, PncMother.class));
+////
+////                        else if (deliveryResult.equals("yes")) {
+////                            // todo add mothers with successful birth
+////                            pncMoms.add(gson.fromJson(details, PncMother.class));
+////
+////                        } else if (deliveryResult.equals("no")) {
+////                            //todo add mothers with unsuccessful birth
+////                            pncMoms.add(gson.fromJson(details, PncMother.class));
+////                        }
+////
+////                        cursor.moveToNext();
+////                    }
+////
+////
+////                }
+////            } catch (Exception e) {
+////                Log.d(TAG, "error: " + e.getMessage());
+////                return null;
+////
+////            } finally {
+////                cursor.close();
+////            }
+////
+////                        else if (deliveryResult.equals("yes")) {
+////                            // todo add mothers with successful birth
+////                            pncMoms.add(gson.fromJson(details, PncMother.class));
+////
+////                        } else if (deliveryResult.equals("no")) {
+////                            //todo add mothers with unsuccessful birth
+////                            pncMoms.add(gson.fromJson(details, PncMother.class));
+////                        }
+////
+////                        cursor.moveToNext();
+////                    }
+////
+////                    // check date range
+////                    if (isDateRangeSet.equals("yes")) {
+////                        for (PncMother mom : pncMoms) {
+////                            if (mom.getDeliveryDate() < startDate || mom.getDeliveryDate() > endDate)
+////                                pncMoms.remove(mom); // remove mother
+////                        }
+////                    }
+////                }
+////            } catch (Exception e) {
+////                Log.d(TAG, "error: " + e.getMessage());
+////                return null;
+////
+////            } finally {
+////                cursor.close();
+////            }
+////
+////            return pncMoms;
+//            return motherPersonList;
+//        }
+//
+//        @Override
+//        protected void onProgressUpdate(Void... values) {
+//            super.onProgressUpdate(values);
+//            // show progress
+//            if (!progressDialog.isShowing())
+//                progressDialog.show();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(List<PncPersonObject> resultList) {
+//            super.onPostExecute(resultList);
+//            // hide progress and process the result
+//            if (progressDialog.isShowing())
+//                progressDialog.dismiss();
+//
+//            if (resultList == null)
+//                showDialog(getString(R.string.failed_please_try_again));
+//
+//            else if (resultList.size() > 0) {
+//                Log.d(TAG, "resultList " + resultList.size());
+//                Log.d(TAG, "resultList " + gson.toJson(resultList));
+//                Intent reportIntent = new Intent(ReportSearchActivity.this, UzaziSalamaReport.class);
+//                reportIntent.putExtra("moms", gson.toJson(resultList));
+//                reportIntent.putExtra("type", "pnc");
+//                reportIntent.putExtra("delivery", delivery);
+//                startActivity(reportIntent);
+//
+//            } else {
+//                Log.d(TAG, "Query result is empty!");
+//                showDialog(getString(R.string.no_results_found));
+//            }
+//        }
+//    }
 
 
     private void makeSnackbar(String message) {

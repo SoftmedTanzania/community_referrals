@@ -35,22 +35,17 @@ import org.ei.opensrp.domain.form.FormField;
 import org.ei.opensrp.domain.form.FormInstance;
 import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.drishti.Application.UzaziSalamaApplication;
 import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.DataModels.FollowUp;
-import org.ei.opensrp.drishti.DataModels.PregnantMom;
-import org.ei.opensrp.drishti.Fragments.AncRegisterFormFragment;
-import org.ei.opensrp.drishti.Fragments.AncSmartRegisterFragment;
 import org.ei.opensrp.drishti.Fragments.CHWFollowUpFragment;
 import org.ei.opensrp.drishti.Fragments.CHWPreRegisterFormFragment;
 import org.ei.opensrp.drishti.Fragments.CHWPreRegistrationFragment;
+import org.ei.opensrp.drishti.Fragments.CHWSmartRegisterFragment;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.Repository.ClientReferralRepository;
 import org.ei.opensrp.drishti.Repository.FollowUpPersonObject;
 import org.ei.opensrp.drishti.Repository.FollowUpRepository;
 import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
-import org.ei.opensrp.drishti.Repository.MotherPersonObject;
-import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
 import org.ei.opensrp.drishti.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.drishti.util.Utils;
@@ -104,7 +99,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private Gson gson = new Gson();
     private CommonRepository commonRepository;
     private android.content.Context appContext;
-    private List<MotherPersonObject> motherPersonList = new ArrayList<>();
     private Cursor cursor;
     private static final String TABLE_NAME = "client_referral";
 
@@ -120,7 +114,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         OrientationHelper.setProperOrientationForDevice(AncSmartRegisterActivity.this);
 
         formNames = this.buildFormNameList();
-        mBaseFragment = new AncSmartRegisterFragment();
+        mBaseFragment = new CHWSmartRegisterFragment();
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
@@ -147,9 +141,9 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     }
 
     public void returnToBaseFragment(){
-        mPager.setCurrentItem(0);
-        AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) getDisplayFormFragmentAtIndex(1);
-        displayFormFragment.reloadValues();
+//        mPager.setCurrentItem(0);
+//        AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) getDisplayFormFragmentAtIndex(1);
+//        displayFormFragment.reloadValues();
 
 
     }
@@ -232,7 +226,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
         Log.d(TAG, "gsonMom = " + gsonMom);
-        final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
+//        final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_visit_details, null);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
@@ -691,19 +685,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 if (data == null) {
                     data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
-                if (formName.equals("pregnant_mothers_registration")) {
-                    AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) getDisplayFormFragmentAtIndex(formIndex);
-                    if (displayFormFragment != null) {
-                        Log.d(TAG, "form data = " + data);
-                        displayFormFragment.setFormData(data);
-                        displayFormFragment.setRecordId(entityId);
-                        displayFormFragment.setFieldOverides(metaData);
-
-                        if((displayFormFragment.getRegistrationType()).equals("2")){
-                            displayFormFragment.setEmptyDetails();
-                        }
-                    }
-                } else if(formName.equals("pregnant_mothers_pre_registration")){
+                 if(formName.equals("pregnant_mothers_pre_registration")){
                     CHWPreRegisterFormFragment displayFormFragment = (CHWPreRegisterFormFragment) getDisplayFormFragmentAtIndex(formIndex);
                     if (displayFormFragment != null) {
                         Log.d(TAG, "form data = " + data);
@@ -950,136 +932,68 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 }
             }.execute();
 
-        } else{
-            final PregnantMom pregnantMom = gson.fromJson(formSubmission, PregnantMom.class);
-
-            MotherPersonObject motherPersonObject = new MotherPersonObject(id, null, pregnantMom);
-            ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
-            Log.d(TAG, "motherPersonObject = " + gson.toJson(motherPersonObject));
-            Log.d(TAG, "values = " + gson.toJson(values));
-
-            CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
-            commonRepository.customInsert(values);
-
-            CommonPersonObject c = commonRepository.findByCaseID(id);
-            List<FormField> formFields = new ArrayList<>();
-
-
-            formFields.add(new FormField("id", c.getCaseId(), commonRepository.TABLE_NAME + "." + "id"));
-
-
-            formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
-
-            for ( String key : c.getDetails().keySet() ) {
-                Log.d(TAG,"key = "+key);
-                FormField f = null;
-                if(!key.equals("FACILITY_ID")) {
-                    f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
-                }else{
-                    f = new FormField(key, c.getDetails().get(key), "facility.id");
-                }
-                formFields.add(f);
-            }
-
-
-            Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
-
-            FormData formData = new FormData("wazazi_salama_mother","/model/instance/Wazazi_Salama_ANC_Registration/",formFields,null);
-            FormInstance formInstance = new FormInstance(formData,"1");
-            FormSubmission submission = new FormSubmission(generateRandomUUIDString(),id,"wazazi_salama_pregnant_mothers_registration",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
-            context().formDataRepository().saveFormSubmission(submission);
-
-            Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
-
-
-//        TODO finish this better implementation for saving data to the database
-//        FormSubmission formSubmission1 = null;
-//        try {
-//            formSubmission1 = FormUtils.getInstance(getApplicationContext()).generateFormSubmisionFromJSONString(id,new Gson().toJson(pregnantMom),"wazazi_salama_pregnant_mothers_registration",fieldOverrides);
-//            Log.d(TAG,"form submission generated successfully");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//        try {
-//            context().ziggyService().saveForm(getParams(formSubmission1), formSubmission1.instance());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-
-            new  org.ei.opensrp.drishti.util.AsyncTask<Void, Void, Void>(){
-                @Override
-                protected Void doInBackground(Void... params) {
-                    if(!pregnantMom.getPhone().equals(""))
-                        Utils.sendRegistrationAlert(pregnantMom.getPhone());
-                    return null;
-                }
-            }.execute();
-
         }
     }
 
 
-    public void updateFormSubmission(MotherPersonObject motherPersonObject, String id){
-
-
-        ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
-        Log.d(TAG,"values to be updated ="+ new Gson().toJson(values));
-        Log.d(TAG," mother id to be updated ="+ id);
-        Log.d(TAG," mother id to be updated ="+ motherPersonObject.getId());
-        CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
-        commonRepository.customUpdateTable("wazazi_salama_mother",values,motherPersonObject.getId());
-
-        CommonRepository cRepository = context().commonrepository("wazazi_salama_mother");
-
-        CommonPersonObject c = cRepository.findByCaseID(id);
-        List<FormField> formFields = new ArrayList<>();
-
-
-        formFields.add(new FormField("id", c.getCaseId(), commonRepository.TABLE_NAME + "." + "id"));
-
-
-        formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
-
-        for ( String key : c.getDetails().keySet() ) {
-            Log.d(TAG,"key = "+key);
-            FormField f = null;
-            if(!key.equals("FACILITY_ID")) {
-                f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
-            }else{
-                f = new FormField(key, c.getDetails().get(key), "facility.id");
-            }
-            formFields.add(f);
-        }
-
-        for ( String key : c.getColumnmaps().keySet() ) {
-            Log.d(TAG,"key = "+key);
-            FormField f = null;
-            if(!key.equals("FACILITY_ID")) {
-                f = new FormField(key, c.getColumnmaps().get(key), commonRepository.TABLE_NAME + "." + key);
-            }else{
-                f = new FormField(key, c.getColumnmaps().get(key), "facility.id");
-            }
-
-            formFields.add(f);
-
-
-        }
-        Log.d(TAG,"fieldes = "+ new Gson().toJson(formFields));
-
-        FormData formData = new FormData("wazazi_salama_mother","/model/instance/Wazazi_Salama_ANC_Registration/",formFields,null);
-        FormInstance formInstance = new FormInstance(formData,"1");
-        FormSubmission submission = context().formDataRepository().fetchFromSubmissionByEntity(motherPersonObject.getId());
-
-        Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
-
-        FormSubmission updatedSubmission = new FormSubmission(submission.instanceId(), submission.entityId(), submission.formName(), new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
-        context().formDataRepository().updateFormSubmission(updatedSubmission);
-
-        Log.d(TAG,"submission content = "+ new Gson().toJson(updatedSubmission));
-    }
+//    public void updateFormSubmission(MotherPersonObject motherPersonObject, String id){
+//
+//
+//        ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
+//        Log.d(TAG,"values to be updated ="+ new Gson().toJson(values));
+//        Log.d(TAG," mother id to be updated ="+ id);
+//        Log.d(TAG," mother id to be updated ="+ motherPersonObject.getId());
+//        CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
+//        commonRepository.customUpdateTable("wazazi_salama_mother",values,motherPersonObject.getId());
+//
+//        CommonRepository cRepository = context().commonrepository("wazazi_salama_mother");
+//
+//        CommonPersonObject c = cRepository.findByCaseID(id);
+//        List<FormField> formFields = new ArrayList<>();
+//
+//
+//        formFields.add(new FormField("id", c.getCaseId(), commonRepository.TABLE_NAME + "." + "id"));
+//
+//
+//        formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
+//
+//        for ( String key : c.getDetails().keySet() ) {
+//            Log.d(TAG,"key = "+key);
+//            FormField f = null;
+//            if(!key.equals("FACILITY_ID")) {
+//                f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
+//            }else{
+//                f = new FormField(key, c.getDetails().get(key), "facility.id");
+//            }
+//            formFields.add(f);
+//        }
+//
+//        for ( String key : c.getColumnmaps().keySet() ) {
+//            Log.d(TAG,"key = "+key);
+//            FormField f = null;
+//            if(!key.equals("FACILITY_ID")) {
+//                f = new FormField(key, c.getColumnmaps().get(key), commonRepository.TABLE_NAME + "." + key);
+//            }else{
+//                f = new FormField(key, c.getColumnmaps().get(key), "facility.id");
+//            }
+//
+//            formFields.add(f);
+//
+//
+//        }
+//        Log.d(TAG,"fieldes = "+ new Gson().toJson(formFields));
+//
+//        FormData formData = new FormData("wazazi_salama_mother","/model/instance/Wazazi_Salama_ANC_Registration/",formFields,null);
+//        FormInstance formInstance = new FormInstance(formData,"1");
+//        FormSubmission submission = context().formDataRepository().fetchFromSubmissionByEntity(motherPersonObject.getId());
+//
+//        Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
+//
+//        FormSubmission updatedSubmission = new FormSubmission(submission.instanceId(), submission.entityId(), submission.formName(), new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
+//        context().formDataRepository().updateFormSubmission(updatedSubmission);
+//
+//        Log.d(TAG,"submission content = "+ new Gson().toJson(updatedSubmission));
+//    }
 
     public void switchToBaseFragment(final String data) {
         Log.v("we are here", "switchtobasegragment");
@@ -1089,14 +1003,15 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             public void run() {
                 // TODO: 9/17/17 this is a hack
 
-
-                if(currentPage==1) {//for supervisors
-                    AncSmartRegisterFragment registerFragment = (AncSmartRegisterFragment) findFragmentByPosition(0);
-                    if (registerFragment != null) {
-                        registerFragment.refreshListView();
-                    }
-                    mPager.setCurrentItem(0, true);
-                }else   if(currentPage==2) {//for chws
+//
+//                if(currentPage==1) {//for supervisors
+//                    AncSmartRegisterFragment registerFragment = (AncSmartRegisterFragment) findFragmentByPosition(0);
+//                    if (registerFragment != null) {
+//                        registerFragment.refreshListView();
+//                    }
+//                    mPager.setCurrentItem(0, true);
+//                }else
+          if(currentPage==2) {//for chws
                     finish();
                 }
             }
@@ -1174,12 +1089,12 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     public void retrieveAndSaveUnsubmittedFormData() {
         if (currentActivityIsShowingForm()) {
-            try {
-                AncSmartRegisterFragment formFragment = (AncSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
-                formFragment.saveCurrentFormData();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            try {
+//                AncSmartRegisterFragment formFragment = (AncSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
+//                formFragment.saveCurrentFormData();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
         }
     }
 

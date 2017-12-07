@@ -1,25 +1,19 @@
 {
   "bindobjects": [
     {
-      "name": "wazazi_salama_mother",
-      "columns": [
-        {"name":"MOTHERS_FIRST_NAME"},{"name":"MOTHERS_LAST_NAME"},{"name":"MOTHERS_LAST_MENSTRUATION_DATE"},{"name":"MOTHERS_SORTVALUE"},{"name":"MOTHERS_ID"},{"name":"PNC_STATUS"},{"name":"EXPECTED_DELIVERY_DATE"},{"name":"IS_VALID"},{"name":"REG_TYPE"},{"name":"Is_PNC"},{"name":"FACILITY_ID"}
-      ]
-    },
-    {
       "name": "client_referral",
       "columns": [
         {"name":"first_name"},{"name":"middle_name"},{"name":"surname"},{"name":"community_based_hiv_service"},{"name":"ctc_number"},{"name":"referral_date"},{"name":"facility_id"},{"name":"referral_reason"},{"name":"referral_service_id"},{"name":"is_valid"},{"name":"referral_status"}
       ]
     },
     {
-      "name": "child",
+      "name": "facility",
       "columns": [
-        {"name":"GENDER"},{"name":"motherCaseId"}
+        {"name":"name"}
       ]
     },
     {
-      "name": "facility",
+      "name": "referral_service",
       "columns": [
         {"name":"name"}
       ]

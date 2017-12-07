@@ -1,14 +1,6 @@
 package org.ei.opensrp.drishti.DataModels;
 
-import android.database.Cursor;
-
-import com.google.gson.Gson;
-
-import org.ei.opensrp.Context;
-import org.ei.opensrp.drishti.Repository.MotherPersonObject;
-
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by ali on 9/5/17.

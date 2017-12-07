@@ -3,7 +3,6 @@ package org.ei.opensrp.drishti;
 import android.app.Activity;
 import android.content.Intent;
 
-import org.ei.opensrp.drishti.chw.CHWSmartRegisterActivity;
 import org.ei.opensrp.view.controller.ANMController;
 
 public class NavigationController extends org.ei.opensrp.view.controller.NavigationController {
@@ -23,7 +22,7 @@ public class NavigationController extends org.ei.opensrp.view.controller.Navigat
 
     @Override
     public void startPNCActivity() {
-        activity.startActivity(new Intent(activity, PncActivity.class));
+//        activity.startActivity(new Intent(activity, PncActivity.class));
     }
 
 }

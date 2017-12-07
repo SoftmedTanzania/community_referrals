@@ -117,6 +117,7 @@ public class LocationSelectorDialogFragment extends DialogFragment {
                 if(node.isLeaf()){
                     JSONObject locationjson = new JSONObject();
                     TreeNode traversingnode = node;
+//                    Log.d(TAG,"location node ="+ new Gson().toJason(traversingnode.ge))
                     while(!traversingnode.isRoot()){
                         try {
                             locationjson.put(traversingnode.getlocationlevel(), traversingnode.getName());
@@ -145,7 +146,7 @@ public class LocationSelectorDialogFragment extends DialogFragment {
                     Strings.isNullOrEmpty(locationTag)?"-":humanize(locationTag),
                     humanize(entry.getValue().getLabel()),
                     formName);
-            Log.d(TAG,"creating node"+new Gson().totree);
+//            Log.d(TAG,"creating node"+new Gson().totree);
             node.addChild(tree);
             if(entry.getValue().getChildren() != null) {
                 locationTreeToTreNode(tree, entry.getValue().getChildren(), formName);

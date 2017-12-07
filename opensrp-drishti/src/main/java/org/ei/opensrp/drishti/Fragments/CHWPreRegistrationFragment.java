@@ -15,11 +15,8 @@ import com.google.gson.Gson;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.drishti.AncRegisterListAdapter;
 import org.ei.opensrp.drishti.R;
-import org.ei.opensrp.drishti.DataModels.PreRegisteredMother;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
-import org.ei.opensrp.drishti.Repository.MotherPersonObject;
 import org.ei.opensrp.drishti.pageradapter.CHWRegisterRecyclerAdapter;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.drishti.util.Utils;

@@ -33,7 +33,6 @@ import org.ei.opensrp.cursoradapter.CursorSortOption;
 import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
 import org.ei.opensrp.domain.ReportMonth;
 import org.ei.opensrp.drishti.AncRegisterListAdapter;
-import org.ei.opensrp.drishti.PncRegisterListAdapter;
 
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
@@ -125,16 +124,8 @@ public abstract class SecuredNativeSmartRegisterCursorAdapterFragment extends or
     public void setClientsAdapter(AncRegisterListAdapter clientsAdapter) {
         this.clientAdapter = clientsAdapter;
     }
-    public PncRegisterListAdapter getPncCursorAdapter() {
-        return pncAdapter;
-    }
 
-    public void setPncAdapter(PncRegisterListAdapter clientsAdapter) {
-        this.pncAdapter = clientsAdapter;
-    }
     public AncRegisterListAdapter clientAdapter;
-
-    public PncRegisterListAdapter pncAdapter;
 
     private FilterOption currentVillageFilter;
 

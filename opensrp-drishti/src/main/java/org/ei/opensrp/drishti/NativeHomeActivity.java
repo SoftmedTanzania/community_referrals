@@ -1,7 +1,5 @@
 package org.ei.opensrp.drishti;
 
-import android.content.Intent;
-import android.database.Cursor;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
@@ -11,20 +9,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
-import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.commonregistry.ControllerFilterMap;
 import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
-import org.ei.opensrp.drishti.Anc.Anc1handler;
-import org.ei.opensrp.drishti.Anc.Anc2handler;
-import org.ei.opensrp.drishti.Anc.Anc3handler;
-import org.ei.opensrp.drishti.Anc.Anc4handler;
 import org.ei.opensrp.drishti.Application.UzaziSalamaApplication;
-import org.ei.opensrp.drishti.Repository.CustomMotherRepository;
-import org.ei.opensrp.drishti.util.CustomContext;
 import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.service.PendingFormSubmissionService;
@@ -113,14 +102,7 @@ public class NativeHomeActivity extends SecuredActivity {
         DisplayFormFragment.formInputErrorMessage = getResources().getString(R.string.forminputerror);
         DisplayFormFragment.okMessage = getResources().getString(R.string.okforminputerror);
 
-        context().formSubmissionRouter().getHandlerMap().put("anc_reminder_visit_1",
-                new Anc1handler());
-        context().formSubmissionRouter().getHandlerMap().put("anc_reminder_visit_2",
-                new Anc2handler());
-        context().formSubmissionRouter().getHandlerMap().put("anc_reminder_visit_3",
-                new Anc3handler());
-        context().formSubmissionRouter().getHandlerMap().put("anc_reminder_visit_4",
-                new Anc4handler());
+
 
         // orientation
         OrientationHelper.setProperOrientationForDevice(NativeHomeActivity.this);

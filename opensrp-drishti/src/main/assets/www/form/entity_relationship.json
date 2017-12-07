@@ -14,21 +14,5 @@
         "kind": "one_to_many",
         "from": "follow_up.id",
         "to": "follow_up.relationalid"
-    },
-    {
-        "parent": "wazazi_salama_mother",
-        "child": "wazazi_salama_pnc",
-        "field": "new mother",
-        "kind": "one_to_many",
-        "from": "wazazi_salama_mother.id",
-        "to": "wazazi_salama_pnc.motherCaseId"
-    },
-    {
-        "parent": "child",
-        "child": "wazazi_salama_pnc",
-        "field": "mothers child",
-        "kind": "one_to_many",
-        "from": "child.id",
-        "to": "wazazi_salama_pnc.childCaseId"
     }
 ]
