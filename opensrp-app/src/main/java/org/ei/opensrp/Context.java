@@ -24,10 +24,12 @@ import org.ei.opensrp.repository.AllTimelineEvents;
 import org.ei.opensrp.repository.ChildRepository;
 import org.ei.opensrp.repository.DrishtiRepository;
 import org.ei.opensrp.repository.EligibleCoupleRepository;
+import org.ei.opensrp.repository.FacilityRepository;
 import org.ei.opensrp.repository.FormDataRepository;
 import org.ei.opensrp.repository.FormsVersionRepository;
 import org.ei.opensrp.repository.ImageRepository;
 import org.ei.opensrp.repository.MotherRepository;
+import org.ei.opensrp.repository.ReferralServiceRepository;
 import org.ei.opensrp.repository.ReportRepository;
 import org.ei.opensrp.repository.Repository;
 import org.ei.opensrp.repository.ServiceProvidedRepository;
@@ -128,6 +130,8 @@ public class Context {
     private AllReports allReports;
     private AllServicesProvided allServicesProvided;
     private AllCommonsRepository allCommonPersonObjectsRepository;
+    private FacilityRepository facilityRepository;
+    private ReferralServiceRepository referralServiceRepository;
     private static ImageRepository imageRepository;
 
 
@@ -500,6 +504,8 @@ public class Context {
             drishtireposotorylist.add(childRepository());
             drishtireposotorylist.add(timelineEventRepository());
             drishtireposotorylist.add(motherRepository());
+            drishtireposotorylist.add(facilityRepository());
+            drishtireposotorylist.add(referralServiceRepository());
             drishtireposotorylist.add(reportRepository());
             drishtireposotorylist.add(formDataRepository());
             drishtireposotorylist.add(serviceProvidedRepository());
@@ -615,6 +621,19 @@ public class Context {
             motherRepository = new MotherRepository();
         }
         return motherRepository;
+    }
+    private ReferralServiceRepository referralServiceRepository() {
+        if (referralServiceRepository == null) {
+            referralServiceRepository = new ReferralServiceRepository();
+        }
+        return referralServiceRepository;
+    }
+
+    private FacilityRepository facilityRepository() {
+        if (facilityRepository == null) {
+            facilityRepository = new FacilityRepository();
+        }
+        return facilityRepository;
     }
 
 

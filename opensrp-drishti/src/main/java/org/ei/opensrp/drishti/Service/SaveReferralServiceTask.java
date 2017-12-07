@@ -1,6 +1,7 @@
 package org.ei.opensrp.drishti.Service;
 
-import org.ei.opensrp.drishti.Repository.ReferralServiceRepository;
+import org.ei.opensrp.commonregistry.CommonRepository;
+import org.ei.opensrp.repository.ReferralServiceRepository;
 import org.ei.opensrp.util.Log;
 import org.ei.opensrp.view.BackgroundAction;
 import org.ei.opensrp.view.LockingBackgroundTask;
@@ -12,9 +13,9 @@ import org.ei.opensrp.view.ProgressIndicator;
 public class SaveReferralServiceTask {
     private ReferralService referralService;
     private LockingBackgroundTask lockingBackgroundTask;
-    private ReferralServiceRepository repository;
+    private CommonRepository repository;
 
-    public SaveReferralServiceTask(ReferralServiceRepository serviceRepository) {
+    public SaveReferralServiceTask(CommonRepository serviceRepository) {
         this.repository = serviceRepository;
         lockingBackgroundTask = new LockingBackgroundTask(new ProgressIndicator() {
             @Override

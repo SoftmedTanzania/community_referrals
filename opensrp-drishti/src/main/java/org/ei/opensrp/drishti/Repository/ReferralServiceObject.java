@@ -12,16 +12,16 @@ import java.util.Map;
  * Created by Kency on 14/09/2017.
  */
 
-public class FacilityObject {
+public class ReferralServiceObject {
     private String id, relationalId, Name;
 
     private String details;
     private Map<String, String> columnMap;
 
-    public FacilityObject(String id,
-                          String relationalId,
-                          String name,
-                          String details
+    public ReferralServiceObject(String id,
+                                 String relationalId,
+                                 String name,
+                                 String details
                                       ) {
         this.details = details;
         this.id = id;
@@ -31,9 +31,7 @@ public class FacilityObject {
 
     // alternative constructor so you don't pass bucha stuff, PregnantMom contains everything
 
-    public FacilityObject(String id, String relationalId, Facility facility) {
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyy", Locale.getDefault());
+    public ReferralServiceObject(String id, String relationalId, Facility facility) {
 
         this.id = id;
         this.relationalId = relationalId;

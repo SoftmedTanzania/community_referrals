@@ -25,6 +25,7 @@ import android.util.Log;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.Repository.FacilityObject;
+import org.ei.opensrp.drishti.Repository.ReferralServiceObject;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -139,17 +140,22 @@ public class Utils {
             return null;
         }
     }
+    public static ReferralServiceObject convertToServiceObject(CommonPersonObject commonPersonObject) {
+        String details = commonPersonObject.getColumnmaps().get("details");
+        Log.d(TAG, "details string = " + convertStandardJSONString(details));
+        try {
+            return new ReferralServiceObject(
+                    commonPersonObject.getColumnmaps().get("id"),
+                    commonPersonObject.getColumnmaps().get("relationalid"),
+                    commonPersonObject.getColumnmaps().get("Name"),
+                    commonPersonObject.getColumnmaps().get("details")
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
-
-//    public static List<MotherPersonObject> convertToMotherPersonObjectList(List<CommonPersonObject> commonPersonObjectsList) {
-//        List<MotherPersonObject> mothers = new ArrayList<>();
-//        for (CommonPersonObject common : commonPersonObjectsList) {
-//            mothers.add(convertToMotherPersonObject(common));
-//        }
-//
-//
-//        return mothers;
-//    }
 
     public static List<ClientReferralPersonObject> convertToClientReferralPersonObjectList(List<CommonPersonObject> commonPersonObjectsList) {
         List<ClientReferralPersonObject> clientReferralPersonObjects = new ArrayList<>();
@@ -164,6 +170,15 @@ public class Utils {
         List<FacilityObject> facilityObjects = new ArrayList<>();
         for (CommonPersonObject common : commonPersonObjectsList) {
             facilityObjects.add(convertToFacilityObject(common));
+        }
+
+
+        return facilityObjects;
+    }
+    public static List<ReferralServiceObject> convertToServiceObjectList(List<CommonPersonObject> commonPersonObjectsList) {
+        List<ReferralServiceObject> facilityObjects = new ArrayList<>();
+        for (CommonPersonObject common : commonPersonObjectsList) {
+            facilityObjects.add(convertToServiceObject(common));
         }
 
 

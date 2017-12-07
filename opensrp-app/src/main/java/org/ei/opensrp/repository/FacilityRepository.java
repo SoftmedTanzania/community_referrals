@@ -1,4 +1,4 @@
-package org.ei.opensrp.drishti.Repository;
+package org.ei.opensrp.repository;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -6,8 +6,7 @@ import android.hardware.camera2.params.Face;
 
 import net.sqlcipher.database.SQLiteDatabase;
 import org.apache.commons.lang3.StringUtils;
-import org.ei.opensrp.drishti.DataModels.Facility;
-import org.ei.opensrp.drishti.DataModels.Facility;
+import org.ei.opensrp.domain.Facility;
 import org.ei.opensrp.repository.DrishtiRepository;
 
 import java.util.ArrayList;
@@ -104,7 +103,7 @@ public class FacilityRepository extends DrishtiRepository {
     }
 
 
-    private ContentValues createValuesFor(Facility facility) {
+    public ContentValues createValuesFor(Facility facility) {
         ContentValues values = new ContentValues();
         values.put(ID_COLUMN, facility.getId());
         values.put(NAME, facility.getName());

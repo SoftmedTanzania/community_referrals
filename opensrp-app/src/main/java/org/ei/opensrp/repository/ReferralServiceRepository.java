@@ -1,4 +1,4 @@
-package org.ei.opensrp.drishti.Repository;
+package org.ei.opensrp.repository;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -6,8 +6,7 @@ import android.util.Log;
 
 import net.sqlcipher.database.SQLiteDatabase;
 import org.apache.commons.lang3.StringUtils;
-import org.ei.opensrp.drishti.DataModels.ReferralServiceDataModel;
-import org.ei.opensrp.repository.DrishtiRepository;
+import org.ei.opensrp.domain.ReferralServiceDataModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +101,7 @@ public class ReferralServiceRepository extends DrishtiRepository {
 
 
 
-    private ContentValues createValuesFor(ReferralServiceDataModel referralServiceDataModel) {
+    public ContentValues createValuesFor(ReferralServiceDataModel referralServiceDataModel) {
         ContentValues values = new ContentValues();
         values.put(ID_COLUMN, referralServiceDataModel.getId());
         values.put(NAME, referralServiceDataModel.getName());

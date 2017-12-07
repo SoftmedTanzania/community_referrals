@@ -1,4 +1,4 @@
-package org.ei.opensrp.drishti.DataModels;
+package org.ei.opensrp.domain;
 
 import java.util.ArrayList;
 

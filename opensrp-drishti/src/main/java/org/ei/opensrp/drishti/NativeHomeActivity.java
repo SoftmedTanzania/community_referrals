@@ -190,7 +190,7 @@ public class NativeHomeActivity extends SecuredActivity {
 //        findViewById(R.id.btn_chw_register).setOnClickListener(onRegisterStartListener);
 //        findViewById(R.id.btn_pnc_register).setOnClickListener(onRegisterStartListener);
         findViewById(R.id.btn_anc_register).setOnClickListener(onRegisterStartListener);
-        findViewById(R.id.btn_pnc_register).setOnClickListener(onRegisterStartListener);
+//        findViewById(R.id.btn_pnc_register).setOnClickListener(onRegisterStartListener);
         findViewById(R.id.btn_reporting).setOnClickListener(onRegisterStartListener);
     }
 

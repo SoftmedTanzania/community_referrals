@@ -2,6 +2,7 @@ package org.ei.opensrp.drishti;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -28,15 +29,17 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import org.ei.opensrp.Context;
+import org.ei.opensrp.commonregistry.CommonRepository;
+import org.ei.opensrp.domain.Facility;
 import org.ei.opensrp.domain.LoginResponse;
 import org.ei.opensrp.domain.Response;
 import org.ei.opensrp.domain.ResponseStatus;
 import org.ei.opensrp.drishti.Application.UzaziSalamaApplication;
 
-import org.ei.opensrp.drishti.DataModels.ReferralServiceDataModel;
+import org.ei.opensrp.domain.ReferralServiceDataModel;
 
-import org.ei.opensrp.drishti.Repository.FacilityRepository;
-import org.ei.opensrp.drishti.Repository.ReferralServiceRepository;
+import org.ei.opensrp.repository.FacilityRepository;
+import org.ei.opensrp.repository.ReferralServiceRepository;
 import org.ei.opensrp.drishti.Service.FacilityService;
 import org.ei.opensrp.drishti.Service.SaveReferralServiceTask;
 import org.ei.opensrp.drishti.util.OrientationHelper;
@@ -51,6 +54,7 @@ import org.ei.opensrp.view.activity.SettingsActivity;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.zip.ZipEntry;
@@ -78,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
     private List<ReferralServiceDataModel> serviceData;
     private ReferralServiceRepository serviceRepository;
     private FacilityRepository facilityRepository;
+    private CommonRepository commonRepository;
     public static final String ENGLISH_LOCALE = "en";
     public static final String KANNADA_LOCALE = "kn";
     public static final String BENGALI_LOCALE = "bn";
@@ -85,7 +90,8 @@ public class LoginActivity extends AppCompatActivity {
     public static final String KANNADA_LANGUAGE = "Kannada";
     public static final String Bengali_LANGUAGE = "Bengali";
 
-
+    private ArrayList<Facility> referralList;
+    private ArrayList<ReferralServiceDataModel> serviceDataModelArrayList;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -276,18 +282,49 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     private void setReferralService() {
-        if (serviceRepository == null) {
-            serviceRepository = new ReferralServiceRepository();
-            serviceTask = new SaveReferralServiceTask(serviceRepository);
+        commonRepository = context.commonrepository("referral_service");
+        serviceTask = new SaveReferralServiceTask(commonRepository);
+        long count = commonRepository.count();
+        if (count > 0 ) {
+
+        }
+        else{
+            ReferralServiceDataModel  serviceDataModel= new ReferralServiceDataModel();
+
+            serviceDataModelArrayList = serviceDataModel.createReferralList();
+            int size = referralList.size();
+            for(int i=0; size < i; i++){
+                ContentValues values = new ReferralServiceRepository().createValuesFor(serviceDataModel);
+                android.util.Log.d(TAG, "values = " + new Gson().toJson(values));
+
+                CommonRepository commonRepository = context.commonrepository("facility");
+                commonRepository.customInsert(values);
+            }
             serviceTask.save("saving referral service");
         }
     }
     private void setFacilityService() {
-        if (facilityRepository == null) {
-            facilityRepository = new FacilityRepository();
-            facilityService = new FacilityService(facilityRepository);
-            facilityService.save("saving facility for referral");
+        commonRepository = context.commonrepository("facility");
+        facilityService = new FacilityService(commonRepository);
+
+        long count = commonRepository.count();
+        if (count > 0 ) {
+
         }
+        else{
+            Facility facility = new Facility();
+
+            referralList = facility.createFacilityList();
+            int size = referralList.size();
+            for(int i=0; size < i; i++){
+                ContentValues values = new FacilityRepository().createValuesFor(facility);
+                android.util.Log.d(TAG, "values = " + new Gson().toJson(values));
+
+                CommonRepository commonRepository = context.commonrepository("facility");
+                commonRepository.customInsert(values);
+            }
+        }
+
     }
 
     private void tryGetLocation(final Listener<Response<String>> afterGet) {

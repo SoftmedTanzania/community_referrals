@@ -1,9 +1,14 @@
 package org.ei.opensrp.drishti.Service;
 
-import org.ei.opensrp.drishti.DataModels.Facility;
-import org.ei.opensrp.drishti.Repository.FacilityRepository;
-import org.ei.opensrp.drishti.Repository.ReferralServiceRepository;
-import org.ei.opensrp.repository.AllSettings;
+import android.content.ContentValues;
+
+import com.google.gson.Gson;
+
+import org.ei.opensrp.Context;
+import org.ei.opensrp.commonregistry.CommonRepository;
+import org.ei.opensrp.domain.Facility;
+import org.ei.opensrp.drishti.Repository.FacilityObject;
+import org.ei.opensrp.repository.FacilityRepository;
 import org.ei.opensrp.util.Log;
 import org.ei.opensrp.view.BackgroundAction;
 import org.ei.opensrp.view.LockingBackgroundTask;
@@ -11,17 +16,19 @@ import org.ei.opensrp.view.ProgressIndicator;
 
 import java.util.ArrayList;
 
+
 /**
- * Created by Dimas Ciputra on 3/24/15.
+ * Created by Kency Shaka on 3/12/17.
  */
 public class FacilityService {
-
+    private Context context;
+    private static final String TAG = FacilityService.class.getSimpleName();
     private LockingBackgroundTask lockingBackgroundTask;
-    private FacilityRepository facilityRepository;
+    private CommonRepository commonRepository;
 
     ArrayList<Facility> referralList;
-    public FacilityService(FacilityRepository serviceRepository) {
-        this.facilityRepository = serviceRepository;
+    public FacilityService(CommonRepository serviceRepository) {
+        this.commonRepository = serviceRepository;
         lockingBackgroundTask = new LockingBackgroundTask(new ProgressIndicator() {
             @Override
             public void setVisible() {
@@ -59,7 +66,11 @@ public class FacilityService {
 
     public void setFacility(Facility facility){
 
-        facilityRepository.add(facility);
+        ContentValues values = new FacilityRepository().createValuesFor(facility);
+        android.util.Log.d(TAG, "values = " + new Gson().toJson(values));
+
+        CommonRepository commonRepository = context.commonrepository("facility");
+        commonRepository.customInsert(values);
     }
 
 

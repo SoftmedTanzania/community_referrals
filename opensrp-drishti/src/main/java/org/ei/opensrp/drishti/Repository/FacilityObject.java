@@ -2,7 +2,7 @@ package org.ei.opensrp.drishti.Repository;
 
 import com.google.gson.Gson;
 
-import org.ei.opensrp.drishti.DataModels.Facility;
+import org.ei.opensrp.domain.Facility;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -31,11 +31,11 @@ public class FacilityObject {
 
     // alternative constructor so you don't pass bucha stuff, PregnantMom contains everything
 
-    public FacilityObject(String id, String relationalId, Facility facility) {
+    public FacilityObject(String relationalId, Facility facility) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyy", Locale.getDefault());
 
-        this.id = id;
+        this.id = facility.getId();
         this.relationalId = relationalId;
         this.Name = facility.getName();
         this.details = new Gson().toJson(facility);
