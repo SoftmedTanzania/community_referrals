@@ -10,78 +10,29 @@
     android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus"
     tools:context=".LoginActivity">
 
-    <LinearLayout
+
+    <android.support.percent.PercentRelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="false"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <FrameLayout
+            app:layout_heightPercent="50%"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="256dp"
+                android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/image_health_it" />
+                android:src="@drawable/clint_adair" />
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:alpha="0.5"
-                android:background="#35E3DB" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_htmr" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="HIV TB MALARIA REFERRALS"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="bottom"-->
-                <!--android:background="#4FFF"-->
-                <!--android:gravity="center_vertical"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:paddingBottom="8dp"-->
-                <!--android:paddingLeft="16dp"-->
-                <!--android:paddingRight="16dp"-->
-                <!--android:paddingTop="8dp">-->
-
-                <!--<ImageView-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="40dp"-->
-                    <!--android:layout_marginTop="0dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:scaleType="fitStart"-->
-                    <!--android:src="@drawable/image_logo_ttcih" />-->
-
-                <!--<ImageView-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="32dp"-->
-                    <!--android:layout_marginBottom="2dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:scaleType="fitEnd"-->
-                    <!--android:src="@drawable/image_logo_unfpa" />-->
-            <!--</LinearLayout>-->
+                android:background="#398FE5" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/mToolbar"
@@ -91,21 +42,19 @@
                 android:background="@android:color/transparent"
                 android:elevation="0dp"
                 android:title=""
-
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
         </FrameLayout>
 
         <android.support.v7.widget.CardView
-            android:layout_width="320dp"
+            android:layout_width="300dp"
+            android:layout_centerHorizontal="true"
+            app:layout_marginTopPercent="30%"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="32dp"
-
             app:cardBackgroundColor="@android:color/white"
             app:cardCornerRadius="4dp"
             app:cardElevation="4dp">
-
             <LinearLayout
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
@@ -116,73 +65,57 @@
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
                 android:paddingTop="24dp">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/editTextUsername"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
-                        android:hint="Username"
-                        android:imeOptions="actionNext"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:paddingLeft="40dp"
-                        android:paddingRight="40dp"
-                        android:textColor="@color/primary_text"
-                        android:textColorHint="@color/hint_text"
-                        android:textSize="14sp" />
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="4dp"
-                        android:src="@drawable/ic_account_circle"
-                        android:tint="@color/secondary_text" />
-                </FrameLayout>
-
-                <FrameLayout
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Login"
+                    android:layout_marginLeft="8dp"
+                    android:textStyle="bold"
+                    android:textColor="#306AA3"/>
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/editTextUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp">
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="0dp"
+                    android:hint="Username"
+                    android:focusable="true"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/secondary_text"
+                    android:textSize="14sp"
+                    app:met_floatingLabelText="Username"
+                    app:met_floatingLabel="normal"
+                    android:inputType="textCapWords|textPersonName"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    app:met_floatingLabelTextColor="@color/primary"/>
 
-                    <EditText
-                        android:id="@+id/editTextPassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
-                        android:hint="Password"
-                        android:imeOptions="actionDone"
-                        android:inputType="textPassword"
-                        android:maxLines="1"
-                        android:paddingLeft="40dp"
-                        android:paddingRight="16dp"
-                        android:textColor="@color/primary_text"
-                        android:textColorHint="@color/hint_text"
-                        android:textSize="14sp" />
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="4dp"
-                        android:src="@drawable/ic_login_lock"
-                        android:tint="@color/secondary_text" />
-                </FrameLayout>
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/editTextPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="0dp"
+                    android:hint="Password"
+                    android:focusable="true"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/secondary_text"
+                    android:textSize="14sp"
+                    app:met_floatingLabelText="Password"
+                    app:met_floatingLabel="normal"
+                    android:inputType="textPassword"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    app:met_floatingLabelTextColor="@color/primary"/>
 
                 <Button
                     android:id="@+id/buttonSignIn"
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
                     android:layout_marginBottom="24dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
                     android:layout_marginTop="32dp"
                     android:background="@drawable/shape_round_button"
                     android:text="Sign In"
@@ -199,5 +132,83 @@
                     android:textSize="12sp" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
-    </LinearLayout>
+
+        <LinearLayout
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_marginTop="4dp"
+                android:layout_height="24dp"
+                android:layout_width="30dp"
+                android:alpha="0.3"
+                android:src="@drawable/coat_of_arms"/>
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_height="24dp"
+                android:alpha="0.3"
+                android:layout_width="56dp"
+                android:src="@drawable/usaid_logo"/>
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_height="32dp"
+                android:layout_width="64dp"
+                android:alpha="0.3"
+                android:src="@drawable/deloitte"/>
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_height="24dp"
+                android:layout_width="72dp"
+                android:alpha="0.3"
+                android:src="@drawable/fhi360"/>
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_marginTop="32dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/htmr_logo"/>
+
+        <TextView android:layout_width="wrap_content"
+            android:layout_alignTop="@id/logo"
+            android:layout_toRightOf="@id/logo"
+            android:paddingTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_height="wrap_content"
+            android:text="htmr"
+            android:id="@+id/title_one"
+            android:textStyle="bold"
+            android:textColor="@color/mdtp_white"
+            android:textSize="32sp"/>
+
+        <TextView android:layout_width="wrap_content"
+            android:layout_below="@id/title_one"
+            android:id="@+id/title_two"
+            android:layout_toRightOf="@id/logo"
+            android:paddingTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_height="wrap_content"
+            android:text="Referral"
+            android:textColor="@color/mdtp_white"
+            android:textSize="18sp"/>
+
+        <TextView android:layout_width="wrap_content"
+            android:layout_below="@id/title_two"
+            android:layout_toRightOf="@id/logo"
+            android:paddingTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_height="wrap_content"
+            android:text="Application"
+            android:textColor="@color/mdtp_white"
+            android:textSize="16sp"/>
+    </android.support.percent.PercentRelativeLayout>
+
 </android.support.design.widget.CoordinatorLayout>
