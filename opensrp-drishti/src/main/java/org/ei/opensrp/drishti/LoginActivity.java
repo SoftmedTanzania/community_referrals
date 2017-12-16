@@ -34,7 +34,7 @@ import org.ei.opensrp.domain.Facility;
 import org.ei.opensrp.domain.LoginResponse;
 import org.ei.opensrp.domain.Response;
 import org.ei.opensrp.domain.ResponseStatus;
-import org.ei.opensrp.drishti.Application.UzaziSalamaApplication;
+import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
 
 import org.ei.opensrp.domain.ReferralServiceDataModel;
 
@@ -405,7 +405,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goToHome() {
-        UzaziSalamaApplication.setCrashlyticsUser(context);
+        BoreshaAfyaApplication.setCrashlyticsUser(context);
         setReferralService();
         setFacilityService();
         startActivity(new Intent(this, NativeHomeActivity.class));

@@ -13,7 +13,7 @@ import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.ControllerFilterMap;
 import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
-import org.ei.opensrp.drishti.Application.UzaziSalamaApplication;
+import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
 import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.service.PendingFormSubmissionService;
@@ -122,8 +122,8 @@ public class NativeHomeActivity extends SecuredActivity {
                 Log.d(TAG,"teamSettings = "+teamSettings.toString());
                 team_details = teamSettings.getJSONObject("team");
                 Log.d(TAG,"team jason "+team_details.get("uuid").toString()+" "+team_details.get("teamName").toString());
-                ((UzaziSalamaApplication)getApplication()).setTeam_uuid(team_details.get("uuid").toString());
-                ((UzaziSalamaApplication)getApplication()).setTeam_name(team_details.get("teamName").toString());
+                ((BoreshaAfyaApplication)getApplication()).setTeam_uuid(team_details.get("uuid").toString());
+                ((BoreshaAfyaApplication)getApplication()).setTeam_name(team_details.get("teamName").toString());
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -133,7 +133,7 @@ public class NativeHomeActivity extends SecuredActivity {
             try {
                 userLocationSettings = team_details.getJSONObject("location");
                 Log.d(TAG,"teamSettings location id= "+userLocationSettings.get("uuid").toString());
-                ((UzaziSalamaApplication)getApplication()).setTeam_location_id(userLocationSettings.get("uuid").toString());
+                ((BoreshaAfyaApplication)getApplication()).setTeam_location_id(userLocationSettings.get("uuid").toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -162,8 +162,8 @@ public class NativeHomeActivity extends SecuredActivity {
         try {
             attributes = userSettings.getJSONObject("attributes");
 
-            ((UzaziSalamaApplication)getApplication()).setCurrentUserID(attributes.get("_PERSON_UUID").toString());
-            ((UzaziSalamaApplication)getApplication()).setUsername(userSettings.get("username").toString());
+            ((BoreshaAfyaApplication)getApplication()).setCurrentUserID(attributes.get("_PERSON_UUID").toString());
+            ((BoreshaAfyaApplication)getApplication()).setUsername(userSettings.get("username").toString());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -175,9 +175,9 @@ public class NativeHomeActivity extends SecuredActivity {
         for (int i =0 ; i<count ; i++){
             try {
                 if(roles.getString(i).equals("Organizational: Health Facility User")){
-                    ((UzaziSalamaApplication)getApplication()).setUserType(0);
+                    ((BoreshaAfyaApplication)getApplication()).setUserType(0);
                 }else if (roles.getString(i).equals("Organizational: CHW")){
-                    ((UzaziSalamaApplication)getApplication()).setUserType(0);
+                    ((BoreshaAfyaApplication)getApplication()).setUserType(0);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

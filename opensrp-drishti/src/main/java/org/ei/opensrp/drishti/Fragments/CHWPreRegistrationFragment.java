@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -26,32 +27,17 @@ import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link } interface
- * to handle interaction events.
- * Use the {@link CHWFollowUpFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class CHWPreRegistrationFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private CommonRepository commonRepository;
     private Gson gson = new Gson();
     private android.content.Context appContext;
     private List<ClientReferralPersonObject> clientReferralPersonObjectList = new ArrayList<>();
     private Cursor cursor;
+    private boolean mTwoPane;
     private static final String TAG = CHWPreRegistrationFragment.class.getSimpleName(),
             TABLE_NAME = "client_referral";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-//    private OnFragmentInteractionListener mListener;
 
     public CHWPreRegistrationFragment() {
         // Required empty public constructor
@@ -72,15 +58,6 @@ public class CHWPreRegistrationFragment extends SecuredNativeSmartRegisterCursor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
     protected void onCreation() {
 
     }
@@ -91,10 +68,9 @@ public class CHWPreRegistrationFragment extends SecuredNativeSmartRegisterCursor
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_chwregistration, container, false);
 
-        RecyclerView recyclerView = (RecyclerView)v.findViewById(R.id.pre_reg_listView);
+        RecyclerView recyclerView = (RecyclerView)v.findViewById(R.id.item_list);
         commonRepository = context().commonrepository("client_referral");
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME );
-//        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where IS_VALID ='true'" );
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
@@ -102,16 +78,30 @@ public class CHWPreRegistrationFragment extends SecuredNativeSmartRegisterCursor
         this.clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
         Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + clientReferralPersonObjectList.size());
 
-        CHWRegisterRecyclerAdapter pager = new CHWRegisterRecyclerAdapter(getActivity(),clientReferralPersonObjectList);
-
+        CHWRegisterRecyclerAdapter chwRegisterRecyclerAdapter = new CHWRegisterRecyclerAdapter(getActivity(),clientReferralPersonObjectList);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
+        if (v.findViewById(R.id.item_detail_container) != null) {
+            // The detail container view will be present only in the
+            // large-screen layouts (res/values-w900dp) or in landscape.
+            // If this view is present, then the
+            // activity should be in two-pane mode.
+            mTwoPane = true;
 
-        recyclerView.setAdapter(pager);
+            chwRegisterRecyclerAdapter.setIsInTwoPane(mTwoPane);
+            chwRegisterRecyclerAdapter.notifyDataSetChanged();
+
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+        }else{
+            int numberOfColumns = 3;
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+        }
+
+        recyclerView.setAdapter(chwRegisterRecyclerAdapter);
 
         return v;
     }

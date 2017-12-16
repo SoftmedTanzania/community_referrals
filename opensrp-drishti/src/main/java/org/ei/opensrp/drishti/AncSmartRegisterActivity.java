@@ -128,7 +128,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
         mPager.setOffscreenPageLimit(formNames.length);
 
-//        if(((UzaziSalamaApplication)getApplication()).getUserType()==0) {
+//        if(((BoreshaAfyaApplication)getApplication()).getUserType()==0) {
 //            mPager.setCurrentItem(3);
 //            currentPage = 3;
 //        }

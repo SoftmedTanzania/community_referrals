@@ -29,10 +29,9 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.drishti.Application.UzaziSalamaApplication;
+import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
 import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.domain.Facility;
-import org.ei.opensrp.domain.ReferralServiceDataModel;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.Repository.FacilityObject;
 import org.ei.opensrp.drishti.Repository.ReferralServiceObject;
@@ -171,8 +170,8 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         textviewReferralProviderSupportGroup = (TextView) fragmentView.findViewById(R.id.provider_support_group);
 
         //setting CHW details
-        textviewReferralProvider.setText(((UzaziSalamaApplication)getActivity().getApplication()).getUsername());
-        textviewReferralProviderSupportGroup.setText(((UzaziSalamaApplication)getActivity().getApplication()).getTeam_name());
+        textviewReferralProvider.setText(((BoreshaAfyaApplication)getActivity().getApplication()).getUsername());
+        textviewReferralProviderSupportGroup.setText(((BoreshaAfyaApplication)getActivity().getApplication()).getTeam_name());
 
 
         editTextDiscountId = (EditText) fragmentView.findViewById(R.id.editTextDiscountId);
@@ -430,8 +429,8 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         referral.setReferral_service_id(getReferralServiceId(spinnerService.getSelectedItem().toString()));
         referral.setProviderMobileNumber(textviewReferralNumber.getText().toString());
         referral.setWard(wardId);
-        referral.setService_provider_uiid(((UzaziSalamaApplication)getActivity().getApplication()).getCurrentUserID());
-        referral.setService_provider_group(((UzaziSalamaApplication)getActivity().getApplication()).getTeam_uuid());
+        referral.setService_provider_uiid(((BoreshaAfyaApplication)getActivity().getApplication()).getCurrentUserID());
+        referral.setService_provider_group(((BoreshaAfyaApplication)getActivity().getApplication()).getTeam_uuid());
         if(fName.equals("client_tb_referral_form")){
             referral.setCtc_number(editTextCTCNumber.getText().toString());
             referral.setHas_2Week_cough(checkBoxAreasonOne.isChecked());

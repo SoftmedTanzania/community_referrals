@@ -36,7 +36,7 @@ import static org.ei.opensrp.util.Log.logInfo;
         formUriBasicAuthPassword = "ecUMrMeTKf1X1ODxHqo3b43W",
         mode = ReportingInteractionMode.SILENT
 )
-public class UzaziSalamaApplication extends DrishtiApplication {
+public class BoreshaAfyaApplication extends DrishtiApplication {
     private ReferralServiceRepository serviceRepository;
     private int userType=0;//0=CHW and 1=Facility health care worker
     public  String currentUserID,team_uuid, phone_number,username,team_name,team_location_id;

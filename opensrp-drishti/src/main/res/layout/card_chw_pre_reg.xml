@@ -7,13 +7,10 @@
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        card_view:cardCornerRadius="8dp">
-
+        android:layout_margin="4dp"
+        card_view:cardCornerRadius="4dp">
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,11 +19,10 @@
             <ImageView
                 android:tintMode="multiply"
                 android:id="@+id/profilePic"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
                 android:layout_alignParentLeft="true"
-                android:layout_margin="32dp"
-                android:background="@drawable/shape_circle"
+                android:layout_margin="16dp"
                 android:src="@drawable/ic_account_circle_black_48dp" />
 
             <org.ei.opensrp.view.customControls.CustomFontTextView
@@ -34,12 +30,11 @@
                 style="@style/CustomFontTextViewStyle.ListView.Small.NoPadding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/profilePic"
+                android:layout_marginTop="32dp"
                 android:textSize="18sp"
                 android:text="Martha Shaka"
                 android:layout_toRightOf="@+id/profilePic"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
 
             <org.ei.opensrp.view.customControls.CustomFontTextView
                 android:id="@+id/phone_number"
@@ -56,7 +51,6 @@
                 android:text="08 Jan 17"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textSize="13sp" />
-
 
             <org.ei.opensrp.view.customControls.CustomFontTextView
                 android:id="@+id/community_based_hiv_service"

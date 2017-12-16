@@ -35,7 +35,7 @@
     </compatible-screens>
 
     <application
-        android:name=".Application.UzaziSalamaApplication"
+        android:name=".Application.BoreshaAfyaApplication"
         android:allowBackup="true"
         android:label="@string/app_name">
 
@@ -76,18 +76,29 @@
             android:name="io.fabric.ApiKey"
             android:value="ee4140a3b1692ec32e688110a280538c7b44e10e" />
 
-        <activity android:name=".UzaziSalamaReport"
+        <activity
+            android:name=".UzaziSalamaReport"
             android:theme="@style/AppTheme.MaterialDesign.NoActionBar">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-
         <activity
             android:name=".ReportSearchActivity"
             android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
+        <activity
+            android:name=".ClientsDetailsActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName=".Fragments.ItemListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.ei.opensrp.drishti.Fragments.ItemListActivity" />
+        </activity>
     </application>
 
 </manifest>

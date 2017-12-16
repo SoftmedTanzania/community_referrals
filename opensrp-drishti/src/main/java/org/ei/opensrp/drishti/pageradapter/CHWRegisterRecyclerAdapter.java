@@ -1,6 +1,9 @@
 package org.ei.opensrp.drishti.pageradapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +18,8 @@ import com.google.gson.Gson;
 
 import org.ei.opensrp.drishti.AncSmartRegisterActivity;
 import org.ei.opensrp.drishti.DataModels.ClientReferral;
+import org.ei.opensrp.drishti.ClientsDetailsActivity;
+import org.ei.opensrp.drishti.Fragments.ItemDetailFragment;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.util.Utils;
@@ -34,6 +39,7 @@ public class CHWRegisterRecyclerAdapter extends
     private List<ClientReferralPersonObject> clients;
     private Context mContext;
     private ClientReferralPersonObject client;
+    private boolean mTwoPane=true;
 
     public CHWRegisterRecyclerAdapter(Context context, List<ClientReferralPersonObject> clients) {
         this.clients = clients;
@@ -63,11 +69,10 @@ public class CHWRegisterRecyclerAdapter extends
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
         // Set item views based on your views and data model
-        TextView name = viewHolder.nameTextView;
         TextView phoneNumberTextView = viewHolder.phoneNumberTextView;
         TextView CBHS = viewHolder.CBHSTextView;
         phoneNumberTextView.setText(clientReferral.getPhone_number());
-        name.setText(clientReferral.getFirst_name());
+        viewHolder.nameTextView.setText(clientReferral.getFirst_name()+" " + clientReferral.getMiddle_name()+", "+clientReferral.getSurname());
 
         if(clientReferral.getCommunity_based_hiv_service()!=null) {
             if(!clientReferral.getCommunity_based_hiv_service().equals(""))
@@ -101,6 +106,30 @@ public class CHWRegisterRecyclerAdapter extends
                     ((AncSmartRegisterActivity) mContext).showPreRegistrationDetailsDialog(clients.get(getAdapterPosition()));
                 }
             });
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mTwoPane) {
+                        Bundle arguments = new Bundle();
+                        arguments.putString(ItemDetailFragment.ARG_ITEM_ID, "id");
+                        ItemDetailFragment fragment = new ItemDetailFragment();
+                        fragment.setArguments(arguments);
+                        ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.item_detail_container, fragment)
+                                .commit();
+                    } else {
+                        Context context = v.getContext();
+                        Intent intent = new Intent(context, ClientsDetailsActivity.class);
+                        intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, "id");
+
+                        context.startActivity(intent);
+                    }
+                }
+            });
+
+
 
 //            iconOptions.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -147,5 +176,9 @@ public class CHWRegisterRecyclerAdapter extends
             }
         });
 
+    }
+
+    public void setIsInTwoPane(boolean mTwoPane){
+        this.mTwoPane = mTwoPane;
     }
 }
