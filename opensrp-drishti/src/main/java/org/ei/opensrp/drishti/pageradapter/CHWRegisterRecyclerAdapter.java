@@ -61,18 +61,18 @@ public class CHWRegisterRecyclerAdapter extends
         String gsonReferral = Utils.convertStandardJSONString(client.getDetails());
         ClientReferral clientReferral = new Gson().fromJson(gsonReferral,ClientReferral.class);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-//        String reg_date = dateFormat.format(clientReferral.getDateLastVisited());
 
         // Set item views based on your views and data model
         TextView name = viewHolder.nameTextView;
-        TextView referralDate = viewHolder.referralDateTextView;
-        TextView visited = viewHolder.visitedTextView;
+        TextView phoneNumberTextView = viewHolder.phoneNumberTextView;
         TextView CBHS = viewHolder.CBHSTextView;
-
-        visited.setText("moja");
-        referralDate.setText(clientReferral.getReferral_date());
+        phoneNumberTextView.setText(clientReferral.getPhone_number());
         name.setText(clientReferral.getFirst_name());
-        CBHS.setText(clientReferral.getCommunity_based_hiv_service());
+
+        if(clientReferral.getCommunity_based_hiv_service()!=null) {
+            if(!clientReferral.getCommunity_based_hiv_service().equals(""))
+                CBHS.setText("CBHS : " + clientReferral.getCommunity_based_hiv_service());
+        }
 
     }
 
@@ -84,14 +84,13 @@ public class CHWRegisterRecyclerAdapter extends
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView nameTextView, referralDateTextView, visitedTextView, CBHSTextView;
+        TextView nameTextView, phoneNumberTextView, CBHSTextView;
         ImageView iconOptions;
 
         public ViewHolder(View itemView) {
             super(itemView);
             nameTextView = (TextView) itemView.findViewById(R.id.name);
-            referralDateTextView = (TextView) itemView.findViewById(R.id.referral_date);
-            visitedTextView = (TextView) itemView.findViewById(R.id.visited);
+            phoneNumberTextView = (TextView) itemView.findViewById(R.id.phone_number);
             CBHSTextView = (TextView) itemView.findViewById(R.id.community_based_hiv_service);
             iconOptions = (ImageView) itemView.findViewById(R.id.iconOptions);
 
@@ -103,13 +102,13 @@ public class CHWRegisterRecyclerAdapter extends
                 }
             });
 
-            iconOptions.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // show options
-                    showPop(getAdapterPosition(), view);
-                }
-            });
+//            iconOptions.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    // show options
+//                    showPop(getAdapterPosition(), view);
+//                }
+//            });
 
         }
 

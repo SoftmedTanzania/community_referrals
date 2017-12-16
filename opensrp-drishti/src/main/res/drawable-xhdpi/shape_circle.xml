@@ -6,12 +6,12 @@
 
     android:useLevel="false" >
 
-    <solid android:color="#35E3DB" />
+    <solid android:color="#868686" />
 
     <size android:width="100dp"
         android:height="100dp"/>
 
     <stroke android:width="4dp"
-        android:color="#35E3DB"/>
+        android:color="#868686"/>
 
 </shape>

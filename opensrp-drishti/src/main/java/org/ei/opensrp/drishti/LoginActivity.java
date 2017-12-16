@@ -169,7 +169,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(final View view) {
-        hideKeyboard();
+//        hideKeyboard();
         view.setClickable(false);
 
 
