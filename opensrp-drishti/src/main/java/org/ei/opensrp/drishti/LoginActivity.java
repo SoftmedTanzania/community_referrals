@@ -38,6 +38,8 @@ import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
 
 import org.ei.opensrp.domain.ReferralServiceDataModel;
 
+import org.ei.opensrp.drishti.util.LargeDiagonalCutPathDrawable;
+import org.ei.opensrp.drishti.util.SmallDiagonalCutPathDrawable;
 import org.ei.opensrp.repository.FacilityRepository;
 import org.ei.opensrp.repository.ReferralServiceRepository;
 import org.ei.opensrp.drishti.Service.FacilityService;
@@ -120,12 +122,14 @@ public class LoginActivity extends AppCompatActivity {
         actionBar.setTitle("");
 
         // orientation
-        OrientationHelper.setProperOrientationForDevice(LoginActivity.this);
+//        OrientationHelper.setProperOrientationForDevice(LoginActivity.this);
 
         context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
         initializeLoginFields();
         setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
+
+        findViewById(R.id.login_layout).setBackground(new SmallDiagonalCutPathDrawable());
 
 
         setLanguage();

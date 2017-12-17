@@ -58,19 +58,6 @@
             android:name=".AncSmartRegisterActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".chw.CHWSmartRegisterActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".chw.CHWFormRegistrationActivity"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".chw.CHWFormFollowActivity"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".chw.CHWEditPreRegistrationActivity"
-            android:screenOrientation="landscape" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

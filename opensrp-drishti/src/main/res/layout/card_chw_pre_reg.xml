@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        card_view:cardCornerRadius="4dp">
+        card_view:cardCornerRadius="0dp">
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,26 +19,25 @@
             <ImageView
                 android:tintMode="multiply"
                 android:id="@+id/profilePic"
-                android:layout_width="108dp"
-                android:layout_height="108dp"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_alignParentLeft="true"
-                android:layout_margin="16dp"
-                android:src="@drawable/ic_account_circle_black_48dp" />
+                android:src="@drawable/user_icon" />
 
             <org.ei.opensrp.view.customControls.CustomFontTextView
                 android:id="@+id/name"
-                style="@style/CustomFontTextViewStyle.ListView.Small.NoPadding"
+                android:layout_alignTop="@id/profilePic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginLeft="16dp"
                 android:textSize="18sp"
                 android:text="Martha Shaka"
-                android:layout_toRightOf="@+id/profilePic"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:layout_toRightOf="@+id/profilePic" />
 
             <org.ei.opensrp.view.customControls.CustomFontTextView
                 android:id="@+id/phone_number"
-                style="@style/CustomFontTextViewStyle.noPadding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/textDate"
@@ -49,39 +48,39 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center_vertical"
                 android:text="08 Jan 17"
-                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textSize="13sp" />
 
             <org.ei.opensrp.view.customControls.CustomFontTextView
                 android:id="@+id/community_based_hiv_service"
-                style="@style/CustomFontTextViewStyle.ListView.Small.NoPadding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/name"
                 android:layout_below="@id/phone_number"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_marginTop="4dp"
                 android:textSize="10sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:layout_margin="8dp"
                 android:layout_below="@id/profilePic"
                 android:orientation="horizontal">
                 <Button
+                    style="?android:attr/borderlessButtonStyle"
                     android:id="@+id/button_details"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:text="Details"
+                    android:textColor="#2D69A5"
                     android:layout_below="@id/profilePic"/>
 
                 <Button
-                    android:layout_weight="1"
+                    style="?android:attr/borderlessButtonStyle"
                     android:layout_toRightOf="@id/button_details"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:text="Follow up"
+                    android:textColor="#2D69A5"
                     android:layout_below="@id/profilePic"/>
             </LinearLayout>
         </RelativeLayout>
