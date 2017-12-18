@@ -412,7 +412,7 @@ public class LoginActivity extends AppCompatActivity {
         BoreshaAfyaApplication.setCrashlyticsUser(context);
         setReferralService();
         setFacilityService();
-        startActivity(new Intent(this, NativeHomeActivity.class));
+        startActivity(new Intent(this, AncSmartRegisterActivity.class));
         finish();
     }
 

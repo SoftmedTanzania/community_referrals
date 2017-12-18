@@ -11,7 +11,7 @@
     tools:context=".LoginActivity">
 
 
-    <RelativeLayout
+    <android.support.percent.PercentRelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -42,14 +42,14 @@
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
         </FrameLayout>
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/login_layout"
-            android:layout_marginRight="72dp"
             android:layout_alignParentRight="true"
             app:layout_marginTopPercent="30%"
+            app:layout_marginRightPercent="10%"
             android:layout_centerVertical="true"
             android:layout_width="400dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:fitsSystemWindows="false"
             android:orientation="vertical"
@@ -58,6 +58,7 @@
             android:paddingRight="32dp"
             android:paddingTop="24dp">
             <TextView
+                android:id="@+id/login_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Login"
@@ -69,6 +70,7 @@
                 android:textColor="#306AA3"/>
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/editTextUsername"
+                android:layout_below="@id/login_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -89,6 +91,7 @@
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/editTextPassword"
                 android:layout_width="match_parent"
+                android:layout_below="@id/editTextUsername"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="0dp"
@@ -102,7 +105,20 @@
                 app:met_floatingLabel="normal"
                 android:inputType="textPassword" app:met_floatingLabelTextColor="@color/primary"/>
 
+
+
+            <TextView
+                android:id="@+id/powered_by_text"
+                android:layout_width="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:text="Powered by OpenSRP"
+                android:textColor="@color/hint_text"
+                android:textSize="12sp" />
             <Button
+                android:layout_above="@id/powered_by_text"
                 android:id="@+id/buttonSignIn"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -115,15 +131,7 @@
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Powered by OpenSRP"
-                android:textColor="@color/hint_text"
-                android:textSize="12sp" />
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -201,6 +209,6 @@
             android:text="Application"
             android:textColor="@color/mdtp_white"
             android:textSize="18sp"/>
-    </RelativeLayout>
+    </android.support.percent.PercentRelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

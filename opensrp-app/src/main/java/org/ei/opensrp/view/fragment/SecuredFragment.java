@@ -153,4 +153,6 @@ public abstract class SecuredFragment extends Fragment {
     public boolean isPaused() {
         return isPaused;
     }
+
+
 }

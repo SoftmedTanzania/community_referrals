@@ -1,6 +1,5 @@
 package org.ei.opensrp.drishti;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,8 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
-import org.ei.opensrp.drishti.Fragments.ItemDetailFragment;
-import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.drishti.Fragments.ClientDetailFragment;
 
 public class ClientsDetailsActivity extends AppCompatActivity {
 
@@ -50,9 +48,9 @@ public class ClientsDetailsActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(ItemDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID));
-            ItemDetailFragment fragment = new ItemDetailFragment();
+            arguments.putString(ClientDetailFragment.ARG_ITEM_ID,
+                    getIntent().getStringExtra(ClientDetailFragment.ARG_ITEM_ID));
+            ClientDetailFragment fragment = new ClientDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.item_detail_container, fragment)

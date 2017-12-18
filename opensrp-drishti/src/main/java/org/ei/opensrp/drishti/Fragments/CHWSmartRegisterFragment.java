@@ -8,11 +8,14 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 import org.ei.opensrp.drishti.AncSmartRegisterActivity;
@@ -33,6 +36,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     private ImageButton imageButton;
     private CHWPagerAdapter adapter;
     private ViewPager feeds;
+    private Toolbar toolbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,10 +76,24 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         tabs = (TabLayout) v.findViewById(R.id.tabs);
         tabs.setupWithViewPager(feeds);
 
-//        ((TextView) v.findViewById(R.id.txt_title_label)).setText("Community HW");
-        // tabs icons
-        tabs.getTabAt(0).setIcon(R.drawable.ic_account_circle);
-        tabs.getTabAt(1).setIcon(R.drawable.ic_message_bulleted);
+
+        LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
+
+        TextView tabContent = (TextView) tabLinearLayout.findViewById(R.id.tabContent);
+        tabContent.setText("Wakufuatilia");
+        tabContent.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_trending_down_white_24dp, 0, 0, 0);
+
+
+
+        LinearLayout tabLinearLayout2 = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
+        TextView tabContent2 = (TextView) tabLinearLayout2.findViewById(R.id.tabContent);
+        tabContent2.setText("Rufaa ya awali");
+        tabContent2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_trending_up_white_24dp, 0, 0, 0);
+
+
+        tabs.getTabAt(0).setCustomView(tabContent);
+        tabs.getTabAt(1).setCustomView(tabContent2);
+
 
         final int colorWhite = ContextCompat.getColor(getActivity(), android.R.color.white);
         final int colorPrimaryLight = ContextCompat.getColor(getActivity(), R.color.primary_light);
@@ -98,6 +116,12 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+
+        toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+
+        toolbar.inflateMenu(R.menu.menu_main);
+
+
         return v;
     }
 
@@ -120,6 +144,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     protected void onInitialization() {
 
     }
+
 
 
     @Override
@@ -162,4 +187,6 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         FragmentPagerAdapter fragmentPagerAdapter = adapter;
         return getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + feeds.getId() + ":" + fragmentPagerAdapter.getItemId(position));
     }
+
+
 }

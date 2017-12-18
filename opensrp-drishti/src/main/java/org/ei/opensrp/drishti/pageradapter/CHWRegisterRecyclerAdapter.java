@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 import org.ei.opensrp.drishti.AncSmartRegisterActivity;
 import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.ClientsDetailsActivity;
-import org.ei.opensrp.drishti.Fragments.ItemDetailFragment;
+import org.ei.opensrp.drishti.Fragments.ClientDetailFragment;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.util.Utils;
@@ -113,8 +113,8 @@ public class CHWRegisterRecyclerAdapter extends
                 public void onClick(View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
-                        arguments.putString(ItemDetailFragment.ARG_ITEM_ID, "id");
-                        ItemDetailFragment fragment = new ItemDetailFragment();
+                        arguments.putString(ClientDetailFragment.ARG_ITEM_ID, "id");
+                        ClientDetailFragment fragment = new ClientDetailFragment();
                         fragment.setArguments(arguments);
                         ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.item_detail_container, fragment)
@@ -122,7 +122,7 @@ public class CHWRegisterRecyclerAdapter extends
                     } else {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, ClientsDetailsActivity.class);
-                        intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, "id");
+                        intent.putExtra(ClientDetailFragment.ARG_ITEM_ID, "id");
 
                         context.startActivity(intent);
                     }

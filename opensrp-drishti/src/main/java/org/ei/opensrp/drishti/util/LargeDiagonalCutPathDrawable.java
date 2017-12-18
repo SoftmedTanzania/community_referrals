@@ -16,6 +16,10 @@ public class LargeDiagonalCutPathDrawable extends Drawable {
         mPaint.setColor(Color.WHITE);
         mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         mPaint.setStrokeWidth(5);
+
+        mPaint.setShadowLayer(4, 1, 1, Color.BLACK);
+
+
     }
 
     @Override
@@ -28,8 +32,11 @@ public class LargeDiagonalCutPathDrawable extends Drawable {
 
 
 
+
         mPath.close();
         canvas.drawPath(mPath, mPaint);
+
+
 
     }
 
