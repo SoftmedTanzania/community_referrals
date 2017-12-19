@@ -1,5 +1,6 @@
 package org.ei.opensrp.drishti;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,10 +9,15 @@ import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.Fragments.ClientDetailFragment;
 
 public class ClientsDetailsActivity extends AppCompatActivity {
+
+    private TextView name,contacts,sponsor,refered,referedReason,referedDate,chwId,note;
+    private ClientReferral clientReferral;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +62,32 @@ public class ClientsDetailsActivity extends AppCompatActivity {
                     .add(R.id.item_detail_container, fragment)
                     .commit();
         }
+
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+
+        clientReferral = (ClientReferral) bundle.getSerializable("client_referral");
+
+
+        name = (TextView) findViewById(R.id.name);
+        contacts = (TextView) findViewById(R.id.contacts);
+        sponsor = (TextView) findViewById(R.id.sponsor);
+        refered = (TextView) findViewById(R.id.refered);
+        refered = (TextView) findViewById(R.id.refered_date);
+        referedDate = (TextView) findViewById(R.id.refered_reason);
+        chwId = (TextView) findViewById(R.id.chw_id);
+        note = (TextView) findViewById(R.id.note);
+
+
+        name . setText(clientReferral.getFirst_name()+" "+clientReferral.getMiddle_name()+", "+ clientReferral.getSurname());
+        contacts.setText(clientReferral.getPhone_number());
+        refered.setText(clientReferral.getFacility_name());
+        referedReason.setText(clientReferral.getReferral_reason());
+        referedDate.setText(clientReferral.getReferral_date());
+        referedDate.setText(clientReferral.getReferral_date());
+        chwId.setText(clientReferral.getService_provider_uiid());
+        note.setText(clientReferral.getStatus());
+        
     }
 
     @Override

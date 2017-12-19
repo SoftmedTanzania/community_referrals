@@ -424,6 +424,7 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
         referral.setIs_valid("true");
         referral.setPhone_number(textPhone.getText().toString());
         referral.setFacility_id(getFacilityId(spinnerFacility.getSelectedItem().toString()));
+        referral.setFacility_name(spinnerFacility.getSelectedItem().toString());
         referral.setVillage_leader(editTextVillageLeader.getText().toString());
         referral.setReferral_reason(editTextReferralReason.getText().toString());
         referral.setReferral_service_id(getReferralServiceId(spinnerService.getSelectedItem().toString()));

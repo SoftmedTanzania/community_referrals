@@ -65,7 +65,7 @@ public class CHWRegisterRecyclerAdapter extends
 
         client = clients.get(position);
         String gsonReferral = Utils.convertStandardJSONString(client.getDetails());
-        ClientReferral clientReferral = new Gson().fromJson(gsonReferral,ClientReferral.class);
+        final ClientReferral clientReferral = new Gson().fromJson(gsonReferral,ClientReferral.class);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
         // Set item views based on your views and data model
@@ -78,6 +78,32 @@ public class CHWRegisterRecyclerAdapter extends
             if(!clientReferral.getCommunity_based_hiv_service().equals(""))
                 CBHS.setText("CBHS : " + clientReferral.getCommunity_based_hiv_service());
         }
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mTwoPane) {
+                    Bundle arguments = new Bundle();
+                    arguments.putString(ClientDetailFragment.ARG_ITEM_ID, "id");
+                    ClientDetailFragment fragment = new ClientDetailFragment();
+                    fragment.setArguments(arguments);
+                    ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.item_detail_container, fragment)
+                            .commit();
+
+                    ((ClientDetailFragment)((FragmentActivity)mContext).getSupportFragmentManager().findFragmentById(R.id.item_detail_container)).setDetails(clientReferral);
+                } else {
+                    Context context = v.getContext();
+                    Intent intent = new Intent(context, ClientsDetailsActivity.class);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("client_referral", clientReferral);
+                    intent.putExtras(bundle);
+
+                    context.startActivity(intent);
+                }
+            }
+        });
 
     }
 
@@ -107,27 +133,6 @@ public class CHWRegisterRecyclerAdapter extends
                 }
             });
 
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mTwoPane) {
-                        Bundle arguments = new Bundle();
-                        arguments.putString(ClientDetailFragment.ARG_ITEM_ID, "id");
-                        ClientDetailFragment fragment = new ClientDetailFragment();
-                        fragment.setArguments(arguments);
-                        ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.item_detail_container, fragment)
-                                .commit();
-                    } else {
-                        Context context = v.getContext();
-                        Intent intent = new Intent(context, ClientsDetailsActivity.class);
-                        intent.putExtra(ClientDetailFragment.ARG_ITEM_ID, "id");
-
-                        context.startActivity(intent);
-                    }
-                }
-            });
 
 
 

@@ -1,12 +1,14 @@
 package org.ei.opensrp.drishti.DataModels;
 
+import java.io.Serializable;
+
 /**
  * Created by kency on 11/20/17.
  */
 
-public class ClientReferral {
+public class ClientReferral implements Serializable{
 
-    private String first_name, middle_name, surname, date_of_birth, referral_date, facility_id, referral_reason, is_valid, service_provider_mobile_number, ward, village,Kijitongoji, village_leader, service_provider_group, service_provider_uiid, phone_number, referral_service_id, gender, community_based_hiv_service, ctc_number,Status;
+    private String first_name, middle_name, surname, date_of_birth, referral_date, facility_id,facility_name, referral_reason, is_valid, service_provider_mobile_number, ward, village,Kijitongoji, village_leader, service_provider_group, service_provider_uiid, phone_number, referral_service_id, gender, community_based_hiv_service, ctc_number,Status;
     private boolean has_2Week_cough,
             has_fever,
             had_weight_loss,
@@ -229,5 +231,25 @@ public class ClientReferral {
 
     public void setCommunity_based_hiv_service(String community_based_hiv_service) {
         this.community_based_hiv_service = community_based_hiv_service;
+    }
+
+    public String getFacility_name() {
+        return facility_name;
+    }
+
+    public void setFacility_name(String facility_name) {
+        this.facility_name = facility_name;
+    }
+
+    public String getService_provider_mobile_number() {
+        return service_provider_mobile_number;
+    }
+
+    public void setService_provider_mobile_number(String service_provider_mobile_number) {
+        this.service_provider_mobile_number = service_provider_mobile_number;
+    }
+
+    public boolean is_lost_follow_up() {
+        return is_lost_follow_up;
     }
 }

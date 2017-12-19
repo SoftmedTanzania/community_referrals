@@ -24,8 +24,10 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import org.ei.opensrp.Context;
@@ -115,21 +117,17 @@ public class LoginActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_login);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.mToolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setTitle("");
-
-        // orientation
-//        OrientationHelper.setProperOrientationForDevice(LoginActivity.this);
 
         context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
         initializeLoginFields();
         setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
 
-        findViewById(R.id.login_layout).setBackground(new SmallDiagonalCutPathDrawable());
+        findViewById(R.id.credential_card).setBackground(new SmallDiagonalCutPathDrawable());
+
+        ImageView v = (ImageView)findViewById(R.id.background);
+        Glide.with(getApplicationContext()).load(R.drawable.clint_adair).into(v);
+
 
 
         setLanguage();

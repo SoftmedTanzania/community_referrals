@@ -98,7 +98,7 @@
                         android:layout_toRightOf="@id/indicator_two"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="21"
+                        android:text="4"
                         android:textSize="15sp"/>
                     <TextView
                         android:textColor="@color/mdtp_white"
@@ -106,7 +106,7 @@
                         android:layout_toRightOf="@id/indicator_two"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Success"
+                        android:text="Unsuccessful"
                         android:textSize="10sp"/>
                 </RelativeLayout>
 

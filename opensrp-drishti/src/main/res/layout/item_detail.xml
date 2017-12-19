@@ -32,7 +32,6 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mwanaidi Juma"
             android:layout_below="@id/icon"
             android:textSize="20sp"
             android:textColor="#398FE5"
@@ -161,6 +160,7 @@
                         android:textColor="@color/client_list_header_text_color"
                         android:text="Residence"/>
                     <TextView
+                        android:id="@+id/contacts"
                         android:layout_marginTop="8dp"
                         android:layout_marginLeft="32dp"
                         android:layout_width="wrap_content"
@@ -169,13 +169,14 @@
                         android:textColor="@color/client_list_header_text_color"
                         android:text="Contacts"/>
                     <TextView
+                        android:id="@+id/sponsor"
                         android:layout_marginTop="8dp"
                         android:layout_marginLeft="32dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
                         android:textColor="@color/client_list_header_text_color"
-                        android:text="Sponsors"/>
+                        android:text=" - "/>
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -265,6 +266,7 @@
                     android:orientation="vertical"
                     android:layout_height="match_parent">
                     <TextView
+                        android:id="@+id/refered"
                         android:layout_marginTop="8dp"
                         android:layout_marginLeft="32dp"
                         android:layout_width="wrap_content"
@@ -279,8 +281,9 @@
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
                         android:textColor="@color/client_list_header_text_color"
-                        android:text="Visits"/>
+                        android:text=" - "/>
                     <TextView
+                        android:id="@+id/refered_reason"
                         android:layout_marginTop="8dp"
                         android:layout_marginLeft="32dp"
                         android:layout_width="wrap_content"
@@ -376,6 +379,7 @@
                     android:orientation="vertical"
                     android:layout_height="match_parent">
                     <TextView
+                        android:id="@+id/refered_date"
                         android:layout_marginTop="8dp"
                         android:layout_marginLeft="32dp"
                         android:layout_width="wrap_content"
@@ -384,6 +388,7 @@
                         android:textColor="@color/client_list_header_text_color"
                         android:text="Date"/>
                     <TextView
+                        android:id="@+id/chw_id"
                         android:layout_marginTop="8dp"
                         android:layout_marginLeft="32dp"
                         android:layout_width="wrap_content"
@@ -392,6 +397,7 @@
                         android:textColor="@color/client_list_header_text_color"
                         android:text="Chw"/>
                     <TextView
+                        android:id="@+id/note"
                         android:layout_marginTop="8dp"
                         android:layout_marginLeft="32dp"
                         android:layout_width="wrap_content"

@@ -7,12 +7,16 @@ import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,12 +53,20 @@ import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.drishti.util.Utils;
+import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
+import org.ei.opensrp.service.PendingFormSubmissionService;
+import org.ei.opensrp.sync.SyncAfterFetchListener;
+import org.ei.opensrp.sync.SyncProgressIndicator;
+import org.ei.opensrp.sync.UpdateActionsTask;
 import org.ei.opensrp.util.FormUtils;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
+import org.ei.opensrp.view.contract.HomeContext;
 import org.ei.opensrp.view.contract.SmartRegisterClient;
 import org.ei.opensrp.view.contract.SmartRegisterClients;
+import org.ei.opensrp.view.controller.NativeAfterANMDetailsFetchListener;
+import org.ei.opensrp.view.controller.NativeUpdateANMDetailsTask;
 import org.ei.opensrp.view.controller.VillageController;
 import org.ei.opensrp.view.dialog.DialogOption;
 import org.ei.opensrp.view.dialog.DialogOptionMapper;
@@ -64,6 +76,11 @@ import org.ei.opensrp.view.dialog.OpenFormOption;
 import org.ei.opensrp.view.viewpager.OpenSRPViewPager;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -78,8 +95,13 @@ import butterknife.ButterKnife;
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
+import static java.lang.String.valueOf;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.ei.opensrp.drishti.util.Utils.generateRandomUUIDString;
+import static org.ei.opensrp.event.Event.ACTION_HANDLED;
+import static org.ei.opensrp.event.Event.FORM_SUBMITTED;
+import static org.ei.opensrp.event.Event.SYNC_COMPLETED;
+import static org.ei.opensrp.event.Event.SYNC_STARTED;
 
 public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener {
     private static final String TAG = AncSmartRegisterActivity.class.getSimpleName();
@@ -93,7 +115,6 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public    OpenSRPViewPager mPager;
     private FragmentPagerAdapter mPagerAdapter;
     private int currentPage;
-
     private String[] formNames = new String[]{};
     private Fragment mBaseFragment;
     private Gson gson = new Gson();
@@ -101,6 +122,10 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private android.content.Context appContext;
     private Cursor cursor;
     private static final String TABLE_NAME = "client_referral";
+    private PendingFormSubmissionService pendingFormSubmissionService;
+    private MenuItem updateMenuItem;
+    private MenuItem remainingFormsToSyncMenuItem;
+    static final String DATABASE_NAME = "drishti.db";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -563,6 +588,10 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     @Override
     protected void onResumption() {
+        LoginActivity.setLanguage();
+        updateRegisterCounts();
+        updateSyncIndicator();
+        updateRemainingFormsToSyncCount();
     }
 
     @Override
@@ -1118,5 +1147,148 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     }
 
 
+    public void updateFromServer() {
+        UpdateActionsTask updateActionsTask = new UpdateActionsTask(
+                this, context().actionService(), context().formSubmissionSyncService(),
+                new SyncProgressIndicator(), context().allFormVersionSyncService());
+        updateActionsTask.updateFromServer(new SyncAfterFetchListener());
+    }
+
+
+    private void updateSyncIndicator() {
+        if (updateMenuItem != null) {
+            if (context().allSharedPreferences().fetchIsSyncInProgress()) {
+                updateMenuItem.setActionView(R.layout.progress);
+            } else
+                updateMenuItem.setActionView(null);
+        }
+    }
+
+    private void updateRemainingFormsToSyncCount() {
+        if (remainingFormsToSyncMenuItem == null) {
+            return;
+        }
+
+        long size = pendingFormSubmissionService.pendingFormSubmissionCount();
+        if (size > 0) {
+            remainingFormsToSyncMenuItem.setTitle(valueOf(size) + " " + getString(R.string.unsynced_forms_count_message));
+            remainingFormsToSyncMenuItem.setVisible(true);
+        } else {
+            remainingFormsToSyncMenuItem.setVisible(false);
+        }
+    }
+
+
+    public boolean backUpDataBase() {
+        boolean result = true;
+
+        // Source path in the application database folder
+        String appDbPath = "/data/data/com.my.application/databases/" + DATABASE_NAME;
+
+        // Destination Path to the sdcard app folder
+        String sdFolder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + DATABASE_NAME;
+
+
+        InputStream myInput = null;
+        OutputStream myOutput = null;
+        try {
+            //Open your local db as the input stream
+            myInput = new FileInputStream(appDbPath);
+            //Open the empty db as the output stream
+            myOutput = new FileOutputStream(sdFolder);
+
+            //transfer bytes from the inputfile to the outputfile
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = myInput.read(buffer)) > 0) {
+                myOutput.write(buffer, 0, length);
+            }
+        } catch (IOException e) {
+            result = false;
+            e.printStackTrace();
+        } finally {
+            try {
+                //Close the streams
+                if (myOutput != null) {
+                    myOutput.flush();
+                    myOutput.close();
+                }
+                if (myInput != null) {
+                    myInput.close();
+                }
+            } catch (IOException e) {
+            }
+        }
+
+        return result;
+    }
+
+    private void initialize() {
+        pendingFormSubmissionService = context().pendingFormSubmissionService();
+        SYNC_STARTED.addListener(onSyncStartListener);
+        SYNC_COMPLETED.addListener(onSyncCompleteListener);
+        FORM_SUBMITTED.addListener(onFormSubmittedListener);
+        ACTION_HANDLED.addListener(updateANMDetailsListener);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("HTM-Referrals");
+        LoginActivity.setLanguage();
+    }
+
+    private Listener<Boolean> onSyncCompleteListener = new Listener<Boolean>() {
+        @Override
+        public void onEvent(Boolean data) {
+            //#TODO: RemainingFormsToSyncCount cannot be updated from a back ground thread!!
+            updateRemainingFormsToSyncCount();
+            if (updateMenuItem != null) {
+                updateMenuItem.setActionView(null);
+            }
+            updateRegisterCounts();
+        }
+    };
+
+    private void updateRegisterCounts() {
+        NativeUpdateANMDetailsTask task = new NativeUpdateANMDetailsTask(Context.getInstance().anmController());
+        task.fetch(new NativeAfterANMDetailsFetchListener() {
+            @Override
+            public void afterFetch(HomeContext anmDetails) {
+                // TODO: 9/14/17 update counts after fetch
+                // updateRegisterCounts(anmDetails);
+            }
+        });
+    }
+
+    private Listener<Boolean> onSyncStartListener = new Listener<Boolean>() {
+        @Override
+        public void onEvent(Boolean data) {
+            if (updateMenuItem != null) {
+                updateMenuItem.setActionView(R.layout.progress);
+            }
+        }
+    };
+
+    private Listener<String> onFormSubmittedListener = new Listener<String>() {
+        @Override
+        public void onEvent(String instanceId) {
+            updateRegisterCounts();
+        }
+    };
+
+
+
+    private Listener<String> updateANMDetailsListener = new Listener<String>() {
+        @Override
+        public void onEvent(String data) {
+            updateRegisterCounts();
+        }
+    };
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        attachLogoutMenuItem(menu);
+        return true;
+    }
 
 }

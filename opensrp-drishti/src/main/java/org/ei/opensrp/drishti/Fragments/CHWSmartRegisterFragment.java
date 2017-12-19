@@ -11,14 +11,19 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import org.ei.opensrp.drishti.AncSmartRegisterActivity;
+import org.ei.opensrp.drishti.LoginActivity;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.pageradapter.CHWPagerAdapter;
@@ -26,6 +31,8 @@ import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapt
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
+
+import static android.widget.Toast.LENGTH_SHORT;
 
 public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     private static final String TAG = CHWSmartRegisterFragment.class.getSimpleName();
@@ -37,6 +44,12 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     private CHWPagerAdapter adapter;
     private ViewPager feeds;
     private Toolbar toolbar;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,8 +104,8 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         tabContent2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_trending_up_white_24dp, 0, 0, 0);
 
 
-        tabs.getTabAt(0).setCustomView(tabContent);
-        tabs.getTabAt(1).setCustomView(tabContent2);
+        tabs.getTabAt(0).setCustomView(tabContent2);
+        tabs.getTabAt(1).setCustomView(tabContent);
 
 
         final int colorWhite = ContextCompat.getColor(getActivity(), android.R.color.white);
@@ -119,11 +132,13 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
         toolbar = (Toolbar) v.findViewById(R.id.toolbar);
 
-        toolbar.inflateMenu(R.menu.menu_main);
+//        toolbar.inflateMenu(R.menu.menu_main);
 
 
         return v;
     }
+
+
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
@@ -188,5 +203,27 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         return getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + feeds.getId() + ":" + fragmentPagerAdapter.getItemId(position));
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Do something that differs the Activity's menu here
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.updateMenuItem:
+                ((AncSmartRegisterActivity)getActivity()).updateFromServer();
+                return true;
+            case R.id.switchLanguageMenuItem:
+                String newLanguagePreference = LoginActivity.switchLanguagePreference();
+                LoginActivity.setLanguage();
+                Toast.makeText(getActivity(), "Language preference set to " + newLanguagePreference + ". Please restart the application.", LENGTH_SHORT).show();
+                getActivity().recreate();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }
