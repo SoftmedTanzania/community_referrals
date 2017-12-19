@@ -1,6 +1,7 @@
 package org.ei.opensrp.drishti.pageradapter;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,11 +9,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import org.ei.opensrp.commonregistry.CommonPersonObject;
+import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.AncSmartRegisterActivity;
 import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.R;
@@ -28,15 +30,17 @@ import java.util.Locale;
  * Created by martha on 8/22/17.
  */
 
-public class CHWFollowUpPagerAdapter extends
-        RecyclerView.Adapter<CHWFollowUpPagerAdapter.ViewHolder> {
-
+public class ReferredClientsPagerAdapter extends
+        RecyclerView.Adapter<ReferredClientsPagerAdapter.ViewHolder> {
+    private static String TAG = ReferredClientsPagerAdapter.class.getSimpleName();
+    private CommonRepository commonRepository;
     private List<ClientReferralPersonObject> client;
     private Context mContext;
 
-    public CHWFollowUpPagerAdapter(Context context, List<ClientReferralPersonObject> clients) {
+    public ReferredClientsPagerAdapter(Context context, List<ClientReferralPersonObject> clients,CommonRepository commonRepository) {
         client = clients;
         mContext = context;
+        this.commonRepository = commonRepository;
 
     }
 
@@ -48,7 +52,7 @@ public class CHWFollowUpPagerAdapter extends
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View contactView = inflater.inflate(R.layout.card_chw_followup, parent, false);
+        View contactView = inflater.inflate(R.layout.referal_list_client_item, parent, false);
 
 
         return new ViewHolder(contactView);
@@ -59,19 +63,30 @@ public class CHWFollowUpPagerAdapter extends
 
         ClientReferralPersonObject clientReferralPersonObject = client.get(position);
         String gsonReferral = Utils.convertStandardJSONString(clientReferralPersonObject.getDetails());
-        Log.d("CHWFollowUpPagerAdapter", "gsonReferral = " + gsonReferral);
+        Log.d(TAG, "gsonReferral = " + gsonReferral);
         ClientReferral clientReferral = new Gson().fromJson(gsonReferral, ClientReferral.class);
 
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
 
-        viewHolder.nameTextView.setText(clientReferral.getFirst_name());
-        viewHolder.ageTextView.setText(clientReferral.getDate_of_birth() +" years");
-        viewHolder.communicationTextView.setText(clientReferral.getPhone_number());
-        viewHolder.villageTextView.setText(clientReferral.getVillage() +"/ "+clientReferral.getKijitongoji());
+        viewHolder.nameTextView.setText(clientReferral.getFirst_name()+" "+clientReferral.getMiddle_name()+" "+clientReferral.getSurname());
+        viewHolder.referralReason.setText(clientReferral.getReferral_reason());
         viewHolder.scheduleDateTextView.setText(clientReferral.getReferral_date());
-        viewHolder.facilityTextView.setText(clientReferral.getFacility_id());
+        viewHolder.serviceName.setText(getReferralServiceName(clientReferral.getReferral_service_id()));
+
+
+        if(clientReferral.getStatus().equals("0")){
+            viewHolder.referralStatus.setText("Pending");
+            viewHolder.statusIcon.setBackgroundColor(mContext.getResources().getColor(R.color.blue_400));
+        }else if(clientReferral.getStatus().equals("1")){
+            viewHolder.referralStatus.setText("Successful");
+            viewHolder.statusIcon.setBackgroundColor(mContext.getResources().getColor(R.color.green_400));
+        }else{
+            viewHolder.referralStatus.setText("Unsuccessful");
+            viewHolder.statusIcon.setBackgroundColor(mContext.getResources().getColor(R.color.red_400));
+        }
+
 
     }
 
@@ -82,23 +97,17 @@ public class CHWFollowUpPagerAdapter extends
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView nameTextView, communicationTextView, scheduleDateTextView, villageTextView, ageTextView,facilityTextView;
-        public ImageView iconOptions;
+        public TextView nameTextView, referralReason, scheduleDateTextView, referralStatus,serviceName;
+        public View statusIcon;
 
         public ViewHolder(View itemView) {
-
             super(itemView);
-
-            nameTextView = (TextView) itemView.findViewById(R.id.textName);
-            communicationTextView = (TextView) itemView.findViewById(R.id.communication);
-            villageTextView = (TextView) itemView.findViewById(R.id.textPhysicalAddress);
-            ageTextView = (TextView) itemView.findViewById(R.id.textAge);
-            scheduleDateTextView = (TextView) itemView.findViewById(R.id.textNextVisitDate);
-            facilityTextView = (TextView) itemView.findViewById(R.id.facility);
-            iconOptions = (ImageView) itemView.findViewById(R.id.iconOptions);
-
-
+            nameTextView = (TextView) itemView.findViewById(R.id.client_name);
+            referralReason = (TextView) itemView.findViewById(R.id.referral_reasons);
+            referralStatus = (TextView) itemView.findViewById(R.id.status);
+            scheduleDateTextView = (TextView) itemView.findViewById(R.id.ref_date);
+            serviceName = (TextView) itemView.findViewById(R.id.referral_service);
+            statusIcon = itemView.findViewById(R.id.status_color);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -107,7 +116,7 @@ public class CHWFollowUpPagerAdapter extends
                 }
             });
 
-            iconOptions.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // show options
@@ -145,5 +154,13 @@ public class CHWFollowUpPagerAdapter extends
             }
         });
 
+    }
+
+    public String getReferralServiceName(String id){
+        Cursor cursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service where id ='"+ id +"'");
+
+        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "referral_service");
+
+        return commonPersonObjectList.get(0).getColumnmaps().get("name");
     }
 }

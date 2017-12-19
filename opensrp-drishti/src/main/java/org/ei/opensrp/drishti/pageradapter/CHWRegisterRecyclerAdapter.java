@@ -83,15 +83,10 @@ public class CHWRegisterRecyclerAdapter extends
             @Override
             public void onClick(View v) {
                 if (mTwoPane) {
-                    Bundle arguments = new Bundle();
-                    arguments.putString(ClientDetailFragment.ARG_ITEM_ID, "id");
-                    ClientDetailFragment fragment = new ClientDetailFragment();
-                    fragment.setArguments(arguments);
+                    ClientDetailFragment fragment = ClientDetailFragment.newInstance(clientReferral);
                     ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction()
                             .replace(R.id.item_detail_container, fragment)
                             .commit();
-
-                    ((ClientDetailFragment)((FragmentActivity)mContext).getSupportFragmentManager().findFragmentById(R.id.item_detail_container)).setDetails(clientReferral);
                 } else {
                     Context context = v.getContext();
                     Intent intent = new Intent(context, ClientsDetailsActivity.class);

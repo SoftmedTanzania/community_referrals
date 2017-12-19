@@ -165,9 +165,11 @@
 
                 <LinearLayout
                     android:id="@+id/search_layout"
+                    android:visibility="gone"
                     android:layout_width="@dimen/ec_main_header_search_layout_width"
                     android:layout_height="fill_parent"
                     android:layout_alignParentRight="true"
+
                     android:layout_margin="8dp"
                     android:background="@drawable/rounded_edit_text_normal"
                     android:orientation="horizontal"

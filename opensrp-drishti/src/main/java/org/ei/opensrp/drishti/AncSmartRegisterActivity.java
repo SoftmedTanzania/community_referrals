@@ -3,6 +3,7 @@ package org.ei.opensrp.drishti;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -41,9 +42,9 @@ import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.DataModels.FollowUp;
-import org.ei.opensrp.drishti.Fragments.CHWFollowUpFragment;
-import org.ei.opensrp.drishti.Fragments.CHWPreRegisterFormFragment;
-import org.ei.opensrp.drishti.Fragments.CHWPreRegistrationFragment;
+import org.ei.opensrp.drishti.Fragments.FollowupClientsFragment;
+import org.ei.opensrp.drishti.Fragments.ReferredClientsFragment;
+import org.ei.opensrp.drishti.Fragments.ClientRegistrationFormFragment;
 import org.ei.opensrp.drishti.Fragments.CHWSmartRegisterFragment;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.Repository.ClientReferralRepository;
@@ -61,7 +62,7 @@ import org.ei.opensrp.sync.SyncAfterFetchListener;
 import org.ei.opensrp.sync.SyncProgressIndicator;
 import org.ei.opensrp.sync.UpdateActionsTask;
 import org.ei.opensrp.util.FormUtils;
-import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
+import org.ei.opensrp.view.activity.*;
 import org.ei.opensrp.view.contract.HomeContext;
 import org.ei.opensrp.view.contract.SmartRegisterClient;
 import org.ei.opensrp.view.contract.SmartRegisterClients;
@@ -272,7 +273,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //                mother.setDetails(new Gson().toJson(pregnantMom));
 //                updateFormSubmission(mother,mother.getId());
 //todo how to refresh the  pre registartion  fragment after updating
-//                mBaseFragment = new CHWPreRegistrationFragment();
+//                mBaseFragment = new FollowupClientsFragment();
 //                // Instantiate a ViewPager and a PagerAdapter.
 //                mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
 //                mPager.setOffscreenPageLimit(formNames.length);
@@ -287,8 +288,8 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //
 //                mPager.setCurrentItem(1);
 //                currentPage = 1;
-                CHWPreRegistrationFragment.newInstance();
-                CHWFollowUpFragment.newInstance();
+                FollowupClientsFragment.newInstance();
+                ReferredClientsFragment.newInstance();
                 Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + mother.getFirst_name() +" "+mother.getSurname(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
@@ -517,7 +518,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //                mother.setDetails(new Gson().toJson(pregnantMom));
 //                updateFormSubmission(mother,mother.getId());
 
-//                mBaseFragment = new CHWPreRegistrationFragment();
+//                mBaseFragment = new FollowupClientsFragment();
                 // Instantiate a ViewPager and a PagerAdapter.
 //                mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
 //                mPager.setOffscreenPageLimit(formNames.length);
@@ -532,7 +533,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //
 //                mPager.setCurrentItem(1);
 //                currentPage = 1;
-                CHWPreRegistrationFragment preRegisterFragment = (CHWPreRegistrationFragment) findFragmentByPosition(currentPage);
+                FollowupClientsFragment preRegisterFragment = (FollowupClientsFragment) findFragmentByPosition(currentPage);
                 preRegisterFragment.refreshListView();
                 Toast.makeText(AncSmartRegisterActivity.this, "umemfuta " + mother.getFirst_name() +" "+mother.getSurname(), Toast.LENGTH_SHORT).show();
 
@@ -661,10 +662,13 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public void OnLocationSelected(String locationSelected) {
         // set registration fragment
         Log.d(TAG,"Location selected"+locationSelected);
-        CHWPreRegisterFormFragment displayFormFragment = (CHWPreRegisterFormFragment) getDisplayFormFragmentAtIndex(FormUtils.getIndexForFormName("pregnant_mothers_pre_registration", formNames) + 1);
-        displayFormFragment.setWardId(locationSelected);
-        mPager.setCurrentItem(2);
-        currentPage = 2;
+//        ClientRegistrationFormFragment displayFormFragment = (ClientRegistrationFormFragment) getDisplayFormFragmentAtIndex(FormUtils.getIndexForFormName("pregnant_mothers_pre_registration", formNames) + 1);
+//        displayFormFragment.setWardId(locationSelected);
+//        mPager.setCurrentItem(2);
+//        currentPage = 2;
+
+        Intent intent = new Intent(this, ClientsFormRegisterActivity.class);
+        startActivity(intent);
     }
 
 
@@ -717,7 +721,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                     data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
                  if(formName.equals("pregnant_mothers_pre_registration")){
-                    CHWPreRegisterFormFragment displayFormFragment = (CHWPreRegisterFormFragment) getDisplayFormFragmentAtIndex(formIndex);
+                    ClientRegistrationFormFragment displayFormFragment = (ClientRegistrationFormFragment) getDisplayFormFragmentAtIndex(formIndex);
                     if (displayFormFragment != null) {
                         Log.d(TAG, "form data = " + data);
                         displayFormFragment.setFormData(data);

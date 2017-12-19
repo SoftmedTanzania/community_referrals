@@ -55,8 +55,8 @@ import fr.ganfra.materialspinner.MaterialSpinner;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
-    private static final String TAG = CHWPreRegisterFormFragment.class.getSimpleName();
+public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+    private static final String TAG = ClientRegistrationFormFragment.class.getSimpleName();
     public static TextView textDate;
     LinearLayout layoutDatePick;
     CardView cardDatePickLNMP;
@@ -95,7 +95,7 @@ public class CHWPreRegisterFormFragment extends SecuredNativeSmartRegisterCursor
     private FacilityRepository facilityRepository = new FacilityRepository();
     private List<ReferralServiceObject> referralServiceList;
     private List<FacilityObject> facilitiesList;
-    public CHWPreRegisterFormFragment() {
+    public ClientRegistrationFormFragment() {
         // Required empty public constructor
     }
 

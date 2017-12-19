@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
-import org.ei.opensrp.drishti.Fragments.CHWPreRegisterFormFragment;
+import org.ei.opensrp.drishti.Fragments.ClientRegistrationFormFragment;
 import org.ei.opensrp.drishti.Fragments.CHWSmartRegisterFragment;
 
 import org.ei.opensrp.view.fragment.DisplayFormFragment;
@@ -49,7 +49,7 @@ public class BaseRegisterActivityPagerAdapter extends FragmentPagerAdapter {
                 break;
             case 2:
                 Log.d(TAG,"setting Chw Registration fragment");
-                fragment = new CHWPreRegisterFormFragment();
+                fragment = new ClientRegistrationFormFragment();
                 break;
             case 3:
                 Log.d(TAG,"setting Chw women list fragment");

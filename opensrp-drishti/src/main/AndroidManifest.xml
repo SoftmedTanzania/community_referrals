@@ -77,15 +77,17 @@
         <activity
             android:name=".ReportSearchActivity"
             android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
+
+
+        <activity
+            android:name=".ClientsFormRegisterActivity"
+            android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
+
         <activity
             android:name=".ClientsDetailsActivity"
             android:label="@string/title_item_detail"
-            android:parentActivityName=".Fragments.ItemListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.ei.opensrp.drishti.Fragments.ItemListActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".RegisterClientActivity"></activity>
     </application>
 
 </manifest>

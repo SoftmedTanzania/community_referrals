@@ -125,12 +125,11 @@ public class LocationSelectorDialogFragment extends DialogFragment {
                     String locationjson = "";
                     TreeNode traversingnode = node;
                     locationjson = traversingnode.getLocationId();
-//
                     if(mCallback != null) {
                         mCallback.OnLocationSelected(locationjson);
                     }
-                    FieldOverrides fieldOverrides = new FieldOverrides(locationjson.toString());
-                    ((AncSmartRegisterActivity)getActivity()).startFormActivity(formName, generateRandomUUIDString(), fieldOverrides.getJSONString());
+//                    FieldOverrides fieldOverrides = new FieldOverrides(locationjson.toString());
+//                    ((AncSmartRegisterActivity)getActivity()).startFormActivity(formName, generateRandomUUIDString(), fieldOverrides.getJSONString());
                     savestate = tView.getSaveState();
                     dismiss();
                 }

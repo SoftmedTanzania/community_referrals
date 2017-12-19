@@ -54,8 +54,8 @@ public class ClientsDetailsActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(ClientDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(ClientDetailFragment.ARG_ITEM_ID));
+            arguments.putString(ClientDetailFragment.CLIENT_REFERRAL,
+                    getIntent().getStringExtra(ClientDetailFragment.CLIENT_REFERRAL));
             ClientDetailFragment fragment = new ClientDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()

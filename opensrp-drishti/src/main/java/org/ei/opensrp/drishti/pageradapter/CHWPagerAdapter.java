@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import org.ei.opensrp.drishti.Fragments.CHWFollowUpFragment;
-import org.ei.opensrp.drishti.Fragments.CHWPreRegistrationFragment;
+import org.ei.opensrp.drishti.Fragments.ReferredClientsFragment;
+import org.ei.opensrp.drishti.Fragments.FollowupClientsFragment;
 
 
 /**
@@ -22,10 +22,10 @@ public class CHWPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new CHWFollowUpFragment() ;
+                return new ReferredClientsFragment() ;
 
             case 1:
-                return new CHWPreRegistrationFragment();
+                return new FollowupClientsFragment();
             default:
                 return null;
         }

@@ -353,7 +353,6 @@
 
                     <com.rengwuxian.materialedittext.MaterialEditText
                         android:id="@+id/editTextOthers"
-                        android:visibility="gone"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
@@ -408,6 +407,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:visibility="gone"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
@@ -417,7 +417,6 @@
         app:cardElevation="4dp">
 
         <LinearLayout
-            android:visibility="gone"
             android:id="@+id/outlayer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

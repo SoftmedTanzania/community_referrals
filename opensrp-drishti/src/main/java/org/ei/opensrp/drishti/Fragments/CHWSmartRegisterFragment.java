@@ -186,14 +186,14 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     @Override
     public void refreshListView() {
 
-        CHWFollowUpFragment chwFollowUpFragment = (CHWFollowUpFragment) findFragmentByPosition(0);
-        if (chwFollowUpFragment != null) {
-            chwFollowUpFragment.populateData();
+        ReferredClientsFragment referredClientsFragment = (ReferredClientsFragment) findFragmentByPosition(0);
+        if (referredClientsFragment != null) {
+            referredClientsFragment.populateData();
         }
 
-        CHWPreRegistrationFragment chwPreRegistrationFragment = (CHWPreRegistrationFragment) findFragmentByPosition(1);
-        if (chwPreRegistrationFragment != null) {
-            chwPreRegistrationFragment.populateData();
+        FollowupClientsFragment followupClientsFragment = (FollowupClientsFragment) findFragmentByPosition(1);
+        if (followupClientsFragment != null) {
+            followupClientsFragment.populateData();
         }
 
     }
