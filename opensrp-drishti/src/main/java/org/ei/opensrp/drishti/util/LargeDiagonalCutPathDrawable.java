@@ -17,7 +17,6 @@ public class LargeDiagonalCutPathDrawable extends Drawable {
         mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         mPaint.setStrokeWidth(1);
 
-        mPaint.setShadowLayer(30, 0, 0, Color.BLACK);
 
 
     }
