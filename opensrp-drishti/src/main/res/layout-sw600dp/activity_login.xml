@@ -56,7 +56,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="64dp"
         android:scaleType="centerCrop"
         android:id="@+id/login_screen_logo"
         android:src="@drawable/ic_logo_white"/>
@@ -64,7 +64,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="64dp"
         android:layout_marginLeft="16dp"
         android:layout_toRightOf="@id/login_screen_logo"
         android:textSize="32sp"

@@ -125,8 +125,6 @@ public class LocationSelectorDialogFragment extends DialogFragment {
                     if(mCallback != null) {
                         mCallback.OnLocationSelected(locationjson);
                     }
-                    FieldOverrides fieldOverrides = new FieldOverrides(locationjson.toString());
-                    ((ChwSmartRegisterActivity)getActivity()).startFormActivity(formName, generateRandomUUIDString(), fieldOverrides.getJSONString());
                     savestate = tView.getSaveState();
                     dismiss();
                 }

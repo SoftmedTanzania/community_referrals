@@ -34,6 +34,7 @@ import org.ei.opensrp.view.ProgressIndicator;
 import org.ei.opensrp.view.activity.DrishtiApplication;
 import org.ei.opensrp.view.receiver.SyncBroadcastReceiver;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.Charset;
@@ -86,94 +87,41 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     private boolean hasFacility = false;
     private boolean hasService = false;
     public String ipAddress = "http://192.168.43.251:8080/opensrp";
+
     public void register(final Context context, final String userId,final  String facility, final String regId) {
 
         Log.i(TAG, "registering device (regId = " + regId + ")");
 
+        String serverUrl = ipAddress+Config.YOUR_SERVER_URL;
+        Log.d(TAG,"URL to register = "+serverUrl);
 
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("google_pushNotification_token", regId);
+        params.put("user_uuid", userId);
+        params.put("facility_uuid", facility);
 
-        long backoff = BACKOFF_MILLI_SECONDS + random.nextInt(1000);
+        StringBuilder bodyBuilder = new StringBuilder();
+        Iterator<Entry<String, String>> iterator = params.entrySet().iterator();
+        bodyBuilder.append("[").append("{");
+        while (iterator.hasNext()) {
+            Entry<String, String> param = iterator.next();
+            bodyBuilder.append('"').append(param.getKey()).append('"').append(':')
+                    .append('"').append(param.getValue()).append('"');
+            if (iterator.hasNext()) {
+                bodyBuilder.append(',');
+            }
+        }
+        bodyBuilder.append("}").append("]");
 
-        // Once GCM returns a registration id, we need to register on our server
-        // As the server might be down, we will retry it a couple
-        // times.
-        displayMessageOnScreen(context, context.getStringResource(
-                R.string.registering_message));
-
-        for (int i = 1; i <= MAX_ATTEMPTS; i++) {
-
-
-            final Response<String> response ;
-            LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
-                @Override
-                public void setVisible() {
-                }
-
-                @Override
-                public void setInvisible() {
-                    org.ei.opensrp.util.Log.logInfo("Successfully set registration token");
-                }
-            });
-
-            task.doActionInBackground(new BackgroundAction<Response<String>>() {
-                @Override
-                public Response<String> actionToDoInBackgroundThread() {
-                    String serverUrl = ipAddress+Config.YOUR_SERVER_URL;
-                    Log.d(TAG,"URL to register = "+serverUrl);
-
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("google_pushNotification_token", regId);
-                    params.put("user_uuid", userId);
-                    params.put("facility_uuid", facility);
-
-                    StringBuilder bodyBuilder = new StringBuilder();
-                    Iterator<Entry<String, String>> iterator = params.entrySet().iterator();
-                    bodyBuilder.append("[").append("{");
-                    while (iterator.hasNext()) {
-                        Entry<String, String> param = iterator.next();
-                        bodyBuilder.append('"').append(param.getKey()).append('"').append(':')
-                                .append('"').append(param.getValue()).append('"');
-                        if (iterator.hasNext()) {
-                            bodyBuilder.append(',');
-                        }
-                    }
-                    bodyBuilder.append("}").append("]");
-
-                    Response response1 = null;
-                    Log.d(TAG,"parameters string ="+bodyBuilder.toString());
-                    try{
-                        response1 = Context.getInstance().getHttpAgent().post(serverUrl,bodyBuilder.toString());
-                        Log.d(TAG,"response is failure "+response1.isFailure());
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-
-                    return response1;
-                }
-
-                public void postExecuteInUIThread(Response result) {
-//                    Log.d(TAG,"response for registartion is "+result.isFailure());
-                    if(result.isFailure()){
-                        Log.d(TAG,"is failure to send token");
-                    }else{
-
-                        setRegistration_id(regId);
-                        String message = context.getStringResource(R.string.registered_message);
-                        displayMessageOnScreen(context, message);
-                    }
-                }
-            });
-
-
-
-
-
+        Response response1 = null;
+        Log.d(TAG,"parameters string ="+bodyBuilder.toString());
+        try{
+            response1 = Context.getInstance().getHttpAgent().post(serverUrl,bodyBuilder.toString());
+            Log.d(TAG,"response is failure "+response1.isFailure());
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
-        String message = context.getStringResource(R.string.token_error_message);
-
-        //Send Broadcast to Show message on screen
-        displayMessageOnScreen(context, message);
     }
 
     public void setReferralService() {
@@ -182,63 +130,37 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         if (count == 0 ) {
 
             //String to place our result in
-            final  String myUrl = ipAddress+Config.GET_SERVICE_URL;
-            final String result= null;
+            final String myUrl = ipAddress + Config.GET_SERVICE_URL;
+            final String result = null;
 
-            Response<String> response = null;
-            LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
-                @Override
-                public void setVisible() {
+            Response<String> stringResponse  = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl, username, password);
+            ReferralServiceDataModel service;
+            JSONArray jsonArray = null;
+            try {
+                jsonArray = new JSONArray(stringResponse.payload());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject explrObject = null;
+                try {
+                    explrObject = jsonArray.getJSONObject(i);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+                service = new Gson().fromJson(explrObject.toString(), ReferralServiceDataModel.class);
+                if (service.getId().equals("")) {
+                    Log.d(TAG, "service table is empty");
 
-                @Override
-                public void setInvisible() {
-                    org.ei.opensrp.util.Log.logInfo("Successfully get service list");
+                } else {
+                    Log.d(TAG, "referral services downloaded " + service.getName());
+                    ContentValues values = new ReferralServiceRepository().createValuesFor(service);
+                    android.util.Log.d(TAG, "values services = " + new Gson().toJson(values));
+
+                    commonRepository1.customInsert(values);
                 }
-            });
-
-            task.doActionInBackground(new BackgroundAction<Response<String>>() {
-                @Override
-                public Response<String> actionToDoInBackgroundThread() {
-                    return Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl,username,password);
-                }
-
-                @Override
-                public void postExecuteInUIThread(Response<String> result) {
-                    Log.d(TAG,"this is the result of referal services"+result.payload());
-
-                    try {
-
-                        ReferralServiceDataModel service ;
-                        JSONArray jsonArray = new JSONArray(result.payload());
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject explrObject = jsonArray.getJSONObject(i);
-                            service = new Gson().fromJson(explrObject.toString(), ReferralServiceDataModel.class) ;
-                            if (service.getId().equals("")) {
-                                Log.d(TAG,"service table is empty");
-
-                            } else {
-                                Log.d(TAG,"referral services downloaded "+service.getName());
-                                ContentValues values = new ReferralServiceRepository().createValuesFor(service);
-                                android.util.Log.d(TAG, "values services = " + new Gson().toJson(values));
-
-                                commonRepository1.customInsert(values);
-                            }
-                        }
-
-
-
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }
-
-
-            });
+            }
             setHasService(true);
-        }
-        else{
-
         }
     }
 

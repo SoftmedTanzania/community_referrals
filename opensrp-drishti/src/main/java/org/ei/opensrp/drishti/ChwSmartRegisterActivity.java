@@ -662,13 +662,9 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public void OnLocationSelected(String locationSelected) {
         // set registration fragment
         Log.d(TAG,"Location selected"+locationSelected);
-        Log.d(TAG,"Location selected"+locationSelected);
-        ClientRegistrationFormFragment displayFormFragment = (ClientRegistrationFormFragment) getDisplayFormFragmentAtIndex(FormUtils.getIndexForFormName("pregnant_mothers_pre_registration", formNames) + 1);
-        displayFormFragment.setWardId(locationSelected);
-        mPager.setCurrentItem(2);
-        currentPage = 2;
 
         Intent intent = new Intent(this, ClientsFormRegisterActivity.class);
+        intent.putExtra("selectedLocation",locationSelected);
         startActivity(intent);
     }
 
