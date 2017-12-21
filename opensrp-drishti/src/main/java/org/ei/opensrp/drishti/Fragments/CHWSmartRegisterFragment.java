@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import org.ei.opensrp.drishti.AncSmartRegisterActivity;
+import org.ei.opensrp.drishti.ChwSmartRegisterActivity;
 import org.ei.opensrp.drishti.LoginActivity;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
@@ -172,7 +172,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         }
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
-                .newInstance((AncSmartRegisterActivity) getActivity(), null, context().anmLocationController().get(),
+                .newInstance((ChwSmartRegisterActivity) getActivity(), null, context().anmLocationController().get(),
                         "pregnant_mothers_pre_registration")
                 .show(ft, locationDialogTAG);
     }
@@ -213,7 +213,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.updateMenuItem:
-                ((AncSmartRegisterActivity)getActivity()).updateFromServer();
+                ((ChwSmartRegisterActivity)getActivity()).updateFromServer();
                 return true;
             case R.id.switchLanguageMenuItem:
                 String newLanguagePreference = LoginActivity.switchLanguagePreference();

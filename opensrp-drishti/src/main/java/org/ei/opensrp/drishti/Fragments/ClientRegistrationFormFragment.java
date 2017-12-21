@@ -147,8 +147,7 @@ public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCu
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View fragmentView = inflater.inflate(R.layout.activity_chwedit_pre_registration, container, false);
+        final   View fragmentView = inflater.inflate(R.layout.activity_chwedit_pre_registration, container, false);
 
 
         textDate = (TextView) fragmentView.findViewById(R.id.textDate);
@@ -174,6 +173,9 @@ public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCu
         textviewReferralProviderSupportGroup.setText(((BoreshaAfyaApplication)getActivity().getApplication()).getTeam_name());
 
 
+        Log.d(TAG, "username"+((BoreshaAfyaApplication)getActivity().getApplication()).getUsername());
+        Log.d(TAG, "team name "+((BoreshaAfyaApplication)getActivity().getApplication()).getTeam_name());
+
         editTextDiscountId = (EditText) fragmentView.findViewById(R.id.editTextDiscountId);
         editTextKijiji = (EditText) fragmentView.findViewById(R.id.editTextKijiji);
         editTextCTCNumber = (EditText) fragmentView.findViewById(R.id.editTextOthers);
@@ -190,12 +192,7 @@ public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCu
         spinnerFacility = (MaterialSpinner) fragmentView.findViewById(R.id.spinnerFacility);
         spinnerFacility.setAdapter(facilityAdapter);
 
-        checkBoxAreasonOne = (CheckBox) fragmentView.findViewById(R.id.checkbox2weekCough);
-        checkBoxreasonTwo = (CheckBox) fragmentView.findViewById(R.id.checkboxfever);
-        checkBoxreasonThree = (CheckBox) fragmentView.findViewById(R.id.checkboxWeightLoss);
-        checkBoxreasonFour = (CheckBox) fragmentView.findViewById(R.id.checkboxSevereSweating);
-        checkBoxresonFive = (CheckBox) fragmentView.findViewById(R.id.checkboxBloodCough);
-        checkBoxreasonSix = (CheckBox) fragmentView.findViewById(R.id.checkboxLostFollowup);
+
 
 
         spinnerService.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -207,17 +204,88 @@ public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCu
                 }
 
 
-                if((spinnerService.getSelectedItem().toString()).equals("Kliniki ya kutibu kifua kikuu")){
+                if((spinnerService.getSelectedItem().toString()).equals("Rufaa kwenda kliniki ya kutibu kifua kikuu")){
+
+
+                    fragmentView.findViewById(R.id.checkboxis_at_hot_spot).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxHasHeadache).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxIsVomiting).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxis_at_hot_spot).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxhas_affected_partner).setVisibility(View.GONE);
+                    checkBoxAreasonOne = (CheckBox) fragmentView.findViewById(R.id.checkbox2weekCough);
+                    checkBoxreasonTwo = (CheckBox) fragmentView.findViewById(R.id.checkboxfever);
+                    checkBoxreasonThree = (CheckBox) fragmentView.findViewById(R.id.checkboxWeightLoss);
+                    checkBoxreasonFour = (CheckBox) fragmentView.findViewById(R.id.checkboxSevereSweating);
+                    checkBoxresonFive = (CheckBox) fragmentView.findViewById(R.id.checkboxBloodCough);
+                    checkBoxreasonSix = (CheckBox) fragmentView.findViewById(R.id.checkboxLostFollowup);
+                    checkBoxAreasonOne.setVisibility(View.VISIBLE);
+                    checkBoxreasonTwo.setVisibility(View.VISIBLE);
+                    checkBoxreasonThree.setVisibility(View.VISIBLE);
+                    checkBoxreasonFour.setVisibility(View.VISIBLE);
+                    checkBoxresonFive.setVisibility(View.VISIBLE);
+                    checkBoxreasonSix.setVisibility(View.VISIBLE);
                     tbLayout.setVisibility(View.VISIBLE);
                     CTCLayout.setVisibility(View.VISIBLE);
                     fName = "client_tb_referral_form";
 
-                }else if((spinnerService.getSelectedItem().toString()).equals("Rufaa kwenda kliniki ya TB na Matunzo (CTC)")||(spinnerService.getSelectedItem().toString()).equals("Huduma ya afya ya uzazi na mtoto (RCH)") ){
+                }else if((spinnerService.getSelectedItem().toString()).equals("Rufaa kwenda kliniki ya TB na Matunzo (CTC)")||(spinnerService.getSelectedItem().toString()).equals("Rufaa kwenda kupata huduma za kuzuia maambukizi toka kwa mama kwenda kwa mtoto") ){
+
+
+                    fragmentView.findViewById(R.id.checkboxHasHeadache).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxWeightLoss).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxSevereSweating).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxhas_loss_of_appetite).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxIsVomiting).setVisibility(View.GONE);
+                    checkBoxAreasonOne = (CheckBox) fragmentView.findViewById(R.id.checkboxis_at_hot_spot);
+                    checkBoxreasonTwo = (CheckBox) fragmentView.findViewById(R.id.checkboxfever);
+                    checkBoxreasonThree = (CheckBox) fragmentView.findViewById(R.id.checkboxWeightLoss);
+                    checkBoxreasonFour = (CheckBox) fragmentView.findViewById(R.id.checkboxhas_symptomps_for_associative_diseases);
+                    checkBoxresonFive = (CheckBox) fragmentView.findViewById(R.id.checkboxhas_affected_partner);
+                    checkBoxreasonSix = (CheckBox) fragmentView.findViewById(R.id.checkboxLostFollowup);
+                    checkBoxAreasonOne.setVisibility(View.VISIBLE);
+                    checkBoxreasonTwo.setVisibility(View.VISIBLE);
+                    checkBoxreasonThree.setVisibility(View.VISIBLE);
+                    checkBoxreasonFour.setVisibility(View.VISIBLE);
+                    checkBoxresonFive.setVisibility(View.VISIBLE);
+                    checkBoxreasonSix.setVisibility(View.VISIBLE);
+
                     tbLayout.setVisibility(View.GONE);
                     CTCLayout.setVisibility(View.VISIBLE);
                     fName = "client_hiv_referral_form";
 
+                }else if((spinnerService.getSelectedItem().toString()).equals("Rufaa kwenda kliniki kutibiwa malaria") ){
+
+                    fragmentView.findViewById(R.id.checkboxis_at_hot_spot).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxWeightLoss).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxBloodCough).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxhas_symptomps_for_associative_diseases).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxhas_affected_partner).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxLostFollowup).setVisibility(View.GONE);
+                    checkBoxAreasonOne = (CheckBox) fragmentView.findViewById(R.id.checkboxfever);
+                    checkBoxreasonTwo = (CheckBox) fragmentView.findViewById(R.id.checkboxHasHeadache);
+                    checkBoxreasonThree = (CheckBox) fragmentView.findViewById(R.id.checkboxSevereSweating);
+                    checkBoxreasonFour = (CheckBox) fragmentView.findViewById(R.id.checkboxIsVomiting);
+                    checkBoxresonFive = (CheckBox) fragmentView.findViewById(R.id.checkboxhas_loss_of_appetite);
+                    checkBoxAreasonOne.setVisibility(View.VISIBLE);
+                    checkBoxreasonTwo.setVisibility(View.VISIBLE);
+                    checkBoxreasonThree.setVisibility(View.VISIBLE);
+                    checkBoxreasonFour.setVisibility(View.VISIBLE);
+                    checkBoxresonFive.setVisibility(View.VISIBLE);
+                    tbLayout.setVisibility(View.GONE);
+                    CTCLayout.setVisibility(View.VISIBLE);
+                    fName = "client_malaria_referral_form";
+
                 }else{
+                    fragmentView.findViewById(R.id.checkboxis_at_hot_spot).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxIsVomiting).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxHasHeadache).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxWeightLoss).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxSevereSweating).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxhas_loss_of_appetite).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxIsVomiting).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxhas_symptomps_for_associative_diseases).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxhas_affected_partner).setVisibility(View.GONE);
+                    fragmentView.findViewById(R.id.checkboxLostFollowup).setVisibility(View.GONE);
                     tbLayout.setVisibility(View.GONE);
                     CTCLayout.setVisibility(View.GONE);
                 }
@@ -266,6 +334,7 @@ public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCu
                 pickDate(R.id.reg_dob);
             }
         });
+
 
 
 
@@ -360,7 +429,6 @@ public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCu
         if (     TextUtils.isEmpty(editTextfName.getText())
                 || TextUtils.isEmpty(editTextlName.getText())
                 || TextUtils.isEmpty(editTextVillageLeader.getText())
-                || TextUtils.isEmpty(textPhone.getText())
                 || TextUtils.isEmpty(editTextDiscountId.getText())
                 ) {
 
@@ -424,7 +492,7 @@ public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCu
         referral.setIs_valid("true");
         referral.setPhone_number(textPhone.getText().toString());
         referral.setFacility_id(getFacilityId(spinnerFacility.getSelectedItem().toString()));
-        referral.setFacility_name(spinnerFacility.getSelectedItem().toString());
+        referral.setFacility_id(spinnerFacility.getSelectedItem().toString());
         referral.setVillage_leader(editTextVillageLeader.getText().toString());
         referral.setReferral_reason(editTextReferralReason.getText().toString());
         referral.setReferral_service_id(getReferralServiceId(spinnerService.getSelectedItem().toString()));
@@ -432,6 +500,8 @@ public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCu
         referral.setWard(wardId);
         referral.setService_provider_uiid(((BoreshaAfyaApplication)getActivity().getApplication()).getCurrentUserID());
         referral.setService_provider_group(((BoreshaAfyaApplication)getActivity().getApplication()).getTeam_uuid());
+
+        //tb referral
         if(fName.equals("client_tb_referral_form")){
             referral.setCtc_number(editTextCTCNumber.getText().toString());
             referral.setHas_2Week_cough(checkBoxAreasonOne.isChecked());
@@ -441,8 +511,29 @@ public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCu
             referral.setHas_blood_cough(checkBoxresonFive.isChecked());
             referral.setIs_lost_follow_up(checkBoxreasonSix.isChecked());
         }
+
+        //for malaria referral
+        if(fName.equals("client_malaria_referral_form")){
+            referral.setCtc_number(editTextCTCNumber.getText().toString());
+            referral.setHas_fever(checkBoxAreasonOne.isChecked());
+            referral.setHas_headache(checkBoxreasonTwo.isChecked());
+            referral.setHas_severe_sweating(checkBoxreasonThree.isChecked());
+            referral.setIs_vomiting(checkBoxreasonFour.isChecked());
+            referral.setHas_loss_of_appetite(checkBoxresonFive.isChecked());
+//            referral.setIs_lost_follow_up(checkBoxreasonSix.isChecked());
+        }
+
+        //for hiv referral
         if(fName.equals("client_hiv_referral_form")){
             referral.setCtc_number(editTextCTCNumber.getText().toString());
+            referral.setIs_at_hot_spot(checkBoxAreasonOne.isChecked());
+            referral.setHas_fever(checkBoxreasonTwo.isChecked());
+            referral.setHad_weight_loss(checkBoxreasonThree.isChecked());
+            referral.setHas_symptomps_for_associative_diseases(checkBoxreasonFour.isChecked());
+            referral.setHas_affected_partner(checkBoxresonFive.isChecked());
+            referral.setIs_lost_follow_up(checkBoxreasonSix.isChecked());
+            referral.setCtc_number(editTextCTCNumber.getText().toString());
+            referral.setLast_ctc_date(dobTextView.getText().toString());
         }
 
 

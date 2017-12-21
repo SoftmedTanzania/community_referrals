@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.drishti.AncSmartRegisterActivity;
+import org.ei.opensrp.drishti.ChwSmartRegisterActivity;
 import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
@@ -112,7 +112,7 @@ public class ReferredClientsPagerAdapter extends
                 @Override
                 public void onClick(View view) {
                     // pass mother to show details
-                    ((AncSmartRegisterActivity) mContext).showFollowUpDetailsDialog(client.get(getAdapterPosition()));
+                    ((ChwSmartRegisterActivity) mContext).showFollowUpDetailsDialog(client.get(getAdapterPosition()));
                 }
             });
 
@@ -129,7 +129,7 @@ public class ReferredClientsPagerAdapter extends
 
     public void showPop(final int position, View anchor) {
 
-        PopupMenu popupMenu = new PopupMenu((AncSmartRegisterActivity) mContext, anchor);
+        PopupMenu popupMenu = new PopupMenu((ChwSmartRegisterActivity) mContext, anchor);
         // inflate menu xml res
         popupMenu.getMenuInflater().inflate(R.menu.menu_follow_up_details, popupMenu.getMenu());
         popupMenu.show();
@@ -141,11 +141,11 @@ public class ReferredClientsPagerAdapter extends
                 switch (item.getItemId()) {
                     // TODO: handle option selected
                     case R.id.popOpt1:
-                        ((AncSmartRegisterActivity) mContext).showFollowUpFormDialog(client.get(position));
+                        ((ChwSmartRegisterActivity) mContext).showFollowUpFormDialog(client.get(position));
                         return true;
 
                     case R.id.popOpt2:
-                        ((AncSmartRegisterActivity) mContext).showFollowUpDetailsDialog(client.get(position));
+                        ((ChwSmartRegisterActivity) mContext).showFollowUpDetailsDialog(client.get(position));
                         return true;
 
                     default:

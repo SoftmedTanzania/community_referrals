@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import org.ei.opensrp.drishti.AncSmartRegisterActivity;
+import org.ei.opensrp.drishti.ChwSmartRegisterActivity;
 import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.ClientsDetailsActivity;
 import org.ei.opensrp.drishti.Fragments.ClientDetailFragment;
@@ -124,7 +124,7 @@ public class CHWRegisterRecyclerAdapter extends
                 @Override
                 public void onClick(View view) {
                     // pass mother to show details
-                    ((AncSmartRegisterActivity) mContext).showPreRegistrationDetailsDialog(clients.get(getAdapterPosition()));
+                    ((ChwSmartRegisterActivity) mContext).showPreRegistrationDetailsDialog(clients.get(getAdapterPosition()));
                 }
             });
 
@@ -146,7 +146,7 @@ public class CHWRegisterRecyclerAdapter extends
 
     public void showPop(final int position, View anchor) {
 
-        PopupMenu popupMenu = new PopupMenu((AncSmartRegisterActivity) mContext, anchor);
+        PopupMenu popupMenu = new PopupMenu((ChwSmartRegisterActivity) mContext, anchor);
         // inflate menu xml res
         popupMenu.getMenuInflater().inflate(R.menu.menu_popup_details, popupMenu.getMenu());
         popupMenu.show();
@@ -158,7 +158,7 @@ public class CHWRegisterRecyclerAdapter extends
                 switch (item.getItemId()) {
                     // TODO: handle option selected
                     case R.id.popOpt1:
-                        ((AncSmartRegisterActivity) mContext).showPreRegistrationVisitDialog(clients.get(position));
+                        ((ChwSmartRegisterActivity) mContext).showPreRegistrationVisitDialog(clients.get(position));
                         return true;
 
                     case R.id.popOpt2:
@@ -167,7 +167,7 @@ public class CHWRegisterRecyclerAdapter extends
 
                     case R.id.popOpt3:
                         // delete mother
-                        ((AncSmartRegisterActivity) mContext).confirmDelete(clients.get(position));
+                        ((ChwSmartRegisterActivity) mContext).confirmDelete(clients.get(position));
                         return true;
 
                     default:

@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,7 +17,7 @@ import com.google.gson.Gson;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.drishti.AncSmartRegisterActivity;
+import org.ei.opensrp.drishti.ChwSmartRegisterActivity;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
@@ -31,8 +30,6 @@ import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.ei.opensrp.drishti.util.Utils.isTablet;
 
 
 public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
@@ -131,7 +128,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
         }
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
-                .newInstance((AncSmartRegisterActivity) getActivity(), null, context().anmLocationController().get(),
+                .newInstance((ChwSmartRegisterActivity) getActivity(), null, context().anmLocationController().get(),
                         "pregnant_mothers_pre_registration")
                 .show(ft, locationDialogTAG);
     }

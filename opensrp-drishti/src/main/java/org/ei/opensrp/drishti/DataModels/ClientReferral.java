@@ -6,15 +6,21 @@ import java.io.Serializable;
  * Created by kency on 11/20/17.
  */
 
-public class ClientReferral implements Serializable{
+public class ClientReferral implements Serializable {
 
-    private String first_name, middle_name, surname, date_of_birth, referral_date, facility_id,facility_name, referral_reason, is_valid, service_provider_mobile_number, ward, village,Kijitongoji, village_leader, service_provider_group, service_provider_uiid, phone_number, referral_service_id, gender, community_based_hiv_service, ctc_number,Status;
+    private String first_name, middle_name, surname,last_ctc_date, date_of_birth, referral_date, facility_id, referral_reason, is_valid, service_provider_mobile_number, ward, village,Kijitongoji, village_leader, service_provider_group, service_provider_uiid, phone_number, referral_service_id, gender, community_based_hiv_service, ctc_number,Status;
     private boolean has_2Week_cough,
             has_fever,
             had_weight_loss,
             has_severe_sweating,
+            has_symptomps_for_associative_diseases,
+            has_affected_partner,
+            has_headache,
+            has_loss_of_appetite,
             has_blood_cough,
-            is_lost_follow_up;
+            is_at_hot_spot,
+            is_lost_follow_up,
+            is_vomiting;
 
     public String getStatus() {
         return Status;
@@ -57,6 +63,14 @@ public class ClientReferral implements Serializable{
         this.has_2Week_cough = has_2Week_cough;
     }
 
+    public boolean is_at_hot_spot() {
+        return is_at_hot_spot;
+    }
+
+    public void setIs_at_hot_spot(boolean is_at_hot_spot) {
+        this.is_at_hot_spot = is_at_hot_spot;
+    }
+
     public boolean isHas_fever() {
         return has_fever;
     }
@@ -71,6 +85,66 @@ public class ClientReferral implements Serializable{
 
     public void setHad_weight_loss(boolean had_weight_loss) {
         this.had_weight_loss = had_weight_loss;
+    }
+
+    public String getLast_ctc_date() {
+        return last_ctc_date;
+    }
+
+    public void setLast_ctc_date(String last_ctc_date) {
+        this.last_ctc_date = last_ctc_date;
+    }
+
+    public String getService_provider_mobile_number() {
+        return service_provider_mobile_number;
+    }
+
+    public void setService_provider_mobile_number(String service_provider_mobile_number) {
+        this.service_provider_mobile_number = service_provider_mobile_number;
+    }
+
+    public boolean isHas_symptomps_for_associative_diseases() {
+        return has_symptomps_for_associative_diseases;
+    }
+
+    public void setHas_symptomps_for_associative_diseases(boolean has_symptomps_for_associative_diseases) {
+        this.has_symptomps_for_associative_diseases = has_symptomps_for_associative_diseases;
+    }
+
+    public boolean isHas_affected_partner() {
+        return has_affected_partner;
+    }
+
+    public void setHas_affected_partner(boolean has_affected_partner) {
+        this.has_affected_partner = has_affected_partner;
+    }
+
+    public boolean isHas_headache() {
+        return has_headache;
+    }
+
+    public void setHas_headache(boolean has_headache) {
+        this.has_headache = has_headache;
+    }
+
+    public boolean isHas_loss_of_appetite() {
+        return has_loss_of_appetite;
+    }
+
+    public void setHas_loss_of_appetite(boolean has_loss_of_appetite) {
+        this.has_loss_of_appetite = has_loss_of_appetite;
+    }
+
+    public boolean is_lost_follow_up() {
+        return is_lost_follow_up;
+    }
+
+    public boolean is_vomiting() {
+        return is_vomiting;
+    }
+
+    public void setIs_vomiting(boolean is_vomiting) {
+        this.is_vomiting = is_vomiting;
     }
 
     public boolean isHas_severe_sweating() {
@@ -231,25 +305,5 @@ public class ClientReferral implements Serializable{
 
     public void setCommunity_based_hiv_service(String community_based_hiv_service) {
         this.community_based_hiv_service = community_based_hiv_service;
-    }
-
-    public String getFacility_name() {
-        return facility_name;
-    }
-
-    public void setFacility_name(String facility_name) {
-        this.facility_name = facility_name;
-    }
-
-    public String getService_provider_mobile_number() {
-        return service_provider_mobile_number;
-    }
-
-    public void setService_provider_mobile_number(String service_provider_mobile_number) {
-        this.service_provider_mobile_number = service_provider_mobile_number;
-    }
-
-    public boolean is_lost_follow_up() {
-        return is_lost_follow_up;
     }
 }

@@ -81,7 +81,7 @@ public class ClientsDetailsActivity extends AppCompatActivity {
 
         name . setText(clientReferral.getFirst_name()+" "+clientReferral.getMiddle_name()+", "+ clientReferral.getSurname());
         contacts.setText(clientReferral.getPhone_number());
-        refered.setText(clientReferral.getFacility_name());
+        refered.setText(clientReferral.getFacility_id());
         referedReason.setText(clientReferral.getReferral_reason());
         referedDate.setText(clientReferral.getReferral_date());
         referedDate.setText(clientReferral.getReferral_date());

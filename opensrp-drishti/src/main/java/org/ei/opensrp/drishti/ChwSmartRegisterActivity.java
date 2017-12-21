@@ -104,8 +104,8 @@ import static org.ei.opensrp.event.Event.FORM_SUBMITTED;
 import static org.ei.opensrp.event.Event.SYNC_COMPLETED;
 import static org.ei.opensrp.event.Event.SYNC_STARTED;
 
-public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener {
-    private static final String TAG = AncSmartRegisterActivity.class.getSimpleName();
+public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener {
+    private static final String TAG = ChwSmartRegisterActivity.class.getSimpleName();
 
     private SmartRegisterClientsProvider clientProvider = null;
     private CommonPersonObjectController controller;
@@ -137,7 +137,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         // orientation
-        OrientationHelper.setProperOrientationForDevice(AncSmartRegisterActivity.this);
+        OrientationHelper.setProperOrientationForDevice(ChwSmartRegisterActivity.this);
 
         formNames = this.buildFormNameList();
         mBaseFragment = new CHWSmartRegisterFragment();
@@ -180,7 +180,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         ClientReferral clientReferral = new Gson().fromJson(gsonMom,ClientReferral.class);
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
 
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
                 .setCancelable(false);
 
@@ -255,7 +255,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //        final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_visit_details, null);
 
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
                 .setCancelable(false);
 
@@ -290,7 +290,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //                currentPage = 1;
                 FollowupClientsFragment.newInstance();
                 ReferredClientsFragment.newInstance();
-                Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + mother.getFirst_name() +" "+mother.getSurname(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChwSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + mother.getFirst_name() +" "+mother.getSurname(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -314,7 +314,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         ClientReferral clientReferral = new Gson().fromJson(gsonMom,ClientReferral.class);
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_details, null);
 
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
                 .setCancelable(false);
         final AlertDialog dialog = dialogBuilder.create();
@@ -389,7 +389,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
 
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
                 .setCancelable(false);
         final AlertDialog dialog = dialogBuilder.create();
@@ -445,11 +445,11 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
 
 
-                    Toast.makeText(AncSmartRegisterActivity.this, "Asante kwa kumtembelea " + clientperson.getFirst_name() +" "+clientperson.getSurname(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChwSmartRegisterActivity.this, "Asante kwa kumtembelea " + clientperson.getFirst_name() +" "+clientperson.getSurname(), Toast.LENGTH_SHORT).show();
 
                 }
                 else {
-                    Toast.makeText(AncSmartRegisterActivity.this, "Tafadhali hakikisha unamtafuta tena kumjulia hali " + clientperson.getFirst_name() +" "+clientperson.getSurname(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChwSmartRegisterActivity.this, "Tafadhali hakikisha unamtafuta tena kumjulia hali " + clientperson.getFirst_name() +" "+clientperson.getSurname(), Toast.LENGTH_SHORT).show();
 
                 }
                 dialog.dismiss();
@@ -499,7 +499,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         final View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_confirm_delete, null);
 
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AncSmartRegisterActivity.this);
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
                 .setCancelable(false);
         final AlertDialog dialog = dialogBuilder.create();
@@ -535,7 +535,7 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //                currentPage = 1;
                 FollowupClientsFragment preRegisterFragment = (FollowupClientsFragment) findFragmentByPosition(currentPage);
                 preRegisterFragment.refreshListView();
-                Toast.makeText(AncSmartRegisterActivity.this, "umemfuta " + mother.getFirst_name() +" "+mother.getSurname(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChwSmartRegisterActivity.this, "umemfuta " + mother.getFirst_name() +" "+mother.getSurname(), Toast.LENGTH_SHORT).show();
 
                 dialog.dismiss();
             }
@@ -662,10 +662,11 @@ public class AncSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public void OnLocationSelected(String locationSelected) {
         // set registration fragment
         Log.d(TAG,"Location selected"+locationSelected);
-//        ClientRegistrationFormFragment displayFormFragment = (ClientRegistrationFormFragment) getDisplayFormFragmentAtIndex(FormUtils.getIndexForFormName("pregnant_mothers_pre_registration", formNames) + 1);
-//        displayFormFragment.setWardId(locationSelected);
-//        mPager.setCurrentItem(2);
-//        currentPage = 2;
+        Log.d(TAG,"Location selected"+locationSelected);
+        ClientRegistrationFormFragment displayFormFragment = (ClientRegistrationFormFragment) getDisplayFormFragmentAtIndex(FormUtils.getIndexForFormName("pregnant_mothers_pre_registration", formNames) + 1);
+        displayFormFragment.setWardId(locationSelected);
+        mPager.setCurrentItem(2);
+        currentPage = 2;
 
         Intent intent = new Intent(this, ClientsFormRegisterActivity.class);
         startActivity(intent);

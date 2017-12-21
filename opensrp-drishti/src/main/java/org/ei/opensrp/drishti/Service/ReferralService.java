@@ -1,75 +1,66 @@
 package org.ei.opensrp.drishti.Service;
 
 import android.content.ContentValues;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
 import org.ei.opensrp.Context;
-import org.ei.opensrp.DristhiConfiguration;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.ReferralServiceDataModel;
-import org.ei.opensrp.repository.FacilityRepository;
 import org.ei.opensrp.repository.ReferralServiceRepository;
-import org.ei.opensrp.service.HTTPAgent;
-import org.ei.opensrp.service.UserService;
-import org.ei.opensrp.util.Session;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.ei.opensrp.util.Log;
+import org.ei.opensrp.view.BackgroundAction;
+import org.ei.opensrp.view.LockingBackgroundTask;
+import org.ei.opensrp.view.ProgressIndicator;
 
 import java.util.ArrayList;
 
 /**
- * Created by kency shaka on 03/12/2017.
+ * Created by Dimas Ciputra on 3/24/15.
  */
-
 public class ReferralService {
-    private static final String TAG = UserService.class.getSimpleName();
-    private ReferralServiceRepository repository;
-    private HTTPAgent httpAgent;
+
     private Context context;
-    private Session session;
-    private DristhiConfiguration configuration;
-    private SaveReferralServiceTask serviceReferralServiceTask;
+    private static final String TAG = ReferralService.class.getSimpleName();
+    private LockingBackgroundTask lockingBackgroundTask;
+    private CommonRepository repository;
+
     private ReferralServiceDataModel referralServiceDataModel;
     ArrayList<ReferralServiceDataModel> referralList;
+    public ReferralService(CommonRepository serviceRepository) {
+        this.repository = serviceRepository;
+        lockingBackgroundTask = new LockingBackgroundTask(new ProgressIndicator() {
+            @Override
+            public void setVisible() {
+            }
 
-    public ReferralService(ReferralServiceRepository repository,  HTTPAgent httpAgent, Session session,
-                       DristhiConfiguration configuration, SaveReferralServiceTask serviceReferralServiceTask) {
-        this.repository = repository;
-        this.httpAgent = httpAgent;
-        this.session = session;
-        this.configuration = configuration;
-        this.serviceReferralServiceTask = serviceReferralServiceTask;
+            @Override
+            public void setInvisible() {
+                Log.logInfo("Successfully saved referral service information");
+            }
+        });
     }
 
+    public void save(final String service) {
+        lockingBackgroundTask.doActionInBackground(new BackgroundAction<Object>() {
+            @Override
+            public Object actionToDoInBackgroundThread() {
+                referralServiceDataModel = new ReferralServiceDataModel();
 
-    public ReferralService(){
-        referralServiceDataModel = new ReferralServiceDataModel();
+                referralList = referralServiceDataModel.createReferralList();
+                int size = referralList.size();
+                for(int i=0; size < i; i++){
+                    setReferralService(referralList.get(i));
+                }
+                Log.logDebug("referral service is set in the database");
+                return service;
+            }
 
-        referralList = referralServiceDataModel.createReferralList();
-        int size = referralList.size();
-        for(int i=0; size < i; i++){
-            setReferralService(referralList.get(i));
-        }
-    }
+            @Override
+            public void postExecuteInUIThread(Object result) {
 
-    public void fetchingServiceData( String serviceInfo) {
-        saveReferralService(getReferralService(serviceInfo));
-
-    }
-    public String getReferralService(String referralService) {
-        try {
-            JSONObject serviceInfoJson = new JSONObject(referralService);
-            return serviceInfoJson.getString("referral_service");
-        } catch (JSONException e) {
-            Log.v("Error : ", e.getMessage());
-            return null;
-        }
-    }
-
-    public void saveReferralService(String referralService) {
-        serviceReferralServiceTask.save(referralService);
+            }
+        });
     }
 
     public void setReferralService(ReferralServiceDataModel referralService){
@@ -77,11 +68,7 @@ public class ReferralService {
         ContentValues values = new ReferralServiceRepository().createValuesFor(referralService);
         android.util.Log.d(TAG, "values = " + new Gson().toJson(values));
 
-        CommonRepository commonRepository = context.commonrepository("facility");
+        CommonRepository commonRepository = context.commonrepository("referral_service");
         commonRepository.customInsert(values);
     }
-
-
-
-
 }

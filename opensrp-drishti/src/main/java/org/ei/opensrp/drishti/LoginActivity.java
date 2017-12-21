@@ -2,18 +2,18 @@ package org.ei.opensrp.drishti;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.ContentValues;
+import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
@@ -25,9 +25,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.gson.Gson;
 
 import org.ei.opensrp.Context;
@@ -40,13 +44,13 @@ import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
 
 import org.ei.opensrp.domain.ReferralServiceDataModel;
 
-import org.ei.opensrp.drishti.util.LargeDiagonalCutPathDrawable;
+import org.ei.opensrp.drishti.Application.Config;
+import org.ei.opensrp.drishti.Service.RegistrationIntentService;
+import org.ei.opensrp.drishti.util.AsyncTask;
 import org.ei.opensrp.drishti.util.SmallDiagonalCutPathDrawable;
 import org.ei.opensrp.repository.FacilityRepository;
 import org.ei.opensrp.repository.ReferralServiceRepository;
 import org.ei.opensrp.drishti.Service.FacilityService;
-import org.ei.opensrp.drishti.Service.SaveReferralServiceTask;
-import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.sync.DrishtiSyncScheduler;
@@ -61,6 +65,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -82,7 +87,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private ProgressDialog progressDialog;
     private FacilityService facilityService;
-    private SaveReferralServiceTask serviceTask;
     private List<ReferralServiceDataModel> serviceData;
     private ReferralServiceRepository serviceRepository;
     private FacilityRepository facilityRepository;
@@ -94,8 +98,16 @@ public class LoginActivity extends AppCompatActivity {
     public static final String KANNADA_LANGUAGE = "Kannada";
     public static final String Bengali_LANGUAGE = "Bengali";
 
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
+    private ProgressBar mRegistrationProgressBar;
+    private TextView mInformationTextView;
+    private boolean isReceiverRegistered;
+    AsyncTask<Void, Void, Void> mRegisterTask;
     private ArrayList<Facility> referralList;
     private ArrayList<ReferralServiceDataModel> serviceDataModelArrayList;
+
+    Intent intent ;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,15 +135,24 @@ public class LoginActivity extends AppCompatActivity {
         setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
 
-        findViewById(R.id.credential_card).setBackground(new SmallDiagonalCutPathDrawable());
+//        findViewById(R.id.credential_card).setBackground(new SmallDiagonalCutPathDrawable());
 
         ImageView v = (ImageView)findViewById(R.id.background);
-        Glide.with(getApplicationContext()).load(R.drawable.clint_adair).into(v);
+//        Glide.with(getApplicationContext()).load(R.drawable.clint_adair).into(v);
 
 
 
         setLanguage();
 
+    }
+    @Override
+    protected void onDestroy() {
+        // Cancel AsyncTask
+        if (mRegisterTask != null) {
+            mRegisterTask.cancel(true);
+        }
+
+        super.onDestroy();
     }
 
     @Override
@@ -168,8 +189,44 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         fillUserIfExists();
+        registerReceiver();
+    }
+    private void registerReceiver(){
+        if(!isReceiverRegistered) {
+            LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                    new IntentFilter(QuickstartPreferences.REGISTRATION_COMPLETE));
+            isReceiverRegistered = true;
+        }
     }
 
+    private boolean checkPlayServices() {
+
+        if (Config.YOUR_SERVER_URL == null
+                || Config.GOOGLE_SENDER_ID == null
+                || Config.YOUR_SERVER_URL.length() == 0
+                || Config.GOOGLE_SENDER_ID.length() == 0) {
+
+            // GCM sernder id / server url is missing
+            ((BoreshaAfyaApplication)getApplication()).showAlertDialog(context, "Configuration Error!",
+                    "Please set your Server URL and GCM Sender ID", false);
+
+            // stop executing code by return
+            return false;
+        }
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+                        .show();
+            } else {
+                Log.logDebug( "This device is not supported.");
+                finish();
+            }
+            return false;
+        }
+        return true;
+    }
     public void login(final View view) {
 //        hideKeyboard();
         view.setClickable(false);
@@ -283,54 +340,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    private void setReferralService() {
-        commonRepository = context.commonrepository("referral_service");
-        serviceTask = new SaveReferralServiceTask(commonRepository);
-        long count = commonRepository.count();
-        android.util.Log.d(TAG,"count ="+count);
-        if (count == 0 ) {
-            ReferralServiceDataModel serviceDataModel= new ReferralServiceDataModel();
-
-            serviceDataModelArrayList = serviceDataModel.createReferralList();
-
-            android.util.Log.d(TAG,"count ="+serviceDataModelArrayList.toString());
-            int size = serviceDataModelArrayList.size();
-            android.util.Log.d(TAG,"size ="+size);
-
-            for(int i=0; size > i; i++){
-                ContentValues values = new ReferralServiceRepository().createValuesFor(serviceDataModelArrayList.get(i));
-                android.util.Log.d(TAG, "values = " + new Gson().toJson(values));
-
-                commonRepository.customInsert(values);
-            }
-            serviceTask.save("saving referral service");
-        }
-        else{
-
-        }
-    }
-    private void setFacilityService() {
-        commonRepository = context.commonrepository("facility");
-        facilityService = new FacilityService(commonRepository);
-
-        long count = commonRepository.count();
-        if (count == 0 ) {
-            Facility facility = new Facility();
-
-            referralList = facility.createFacilityList();
-            int size = referralList.size();
-            for(int i=0; size > i; i++){
-                ContentValues values = new FacilityRepository().createValuesFor(referralList.get(i));
-                android.util.Log.d(TAG, "values facility = " + new Gson().toJson(values));
-
-                commonRepository.customInsert(values);
-            }
-        }
-        else{
-
-        }
-
-    }
 
     private void tryGetLocation(final Listener<Response<String>> afterGet) {
         LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
@@ -408,9 +417,66 @@ public class LoginActivity extends AppCompatActivity {
 
     private void goToHome() {
         BoreshaAfyaApplication.setCrashlyticsUser(context);
-        setReferralService();
-        setFacilityService();
-        startActivity(new Intent(this, AncSmartRegisterActivity.class));
+
+        // Registering BroadcastReceiver
+        registerReceiver();
+        startActivity(new Intent(this, NativeHomeActivity.class));
+
+        final String regId =  ((BoreshaAfyaApplication)getApplication()).getRegistration_id();
+        if(((BoreshaAfyaApplication)getApplication()).isHasFacility()) {
+            android.util.Log.d(TAG,"has the list of facility already");
+        }else{
+            ((BoreshaAfyaApplication)getApplication()).setFacilityService();
+        }
+
+        if(((BoreshaAfyaApplication)getApplication()).isHasService()) {
+            android.util.Log.d(TAG,"has the list of service already");
+        }else{
+
+            ((BoreshaAfyaApplication)getApplication()).setReferralService();
+        }
+        // Check if regid already presents
+        if (regId.equals("")) {
+
+            // Register with GCM
+
+            intent = new Intent(this, RegistrationIntentService.class);
+            mRegisterTask = new AsyncTask<Void, Void, Void>() {
+
+                @Override
+                protected Void doInBackground(Void... params) {
+
+                    // Register on our server
+                    // On server creates a new user
+                    if (checkPlayServices()) {
+                        // Start IntentService to register this application with GCM.
+                        startService(intent);
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void result) {
+                    mRegisterTask = null;
+                }
+
+            };
+
+            // execute AsyncTask
+            mRegisterTask.execute(null, null, null);
+
+        } else {
+
+
+            // Skips registration of the mobile to the server.
+            Toast.makeText(getApplicationContext(),
+                    "Already registered with GCM Server",
+                    Toast.LENGTH_LONG).
+                    show();
+
+
+        }
         finish();
     }
 

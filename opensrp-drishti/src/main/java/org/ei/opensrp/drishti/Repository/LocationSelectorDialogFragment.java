@@ -3,23 +3,19 @@ package org.ei.opensrp.drishti.Repository;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.google.common.base.Strings;
-import com.google.gson.Gson;
 
 import org.ei.opensrp.R;
 import org.ei.opensrp.domain.form.FieldOverrides;
-import org.ei.opensrp.drishti.AncSmartRegisterActivity;
+import org.ei.opensrp.drishti.ChwSmartRegisterActivity;
 
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.ei.opensrp.view.dialog.DialogOptionModel;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
 import org.opensrp.api.util.LocationTree;
@@ -125,11 +121,12 @@ public class LocationSelectorDialogFragment extends DialogFragment {
                     String locationjson = "";
                     TreeNode traversingnode = node;
                     locationjson = traversingnode.getLocationId();
+//
                     if(mCallback != null) {
                         mCallback.OnLocationSelected(locationjson);
                     }
-//                    FieldOverrides fieldOverrides = new FieldOverrides(locationjson.toString());
-//                    ((AncSmartRegisterActivity)getActivity()).startFormActivity(formName, generateRandomUUIDString(), fieldOverrides.getJSONString());
+                    FieldOverrides fieldOverrides = new FieldOverrides(locationjson.toString());
+                    ((ChwSmartRegisterActivity)getActivity()).startFormActivity(formName, generateRandomUUIDString(), fieldOverrides.getJSONString());
                     savestate = tView.getSaveState();
                     dismiss();
                 }

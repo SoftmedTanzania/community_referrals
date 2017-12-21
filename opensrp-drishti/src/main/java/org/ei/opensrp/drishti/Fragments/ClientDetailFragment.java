@@ -65,7 +65,7 @@ public class ClientDetailFragment extends Fragment {
 
         name . setText(clientReferral.getFirst_name()+" "+clientReferral.getMiddle_name()+", "+ clientReferral.getSurname());
         contacts.setText(clientReferral.getPhone_number());
-        refered.setText(clientReferral.getFacility_name());
+        refered.setText(clientReferral.getFacility_id());
         referedDate.setText(clientReferral.getReferral_date());
         chwId.setText(clientReferral.getService_provider_uiid());
         note.setText(clientReferral.getStatus());
