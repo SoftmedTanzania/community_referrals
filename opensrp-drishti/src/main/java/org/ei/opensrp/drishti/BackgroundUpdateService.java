@@ -6,19 +6,12 @@ package org.ei.opensrp.drishti;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-
-import com.google.android.gms.gcm.GcmPubSub;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.android.gms.iid.InstanceID;
 
 
 import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
 
-import java.io.IOException;
 import java.util.Random;
 
 public class BackgroundUpdateService extends IntentService {
@@ -46,7 +39,7 @@ public class BackgroundUpdateService extends IntentService {
                 message="delete a facility";
                 ((BoreshaAfyaApplication)getApplication()).deleteFacility(message);
             }  else{
-                ((BoreshaAfyaApplication)getApplication()).setFacilityService();
+                ((BoreshaAfyaApplication)getApplication()).getFacilities();
             }
 
             if(((BoreshaAfyaApplication)getApplication()).isHasService()) {

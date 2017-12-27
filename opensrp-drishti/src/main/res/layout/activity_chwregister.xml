@@ -16,6 +16,8 @@
             android:layout_width="fill_parent"
             android:layout_height="@dimen/ec_main_header_height"
             android:background="#2d69a5"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:focusableInTouchMode="true">
             <RelativeLayout
                 android:id="@+id/register_nav_bar_container"

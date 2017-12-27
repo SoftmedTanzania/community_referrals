@@ -2,6 +2,7 @@ package org.ei.opensrp.drishti;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -45,6 +46,7 @@ import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
 import org.ei.opensrp.domain.ReferralServiceDataModel;
 
 import org.ei.opensrp.drishti.Application.Config;
+import org.ei.opensrp.drishti.Service.ReferralService;
 import org.ei.opensrp.drishti.Service.RegistrationIntentService;
 import org.ei.opensrp.drishti.util.AsyncTask;
 import org.ei.opensrp.drishti.util.SmallDiagonalCutPathDrawable;
@@ -65,7 +67,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Timer;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -419,26 +420,25 @@ public class LoginActivity extends AppCompatActivity {
 
         // Registering BroadcastReceiver
         registerReceiver();
-        startActivity(new Intent(this, NativeHomeActivity.class));
-
-        final String regId =  ((BoreshaAfyaApplication)getApplication()).getRegistration_id();
+        startActivity(new Intent(this, ChwSmartRegisterActivity.class));
         if(((BoreshaAfyaApplication)getApplication()).isHasFacility()) {
             android.util.Log.d(TAG,"has the list of facility already");
         }else{
-            ((BoreshaAfyaApplication)getApplication()).setFacilityService();
+            android.util.Log.d(TAG,"starting facility service");
+            startService(new Intent(this, FacilityService.class));
         }
 
         if(((BoreshaAfyaApplication)getApplication()).isHasService()) {
             android.util.Log.d(TAG,"has the list of service already");
         }else{
-
-            ((BoreshaAfyaApplication)getApplication()).setReferralService();
+            android.util.Log.d(TAG,"starting referral service");
+            startService(new Intent(this, ReferralService.class));
         }
+
+        final String regId =  ((BoreshaAfyaApplication)getApplication()).getRegistration_id();
         // Check if regid already presents
         if (regId.equals("")) {
-
             // Register with GCM
-
             intent = new Intent(this, RegistrationIntentService.class);
             mRegisterTask = new AsyncTask<Void, Void, Void>() {
 
@@ -454,29 +454,25 @@ public class LoginActivity extends AppCompatActivity {
 
                     return null;
                 }
-
                 @Override
                 protected void onPostExecute(Void result) {
                     mRegisterTask = null;
                 }
 
             };
-
             // execute AsyncTask
             mRegisterTask.execute(null, null, null);
+            finish();
 
         } else {
-
-
             // Skips registration of the mobile to the server.
             Toast.makeText(getApplicationContext(),
                     "Already registered with GCM Server",
                     Toast.LENGTH_LONG).
                     show();
-
-
+            finish();
         }
-        finish();
+
     }
 
     private String getVersion() throws PackageManager.NameNotFoundException {

@@ -100,7 +100,6 @@ public class HTTPAgent {
             ByteArrayEntity entity = new ByteArrayEntity(jsonPayload.toString().getBytes("UTF-8"));
             entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-
             httpClient.post(context, postURLPath, entity, "application/json",
                     new TextHttpResponseHandler() {
                         @Override
@@ -121,7 +120,7 @@ public class HTTPAgent {
 
             return new Response<String>(r, null);
         } catch (Exception e) {
-            logWarn(e.toString());
+            e.printStackTrace();
             return new Response<String>(ResponseStatus.failure, null);
         }
     }

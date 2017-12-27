@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -132,7 +133,16 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
         toolbar = (Toolbar) v.findViewById(R.id.toolbar);
 
-//        toolbar.inflateMenu(R.menu.menu_main);
+
+        toolbar.inflateMenu(R.menu.menu_main);
+        toolbar.setOnMenuItemClickListener(
+                new Toolbar.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        // Handle menu item click event
+                        return true;
+                    }
+                });
 
 
         return v;
@@ -203,11 +213,6 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         return getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + feeds.getId() + ":" + fragmentPagerAdapter.getItemId(position));
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // Do something that differs the Activity's menu here
-        super.onCreateOptionsMenu(menu, inflater);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

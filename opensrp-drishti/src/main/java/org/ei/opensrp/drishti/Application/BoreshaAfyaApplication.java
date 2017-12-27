@@ -164,6 +164,18 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         }
     }
 
+    public void initializeReferralService() {
+        try {
+            commonRepository1 = context.commonrepository("referral_service");
+            long count = commonRepository.count();
+            if (count > 0) {
+                setHasService(true);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void deleteReferralService( String value){
         ( (NativeHomeActivity)getApplicationContext()).updateFromServer();
         Log.d(TAG,"message = "+value);
@@ -182,77 +194,54 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     }
 
     public void updateFacility(String value){
-        ( (NativeHomeActivity)getApplicationContext()).updateFromServer();
+        ((NativeHomeActivity)getApplicationContext()).updateFromServer();
         Log.d(TAG,"message = "+value);
     }
 
-    public void setFacilityService() {
+    public void getFacilities() {
         commonRepository = context.commonrepository("facility");
-//        facilityService = new FacilityService(commonRepository);
 
         long count = commonRepository.count();
         if (count == 0 ) {
-            Facility facility = new Facility();
-
             //String to place our result in
             final  String myUrl = ipAddress+Config.GET_FACILITY_URL;
-            final String result= null;
+            Response<String>  results = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl,username,password);
+            Log.d(TAG,"this is the result of facility"+results.payload());
 
-            Response<String> response = null;
-            LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
-                @Override
-                public void setVisible() {
-                }
+            try {
+                JSONArray jsonArray = new JSONArray(results.payload());
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    Facility facility;
+                    JSONObject explrObject = jsonArray.getJSONObject(i);
+                    facility = new Gson().fromJson(explrObject.toString(), Facility.class) ;
+                    if (facility.getId().equals("")) {
+                        Log.d(TAG,"facility table is empty");
 
-                @Override
-                public void setInvisible() {
-                    org.ei.opensrp.util.Log.logInfo("Successfully get facility list");
-                }
-            });
+                    } else {
+                        Log.d(TAG,"facility downloaded "+facility.getName());
+                        ContentValues values = new FacilityRepository().createValuesFor(facility);
+                        android.util.Log.d(TAG, "values facility = " + new Gson().toJson(values));
 
-            task.doActionInBackground(new BackgroundAction<Response<String>>() {
-                @Override
-                public Response<String> actionToDoInBackgroundThread() {
-                    return Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl,username,password);
-                }
-
-                @Override
-                public void postExecuteInUIThread(Response<String> result) {
-                    Log.d(TAG,"this is the result of facility"+result.payload());
-
-//                    List<Facility> service = new ArrayList<>();
-                    Facility service;
-                    try {
-
-                        JSONArray jsonArray = new JSONArray(result.payload());
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject explrObject = jsonArray.getJSONObject(i);
-                            service = new Gson().fromJson(explrObject.toString(), Facility.class) ;
-                            if (service.getId().equals("")) {
-                                Log.d(TAG,"facility table is empty");
-
-                            } else {
-                                Log.d(TAG,"facility downloaded "+service.getName());
-                                ContentValues values = new FacilityRepository().createValuesFor(service);
-                                android.util.Log.d(TAG, "values facility = " + new Gson().toJson(values));
-
-                                commonRepository.customInsert(values);
-                            }
-                        }
-
-
-
-                    }catch (Exception e){
-                        e.printStackTrace();
+                        commonRepository.customInsert(values);
                     }
                 }
-
-
-            });
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             setHasFacility(true);
         }
-        else{
 
+    }
+
+    public void initializeHasFacilities() {
+        try {
+            commonRepository = context.commonrepository("facility");
+            long count = commonRepository.count();
+            if (count > 0) {
+                setHasFacility(true);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
     }
@@ -369,6 +358,8 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         if (serviceRepository == null) {
             serviceRepository = new ReferralServiceRepository();
         }
+        initializeReferralService();
+        initializeHasFacilities();
     }
 
 
