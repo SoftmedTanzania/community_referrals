@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.util.LargeDiagonalCutPathDrawable;
 

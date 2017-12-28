@@ -1,4 +1,6 @@
-package org.ei.opensrp.drishti.DataModels;
+package org.ei.opensrp.domain;
+
+import com.google.gson.Gson;
 
 import java.io.Serializable;
 
@@ -8,7 +10,7 @@ import java.io.Serializable;
 
 public class ClientReferral implements Serializable {
 
-    private String first_name, middle_name, surname,last_ctc_date, date_of_birth, referral_date, facility_id, referral_reason, is_valid, service_provider_mobile_number, ward, village,Kijitongoji, village_leader, service_provider_group, service_provider_uiid, phone_number, referral_service_id, gender, community_based_hiv_service, ctc_number,Status;
+    private String id, relationalid,details, first_name, middle_name, surname,last_ctc_date, date_of_birth, referral_date, facility_id, referral_reason, is_valid, service_provider_mobile_number, ward, village,Kijitongoji, village_leader, service_provider_group, service_provider_uiid, phone_number, referral_service_id, gender, community_based_hiv_service, ctc_number,Status;
     private boolean has_2Week_cough,
             has_fever,
             had_weight_loss,
@@ -21,6 +23,60 @@ public class ClientReferral implements Serializable {
             is_at_hot_spot,
             is_lost_follow_up,
             is_vomiting;
+
+    public ClientReferral(String id,
+                          String relationalId,
+                          String first_name,
+                          String middle_name,
+                          String surname,
+                          String community_based_hiv_service,
+                          String ctc_number,
+                          String referral_date,
+                          String facility_id,
+                          String ReferralReason,
+                          String referral_service_id,
+                          String referral_status,
+                          String is_valid,
+                          String details
+    ) {
+        this.details = details;
+        this.id = id;
+        this.Status = referral_status;
+        this.community_based_hiv_service = community_based_hiv_service;
+        this.ctc_number = ctc_number;
+        this.relationalid = relationalId;
+        this.first_name = first_name;
+        this.middle_name = middle_name;
+        this.surname = surname;
+        this.referral_date = referral_date;
+        this.facility_id = facility_id;
+        this.referral_reason = ReferralReason;
+        this.referral_service_id = referral_service_id;
+        this.is_valid = is_valid;
+    }
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getRelationalid() {
+        return relationalid;
+    }
+
+    public void setRelationalid(String relationalid) {
+        this.relationalid = relationalid;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
 
     public String getStatus() {
         return Status;

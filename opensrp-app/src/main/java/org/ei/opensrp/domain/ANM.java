@@ -7,39 +7,32 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class ANM {
     private final String name;
     private final long fpCount;
-    private final long eligibleCoupleCount;
-    private final long ancCount;
-    private final long pncCount;
-    private final long childCount;
+    private final long successfulCount;
+    private final long unsucessfulCount;
 
-    public ANM(String name, long eligibleCoupleCount, long fpCount, long ancCount, long pncCount, long childCount) {
+    public ANM(String name, long eligibleCoupleCount, long fpCount, long successfulCount, long unsucessfulCount) {
         this.name = name;
-        this.eligibleCoupleCount = eligibleCoupleCount;
         this.fpCount = fpCount;
-        this.ancCount = ancCount;
-        this.pncCount = pncCount;
-        this.childCount = childCount;
+        this.successfulCount = successfulCount;
+        this.unsucessfulCount = unsucessfulCount;
     }
 
-    public String name() {
+    public String getName() {
         return name;
     }
 
-    public long ancCount() {
-        return ancCount;
+    public long getFpCount() {
+        return fpCount;
     }
 
-    public long pncCount() {
-        return pncCount;
+    public long getSuccessfulCount() {
+        return successfulCount;
     }
 
-    public long childCount() {
-        return childCount;
+    public long getUnsucessfulCount() {
+        return unsucessfulCount;
     }
 
-    public long ecCount() {
-        return eligibleCoupleCount;
-    }
 
     public long fpCount() {
         return fpCount;

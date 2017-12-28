@@ -3,7 +3,6 @@ package org.ei.opensrp.drishti;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -34,20 +33,19 @@ import org.ei.opensrp.Context;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectController;
+import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.domain.SyncStatus;
 import org.ei.opensrp.domain.form.FormData;
 import org.ei.opensrp.domain.form.FormField;
 import org.ei.opensrp.domain.form.FormInstance;
 import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.drishti.DataModels.ClientReferral;
 import org.ei.opensrp.drishti.DataModels.FollowUp;
 import org.ei.opensrp.drishti.Fragments.FollowupClientsFragment;
 import org.ei.opensrp.drishti.Fragments.ReferredClientsFragment;
 import org.ei.opensrp.drishti.Fragments.ClientRegistrationFormFragment;
 import org.ei.opensrp.drishti.Fragments.CHWSmartRegisterFragment;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
-import org.ei.opensrp.drishti.Repository.ClientReferralRepository;
 import org.ei.opensrp.drishti.Repository.FollowUpPersonObject;
 import org.ei.opensrp.drishti.Repository.FollowUpRepository;
 import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
@@ -57,6 +55,7 @@ import org.ei.opensrp.drishti.util.Utils;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
+import org.ei.opensrp.repository.ClientReferralRepository;
 import org.ei.opensrp.service.PendingFormSubmissionService;
 import org.ei.opensrp.sync.SyncAfterFetchListener;
 import org.ei.opensrp.sync.SyncProgressIndicator;
@@ -127,6 +126,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private MenuItem updateMenuItem;
     private MenuItem remainingFormsToSyncMenuItem;
     private String wardId =null;
+
     static final String DATABASE_NAME = "drishti.db";
     private SecuredActivity securedActivity;
     @Override
@@ -170,7 +170,17 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
 
     }
-
+    private void initialize() {
+        pendingFormSubmissionService = context().pendingFormSubmissionService();
+        SYNC_STARTED.addListener(onSyncStartListener);
+        SYNC_COMPLETED.addListener(onSyncCompleteListener);
+        FORM_SUBMITTED.addListener(onFormSubmittedListener);
+        ACTION_HANDLED.addListener(updateANMDetailsListener);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("HTM-Referrals");
+        LoginActivity.setLanguage();
+    }
     public void returnToBaseFragment(){
 //        mPager.setCurrentItem(0);
 //        AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) getDisplayFormFragmentAtIndex(1);
@@ -776,9 +786,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         if(formName.equals("client_referral_form")){
             final ClientReferral clientReferral = gson.fromJson(formSubmission, ClientReferral.class);
 
-            ClientReferralPersonObject clientReferralPersonObject = new ClientReferralPersonObject(id, null, clientReferral);
-            ContentValues values = new ClientReferralRepository().createValuesFor(clientReferralPersonObject);
-            Log.d(TAG, "clientReferralPersonObject = " + gson.toJson(clientReferralPersonObject));
+           ContentValues values = new ClientReferralRepository().createValuesFor(clientReferral);
             Log.d(TAG, "values = " + gson.toJson(values));
 
             CommonRepository commonRepository = context().commonrepository("client_referral");
@@ -1208,17 +1216,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         return result;
     }
 
-    private void initialize() {
-        pendingFormSubmissionService = context().pendingFormSubmissionService();
-        SYNC_STARTED.addListener(onSyncStartListener);
-        SYNC_COMPLETED.addListener(onSyncCompleteListener);
-        FORM_SUBMITTED.addListener(onFormSubmittedListener);
-        ACTION_HANDLED.addListener(updateANMDetailsListener);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("HTM-Referrals");
-        LoginActivity.setLanguage();
-    }
+
 
     private Listener<Boolean> onSyncCompleteListener = new Listener<Boolean>() {
         @Override
@@ -1238,7 +1236,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void afterFetch(HomeContext anmDetails) {
                 // TODO: 9/14/17 update counts after fetch
-                // updateRegisterCounts(anmDetails);
+//                 updateRegisterCounts(anmDetails);
             }
         });
     }

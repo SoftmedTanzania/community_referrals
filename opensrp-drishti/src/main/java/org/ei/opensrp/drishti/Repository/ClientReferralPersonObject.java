@@ -2,7 +2,7 @@ package org.ei.opensrp.drishti.Repository;
 
 import com.google.gson.Gson;
 
-import org.ei.opensrp.drishti.DataModels.ClientReferral;
+import org.ei.opensrp.domain.ClientReferral;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
