@@ -2,10 +2,13 @@ package org.ei.opensrp;
 
 public class AllConstants {
     public static final String DRISHTI_BASE_URL = "DRISHTI_BASE_URL";
+    public static final String GSM_SERVER_URL = "/add-google-push-notifications-user";
     public static final String PROFILE_IMAGES_DOWNLOAD_PATH = "/multimedia/profileimage";
     public static final String PROFILE_IMAGES_UPLOAD_PATH = "/multimedia-file";
 
 
+    static final String EXTRA_MESSAGE = "message";
+    public static final String GOOGLE_SENDER_ID = "830479277284";
     public static final String REPORT_CATEGORY = "reportCategory";
     public static final String INDICATOR_DETAIL = "indicatorDetail";
     public static final String CATEGORY_DESCRIPTION = "categoryDescription";
@@ -31,6 +34,8 @@ public class AllConstants {
     public static final String AUTHENTICATE_USER_URL_PATH = "/anm-villages?anm-id=";
     public static final String OPENSRP_AUTH_USER_URL_PATH = "/security/authenticate";
     public static final String OPENSRP_LOCATION_URL_PATH = "/location/location-children-tree";
+    public static final String OPENSRP_REFERRAL_SERVICES_URL_PATH = "/boresha-afya-services";
+    public static final String OPENSRP_FACILITY_URL_PATH = "/boresha-afya-services";
 
     public static final String FORM_NAME_PARAM = "formName";
     public static final String INSTANCE_ID_PARAM = "instanceId";

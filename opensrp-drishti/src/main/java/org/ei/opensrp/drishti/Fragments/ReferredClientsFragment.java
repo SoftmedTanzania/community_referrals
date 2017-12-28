@@ -39,8 +39,6 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
     private static final String ARG_PARAM2 = "param2";
     private CommonRepository commonRepository;
     private Gson gson = new Gson();
-    private Gson gson1 = new Gson();
-    private Gson gson2 = new Gson();
     private android.content.Context appContext;
     private List<ClientReferralPersonObject> clientReferralPersonObjectList = new ArrayList<>();
     private Cursor cursor,cursor2;

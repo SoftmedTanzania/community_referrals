@@ -12,6 +12,8 @@ import org.ei.opensrp.repository.Repository;
 import org.ei.opensrp.sync.SaveANMLocationTask;
 import org.ei.opensrp.sync.SaveTeamInfoTask;
 import org.ei.opensrp.sync.SaveUserInfoTask;
+import org.ei.opensrp.sync.SavehasFacilityInfoTask;
+import org.ei.opensrp.sync.SavehasReferralServiceInfoTask;
 import org.ei.opensrp.util.Session;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,10 +33,12 @@ public class UserService {
     private SaveANMLocationTask saveANMLocationTask;
     private SaveUserInfoTask saveUserInfoTask;
     private SaveTeamInfoTask saveTeamInfoTask;
+    private SavehasFacilityInfoTask savehasFacilityInfoTask;
+    private SavehasReferralServiceInfoTask savehasReferralServiceInfoTask;
 
     public UserService(Repository repository, AllSettings allSettings, AllSharedPreferences allSharedPreferences, HTTPAgent httpAgent, Session session,
                        DristhiConfiguration configuration, SaveANMLocationTask saveANMLocationTask,
-                       SaveUserInfoTask saveUserInfoTask, SaveTeamInfoTask saveTeamInfoTask) {
+                       SaveUserInfoTask saveUserInfoTask, SavehasReferralServiceInfoTask savehasReferralServiceInfoTask,SavehasFacilityInfoTask savehasFacilityInfoTask, SaveTeamInfoTask saveTeamInfoTask) {
         this.repository = repository;
         this.allSettings = allSettings;
         this.allSharedPreferences = allSharedPreferences;
@@ -44,6 +48,8 @@ public class UserService {
         this.saveANMLocationTask = saveANMLocationTask;
         this.saveUserInfoTask = saveUserInfoTask;
         this.saveTeamInfoTask = saveTeamInfoTask;
+        this.savehasReferralServiceInfoTask = savehasReferralServiceInfoTask;
+        this.savehasFacilityInfoTask = savehasFacilityInfoTask;
     }
 
     public boolean isValidLocalLogin(String userName, String password) {
@@ -77,6 +83,8 @@ public class UserService {
         saveAnmLocation(getUserLocation(userInfo));
         saveUserInfo(getUserData(userInfo));
         saveTeamInfo(getTeamData(userInfo));
+        saveHasReferralServiceInfo("false");
+        saveHasFacilityInfo("false");
 
     }
 
@@ -119,6 +127,14 @@ public class UserService {
 
     public void saveTeamInfo(String teamInfo) {
         saveTeamInfoTask.save(teamInfo);
+    }
+
+    public void saveHasFacilityInfo(String value) {
+        savehasFacilityInfoTask.save(value);
+    }
+
+    public void saveHasReferralServiceInfo(String value) {
+        savehasReferralServiceInfoTask.save(value);
     }
 
     public boolean hasARegisteredUser() {

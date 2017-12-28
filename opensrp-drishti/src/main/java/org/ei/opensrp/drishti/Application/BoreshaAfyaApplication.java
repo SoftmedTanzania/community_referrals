@@ -8,8 +8,6 @@ import android.util.Pair;
 
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
@@ -49,6 +47,11 @@ import cz.msebera.android.httpclient.entity.ByteArrayEntity;
 import cz.msebera.android.httpclient.message.BasicHeader;
 import io.fabric.sdk.android.Fabric;
 
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
+import static org.ei.opensrp.AllConstants.GSM_SERVER_URL;
+import static org.ei.opensrp.AllConstants.OPENSRP_FACILITY_URL_PATH;
+import static org.ei.opensrp.AllConstants.OPENSRP_LOCATION_URL_PATH;
+import static org.ei.opensrp.AllConstants.OPENSRP_REFERRAL_SERVICES_URL_PATH;
 import static org.ei.opensrp.util.Log.logInfo;
 import java.util.Iterator;
 import java.util.Random;
@@ -86,13 +89,14 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     private CommonRepository commonRepository1,commonRepository;
     private boolean hasFacility = false;
     private boolean hasService = false;
-    public String ipAddress = "http://192.168.43.251:8080/opensrp";
+
+    private DristhiConfiguration configuration;
 
     public void register(final Context context, final String userId,final  String facility, final String regId) {
 
         Log.i(TAG, "registering device (regId = " + regId + ")");
 
-        String serverUrl = ipAddress+Config.YOUR_SERVER_URL;
+        String serverUrl = configuration.dristhiBaseURL() + GSM_SERVER_URL;
         Log.d(TAG,"URL to register = "+serverUrl);
 
         Map<String, String> params = new HashMap<String, String>();
@@ -130,7 +134,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         if (count == 0 ) {
 
             //String to place our result in
-            final String myUrl = ipAddress + Config.GET_SERVICE_URL;
+            final  String myUrl = configuration.dristhiBaseURL() + OPENSRP_REFERRAL_SERVICES_URL_PATH;
             final String result = null;
 
             Response<String> stringResponse  = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl, username, password);
@@ -204,7 +208,8 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         long count = commonRepository.count();
         if (count == 0 ) {
             //String to place our result in
-            final  String myUrl = ipAddress+Config.GET_FACILITY_URL;
+
+            final  String myUrl = configuration.dristhiBaseURL() + OPENSRP_FACILITY_URL_PATH;
             Response<String>  results = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl,username,password);
             Log.d(TAG,"this is the result of facility"+results.payload());
 
@@ -284,13 +289,11 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     // Notifies UI to display a message.
     void displayMessageOnScreen(Context context, String message) {
 
-        Intent intent = new Intent(Config.DISPLAY_MESSAGE_ACTION);
-        intent.putExtra(Config.EXTRA_MESSAGE, message);
 
 
 
         // Send Broadcast to Broadcast receiver with message
-        sendBroadcast(intent);
+
 
     }
 
@@ -370,6 +373,9 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getApplicationContext().startActivity(intent);
         context.userService().logoutSession();
+    }
+    public void logoutUser(){
+        cleanUpSyncState();
     }
 
     private void cleanUpSyncState() {

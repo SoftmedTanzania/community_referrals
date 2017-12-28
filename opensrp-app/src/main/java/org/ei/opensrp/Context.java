@@ -81,6 +81,8 @@ import org.ei.opensrp.service.formSubmissionHandler.VitaminAHandler;
 import org.ei.opensrp.sync.SaveANMLocationTask;
 import org.ei.opensrp.sync.SaveTeamInfoTask;
 import org.ei.opensrp.sync.SaveUserInfoTask;
+import org.ei.opensrp.sync.SavehasFacilityInfoTask;
+import org.ei.opensrp.sync.SavehasReferralServiceInfoTask;
 import org.ei.opensrp.util.Cache;
 import org.ei.opensrp.util.Session;
 import org.ei.opensrp.view.contract.ANCClients;
@@ -195,6 +197,8 @@ public class Context {
     private SaveANMLocationTask saveANMLocationTask;
     private SaveUserInfoTask saveUserInfoTask;
     private SaveTeamInfoTask saveTeamInfoTask;
+    private SavehasFacilityInfoTask savehasFacilityInfoTask;
+    private SavehasReferralServiceInfoTask savehasReferralServiceInfoTask;
 
     private ANMController anmController;
     private ANMLocationController anmLocationController;
@@ -683,16 +687,28 @@ public class Context {
     public UserService userService() {
         if (userService == null) {
             Repository repo = initRepository();
-            userService = new UserService(repo, allSettings(), allSharedPreferences(), httpAgent(), session(), configuration(), saveANMLocationTask(), saveUserInfoTask(), saveTeamInfoTask());
+            userService = new UserService(repo, allSettings(), allSharedPreferences(), httpAgent(), session(), configuration(), saveANMLocationTask(), saveUserInfoTask(),savehasReferralServiceInfoTask(),savehasFacilityInfoTask(), saveTeamInfoTask());
         }
         return userService;
     }
 
+    private SavehasFacilityInfoTask savehasFacilityInfoTask() {
+        if (savehasFacilityInfoTask == null) {
+            savehasFacilityInfoTask = new SavehasFacilityInfoTask(allSettings());
+        }
+        return savehasFacilityInfoTask;
+    }
     private SaveTeamInfoTask saveTeamInfoTask() {
         if (saveTeamInfoTask == null) {
             saveTeamInfoTask = new SaveTeamInfoTask(allSettings());
         }
         return saveTeamInfoTask;
+    }
+    private SavehasReferralServiceInfoTask savehasReferralServiceInfoTask() {
+        if (savehasReferralServiceInfoTask == null) {
+            savehasReferralServiceInfoTask = new SavehasReferralServiceInfoTask(allSettings());
+        }
+        return savehasReferralServiceInfoTask;
     }
 
     private SaveANMLocationTask saveANMLocationTask() {

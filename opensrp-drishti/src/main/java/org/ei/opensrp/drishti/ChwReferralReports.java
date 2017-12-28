@@ -1,34 +1,19 @@
 package org.ei.opensrp.drishti;
 
-import android.content.Context;
-import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TableLayout;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import org.ei.opensrp.drishti.util.DatesHelper;
-
-import org.ei.opensrp.commonregistry.CommonRepository;
-
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
-public class UzaziSalamaReport extends AppCompatActivity implements java.io.Serializable  {
+public class ChwReferralReports extends AppCompatActivity implements java.io.Serializable  {
 //    private PregnantMom pregnantMom,mother;
 //    private PncMother pncMom;
 //    private PncPersonObject pncMomObject;
 //    private Child child;
     private List<Object> motherList;
-    private final static String TAG = UzaziSalamaReport.class.getSimpleName();
+    private final static String TAG = ChwReferralReports.class.getSimpleName();
     private Gson gson = new Gson();
     private String risk,delivery;
 
@@ -45,13 +30,13 @@ public class UzaziSalamaReport extends AppCompatActivity implements java.io.Seri
 //        if (type.equals("anc")){
 //            motherList = gson.fromJson(gsonMoms, new TypeToken<List<PregnantMom>>() {
 //            }.getType());
-//            Log.d("UzaziSalamaReport", "list count = " + motherList.size());
+//            Log.d("ChwReferralReports", "list count = " + motherList.size());
 //
 //            fillTableAncMother();
 //        } else {
 //            motherList = gson.fromJson(gsonMoms, new TypeToken<List<PncPersonObject>>() {
 //            }.getType());
-//            Log.d("UzaziSalamaReport", "list count = " + motherList.size());
+//            Log.d("ChwReferralReports", "list count = " + motherList.size());
 //
 //            fillTablePncMother();
 //        }

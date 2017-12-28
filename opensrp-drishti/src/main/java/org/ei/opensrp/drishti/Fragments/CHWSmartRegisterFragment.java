@@ -2,6 +2,7 @@ package org.ei.opensrp.drishti.Fragments;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
 import org.ei.opensrp.drishti.ChwSmartRegisterActivity;
 import org.ei.opensrp.drishti.LoginActivity;
 import org.ei.opensrp.drishti.R;
@@ -30,6 +32,7 @@ import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.pageradapter.CHWPagerAdapter;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
+import org.ei.opensrp.view.activity.DrishtiApplication;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
 
@@ -140,6 +143,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         // Handle menu item click event
+                        onOptionsItemSelected(item);
                         return true;
                     }
                 });
@@ -220,11 +224,22 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
             case R.id.updateMenuItem:
                 ((ChwSmartRegisterActivity)getActivity()).updateFromServer();
                 return true;
+
+            case R.id.help:
+                Toast.makeText(getActivity(), "help implementation under construction", LENGTH_SHORT).show();
+                return true;
+
+            case R.id.logout:
+                ((BoreshaAfyaApplication)getActivity().getApplication()).logoutCurrentUser();
+
+                return true;
             case R.id.switchLanguageMenuItem:
-                String newLanguagePreference = LoginActivity.switchLanguagePreference();
+                String newLanguagePreference = context().userService().switchLanguagePreference();
+//                String newLanguagePreference = LoginActivity.switchLanguagePreference();
+
                 LoginActivity.setLanguage();
                 Toast.makeText(getActivity(), "Language preference set to " + newLanguagePreference + ". Please restart the application.", LENGTH_SHORT).show();
-                getActivity().recreate();
+//                getActivity().recreate();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

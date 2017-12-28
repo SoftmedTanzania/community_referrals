@@ -126,19 +126,28 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private PendingFormSubmissionService pendingFormSubmissionService;
     private MenuItem updateMenuItem;
     private MenuItem remainingFormsToSyncMenuItem;
+    private String wardId =null;
     static final String DATABASE_NAME = "drishti.db";
-
+    private SecuredActivity securedActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
         // orientation
         OrientationHelper.setProperOrientationForDevice(ChwSmartRegisterActivity.this);
+        securedActivity = new SecuredActivity() {
+            @Override
+            protected void onCreation() {
 
+            }
+
+            @Override
+            protected void onResumption() {
+
+            }
+        };
         formNames = this.buildFormNameList();
         mBaseFragment = new CHWSmartRegisterFragment();
 
@@ -154,10 +163,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
         mPager.setOffscreenPageLimit(formNames.length);
 
-//        if(((BoreshaAfyaApplication)getApplication()).getUserType()==0) {
-//            mPager.setCurrentItem(3);
-//            currentPage = 3;
-//        }
         mPager.setCurrentItem(3);
         currentPage = 3;
 
@@ -510,29 +515,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void onClick(View view) {
                 // todo: delete mother
-//                mother.setIs_valid("false");
-//                pregnantMom.setIs_valid("false");
-//                this.motherData = new Gson().fromJson(gsonMom,PregnantMom.class);
-//                Log.d(TAG, "gsonMomafter Changes = " + pregnantMom);
 
-//                mother.setDetails(new Gson().toJson(pregnantMom));
-//                updateFormSubmission(mother,mother.getId());
-
-//                mBaseFragment = new FollowupClientsFragment();
-                // Instantiate a ViewPager and a PagerAdapter.
-//                mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
-//                mPager.setOffscreenPageLimit(formNames.length);
-//                mPager.setAdapter(mPagerAdapter);
-//                mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-//                    @Override
-//                    public void onPageSelected(int position) {
-//                        currentPage = position;
-//                        // onPageChanged(position);
-//                    }
-//                });
-//
-//                mPager.setCurrentItem(1);
-//                currentPage = 1;
                 FollowupClientsFragment preRegisterFragment = (FollowupClientsFragment) findFragmentByPosition(currentPage);
                 preRegisterFragment.refreshListView();
                 Toast.makeText(ChwSmartRegisterActivity.this, "umemfuta " + mother.getFirst_name() +" "+mother.getSurname(), Toast.LENGTH_SHORT).show();
@@ -662,10 +645,9 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public void OnLocationSelected(String locationSelected) {
         // set registration fragment
         Log.d(TAG,"Location selected"+locationSelected);
+        wardId = locationSelected;
 
-        Intent intent = new Intent(this, ClientsFormRegisterActivity.class);
-        intent.putExtra("selectedLocation",locationSelected);
-        startActivity(intent);
+        startFormActivity("pregnant_mothers_pre_registration",generateRandomUUIDString(),null);
     }
 
 
@@ -722,6 +704,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                     if (displayFormFragment != null) {
                         Log.d(TAG, "form data = " + data);
                         displayFormFragment.setFormData(data);
+                        displayFormFragment.setWardId(wardId);
                         displayFormFragment.setRecordId(entityId);
                         displayFormFragment.setFieldOverides(metaData);
                     }
@@ -1143,6 +1126,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public int getFormIndex(String formName){
         return FormUtils.getIndexForFormName(formName, formNames) + 1;
     }
+
     public void switchToPage(int pageNumber){
         mPager.setCurrentItem(pageNumber);
     }

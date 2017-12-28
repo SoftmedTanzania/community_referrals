@@ -1,5 +1,7 @@
 package org.ei.opensrp.repository;
 
+import android.text.BoringLayout;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +13,8 @@ public class AllSettings {
     private static final String ANM_LOCATION = "anmLocation";
     private static final String USER_INFORMATION = "userInformation";
     private static final String TEAM_INFORMATION = "teamInformation";
+    private static final String FACILITY_BOOLEAN = "hasFacility";
+    private static final String REFERRAL_SERVICE_BOOLEAN = "hasReferralService";
 
     protected AllSharedPreferences preferences;
     public SettingsRepository settingsRepository;
@@ -67,6 +71,21 @@ public class AllSettings {
 
     public String fetchTeamInformation() {
         return settingsRepository.querySetting(TEAM_INFORMATION, "");
+    }
+    public void savehasFacility(String value) {
+        settingsRepository.updateSetting(FACILITY_BOOLEAN, value);
+    }
+
+    public String fetchhasFacility() {
+        return settingsRepository.querySetting(FACILITY_BOOLEAN, "");
+    }
+
+    public void savehasReferralService(String value) {
+        settingsRepository.updateSetting(REFERRAL_SERVICE_BOOLEAN, value);
+    }
+
+    public String fetchhasReferralService() {
+        return settingsRepository.querySetting(REFERRAL_SERVICE_BOOLEAN, "");
     }
 
     public void saveUserInformation(String userInformation) {
