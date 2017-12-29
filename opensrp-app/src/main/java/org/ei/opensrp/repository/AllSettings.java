@@ -11,6 +11,7 @@ public class AllSettings {
     public static final String PREVIOUS_FORM_SYNC_INDEX_SETTING_KEY = "previousFormSyncIndex";
     private static final String ANM_PASSWORD_PREFERENCE_KEY = "anmPassword";
     private static final String ANM_LOCATION = "anmLocation";
+    private static final String REGISTRATION_ID = "registration_id";
     private static final String USER_INFORMATION = "userInformation";
     private static final String TEAM_INFORMATION = "teamInformation";
     private static final String FACILITY_BOOLEAN = "hasFacility";
@@ -78,6 +79,13 @@ public class AllSettings {
 
     public String fetchhasFacility() {
         return settingsRepository.querySetting(FACILITY_BOOLEAN, "");
+    }
+    public void saveRegistartionId(String value) {
+        settingsRepository.updateSetting(REGISTRATION_ID, value);
+    }
+
+    public String fetchRegistartionId() {
+        return settingsRepository.querySetting(REGISTRATION_ID, "");
     }
 
     public void savehasReferralService(String value) {

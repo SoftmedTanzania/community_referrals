@@ -418,7 +418,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void goToHome() {
         BoreshaAfyaApplication.setCrashlyticsUser(context);
-        setValuesInBoreshaAfya();
+
         // Registering BroadcastReceiver
 //        registerReceiver();
         startActivity(new Intent(this, ChwSmartRegisterActivity.class));
@@ -479,83 +479,6 @@ public class LoginActivity extends AppCompatActivity {
     private String getVersion() throws PackageManager.NameNotFoundException {
         PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
         return packageInfo.versionName;
-    }
-    private void setValuesInBoreshaAfya(){
-
-        String userDetailsString = context.allSettings().settingsRepository.querySetting("userInformation","");
-        String teamDetailsString = context.allSettings().settingsRepository.querySetting("teamInformation","");
-        android.util.Log.d(TAG,"team details "+teamDetailsString);
-        JSONObject teamSettings = null;
-        try {
-            teamSettings = new JSONObject(teamDetailsString);
-
-
-            JSONObject team_details = null;
-            try {
-                android.util.Log.d(TAG,"teamSettings = "+teamSettings.toString());
-                team_details = teamSettings.getJSONObject("team");
-                android.util.Log.d(TAG,"team jason "+team_details.get("uuid").toString()+" "+team_details.get("teamName").toString());
-                ((BoreshaAfyaApplication)getApplication()).setTeam_uuid(team_details.get("uuid").toString());
-                ((BoreshaAfyaApplication)getApplication()).setTeam_name(team_details.get("teamName").toString());
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            JSONObject userLocationSettings = null;
-            try {
-                userLocationSettings = team_details.getJSONObject("location");
-                android.util.Log.d(TAG,"teamSettings location id= "+userLocationSettings.get("uuid").toString());
-                ((BoreshaAfyaApplication)getApplication()).setTeam_location_id(userLocationSettings.get("uuid").toString());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        JSONObject userSettings = null;
-        try {
-            userSettings = new JSONObject(userDetailsString);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JSONArray roles = null;
-        try {
-            android.util.Log.d(TAG,"usersettings = "+userSettings.toString());
-            roles = userSettings.getJSONArray("roles");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JSONObject attributes = null;
-        try {
-            attributes = userSettings.getJSONObject("attributes");
-
-            ((BoreshaAfyaApplication)getApplication()).setCurrentUserID(attributes.get("_PERSON_UUID").toString());
-            ((BoreshaAfyaApplication)getApplication()).setUsername(userSettings.get("username").toString());
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-
-        int count = roles.length();
-        for (int i =0 ; i<count ; i++){
-            try {
-                if(roles.getString(i).equals("Organizational: Health Facility User")){
-                    ((BoreshaAfyaApplication)getApplication()).setUserType(0);
-                }else if (roles.getString(i).equals("Organizational: CHW")){
-                    ((BoreshaAfyaApplication)getApplication()).setUserType(0);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     private String getBuildDate() throws PackageManager.NameNotFoundException, IOException {

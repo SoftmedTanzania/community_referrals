@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.drishti.Fragments.ClientDetailFragment;
 
 public class ClientsDetailsActivity extends AppCompatActivity {

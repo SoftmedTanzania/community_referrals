@@ -24,6 +24,9 @@ import java.util.ArrayList;
 public class FacilityService extends IntentService {
     private static final String TAG = FacilityService.class.getSimpleName();
 
+    public FacilityService() {
+        super("FacilityService");
+    }
     public FacilityService(String name) {
         super(name);
     }

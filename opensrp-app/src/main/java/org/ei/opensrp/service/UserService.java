@@ -10,6 +10,7 @@ import org.ei.opensrp.repository.AllSettings;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.repository.Repository;
 import org.ei.opensrp.sync.SaveANMLocationTask;
+import org.ei.opensrp.sync.SaveRegistrationIdInfoTask;
 import org.ei.opensrp.sync.SaveTeamInfoTask;
 import org.ei.opensrp.sync.SaveUserInfoTask;
 import org.ei.opensrp.sync.SavehasFacilityInfoTask;
@@ -35,10 +36,11 @@ public class UserService {
     private SaveTeamInfoTask saveTeamInfoTask;
     private SavehasFacilityInfoTask savehasFacilityInfoTask;
     private SavehasReferralServiceInfoTask savehasReferralServiceInfoTask;
+    private SaveRegistrationIdInfoTask saveRegistrationIdInfoTask;
 
     public UserService(Repository repository, AllSettings allSettings, AllSharedPreferences allSharedPreferences, HTTPAgent httpAgent, Session session,
                        DristhiConfiguration configuration, SaveANMLocationTask saveANMLocationTask,
-                       SaveUserInfoTask saveUserInfoTask, SavehasReferralServiceInfoTask savehasReferralServiceInfoTask,SavehasFacilityInfoTask savehasFacilityInfoTask, SaveTeamInfoTask saveTeamInfoTask) {
+                       SaveUserInfoTask saveUserInfoTask, SavehasReferralServiceInfoTask savehasReferralServiceInfoTask,SavehasFacilityInfoTask savehasFacilityInfoTask, SaveTeamInfoTask saveTeamInfoTask,SaveRegistrationIdInfoTask saveRegistrationIdInfoTask) {
         this.repository = repository;
         this.allSettings = allSettings;
         this.allSharedPreferences = allSharedPreferences;
@@ -50,6 +52,7 @@ public class UserService {
         this.saveTeamInfoTask = saveTeamInfoTask;
         this.savehasReferralServiceInfoTask = savehasReferralServiceInfoTask;
         this.savehasFacilityInfoTask = savehasFacilityInfoTask;
+        this.saveRegistrationIdInfoTask = saveRegistrationIdInfoTask;
     }
 
     public boolean isValidLocalLogin(String userName, String password) {
@@ -135,6 +138,9 @@ public class UserService {
 
     public void saveHasReferralServiceInfo(String value) {
         savehasReferralServiceInfoTask.save(value);
+    }
+    public void saveRegistrationInfo(String value) {
+        saveRegistrationIdInfoTask.save(value);
     }
 
     public boolean hasARegisteredUser() {

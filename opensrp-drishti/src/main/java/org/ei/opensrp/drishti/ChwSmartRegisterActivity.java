@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -40,6 +41,7 @@ import org.ei.opensrp.domain.form.FormField;
 import org.ei.opensrp.domain.form.FormInstance;
 import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.commonregistry.CommonRepository;
+import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
 import org.ei.opensrp.drishti.DataModels.FollowUp;
 import org.ei.opensrp.drishti.Fragments.FollowupClientsFragment;
 import org.ei.opensrp.drishti.Fragments.ReferredClientsFragment;
@@ -74,6 +76,8 @@ import org.ei.opensrp.view.dialog.DialogOptionModel;
 import org.ei.opensrp.view.dialog.EditOption;
 import org.ei.opensrp.view.dialog.OpenFormOption;
 import org.ei.opensrp.view.viewpager.OpenSRPViewPager;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.FileInputStream;
@@ -105,7 +109,9 @@ import static org.ei.opensrp.event.Event.SYNC_STARTED;
 
 public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener {
     private static final String TAG = ChwSmartRegisterActivity.class.getSimpleName();
-
+    private Context context;
+    private long unsuccesfulCount = 0;
+    private long succesfulCount = 0;
     private SmartRegisterClientsProvider clientProvider = null;
     private CommonPersonObjectController controller;
     private VillageController villageController;
@@ -165,7 +171,8 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         mPager.setCurrentItem(3);
         currentPage = 3;
-
+        initialize();
+        setValuesInBoreshaAfya();
         Log.d(TAG, "table columns ="+new Gson().toJson(context().commonrepository("referral_service").common_TABLE_COLUMNS));
 
 
@@ -693,6 +700,84 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         }
     }
 
+    private void setValuesInBoreshaAfya(){
+
+        String userDetailsString = context().allSettings().settingsRepository.querySetting("userInformation","");
+        String teamDetailsString = context().allSettings().settingsRepository.querySetting("teamInformation","");
+        android.util.Log.d(TAG,"team details "+teamDetailsString);
+        JSONObject teamSettings = null;
+        try {
+            teamSettings = new JSONObject(teamDetailsString);
+
+
+            JSONObject team_details = null;
+            try {
+                android.util.Log.d(TAG,"teamSettings = "+teamSettings.toString());
+                team_details = teamSettings.getJSONObject("team");
+                android.util.Log.d(TAG,"team jason "+team_details.get("uuid").toString()+" "+team_details.get("teamName").toString());
+                ((BoreshaAfyaApplication)getApplication()).setTeam_uuid(team_details.get("uuid").toString());
+                ((BoreshaAfyaApplication)getApplication()).setTeam_name(team_details.get("teamName").toString());
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            JSONObject userLocationSettings = null;
+            try {
+                userLocationSettings = team_details.getJSONObject("location");
+                android.util.Log.d(TAG,"teamSettings location id= "+userLocationSettings.get("uuid").toString());
+                ((BoreshaAfyaApplication)getApplication()).setTeam_location_id(userLocationSettings.get("uuid").toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        JSONObject userSettings = null;
+        try {
+            userSettings = new JSONObject(userDetailsString);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JSONArray roles = null;
+        try {
+//            android.util.Log.d(TAG,"usersettings = "+userSettings.toString());
+            roles = userSettings.getJSONArray("roles");
+            int count = roles.length();
+            for (int i =0 ; i<count ; i++){
+                try {
+                    if(roles.getString(i).equals("Organizational: Health Facility User")){
+                        ((BoreshaAfyaApplication)getApplication()).setUserType(0);
+                    }else if (roles.getString(i).equals("Organizational: CHW")){
+                        ((BoreshaAfyaApplication)getApplication()).setUserType(0);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JSONObject attributes = null;
+        try {
+            attributes = userSettings.getJSONObject("attributes");
+
+            ((BoreshaAfyaApplication)getApplication()).setCurrentUserID(attributes.get("_PERSON_UUID").toString());
+            ((BoreshaAfyaApplication)getApplication()).setUsername(userSettings.get("username").toString());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+    }
     @Override
     public void startFormActivity(String formName, String entityId, String metaData) {
         Log.d(TAG, "starting form = "+formName);
@@ -785,7 +870,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         if(formName.equals("client_referral_form")){
             final ClientReferral clientReferral = gson.fromJson(formSubmission, ClientReferral.class);
-
+           clientReferral.setId(id);
            ContentValues values = new ClientReferralRepository().createValuesFor(clientReferral);
             Log.d(TAG, "values = " + gson.toJson(values));
 
@@ -1236,11 +1321,41 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void afterFetch(HomeContext anmDetails) {
                 // TODO: 9/14/17 update counts after fetch
-//                 updateRegisterCounts(anmDetails);
+                 updateRegisterCounts(anmDetails);
             }
         });
     }
+    private void updateRegisterCounts(final HomeContext homeContext) {
 
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+                succesfulCount = homeContext.getSucessReferralCount();
+                unsuccesfulCount = homeContext.getUnsucessReferralCount();
+//
+//
+//
+//                Handler mainHandler = new Handler(getMainLooper());
+//
+//                Runnable myRunnable = new Runnable() {
+//                    @Override
+//                    public void run() {
+
+                        CHWSmartRegisterFragment displayFormFragment ;
+                        displayFormFragment = new CHWSmartRegisterFragment();
+
+
+                            displayFormFragment.setSuccessValue(succesfulCount);
+                            displayFormFragment.setUnSuccessValue(unsuccesfulCount);
+
+//                    }
+//                };
+//                mainHandler.post(myRunnable);
+//
+//            }
+//        }).start();
+    }
     private Listener<Boolean> onSyncStartListener = new Listener<Boolean>() {
         @Override
         public void onEvent(Boolean data) {

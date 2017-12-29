@@ -67,10 +67,12 @@ public class HTTPAgent {
 
     private String responseContent;
     public Response<String> fetch(String requestURLPath) {
+        Log.d(TAG,"url "+requestURLPath);
         responseContent=null;
         try {
             setCredentials(allSharedPreferences.fetchRegisteredANM(), settings.fetchANMPassword());
-
+            Log.d(TAG,"username - "+allSharedPreferences.fetchRegisteredANM());
+            Log.d(TAG,"password -  "+settings.fetchANMPassword());
             httpClient.get(requestURLPath, new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -179,6 +181,8 @@ public class HTTPAgent {
 
 
     private void setCredentials(String userName, String password) {
+        Log.d(TAG,"username = "+userName);
+        Log.d(TAG,"password = "+password);
         httpClient.setBasicAuth(userName,password);
     }
 

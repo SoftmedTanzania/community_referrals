@@ -7,8 +7,8 @@ public class HomeContext {
     private long unsucessReferralCount;
 
     public HomeContext(ANM anm) {
-        this.sucessReferralCount = anm.ancCount();
-        this.unsucessReferralCount = anm.pncCount();
+        this.sucessReferralCount = anm.getSuccessfulCount();
+        this.unsucessReferralCount = anm.getUnsucessfulCount();
     }
 
 

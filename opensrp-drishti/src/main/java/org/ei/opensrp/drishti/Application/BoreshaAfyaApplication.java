@@ -23,9 +23,14 @@ import org.ei.opensrp.domain.ResponseStatus;
 import org.ei.opensrp.drishti.LoginActivity;
 import org.ei.opensrp.drishti.NativeHomeActivity;
 import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.repository.AllSettings;
+import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.repository.FacilityRepository;
 import org.ei.opensrp.repository.ReferralServiceRepository;
 import org.ei.opensrp.sync.DrishtiSyncScheduler;
+import org.ei.opensrp.sync.SaveRegistrationIdInfoTask;
+import org.ei.opensrp.sync.SavehasFacilityInfoTask;
+import org.ei.opensrp.sync.SavehasReferralServiceInfoTask;
 import org.ei.opensrp.view.BackgroundAction;
 import org.ei.opensrp.view.LockingBackgroundTask;
 import org.ei.opensrp.view.ProgressIndicator;
@@ -48,6 +53,7 @@ import cz.msebera.android.httpclient.message.BasicHeader;
 import io.fabric.sdk.android.Fabric;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
+import static org.ei.opensrp.AllConstants.DRISHTI_BASE_PATH;
 import static org.ei.opensrp.AllConstants.GSM_SERVER_URL;
 import static org.ei.opensrp.AllConstants.OPENSRP_FACILITY_URL_PATH;
 import static org.ei.opensrp.AllConstants.OPENSRP_LOCATION_URL_PATH;
@@ -90,18 +96,23 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     private boolean hasFacility = false;
     private boolean hasService = false;
 
+    private AllSettings settings;
+    private AllSharedPreferences allSharedPreferences;
     private DristhiConfiguration configuration;
-
+    private SaveRegistrationIdInfoTask saveRegistrationIdInfoTask;
+    private SavehasFacilityInfoTask savehasFacilityInfoTask;
+    private SavehasReferralServiceInfoTask savehasReferralServiceInfoTask;
     public void register(final Context context, final String userId,final  String facility, final String regId) {
 
         Log.i(TAG, "registering device (regId = " + regId + ")");
 
-        String serverUrl = configuration.dristhiBaseURL() + GSM_SERVER_URL;
+        String serverUrl =  DRISHTI_BASE_PATH + GSM_SERVER_URL;
+//        String serverUrl = "http://192.168.43.251:8080/opensrp" + GSM_SERVER_URL;
         Log.d(TAG,"URL to register = "+serverUrl);
 
         Map<String, String> params = new HashMap<String, String>();
-        params.put("google_pushNotification_token", regId);
         params.put("user_uuid", userId);
+        params.put("google_push_notification_token", regId);
         params.put("facility_uuid", facility);
 
         StringBuilder bodyBuilder = new StringBuilder();
@@ -122,6 +133,11 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         try{
             response1 = Context.getInstance().getHttpAgent().post(serverUrl,bodyBuilder.toString());
             Log.d(TAG,"response is failure "+response1.isFailure());
+            if(response1.isFailure()){
+
+            }else{
+                context.userService().saveRegistrationInfo(regId);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -134,10 +150,11 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         if (count == 0 ) {
 
             //String to place our result in
-            final  String myUrl = configuration.dristhiBaseURL() + OPENSRP_REFERRAL_SERVICES_URL_PATH;
+//            final  String myUrl = "http://192.168.43.251:8080/opensrp" + OPENSRP_REFERRAL_SERVICES_URL_PATH;
+            final  String myUrl =  DRISHTI_BASE_PATH + OPENSRP_REFERRAL_SERVICES_URL_PATH;
             final String result = null;
 
-            Response<String> stringResponse  = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl, username, password);
+            Response<String> stringResponse  = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl,"sean", "Admin123");
             ReferralServiceDataModel service;
             JSONArray jsonArray = null;
             try {
@@ -160,8 +177,8 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
                     Log.d(TAG, "referral services downloaded " + service.getName());
                     ContentValues values = new ReferralServiceRepository().createValuesFor(service);
                     android.util.Log.d(TAG, "values services = " + new Gson().toJson(values));
-
                     commonRepository1.customInsert(values);
+                    context.userService().saveHasReferralServiceInfo("true");
                 }
             }
             setHasService(true);
@@ -209,8 +226,9 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         if (count == 0 ) {
             //String to place our result in
 
-            final  String myUrl = configuration.dristhiBaseURL() + OPENSRP_FACILITY_URL_PATH;
-            Response<String>  results = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl,username,password);
+            final  String myUrl = DRISHTI_BASE_PATH + OPENSRP_FACILITY_URL_PATH;
+//            final  String myUrl = "http://192.168.43.251:8080/opensrp" + OPENSRP_FACILITY_URL_PATH;
+            Response<String>  results = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl,"sean", "Admin123");
             Log.d(TAG,"this is the result of facility"+results.payload());
 
             try {
@@ -226,14 +244,13 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
                         Log.d(TAG,"facility downloaded "+facility.getName());
                         ContentValues values = new FacilityRepository().createValuesFor(facility);
                         android.util.Log.d(TAG, "values facility = " + new Gson().toJson(values));
-
                         commonRepository.customInsert(values);
+                        context.userService().saveHasFacilityInfo("true");
                     }
                 }
             }catch (Exception e){
                 e.printStackTrace();
             }
-            setHasFacility(true);
         }
 
     }

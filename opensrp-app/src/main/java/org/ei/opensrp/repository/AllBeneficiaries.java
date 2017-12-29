@@ -13,15 +13,17 @@ import static org.ei.opensrp.repository.MotherRepository.TYPE_PNC;
 public class AllBeneficiaries {
     private ChildRepository childRepository;
     private MotherRepository motherRepository;
+    private ClientReferralRepository clientReferralRepository;
     private final AlertRepository alertRepository;
     private final TimelineEventRepository timelineEventRepository;
 
-    public AllBeneficiaries(MotherRepository motherRepository, ChildRepository childRepository,
+    public AllBeneficiaries(MotherRepository motherRepository, ClientReferralRepository clientReferralRepository,ChildRepository childRepository,
                             AlertRepository alertRepository, TimelineEventRepository timelineEventRepository) {
         this.childRepository = childRepository;
         this.motherRepository = motherRepository;
         this.alertRepository = alertRepository;
         this.timelineEventRepository = timelineEventRepository;
+        this.clientReferralRepository = clientReferralRepository;
     }
 
     //#TODO
@@ -46,6 +48,14 @@ public class AllBeneficiaries {
 
     public long pncCount() {
         return motherRepository.pncCount();
+    }
+
+    public long successCount() {
+        return clientReferralRepository.succesfulcount();
+    }
+
+    public long unsuccessCount() {
+        return clientReferralRepository.unsuccesfulcount();
     }
 
     public long childCount() {

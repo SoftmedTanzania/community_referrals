@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.drishti.ChwSmartRegisterActivity;
 import org.ei.opensrp.drishti.ClientsDetailsActivity;
 import org.ei.opensrp.drishti.Fragments.ClientDetailFragment;

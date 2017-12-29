@@ -96,10 +96,9 @@ public class CommonRepository extends DrishtiRepository {
     public void customInsert(ContentValues contentValues) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
         Log.d("customInsert", "tableName = " + TABLE_NAME);
+        Log.d("customInsert", "content values = " + contentValues.toString());
         database.insert(TABLE_NAME, null, contentValues);
 
-//        Cursor cursor = database.rawQuery("select * from uzazi_salama_follow_up_report",null);
-//        Log.d("customInsert", "inserted values = " +new Gson().toJson(readAllcommon(cursor)));
     }
 
     public void customUpdate(ContentValues contentValues, String caseId) {

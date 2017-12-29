@@ -80,6 +80,7 @@ import org.ei.opensrp.service.formSubmissionHandler.RenewFPProductHandler;
 import org.ei.opensrp.service.formSubmissionHandler.TTHandler;
 import org.ei.opensrp.service.formSubmissionHandler.VitaminAHandler;
 import org.ei.opensrp.sync.SaveANMLocationTask;
+import org.ei.opensrp.sync.SaveRegistrationIdInfoTask;
 import org.ei.opensrp.sync.SaveTeamInfoTask;
 import org.ei.opensrp.sync.SaveUserInfoTask;
 import org.ei.opensrp.sync.SavehasFacilityInfoTask;
@@ -201,6 +202,7 @@ public class Context {
     private SaveTeamInfoTask saveTeamInfoTask;
     private SavehasFacilityInfoTask savehasFacilityInfoTask;
     private SavehasReferralServiceInfoTask savehasReferralServiceInfoTask;
+    private SaveRegistrationIdInfoTask saveRegistrationIdInfoTask;
 
     private ANMController anmController;
     private ANMLocationController anmLocationController;
@@ -566,7 +568,7 @@ public class Context {
     public AllBeneficiaries allBeneficiaries() {
         initRepository();
         if (allBeneficiaries == null) {
-            allBeneficiaries = new AllBeneficiaries(motherRepository(), childRepository(), alertRepository(), timelineEventRepository());
+            allBeneficiaries = new AllBeneficiaries(motherRepository(),clientReferralRepository() ,childRepository(), alertRepository(), timelineEventRepository());
         }
         return allBeneficiaries;
     }
@@ -696,11 +698,17 @@ public class Context {
     public UserService userService() {
         if (userService == null) {
             Repository repo = initRepository();
-            userService = new UserService(repo, allSettings(), allSharedPreferences(), httpAgent(), session(), configuration(), saveANMLocationTask(), saveUserInfoTask(),savehasReferralServiceInfoTask(),savehasFacilityInfoTask(), saveTeamInfoTask());
+            userService = new UserService(repo, allSettings(), allSharedPreferences(), httpAgent(), session(), configuration(), saveANMLocationTask(), saveUserInfoTask(),savehasReferralServiceInfoTask(),savehasFacilityInfoTask(), saveTeamInfoTask(), saveRegistrationIdInfoTask());
         }
         return userService;
     }
 
+    private SaveRegistrationIdInfoTask saveRegistrationIdInfoTask() {
+        if (saveRegistrationIdInfoTask == null) {
+            saveRegistrationIdInfoTask = new SaveRegistrationIdInfoTask(allSettings());
+        }
+        return saveRegistrationIdInfoTask;
+    }
     private SavehasFacilityInfoTask savehasFacilityInfoTask() {
         if (savehasFacilityInfoTask == null) {
             savehasFacilityInfoTask = new SavehasFacilityInfoTask(allSettings());

@@ -20,6 +20,6 @@ public class ANMService {
     }
 
     public ANM fetchDetails() {
-        return new ANM(allSharedPreferences.fetchRegisteredANM(), allEligibleCouples.count(), allEligibleCouples.fpCount(),new ClientReferralRepository().succesfulcount(),new ClientReferralRepository().unsuccesfulcount());
+        return new ANM(allSharedPreferences.fetchRegisteredANM(), allEligibleCouples.count(), allEligibleCouples.fpCount(),allBeneficiaries.successCount(),allBeneficiaries.unsuccessCount());
     }
 }

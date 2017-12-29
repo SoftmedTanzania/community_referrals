@@ -1,5 +1,6 @@
 package org.ei.opensrp.drishti;
 
+import android.database.Cursor;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
@@ -16,6 +17,7 @@ import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
 import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
 import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.event.Listener;
+import org.ei.opensrp.repository.ClientReferralRepository;
 import org.ei.opensrp.service.PendingFormSubmissionService;
 import org.ei.opensrp.sync.SyncAfterFetchListener;
 import org.ei.opensrp.sync.SyncProgressIndicator;
@@ -87,10 +89,8 @@ public class NativeHomeActivity extends SecuredActivity {
 
 
     public static int hhcount;
-    private int elcocount;
-    private int anccount;
-    private int pnccount;
-    private int childcount;
+    private long unsuccesfulCount;
+    private long succesfulCount;
 
     @Override
     protected void onCreation() {
@@ -154,6 +154,18 @@ public class NativeHomeActivity extends SecuredActivity {
         try {
             Log.d(TAG,"usersettings = "+userSettings.toString());
             roles = userSettings.getJSONArray("roles");
+            int count = roles.length();
+            for (int i =0 ; i<count ; i++){
+                try {
+                    if(roles.getString(i).equals("Organizational: Health Facility User")){
+                        ((BoreshaAfyaApplication)getApplication()).setUserType(0);
+                    }else if (roles.getString(i).equals("Organizational: CHW")){
+                        ((BoreshaAfyaApplication)getApplication()).setUserType(0);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -171,18 +183,7 @@ public class NativeHomeActivity extends SecuredActivity {
 
 
 
-        int count = roles.length();
-        for (int i =0 ; i<count ; i++){
-            try {
-                if(roles.getString(i).equals("Organizational: Health Facility User")){
-                    ((BoreshaAfyaApplication)getApplication()).setUserType(0);
-                }else if (roles.getString(i).equals("Organizational: CHW")){
-                    ((BoreshaAfyaApplication)getApplication()).setUserType(0);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+
 
     }
 
@@ -220,31 +221,21 @@ public class NativeHomeActivity extends SecuredActivity {
             @Override
             public void afterFetch(HomeContext anmDetails) {
                 // TODO: 9/14/17 update counts after fetch
-               // updateRegisterCounts(anmDetails);
+//                updateRegisterCounts(anmDetails);
             }
         });
     }
 
-    private void updateRegisterCounts(HomeContext homeContext) {
+    private void updateRegisterCounts(final HomeContext homeContext) {
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
 
+                succesfulCount = homeContext.getSucessReferralCount();
+                unsuccesfulCount = homeContext.getUnsucessReferralCount();
 
-//                MotherRepository commonRepository = context().commonrepository("wazazi_salama_mother");
-//                if(commonRepository!=null) {
-//                    Cursor anccountcursor = context().commonrepository("wazazi_salama_mother").RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("wazazi_salama_mother", "(wazazi_salama_mother.Is_PNC is null or wazazi_salama_mother.Is_PNC = '0') and wazazi_salama_mother.MOTHERS_NAME is not NUll  AND wazazi_salama_mother.MOTHERS_NAME != \"\"  AND wazazi_salama_mother.details  LIKE '%\"IS_VALID\":\"1\"%'"));
-//                    anccountcursor.moveToFirst();
-//                    anccount = anccountcursor.getInt(0);
-//                    anccountcursor.close();
-
-
-//                Cursor pnccountcursor = context().commonrepository("mcaremother").RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("mcaremother","mcaremother.Is_PNC = '1' and mcaremother.FWWOMFNAME is not NUll  AND mcaremother.FWWOMFNAME != \"\"      AND mcaremother.details  LIKE '%\"FWWOMVALID\":\"1\"%'"));
-//                pnccountcursor.moveToFirst();
-//                pnccount= pnccountcursor.getInt(0);
-//                pnccountcursor.close();
 
 
                     Handler mainHandler = new Handler(getMainLooper());
@@ -252,11 +243,6 @@ public class NativeHomeActivity extends SecuredActivity {
                     Runnable myRunnable = new Runnable() {
                         @Override
                         public void run() {
-//                        pncRegisterClientCountView.setText(valueOf(pnccount));
-//                        ecRegisterClientCountView.setText(valueOf(hhcount));
-//                        ancRegisterClientCountView.setText(valueOf(anccount));
-//                        fpRegisterClientCountView.setText(valueOf(elcocount));
-//                        childRegisterClientCountView.setText(valueOf(childcount));
                         }
                     };
                     mainHandler.post(myRunnable);

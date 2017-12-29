@@ -23,7 +23,9 @@ public class ClientReferral implements Serializable {
             is_at_hot_spot,
             is_lost_follow_up,
             is_vomiting;
+    public ClientReferral(){
 
+    }
     public ClientReferral(String id,
                           String relationalId,
                           String first_name,

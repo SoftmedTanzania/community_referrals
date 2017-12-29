@@ -37,6 +37,7 @@ import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
 
 import static android.widget.Toast.LENGTH_SHORT;
+import static java.lang.String.valueOf;
 
 public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     private static final String TAG = CHWSmartRegisterFragment.class.getSimpleName();
@@ -48,7 +49,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     private CHWPagerAdapter adapter;
     private ViewPager feeds;
     private Toolbar toolbar;
-
+    private View v;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +61,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                              Bundle savedInstanceState) {
 
         this.inflater = inflater;
-        View v = inflater.inflate(R.layout.activity_chwregister, container, false);
+        v = inflater.inflate(R.layout.activity_chwregister, container, false);
         imageButton = (ImageButton) v.findViewById(R.id.register_client);
 
         adapter = new CHWPagerAdapter(getActivity().getSupportFragmentManager());
@@ -245,5 +246,21 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    public void setSuccessValue(Long value){
+
+//        TextView count =  (TextView) v.findViewById(R.id.count_one);
+//        count.setText(valueOf(value));
+
+
+    }
+    public void setUnSuccessValue(Long value){
+
+//        TextView count =  (TextView) v.findViewById(R.id.count_two);
+//        count.setText(valueOf(value));
+
+
+    }
+
 
 }

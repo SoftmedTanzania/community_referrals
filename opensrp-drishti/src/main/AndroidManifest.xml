@@ -78,6 +78,16 @@
             <intent-filter><action android:name="com.google.android.gms.iid.InstanceID"/>
             </intent-filter>
         </service>
+        <service android:enabled="true"
+            android:name="org.ei.opensrp.drishti.Service.FacilityService"
+              >
+
+        </service>
+        <service android:enabled="true"
+            android:name="org.ei.opensrp.drishti.Service.ReferralService"
+              >
+
+        </service>
 
         <activity
             android:name=".LoginActivity"

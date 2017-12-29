@@ -114,11 +114,7 @@ public class NativeHomeActivity extends SecuredActivity {
     }
 
     private void updateRegisterCounts(HomeContext homeContext) {
-        ecRegisterClientCountView.setText(valueOf(homeContext.eligibleCoupleCount()));
-        ancRegisterClientCountView.setText(valueOf(homeContext.ancCount()));
-        pncRegisterClientCountView.setText(valueOf(homeContext.pncCount()));
-        fpRegisterClientCountView.setText(valueOf(homeContext.fpCount()));
-        childRegisterClientCountView.setText(valueOf(homeContext.childCount()));
+
     }
 
     @Override
