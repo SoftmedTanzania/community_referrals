@@ -183,32 +183,32 @@ public abstract class SecuredNativeSmartRegisterActivity extends SecuredActivity
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                clientsProgressView.setVisibility(VISIBLE);
-                clientsView.setVisibility(INVISIBLE);
+//                clientsProgressView.setVisibility(VISIBLE);
+//                clientsView.setVisibility(INVISIBLE);
             }
 
             @Override
             protected void onPostExecute(Void result) {
-                clientsView.setAdapter(clientsAdapter);
-                paginationViewHandler.refresh();
-                clientsProgressView.setVisibility(View.GONE);
-                clientsView.setVisibility(VISIBLE);
+//                clientsView.setAdapter(clientsAdapter);
+//                paginationViewHandler.refresh();
+//                clientsProgressView.setVisibility(View.GONE);
+//                clientsView.setVisibility(VISIBLE);
 
             }
         }.executeOnExecutor(THREAD_POOL_EXECUTOR);
     }
 
     protected void setupViews() {
-        setupNavBarViews();
-        populateClientListHeaderView(defaultOptionProvider.serviceMode().getHeaderProvider());
+//        setupNavBarViews();
+//        populateClientListHeaderView(defaultOptionProvider.serviceMode().getHeaderProvider());
 
-        clientsProgressView = (ProgressBar) findViewById(R.id.client_list_progress);
-        clientsView = (ListView) findViewById(R.id.list);
+//        clientsProgressView = (ProgressBar) findViewById(R.id.client_list_progress);
+//        clientsView = (ListView) findViewById(R.id.list);
 
-        setupStatusBarViews();
-        paginationViewHandler.addPagination(clientsView);
+//        setupStatusBarViews();
+//        paginationViewHandler.addPagination(clientsView);
 
-        updateDefaultOptions();
+//        updateDefaultOptions();
     }
 
     private void setupStatusBarViews() {
@@ -250,29 +250,8 @@ public abstract class SecuredNativeSmartRegisterActivity extends SecuredActivity
     }
 
     private void setupSearchView() {
-        searchView = (EditText) findViewById(R.id.edt_search);
-        searchView.setHint(navBarOptionsProvider.searchHint());
-        searchView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            }
 
-            @Override
-            public void onTextChanged(CharSequence cs, int start, int before, int count) {
-                currentSearchFilter = new ECSearchOption(cs.toString());
-                clientsAdapter
-                        .refreshList(currentVillageFilter, currentServiceModeOption,
-                                currentSearchFilter, currentSortOption);
 
-                searchCancelView.setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
-        searchCancelView = findViewById(R.id.btn_search_cancel);
-        searchCancelView.setOnClickListener(searchCancelHandler);
     }
 
     private void setReportDates(TextView titleView) {

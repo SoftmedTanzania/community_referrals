@@ -3,6 +3,7 @@ package org.ei.opensrp.drishti;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -140,9 +141,9 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         // orientation
-        OrientationHelper.setProperOrientationForDevice(ChwSmartRegisterActivity.this);
+//        OrientationHelper.setProperOrientationForDevice(ChwSmartRegisterActivity.this);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         securedActivity = new SecuredActivity() {
             @Override
             protected void onCreation() {
@@ -177,6 +178,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
 
     }
+
     private void initialize() {
         pendingFormSubmissionService = context().pendingFormSubmissionService();
         SYNC_STARTED.addListener(onSyncStartListener);
@@ -188,6 +190,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         getSupportActionBar().setTitle("HTM-Referrals");
         LoginActivity.setLanguage();
     }
+
     public void returnToBaseFragment(){
 //        mPager.setCurrentItem(0);
 //        AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) getDisplayFormFragmentAtIndex(1);
@@ -662,9 +665,11 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public void OnLocationSelected(String locationSelected) {
         // set registration fragment
         Log.d(TAG,"Location selected"+locationSelected);
-        wardId = locationSelected;
 
-        startFormActivity("pregnant_mothers_pre_registration",generateRandomUUIDString(),null);
+        Intent intent = new Intent(this, ClientsFormRegisterActivity.class);
+        intent.putExtra("selectedLocation",locationSelected);
+        startActivity(intent);
+//        startFormActivity("pregnant_mothers_pre_registration",generateRandomUUIDString(),null);
     }
 
 
@@ -702,6 +707,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     private void setValuesInBoreshaAfya(){
 
+        updateRegisterCounts();
         String userDetailsString = context().allSettings().settingsRepository.querySetting("userInformation","");
         String teamDetailsString = context().allSettings().settingsRepository.querySetting("teamInformation","");
         android.util.Log.d(TAG,"team details "+teamDetailsString);
@@ -954,8 +960,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
             Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
 
-
-
+            UpdateContent();
             new  org.ei.opensrp.drishti.util.AsyncTask<Void, Void, Void>(){
                 @Override
                 protected Void doInBackground(Void... params) {
@@ -1012,21 +1017,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
 
 
-//        TODO finish this better implementation for saving data to the database
-//        FormSubmission formSubmission1 = null;
-//        try {
-//            formSubmission1 = FormUtils.getInstance(getApplicationContext()).generateFormSubmisionFromJSONString(id,new Gson().toJson(pregnantMom),"wazazi_salama_pregnant_mothers_registration",fieldOverrides);
-//            Log.d(TAG,"form submission generated successfully");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//        try {
-//            context().ziggyService().saveForm(getParams(formSubmission1), formSubmission1.instance());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+
 
 
             new  org.ei.opensrp.drishti.util.AsyncTask<Void, Void, Void>(){
@@ -1101,7 +1092,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //        context().formDataRepository().updateFormSubmission(updatedSubmission);
 //
 //        Log.d(TAG,"submission content = "+ new Gson().toJson(updatedSubmission));
-//    }
+//    }r
 
     public void switchToBaseFragment(final String data) {
         Log.v("we are here", "switchtobasegragment");
@@ -1113,7 +1104,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
 //
 //                if(currentPage==1) {//for supervisors
-//                    AncSmartRegisterFragment registerFragment = (AncSmartRegisterFragment) findFragmentByPosition(0);
+//                    ChwSmartRegisterFragment registerFragment = (ChwSmartRegisterFragment) findFragmentByPosition(0);
 //                    if (registerFragment != null) {
 //                        registerFragment.refreshListView();
 //                    }
@@ -1176,6 +1167,17 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             }
 
         } else if (currentPage == 0 || currentPage == 3) {
+            securedActivity = new SecuredActivity() {
+                @Override
+                protected void onCreation() {
+
+                }
+
+                @Override
+                protected void onResumption() {
+
+                }
+            };
             super.onBackPressed(); // allow back key only if we are
         }
     }
@@ -1232,6 +1234,14 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         updateActionsTask.updateFromServer(new SyncAfterFetchListener());
     }
 
+    public void UpdateContent(){
+        CHWSmartRegisterFragment registerFragment = (CHWSmartRegisterFragment) findFragmentByPosition(0);
+        if (registerFragment != null) {
+            registerFragment.refreshListView();
+        }
+
+        updateRegisterCounts();
+    }
 
     private void updateSyncIndicator() {
         if (updateMenuItem != null) {
@@ -1316,6 +1326,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     };
 
     private void updateRegisterCounts() {
+        Log.d(TAG,"updating the counts");
         NativeUpdateANMDetailsTask task = new NativeUpdateANMDetailsTask(Context.getInstance().anmController());
         task.fetch(new NativeAfterANMDetailsFetchListener() {
             @Override
@@ -1325,25 +1336,28 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             }
         });
     }
+
     private void updateRegisterCounts(final HomeContext homeContext) {
 
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
-//
+
                 succesfulCount = homeContext.getSucessReferralCount();
                 unsuccesfulCount = homeContext.getUnsucessReferralCount();
-//
-//
-//
+
+        Log.d(TAG,"succesfulcount --"+succesfulCount);
+        Log.d(TAG,"unsuccesfulcount --"+unsuccesfulCount);
+
+
+
 //                Handler mainHandler = new Handler(getMainLooper());
 //
 //                Runnable myRunnable = new Runnable() {
 //                    @Override
 //                    public void run() {
 
-                        CHWSmartRegisterFragment displayFormFragment ;
-                        displayFormFragment = new CHWSmartRegisterFragment();
+        CHWSmartRegisterFragment displayFormFragment = (CHWSmartRegisterFragment) findFragmentByPosition(0);
 
 
                             displayFormFragment.setSuccessValue(succesfulCount);

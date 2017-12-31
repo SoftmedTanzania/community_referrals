@@ -3,6 +3,7 @@ package org.ei.opensrp.drishti.Fragments;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -50,6 +51,9 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     private ViewPager feeds;
     private Toolbar toolbar;
     private View v;
+    TextView successView, unsuccessView;
+    Long success = (long) 0;
+    Long unsuccess = (long) 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +63,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         this.inflater = inflater;
         v = inflater.inflate(R.layout.activity_chwregister, container, false);
         imageButton = (ImageButton) v.findViewById(R.id.register_client);
@@ -149,7 +153,12 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                     }
                 });
 
-
+        successView =  (TextView) v.findViewById(R.id.count_two);
+        successView.setText(valueOf(success));
+        Log.d(TAG,"setting counts"+success);
+        unsuccessView =  (TextView) v.findViewById(R.id.count_one);
+        unsuccessView.setText(valueOf(unsuccess));
+        Log.d(TAG," setiing unsuccess counts"+unsuccess);
         return v;
     }
 
@@ -249,17 +258,18 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
     public void setSuccessValue(Long value){
 
-//        TextView count =  (TextView) v.findViewById(R.id.count_one);
-//        count.setText(valueOf(value));
-
-
+        Log.d(TAG,"succesfull count "+value);
+        this.success = value;
+        successView =  (TextView) v.findViewById(R.id.count_two);
+        successView.setText(valueOf(success));
     }
+
     public void setUnSuccessValue(Long value){
+        Log.d(TAG,"unsuccesfull count "+value);
+        this.unsuccess = value;
 
-//        TextView count =  (TextView) v.findViewById(R.id.count_two);
-//        count.setText(valueOf(value));
-
-
+        unsuccessView =  (TextView) v.findViewById(R.id.count_one);
+        unsuccessView.setText(valueOf(unsuccess));
     }
 
 

@@ -130,7 +130,8 @@ public class FollowupClientsFragment extends SecuredNativeSmartRegisterCursorAda
 
     }
     protected void populateData() {
-
+        commonRepository = context().commonrepository("client_referral");
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME );
     }
 
 

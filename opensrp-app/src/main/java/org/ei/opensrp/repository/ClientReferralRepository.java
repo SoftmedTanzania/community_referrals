@@ -103,7 +103,7 @@ public class ClientReferralRepository extends DrishtiRepository {
 
     public long unsuccesfulcount() {
         return longForQuery(masterRepository.getReadableDatabase(), "SELECT COUNT(1) FROM " + CLIENT_REFERRAL
-                + " WHERE " + Status + " = '0' and is_valid = 'true'", new String[0]);
+               , new String[0]);
     }
     public long succesfulcount() {
         return longForQuery(masterRepository.getReadableDatabase(), "SELECT COUNT(1) FROM " + CLIENT_REFERRAL

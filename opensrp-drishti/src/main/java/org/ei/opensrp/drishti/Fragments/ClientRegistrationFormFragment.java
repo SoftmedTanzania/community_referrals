@@ -2,6 +2,7 @@ package org.ei.opensrp.drishti.Fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -78,7 +79,7 @@ public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCu
     private EditText CTCLayout,textPhone;
     private List<String> facilityList = new ArrayList<>();
     private List<String> serviceList = new ArrayList<>();
-    public String message = "";
+    public String message = "toast message";
     public static Context context;
     public static int clientServiceSelection = -1,facilitySelection = -1;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
@@ -103,7 +104,6 @@ public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCu
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         today = Calendar.getInstance();
-
 
 
         commonRepository = context().commonrepository("referral_service");
@@ -553,6 +553,7 @@ public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCu
 
         return commonPersonObjectList.get(0).getColumnmaps().get("id");
     }
+
     public String getReferralServiceId(String name){
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service where name ='"+ name +"'");
 
@@ -573,8 +574,9 @@ public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCu
         Log.d("TAG","ward id = "+locationId);
         this.wardId = locationId;
     }
+
     private void makeToast() {
-        Toast.makeText(context,
+        Toast.makeText(getActivity(),
                 message,
                 Toast.LENGTH_LONG).show();
     }

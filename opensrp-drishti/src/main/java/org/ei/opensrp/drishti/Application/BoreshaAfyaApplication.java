@@ -111,9 +111,9 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         Log.d(TAG,"URL to register = "+serverUrl);
 
         Map<String, String> params = new HashMap<String, String>();
-        params.put("user_uuid", userId);
         params.put("google_push_notification_token", regId);
         params.put("facility_uuid", facility);
+        params.put("user_uuid", userId);
 
         StringBuilder bodyBuilder = new StringBuilder();
         Iterator<Entry<String, String>> iterator = params.entrySet().iterator();
@@ -156,6 +156,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
 
             Response<String> stringResponse  = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl,"sean", "Admin123");
             ReferralServiceDataModel service;
+            Log.d(TAG,"referral service failure is "+stringResponse.isFailure());
             JSONArray jsonArray = null;
             try {
                 jsonArray = new JSONArray(stringResponse.payload());
@@ -229,6 +230,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
             final  String myUrl = DRISHTI_BASE_PATH + OPENSRP_FACILITY_URL_PATH;
 //            final  String myUrl = "http://192.168.43.251:8080/opensrp" + OPENSRP_FACILITY_URL_PATH;
             Response<String>  results = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl,"sean", "Admin123");
+            Log.d(TAG,"facility failure is "+results.isFailure());
             Log.d(TAG,"this is the result of facility"+results.payload());
 
             try {

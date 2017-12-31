@@ -29,7 +29,7 @@ public class SmartRegisterPaginatedAdapter extends BaseAdapter {
             int clientsPerPage, SmartRegisterClientsProvider listItemProvider) {
         this.clientsPerPage = clientsPerPage;
         this.listItemProvider = listItemProvider;
-        refreshClients(listItemProvider.getClients());
+//        refreshClients(listItemProvider.getClients());
     }
 
     public void refreshClients(SmartRegisterClients filteredClients) {
