@@ -134,6 +134,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private MenuItem remainingFormsToSyncMenuItem;
     private String wardId =null;
 
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     static final String DATABASE_NAME = "drishti.db";
     private SecuredActivity securedActivity;
     @Override
@@ -173,6 +174,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         mPager.setCurrentItem(3);
         currentPage = 3;
         initialize();
+        updateRegisterCounts();
         setValuesInBoreshaAfya();
         Log.d(TAG, "table columns ="+new Gson().toJson(context().commonrepository("referral_service").common_TABLE_COLUMNS));
 
@@ -228,18 +230,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         int Cyear = today.get(Calendar.YEAR);
         int year = 0;
 
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd mmm yyyy");
-            Date d = sdf.parse(clientReferral.getDate_of_birth());
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(d);
-            year = cal.get(Calendar.YEAR);
 
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         TextView textName = (TextView) dialogView.findViewById(R.id.name);
         TextView textAge = (TextView) dialogView.findViewById(R.id.mom_age);
@@ -354,7 +345,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
 
 
-        String reg_date = clientReferral.getReferral_date();
+        String reg_date = dateFormat.format(clientReferral.getReferral_date());
         String ageS="";
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
@@ -486,7 +477,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         TextView textName = (TextView) dialogView.findViewById(R.id.name);
         TextView textAge = (TextView) dialogView.findViewById(R.id.mom_age);
 
-        String reg_date = clientperson.getReferral_date();
+        String reg_date = dateFormat.format(clientperson.getReferral_date());
         String ageS="";
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd mmm yyyy");
@@ -668,10 +659,26 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         Intent intent = new Intent(this, ClientsFormRegisterActivity.class);
         intent.putExtra("selectedLocation",locationSelected);
-        startActivity(intent);
+        startActivityForResult(intent,90);
 //        startFormActivity("pregnant_mothers_pre_registration",generateRandomUUIDString(),null);
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        Log.d(TAG,"am here after result");
+        if (requestCode == 90) {
+            UpdateContent();
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                // The user picked a contact.
+                // The Intent's data Uri identifies which contact was selected.
 
+                // Do something with the contact here (bigger example below)
+                Log.d(TAG,"am here after result");
+                UpdateContent();
+            }
+        }
+    }
 
     private class EditDialogOptionModelfornbnf implements DialogOptionModel {
         @Override
@@ -1235,11 +1242,12 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     }
 
     public void UpdateContent(){
-        CHWSmartRegisterFragment registerFragment = (CHWSmartRegisterFragment) findFragmentByPosition(0);
+        Log.d(TAG,"am here in refresh");
+        CHWSmartRegisterFragment registerFragment = (CHWSmartRegisterFragment) getDisplayFormFragmentAtIndex(0);
         if (registerFragment != null) {
             registerFragment.refreshListView();
         }
-
+        registerFragment.refreshListView();
         updateRegisterCounts();
     }
 
@@ -1357,7 +1365,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //                    @Override
 //                    public void run() {
 
-        CHWSmartRegisterFragment displayFormFragment = (CHWSmartRegisterFragment) findFragmentByPosition(0);
+        CHWSmartRegisterFragment displayFormFragment = (CHWSmartRegisterFragment) getDisplayFormFragmentAtIndex(0);
 
 
                             displayFormFragment.setSuccessValue(succesfulCount);

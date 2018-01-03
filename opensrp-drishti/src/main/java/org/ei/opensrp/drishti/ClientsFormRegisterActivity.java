@@ -62,6 +62,7 @@ import java.util.Locale;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 
+import static java.lang.String.valueOf;
 import static org.ei.opensrp.drishti.util.Utils.generateRandomUUIDString;
 
 /**
@@ -84,7 +85,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
     private Calendar today;
     private static CheckBox checkBoxAreasonOne, checkBoxreasonTwo, checkBoxreasonThree,
             checkBoxreasonFour, checkBoxresonFive, checkBoxreasonSix;
-
+    private long dob;
     private LinearLayout tbLayout;
     private EditText CTCLayout,textPhone;
     private List<String> facilityList = new ArrayList<String>();
@@ -147,9 +148,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
                     Log.d(TAG, "referral = " + gsonReferral);
 
                     // todo start form submission
-
-                    chwSmartRegisterActivity.saveFormSubmission(gsonReferral, generateRandomUUIDString(), formName, getFormFieldsOverrides());
-//                   chwSmartRegisterActivity.UpdateContent();
+                    saveFormSubmission(gsonReferral, generateRandomUUIDString(), formName, getFormFieldsOverrides());
                     finish();
                 }
 
@@ -588,6 +587,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
 //                if (id == R.id.textDate)
 //                    textDate.setText(dateFormat.format(pickedDate.getTimeInMillis()));
                 if (id == R.id.reg_dob)
+                    dob = pickedDate.getTimeInMillis();
                     dobTextView.setText(dateFormat.format(pickedDate.getTimeInMillis()));
 
 
@@ -660,17 +660,17 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
     public ClientReferral getClientReferral() {
         ClientReferral referral = new ClientReferral();
 
-        referral.setReferral_date(dateFormat.format(today.getTimeInMillis()));
-        if((dobTextView.getText().toString()).equals("dd mmm yyyy")){
-            int age = Integer.parseInt(editTextAge.getText().toString());
-            int year = Calendar.getInstance().get(Calendar.YEAR);
-            int Byear = year - age;
-            referral.setDate_of_birth("1 Jul "+Byear);
-
-        }else{
-            referral.setDate_of_birth(dobTextView.getText().toString());
-        }
-
+        referral.setReferral_date(today.getTimeInMillis());
+//        if((dobTextView.getText().toString()).equals("dd mmm yyyy")){
+//            int age = Integer.parseInt(editTextAge.getText().toString());
+//            int year = Calendar.getInstance().get(Calendar.YEAR);
+//            int Byear = year - age;
+//            referral.setDate_of_birth("1 Jul "+Byear);
+//
+//        }else{
+//            referral.setDate_of_birth(dobTextView.getText().toString());
+//        }
+        referral.setDate_of_birth(dob);
         referral.setCommunity_based_hiv_service(editTextDiscountId.getText().toString());
         referral.setFirst_name(editTextfName.getText().toString());
         referral.setMiddle_name(editTextmName.getText().toString());

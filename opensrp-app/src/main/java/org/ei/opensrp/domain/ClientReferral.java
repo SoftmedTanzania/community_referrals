@@ -10,7 +10,8 @@ import java.io.Serializable;
 
 public class ClientReferral implements Serializable {
 
-    private String id, relationalid,details, first_name, middle_name, surname,last_ctc_date, date_of_birth, referral_date, facility_id, referral_reason, is_valid, service_provider_mobile_number, ward, village,Kijitongoji, village_leader, service_provider_group, service_provider_uiid, phone_number, referral_service_id, gender, community_based_hiv_service, ctc_number,Status;
+    private String id, relationalid,details, first_name, middle_name, surname,last_ctc_date, facility_id, referral_reason, is_valid, service_provider_mobile_number, ward, village,Kijitongoji, village_leader, service_provider_group, service_provider_uiid, phone_number, referral_service_id, gender, community_based_hiv_service, ctc_number,Status;
+    private long  date_of_birth, referral_date;
     private boolean has_2Week_cough,
             has_fever,
             had_weight_loss,
@@ -33,7 +34,7 @@ public class ClientReferral implements Serializable {
                           String surname,
                           String community_based_hiv_service,
                           String ctc_number,
-                          String referral_date,
+                          Long referral_date,
                           String facility_id,
                           String ReferralReason,
                           String referral_service_id,
@@ -105,7 +106,7 @@ public class ClientReferral implements Serializable {
         this.surname = surname;
     }
 
-    public String getDate_of_birth() {
+    public long getDate_of_birth() {
         return date_of_birth;
     }
 
@@ -233,7 +234,7 @@ public class ClientReferral implements Serializable {
         this.ctc_number = ctc_number;
     }
 
-    public void setDate_of_birth(String date_of_birth) {
+    public void setDate_of_birth(long date_of_birth) {
         this.date_of_birth = date_of_birth;
     }
 
@@ -261,11 +262,11 @@ public class ClientReferral implements Serializable {
         this.first_name = first_name;
     }
 
-    public String getReferral_date() {
+    public long getReferral_date() {
         return referral_date;
     }
 
-    public void setReferral_date(String referral_date) {
+    public void setReferral_date(long referral_date) {
         this.referral_date = referral_date;
     }
 

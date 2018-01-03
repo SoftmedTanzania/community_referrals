@@ -11,6 +11,9 @@ import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.util.LargeDiagonalCutPathDrawable;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public class ClientDetailFragment extends Fragment {
     /**
      * The fragment argument representing the item ID that this fragment
@@ -18,6 +21,8 @@ public class ClientDetailFragment extends Fragment {
      */
     public static final String CLIENT_REFERRAL = "item_id";
     public ClientReferral clientReferral;
+
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private  TextView name,contacts,sponsor,refered,referedDate,chwId,note;
     public ClientDetailFragment() {
     }
@@ -66,7 +71,7 @@ public class ClientDetailFragment extends Fragment {
         name . setText(clientReferral.getFirst_name()+" "+clientReferral.getMiddle_name()+", "+ clientReferral.getSurname());
         contacts.setText(clientReferral.getPhone_number());
         refered.setText(clientReferral.getFacility_id());
-        referedDate.setText(clientReferral.getReferral_date());
+        referedDate.setText(dateFormat.format(clientReferral.getReferral_date()));
         chwId.setText(clientReferral.getService_provider_uiid());
         note.setText(clientReferral.getStatus());
 

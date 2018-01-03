@@ -62,6 +62,7 @@ public class ReferredClientsPagerAdapter extends
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
         ClientReferralPersonObject clientReferralPersonObject = client.get(position);
+
         String gsonReferral = Utils.convertStandardJSONString(clientReferralPersonObject.getDetails());
         Log.d(TAG, "gsonReferral = " + gsonReferral);
         ClientReferral clientReferral = new Gson().fromJson(gsonReferral, ClientReferral.class);
@@ -72,7 +73,7 @@ public class ReferredClientsPagerAdapter extends
 
         viewHolder.nameTextView.setText(clientReferral.getFirst_name()+" "+clientReferral.getMiddle_name()+" "+clientReferral.getSurname());
         viewHolder.referralReason.setText(clientReferral.getReferral_reason());
-        viewHolder.scheduleDateTextView.setText(clientReferral.getReferral_date());
+        viewHolder.scheduleDateTextView.setText(dateFormat.format(clientReferral.getReferral_date()));
         viewHolder.serviceName.setText(getReferralServiceName(clientReferral.getReferral_service_id()));
 
 

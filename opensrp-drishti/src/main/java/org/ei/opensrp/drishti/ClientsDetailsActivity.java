@@ -14,8 +14,12 @@ import android.widget.TextView;
 import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.drishti.Fragments.ClientDetailFragment;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public class ClientsDetailsActivity extends AppCompatActivity {
 
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private TextView name,contacts,sponsor,refered,referedReason,referedDate,chwId,note;
     private ClientReferral clientReferral;
 
@@ -83,8 +87,7 @@ public class ClientsDetailsActivity extends AppCompatActivity {
         contacts.setText(clientReferral.getPhone_number());
         refered.setText(clientReferral.getFacility_id());
         referedReason.setText(clientReferral.getReferral_reason());
-        referedDate.setText(clientReferral.getReferral_date());
-        referedDate.setText(clientReferral.getReferral_date());
+        referedDate.setText(dateFormat.format(clientReferral.getReferral_date()));
         chwId.setText(clientReferral.getService_provider_uiid());
         note.setText(clientReferral.getStatus());
         

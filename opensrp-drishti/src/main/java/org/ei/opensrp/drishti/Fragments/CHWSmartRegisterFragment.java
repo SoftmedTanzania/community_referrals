@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -25,6 +26,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.gson.Gson;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
+import org.ei.opensrp.Context;
+import org.ei.opensrp.commonregistry.CommonRepository;
+import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
 import org.ei.opensrp.drishti.ChwSmartRegisterActivity;
 import org.ei.opensrp.drishti.LoginActivity;
@@ -32,10 +39,17 @@ import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.pageradapter.CHWPagerAdapter;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
+import org.ei.opensrp.drishti.util.AsyncTask;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.DrishtiApplication;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Locale;
 
 import static android.widget.Toast.LENGTH_SHORT;
 import static java.lang.String.valueOf;
@@ -51,9 +65,11 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     private ViewPager feeds;
     private Toolbar toolbar;
     private View v;
+    private TextView cardPickStartDate, cardPickEndDate;
     TextView successView, unsuccessView;
     Long success = (long) 0;
     Long unsuccess = (long) 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +102,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
             public void onPageScrollStateChanged(int state) {
             }
         });
+
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -260,17 +277,19 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
         Log.d(TAG,"succesfull count "+value);
         this.success = value;
-        successView =  (TextView) v.findViewById(R.id.count_two);
         successView.setText(valueOf(success));
     }
 
     public void setUnSuccessValue(Long value){
-        Log.d(TAG,"unsuccesfull count "+value);
         this.unsuccess = value;
 
-        unsuccessView =  (TextView) v.findViewById(R.id.count_one);
         unsuccessView.setText(valueOf(unsuccess));
+
+        Log.d(TAG,"unsuccesfull count after"+value);
     }
+
+
+
 
 
 }

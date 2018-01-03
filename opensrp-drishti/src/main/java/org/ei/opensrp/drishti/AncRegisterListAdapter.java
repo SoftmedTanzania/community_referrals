@@ -92,7 +92,7 @@ public class AncRegisterListAdapter extends RecyclerView.Adapter<AncRegisterList
         ClientReferral clientReferral = gson.fromJson(convertStandardJSONString(clientReferralPersonObject.getDetails()), ClientReferral.class);
 
         holder.textName.setText(clientReferral.getFirst_name());
-        holder.textEDD.setText(clientReferral.getReferral_date());
+//        holder.textEDD.setText(clientReferral.getReferral_date());
         holder.textPhysicalAddress.setText(clientReferral.getWard());
 
         //  Glide.with(appContext).load("photoUrl").into(holder.imageProfilePic);

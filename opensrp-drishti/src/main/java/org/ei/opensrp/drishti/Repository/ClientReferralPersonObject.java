@@ -13,8 +13,8 @@ import java.util.Map;
  */
 
 public class ClientReferralPersonObject {
-    private String id, relationalId, first_name, middle_name, surname, community_based_hiv_service, ctc_number, is_valid, referral_date, referral_reason, facility_id, referral_service_id, referral_status;
-
+    private String id, relationalId, first_name, middle_name, surname, community_based_hiv_service, ctc_number, is_valid, referral_reason, facility_id, referral_service_id, referral_status;
+    private long referral_date;
     private String details;
     private Map<String, String> columnMap;
 
@@ -25,7 +25,7 @@ public class ClientReferralPersonObject {
                                       String surname,
                                       String community_based_hiv_service,
                                       String ctc_number,
-                                      String referral_date,
+                                      long referral_date,
                                       String facility_id,
                                       String ReferralReason,
                                       String referral_service_id,
@@ -144,11 +144,11 @@ public class ClientReferralPersonObject {
         this.is_valid = is_valid;
     }
 
-    public String getReferral_date() {
+    public long getReferral_date() {
         return referral_date;
     }
 
-    public void setReferral_date(String referral_date) {
+    public void setReferral_date(long referral_date) {
         this.referral_date = referral_date;
     }
 

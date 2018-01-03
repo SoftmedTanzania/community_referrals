@@ -35,6 +35,7 @@ import org.ei.opensrp.view.BackgroundAction;
 import org.ei.opensrp.view.LockingBackgroundTask;
 import org.ei.opensrp.view.ProgressIndicator;
 import org.ei.opensrp.view.activity.DrishtiApplication;
+import org.ei.opensrp.view.activity.SecuredActivity;
 import org.ei.opensrp.view.receiver.SyncBroadcastReceiver;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -102,6 +103,8 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     private SaveRegistrationIdInfoTask saveRegistrationIdInfoTask;
     private SavehasFacilityInfoTask savehasFacilityInfoTask;
     private SavehasReferralServiceInfoTask savehasReferralServiceInfoTask;
+
+    private SecuredActivity securedActivity;
     public void register(final Context context, final String userId,final  String facility, final String regId) {
 
         Log.i(TAG, "registering device (regId = " + regId + ")");
@@ -388,6 +391,17 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     @Override
     public void logoutCurrentUser(){
         cleanUpSyncState();
+        securedActivity = new SecuredActivity() {
+            @Override
+            protected void onCreation() {
+
+            }
+
+            @Override
+            protected void onResumption() {
+
+            }
+        };
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getApplicationContext().startActivity(intent);

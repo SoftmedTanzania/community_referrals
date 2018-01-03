@@ -146,7 +146,7 @@ public class ClientReferralRepository extends DrishtiRepository {
         cursor.moveToFirst();
         List<ClientReferral> referralServicesListDataModel = new ArrayList<ClientReferral>();
         while (!cursor.isAfterLast()) {
-            referralServicesListDataModel.add(new ClientReferral(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12), cursor.getString(13))
+            referralServicesListDataModel.add(new ClientReferral(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getLong(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12), cursor.getString(13))
 
             );
             cursor.moveToNext();
@@ -175,13 +175,14 @@ public class ClientReferralRepository extends DrishtiRepository {
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, lName),
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, CBHS),
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, CTCNumber),
-                getColumnValueByAlias(cursor, CLIENT_REFERRAL, ReferralDate),
+                Long.parseLong(getColumnValueByAlias(cursor, CLIENT_REFERRAL, ReferralDate)),
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, ReferralFacility),
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, ReferralReason),
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, Service),
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, Status),
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, IS_VALID),
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, DETAILS_COLUMN));
+
     }
 
     private String getColumnValueByAlias(Cursor cursor, String table, String column) {

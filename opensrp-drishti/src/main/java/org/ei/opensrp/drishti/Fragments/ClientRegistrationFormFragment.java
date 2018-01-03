@@ -70,7 +70,7 @@ public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCu
     private ArrayAdapter<String>  serviceAdapter;
     private ArrayAdapter<String>  facilityAdapter;
     private ArrayList<Facility> facilities;
-
+    private long dob;
     private Calendar today;
     private static CheckBox checkBoxAreasonOne, checkBoxreasonTwo, checkBoxreasonThree,
             checkBoxreasonFour, checkBoxresonFive, checkBoxreasonSix;
@@ -403,6 +403,7 @@ public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCu
                 if (id == R.id.textDate)
                     textDate.setText(dateFormat.format(pickedDate.getTimeInMillis()));
                 if (id == R.id.reg_dob)
+                    dob=pickedDate.getTimeInMillis();
                     dobTextView.setText(dateFormat.format(pickedDate.getTimeInMillis()));
 
 
@@ -469,17 +470,17 @@ public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCu
     public ClientReferral getClientReferral() {
         ClientReferral referral = new ClientReferral();
 
-        referral.setReferral_date(textDate.getText().toString());
-        if((dobTextView.getText().toString()).equals("dd mmm yyyy")){
-            int age = Integer.parseInt(editTextAge.getText().toString());
-            int year = Calendar.getInstance().get(Calendar.YEAR);
-            int Byear = year - age;
-            referral.setDate_of_birth("1 Jul "+Byear);
-
-        }else{
-            referral.setDate_of_birth(dobTextView.getText().toString());
-        }
-
+        referral.setReferral_date(today.getTimeInMillis());
+//        if((dobTextView.getText().toString()).equals("dd mmm yyyy")){
+//            int age = Integer.parseInt(editTextAge.getText().toString());
+//            int year = Calendar.getInstance().get(Calendar.YEAR);
+//            int Byear = year - age;
+//            referral.setDate_of_birth("1 Jul "+Byear);
+//
+//        }else{
+//            referral.setDate_of_birth(dobTextView.getText().toString());
+//        }
+        referral.setDate_of_birth(dob);
         referral.setCommunity_based_hiv_service(editTextDiscountId.getText().toString());
         referral.setFirst_name(editTextfName.getText().toString());
         referral.setMiddle_name(editTextmName.getText().toString());
