@@ -110,31 +110,23 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         Log.i(TAG, "registering device (regId = " + regId + ")");
 
         String serverUrl =  DRISHTI_BASE_PATH + GSM_SERVER_URL;
-//        String serverUrl = "http://192.168.43.251:8080/opensrp" + GSM_SERVER_URL;
         Log.d(TAG,"URL to register = "+serverUrl);
 
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("google_push_notification_token", regId);
-        params.put("facility_uuid", facility);
-        params.put("user_uuid", userId);
-
-        StringBuilder bodyBuilder = new StringBuilder();
-        Iterator<Entry<String, String>> iterator = params.entrySet().iterator();
-        bodyBuilder.append("[").append("{");
-        while (iterator.hasNext()) {
-            Entry<String, String> param = iterator.next();
-            bodyBuilder.append('"').append(param.getKey()).append('"').append(':')
-                    .append('"').append(param.getValue()).append('"');
-            if (iterator.hasNext()) {
-                bodyBuilder.append(',');
-            }
+        JSONObject object = new JSONObject();
+        try {
+            object.put("google_push_notification_token",regId);
+            object.put("facility_uuid",facility);
+            object.put("user_uuid",userId);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        bodyBuilder.append("}").append("]");
+
+
 
         Response response1 = null;
-        Log.d(TAG,"parameters string ="+bodyBuilder.toString());
+        Log.d(TAG,"parameters string ="+object.toString());
         try{
-            response1 = Context.getInstance().getHttpAgent().post(serverUrl,bodyBuilder.toString());
+            response1 = Context.getInstance().getHttpAgent().post(serverUrl,object.toString());
             Log.d(TAG,"response is failure "+response1.isFailure());
             if(response1.isFailure()){
 
@@ -153,7 +145,6 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         if (count == 0 ) {
 
             //String to place our result in
-//            final  String myUrl = "http://192.168.43.251:8080/opensrp" + OPENSRP_REFERRAL_SERVICES_URL_PATH;
             final  String myUrl =  DRISHTI_BASE_PATH + OPENSRP_REFERRAL_SERVICES_URL_PATH;
             final String result = null;
 
@@ -231,7 +222,6 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
             //String to place our result in
 
             final  String myUrl = DRISHTI_BASE_PATH + OPENSRP_FACILITY_URL_PATH;
-//            final  String myUrl = "http://192.168.43.251:8080/opensrp" + OPENSRP_FACILITY_URL_PATH;
             Response<String>  results = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl,"sean", "Admin123");
             Log.d(TAG,"facility failure is "+results.isFailure());
             Log.d(TAG,"this is the result of facility"+results.payload());

@@ -78,7 +78,6 @@ public class RegistrationIntentService extends IntentService {
      * @param token The new token.
      */
     private void sendRegistrationToServer(String token) {
-        // sending  userid , facility id  and token to the server
         ((BoreshaAfyaApplication)getApplication()).register(((BoreshaAfyaApplication)getApplication()).context,((BoreshaAfyaApplication)getApplication()).getCurrentUserID(),((BoreshaAfyaApplication)getApplication()).getTeam_location_id(),token);
 
     }
