@@ -114,9 +114,9 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
 
         JSONObject object = new JSONObject();
         try {
-            object.put("google_push_notification_token",regId);
-            object.put("facility_uuid",facility);
-            object.put("user_uuid",userId);
+            object.put("facilityUiid",facility);
+            object.put("userUiid",userId);
+            object.put("googlePushNotificationToken",regId);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -124,7 +124,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
 
 
         Response response1 = null;
-        Log.d(TAG,"parameters string ="+object.toString());
+        Log.d(TAG,"parameters string = "+object.toString());
         try{
             response1 = Context.getInstance().getHttpAgent().post(serverUrl,object.toString());
             Log.d(TAG,"response is failure "+response1.isFailure());
