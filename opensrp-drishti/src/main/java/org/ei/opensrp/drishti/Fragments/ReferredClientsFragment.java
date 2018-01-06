@@ -380,7 +380,6 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                             Log.d(TAG, "enddate 2 =" + mom.getReferral_date());
                             Log.d(TAG, "comparison =" + (endDate < mom.getReferral_date()));
                             if (endDate >= mom.getReferral_date())
-
                                 ClientReferrals.add(mom);
                         }
 
@@ -411,21 +410,14 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
         @Override
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
-            // show progress
-//            if (!progressDialog.isShowing())
-//                progressDialog.show();
         }
 
         @Override
         protected void onPostExecute(List<ClientReferral> resultList) {
             super.onPostExecute(resultList);
-            // hide progress and process the result
-//            if (progressDialog.isShowing())
-//                progressDialog.dismiss();
 
             if (resultList == null) {
                 Log.d(TAG, "Query failed!");
-//                showDialog(getString(R.string.failed_please_try_again));
             } else if (resultList.size() > 0) {
                 Log.d(TAG, "resultList " + resultList.size() + "items");
 
@@ -454,7 +446,6 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                         new DividerItemDecoration(getActivity(), null));
                 recyclerView.setAdapter(pager);
 
-//                showDialog(getString(R.string.no_results_found));
             }
         }
     }
