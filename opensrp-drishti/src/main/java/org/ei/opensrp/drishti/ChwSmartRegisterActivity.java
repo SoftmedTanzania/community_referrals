@@ -667,13 +667,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         // Check which request we're responding to
         Log.d(TAG,"am here after result");
         if (requestCode == 90) {
-            UpdateContent();
-            // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                // The user picked a contact.
-                // The Intent's data Uri identifies which contact was selected.
-
-                // Do something with the contact here (bigger example below)
                 Log.d(TAG,"am here after result");
                 UpdateContent();
             }
@@ -1247,7 +1241,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         if (registerFragment != null) {
             registerFragment.refreshListView();
         }
-        registerFragment.refreshListView();
         updateRegisterCounts();
     }
 
@@ -1346,37 +1339,30 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     }
 
     private void updateRegisterCounts(final HomeContext homeContext) {
-
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
                 succesfulCount = homeContext.getSucessReferralCount();
                 unsuccesfulCount = homeContext.getUnsucessReferralCount();
 
-        Log.d(TAG,"succesfulcount --"+succesfulCount);
-        Log.d(TAG,"unsuccesfulcount --"+unsuccesfulCount);
+                Log.d(TAG,"succesfulcount --"+succesfulCount);
+                Log.d(TAG,"unsuccesfulcount --"+unsuccesfulCount);
 
+                Handler mainHandler = new Handler(getMainLooper());
 
+                Runnable myRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        CHWSmartRegisterFragment displayFormFragment = (CHWSmartRegisterFragment) getDisplayFormFragmentAtIndex(0);
 
-//                Handler mainHandler = new Handler(getMainLooper());
-//
-//                Runnable myRunnable = new Runnable() {
-//                    @Override
-//                    public void run() {
+                        displayFormFragment.setSuccessValue(succesfulCount);
+                        displayFormFragment.setUnSuccessValue(unsuccesfulCount);
+                    }
+                };
+                mainHandler.post(myRunnable);
+            }
+        }).start();
 
-        CHWSmartRegisterFragment displayFormFragment = (CHWSmartRegisterFragment) getDisplayFormFragmentAtIndex(0);
-
-
-                            displayFormFragment.setSuccessValue(succesfulCount);
-                            displayFormFragment.setUnSuccessValue(unsuccesfulCount);
-
-//                    }
-//                };
-//                mainHandler.post(myRunnable);
-//
-//            }
-//        }).start();
     }
     private Listener<Boolean> onSyncStartListener = new Listener<Boolean>() {
         @Override

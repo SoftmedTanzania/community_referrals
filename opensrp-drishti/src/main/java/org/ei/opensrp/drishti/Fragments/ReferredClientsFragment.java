@@ -2,7 +2,6 @@ package org.ei.opensrp.drishti.Fragments;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -30,7 +28,7 @@ import org.ei.opensrp.drishti.ChwSmartRegisterActivity;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
-import org.ei.opensrp.drishti.pageradapter.ReferredClientsPagerAdapter;
+import org.ei.opensrp.drishti.pageradapter.ReferredClientsListAdapter;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.drishti.util.AsyncTask;
 import org.ei.opensrp.drishti.util.DividerItemDecoration;
@@ -40,7 +38,6 @@ import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -61,7 +58,6 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
     private static final String TAG = ReferredClientsFragment.class.getSimpleName(),
             TABLE_NAME = "client_referral";
     private long startDate = 0, endDate = 0;
-    private Button filter;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private Gson gson = new Gson();
     private EditText fname,othername,ctc_number,textStartDate,textEndDate;
@@ -104,7 +100,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
         this.clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
         Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + clientReferralPersonObjectList.size());
 
-        ReferredClientsPagerAdapter pager = new ReferredClientsPagerAdapter(getActivity(), clientReferralPersonObjectList,commonRepository);
+        ReferredClientsListAdapter clientsListAdapter = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList,commonRepository);
 
         spinnerType = (MaterialSpinner) v.findViewById(R.id.spin_status);
         FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
@@ -137,7 +133,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
 
                     clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
                     Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + clientReferralPersonObjectList.size());
-                    ReferredClientsPagerAdapter pager = new ReferredClientsPagerAdapter(getActivity(), clientReferralPersonObjectList,commonRepository);
+                    ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList,commonRepository);
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                     recyclerView.setLayoutManager(mLayoutManager);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -181,7 +177,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                 new DividerItemDecoration(getActivity(), null));
 
 
-        recyclerView.setAdapter(pager);
+        recyclerView.setAdapter(clientsListAdapter);
 
         return v;
     }
@@ -439,7 +435,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                 Log.d(TAG, "resultList " + resultList.size() +"items");
 
                 clientReferralPersonObjectList = Utils.convertToClientReferralList(resultList);
-                ReferredClientsPagerAdapter pager = new ReferredClientsPagerAdapter(getActivity(), clientReferralPersonObjectList,commonRepository);
+                ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList,commonRepository);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -454,7 +450,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                 message ="hakuna taarifa yoyote";
                 makeToast();
                 clientReferralPersonObjectList = Utils.convertToClientReferralList(resultList);
-                ReferredClientsPagerAdapter pager = new ReferredClientsPagerAdapter(getActivity(), clientReferralPersonObjectList,commonRepository);
+                ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList,commonRepository);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());

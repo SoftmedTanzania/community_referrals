@@ -151,7 +151,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
             Response<String> stringResponse  = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl,"sean", "Admin123");
             ReferralServiceDataModel service;
             Log.d(TAG,"referral service failure is "+stringResponse.isFailure());
-            JSONArray jsonArray = null;
+            JSONArray jsonArray = new JSONArray();
             try {
                 jsonArray = new JSONArray(stringResponse.payload());
             } catch (JSONException e) {

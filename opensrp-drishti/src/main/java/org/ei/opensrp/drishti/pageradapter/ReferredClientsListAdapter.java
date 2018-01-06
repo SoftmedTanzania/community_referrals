@@ -30,14 +30,14 @@ import java.util.Locale;
  * Created by martha on 8/22/17.
  */
 
-public class ReferredClientsPagerAdapter extends
-        RecyclerView.Adapter<ReferredClientsPagerAdapter.ViewHolder> {
-    private static String TAG = ReferredClientsPagerAdapter.class.getSimpleName();
+public class ReferredClientsListAdapter extends
+        RecyclerView.Adapter<ReferredClientsListAdapter.ViewHolder> {
+    private static String TAG = ReferredClientsListAdapter.class.getSimpleName();
     private CommonRepository commonRepository;
     private List<ClientReferralPersonObject> client;
     private Context mContext;
 
-    public ReferredClientsPagerAdapter(Context context, List<ClientReferralPersonObject> clients,CommonRepository commonRepository) {
+    public ReferredClientsListAdapter(Context context, List<ClientReferralPersonObject> clients, CommonRepository commonRepository) {
         client = clients;
         mContext = context;
         this.commonRepository = commonRepository;
