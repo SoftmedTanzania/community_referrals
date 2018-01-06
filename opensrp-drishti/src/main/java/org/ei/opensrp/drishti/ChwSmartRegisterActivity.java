@@ -264,10 +264,10 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //        }
     }
 
-    public void showPreRegistrationVisitDialog(final ClientReferralPersonObject mother) {
+    public void showPreRegistrationVisitDialog(final ClientReferralPersonObject clientReferralPersonObject) {
 
-        String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
-        Log.d(TAG, "gsonMom = " + gsonMom);
+        String gsonClient = Utils.convertStandardJSONString(clientReferralPersonObject.getDetails());
+        Log.d(TAG, "gsonMom = " + gsonClient);
 //        final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_visit_details, null);
 
@@ -277,8 +277,8 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
-        Button button_yes = (Button) dialogView.findViewById(R.id.button_yes);
-        Button button_no = (Button) dialogView.findViewById(R.id.button_no);
+        Button button_yes = (Button) dialogView.findViewById(R.id.tuma_button);
+        Button button_no = (Button) dialogView.findViewById(R.id.cancel_button);
 
         button_yes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -306,7 +306,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //                currentPage = 1;
                 FollowupClientsFragment.newInstance();
                 ReferredClientsFragment.newInstance();
-                Toast.makeText(ChwSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + mother.getFirst_name() +" "+mother.getSurname(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChwSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + clientReferralPersonObject.getFirst_name() +" "+clientReferralPersonObject.getMiddle_name()+" "+clientReferralPersonObject.getSurname(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -319,8 +319,24 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         // TODO: findviewbyid that are on the dialog layout
         // example
-        TextView textName = (TextView) dialogView.findViewById(R.id.name);
-        textName.setText(mother.getFirst_name()+" "+ mother.getSurname());
+        TextView textName = (TextView) dialogView.findViewById(R.id.patient_name);
+        textName.setText(clientReferralPersonObject.getFirst_name()+" "+clientReferralPersonObject.getMiddle_name()+" "+ clientReferralPersonObject.getSurname());
+
+        TextView facility = (TextView) dialog.findViewById(R.id.textview_facility);
+        facility.setText(getFacilityName(clientReferralPersonObject.getFacility_id()));
+
+        TextView referral_reason = (TextView) dialog.findViewById(R.id.textview_service);
+        referral_reason.setText(clientReferralPersonObject.getReferral_reason());
+    }
+    public String getFacilityName(String id){
+
+        commonRepository = context().commonrepository("facility");
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility where id ='"+ id +"'");
+
+        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
+        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
+
+        return commonPersonObjectList.get(0).getColumnmaps().get("name");
     }
 
     public void showFollowUpDetailsDialog(ClientReferralPersonObject clientReferralPersonObject) {

@@ -121,7 +121,13 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                     List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
                     Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
                     clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
-                    clientsListAdapter.notifyDataSetChanged();
+                    ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList, commonRepository);
+                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+                    recyclerView.setLayoutManager(mLayoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.addItemDecoration(
+                            new DividerItemDecoration(getActivity(), null));
+                    recyclerView.setAdapter(pager);
                 }
             }
         });

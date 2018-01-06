@@ -142,7 +142,7 @@ public class ReferredClientsListAdapter extends
                 switch (item.getItemId()) {
                     // TODO: handle option selected
                     case R.id.popOpt1:
-                        ((ChwSmartRegisterActivity) mContext).showFollowUpFormDialog(client.get(position));
+                        ((ChwSmartRegisterActivity) mContext).showPreRegistrationVisitDialog(client.get(position));
                         return true;
 
                     case R.id.popOpt2:

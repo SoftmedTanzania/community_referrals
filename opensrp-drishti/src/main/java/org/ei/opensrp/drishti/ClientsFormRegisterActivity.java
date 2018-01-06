@@ -661,15 +661,6 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
         ClientReferral referral = new ClientReferral();
 
         referral.setReferral_date(today.getTimeInMillis());
-//        if((dobTextView.getText().toString()).equals("dd mmm yyyy")){
-//            int age = Integer.parseInt(editTextAge.getText().toString());
-//            int year = Calendar.getInstance().get(Calendar.YEAR);
-//            int Byear = year - age;
-//            referral.setDate_of_birth("1 Jul "+Byear);
-//
-//        }else{
-//            referral.setDate_of_birth(dobTextView.getText().toString());
-//        }
         referral.setDate_of_birth(dob);
         referral.setCommunity_based_hiv_service(editTextDiscountId.getText().toString());
         referral.setFirst_name(editTextfName.getText().toString());

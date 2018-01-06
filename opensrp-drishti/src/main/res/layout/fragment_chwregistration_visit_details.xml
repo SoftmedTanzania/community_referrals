@@ -1,117 +1,362 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:background="#E8E8E8"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app_ms="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingBottom="16dp"
-    android:paddingTop="2dp">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp">
+        android:scrollbars="none">
 
-        <android.support.v7.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp">
+            android:orientation="vertical"
+            android:background="@color/colorPrimaryDark">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff"
-                android:orientation="vertical">
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="64dp"
-                    android:text="Martha Shaka" />
+                    android:layout_marginLeft="16dp"
+                    android:textSize="18sp"
+                    android:id="@+id/patient_name_title"
+                    android:textColor="@color/white"
+                    android:text="Kutembelewa" />
 
                 <TextView
-                    android:id="@+id/mom_age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="16dp"
-                    android:text="Ametembelewa kwa mara nyingine tena" />
+                    android:layout_marginLeft="16dp"
+                    android:textSize="18sp"
+                    android:id="@+id/patient_name"
+                    android:textColor="@color/white"
+                    android:text="Jonh Doe" />
+
             </LinearLayout>
-        </android.support.v7.widget.CardView>
 
-        <ImageView
-            android:id="@+id/profilePic"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:layout_below="@+id/textView"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/shape_circle"
-            android:elevation="4dp"
-            android:src="@drawable/unfpa_anc" />
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="48dp"
-        android:layout_marginRight="48dp"
-        android:layout_weight="1"
-        android:background="#E8E8E8"
-        android:orientation="horizontal">
-
-        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_contact"
-            android:layout_marginRight="24dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            card_view:cardCornerRadius="0dp">
-
-            <Button
-
-                android:id="@+id/button_yes"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#8DC63F"
-                android:text="Ndio"
-                android:textColor="#fff"
-                />
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/cyan_400"/>
 
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_info"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:layout_weight="0.5"
-            android:background="#F3F3F3"
-            android:layout_marginLeft="24dp"
-            card_view:cardCornerRadius="0dp">
-
-            <Button
-
-                android:id="@+id/button_no"
+            <LinearLayout
+                android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#D85751"
-                android:text="Hapana"
-                android:textColor="#fff"
-                />
+                android:orientation="horizontal"
+                android:layout_height="70dp">
 
-        </android.support.v7.widget.CardView>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/textViewReferralReason"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_centerVertical="true"
+                        android:text="Sababu ya rufaa :"
+                        android:textColor="@color/white"/>
+                    <TextView
+                        android:layout_toRightOf="@+id/textViewReferralReason"
+                        android:id="@+id/textview_service"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:divider="@null"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:text="rufaaa inahusu"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"/>
 
-    </LinearLayout>
-    </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="70dp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/textViewReferralfacility"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_centerVertical="true"
+                        android:text="kituo cha rufaa :"
+                        android:textColor="@color/white"/>
+                    <TextView
+                        android:layout_toRightOf="@+id/textViewReferralfacility"
+                        android:id="@+id/textview_facility"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:divider="@null"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:text="mt meru hospital"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"/>
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_marginLeft="16dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/has_two_weeks_cough_title"
+                        android:layout_below="@id/flags_title"
+                        android:layout_marginTop="16dp"
+                        android:text="Two weeks cough"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"/>
+
+                    <CheckBox
+                        android:id="@+id/two_weeks_cough"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_below="@+id/flags_title"
+                        android:layout_marginTop="8dp"
+                        android:checked="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="32dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/blood_cough_title"
+                        android:layout_below="@id/flags_title"
+                        android:layout_marginTop="16dp"
+                        android:text="Blood Cough"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"/>
+
+                    <CheckBox
+                        android:id="@+id/blood_cough"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_below="@+id/flags_title"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="16dp"
+                        android:checked="false"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="32dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_marginRight="16dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/weight_loss_title"
+                        android:layout_below="@id/flags_title"
+                        android:layout_marginTop="16dp"
+                        android:text="Weight Loss"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"/>
+
+                    <CheckBox
+                        android:id="@+id/weight_loss"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_below="@+id/flags_title"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="16dp"
+                        android:checked="false"
+                        android:layout_alignParentRight="true" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_marginLeft="16dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/severe_sweating_title"
+                        android:layout_below="@id/flags_title"
+                        android:layout_marginTop="16dp"
+                        android:text="Severe Sweating"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"/>
+
+                    <CheckBox
+                        android:id="@+id/severe_sweating"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_below="@+id/flags_title"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="16dp"
+                        android:checked="false"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="32dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/fever_title"
+                        android:layout_below="@id/flags_title"
+                        android:layout_marginTop="16dp"
+                        android:text="Fever"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"/>
+
+                    <CheckBox
+                        android:id="@+id/fever"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_below="@+id/flags_title"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="16dp"
+                        android:checked="false"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="32dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_marginRight="16dp"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/pregnant_title"
+                        android:layout_below="@id/flags_title"
+                        android:layout_marginTop="16dp"
+                        android:text="Pregnant"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"/>
+
+                    <CheckBox
+                        android:id="@+id/pregnant"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_below="@+id/flags_title"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="16dp"
+                        android:checked="false"
+                        android:layout_alignParentRight="true"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/cyan_400"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/cyan_900"
+                android:paddingBottom="4dp">
+
+                <Button
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:id="@+id/tuma_button"
+                    android:background="@drawable/border_four"
+                    android:text="Hifadhi"
+                    android:textSize="14sp"
+                    android:layout_marginTop="32dp"/>
+
+                <Button
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_toLeftOf="@id/tuma_button"
+                    android:id="@+id/cancel_button"
+                    android:background="@drawable/border_four"
+                    android:text="Futa"
+                    android:textSize="14sp"
+                    android:layout_marginTop="32dp"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
