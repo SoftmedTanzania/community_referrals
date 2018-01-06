@@ -419,8 +419,6 @@ public class LoginActivity extends AppCompatActivity {
     private void goToHome() {
         BoreshaAfyaApplication.setCrashlyticsUser(context);
 
-        // Registering BroadcastReceiver
-//        registerReceiver();
         startActivity(new Intent(this, ChwSmartRegisterActivity.class));
         if((context.allSettings().fetchhasFacility()).equals("true")) {
             android.util.Log.d(TAG,"has the list of facility already");
@@ -436,8 +434,9 @@ public class LoginActivity extends AppCompatActivity {
             startService(new Intent(this, ReferralService.class));
         }
 
-        final String regId =  ((BoreshaAfyaApplication)getApplication()).getRegistration_id();
+        final String regId =  context.allSettings().fetchRegistartionId();
         // Check if regid already presents
+        Log.logDebug("registration id"+regId);
         if (regId.equals("")) {
             // Register with GCM
             intent = new Intent(this, RegistrationIntentService.class);

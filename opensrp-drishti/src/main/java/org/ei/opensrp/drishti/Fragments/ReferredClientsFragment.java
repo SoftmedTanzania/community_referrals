@@ -276,8 +276,22 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
     protected void populateData() {
         //todo need to select all mothers with usertype id similar to the logged chw user
         commonRepository = context().commonrepository("client_referral");
-        //todo martha edit the query
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME );
+         Log.d(TAG,"am in refresh list view");
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where is_valid ='true'" );
+
+        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
+        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
+
+        clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
+        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + clientReferralPersonObjectList.size());
+        ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList,commonRepository);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        recyclerView.addItemDecoration(
+                new DividerItemDecoration(getActivity(), null));
+        recyclerView.setAdapter(pager);
     }
 
     private String isDateRangeSet() {
@@ -398,7 +412,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                         Log.d(TAG,"am in the date range");
                         for (ClientReferral client : ClientReferrals) {
                             if (client.getReferral_date() < startDate || client.getReferral_date() > endDate)
-                                ClientReferrals.remove(client); // remove mother
+                                ClientReferrals.remove(client); // remove client referral
                         }
                     }
                 }
