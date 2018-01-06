@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-
 import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
@@ -35,7 +34,6 @@ import org.ei.opensrp.drishti.util.DividerItemDecoration;
 import org.ei.opensrp.drishti.util.Utils;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -46,27 +44,23 @@ import fr.ganfra.materialspinner.MaterialSpinner;
 
 
 public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private CommonRepository commonRepository;
     private android.content.Context appContext;
     private List<ClientReferralPersonObject> clientReferralPersonObjectList = new ArrayList<>();
-    private Cursor cursor,cursor2;
+    private Cursor cursor, cursor2;
     private String locationDialogTAG = "locationDialogTAG";
     private static final String TAG = ReferredClientsFragment.class.getSimpleName(),
             TABLE_NAME = "client_referral";
     private long startDate = 0, endDate = 0;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private Gson gson = new Gson();
-    private EditText fname,othername,ctc_number,textStartDate,textEndDate;
+    private EditText fname, othername, ctc_number, textStartDate, textEndDate;
     public String message = "";
     MaterialSpinner spinnerType;
     private RecyclerView recyclerView;
+    private ReferredClientsListAdapter clientsListAdapter;
 
     public ReferredClientsFragment() {
-        // Required empty public constructor
     }
 
     public static ReferredClientsFragment newInstance() {
@@ -85,22 +79,19 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v= inflater.inflate(R.layout.fragment_refered_clients, container, false);
+        View v = inflater.inflate(R.layout.fragment_refered_clients, container, false);
 
-        recyclerView = (RecyclerView)v.findViewById(R.id.clients_recycler);
-        //todo need to select all mothers with usertype id similar to the logged chw user
+        recyclerView = (RecyclerView) v.findViewById(R.id.clients_recycler);
+
         commonRepository = context().commonrepository("client_referral");
         //todo martha edit the query
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME );
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + TABLE_NAME);
 //        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where IS_VALID='true'" );
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
-        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
+        clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
 
-        this.clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
-        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + clientReferralPersonObjectList.size());
-
-        ReferredClientsListAdapter clientsListAdapter = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList,commonRepository);
+        clientsListAdapter = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList, commonRepository);
 
         spinnerType = (MaterialSpinner) v.findViewById(R.id.spin_status);
         FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
@@ -122,25 +113,15 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                     new QueryTask().execute(
                             queryBuilder.toString(),
                             TABLE_NAME,
-                            getFname(),getOthername(),getCTCNumber(),getFromDate(),getToDate(),isDateRangeSet());
+                            getFname(), getOthername(), getCTCNumber(), getFromDate(), getToDate(), isDateRangeSet());
 
-                }else {
-                    Log.d(TAG,"am in false else");
-                   cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where is_valid ='true'" );
-
+                } else {
+                    Log.d(TAG, "am in false else");
+                    cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + TABLE_NAME + " where is_valid ='true'");
                     List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
                     Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
-
                     clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
-                    Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + clientReferralPersonObjectList.size());
-                    ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList,commonRepository);
-                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-                    recyclerView.setLayoutManager(mLayoutManager);
-                    recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-                    recyclerView.addItemDecoration(
-                            new DividerItemDecoration(getActivity(), null));
-                    recyclerView.setAdapter(pager);
+                    clientsListAdapter.notifyDataSetChanged();
                 }
             }
         });
@@ -157,17 +138,12 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                 pickDate(0);
             }
         });
-
         textEndDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 pickDate(1);
             }
         });
-
-
-
-
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -176,50 +152,57 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
         recyclerView.addItemDecoration(
                 new DividerItemDecoration(getActivity(), null));
 
-
         recyclerView.setAdapter(clientsListAdapter);
 
         return v;
     }
+
     private String getFname() {
-       String value ="";
-        if(!(fname.getText().toString()).isEmpty()){
-           value = fname.getText().toString();
+        String value = "";
+        if (!(fname.getText().toString()).isEmpty()) {
+            value = fname.getText().toString();
         }
         return value;
     }
+
     private String getOthername() {
-       String value ="";
-        if(!(othername.getText().toString()).isEmpty()){
-           value = othername.getText().toString();
-        }
-        return value;
-    } private String getCTCNumber() {
-       String value ="";
-        if(!(ctc_number.getText().toString()).isEmpty()){
-           value = ctc_number.getText().toString();
+        String value = "";
+        if (!(othername.getText().toString()).isEmpty()) {
+            value = othername.getText().toString();
         }
         return value;
     }
+
+    private String getCTCNumber() {
+        String value = "";
+        if (!(ctc_number.getText().toString()).isEmpty()) {
+            value = ctc_number.getText().toString();
+        }
+        return value;
+    }
+
     private String getFromDate() {
-       String value ="";
-        if(!(textStartDate.getText().toString()).isEmpty()){
-           value = textStartDate.getText().toString();
+        String value = "";
+        if (!(textStartDate.getText().toString()).isEmpty()) {
+            value = textStartDate.getText().toString();
         }
         return value;
     }
+
     private String getToDate() {
-       String value ="";
-        if(!(textEndDate.getText().toString()).isEmpty()){
-           value = textEndDate.getText().toString();
+        String value = "";
+        if (!(textEndDate.getText().toString()).isEmpty()) {
+            value = textEndDate.getText().toString();
         }
         return value;
     }
+
     private void makeToast() {
         Toast.makeText(getActivity(),
                 message,
                 Toast.LENGTH_LONG).show();
     }
+
     private boolean isQueryInitializationOk() {
 //        if (spinnerType.getSelectedItemPosition() == 0) {
 //            // nothing selected
@@ -229,15 +212,16 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
 //
 //        }
 
-        if ((fname.getText().toString()).isEmpty()&& (othername.getText().toString()).isEmpty()&&(ctc_number.getText().toString()).isEmpty()&&(textStartDate.getText().toString()).isEmpty()&&(textEndDate.getText().toString()).isEmpty()){
+        if ((fname.getText().toString()).isEmpty() && (othername.getText().toString()).isEmpty() && (ctc_number.getText().toString()).isEmpty() && (textStartDate.getText().toString()).isEmpty() && (textEndDate.getText().toString()).isEmpty()) {
             // date range not defined properly
-            message ="hujachagua kitu cha kutafuta";
+            message = "hujachagua kitu cha kutafuta";
             makeToast();
             return false;
         }
 
         return true;
     }
+
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
         return null;
@@ -276,6 +260,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
     protected void populateData() {
         //todo need to select all mothers with usertype id similar to the logged chw user
         commonRepository = context().commonrepository("client_referral");
+
          Log.d(TAG,"am in refresh list view");
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where is_valid ='true'" );
 
@@ -295,7 +280,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
     }
 
     private String isDateRangeSet() {
-        if((startDate == 0 && endDate == 0 ) )
+        if ((startDate == 0 && endDate == 0))
             return "no";
         else
             return "yes";
@@ -314,7 +299,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                 if (id == 0) {
                     // start date
                     startDate = pickedDate.getTimeInMillis();
-                    Log.d(TAG,"chosen date"+startDate);
+                    Log.d(TAG, "chosen date" + startDate);
                     textStartDate.setText(dateFormat.format(startDate));
 
                 } else if (id == 1) {
@@ -353,14 +338,14 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
             String edate = params[6];
             String daterange = params[7];
             Log.d(TAG, "query = " + query);
-            Log.d(TAG, "tableName = " + tableName + ", parameter = " + fName+ ", rangeisset = " + daterange);
+            Log.d(TAG, "tableName = " + tableName + ", parameter = " + fName + ", rangeisset = " + daterange);
 
             Context context = Context.getInstance().updateApplicationContext(getActivity().getApplicationContext());
             CommonRepository commonRepository = context.commonrepository(tableName);
             Cursor cursor = commonRepository.RawCustomQueryForAdapter(query);
 
             // obtains mothers from result
-             ClientReferral mom  = null;
+            ClientReferral mom = null;
             List<ClientReferral> ClientReferrals = new ArrayList<>();
 
             SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
@@ -373,43 +358,39 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                         String details = cursor.getString(cursor.getColumnIndex("details"));
                         Log.d(TAG, "column details = " + details);
                         // convert and add to list
-                        if (!fName.isEmpty()){
-                                 mom  = gson.fromJson(details, ClientReferral.class);
-                                 if (mom.getFirst_name().equalsIgnoreCase(fname.getText().toString()))
-                                      ClientReferrals.add(mom);
-                        } else
-                        if (!other_name.isEmpty()){
-                                 mom  = gson.fromJson(details, ClientReferral.class);
-                                 if (mom.getFirst_name().equalsIgnoreCase(fname.getText().toString()))
-                                      ClientReferrals.add(mom);
-                        }else
-                        if (!ctc_number.isEmpty()){
-                                 mom  = gson.fromJson(details, ClientReferral.class);
-                                 if (mom.getCtc_number().equalsIgnoreCase(ctc_number))
-                                  ClientReferrals.add(mom);
-                        }  else
-                        if (!sdate.isEmpty()){
-                                 mom  = gson.fromJson(details, ClientReferral.class);
-                                 if (startDate <= mom.getReferral_date())
-                                      ClientReferrals.add(mom);
-                        }else if (!edate.isEmpty()){
-                            Log.d(TAG,"am in enddate");
-                                 mom  = gson.fromJson(details, ClientReferral.class);
-                            Log.d(TAG,"enddate ="+endDate);
-                            Log.d(TAG,"enddate 2 ="+mom.getReferral_date());
-                            Log.d(TAG,"comparison ="+(endDate < mom.getReferral_date()));
-                                 if (endDate >= mom.getReferral_date())
-
-                                      ClientReferrals.add(mom);
+                        if (!fName.isEmpty()) {
+                            mom = gson.fromJson(details, ClientReferral.class);
+                            if (mom.getFirst_name().equalsIgnoreCase(fname.getText().toString()))
+                                ClientReferrals.add(mom);
+                        } else if (!other_name.isEmpty()) {
+                            mom = gson.fromJson(details, ClientReferral.class);
+                            if (mom.getFirst_name().equalsIgnoreCase(fname.getText().toString()))
+                                ClientReferrals.add(mom);
+                        } else if (!ctc_number.isEmpty()) {
+                            mom = gson.fromJson(details, ClientReferral.class);
+                            if (mom.getCtc_number().equalsIgnoreCase(ctc_number))
+                                ClientReferrals.add(mom);
+                        } else if (!sdate.isEmpty()) {
+                            mom = gson.fromJson(details, ClientReferral.class);
+                            if (startDate <= mom.getReferral_date())
+                                ClientReferrals.add(mom);
+                        } else if (!edate.isEmpty()) {
+                            Log.d(TAG, "am in enddate");
+                            mom = gson.fromJson(details, ClientReferral.class);
+                            Log.d(TAG, "enddate =" + endDate);
+                            Log.d(TAG, "enddate 2 =" + mom.getReferral_date());
+                            Log.d(TAG, "comparison =" + (endDate < mom.getReferral_date()));
+                            if (endDate >= mom.getReferral_date())
+                                ClientReferrals.add(mom);
                         }
 
                         cursor.moveToNext();
                     }
 
-                    Log.d(TAG,"result client referral size"+ClientReferrals.size());
+                    Log.d(TAG, "result client referral size" + ClientReferrals.size());
                     // check date range
                     if (daterange.equals("yes")) {
-                        Log.d(TAG,"am in the date range");
+                        Log.d(TAG, "am in the date range");
                         for (ClientReferral client : ClientReferrals) {
                             if (client.getReferral_date() < startDate || client.getReferral_date() > endDate)
                                 ClientReferrals.remove(client); // remove client referral
@@ -430,26 +411,19 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
         @Override
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
-            // show progress
-//            if (!progressDialog.isShowing())
-//                progressDialog.show();
         }
 
         @Override
         protected void onPostExecute(List<ClientReferral> resultList) {
             super.onPostExecute(resultList);
-            // hide progress and process the result
-//            if (progressDialog.isShowing())
-//                progressDialog.dismiss();
 
-            if (resultList == null){
+            if (resultList == null) {
                 Log.d(TAG, "Query failed!");
-//                showDialog(getString(R.string.failed_please_try_again));
-            }else if (resultList.size() > 0) {
-                Log.d(TAG, "resultList " + resultList.size() +"items");
+            } else if (resultList.size() > 0) {
+                Log.d(TAG, "resultList " + resultList.size() + "items");
 
                 clientReferralPersonObjectList = Utils.convertToClientReferralList(resultList);
-                ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList,commonRepository);
+                ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList, commonRepository);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -461,10 +435,10 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
 
             } else {
                 Log.d(TAG, "Query result is empty!");
-                message ="hakuna taarifa yoyote";
+                message = "hakuna taarifa yoyote";
                 makeToast();
                 clientReferralPersonObjectList = Utils.convertToClientReferralList(resultList);
-                ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList,commonRepository);
+                ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList, commonRepository);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -473,7 +447,6 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                         new DividerItemDecoration(getActivity(), null));
                 recyclerView.setAdapter(pager);
 
-//                showDialog(getString(R.string.no_results_found));
             }
         }
     }
