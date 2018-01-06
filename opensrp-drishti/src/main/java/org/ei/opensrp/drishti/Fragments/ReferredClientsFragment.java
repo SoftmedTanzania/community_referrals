@@ -16,10 +16,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-
 import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
@@ -35,7 +33,6 @@ import org.ei.opensrp.drishti.util.DividerItemDecoration;
 import org.ei.opensrp.drishti.util.Utils;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -123,15 +120,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                     List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
                     Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
                     clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
-                    Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + clientReferralPersonObjectList.size());
-                    clientsListAdapter = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList, commonRepository);
-                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-                    recyclerView.setLayoutManager(mLayoutManager);
-                    recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-                    recyclerView.addItemDecoration(
-                            new DividerItemDecoration(getActivity(), null));
-                    recyclerView.setAdapter(clientsListAdapter);
+                    clientsListAdapter.notifyDataSetChanged();
                 }
             }
         });
