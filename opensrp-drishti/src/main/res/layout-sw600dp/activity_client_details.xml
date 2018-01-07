@@ -623,15 +623,7 @@
                                     android:text="Rufaa"
                                     android:textColor="@color/card_title_text" />
 
-                                <Button
-                                    android:id="@+id/save_button"
-                                    android:layout_width="200dp"
-                                    android:layout_height="60dp"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_toLeftOf="@id/referal_button"
-                                    android:text="Hifadhi"
-                                    android:textColor="@color/white" />
+
 
 
                             </RelativeLayout>
