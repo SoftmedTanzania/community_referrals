@@ -115,7 +115,7 @@
                                 android:layout_marginTop="16dp"
                                 android:layout_toRightOf="@+id/cbhs_number_title"
                                 android:text="0001/0001/000001"
-                                android:textColor="@color/card_title_text"
+                                android:textColor="@color/primary_text"
                                 android:textSize="14sp"
                                 android:visibility="visible" />
 
@@ -126,15 +126,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/card_separator_third"
-                            android:orientation="horizontal"
-                            android:paddingLeft="32dp"
+                            android:orientation="vertical"
+                            android:layout_marginTop="16dp"
+                            android:paddingLeft="16dp"
                             android:paddingRight="32dp">
 
                             <RelativeLayout
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="16dp"
-                                android:layout_weight="0.4"
                                 android:paddingBottom="16dp">
 
                                 <LinearLayout
@@ -145,15 +145,15 @@
                                         android:id="@+id/genderTitle"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="0dp"
+                                        android:layout_marginLeft="16dp"
                                         android:layout_marginRight="0dp"
                                         android:layout_weight="0.2"
-                                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                                         android:focusable="true"
                                         android:text="jinsia"
                                         android:imeOptions="actionNext"
                                         android:inputType="textCapWords|textPersonName"
-                                        android:textColor="@color/primary_text"
+                                        android:textColor="@color/card_title_text"
                                         android:textColorHint="@color/hint_text"
                                         android:textSize="14sp" />
 
@@ -168,7 +168,6 @@
                                         android:imeOptions="actionNext"
                                         android:inputType="textCapWords|textPersonName"
                                         android:textColor="@color/primary_text"
-                                        android:textColorHint="@color/hint_text"
                                         android:textSize="16sp" />
 
                                 </LinearLayout>
@@ -177,10 +176,9 @@
                             </RelativeLayout>
 
                             <RelativeLayout
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp"
-                                android:layout_weight="0.4"
+                                android:layout_marginRight="16dp"
                                 android:paddingBottom="16dp">
 
                                 <LinearLayout
@@ -222,7 +220,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="16dp"
-                                android:layout_weight="0.5"
                                 android:paddingBottom="16dp">
 
                                 <LinearLayout
@@ -260,7 +257,7 @@
                             </RelativeLayout>
 
                             <RelativeLayout
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="16dp"
                                 android:layout_weight="0.5"
