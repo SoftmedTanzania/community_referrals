@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ReferralServiceDataModel {
 
     private static final String TAG = ReferralServiceDataModel.class.getSimpleName();
-    private String name, id;
+    private String serviceName, id;
 
     public ReferralServiceDataModel() {
 
@@ -19,7 +19,7 @@ public class ReferralServiceDataModel {
 
     public ReferralServiceDataModel(String id, String name) {
         this.id = id;
-        this.name = name;
+        this.serviceName = name;
 
     }
 
@@ -32,11 +32,11 @@ public class ReferralServiceDataModel {
     }
 
     public String getName() {
-        return name;
+        return serviceName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.serviceName = name;
     }
 
     public static ArrayList<ReferralServiceDataModel> createReferralList() {

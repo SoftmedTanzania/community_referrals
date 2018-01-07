@@ -161,6 +161,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
                 JSONObject explrObject = null;
                 try {
                     explrObject = jsonArray.getJSONObject(i);
+                    Log.d(TAG,"string response "+explrObject.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -169,7 +170,8 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
                     Log.d(TAG, "service table is empty");
 
                 } else {
-                    Log.d(TAG, "referral services downloaded " + service.getName());
+                    Log.d(TAG, "referral services downloaded name " + service.getName());
+                    Log.d(TAG, "referral services downloaded " + service.toString());
                     ContentValues values = new ReferralServiceRepository().createValuesFor(service);
                     android.util.Log.d(TAG, "values services = " + new Gson().toJson(values));
                     commonRepository1.customInsert(values);

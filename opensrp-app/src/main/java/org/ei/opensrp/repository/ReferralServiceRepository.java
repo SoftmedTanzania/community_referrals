@@ -105,6 +105,7 @@ public class ReferralServiceRepository extends DrishtiRepository {
         ContentValues values = new ContentValues();
         values.put(ID_COLUMN, referralServiceDataModel.getId());
         values.put(NAME, referralServiceDataModel.getName());
+        Log.d(TAG,"values"+values);
         return values;
     }
 

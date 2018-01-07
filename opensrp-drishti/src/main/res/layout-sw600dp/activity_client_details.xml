@@ -130,7 +130,7 @@
                                 android:orientation="horizontal"
                                 android:paddingLeft="32dp"
                                 android:paddingRight="32dp">
-
+                                ]=
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
@@ -418,12 +418,12 @@
                                         app:ms_baseColor="@color/accent"
                                         app:ms_enableFloatingLabel="false"
                                         app:ms_hint="Aina za huduma"
-                                        app:ms_hintColor="@color/hint_text"
+                                        app:ms_hintColor="@color/black_translucent"
                                         app:ms_multiline="false"
                                         app:ms_thickness="1dp"
                                         app:paddingEnd="16dp"
-                                        app:paddingStart="16dp" />
-
+                                        app:paddingStart="16dp"
+                                        app:ms_floatingLabelColor="@color/primary_text" />
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/spinnerFacility"
                                         android:layout_below="@+id/spinnerService"
@@ -481,7 +481,7 @@
                                             android:imeOptions="actionNext"
                                             android:inputType="text"
                                             android:textColor="@color/primary_text"
-                                            android:textColorHint="@color/hint_text"
+                                            android:textColorHint="@color/black_translucent"
                                             android:textSize="14sp"
                                             app:met_floatingLabel="normal"
                                             app:met_floatingLabelText="Namba ya mteja ya community_based_hiv_service"
@@ -535,6 +535,7 @@
                                         android:orientation="vertical">
 
                                         <CheckBox
+                                            android:visibility="gone"
                                             android:id="@+id/checkbox2weekCough"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -542,9 +543,10 @@
                                             android:paddingTop="12dp"
                                             android:text="Kikohozi zaidi ya wiki mbili"
                                             android:textColor="@color/secondary_text"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
 
                                         <CheckBox
+                                            android:visibility="gone"
                                             android:id="@+id/checkboxfever"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -552,9 +554,10 @@
                                             android:paddingTop="12dp"
                                             android:text="Homa zaidi ya wiki mbili"
                                             android:textColor="@color/secondary_text"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
 
                                         <CheckBox
+                                            android:visibility="gone"
                                             android:id="@+id/checkboxWeightLoss"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -562,10 +565,12 @@
                                             android:paddingTop="12dp"
                                             android:text="Kupungua uzito"
                                             android:textColor="@color/secondary_text"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
+
 
 
                                         <CheckBox
+                                            android:visibility="gone"
                                             android:id="@+id/checkboxSevereSweating"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -573,9 +578,10 @@
                                             android:paddingTop="12dp"
                                             android:text="Kutokwa na jasho usiku zaidi ya wiki mbili"
                                             android:textColor="@color/secondary_text"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
 
                                         <CheckBox
+                                            android:visibility="gone"
                                             android:id="@+id/checkboxBloodCough"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -583,9 +589,11 @@
                                             android:paddingTop="12dp"
                                             android:text="Kukohoa makohozi yenye mchanganyiko na damu"
                                             android:textColor="@color/secondary_text"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
 
                                         <CheckBox
+
+                                            android:visibility="gone"
                                             android:id="@+id/checkboxLostFollowup"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -593,7 +601,73 @@
                                             android:paddingTop="12dp"
                                             android:text="Kusitisha dawa"
                                             android:textColor="@color/secondary_text"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
+                                        <CheckBox
+
+                                            android:visibility="gone"
+                                            android:id="@+id/checkboxIsVomiting"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:paddingBottom="12dp"
+                                            android:paddingTop="12dp"
+                                            android:text="Anatapika"
+                                            android:textColor="@color/secondary_text"
+                                            android:textSize="14sp" />
+                                        <CheckBox
+
+                                            android:visibility="gone"
+                                            android:id="@+id/checkboxHasHeadache"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:paddingBottom="12dp"
+                                            android:paddingTop="12dp"
+                                            android:text="Anaumwa Kichwa"
+                                            android:textColor="@color/secondary_text"
+                                            android:textSize="14sp" />
+                                        <CheckBox
+
+                                            android:visibility="gone"
+                                            android:id="@+id/checkboxhas_affected_partner"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:paddingBottom="12dp"
+                                            android:paddingTop="12dp"
+                                            android:text="Ana mwenza mwenye maambukizi"
+                                            android:textColor="@color/secondary_text"
+                                            android:textSize="14sp" />
+                                        <CheckBox
+
+                                            android:visibility="gone"
+                                            android:id="@+id/checkboxis_at_hot_spot"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:paddingBottom="12dp"
+                                            android:paddingTop="12dp"
+                                            android:text="Yupo sehemu hatarishi"
+                                            android:textColor="@color/secondary_text"
+                                            android:textSize="14sp" />
+                                        <CheckBox
+
+                                            android:visibility="gone"
+                                            android:id="@+id/checkboxhas_loss_of_appetite"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:paddingBottom="12dp"
+                                            android:paddingTop="12dp"
+                                            android:text="Hana hamu ya kula"
+                                            android:textColor="@color/secondary_text"
+                                            android:textSize="14sp" />
+                                        <CheckBox
+
+                                            android:visibility="gone"
+                                            android:id="@+id/checkboxhas_symptomps_for_associative_diseases"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:paddingBottom="12dp"
+                                            android:paddingTop="12dp"
+                                            android:text="Ana magonjwa nyemelezi"
+                                            android:textColor="@color/secondary_text"
+                                            android:textSize="14sp" />
                                     </LinearLayout>
 
                                 </RelativeLayout>
@@ -622,8 +696,6 @@
                                     android:layout_marginRight="16dp"
                                     android:text="Rufaa"
                                     android:textColor="@color/card_title_text" />
-
-
 
 
                             </RelativeLayout>
