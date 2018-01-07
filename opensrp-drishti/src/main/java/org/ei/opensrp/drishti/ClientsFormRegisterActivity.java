@@ -1,5 +1,6 @@
 package org.ei.opensrp.drishti;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -149,6 +150,10 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
 
                     // todo start form submission
                     saveFormSubmission(gsonReferral, generateRandomUUIDString(), formName, getFormFieldsOverrides());
+
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra("status", true);
+                    setResult(Activity.RESULT_OK, resultIntent);
                     finish();
                 }
 
