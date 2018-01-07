@@ -338,6 +338,16 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         return commonPersonObjectList.get(0).getColumnmaps().get("name");
     }
+    public String getReferralServiceName(String id){
+
+        commonRepository = context().commonrepository("referral_service");
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service where id ='"+ id +"'");
+
+        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "referral_service");
+        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
+
+        return commonPersonObjectList.get(0).getColumnmaps().get("name");
+    }
 
     public void showFollowUpDetailsDialog(ClientReferralPersonObject clientReferralPersonObject) {
 
@@ -352,7 +362,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
 
-        ImageView cancel = (ImageView) dialogView.findViewById(R.id.cancel_action);
+        Button cancel = (Button) dialogView.findViewById(R.id.ok_button);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -361,7 +371,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
 
 
-        String reg_date = dateFormat.format(clientReferral.getReferral_date());
+        String reg_date = dateFormat.format(clientReferral.getDate_of_birth());
         String ageS="";
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
@@ -381,35 +391,41 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             e.printStackTrace();
         }
 
-        TextView textName = (TextView) dialogView.findViewById(R.id.name);
-        TextView textAge = (TextView) dialogView.findViewById(R.id.mom_age);
-//        TextView textSpouseName = (TextView) dialogView.findViewById(R.id.spouseName);
-//        TextView textSpousetel = (TextView) dialogView.findViewById(R.id.spouseTel);
-//        TextView textvillage = (TextView) dialogView.findViewById(R.id.village);
-//        TextView textfacility = (TextView) dialogView.findViewById(R.id.facility);
-//        TextView textvisit = (TextView) dialogView.findViewById(R.id.visit);
-//        TextView textrisk = (TextView) dialogView.findViewById(R.id.risk);
-//        TextView textedd = (TextView) dialogView.findViewById(R.id.EDD);
-//        TextView textlnmp = (TextView) dialogView.findViewById(R.id.lnmp);
-//        TextView textPregnancyAge = (TextView) dialogView.findViewById(R.id.age);
+        TextView textName = (TextView) dialogView.findViewById(R.id.client_name);
+        TextView textAge = (TextView) dialogView.findViewById(R.id.agevalue);
+        TextView cbhs = (TextView) dialogView.findViewById(R.id.cbhs_number_value);
+        TextView referral_service = (TextView) dialogView.findViewById(R.id.viewService);
+        TextView facility = (TextView) dialogView.findViewById(R.id.viewFacility);
+        TextView ctc_number = (TextView) dialogView.findViewById(R.id.ctc_number);
+        TextView referral_reason = (TextView) dialogView.findViewById(R.id.reason_for_referral);
+        TextView gender = (TextView) dialogView.findViewById(R.id.gendervalue);
+        TextView phoneNumber = (TextView) dialogView.findViewById(R.id.viewPhone);
+        TextView physicalAddress = (TextView) dialogView.findViewById(R.id.editTextKijiji);
+        TextView villageleader = (TextView) dialogView.findViewById(R.id.viewVillageLeader);
 
 
         textName.setText(clientReferral.getFirst_name() +" "+clientReferral.getMiddle_name()+" "+clientReferral.getSurname());
-
+//
         textAge.setText(ageS + " years");
-//        textSpouseName.setText(pregnantMom.getHusbandName()+"["+ pregnantMom.getHusbandOccupation() +"]");
-//        textSpousetel.setText(pregnantMom.getPhone());
-//        textvillage.setText(clientReferral.getVillage());
-//        textfacility.setText(clientReferral.getFacility_id());
-//        textvisit.setText(reg_date);
-//        //Todo to check the risk indicators if checked to display high or low or moderate
+        cbhs.setText(clientReferral.getCommunity_based_hiv_service());
+        referral_service.setText(getReferralServiceName(clientReferral.getReferral_service_id()));
+        facility.setText(getFacilityName(clientReferral.getFacility_id()));
+        if(!clientReferral.getCtc_number().isEmpty())
+            ctc_number.setText(clientReferral.getCtc_number());
+        else
+            ctc_number.setText("-");
+        referral_reason.setText(clientReferral.getReferral_reason());
+        phoneNumber.setText(clientReferral.getPhone_number());
+        villageleader.setText(clientReferral.getVillage_leader());
+        physicalAddress.setText(clientReferral.getVillage());
+//        Todo to check the checkbox and displayed selected values
 //        textrisk.setText("high");
-//        if((clientReferral.getGender()).equals("fe")){
-//            textPregnancyAge.setText("Female");
-//        }
-//        else     {
-//            textPregnancyAge.setText("Male");
-//        }
+        if((clientReferral.getGender()).equals("KE")){
+            gender.setText("Mwanamke");
+        }
+        else     {
+            gender.setText("Mwanaume");
+        }
     }
 
     public void showFollowUpFormDialog(final ClientReferralPersonObject clientperson) {
