@@ -264,7 +264,7 @@
                                             app:ms_arrowSize="14dp"
                                             app:ms_baseColor="@color/accent"
                                             app:ms_enableFloatingLabel="false"
-                                            app:ms_hint="Chaguwa jinsia"
+                                            app:ms_hint="Chagua jinsia"
                                             app:ms_hintColor="@color/hint_text"
                                             app:ms_multiline="false"
                                             app:ms_thickness="1dp"
