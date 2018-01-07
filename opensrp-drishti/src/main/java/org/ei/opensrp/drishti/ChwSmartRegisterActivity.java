@@ -692,7 +692,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         Intent intent = new Intent(this, ClientsFormRegisterActivity.class);
         intent.putExtra("selectedLocation",locationSelected);
         startActivityForResult(intent,90);
-//        startFormActivity("pregnant_mothers_pre_registration",generateRandomUUIDString(),null);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -700,7 +699,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         Log.d(TAG,"am here after result");
         if (requestCode == 90) {
             if (resultCode == RESULT_OK) {
-                Log.d(TAG,"am here after result");
                 UpdateContent();
             }
         }
@@ -1268,7 +1266,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     }
 
     public void UpdateContent(){
-        Log.d(TAG,"am here in refresh");
         CHWSmartRegisterFragment registerFragment = (CHWSmartRegisterFragment) getDisplayFormFragmentAtIndex(0);
         if (registerFragment != null) {
             registerFragment.refreshListView();
