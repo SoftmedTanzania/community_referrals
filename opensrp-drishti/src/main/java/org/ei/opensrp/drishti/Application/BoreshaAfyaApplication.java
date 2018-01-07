@@ -103,7 +103,6 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     private SaveRegistrationIdInfoTask saveRegistrationIdInfoTask;
     private SavehasFacilityInfoTask savehasFacilityInfoTask;
     private SavehasReferralServiceInfoTask savehasReferralServiceInfoTask;
-
     private SecuredActivity securedActivity;
     public void register(final Context context, final String userId,final  String facility, final String regId) {
 

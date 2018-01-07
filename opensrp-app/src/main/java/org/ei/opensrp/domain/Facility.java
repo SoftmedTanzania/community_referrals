@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 
 public class Facility  {
-    private String serviceName, id;
+    private String facilityName, id;
 
     public Facility() {
 
@@ -15,7 +15,7 @@ public class Facility  {
 
     public Facility(String id, String name) {
         this.id = id;
-        this.serviceName = name;
+        this.facilityName = name;
 
     }
 
@@ -28,11 +28,11 @@ public class Facility  {
     }
 
     public String getName() {
-        return serviceName;
+        return facilityName;
     }
 
     public void setName(String name) {
-        this.serviceName = name;
+        this.facilityName = name;
     }
 
     public static ArrayList<Facility> createFacilityList() {

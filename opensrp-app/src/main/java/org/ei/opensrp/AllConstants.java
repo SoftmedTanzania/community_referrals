@@ -36,7 +36,7 @@ public class AllConstants {
     public static final String OPENSRP_AUTH_USER_URL_PATH = "/security/authenticate";
     public static final String OPENSRP_LOCATION_URL_PATH = "/location/location-children-tree";
     public static final String OPENSRP_REFERRAL_SERVICES_URL_PATH = "/boresha-afya-services";
-    public static final String OPENSRP_FACILITY_URL_PATH = "/boresha-afya-services";
+    public static final String OPENSRP_FACILITY_URL_PATH = "/get_health_facilities";
 
     public static final String FORM_NAME_PARAM = "formName";
     public static final String INSTANCE_ID_PARAM = "instanceId";

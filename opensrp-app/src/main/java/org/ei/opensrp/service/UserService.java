@@ -16,6 +16,7 @@ import org.ei.opensrp.sync.SaveUserInfoTask;
 import org.ei.opensrp.sync.SavehasFacilityInfoTask;
 import org.ei.opensrp.sync.SavehasReferralServiceInfoTask;
 import org.ei.opensrp.util.Session;
+import org.ei.opensrp.view.activity.SecuredActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,7 +38,7 @@ public class UserService {
     private SavehasFacilityInfoTask savehasFacilityInfoTask;
     private SavehasReferralServiceInfoTask savehasReferralServiceInfoTask;
     private SaveRegistrationIdInfoTask saveRegistrationIdInfoTask;
-
+    private SecuredActivity securedActivity;
     public UserService(Repository repository, AllSettings allSettings, AllSharedPreferences allSharedPreferences, HTTPAgent httpAgent, Session session,
                        DristhiConfiguration configuration, SaveANMLocationTask saveANMLocationTask,
                        SaveUserInfoTask saveUserInfoTask, SavehasReferralServiceInfoTask savehasReferralServiceInfoTask,SavehasFacilityInfoTask savehasFacilityInfoTask, SaveTeamInfoTask saveTeamInfoTask,SaveRegistrationIdInfoTask saveRegistrationIdInfoTask) {
@@ -155,6 +156,18 @@ public class UserService {
     }
 
     public void logoutSession() {
+
+        securedActivity = new SecuredActivity() {
+            @Override
+            protected void onCreation() {
+
+            }
+
+            @Override
+            protected void onResumption() {
+
+            }
+        };
         session().expire();
         ON_LOGOUT.notifyListeners(true);
     }
