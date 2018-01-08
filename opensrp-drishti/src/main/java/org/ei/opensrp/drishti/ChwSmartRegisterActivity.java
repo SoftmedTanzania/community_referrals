@@ -358,9 +358,10 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
-                .setCancelable(false);
+                .setCancelable(true);
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
+        dialog.getWindow().setLayout(800,800);
 
         Button cancel = (Button) dialogView.findViewById(R.id.ok_button);
         cancel.setOnClickListener(new View.OnClickListener() {

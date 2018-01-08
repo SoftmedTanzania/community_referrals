@@ -1,626 +1,532 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<LinearLayout android:layout_width="400dp"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingTop="2dp"
-    android:paddingBottom="2dp"
+    android:background="@color/white"
     android:orientation="vertical"
-    android:layout_margin="16dp"
-    android:background="#E8E8E8">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.design.widget.CoordinatorLayout
+    <RelativeLayout
+        android:paddingBottom="16dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:layout_height="wrap_content"
+        android:background="@color/card_separator_third">
 
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/client_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            android:visibility="gone">
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"
+            android:text="New Client Registration Form"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/client_name">
+            <TextView
+                android:id="@+id/cbhs_number_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="CBHS #"
+                android:textColor="@color/card_title_text"
+                android:textSize="14sp"
+                android:visibility="visible" />
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+            <TextView
+                android:id="@+id/cbhs_number_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:text="0001/0001/000001"
+                android:textColor="@color/primary_text"
+                android:textSize="14sp"
+                android:visibility="visible" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/primary"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/app_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="4dp"
-                        android:text="HTMR"
-                        android:textColor="@color/white"
-                        android:textSize="14sp" />
-
-                </RelativeLayout>
-
-            </android.support.v7.widget.Toolbar>
-
-        </android.support.design.widget.AppBarLayout>
-
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/card"
-            android:scrollbars="none">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="140dp"
-                    android:background="@color/primary" />
-
-                <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="56dp"
-                    android:layout_marginLeft="72dp"
-                    android:layout_marginRight="72dp"
-                    android:layout_marginTop="46dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:paddingBottom="16dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:orientation="vertical">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/card_separator_third">
-
-                            <TextView
-                                android:id="@+id/client_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginLeft="32dp"
-                                android:layout_marginTop="32dp"
-                                android:text="New Client Registration Form"
-                                android:textColor="@color/black"
-                                android:textSize="42sp" />
-
-                            <TextView
-                                android:id="@+id/cbhs_number_title"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/client_name"
-                                android:layout_marginLeft="32dp"
-                                android:layout_marginTop="16dp"
-                                android:text="CBHS #"
-                                android:textColor="@color/card_title_text"
-                                android:textSize="14sp"
-                                android:visibility="visible" />
-
-                            <TextView
-                                android:id="@+id/cbhs_number_value"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/client_name"
-                                android:layout_marginLeft="16dp"
-                                android:layout_marginTop="16dp"
-                                android:layout_toRightOf="@+id/cbhs_number_title"
-                                android:text="0001/0001/000001"
-                                android:textColor="@color/primary_text"
-                                android:textSize="14sp"
-                                android:visibility="visible" />
-
-                        </RelativeLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/card_separator_third"
-                            android:orientation="vertical"
-                            android:layout_marginTop="16dp"
-                            android:paddingLeft="16dp"
-                            android:paddingRight="32dp">
-
-                            <RelativeLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="16dp"
-                                android:paddingBottom="16dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
-
-                                    <TextView
-                                        android:id="@+id/genderTitle"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_marginRight="0dp"
-                                        android:layout_weight="0.2"
-                                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                                        android:focusable="true"
-                                        android:text="jinsia"
-                                        android:imeOptions="actionNext"
-                                        android:inputType="textCapWords|textPersonName"
-                                        android:textColor="@color/card_title_text"
-                                        android:textColorHint="@color/hint_text"
-                                        android:textSize="14sp" />
-
-                                    <TextView
-                                        android:id="@+id/gendervalue"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_weight="0.2"
-                                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                        android:hint="Jina la kati"
-                                        android:imeOptions="actionNext"
-                                        android:inputType="textCapWords|textPersonName"
-                                        android:textColor="@color/primary_text"
-                                        android:textSize="16sp" />
-
-                                </LinearLayout>
-
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp"
-                                android:paddingBottom="16dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
-
-                                    <TextView
-                                        android:id="@+id/textphoneNumber"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                        android:text="Namba ya simu"
-                                        android:imeOptions="actionNext"
-                                        android:inputType="textCapWords|textPersonName"
-                                        android:textColor="@color/card_grid_text"
-                                        android:textColorHint="@color/hint_text"
-                                        android:textSize="16sp" />
-
-                                    <TextView
-                                        android:id="@+id/viewPhone"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_weight="1"
-                                        android:hint="Namba ya simu"
-                                        android:imeOptions="actionNext"
-                                        android:inputType="number"
-                                        android:textColor="@color/primary_text"
-                                        android:textColorHint="@color/hint_text"
-                                        android:textSize="14sp"/>
-
-
-                                </LinearLayout>
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp"
-                                android:paddingBottom="16dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp">
-
-                                    <TextView
-                                        android:id="@+id/age"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginRight="16dp"
-                                        android:layout_weight="0.5"
-                                        android:text="umri"
-                                        app:paddingEnd="16dp"
-                                        app:paddingStart="16dp" />
-
-
-                                    <TextView
-                                        android:id="@+id/agevalue"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_weight="0.5"
-                                        android:clickable="true"
-                                        android:editable="false"
-                                        android:focusable="false"
-                                        android:hint="Tarehe ya Kuzaliwa"
-                                        android:inputType="date"
-                                        android:textColor="@color/text_black"
-                                        android:textSize="14sp"/>
-
-
-                                </LinearLayout>
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp"
-                                android:paddingBottom="16dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp">
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginRight="16dp"
-                                        android:layout_weight="0.5"
-                                        android:text="Mahali anapokaa :"
-                                        app:paddingEnd="16dp"
-                                        app:paddingStart="16dp" />
-
-
-                                    <TextView
-                                        android:id="@+id/editTextKijiji"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_weight="0.5"
-                                        android:clickable="true"
-                                        android:editable="false"
-                                        android:focusable="false"
-                                        android:hint="Tarehe ya Kuzaliwa"
-                                        android:inputType="date"
-                                        android:textColor="@color/text_black"
-                                        android:textSize="14sp"/>
-
-
-                                </LinearLayout>
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp"
-                                android:paddingBottom="16dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp">
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginRight="16dp"
-                                        android:layout_weight="0.5"
-                                        android:text="M/kiti wa mtaa :"
-                                        app:paddingEnd="16dp"
-                                        app:paddingStart="16dp" />
-
-
-                                    <TextView
-                                        android:id="@+id/viewVillageLeader"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_weight="0.5"
-                                        android:clickable="true"
-                                        android:editable="false"
-                                        android:focusable="false"
-                                        android:hint="Tarehe ya Kuzaliwa"
-                                        android:textColor="@color/primary_text"
-                                        android:textSize="14sp"/>
-
-
-                                </LinearLayout>
-                            </RelativeLayout>
-
-
-                        </LinearLayout>
-
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginRight="4dp"
-                            android:background="@color/cyan_100"
-                            android:visibility="invisible" />
+                        android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/referer_title"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/genderTitle"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="32dp"
-                            android:layout_marginTop="8dp"
-                            android:text="Taarifa za rufaa"
+                            android:gravity="right"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1"
+                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                            android:focusable="true"
+                            android:text="jinsia"
+                            android:imeOptions="actionNext"
+                            android:inputType="textCapWords|textPersonName"
                             android:textColor="@color/card_title_text"
+                            android:textColorHint="@color/hint_text"
                             android:textSize="14sp" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/gendervalue"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
-                            android:background="@color/white"
-                            android:orientation="horizontal"
-                            android:padding="16dp">
-
-                            <RelativeLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="16dp"
-                                android:layout_weight="0.3"
-                                android:background="@color/white">
-                                <TextView
-                                    android:id="@+id/reason_title"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="sababu ya rufaa :"/>
-                                <TextView
-                                    android:layout_below="@+id/reason_title"
-                                    android:id="@+id/reason_for_referral"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="48dp"
-                                    android:layout_weight="0.5"
-                                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                    android:hint="Sababu ya Rufaa"
-                                    android:imeOptions="actionNext"
-                                    android:inputType="textCapWords|textPersonName"
-                                    android:textColor="@color/primary_text"
-                                    android:textColorHint="@color/hint_text"
-                                    android:textSize="14sp" />
-
-                            </RelativeLayout>
-
-                            <View
-                                android:layout_width="1dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginBottom="16dp"
-                                android:layout_marginRight="16dp"
-                                android:layout_marginTop="16dp"
-                                android:background="@color/card_separator" />
-
-                            <RelativeLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.3">
-
-                                <TextView
-                                    android:id="@+id/service_title"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Aina ya rufaa :"/>
-                                <TextView
-                                    android:id="@+id/viewService"
-                                    android:layout_below="@+id/service_title"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginRight="16dp"
-                                    app:paddingEnd="16dp"
-                                    app:paddingStart="16dp" />
-                                <TextView
-                                    android:id="@+id/facility_title"
-                                    android:layout_below="@+id/viewService"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Kituo cha rufaa :"/>
-                                <TextView
-                                    android:id="@+id/viewFacility"
-                                    android:layout_below="@+id/facility_title"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginRight="16dp"
-                                    app:paddingEnd="16dp"
-                                    app:paddingStart="16dp"/>
-
-                            </RelativeLayout>
-
-                            <View
-                                android:layout_width="1dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginBottom="16dp"
-                                android:layout_marginRight="16dp"
-                                android:layout_marginTop="16dp"
-                                android:background="@color/card_separator" />
-
-                            <RelativeLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.3">
-
-                                <TextView
-                                    android:id="@+id/clinical_information_title"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp"
-                                    android:text="Taarifa Nyingine"
-                                    android:textColor="@color/card_title_text"
-                                    android:textSize="14sp" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:id="@+id/editTextDiscountId"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginRight="16dp"
-                                        android:layout_marginTop="16dp"
-                                        android:text="Namba ya CTC"
-                                        android:imeOptions="actionNext"
-                                        android:inputType="text"
-                                        android:textColor="@color/primary_text"
-                                        android:textColorHint="@color/hint_text"
-                                        android:textSize="14sp"
-                                        />
-
-                                    <TextView
-                                        android:id="@+id/ctc_number"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginRight="16dp"
-                                        android:hint="Namba ya CTC"
-                                        android:imeOptions="actionNext"
-                                        android:inputType="text"
-                                        android:textColor="@color/primary_text"
-                                        android:textColorHint="@color/hint_text"
-                                        android:textSize="14sp"/>
-
-
-                                </LinearLayout>
-
-                            </RelativeLayout>
-
-                            <View
-                                android:layout_width="1dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginBottom="16dp"
-                                android:layout_marginRight="16dp"
-                                android:layout_marginTop="16dp"
-                                android:background="@color/card_separator" />
-
-                            <RelativeLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.3">
-
-                                <TextView
-                                    android:id="@+id/flags_title"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Vidokezo vya hatari"
-                                    android:textColor="@color/card_title_text"
-                                    android:textSize="14sp" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_below="@id/flags_title"
-                                    android:orientation="vertical">
-
-                                    <CheckBox
-                                        android:id="@+id/checkbox2weekCough"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:paddingBottom="12dp"
-                                        android:paddingTop="12dp"
-                                        android:text="Kikohozi zaidi ya wiki mbili"
-                                        android:textColor="@color/secondary_text"
-                                        android:textSize="12sp" />
-
-                                    <CheckBox
-                                        android:id="@+id/checkboxfever"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:paddingBottom="12dp"
-                                        android:paddingTop="12dp"
-                                        android:text="Homa zaidi ya wiki mbili"
-                                        android:textColor="@color/secondary_text"
-                                        android:textSize="12sp" />
-
-                                    <CheckBox
-                                        android:id="@+id/checkboxWeightLoss"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:paddingBottom="12dp"
-                                        android:paddingTop="12dp"
-                                        android:text="Kupungua uzito"
-                                        android:textColor="@color/secondary_text"
-                                        android:textSize="12sp" />
-
-
-                                    <CheckBox
-                                        android:id="@+id/checkboxSevereSweating"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:paddingBottom="12dp"
-                                        android:paddingTop="12dp"
-                                        android:text="Kutokwa na jasho usiku zaidi ya wiki mbili"
-                                        android:textColor="@color/secondary_text"
-                                        android:textSize="12sp" />
-
-                                    <CheckBox
-                                        android:id="@+id/checkboxBloodCough"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:paddingBottom="12dp"
-                                        android:paddingTop="12dp"
-                                        android:text="Kukohoa makohozi yenye mchanganyiko na damu"
-                                        android:textColor="@color/secondary_text"
-                                        android:textSize="12sp" />
-
-                                    <CheckBox
-                                        android:id="@+id/checkboxLostFollowup"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:paddingBottom="12dp"
-                                        android:paddingTop="12dp"
-                                        android:text="Kusitisha dawa"
-                                        android:textColor="@color/secondary_text"
-                                        android:textSize="12sp" />
-                                </LinearLayout>
-
-                            </RelativeLayout>
-
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
-                            android:background="@color/card_separator" />
-
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp">
-
-
-
-                            <Button
-                                android:id="@+id/ok_button"
-                                android:layout_width="200dp"
-                                android:layout_height="60dp"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="16dp"
-                                android:layout_toLeftOf="@id/referal_button"
-                                android:text="ok"
-                                android:textColor="@color/white" />
-
-
-                        </RelativeLayout>
+                            android:layout_weight="1"
+                            android:hint="Jina la kati"
+                            android:imeOptions="actionNext"
+                            android:inputType="textCapWords|textPersonName"
+                            android:textColor="@color/primary_text"
+                            android:textSize="16sp" />
 
                     </LinearLayout>
 
 
-                </android.support.v7.widget.CardView>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/textphoneNumber"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:layout_marginRight="16dp"
+                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                            android:text="Namba ya simu"
+                            android:imeOptions="actionNext"
+                            android:inputType="textCapWords|textPersonName"
+                            android:textColor="@color/card_grid_text"
+                            android:textColorHint="@color/hint_text"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/viewPhone"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_weight="1"
+                            android:hint="Namba ya simu"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:textColor="@color/primary_text"
+                            android:textColorHint="@color/hint_text"
+                            android:textSize="14sp"/>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:id="@+id/age"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:text="umri"
+                            android:gravity="right"
+                            android:layout_marginRight="16dp"
+                            app:paddingEnd="16dp"
+                            app:paddingStart="16dp" />
+
+
+                        <TextView
+                            android:id="@+id/agevalue"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_weight="0.5"
+                            android:clickable="true"
+                            android:editable="false"
+                            android:focusable="false"
+                            android:hint="Tarehe ya Kuzaliwa"
+                            android:inputType="date"
+                            android:textColor="@color/text_black"
+                            android:textSize="14sp"/>
+
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:text="Mahali anapokaa"
+                            android:gravity="right"
+                            android:layout_marginRight="16dp"
+                            app:paddingEnd="16dp"
+                            app:paddingStart="16dp" />
+
+
+                        <TextView
+                            android:id="@+id/editTextKijiji"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_weight="0.5"
+                            android:clickable="true"
+                            android:editable="false"
+                            android:focusable="false"
+                            android:hint="Tarehe ya Kuzaliwa"
+                            android:inputType="date"
+                            android:textColor="@color/text_black"
+                            android:textSize="14sp"/>
+
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:text="M/kiti wa mtaa"
+                            android:gravity="right"
+                            android:layout_marginRight="16dp"
+                            app:paddingEnd="16dp"
+                            app:paddingStart="16dp" />
+
+
+                        <TextView
+                            android:id="@+id/viewVillageLeader"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_weight="0.5"
+                            android:clickable="true"
+                            android:editable="false"
+                            android:focusable="false"
+                            android:hint="Tarehe ya Kuzaliwa"
+                            android:textColor="@color/primary_text"
+                            android:textSize="14sp"/>
+
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:background="@color/cyan_100"
+                android:visibility="invisible" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:background="@color/white">
+                    <TextView
+                        android:id="@+id/reason_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="sababu ya rufaa"/>
+                    <TextView
+                        android:layout_below="@+id/reason_title"
+                        android:id="@+id/reason_for_referral"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_weight="0.5"
+                        android:textColorHint="@color/hint_text"
+                        android:textSize="14sp" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/card_separator" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/service_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aina ya rufaa"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:id="@+id/viewService"
+                        android:layout_below="@+id/service_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        app:paddingEnd="16dp"
+                        app:paddingStart="16dp" />
+                    <TextView
+                        android:id="@+id/facility_title"
+                        android:layout_below="@+id/viewService"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kituo cha rufaa"/>
+                    <TextView
+                        android:id="@+id/viewFacility"
+                        android:layout_below="@+id/facility_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        app:paddingEnd="16dp"
+                        app:paddingStart="16dp"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/card_separator" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/flags_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Vidokezo vya hatari"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/flags_title"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/checkbox2weekCough"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="12dp"
+                            android:paddingTop="12dp"
+                            android:text="Kikohozi zaidi ya wiki mbili"
+                            android:textColor="@color/secondary_text"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/checkboxfever"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="12dp"
+                            android:paddingTop="12dp"
+                            android:text="Homa zaidi ya wiki mbili"
+                            android:textColor="@color/secondary_text"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/checkboxWeightLoss"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="12dp"
+                            android:paddingTop="12dp"
+                            android:text="Kupungua uzito"
+                            android:textColor="@color/secondary_text"
+                            android:textSize="12sp" />
+
+
+                        <TextView
+                            android:id="@+id/checkboxSevereSweating"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="12dp"
+                            android:paddingTop="12dp"
+                            android:text="Kutokwa na jasho usiku zaidi ya wiki mbili"
+                            android:textColor="@color/secondary_text"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/checkboxBloodCough"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="12dp"
+                            android:paddingTop="12dp"
+                            android:text="Kukohoa makohozi yenye mchanganyiko na damu"
+                            android:textColor="@color/secondary_text"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/checkboxLostFollowup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="12dp"
+                            android:paddingTop="12dp"
+                            android:text="Kusitisha dawa"
+                            android:textColor="@color/secondary_text"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/card_separator" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/clinical_information_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Taarifa Nyingine"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_below="@id/clinical_information_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/editTextDiscountId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Namba ya CTC"
+                            android:textColor="@color/primary_text"
+                            android:textColorHint="@color/hint_text"
+                            android:textSize="14sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/ctc_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:hint="Namba ya CTC"
+                            android:textColor="@color/primary_text"
+                            android:textColorHint="@color/hint_text"
+                            android:textSize="14sp"/>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/card_separator" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <Button
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/ok_button"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_toLeftOf="@id/referal_button"
+                    android:text="ok"
+                    android:textColor="@color/white" />
+
 
             </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 
-        </RelativeLayout>
-
-    </android.support.design.widget.CoordinatorLayout>
-
-    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>
