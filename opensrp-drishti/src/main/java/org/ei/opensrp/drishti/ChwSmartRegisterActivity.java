@@ -20,6 +20,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -96,6 +98,7 @@ import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import fr.ganfra.materialspinner.MaterialSpinner;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.View.INVISIBLE;
@@ -133,10 +136,12 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private MenuItem updateMenuItem;
     private MenuItem remainingFormsToSyncMenuItem;
     private String wardId =null;
-
+    public static MaterialSpinner spinnerReason;
+    public static int reasonSelection = -1;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     static final String DATABASE_NAME = "drishti.db";
     private SecuredActivity securedActivity;
+    String message ="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -266,10 +271,34 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     public void showPreRegistrationVisitDialog(final ClientReferralPersonObject clientReferralPersonObject) {
 
+        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_visit_details, null);
+        String[] ITEMS = {"Amehama", "Amefariki","Sababu nyinginezo"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ITEMS);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerReason = (MaterialSpinner) findViewById(R.id.spinnerReason);
+        spinnerReason.setAdapter(adapter);
+
+        spinnerReason.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i >= 0) {
+                    spinnerReason.setFloatingLabelText("Chagua sababu ya kutokwenda kliniki");
+                    reasonSelection = i;
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
+        spinnerReason.setSelection(reasonSelection);
+
         String gsonClient = Utils.convertStandardJSONString(clientReferralPersonObject.getDetails());
         Log.d(TAG, "gsonMom = " + gsonClient);
 //        final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
-        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_visit_details, null);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
@@ -283,29 +312,18 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         button_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spinnerReason.getSelectedItemPosition() <=0) {
+                    // no radio checked
+                    message = "Tafadhali chagua sababu ya mteja kutokwenda kliniki";
+                    makeToast();
+                }
 
-//                pregnantMom.setDateLastVisited(Calendar.getInstance().getTimeInMillis());
+                ClientReferral clientReferral = new Gson().fromJson(clientReferralPersonObject.getDetails(),ClientReferral.class);
 
-//                mother.setDetails(new Gson().toJson(pregnantMom));
-//                updateFormSubmission(mother,mother.getId());
-//todo how to refresh the  pre registartion  fragment after updating
-//                mBaseFragment = new FollowupClientsFragment();
-//                // Instantiate a ViewPager and a PagerAdapter.
-//                mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
-//                mPager.setOffscreenPageLimit(formNames.length);
-//                mPager.setAdapter(mPagerAdapter);
-//                mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-//                    @Override
-//                    public void onPageSelected(int position) {
-//                        currentPage = position;
-//                        // onPageChanged(position);
-//                    }
-//                });
-//
-//                mPager.setCurrentItem(1);
-//                currentPage = 1;
-                FollowupClientsFragment.newInstance();
-                ReferredClientsFragment.newInstance();
+                if(spinnerReason.getSelectedItem().toString().equals("Amehama")||spinnerReason.getSelectedItem().toString().equals("Amefariki"))
+                clientReferral.setIs_valid("false");
+
+                clientReferral.setReferral_feedback(spinnerReason.getSelectedItem().toString());
                 Toast.makeText(ChwSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + clientReferralPersonObject.getFirst_name() +" "+clientReferralPersonObject.getMiddle_name()+" "+clientReferralPersonObject.getSurname(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
@@ -317,17 +335,25 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             }
         });
 
-        // TODO: findviewbyid that are on the dialog layout
-        // example
         TextView textName = (TextView) dialogView.findViewById(R.id.patient_name);
         textName.setText(clientReferralPersonObject.getFirst_name()+" "+clientReferralPersonObject.getMiddle_name()+" "+ clientReferralPersonObject.getSurname());
 
         TextView facility = (TextView) dialog.findViewById(R.id.textview_facility);
         facility.setText(getFacilityName(clientReferralPersonObject.getFacility_id()));
 
+        TextView service = (TextView) dialog.findViewById(R.id.textview_referral);
+        service.setText(getReferralServiceName(clientReferralPersonObject.getReferral_service_id()));
+
         TextView referral_reason = (TextView) dialog.findViewById(R.id.textview_service);
         referral_reason.setText(clientReferralPersonObject.getReferral_reason());
     }
+
+    private void makeToast() {
+        Toast.makeText(this,
+                message,
+                Toast.LENGTH_LONG).show();
+    }
+
     public String getFacilityName(String id){
 
         commonRepository = context().commonrepository("facility");
@@ -338,6 +364,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         return commonPersonObjectList.get(0).getColumnmaps().get("name");
     }
+
     public String getReferralServiceName(String id){
 
         commonRepository = context().commonrepository("referral_service");
@@ -382,7 +409,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             cal.setTime(d);
 
             int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
-
+            Log.d(TAG,"age is ="+age);
             Integer ageInt = new Integer(age);
             ageS = ageInt.toString();
 
@@ -427,6 +454,105 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         else     {
             gender.setText("Mwanaume");
         }
+        setIndicators(dialogView,clientReferralPersonObject);
+    }
+
+    public void setIndicators(View view,ClientReferralPersonObject clientReferralPersonObject){
+
+        String service_name = getReferralServiceName(clientReferralPersonObject.getReferral_service_id());
+
+        TextView indicatorOne = (TextView) view.findViewById(R.id.checkbox2weekCough);
+        TextView indicatorTwo = (TextView) view.findViewById(R.id.checkboxfever);
+        TextView indicatorThree = (TextView) view.findViewById(R.id.checkboxWeightLoss);
+        TextView indicatorFour = (TextView) view.findViewById(R.id.checkboxSevereSweating);
+        TextView indicatorFive = (TextView) view.findViewById(R.id.checkboxBloodCough);
+        TextView indicatorSix = (TextView) view.findViewById(R.id.checkboxLostFollowup);
+        String details = clientReferralPersonObject.getDetails();
+        Log.d(TAG,"details ="+details);
+        ClientReferral clientReferral =  gson.fromJson(details, ClientReferral.class);
+        Log.d(TAG,"details ="+clientReferral.toString());
+        if(service_name.equals("Rufaa kwenda kliniki kutibiwa malaria")){
+            if(clientReferral.is_shaking()) {
+                indicatorOne.setVisibility(VISIBLE);
+                indicatorOne.setText("Anatetemeka");
+            }
+            if(clientReferral.isHas_fever()) {
+                indicatorTwo.setVisibility(VISIBLE);
+                indicatorTwo.setText("Anahoma kali");
+            }
+            if(clientReferral.is_vomiting()) {
+                indicatorThree.setVisibility(VISIBLE);
+                indicatorThree.setText("Anatapika");
+            }
+            if(clientReferral.is_shaking()) {
+                indicatorFour.setVisibility(VISIBLE);
+                indicatorFour.setText("Anatetemeka");
+            }
+            if(clientReferral.isHas_diarrhea()) {
+                indicatorFive.setVisibility(VISIBLE);
+                indicatorFive.setText("Anaharisha");
+            }
+            if(clientReferral.isHas_headache()) {
+                indicatorSix.setVisibility(VISIBLE);
+                indicatorSix.setText("Anaumwa kichwa");
+            }
+
+        }
+        else if(service_name.equals("Rufaa kwenda kliniki ya ushauri nasaha na upimaji")|| service_name.equals("Rufaa kwenda kupata huduma za kuzuia maambukizi toka kwa mama kwenda kwa mtoto")){
+
+            if(clientReferral.isHad_weight_loss()) {
+                indicatorOne.setVisibility(VISIBLE);
+                indicatorOne.setText("Kupunguwa uzito");
+            }
+            if(clientReferral.isHas_fever()) {
+                indicatorTwo.setVisibility(VISIBLE);
+                indicatorTwo.setText("Anahoma kali");
+            }
+            if(clientReferral.is_at_hot_spot()) {
+                indicatorThree.setVisibility(VISIBLE);
+                indicatorThree.setText("yupo sehemu hatarishi");
+            }
+            if(clientReferral.is_lost_follow_up()) {
+                indicatorFour.setVisibility(VISIBLE);
+                indicatorFour.setText("Kusitishwa dawa");
+            }
+            if(clientReferral.isHas_affected_partner()) {
+                indicatorFive.setVisibility(VISIBLE);
+                indicatorFive.setText("Ana mwenza mwenye maambukizi");
+            }
+            if(clientReferral.isHas_symptomps_for_associative_diseases()) {
+                indicatorSix.setVisibility(VISIBLE);
+                indicatorSix.setText("Ana magonjwa nyemelezi");
+            }
+        }
+        else if(service_name.equals("Rufaa kwenda kliniki ya kutibu kifua kikuu")){
+
+            if(clientReferral.isHad_weight_loss()) {
+                indicatorOne.setVisibility(VISIBLE);
+                indicatorOne.setText("Kupunguwa uzito");
+            }
+            if(clientReferral.isHas_fever()) {
+                indicatorTwo.setVisibility(VISIBLE);
+                indicatorTwo.setText("Anahoma kali");
+            }
+            if(clientReferral.isHas_2Week_cough()) {
+                indicatorThree.setVisibility(VISIBLE);
+                indicatorThree.setText("kikohozi zaidi ya wiki mbili");
+            }
+            if(clientReferral.is_lost_follow_up()) {
+                indicatorFour.setVisibility(VISIBLE);
+                indicatorFour.setText("Kusitishwa dawa");
+            }
+            if(clientReferral.isHas_severe_sweating()) {
+                indicatorFive.setVisibility(VISIBLE);
+                indicatorFive.setText("Kutokwa na jasho usiku zaidi ya week 2");
+            }
+            if(clientReferral.isHas_blood_cough()) {
+                indicatorSix.setVisibility(VISIBLE);
+                indicatorSix.setText("kukohoa makohozi yenye mchanganyiko na damu");
+            }
+        }
+
     }
 
     public void showFollowUpFormDialog(final ClientReferralPersonObject clientperson) {

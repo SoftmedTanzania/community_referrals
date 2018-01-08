@@ -56,7 +56,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_height="70dp">
+                android:layout_height="60dp">
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -93,7 +93,44 @@
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_height="70dp">
+                android:layout_height="60dp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/textViewReferralService"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_centerVertical="true"
+                        android:text="Aina ya rufaa :"
+                        android:textColor="@color/white"/>
+                    <TextView
+                        android:layout_toRightOf="@+id/textViewReferralService"
+                        android:id="@+id/textview_referral"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:divider="@null"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="16dp"
+                        android:text="rufaaa inahusu"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"/>
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="60dp">
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -115,7 +152,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:divider="@null"
-                        android:layout_marginLeft="16dp"
+                        android:layout_marginLeft="32dp"
                         android:layout_marginRight="16dp"
                         android:text="mt meru hospital"
                         android:textColor="@color/white"
@@ -129,186 +166,28 @@
 
             <LinearLayout
                 android:layout_marginTop="16dp"
-                android:layout_width="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_width="wrap_content"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
 
-                <RelativeLayout
+
+                <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spinnerReason"
                     android:layout_width="0dp"
-                    android:layout_weight="0.3"
-                    android:layout_marginLeft="16dp"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/has_two_weeks_cough_title"
-                        android:layout_below="@id/flags_title"
-                        android:layout_marginTop="16dp"
-                        android:text="Two weeks cough"
-                        android:textSize="14sp"
-                        android:textColor="@color/white"/>
-
-                    <CheckBox
-                        android:id="@+id/two_weeks_cough"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_below="@+id/flags_title"
-                        android:layout_marginTop="8dp"
-                        android:checked="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="32dp"/>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="0.3"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/blood_cough_title"
-                        android:layout_below="@id/flags_title"
-                        android:layout_marginTop="16dp"
-                        android:text="Blood Cough"
-                        android:textSize="14sp"
-                        android:textColor="@color/white"/>
-
-                    <CheckBox
-                        android:id="@+id/blood_cough"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_below="@+id/flags_title"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="16dp"
-                        android:checked="false"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="32dp"/>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/weight_loss_title"
-                        android:layout_below="@id/flags_title"
-                        android:layout_marginTop="16dp"
-                        android:text="Weight Loss"
-                        android:textSize="14sp"
-                        android:textColor="@color/white"/>
-
-                    <CheckBox
-                        android:id="@+id/weight_loss"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_below="@+id/flags_title"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="16dp"
-                        android:checked="false"
-                        android:layout_alignParentRight="true" />
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="0.3"
-                    android:layout_marginLeft="16dp"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/severe_sweating_title"
-                        android:layout_below="@id/flags_title"
-                        android:layout_marginTop="16dp"
-                        android:text="Severe Sweating"
-                        android:textSize="14sp"
-                        android:textColor="@color/white"/>
-
-                    <CheckBox
-                        android:id="@+id/severe_sweating"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_below="@+id/flags_title"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="16dp"
-                        android:checked="false"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="32dp"/>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="0.3"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/fever_title"
-                        android:layout_below="@id/flags_title"
-                        android:layout_marginTop="16dp"
-                        android:text="Fever"
-                        android:textSize="14sp"
-                        android:textColor="@color/white"/>
-
-                    <CheckBox
-                        android:id="@+id/fever"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_below="@+id/flags_title"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="16dp"
-                        android:checked="false"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="32dp"/>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="0.3"
-                    android:layout_marginRight="16dp"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/pregnant_title"
-                        android:layout_below="@id/flags_title"
-                        android:layout_marginTop="16dp"
-                        android:text="Pregnant"
-                        android:textSize="14sp"
-                        android:textColor="@color/white"/>
-
-                    <CheckBox
-                        android:id="@+id/pregnant"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_below="@+id/flags_title"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="16dp"
-                        android:checked="false"
-                        android:layout_alignParentRight="true"/>
-
-                </RelativeLayout>
+                    android:layout_weight="0.5"
+                    app:ms_arrowColor="@color/accent"
+                    app:ms_arrowSize="14dp"
+                    app:ms_baseColor="@color/accent"
+                    app:ms_enableFloatingLabel="false"
+                    app:ms_hint="sababu ya kutokwenda kliniki"
+                    app:ms_hintColor="@color/hint_text"
+                    app:ms_multiline="false"
+                    app:ms_thickness="1dp"
+                    app:paddingEnd="16dp"
+                    app:paddingStart="16dp" />
 
             </LinearLayout>
 

@@ -141,9 +141,9 @@ public class LoginActivity extends AppCompatActivity {
         setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
 
-        findViewById(R.id.credential_card).setBackground(new SmallDiagonalCutPathDrawable());
-        ImageView v = (ImageView)findViewById(R.id.background);
-        Glide.with(getApplicationContext()).load(R.drawable.clint_adair).into(v);
+//        findViewById(R.id.credential_card).setBackground(new SmallDiagonalCutPathDrawable());
+//        ImageView v = (ImageView)findViewById(R.id.background);
+//        Glide.with(getApplicationContext()).load(R.drawable.clint_adair).into(v);
 
 
 
@@ -217,8 +217,8 @@ public class LoginActivity extends AppCompatActivity {
         int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
         if (resultCode != ConnectionResult.SUCCESS) {
             if (apiAvailability.isUserResolvableError(resultCode)) {
-                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
-                        .show();
+//                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+//                        .show();
             } else {
                 Log.logDebug( "This device is not supported.");
                 finish();
@@ -445,10 +445,10 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 protected Void doInBackground(Void... params) {
 
-                    // Register on our server
-                    // On server creates a new user
+//                     Register on our server
+//                     On server creates a new user
                     if (checkPlayServices()) {
-                        // Start IntentService to register this application with GCM.
+//                         Start IntentService to register this application with GCM.
                         startService(intent);
                     }
 

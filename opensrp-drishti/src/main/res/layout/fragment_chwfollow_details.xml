@@ -383,6 +383,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/checkbox2weekCough"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -393,6 +394,7 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/checkboxfever"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -403,6 +405,7 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/checkboxWeightLoss"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -414,6 +417,7 @@
 
 
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/checkboxSevereSweating"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -424,6 +428,7 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/checkboxBloodCough"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -434,6 +439,7 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/checkboxLostFollowup"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

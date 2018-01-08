@@ -2,7 +2,6 @@ package org.ei.opensrp.drishti.Fragments;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -520,7 +519,7 @@ public class ClientRegistrationFormFragment extends SecuredNativeSmartRegisterCu
             referral.setHas_headache(checkBoxreasonTwo.isChecked());
             referral.setHas_severe_sweating(checkBoxreasonThree.isChecked());
             referral.setIs_vomiting(checkBoxreasonFour.isChecked());
-            referral.setHas_loss_of_appetite(checkBoxresonFive.isChecked());
+            referral.setHas_diarrhea(checkBoxresonFive.isChecked());
 //            referral.setIs_lost_follow_up(checkBoxreasonSix.isChecked());
         }
 
