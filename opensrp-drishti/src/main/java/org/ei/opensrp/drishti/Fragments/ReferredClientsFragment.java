@@ -266,6 +266,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
     protected void populateData() {
         //todo need to select all mothers with usertype id similar to the logged chw user
         commonRepository = context().commonrepository("client_referral");
+
          Log.d(TAG,"am in refresh list view");
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME+" where is_valid ='true'" );
 

@@ -3,17 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:baselineAligned="false"
-    android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
-    android:showDividers="middle"
-    tools:context="org.ei.opensrp.drishti.Fragments.ItemListActivity">
-
-    <!--
-    This layout is a two-pane layout for the Items
-    master/detail flow.
-    
-    -->
+    tools:context="org.ei.opensrp.drishti.ChwSmartRegisterActivity">
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"

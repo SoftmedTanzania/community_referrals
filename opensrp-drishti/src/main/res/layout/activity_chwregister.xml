@@ -7,15 +7,15 @@
     android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
-
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#2d69a5">
+        android:layout_width="match_parent"
+        android:id="@+id/app_bar_layout"
+        android:theme="@style/AppTheme.AppBarOverlay">
         <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/toolbar"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/ec_main_header_height"
-            android:background="#2d69a5"
+            android:background="@color/colorPrimary"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:focusableInTouchMode="true">
@@ -23,27 +23,55 @@
                 android:id="@+id/register_nav_bar_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <TextView
-                    android:visibility="gone"
-                    android:id="@+id/title"
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_centerVertical="true"
+                    android:src="@drawable/ic_logo_white"
+                    android:id="@+id/toolbar_logo"/>
+
+                <LinearLayout
+                    android:id="@+id/title"
+                    android:paddingTop="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="    HTM-Referrals"
-                    android:textColor="#fff"
-                    android:textSize="18sp"/>
+                    android:orientation="vertical"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@id/toolbar_logo"
+                    android:layout_centerVertical="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mfumo wa Rufaa"
+                        android:textColor="@color/white"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginLeft="4dp"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Logged user"
+                        android:textColor="@color/white"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginLeft="4dp"
+                        android:textSize="16sp"
+                        android:id="@+id/toolbar_user_name"/>
+
+                </LinearLayout>
 
                 <org.ei.opensrp.drishti.util.DonutChart
                     android:id="@+id/donutChart"
-                    android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/title"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     customviews:radius="18dp"
                     android:layout_gravity="center"/>
-
 
                 <RelativeLayout
                     android:layout_marginLeft="32dp"
@@ -111,20 +139,6 @@
                         android:text="Unsuccessful"
                         android:textSize="10sp"/>
                 </RelativeLayout>
-
-
-
-                <android.support.design.widget.TabLayout
-                    android:id="@+id/tabs"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    app:tabGravity="fill"
-                    app:tabIndicatorColor="#fff"
-                    app:tabIndicatorHeight="2dp"
-                    app:tabMode="fixed"
-                    app:tabSelectedTextColor="#fff"
-                    app:tabTextColor="#aaa" />
 
                 <ImageButton
                     android:visibility="gone"
@@ -256,10 +270,29 @@
                     android:paddingRight="5dp" />
 
             </RelativeLayout>
-
-
         </android.support.v7.widget.Toolbar>
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorPrimary"
+            android:paddingTop="8dp"
+            android:layout_height="wrap_content">
+            <View android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="148dp"
+                android:layout_marginLeft="16dp"
+                android:background="@color/cyan_200"/>
+        </android.support.percent.PercentRelativeLayout>
 
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:tabIndicatorColor="@color/cyan_200"
+            app:tabIndicatorHeight="2dp"
+            app:tabMode="fixed"
+            app:tabMaxWidth="0dp"
+            app:tabGravity="fill"/>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
