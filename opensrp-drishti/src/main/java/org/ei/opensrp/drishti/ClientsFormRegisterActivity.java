@@ -459,6 +459,9 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
                     findViewById(R.id.checkboxIsVomiting).setVisibility(View.GONE);
                     findViewById(R.id.checkboxHasHeadache).setVisibility(View.GONE);
                     findViewById(R.id.checkboxWeightLoss).setVisibility(View.GONE);
+                    findViewById(R.id.checkbox2weekCough).setVisibility(View.GONE);
+                    findViewById(R.id.checkboxfever).setVisibility(View.GONE);
+                    findViewById(R.id.checkboxBloodCough).setVisibility(View.GONE);
                     findViewById(R.id.checkboxSevereSweating).setVisibility(View.GONE);
                     findViewById(R.id.checkboxhas_loss_of_appetite).setVisibility(View.GONE);
                     findViewById(R.id.checkboxIsVomiting).setVisibility(View.GONE);
@@ -467,6 +470,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
                     findViewById(R.id.checkboxLostFollowup).setVisibility(View.GONE);
 //                    tbLayout.setVisibility(View.GONE);
                     CTCLayout.setVisibility(View.GONE);
+                    fName = " ";
                 }
             }
 

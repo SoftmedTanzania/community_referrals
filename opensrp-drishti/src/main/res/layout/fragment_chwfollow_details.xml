@@ -178,7 +178,7 @@
                             <RelativeLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginRight="16dp"
+                                android:layout_marginLeft="16dp"
                                 android:paddingBottom="16dp">
 
                                 <LinearLayout
@@ -194,7 +194,7 @@
                                         android:text="Namba ya simu"
                                         android:imeOptions="actionNext"
                                         android:inputType="textCapWords|textPersonName"
-                                        android:textColor="@color/primary_text"
+                                        android:textColor="@color/card_grid_text"
                                         android:textColorHint="@color/hint_text"
                                         android:textSize="16sp" />
 
@@ -219,7 +219,7 @@
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginRight="16dp"
+                                android:layout_marginLeft="16dp"
                                 android:paddingBottom="16dp">
 
                                 <LinearLayout
@@ -257,56 +257,82 @@
                             </RelativeLayout>
 
                             <RelativeLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="16dp"
-                                android:layout_weight="0.5"
                                 android:paddingBottom="16dp">
-
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:text="Mahali anapokaa :"/>
+                                        android:layout_marginRight="16dp"
+                                        android:layout_weight="0.5"
+                                        android:text="Mahali anapokaa :"
+                                        app:paddingEnd="16dp"
+                                        app:paddingStart="16dp" />
+
+
                                     <TextView
                                         android:id="@+id/editTextKijiji"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginTop="8dp"
-                                        android:layout_weight="1"
-                                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                        android:hint="Mahali anapokaa"
-                                        android:imeOptions="actionNext"
-                                        android:inputType="textCapWords|textPersonName"
-                                        android:textColor="@color/primary_text"
-                                        android:textColorHint="@color/hint_text"
-                                        android:textSize="14sp" />
+                                        android:layout_marginLeft="16dp"
+                                        android:layout_weight="0.5"
+                                        android:clickable="true"
+                                        android:editable="false"
+                                        android:focusable="false"
+                                        android:hint="Tarehe ya Kuzaliwa"
+                                        android:inputType="date"
+                                        android:textColor="@color/text_black"
+                                        android:textSize="14sp"/>
+
+
+                                </LinearLayout>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:paddingBottom="16dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:text="M/kiti wa mtaa :"/>
+                                        android:layout_marginRight="16dp"
+                                        android:layout_weight="0.5"
+                                        android:text="M/kiti wa mtaa :"
+                                        app:paddingEnd="16dp"
+                                        app:paddingStart="16dp" />
+
 
                                     <TextView
                                         android:id="@+id/viewVillageLeader"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="16dp"
-                                        android:layout_marginTop="8dp"
-                                        android:layout_weight="1"
-                                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                        android:hint="Jina la mwenyekiti wa kijitongoji"
-                                        android:inputType="textCapWords|textPersonName"
+                                        android:layout_weight="0.5"
+                                        android:clickable="true"
+                                        android:editable="false"
+                                        android:focusable="false"
+                                        android:hint="Tarehe ya Kuzaliwa"
                                         android:textColor="@color/primary_text"
-                                        android:textColorHint="@color/hint_text"
                                         android:textSize="14sp"/>
-                                </LinearLayout>
 
+
+                                </LinearLayout>
                             </RelativeLayout>
+
 
                         </LinearLayout>
 
