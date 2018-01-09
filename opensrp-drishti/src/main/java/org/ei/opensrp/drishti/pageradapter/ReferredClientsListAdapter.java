@@ -146,7 +146,7 @@ public class ReferredClientsListAdapter extends
                         return true;
 
                     case R.id.popOpt2:
-                        ((ChwSmartRegisterActivity) mContext).showFollowUpDetailsDialog(client.get(position));
+                        ((ChwSmartRegisterActivity) mContext).showPreRegistrationDetailsDialog(client.get(position));
                         return true;
 
                     default:

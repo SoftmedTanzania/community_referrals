@@ -13,8 +13,8 @@ import java.util.Map;
  */
 
 public class FollowUpPersonObject {
-    private String id, relationalId, comment, token, follow_up_date, follow_up_reason, is_valid, sponser_number, sponser_name;
-
+    private String id, relationalId, comment, token,  follow_up_reason, is_valid, sponser_number, sponser_name;
+    private long follow_up_date;
     private String details;
     private Map<String, String> columnMap;
 
@@ -24,7 +24,7 @@ public class FollowUpPersonObject {
                                 String Token,
                                 String sponser_name,
                                 String sponser_number,
-                                String follow_up_date,
+                                long follow_up_date,
                                 String follow_up_reason,
                                 String is_valid,
                                 String details
@@ -108,11 +108,11 @@ public class FollowUpPersonObject {
         this.sponser_name = sponser_name;
     }
 
-    public String getFollow_up_date() {
+    public long getFollow_up_date() {
         return follow_up_date;
     }
 
-    public void setFollow_up_date(String follow_up_date) {
+    public void setFollow_up_date(long follow_up_date) {
         this.follow_up_date = follow_up_date;
     }
 

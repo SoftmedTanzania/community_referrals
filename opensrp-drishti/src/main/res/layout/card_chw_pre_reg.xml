@@ -75,6 +75,7 @@
                     android:layout_below="@id/profilePic"/>
 
                 <Button
+                    android:id="@+id/button_followup"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_toRightOf="@id/button_details"
                     android:layout_width="wrap_content"
