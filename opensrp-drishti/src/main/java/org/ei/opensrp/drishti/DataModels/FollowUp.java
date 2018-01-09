@@ -5,8 +5,9 @@ package org.ei.opensrp.drishti.DataModels;
  */
 
 public class FollowUp {
-    private String comment, follow_up_date, token, follow_up_reason,is_valid, sponser_name, sponser_mobile_number;
+    private String comment,  token, follow_up_reason,is_valid, sponser_name, sponser_mobile_number;
 
+    private long follow_up_date;
     public String getComment() {
         return comment;
     }
@@ -24,11 +25,11 @@ public class FollowUp {
         is_valid = isValid;
     }
 
-    public String getFollow_up_date() {
+    public long getFollow_up_date() {
         return follow_up_date;
     }
 
-    public void setFollow_up_date(String follow_up_date) {
+    public void setFollow_up_date(long follow_up_date) {
         this.follow_up_date = follow_up_date;
     }
 

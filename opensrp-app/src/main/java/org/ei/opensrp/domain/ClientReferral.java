@@ -1,7 +1,5 @@
 package org.ei.opensrp.domain;
 
-import com.google.gson.Gson;
-
 import java.io.Serializable;
 
 /**
@@ -10,7 +8,7 @@ import java.io.Serializable;
 
 public class ClientReferral implements Serializable {
 
-    private String id, relationalid,details, first_name, middle_name, surname,last_ctc_date, facility_id, referral_reason, is_valid, service_provider_mobile_number, ward, village,Kijitongoji, village_leader, service_provider_group, service_provider_uiid, phone_number, referral_service_id, gender, community_based_hiv_service, ctc_number,Status;
+    private String id, relationalid,details, referral_feedback,first_name, middle_name, surname,last_ctc_date, facility_id, referral_reason, is_valid, service_provider_mobile_number, ward, village,Kijitongoji, village_leader, service_provider_group, service_provider_uiid, phone_number, referral_service_id, gender, community_based_hiv_service, ctc_number,Status;
     private long  date_of_birth, referral_date;
     private boolean has_2Week_cough,
             has_fever,
@@ -19,10 +17,11 @@ public class ClientReferral implements Serializable {
             has_symptomps_for_associative_diseases,
             has_affected_partner,
             has_headache,
-            has_loss_of_appetite,
+            has_diarrhea,
             has_blood_cough,
             is_at_hot_spot,
             is_lost_follow_up,
+            is_shaking,
             is_vomiting;
     public ClientReferral(){
 
@@ -57,6 +56,8 @@ public class ClientReferral implements Serializable {
         this.referral_service_id = referral_service_id;
         this.is_valid = is_valid;
     }
+
+
     public String getId() {
         return id;
     }
@@ -120,6 +121,22 @@ public class ClientReferral implements Serializable {
 
     public void setHas_2Week_cough(boolean has_2Week_cough) {
         this.has_2Week_cough = has_2Week_cough;
+    }
+
+    public boolean is_shaking() {
+        return is_shaking;
+    }
+
+    public void setIs_shaking(boolean is_shaking) {
+        this.is_shaking = is_shaking;
+    }
+
+    public String getReferral_feedback() {
+        return referral_feedback;
+    }
+
+    public void setReferral_feedback(String referral_feedback) {
+        this.referral_feedback = referral_feedback;
     }
 
     public boolean is_at_hot_spot() {
@@ -186,12 +203,12 @@ public class ClientReferral implements Serializable {
         this.has_headache = has_headache;
     }
 
-    public boolean isHas_loss_of_appetite() {
-        return has_loss_of_appetite;
+    public boolean isHas_diarrhea() {
+        return has_diarrhea;
     }
 
-    public void setHas_loss_of_appetite(boolean has_loss_of_appetite) {
-        this.has_loss_of_appetite = has_loss_of_appetite;
+    public void setHas_diarrhea(boolean has_diarrhea) {
+        this.has_diarrhea = has_diarrhea;
     }
 
     public boolean is_lost_follow_up() {

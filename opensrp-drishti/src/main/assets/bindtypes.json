@@ -21,7 +21,7 @@
     {
       "name": "follow_up",
       "columns": [
-        {"name":"follow_up_reason"},{"name":"follow_up_date"},{"name":"is_valid"}
+        {"name":"follow_up_reason"},{"name":"comment"},{"name":"follow_up_date"},{"name":"is_valid"}
       ]
     }
   ]

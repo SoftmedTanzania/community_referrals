@@ -10,7 +10,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -22,7 +21,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,8 +47,6 @@ import org.ei.opensrp.drishti.Repository.ReferralServiceObject;
 import org.ei.opensrp.drishti.util.Utils;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.ClientReferralRepository;
-import org.ei.opensrp.repository.FacilityRepository;
-import org.ei.opensrp.repository.ReferralServiceRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
 
@@ -407,10 +403,12 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
                     CTCLayout.setVisibility(View.VISIBLE);
                     fName = "client_tb_referral_form";
 
-                }else if((spinnerService.getSelectedItem().toString()).equals("Rufaa kwenda kliniki ya TB na Matunzo (CTC)")||(spinnerService.getSelectedItem().toString()).equals("Rufaa kwenda kupata huduma za kuzuia maambukizi toka kwa mama kwenda kwa mtoto") ){
+                }else if((spinnerService.getSelectedItem().toString()).equals("Rufaa kwenda kliniki ya ushauri nasaha na upimaji")||(spinnerService.getSelectedItem().toString()).equals("Rufaa kwenda kupata huduma za kuzuia maambukizi toka kwa mama kwenda kwa mtoto") ){
 
 
                     findViewById(R.id.checkboxHasHeadache).setVisibility(View.GONE);
+                    findViewById(R.id.checkboxBloodCough).setVisibility(View.GONE);
+                    findViewById(R.id.checkbox2weekCough).setVisibility(View.GONE);
                     findViewById(R.id.checkboxWeightLoss).setVisibility(View.GONE);
                     findViewById(R.id.checkboxSevereSweating).setVisibility(View.GONE);
                     findViewById(R.id.checkboxhas_loss_of_appetite).setVisibility(View.GONE);
@@ -445,11 +443,17 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
                     checkBoxreasonThree = (CheckBox)   findViewById(R.id.checkboxSevereSweating);
                     checkBoxreasonFour = (CheckBox)   findViewById(R.id.checkboxIsVomiting);
                     checkBoxresonFive = (CheckBox)   findViewById(R.id.checkboxhas_loss_of_appetite);
+                    checkBoxreasonSix = (CheckBox)   findViewById(R.id.checkbox2weekCough);
+                    checkBoxAreasonOne.setText("Anahoma Kali");
+                    checkBoxreasonThree.setText("Anatokwa Jasho");
+                    checkBoxresonFive.setText("Anaharisha");
+                    checkBoxreasonSix.setText("Anatetemeka");
                     checkBoxAreasonOne.setVisibility(View.VISIBLE);
                     checkBoxreasonTwo.setVisibility(View.VISIBLE);
                     checkBoxreasonThree.setVisibility(View.VISIBLE);
                     checkBoxreasonFour.setVisibility(View.VISIBLE);
                     checkBoxresonFive.setVisibility(View.VISIBLE);
+                    checkBoxreasonSix.setVisibility(View.VISIBLE);
 //                    tbLayout.setVisibility(View.GONE);
                     CTCLayout.setVisibility(View.GONE);
                     fName = "client_malaria_referral_form";
@@ -683,7 +687,6 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
         referral.setVillage_leader(editTextVillageLeader.getText().toString());
         referral.setReferral_reason(editTextReferralReason.getText().toString());
         referral.setReferral_service_id(getReferralServiceId(spinnerService.getSelectedItem().toString()));
-//        referral.setProviderMobileNumber(textviewReferralNumber.getText().toString());
         referral.setWard(wardId);
         referral.setService_provider_uiid(((BoreshaAfyaApplication)getApplication()).getCurrentUserID());
         referral.setService_provider_group(((BoreshaAfyaApplication)getApplication()).getTeam_uuid());
@@ -706,8 +709,8 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
             referral.setHas_headache(checkBoxreasonTwo.isChecked());
             referral.setHas_severe_sweating(checkBoxreasonThree.isChecked());
             referral.setIs_vomiting(checkBoxreasonFour.isChecked());
-            referral.setHas_loss_of_appetite(checkBoxresonFive.isChecked());
-//            referral.setIs_lost_follow_up(checkBoxreasonSix.isChecked());
+            referral.setHas_diarrhea(checkBoxresonFive.isChecked());
+            referral.setIs_shaking(checkBoxreasonSix.isChecked());
         }
 
         //for hiv referral

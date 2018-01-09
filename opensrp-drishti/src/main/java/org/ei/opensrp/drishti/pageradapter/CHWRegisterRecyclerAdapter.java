@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,6 +72,7 @@ public class CHWRegisterRecyclerAdapter extends
         // Set item views based on your views and data model
         TextView phoneNumberTextView = viewHolder.phoneNumberTextView;
         TextView CBHS = viewHolder.CBHSTextView;
+
         phoneNumberTextView.setText(clientReferral.getPhone_number());
         viewHolder.nameTextView.setText(clientReferral.getFirst_name()+" " + clientReferral.getMiddle_name()+", "+clientReferral.getSurname());
 
@@ -111,70 +113,48 @@ public class CHWRegisterRecyclerAdapter extends
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView nameTextView, phoneNumberTextView, CBHSTextView;
-        ImageView iconOptions;
+        Button details,followup;
 
         public ViewHolder(View itemView) {
             super(itemView);
             nameTextView = (TextView) itemView.findViewById(R.id.name);
             phoneNumberTextView = (TextView) itemView.findViewById(R.id.phone_number);
             CBHSTextView = (TextView) itemView.findViewById(R.id.community_based_hiv_service);
-            iconOptions = (ImageView) itemView.findViewById(R.id.iconOptions);
+            details = (Button) itemView.findViewById(R.id.button_details);
+            followup = (Button) itemView.findViewById(R.id.button_followup);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            details.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // pass mother to show details
-                    ((ChwSmartRegisterActivity) mContext).showPreRegistrationDetailsDialog(clients.get(getAdapterPosition()));
+                    // pass clients to show details
+                    ((ChwSmartRegisterActivity) mContext).showFollowUpDetailsDialog(clients.get(getAdapterPosition()));
+//                    Context context = view.getContext();
+//                    Intent intent = new Intent(context, ClientsDetailsActivity.class);
+//                    ClientReferral clientReferral = new Gson().fromJson(clients.get(getAdapterPosition()).getDetails(),ClientReferral.class);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putSerializable("client_referral", clientReferral);
+//                    intent.putExtras(bundle);
+//
+//                    context.startActivity(intent);
+
+//                    ClientDetailFragment fragment = ClientDetailFragment.newInstance(clientReferral);
+//                    ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction()
+//                            .replace(R.id.item_detail_container, fragment)
+//                            .commit();
                 }
             });
 
 
+            followup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // pass clients to show follow up form
+                    ((ChwSmartRegisterActivity) mContext).showFollowUpFormDialog(clients.get(getAdapterPosition()));
+                }
+            });
 
-
-//            iconOptions.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    // show options
-//                    showPop(getAdapterPosition(), view);
-//                }
-//            });
 
         }
-
-    }
-
-
-    public void showPop(final int position, View anchor) {
-
-        PopupMenu popupMenu = new PopupMenu((ChwSmartRegisterActivity) mContext, anchor);
-        // inflate menu xml res
-        popupMenu.getMenuInflater().inflate(R.menu.menu_popup_details, popupMenu.getMenu());
-        popupMenu.show();
-
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-
-                switch (item.getItemId()) {
-                    // TODO: handle option selected
-                    case R.id.popOpt1:
-                        ((ChwSmartRegisterActivity) mContext).showPreRegistrationVisitDialog(clients.get(position));
-                        return true;
-
-                    case R.id.popOpt2:
-                        Toast.makeText(mContext, item.getTitle() + " clicked", Toast.LENGTH_SHORT).show();
-                        return true;
-
-                    case R.id.popOpt3:
-                        // delete mother
-                        ((ChwSmartRegisterActivity) mContext).confirmDelete(clients.get(position));
-                        return true;
-
-                    default:
-                        return false;
-                }
-            }
-        });
 
     }
 

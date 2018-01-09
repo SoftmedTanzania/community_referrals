@@ -20,6 +20,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -96,6 +98,7 @@ import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import fr.ganfra.materialspinner.MaterialSpinner;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.View.INVISIBLE;
@@ -133,10 +136,13 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private MenuItem updateMenuItem;
     private MenuItem remainingFormsToSyncMenuItem;
     private String wardId =null;
-
+    public static MaterialSpinner spinnerReason,spinnerClientAvailable;
+    public static int availableSelection = -1,reasonSelection = -1;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     static final String DATABASE_NAME = "drishti.db";
     private SecuredActivity securedActivity;
+    String message ="";
+    Calendar today = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -201,167 +207,18 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     }
 
-    public void showPreRegistrationDetailsDialog(ClientReferralPersonObject mother) {
-        String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
-        Log.d(TAG, "gsonMom = " + gsonMom);
-        ClientReferral clientReferral = new Gson().fromJson(gsonMom,ClientReferral.class);
+    public void showPreRegistrationDetailsDialog(ClientReferralPersonObject clientReferralPersonObject) {
+
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
-
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
-        dialogBuilder.setView(dialogView)
-                .setCancelable(false);
-
-        final AlertDialog dialog = dialogBuilder.create();
-        dialog.show();
-        ImageView cancel = (ImageView) dialogView.findViewById(R.id.cancel_action);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-//        long lnmp = pregnantMom.getDateLNMP();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-//        String edd = dateFormat.format(DatesHelper.calculateEDDFromLNMP(lnmp));
-//        String reg_date = dateFormat.format(pregnantMom.getDateReg());
-
-        Calendar today = Calendar.getInstance();
-        int Cyear = today.get(Calendar.YEAR);
-        int year = 0;
-
-
-
-        TextView textName = (TextView) dialogView.findViewById(R.id.name);
-        TextView textAge = (TextView) dialogView.findViewById(R.id.mom_age);
-        TextView textSpouseName = (TextView) dialogView.findViewById(R.id.spouseName);
-        TextView textSpousetel = (TextView) dialogView.findViewById(R.id.spouseTel);
-        TextView textvillage = (TextView) dialogView.findViewById(R.id.village);
-        TextView textfacility = (TextView) dialogView.findViewById(R.id.facility);
-        TextView textvisit = (TextView) dialogView.findViewById(R.id.visit);
-        TextView textReason = (TextView) dialogView.findViewById(R.id .rufaa);
-        TextView textDate = (TextView) dialogView.findViewById(R.id.rufaaDate);
-        TextView textcbhs = (TextView) dialogView.findViewById(R.id.cbhs);
-        TextView textPregnancyAge = (TextView) dialogView.findViewById(R.id.age);
-
-
-        textName.setText(mother.getFirst_name() +" "+mother.getSurname());
-        textAge.setText((Cyear-year)+" years");
-//        textSpouseName.setText(pregnantMom.getHusbandName()+"["+ pregnantMom.getHusbandOccupation() +"]");
-//        textSpousetel.setText(pregnantMom.getPhone());
-//        textvillage.setText(pregnantMom.getPhysicalAddress());
-//        textfacility.setText(pregnantMom.getFacility_id());
-//        textvisit.setText(reg_date);
-        //Todo to check the risk indicators if checked to display high or low or moderate
-//        textrisk.setText("high");
-//        textedd.setText(edd);
-//        textlnmp.setText(mother.getReferral_date());
-//        if(pregnantMom.isAbove20WeeksPregnant()){
-//            textPregnancyAge.setText("greater than 20");
-//        }
-//        else     {
-//            textPregnancyAge.setText("less than 20");
-//        }
-    }
-
-    public void showPreRegistrationVisitDialog(final ClientReferralPersonObject clientReferralPersonObject) {
-
         String gsonClient = Utils.convertStandardJSONString(clientReferralPersonObject.getDetails());
-        Log.d(TAG, "gsonMom = " + gsonClient);
-//        final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
-        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_visit_details, null);
-
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
-        dialogBuilder.setView(dialogView)
-                .setCancelable(false);
-
-        final AlertDialog dialog = dialogBuilder.create();
-        dialog.show();
-        Button button_yes = (Button) dialogView.findViewById(R.id.tuma_button);
-        Button button_no = (Button) dialogView.findViewById(R.id.cancel_button);
-
-        button_yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-//                pregnantMom.setDateLastVisited(Calendar.getInstance().getTimeInMillis());
-
-//                mother.setDetails(new Gson().toJson(pregnantMom));
-//                updateFormSubmission(mother,mother.getId());
-//todo how to refresh the  pre registartion  fragment after updating
-//                mBaseFragment = new FollowupClientsFragment();
-//                // Instantiate a ViewPager and a PagerAdapter.
-//                mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
-//                mPager.setOffscreenPageLimit(formNames.length);
-//                mPager.setAdapter(mPagerAdapter);
-//                mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-//                    @Override
-//                    public void onPageSelected(int position) {
-//                        currentPage = position;
-//                        // onPageChanged(position);
-//                    }
-//                });
-//
-//                mPager.setCurrentItem(1);
-//                currentPage = 1;
-                FollowupClientsFragment.newInstance();
-                ReferredClientsFragment.newInstance();
-                Toast.makeText(ChwSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + clientReferralPersonObject.getFirst_name() +" "+clientReferralPersonObject.getMiddle_name()+" "+clientReferralPersonObject.getSurname(), Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
-        });
-        button_no.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-        // TODO: findviewbyid that are on the dialog layout
-        // example
-        TextView textName = (TextView) dialogView.findViewById(R.id.patient_name);
-        textName.setText(clientReferralPersonObject.getFirst_name()+" "+clientReferralPersonObject.getMiddle_name()+" "+ clientReferralPersonObject.getSurname());
-
-        TextView facility = (TextView) dialog.findViewById(R.id.textview_facility);
-        facility.setText(getFacilityName(clientReferralPersonObject.getFacility_id()));
-
-        TextView referral_reason = (TextView) dialog.findViewById(R.id.textview_service);
-        referral_reason.setText(clientReferralPersonObject.getReferral_reason());
-    }
-    public String getFacilityName(String id){
-
-        commonRepository = context().commonrepository("facility");
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility where id ='"+ id +"'");
-
-        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
-        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
-
-        return commonPersonObjectList.get(0).getColumnmaps().get("name");
-    }
-    public String getReferralServiceName(String id){
-
-        commonRepository = context().commonrepository("referral_service");
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service where id ='"+ id +"'");
-
-        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "referral_service");
-        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
-
-        return commonPersonObjectList.get(0).getColumnmaps().get("name");
-    }
-
-    public void showFollowUpDetailsDialog(ClientReferralPersonObject clientReferralPersonObject) {
-
-        String gsonMom = Utils.convertStandardJSONString(clientReferralPersonObject.getDetails());
-        Log.d(TAG, "gsonMom = " + gsonMom);
-        ClientReferral clientReferral = new Gson().fromJson(gsonMom,ClientReferral.class);
-        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_details, null);
+        ClientReferral clientReferral = new Gson().fromJson(gsonClient,ClientReferral.class);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
                 .setCancelable(true);
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
-        dialog.getWindow().setLayout(800,700);
+        dialog.getWindow().setLayout(800,800);
 
         Button cancel = (Button) dialogView.findViewById(R.id.ok_button);
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -382,7 +239,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             cal.setTime(d);
 
             int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
-
+            Log.d(TAG,"age is ="+age);
             Integer ageInt = new Integer(age);
             ageS = ageInt.toString();
 
@@ -427,6 +284,295 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         else     {
             gender.setText("Mwanaume");
         }
+        setIndicators(dialogView,clientReferralPersonObject);
+    }
+
+    public void showPreRegistrationVisitDialog(final ClientReferralPersonObject clientReferralPersonObject)
+    {
+
+        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_visit_details, null);
+        String[] ITEMS = {"Amehama", "Amefariki","Ameenda kituo kingine","Sababu nyinginezo"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ITEMS);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerReason = (MaterialSpinner) dialogView.findViewById(R.id.spinnerReason);
+        spinnerReason.setAdapter(adapter);
+
+        spinnerReason.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i >= 0) {
+                    spinnerReason.setFloatingLabelText("Chagua sababu ya kutokwenda kliniki");
+                    reasonSelection = i;
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
+        spinnerReason.setSelection(reasonSelection);
+
+        String gsonClient = Utils.convertStandardJSONString(clientReferralPersonObject.getDetails());
+        Log.d(TAG, "gsonMom = " + gsonClient);
+//        final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
+        dialogBuilder.setView(dialogView)
+                .setCancelable(false);
+
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+        Button button_yes = (Button) dialogView.findViewById(R.id.tuma_button);
+        Button button_no = (Button) dialogView.findViewById(R.id.cancel_button);
+
+        button_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (spinnerReason.getSelectedItemPosition() <=0) {
+                    // no radio checked
+                    message = "Tafadhali chagua sababu ya mteja kutokwenda kliniki";
+                    makeToast();
+                }else {
+
+                    ClientReferral clientReferral = new Gson().fromJson(clientReferralPersonObject.getDetails(), ClientReferral.class);
+
+                    if (spinnerReason.getSelectedItem().toString().equals("Amehama") || spinnerReason.getSelectedItem().toString().equals("Amefariki"))
+                        clientReferral.setIs_valid("false");
+
+                    clientReferral.setReferral_feedback(spinnerReason.getSelectedItem().toString());
+                    Toast.makeText(ChwSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + clientReferralPersonObject.getFirst_name() + " " + clientReferralPersonObject.getMiddle_name() + " " + clientReferralPersonObject.getSurname(), Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            }
+        });
+        button_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        TextView textName = (TextView) dialogView.findViewById(R.id.patient_name);
+        textName.setText(clientReferralPersonObject.getFirst_name()+" "+clientReferralPersonObject.getMiddle_name()+" "+ clientReferralPersonObject.getSurname());
+
+        TextView facility = (TextView) dialog.findViewById(R.id.textview_facility);
+        facility.setText(getFacilityName(clientReferralPersonObject.getFacility_id()));
+
+        TextView service = (TextView) dialog.findViewById(R.id.textview_referral);
+        service.setText(getReferralServiceName(clientReferralPersonObject.getReferral_service_id()));
+
+        TextView referral_reason = (TextView) dialog.findViewById(R.id.textview_service);
+        referral_reason.setText(clientReferralPersonObject.getReferral_reason());
+    }
+
+    private void makeToast() {
+        Toast.makeText(this,
+                message,
+                Toast.LENGTH_LONG).show();
+    }
+
+    public String getFacilityName(String id){
+
+        commonRepository = context().commonrepository("facility");
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility where id ='"+ id +"'");
+
+        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
+        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
+
+        return commonPersonObjectList.get(0).getColumnmaps().get("name");
+    }
+
+    public String getReferralServiceName(String id){
+
+        commonRepository = context().commonrepository("referral_service");
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service where id ='"+ id +"'");
+
+        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "referral_service");
+        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
+
+        return commonPersonObjectList.get(0).getColumnmaps().get("name");
+    }
+
+    public void showFollowUpDetailsDialog(ClientReferralPersonObject clientReferralPersonObject) {
+
+        String gsonMom = Utils.convertStandardJSONString(clientReferralPersonObject.getDetails());
+        Log.d(TAG, "gsonMom = " + gsonMom);
+        ClientReferral clientReferral = new Gson().fromJson(gsonMom,ClientReferral.class);
+        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_details, null);
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
+        dialogBuilder.setView(dialogView)
+                .setCancelable(true);
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+        dialog.getWindow().setLayout(800,700);
+
+        Button cancel = (Button) dialogView.findViewById(R.id.ok_button);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+
+        String reg_date = dateFormat.format(clientReferral.getDate_of_birth());
+        String ageS="";
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+            Date d = sdf.parse(reg_date);
+            Calendar cal = Calendar.getInstance();
+            Calendar today = Calendar.getInstance();
+            cal.setTime(d);
+
+            int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
+            Log.d(TAG,"age is ="+age);
+            Integer ageInt = new Integer(age);
+            ageS = ageInt.toString();
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        TextView textName = (TextView) dialogView.findViewById(R.id.client_name);
+        TextView textAge = (TextView) dialogView.findViewById(R.id.agevalue);
+        TextView cbhs = (TextView) dialogView.findViewById(R.id.cbhs_number_value);
+        TextView referral_service = (TextView) dialogView.findViewById(R.id.viewService);
+        TextView facility = (TextView) dialogView.findViewById(R.id.viewFacility);
+        TextView ctc_number = (TextView) dialogView.findViewById(R.id.ctc_number);
+        TextView referral_reason = (TextView) dialogView.findViewById(R.id.reason_for_referral);
+        TextView gender = (TextView) dialogView.findViewById(R.id.gendervalue);
+        TextView phoneNumber = (TextView) dialogView.findViewById(R.id.viewPhone);
+        TextView physicalAddress = (TextView) dialogView.findViewById(R.id.editTextKijiji);
+        TextView villageleader = (TextView) dialogView.findViewById(R.id.viewVillageLeader);
+
+
+        textName.setText(clientReferral.getFirst_name() +" "+clientReferral.getMiddle_name()+" "+clientReferral.getSurname());
+//
+        textAge.setText(ageS + " years");
+        cbhs.setText(clientReferral.getCommunity_based_hiv_service());
+        referral_service.setText(getReferralServiceName(clientReferral.getReferral_service_id()));
+        facility.setText(getFacilityName(clientReferral.getFacility_id()));
+        if(!clientReferral.getCtc_number().isEmpty())
+            ctc_number.setText(clientReferral.getCtc_number());
+        else
+            ctc_number.setText("-");
+        referral_reason.setText(clientReferral.getReferral_reason());
+        phoneNumber.setText(clientReferral.getPhone_number());
+        villageleader.setText(clientReferral.getVillage_leader());
+        physicalAddress.setText(clientReferral.getVillage());
+//        Todo to check the checkbox and displayed selected values
+//        textrisk.setText("high");
+        if((clientReferral.getGender()).equals("KE")){
+            gender.setText("Mwanamke");
+        }
+        else     {
+            gender.setText("Mwanaume");
+        }
+        setIndicators(dialogView,clientReferralPersonObject);
+    }
+
+    public void setIndicators(View view,ClientReferralPersonObject clientReferralPersonObject){
+
+        String service_name = getReferralServiceName(clientReferralPersonObject.getReferral_service_id());
+
+        TextView indicatorOne = (TextView) view.findViewById(R.id.checkbox2weekCough);
+        TextView indicatorTwo = (TextView) view.findViewById(R.id.checkboxfever);
+        TextView indicatorThree = (TextView) view.findViewById(R.id.checkboxWeightLoss);
+        TextView indicatorFour = (TextView) view.findViewById(R.id.checkboxSevereSweating);
+        TextView indicatorFive = (TextView) view.findViewById(R.id.checkboxBloodCough);
+        TextView indicatorSix = (TextView) view.findViewById(R.id.checkboxLostFollowup);
+        String details = clientReferralPersonObject.getDetails();
+        Log.d(TAG,"details ="+details);
+        ClientReferral clientReferral =  gson.fromJson(details, ClientReferral.class);
+        Log.d(TAG,"details ="+clientReferral.toString());
+        if(service_name.equals("Rufaa kwenda kliniki kutibiwa malaria")){
+            if(clientReferral.is_shaking()) {
+                indicatorOne.setVisibility(VISIBLE);
+                indicatorOne.setText("Anatetemeka");
+            }
+            if(clientReferral.isHas_fever()) {
+                indicatorTwo.setVisibility(VISIBLE);
+                indicatorTwo.setText("Anahoma kali");
+            }
+            if(clientReferral.is_vomiting()) {
+                indicatorThree.setVisibility(VISIBLE);
+                indicatorThree.setText("Anatapika");
+            }
+            if(clientReferral.is_shaking()) {
+                indicatorFour.setVisibility(VISIBLE);
+                indicatorFour.setText("Anatetemeka");
+            }
+            if(clientReferral.isHas_diarrhea()) {
+                indicatorFive.setVisibility(VISIBLE);
+                indicatorFive.setText("Anaharisha");
+            }
+            if(clientReferral.isHas_headache()) {
+                indicatorSix.setVisibility(VISIBLE);
+                indicatorSix.setText("Anaumwa kichwa");
+            }
+
+        }
+        else if(service_name.equals("Rufaa kwenda kliniki ya ushauri nasaha na upimaji")|| service_name.equals("Rufaa kwenda kupata huduma za kuzuia maambukizi toka kwa mama kwenda kwa mtoto")){
+
+            if(clientReferral.isHad_weight_loss()) {
+                indicatorOne.setVisibility(VISIBLE);
+                indicatorOne.setText("Kupunguwa uzito");
+            }
+            if(clientReferral.isHas_fever()) {
+                indicatorTwo.setVisibility(VISIBLE);
+                indicatorTwo.setText("Anahoma kali");
+            }
+            if(clientReferral.is_at_hot_spot()) {
+                indicatorThree.setVisibility(VISIBLE);
+                indicatorThree.setText("yupo sehemu hatarishi");
+            }
+            if(clientReferral.is_lost_follow_up()) {
+                indicatorFour.setVisibility(VISIBLE);
+                indicatorFour.setText("Kusitishwa dawa");
+            }
+            if(clientReferral.isHas_affected_partner()) {
+                indicatorFive.setVisibility(VISIBLE);
+                indicatorFive.setText("Ana mwenza mwenye maambukizi");
+            }
+            if(clientReferral.isHas_symptomps_for_associative_diseases()) {
+                indicatorSix.setVisibility(VISIBLE);
+                indicatorSix.setText("Ana magonjwa nyemelezi");
+            }
+        }
+        else if(service_name.equals("Rufaa kwenda kliniki ya kutibu kifua kikuu")){
+
+            if(clientReferral.isHad_weight_loss()) {
+                indicatorOne.setVisibility(VISIBLE);
+                indicatorOne.setText("Kupunguwa uzito");
+            }
+            if(clientReferral.isHas_fever()) {
+                indicatorTwo.setVisibility(VISIBLE);
+                indicatorTwo.setText("Anahoma kali");
+            }
+            if(clientReferral.isHas_2Week_cough()) {
+                indicatorThree.setVisibility(VISIBLE);
+                indicatorThree.setText("kikohozi zaidi ya wiki mbili");
+            }
+            if(clientReferral.is_lost_follow_up()) {
+                indicatorFour.setVisibility(VISIBLE);
+                indicatorFour.setText("Kusitishwa dawa");
+            }
+            if(clientReferral.isHas_severe_sweating()) {
+                indicatorFive.setVisibility(VISIBLE);
+                indicatorFive.setText("Kutokwa na jasho usiku zaidi ya week 2");
+            }
+            if(clientReferral.isHas_blood_cough()) {
+                indicatorSix.setVisibility(VISIBLE);
+                indicatorSix.setText("kukohoa makohozi yenye mchanganyiko na damu");
+            }
+        }
+
     }
 
     public void showFollowUpFormDialog(final ClientReferralPersonObject clientperson) {
@@ -437,38 +583,69 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         final FollowUp referral = new Gson().fromJson(gsonClient,FollowUp.class);
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
+        final View view =  dialogView.findViewById(R.id.textview2);
+        final EditText client_condition = (EditText)dialogView.findViewById(R.id.client_status);
+        String[] ITEMS = {"Amehama mji", "Amefariki","Ameenda kituo kingine","Sababu nyinginezo"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ITEMS);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerReason = (MaterialSpinner) dialogView.findViewById(R.id.spinnerReason);
+        spinnerReason.setAdapter(adapter);
+
+        String[] options = {"ndio", "hapana"};
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, options);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerClientAvailable = (MaterialSpinner) dialogView.findViewById(R.id.spinnerClientAvailable);
+        spinnerClientAvailable.setAdapter(adapter1);
+
+        spinnerClientAvailable.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i >= 0) {
+                    spinnerClientAvailable.setFloatingLabelText("Umemkutana na  mteja?");
+                    availableSelection = i;
+                }
+
+                if(spinnerClientAvailable.getSelectedItem().toString().equals("ndio")){
+                    spinnerReason.setVisibility(VISIBLE);
+                    client_condition.setVisibility(VISIBLE);
+                    view.setVisibility(View.GONE);
+                }else{
+                    spinnerReason.setVisibility(View.GONE);
+                    client_condition.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        spinnerReason.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i >= 0) {
+                    spinnerReason.setFloatingLabelText("Chagua sababu ya kutokwenda kliniki");
+                    reasonSelection = i;
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
+        spinnerReason.setSelection(reasonSelection);
+        spinnerClientAvailable.setSelection(availableSelection);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
                 .setCancelable(false);
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
-        final String[] met = new String[1];
 
-        RadioGroup radioGroup = (RadioGroup) dialogView.findViewById(R.id.visit);
-
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                int selectedId = group.getCheckedRadioButtonId();
-                RadioButton radioButton = (RadioButton) findViewById(selectedId);
-
-                if (selectedId == R.id.visit_yes) {
-                    RelativeLayout info = (RelativeLayout) dialogView.findViewById(R.id.information);
-                    info.setVisibility(View.VISIBLE);
-                    met[0] = "yes";
-                }
-                if (selectedId == R.id.visit_no) {
-                    RelativeLayout info = (RelativeLayout) dialogView.findViewById(R.id.information);
-                    info.setVisibility(View.GONE);
-                }
-            }
-        });
-
-        final EditText comment = (EditText) dialogView.findViewById(R.id.observation);
-        final EditText Token = (EditText) dialogView.findViewById(R.id.token);
-        final TextView date = (TextView) dialogView.findViewById(R.id.textDate);
-
-        Button cancel = (Button) dialogView.findViewById(R.id.cancel_action);
+        Button cancel = (Button) dialogView.findViewById(R.id.cancel_button);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -476,62 +653,49 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             }
         });
 
-        Button save = (Button) dialogView.findViewById(R.id.save);
+        Button save = (Button) dialogView.findViewById(R.id.tuma_button);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(met[0] == "yes"){
-                    referral.setFollow_up_date(date.getText().toString());
-                    referral.setComment(comment.getText().toString());
-                    referral.setToken(Token.getText().toString());
-                    referral.setIsValid("true");
+                if(spinnerClientAvailable.getSelectedItem().toString().equals("ndio")){
+                    if (spinnerReason.getSelectedItemPosition() <=0) {
+                        // no radio checked
+                        message = "Tafadhali chagua sababu ya mteja kutokwenda kliniki";
+                        makeToast();
+                    }else {
+                        referral.setFollow_up_date(today.getTimeInMillis());
+                        referral.setComment(client_condition.getText().toString());
+                        referral.setFollow_up_reason(spinnerReason.getSelectedItem().toString());
+                        referral.setIsValid("true");
 
-                    String gsonReferral = gson.toJson(referral);
-                    Log.d(TAG, "referral = " + gsonReferral);
+                        String gsonReferral = gson.toJson(referral);
+                        Log.d(TAG, "referral = " + gsonReferral);
 
-                    // todo start form submission
-                    saveFormSubmission(gsonReferral,clientperson.getId() , "follow_up_form", fieldOverides);
+                        // todo start form submission
+                        saveFormSubmission(gsonReferral, clientperson.getId(), "follow_up_form", fieldOverides);
 
 
-
-                    Toast.makeText(ChwSmartRegisterActivity.this, "Asante kwa kumtembelea " + clientperson.getFirst_name() +" "+clientperson.getSurname(), Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(ChwSmartRegisterActivity.this, "Asante kwa kumtembelea " + clientperson.getFirst_name() + " " + clientperson.getSurname(), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
                 }
                 else {
                     Toast.makeText(ChwSmartRegisterActivity.this, "Tafadhali hakikisha unamtafuta tena kumjulia hali " + clientperson.getFirst_name() +" "+clientperson.getSurname(), Toast.LENGTH_SHORT).show();
-
+                    dialog.dismiss();
                 }
-                dialog.dismiss();
+
             }
         });
 
-        // TODO: findviewbyid that are on the dialog layout
-        // example
-        TextView textName = (TextView) dialogView.findViewById(R.id.name);
-        TextView textAge = (TextView) dialogView.findViewById(R.id.mom_age);
+        TextView textName = (TextView) dialogView.findViewById(R.id.patient_name);
+        textName.setText(clientperson.getFirst_name()+" "+clientperson.getMiddle_name()+" "+ clientperson.getSurname());
 
-        String reg_date = dateFormat.format(clientperson.getReferral_date());
-        String ageS="";
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd mmm yyyy");
-            Date d = sdf.parse(reg_date);
-            Calendar cal = Calendar.getInstance();
-            Calendar today = Calendar.getInstance();
-            cal.setTime(d);
+        TextView facility = (TextView) dialog.findViewById(R.id.textview_facility);
+        facility.setText(getFacilityName(clientperson.getFacility_id()));
 
-            int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
+        TextView service = (TextView) dialog.findViewById(R.id.textview_feedback);
 
-            Integer ageInt = new Integer(age);
-            ageS = ageInt.toString();
-
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        textName.setText(clientperson.getFirst_name() +" "+ clientperson.getMiddle_name()+" "+clientperson.getSurname());
-        textAge.setText(ageS+" years");
-
+        TextView referral_reason = (TextView) dialog.findViewById(R.id.textview_followupreason);
 
     }
 
