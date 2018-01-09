@@ -199,13 +199,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         LoginActivity.setLanguage();
     }
 
-    public void returnToBaseFragment(){
-//        mPager.setCurrentItem(0);
-//        AncRegisterFormFragment displayFormFragment = (AncRegisterFormFragment) getDisplayFormFragmentAtIndex(1);
-//        displayFormFragment.reloadValues();
-
-
-    }
 
     public void showPreRegistrationDetailsDialog(ClientReferralPersonObject clientReferralPersonObject) {
 
@@ -218,7 +211,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 .setCancelable(true);
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
-        dialog.getWindow().setLayout(800,800);
+        dialog.getWindow().setLayout(800,600);
 
         Button cancel = (Button) dialogView.findViewById(R.id.ok_button);
         cancel.setOnClickListener(new View.OnClickListener() {
