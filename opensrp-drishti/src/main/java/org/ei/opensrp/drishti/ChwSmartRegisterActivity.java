@@ -593,7 +593,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         String[] options = {"ndio", "hapana"};
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, options);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerClientAvailable = (MaterialSpinner) dialogView.findViewById(R.id.spinnerClientAvailable);
         spinnerClientAvailable.setAdapter(adapter1);
 

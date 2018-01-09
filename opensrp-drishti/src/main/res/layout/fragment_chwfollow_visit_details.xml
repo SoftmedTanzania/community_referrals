@@ -227,14 +227,13 @@
 
                 <EditText
                     android:id="@+id/client_status"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="0dp"
-                    android:layout_weight="1"
                     android:hint="Hali ya mgonjwa ulipomtembelea"
-                    android:paddingLeft="0dp"
-                    android:paddingRight="0dp"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
                     android:textColor="@color/white"
                     android:textColorHint="@color/card_grid_tex"
                     android:textSize="14sp" />
