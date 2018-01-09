@@ -60,6 +60,24 @@
                 "name": "village"
             },
             {
+                "name": "is_at_hot_spot"
+            },
+            {
+                "name": "has_fever"
+            },
+            {
+                "name": "had_weight_loss"
+            },
+            {
+                "name": "has_symptomps_for_associative_diseases"
+            },
+            {
+                "name": "has_affected_partner"
+            },
+            {
+                "name": "is_lost_follow_up"
+            },
+            {
                 "name": "village_leader"
             },
             {

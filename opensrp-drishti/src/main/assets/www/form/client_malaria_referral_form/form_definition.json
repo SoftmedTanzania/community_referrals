@@ -2,7 +2,7 @@
     "form_data_definition_version": "4",
     "form": {
         "bind_type": "client_referral",
-        "default_bind_path": "/model/instance/client_referral_form/",
+        "default_bind_path": "/model/instance/client_malaria_referral_form/",
         "fields": [
             {
                 "name": "id",
@@ -52,6 +52,24 @@
             },
             {
                 "name": "ward"
+            },
+            {
+                "name": "has_severe_sweating"
+            },
+            {
+                "name": "has_headache"
+            },
+            {
+                "name": "has_diarrhea"
+            },
+            {
+                "name": "is_vomiting"
+            },
+            {
+                "name": "is_shaking"
+            },
+            {
+                "name": "has_fever"
             },
             {
                 "name": "village"

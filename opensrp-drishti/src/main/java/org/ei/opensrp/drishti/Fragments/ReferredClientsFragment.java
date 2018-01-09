@@ -350,8 +350,8 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
             CommonRepository commonRepository = context.commonrepository(tableName);
             Cursor cursor = commonRepository.RawCustomQueryForAdapter(query);
 
-            // obtains mothers from result
-            ClientReferral mom = null;
+            // obtains client from result
+            ClientReferral client = null;
             List<ClientReferral> ClientReferrals = new ArrayList<>();
 
             SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
@@ -365,29 +365,26 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                         Log.d(TAG, "column details = " + details);
                         // convert and add to list
                         if (!fName.isEmpty()) {
-                            mom = gson.fromJson(details, ClientReferral.class);
-                            if (mom.getFirst_name().equalsIgnoreCase(fname.getText().toString()))
-                                ClientReferrals.add(mom);
+                            client = gson.fromJson(details, ClientReferral.class);
+                            if (client.getFirst_name().contains(fname.getText().toString()))
+                                ClientReferrals.add(client);
                         } else if (!other_name.isEmpty()) {
-                            mom = gson.fromJson(details, ClientReferral.class);
-                            if (mom.getFirst_name().equalsIgnoreCase(fname.getText().toString()))
-                                ClientReferrals.add(mom);
+                            client = gson.fromJson(details, ClientReferral.class);
+                            if (client.getMiddle_name().contains(other_name)||client.getSurname().contains(other_name))
+                                ClientReferrals.add(client);
                         } else if (!ctc_number.isEmpty()) {
-                            mom = gson.fromJson(details, ClientReferral.class);
-                            if (mom.getCtc_number().equalsIgnoreCase(ctc_number))
-                                ClientReferrals.add(mom);
+                            client = gson.fromJson(details, ClientReferral.class);
+                            if (client.getCtc_number().contains(ctc_number))
+                                ClientReferrals.add(client);
                         } else if (!sdate.isEmpty()) {
-                            mom = gson.fromJson(details, ClientReferral.class);
-                            if (startDate <= mom.getReferral_date())
-                                ClientReferrals.add(mom);
+                            client = gson.fromJson(details, ClientReferral.class);
+                            if (startDate <= client.getReferral_date())
+                                ClientReferrals.add(client);
                         } else if (!edate.isEmpty()) {
                             Log.d(TAG, "am in enddate");
-                            mom = gson.fromJson(details, ClientReferral.class);
-                            Log.d(TAG, "enddate =" + endDate);
-                            Log.d(TAG, "enddate 2 =" + mom.getReferral_date());
-                            Log.d(TAG, "comparison =" + (endDate < mom.getReferral_date()));
-                            if (endDate >= mom.getReferral_date())
-                                ClientReferrals.add(mom);
+                            client = gson.fromJson(details, ClientReferral.class);
+                            if (endDate >= client.getReferral_date())
+                                ClientReferrals.add(client);
                         }
 
                         cursor.moveToNext();
@@ -397,9 +394,9 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                     // check date range
                     if (daterange.equals("yes")) {
                         Log.d(TAG, "am in the date range");
-                        for (ClientReferral client : ClientReferrals) {
-                            if (client.getReferral_date() < startDate || client.getReferral_date() > endDate)
-                                ClientReferrals.remove(client); // remove client referral
+                        for (ClientReferral clients : ClientReferrals) {
+                            if (clients.getReferral_date() < startDate || clients.getReferral_date() > endDate)
+                                ClientReferrals.remove(clients); // remove client referral
                         }
                     }
                 }
