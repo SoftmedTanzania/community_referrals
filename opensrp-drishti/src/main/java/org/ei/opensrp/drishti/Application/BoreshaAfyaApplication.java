@@ -116,6 +116,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
             object.put("facilityUiid",facility);
             object.put("userUiid",userId);
             object.put("googlePushNotificationToken",regId);
+            object.put("userType",0);
         } catch (JSONException e) {
             e.printStackTrace();
         }
