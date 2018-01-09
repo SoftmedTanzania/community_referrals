@@ -123,27 +123,6 @@ public class CHWRegisterRecyclerAdapter extends
             details = (Button) itemView.findViewById(R.id.button_details);
             followup = (Button) itemView.findViewById(R.id.button_followup);
 
-            details.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // pass clients to show details
-                    ((ChwSmartRegisterActivity) mContext).showFollowUpDetailsDialog(clients.get(getAdapterPosition()));
-//                    Context context = view.getContext();
-//                    Intent intent = new Intent(context, ClientsDetailsActivity.class);
-//                    ClientReferral clientReferral = new Gson().fromJson(clients.get(getAdapterPosition()).getDetails(),ClientReferral.class);
-//                    Bundle bundle = new Bundle();
-//                    bundle.putSerializable("client_referral", clientReferral);
-//                    intent.putExtras(bundle);
-//
-//                    context.startActivity(intent);
-
-//                    ClientDetailFragment fragment = ClientDetailFragment.newInstance(clientReferral);
-//                    ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction()
-//                            .replace(R.id.item_detail_container, fragment)
-//                            .commit();
-                }
-            });
-
 
             followup.setOnClickListener(new View.OnClickListener() {
                 @Override

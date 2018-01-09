@@ -1,0 +1,46 @@
+{
+    "form_data_definition_version": "4",
+    "form": {
+        "bind_type": "follow_up",
+        "default_bind_path": "/model/instance/follow_up_form/",
+        "fields": [
+            {
+                "name": "id",
+                "shouldLoadValue": true
+            },
+            {
+                "name": "relationalid"
+            },
+            {
+                "name": "comment"
+            },
+            {
+                "name": "sponser_name"
+            },
+            {
+                "name": "sponser_mobile_number"
+            },
+            {
+                "name": "date_of_birth"
+            },
+            {
+                "name": "follow_up_date"
+            },
+            {
+                "name": "is_valid"
+            },
+            {
+                "name": "follow_up_reason"
+            },
+            {
+                "name": "service_provider_uiid"
+            },
+            {
+                "name": "service_provider_group"
+            },
+            {
+                "name": "service_provider_mobile_number"
+            }
+        ]
+    }
+}
