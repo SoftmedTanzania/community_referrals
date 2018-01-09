@@ -35,7 +35,7 @@ public class FacilityRepository extends DrishtiRepository {
 
     public void update(Facility facility) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
-        database.update(FACILITY, createValuesFor(facility), ID_COLUMN + " = ?", new String[]{facility.getId()});
+        database.update(FACILITY, createValuesFor(facility), ID_COLUMN + " = ?", new String[]{facility.getOpenMRSUIID()});
     }
 
     public List<Facility> all() {
@@ -105,8 +105,8 @@ public class FacilityRepository extends DrishtiRepository {
 
     public ContentValues createValuesFor(Facility facility) {
         ContentValues values = new ContentValues();
-        values.put(ID_COLUMN, facility.getId());
-        values.put(NAME, facility.getName());
+        values.put(ID_COLUMN, facility.getOpenMRSUIID());
+        values.put(NAME, facility.getFacilityName());
         return values;
     }
 

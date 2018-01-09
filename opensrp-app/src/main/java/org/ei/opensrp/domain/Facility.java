@@ -7,46 +7,26 @@ import java.util.ArrayList;
  */
 
 public class Facility  {
-    private String facilityName, id;
+    private String facilityName, openMRSUIID;
 
-    public Facility() {
-
+    public Facility(String facilityName, String openMRSUIID) {
+        this.facilityName = facilityName;
+        this.openMRSUIID = openMRSUIID;
     }
 
-    public Facility(String id, String name) {
-        this.id = id;
-        this.facilityName = name;
-
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
+    public String getFacilityName() {
         return facilityName;
     }
 
-    public void setName(String name) {
-        this.facilityName = name;
+    public void setFacilityName(String facilityName) {
+        this.facilityName = facilityName;
     }
 
-    public static ArrayList<Facility> createFacilityList() {
-        ArrayList<Facility> visitedMom = new ArrayList<Facility>();
+    public String getOpenMRSUIID() {
+        return openMRSUIID;
+    }
 
-
-        visitedMom.add(new Facility("0001","facility A"));
-        visitedMom.add(new Facility("0002","facility B"));
-        visitedMom.add(new Facility("0003","facility C"));
-        visitedMom.add(new Facility("0004","facility D"));
-        visitedMom.add(new Facility("0005","facility E"));
-        visitedMom.add(new Facility("0007","facility F"));
-
-
-        return visitedMom;
+    public void setOpenMRSUIID(String openMRSUIID) {
+        this.openMRSUIID = openMRSUIID;
     }
 }
