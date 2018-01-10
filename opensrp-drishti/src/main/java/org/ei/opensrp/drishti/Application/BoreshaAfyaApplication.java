@@ -234,11 +234,11 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
                     Facility facility;
                     JSONObject explrObject = jsonArray.getJSONObject(i);
                     facility = new Gson().fromJson(explrObject.toString(), Facility.class) ;
-                    if (facility.getId().equals("")) {
+                    if (facility.getOpenMRSUIID().equals("")) {
                         Log.d(TAG,"facility table is empty");
 
                     } else {
-                        Log.d(TAG,"facility downloaded "+facility.getName());
+                        Log.d(TAG,"facility downloaded "+facility.getFacilityName());
                         ContentValues values = new FacilityRepository().createValuesFor(facility);
                         android.util.Log.d(TAG, "values facility = " + new Gson().toJson(values));
                         commonRepository.customInsert(values);
