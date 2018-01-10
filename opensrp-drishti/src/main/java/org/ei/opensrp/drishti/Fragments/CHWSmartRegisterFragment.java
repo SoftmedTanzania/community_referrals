@@ -281,18 +281,16 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     }
 
     public void setSuccessValue(Long value){
-
         Log.d(TAG,"succesfull count "+value);
         this.success = value;
         successView.setText(valueOf(success));
     }
 
     public void setUnSuccessValue(Long value){
+        Log.d(TAG,"unsuccesfull count after"+value);
         this.unsuccess = value;
-
         unsuccessView.setText(valueOf(unsuccess));
 
-        Log.d(TAG,"unsuccesfull count after"+value);
     }
 
 

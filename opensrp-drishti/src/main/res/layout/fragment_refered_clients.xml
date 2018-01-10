@@ -28,6 +28,7 @@
                 android:layout_weight="0.5"
                 app:ms_arrowColor="@color/accent"
                 app:ms_arrowSize="14dp"
+                android:visibility="gone"
                 app:ms_baseColor="@color/accent"
                 app:ms_enableFloatingLabel="false"
                 app:ms_hint="Aina za huduma"

@@ -1540,8 +1540,8 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 Runnable myRunnable = new Runnable() {
                     @Override
                     public void run() {
+                        Log.d(TAG,"post results on main thread");
                         CHWSmartRegisterFragment displayFormFragment = (CHWSmartRegisterFragment) getDisplayFormFragmentAtIndex(0);
-
                         displayFormFragment.setSuccessValue(succesfulCount);
                         displayFormFragment.setUnSuccessValue(unsuccesfulCount);
                     }

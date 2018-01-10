@@ -26,21 +26,19 @@ public class HomeContext {
 
 
     public long getSucessReferralCount() {
-
-//            commonRepository = context.commonrepository("client_referral");
-//            cursor = commonRepository.RawCustomQueryForAdapter("select * FROM client_referral where referral_status ='1'");
-//
-//            List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
-//            Log.d(TAG,"success"+commonPersonObjectList.size());
+            commonRepository = context.commonrepository("client_referral");
+            cursor = commonRepository.RawCustomQueryForAdapter("select * FROM client_referral where referral_status ='1'");
+            List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
+            Log.d(TAG,"success"+commonPersonObjectList.size());
             Log.d(TAG,"success"+sucessReferralCount);
             return sucessReferralCount;
     }
 
     public long getUnsucessReferralCount() {
-//        commonRepository= context.commonrepository("client_referral");
-//        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM client_referral where referral_status ='0'");
-//        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
-//        this.sucessReferralCount=commonPersonObjectList.size();
+        commonRepository= context.commonrepository("client_referral");
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM client_referral where referral_status ='0'");
+        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
+        this.sucessReferralCount=commonPersonObjectList.size();
         Log.d(TAG,"unsuccess"+unsucessReferralCount);
         return unsucessReferralCount;
     }

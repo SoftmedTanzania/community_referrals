@@ -41,7 +41,7 @@ public class ReferralServiceObject {
 
         this.id = id;
         this.relationalId = relationalId;
-        this.Name = facility.getName();
+        this.Name = facility.getFacilityName();
         this.details = new Gson().toJson(facility);
 
     }

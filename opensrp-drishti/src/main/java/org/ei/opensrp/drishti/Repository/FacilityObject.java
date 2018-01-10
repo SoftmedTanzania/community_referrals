@@ -35,9 +35,9 @@ public class FacilityObject {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyy", Locale.getDefault());
 
-        this.id = facility.getId();
+        this.id = facility.getOpenMRSUIID();
         this.relationalId = relationalId;
-        this.Name = facility.getName();
+        this.Name = facility.getFacilityName();
         this.details = new Gson().toJson(facility);
 
     }
