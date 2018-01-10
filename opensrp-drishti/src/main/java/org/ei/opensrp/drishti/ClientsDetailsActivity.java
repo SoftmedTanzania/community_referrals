@@ -128,9 +128,10 @@ public class ClientsDetailsActivity extends SecuredNativeSmartRegisterActivity {
         name . setText(clientReferral.getFirst_name()+" "+clientReferral.getMiddle_name()+", "+ clientReferral.getSurname());
         contacts.setText(clientReferral.getPhone_number());
         facility.setText(getFacilityName(clientReferral.getFacility_id()));
+        referedReason.setText(getFacilityName(clientReferral.getReferral_reason()));
         referedDate.setText(dateFormat.format(clientReferral.getReferral_date()));
         residence.setText(clientReferral.getVillage()+" M/kiti -:"+clientReferral.getVillage_leader());
-        note.setText(clientReferral.getStatus());
+        note.setText("-");
     }
 
     public String getFacilityName(String id){
