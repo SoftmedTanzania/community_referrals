@@ -39,7 +39,7 @@ public class DonutChart extends View {
         );
          
         try {
-            radius = a.getDimension(R.styleable.DonutChart_radius, 20.0f);
+            radius = a.getDimension(R.styleable.DonutChart_radius, 80.0f);
         } finally {
             a.recycle();
         }

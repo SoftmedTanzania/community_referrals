@@ -40,6 +40,7 @@ import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.pageradapter.CHWPagerAdapter;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.drishti.util.AsyncTask;
+import org.ei.opensrp.drishti.util.DonutChart;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.DrishtiApplication;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
@@ -69,6 +70,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     TextView successView, unsuccessView;
     Long success = (long) 0;
     Long unsuccess = (long) 0;
+    private DonutChart donutChart;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,6 +106,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         });
 
 
+        donutChart = (DonutChart)v.findViewById(R.id.donutChart) ;
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,6 +179,10 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         unsuccessView =  (TextView) v.findViewById(R.id.count_one);
         unsuccessView.setText(valueOf(unsuccess));
         Log.d(TAG," setiing unsuccess counts"+unsuccess);
+
+
+
+        
         return v;
     }
 
