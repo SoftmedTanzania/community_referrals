@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonRepository;
+import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
 import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
 import org.ei.opensrp.drishti.ChwSmartRegisterActivity;
@@ -40,10 +43,18 @@ import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.pageradapter.CHWPagerAdapter;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.drishti.util.AsyncTask;
+import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.drishti.util.DonutChart;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
+import org.ei.opensrp.service.PendingFormSubmissionService;
+import org.ei.opensrp.sync.SyncAfterFetchListener;
+import org.ei.opensrp.sync.SyncProgressIndicator;
+import org.ei.opensrp.sync.UpdateActionsTask;
 import org.ei.opensrp.view.activity.DrishtiApplication;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
+import org.ei.opensrp.view.contract.HomeContext;
+import org.ei.opensrp.view.controller.NativeAfterANMDetailsFetchListener;
+import org.ei.opensrp.view.controller.NativeUpdateANMDetailsTask;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -52,8 +63,13 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
+import static android.os.Looper.getMainLooper;
 import static android.widget.Toast.LENGTH_SHORT;
 import static java.lang.String.valueOf;
+import static org.ei.opensrp.event.Event.ACTION_HANDLED;
+import static org.ei.opensrp.event.Event.FORM_SUBMITTED;
+import static org.ei.opensrp.event.Event.SYNC_COMPLETED;
+import static org.ei.opensrp.event.Event.SYNC_STARTED;
 
 public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     private static final String TAG = CHWSmartRegisterFragment.class.getSimpleName();
@@ -66,12 +82,18 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     private ViewPager feeds;
     private Toolbar toolbar;
     private View v;
-    private TextView cardPickStartDate, cardPickEndDate;
+    private TextView pending;
     TextView successView, unsuccessView;
     Long success = (long) 0;
     Long unsuccess = (long) 0;
     private DonutChart donutChart;
 
+    private android.content.Context context;
+    private MenuItem updateMenuItem;
+    private MenuItem remainingFormsToSyncMenuItem;
+    private PendingFormSubmissionService pendingFormSubmissionService;
+    static final String DATABASE_NAME = "drishti.db";
+    RelativeLayout pendingForm;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +106,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         this.inflater = inflater;
         v = inflater.inflate(R.layout.activity_chwregister, container, false);
+        onInitialization();
         imageButton = (ImageButton) v.findViewById(R.id.register_client);
 
         adapter = new CHWPagerAdapter(getActivity().getSupportFragmentManager());
@@ -168,21 +191,18 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         // Handle menu item click event
+
                         onOptionsItemSelected(item);
                         return true;
                     }
                 });
 
-        successView =  (TextView) v.findViewById(R.id.count_two);
-        successView.setText(valueOf(success));
-        Log.d(TAG,"setting counts"+success);
-        unsuccessView =  (TextView) v.findViewById(R.id.count_one);
-        unsuccessView.setText(valueOf(unsuccess));
-        Log.d(TAG," setiing unsuccess counts"+unsuccess);
-
-
-
-        
+        TextView username = (TextView) v.findViewById(R.id.toolbar_user_name);
+        pendingForm = (RelativeLayout) v.findViewById(R.id.key_three);
+        pending = (TextView) v.findViewById(R.id.count_three);
+        username.setText("Logged as "+((BoreshaAfyaApplication)getActivity().getApplication()).getUsername());
+        successView =  (TextView) v.findViewById(R.id.count_one);
+        unsuccessView =  (TextView) v.findViewById(R.id.count_two);
         return v;
     }
 
@@ -205,10 +225,147 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
     @Override
     protected void onInitialization() {
+        pendingFormSubmissionService = context().pendingFormSubmissionService();
+        SYNC_STARTED.addListener(onSyncStartListener);
+        SYNC_COMPLETED.addListener(onSyncCompleteListener);
+        FORM_SUBMITTED.addListener(onFormSubmittedListener);
+        ACTION_HANDLED.addListener(updateANMDetailsListener);
+        updateRegisterCounts();
+    }
 
+    private Listener<Boolean> onSyncCompleteListener = new Listener<Boolean>() {
+        @Override
+        public void onEvent(Boolean data) {
+            //#TODO: RemainingFormsToSyncCount cannot be updated from a back ground thread!!
+            updateRemainingFormsToSyncCount();
+            if (updateMenuItem != null) {
+                updateMenuItem.setActionView(null);
+            }
+            updateRegisterCounts();
+        }
+    };
+
+    private Listener<String> onFormSubmittedListener = new Listener<String>() {
+        @Override
+        public void onEvent(String instanceId) {
+            updateRegisterCounts();
+        }
+    };
+
+    private Listener<String> updateANMDetailsListener = new Listener<String>() {
+        @Override
+        public void onEvent(String data) {
+            updateRegisterCounts();
+        }
+    };
+
+    protected void onResumption() {
+        updateRegisterCounts();
+        updateSyncIndicator();
+        updateRemainingFormsToSyncCount();
+    }
+
+    public void updateRegisterCounts() {
+        NativeUpdateANMDetailsTask task = new NativeUpdateANMDetailsTask(Context.getInstance().anmController());
+        task.fetch(new NativeAfterANMDetailsFetchListener() {
+            @Override
+            public void afterFetch(HomeContext anmDetails) {
+                // TODO: 9/14/17 update counts after fetch
+                 updateRegisterCounts(anmDetails);
+            }
+        });
     }
 
 
+    private void updateRegisterCounts(final HomeContext homeContext) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                Log.d(TAG,"succesfulcount --"+homeContext.getSucessReferralCount());
+                Log.d(TAG,"unsuccesfulcount --"+homeContext.getUnsucessReferralCount());
+
+
+                Handler mainHandler = new Handler(getMainLooper());
+
+                Runnable myRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        successView =  (TextView) v.findViewById(R.id.count_one);
+                        unsuccessView =  (TextView) v.findViewById(R.id.count_two);
+                        successView.setText(valueOf(homeContext.getSucessReferralCount()));
+                        unsuccessView.setText(valueOf(homeContext.getUnsucessReferralCount()));
+                    }
+                };
+                mainHandler.post(myRunnable);
+
+            }
+        }).start();
+    }
+
+
+
+
+    public void onPrepareOptionsMenu(Menu menu) {
+        updateMenuItem = menu.findItem(R.id.updateMenuItem);
+        remainingFormsToSyncMenuItem = menu.findItem(R.id.remainingFormsToSyncMenuItem);
+
+        updateSyncIndicator();
+        updateRemainingFormsToSyncCount();
+
+    }
+
+    private Listener<Boolean> onSyncStartListener = new Listener<Boolean>() {
+        @Override
+        public void onEvent(Boolean data) {
+            if (updateMenuItem != null) {
+                updateMenuItem.setActionView(R.layout.progress);
+            }
+        }
+    };
+
+    public void updateFromServer() {
+        updateRemainingFormsToSyncCount();
+        UpdateActionsTask updateActionsTask = new UpdateActionsTask(
+                context, context().actionService(), context().formSubmissionSyncService(),
+                new SyncProgressIndicator(), context().allFormVersionSyncService());
+        updateActionsTask.updateFromServer(new SyncAfterFetchListener());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        SYNC_STARTED.removeListener(onSyncStartListener);
+        SYNC_COMPLETED.removeListener(onSyncCompleteListener);
+        FORM_SUBMITTED.removeListener(onFormSubmittedListener);
+        ACTION_HANDLED.removeListener(updateANMDetailsListener);
+    }
+
+    private void updateSyncIndicator() {
+
+//        if (updateMenuItem != null) {
+//            if (context().allSharedPreferences().fetchIsSyncInProgress()) {
+//                updateMenuItem.setActionView(R.layout.progress);
+//            } else
+//                updateMenuItem.setActionView(null);
+//        }
+
+    }
+
+    public void updateRemainingFormsToSyncCount() {
+
+
+        long size = pendingFormSubmissionService.pendingFormSubmissionCount();
+        Log.d(TAG,"pending from submission ="+size);
+        if (size > 0) {
+            pending.setText(valueOf(size) + " " + getString(R.string.unsynced_forms_count_message));
+            pendingForm.setVisibility(View.VISIBLE);
+        } else {
+            pendingForm.setVisibility(View.GONE);
+        }
+    }
 
     @Override
     public void startRegistration() {
@@ -261,9 +418,16 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
             case R.id.updateMenuItem:
-                ((ChwSmartRegisterActivity)getActivity()).updateFromServer();
+                updateFromServer();
+                if (context().allSharedPreferences().fetchIsSyncInProgress()) {
+                    Log.d(TAG,"am in sync progress");
+                    item.setActionView(R.layout.progress);
+                } else
+                    item.setActionView(null);
+
                 return true;
 
             case R.id.help:
@@ -274,6 +438,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                 ((BoreshaAfyaApplication)getActivity().getApplication()).logoutCurrentUser();
 
                 return true;
+
             case R.id.switchLanguageMenuItem:
                 String newLanguagePreference = context().userService().switchLanguagePreference();
 //                String newLanguagePreference = LoginActivity.switchLanguagePreference();
@@ -286,22 +451,6 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    public void setSuccessValue(Long value){
-        Log.d(TAG,"succesfull count "+value);
-        this.success = value;
-        successView.setText(valueOf(success));
-    }
-
-    public void setUnSuccessValue(Long value){
-        Log.d(TAG,"unsuccesfull count after"+value);
-        this.unsuccess = value;
-        unsuccessView.setText(valueOf(unsuccess));
-
-    }
-
-
-
 
 
 }

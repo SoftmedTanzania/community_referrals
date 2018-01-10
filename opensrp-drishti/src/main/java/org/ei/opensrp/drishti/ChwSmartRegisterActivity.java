@@ -180,7 +180,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         mPager.setCurrentItem(3);
         currentPage = 3;
         initialize();
-        updateRegisterCounts();
         setValuesInBoreshaAfya();
         Log.d(TAG, "table columns ="+new Gson().toJson(context().commonrepository("referral_service").common_TABLE_COLUMNS));
 
@@ -188,14 +187,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     }
 
     private void initialize() {
-        pendingFormSubmissionService = context().pendingFormSubmissionService();
-        SYNC_STARTED.addListener(onSyncStartListener);
-        SYNC_COMPLETED.addListener(onSyncCompleteListener);
-        FORM_SUBMITTED.addListener(onFormSubmittedListener);
-        ACTION_HANDLED.addListener(updateANMDetailsListener);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("HTM-Referrals");
+
         LoginActivity.setLanguage();
     }
 
@@ -774,7 +766,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     @Override
     protected void onResumption() {
         LoginActivity.setLanguage();
-        updateRegisterCounts();
         updateSyncIndicator();
         updateRemainingFormsToSyncCount();
     }
@@ -896,7 +887,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     private void setValuesInBoreshaAfya(){
 
-        updateRegisterCounts();
         String userDetailsString = context().allSettings().settingsRepository.querySetting("userInformation","");
         String teamDetailsString = context().allSettings().settingsRepository.querySetting("teamInformation","");
         android.util.Log.d(TAG,"team details "+teamDetailsString);
@@ -1428,7 +1418,8 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         if (registerFragment != null) {
             registerFragment.refreshListView();
         }
-        updateRegisterCounts();
+        registerFragment.updateRegisterCounts();
+        registerFragment.updateRemainingFormsToSyncCount();
     }
 
     private void updateSyncIndicator() {
@@ -1499,82 +1490,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         return result;
     }
 
-
-
-    private Listener<Boolean> onSyncCompleteListener = new Listener<Boolean>() {
-        @Override
-        public void onEvent(Boolean data) {
-            //#TODO: RemainingFormsToSyncCount cannot be updated from a back ground thread!!
-            updateRemainingFormsToSyncCount();
-            if (updateMenuItem != null) {
-                updateMenuItem.setActionView(null);
-            }
-            updateRegisterCounts();
-        }
-    };
-
-    private void updateRegisterCounts() {
-        Log.d(TAG,"updating the counts");
-        NativeUpdateANMDetailsTask task = new NativeUpdateANMDetailsTask(Context.getInstance().anmController());
-        task.fetch(new NativeAfterANMDetailsFetchListener() {
-            @Override
-            public void afterFetch(HomeContext anmDetails) {
-                // TODO: 9/14/17 update counts after fetch
-                 updateRegisterCounts(anmDetails);
-            }
-        });
-    }
-
-    private void updateRegisterCounts(final HomeContext homeContext) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                succesfulCount = homeContext.getSucessReferralCount();
-                unsuccesfulCount = homeContext.getUnsucessReferralCount();
-
-                Log.d(TAG,"succesfulcount --"+succesfulCount);
-                Log.d(TAG,"unsuccesfulcount --"+unsuccesfulCount);
-
-                Handler mainHandler = new Handler(getMainLooper());
-
-                Runnable myRunnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.d(TAG,"post results on main thread");
-                        CHWSmartRegisterFragment displayFormFragment = (CHWSmartRegisterFragment) getDisplayFormFragmentAtIndex(0);
-                        displayFormFragment.setSuccessValue(succesfulCount);
-                        displayFormFragment.setUnSuccessValue(unsuccesfulCount);
-                    }
-                };
-                mainHandler.post(myRunnable);
-            }
-        }).start();
-
-    }
-    private Listener<Boolean> onSyncStartListener = new Listener<Boolean>() {
-        @Override
-        public void onEvent(Boolean data) {
-            if (updateMenuItem != null) {
-                updateMenuItem.setActionView(R.layout.progress);
-            }
-        }
-    };
-
-    private Listener<String> onFormSubmittedListener = new Listener<String>() {
-        @Override
-        public void onEvent(String instanceId) {
-            updateRegisterCounts();
-        }
-    };
-
-
-
-    private Listener<String> updateANMDetailsListener = new Listener<String>() {
-        @Override
-        public void onEvent(String data) {
-            updateRegisterCounts();
-        }
-    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

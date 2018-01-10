@@ -143,6 +143,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
                     // convert to json
                     String gsonReferral = gson.toJson(clientReferral);
                     Log.d(TAG, "referral = " + gsonReferral);
+                    Log.d(TAG, "fname = " + fName);
 
                     // todo start form submission
                     saveFormSubmission(gsonReferral, generateRandomUUIDString(), fName, getFormFieldsOverrides());
@@ -162,7 +163,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
     public void saveFormSubmission(String formSubmission, final String id, String formName, JSONObject fieldOverrides) {
         // save the form
 
-        if(formName.equals("client_tb_referral_form") || formName.equals("client_hiv_referral_form")|| formName.equals("client_malaria_referral_formf")){
+        if(formName.equals("client_tb_referral_form") || formName.equals("client_hiv_referral_form")|| formName.equals("client_malaria_referral_form")){
             final ClientReferral clientReferral = gson.fromJson(formSubmission, ClientReferral.class);
             clientReferral.setId(id);
             ContentValues values = new ClientReferralRepository().createValuesFor(clientReferral);
