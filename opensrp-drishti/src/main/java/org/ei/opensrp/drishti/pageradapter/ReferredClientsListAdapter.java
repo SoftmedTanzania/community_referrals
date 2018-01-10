@@ -112,18 +112,12 @@ public class ReferredClientsListAdapter extends
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // pass mother to show details
-                    ((ChwSmartRegisterActivity) mContext).showFollowUpDetailsDialog(client.get(getAdapterPosition()));
+                    // pass client referral to show details
+                    ((ChwSmartRegisterActivity) mContext).showPreRegistrationDetailsDialog(client.get(getAdapterPosition()));
                 }
             });
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // show options
-                    showPop(getAdapterPosition(), view);
-                }
-            });
+
         }
 
     }

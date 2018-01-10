@@ -1,5 +1,7 @@
 package org.ei.opensrp.repository;
 
+import android.util.Log;
+
 import org.apache.commons.lang3.tuple.Pair;
 import org.ei.opensrp.domain.Child;
 import org.ei.opensrp.domain.EligibleCouple;
@@ -55,6 +57,7 @@ public class AllBeneficiaries {
     }
 
     public long unsuccessCount() {
+        Log.d("count","the count "+clientReferralRepository.unsuccesfulcount());
         return clientReferralRepository.unsuccesfulcount();
     }
 

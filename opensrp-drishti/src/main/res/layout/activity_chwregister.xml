@@ -108,6 +108,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/key_two"
                     android:layout_marginLeft="16dp"
                     android:layout_toRightOf="@id/key_one"
                     android:layout_marginTop="8dp"
@@ -137,6 +138,39 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Unsuccessful"
+                        android:textSize="10sp"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/key_three"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@id/key_two"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <View
+                        android:id="@+id/indicator_three"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:layout_width="2dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_height="match_parent"
+                        android:background="#ff1100"/>
+                    <TextView
+                        android:id="@+id/count_three"
+                        android:textColor="@color/mdtp_white"
+                        android:layout_toRightOf="@id/indicator_three"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="15sp"/>
+                    <TextView
+                        android:textColor="@color/mdtp_white"
+                        android:layout_below="@id/count_three"
+                        android:layout_toRightOf="@id/indicator_three"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="form(s) unsynced"
                         android:textSize="10sp"/>
                 </RelativeLayout>
 

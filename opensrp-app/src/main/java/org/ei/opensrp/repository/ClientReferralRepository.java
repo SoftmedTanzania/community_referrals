@@ -103,11 +103,13 @@ public class ClientReferralRepository extends DrishtiRepository {
 
     public long unsuccesfulcount() {
         return longForQuery(masterRepository.getReadableDatabase(), "SELECT COUNT(1) FROM " + CLIENT_REFERRAL
-               , new String[0]);
+                        + " WHERE " + Status + " = ? ",
+                new String[]{"0"});
     }
     public long succesfulcount() {
         return longForQuery(masterRepository.getReadableDatabase(), "SELECT COUNT(1) FROM " + CLIENT_REFERRAL
-                + " WHERE " + Status + " = '1' and is_valid = 'true'", new String[0]);
+                        + " WHERE " + Status + " = ? ",
+                new String[]{"1"});
     }
     private String tableColumnsForQuery(String tableName, String[] tableColumns) {
         return StringUtils.join(prepend(tableColumns, tableName), ", ");
