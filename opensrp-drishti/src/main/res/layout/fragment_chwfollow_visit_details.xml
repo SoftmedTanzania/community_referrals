@@ -29,18 +29,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:textSize="18sp"
-                    android:id="@+id/patient_name_title"
+                     android:id="@+id/patient_name_title"
                     android:textColor="@color/white"
-                    android:text="Kutembelewa" />
+                    android:text="@string/follow_up_for" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:textSize="18sp"
-                    android:id="@+id/patient_name"
-                    android:textColor="@color/white"
-                    android:text="Jonh Doe" />
+                     android:id="@+id/patient_name"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
@@ -63,24 +62,23 @@
                     android:layout_weight="1"
                     android:layout_height="match_parent">
                     <TextView
-                        android:id="@+id/textViewReferralReason"
+                         android:id="@+id/textViewReferralReason"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="32dp"
                         android:layout_centerVertical="true"
-                        android:text="Mrejesho wa Rufaa :"
+                        android:text="@string/referral_feedback"
                         android:textColor="@color/white"/>
                     <TextView
                         android:layout_toRightOf="@+id/textViewReferralReason"
-                        android:id="@+id/textview_feedback"
+                         android:id="@+id/textview_feedback"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:divider="@null"
                         android:layout_marginLeft="32dp"
                         android:layout_marginRight="16dp"
-                        android:text="Alifika kituoni na kupewa huduma stahiki"
                         android:textColor="@color/white"
                         android:textSize="14sp"/>
 
@@ -100,24 +98,23 @@
                     android:layout_weight="1"
                     android:layout_height="match_parent">
                     <TextView
-                        android:id="@+id/textViewReferralService"
+                         android:id="@+id/textViewReferralService"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_centerVertical="true"
-                        android:text="Sababu ya kufuatiliwa :"
+                        android:text="@string/follow_up_reasons"
                         android:textColor="@color/white"/>
                     <TextView
                         android:layout_toRightOf="@+id/textViewReferralService"
-                        android:id="@+id/textview_followupreason"
+                         android:id="@+id/textview_followupreason"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:divider="@null"
                         android:layout_marginLeft="32dp"
                         android:layout_marginRight="16dp"
-                        android:text="Amesitisha huduma gafla"
                         android:textColor="@color/white"
                         android:textSize="14sp"/>
 
@@ -137,24 +134,23 @@
                     android:layout_weight="1"
                     android:layout_height="match_parent">
                     <TextView
-                        android:id="@+id/textViewReferralfacility"
+                         android:id="@+id/textViewReferralfacility"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="32dp"
                         android:layout_centerVertical="true"
-                        android:text="Anahudumiwa :"
+                        android:text="@string/client_hospital"
                         android:textColor="@color/white"/>
                     <TextView
                         android:layout_toRightOf="@+id/textViewReferralfacility"
-                        android:id="@+id/textview_facility"
+                         android:id="@+id/textview_facility"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:divider="@null"
                         android:layout_marginLeft="64dp"
                         android:layout_marginRight="16dp"
-                        android:text="mt meru hospital"
                         android:textColor="@color/white"
                         android:textSize="14sp"/>
 
@@ -173,7 +169,7 @@
 
 
                 <fr.ganfra.materialspinner.MaterialSpinner
-                    android:id="@+id/spinnerClientAvailable"
+                     android:id="@+id/spinnerClientAvailable"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
@@ -200,7 +196,7 @@
 
                 <fr.ganfra.materialspinner.MaterialSpinner
                     android:visibility="gone"
-                    android:id="@+id/spinnerReason"
+                     android:id="@+id/spinnerReason"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
@@ -226,7 +222,7 @@
 
 
                 <EditText
-                    android:id="@+id/client_status"
+                     android:id="@+id/client_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -240,7 +236,7 @@
 
             </LinearLayout>
             <View
-                android:id="@+id/textview2"
+                 android:id="@+id/textview2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="16dp"
@@ -263,9 +259,9 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
-                    android:id="@+id/tuma_button"
+                     android:id="@+id/tuma_button"
                     android:background="@drawable/border_four"
-                    android:text="Hifadhi"
+                    android:text="@string/save"
                     android:textSize="14sp"
                     android:layout_marginTop="32dp"/>
 
@@ -275,9 +271,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16dp"
                     android:layout_toLeftOf="@id/tuma_button"
-                    android:id="@+id/cancel_button"
+                     android:id="@+id/cancel_button"
                     android:background="@drawable/border_four"
-                    android:text="Futa"
+                    android:text="@string/delete"
                     android:textSize="14sp"
                     android:layout_marginTop="32dp"/>
 

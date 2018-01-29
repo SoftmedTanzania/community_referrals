@@ -12,7 +12,7 @@
 
     <LinearLayout
         android:visibility="gone"
-        android:id="@+id/clients_header_layout"
+         android:id="@+id/clients_header_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/list_header_height"
         android:layout_marginLeft="@dimen/list_view_margin_left_and_right"
@@ -34,12 +34,12 @@
         android:background="@drawable/listview_background_rounded">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/list"
+             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
         <ProgressBar
-            android:id="@+id/client_list_progress"
+             android:id="@+id/client_list_progress"
             style="@android:style/Widget.Holo.Light.ProgressBar.Large.Inverse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

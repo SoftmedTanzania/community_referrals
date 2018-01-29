@@ -20,7 +20,7 @@
             android:orientation="horizontal">
 
             <fr.ganfra.materialspinner.MaterialSpinner
-                android:id="@+id/spin_status"
+                 android:id="@+id/spin_status"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -40,7 +40,7 @@
 
 
             <EditText
-                android:id="@+id/client_name_et"
+                 android:id="@+id/client_name_et"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -55,7 +55,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/client_last_name_et"
+                 android:id="@+id/client_last_name_et"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -70,7 +70,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/client_ctc_number_et"
+                 android:id="@+id/client_ctc_number_et"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -85,7 +85,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/from_date"
+                 android:id="@+id/from_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -102,7 +102,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/to_date"
+                 android:id="@+id/to_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -125,12 +125,12 @@
             android:paddingBottom="16dp">
 
             <Button
-                android:id="@+id/filter_button"
+                 android:id="@+id/filter_button"
                 android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="16dp"
-                android:text="Tafuta" />
+                android:text="@string/search_clients" />
 
         </RelativeLayout>
 
@@ -151,12 +151,12 @@
                 android:layout_weight="0.2">
 
                 <TextView
-                    android:id="@+id/client_name"
+                     android:id="@+id/client_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginTop="16dp"
-                    android:text="Majina"
+                    android:text="@string/clients_names"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -168,11 +168,11 @@
                 android:layout_weight="0.3">
 
                 <TextView
-                    android:id="@+id/referral_reasons"
+                     android:id="@+id/referral_reasons"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="Sababu za Rufaa"
+                    android:text="@string/referral_reason"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -185,12 +185,12 @@
                 android:layout_weight="0.2">
 
                 <TextView
-                    android:id="@+id/ref_date"
+                     android:id="@+id/ref_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginTop="16dp"
-                    android:text="Tarehe ya Rufaa"
+                    android:text="@string/referral_date"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -202,12 +202,12 @@
                 android:layout_weight="0.2">
 
                 <TextView
-                    android:id="@+id/referral_service"
+                     android:id="@+id/referral_service"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginTop="16dp"
-                    android:text="Huduma"
+                    android:text="@string/referral_services"
                     android:textColor="@color/black" />
 
             </RelativeLayout>
@@ -218,14 +218,14 @@
                 android:layout_weight="0.1">
 
                 <TextView
-                    android:id="@+id/status"
+                     android:id="@+id/status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:gravity="center"
                     android:paddingBottom="8dp"
                     android:paddingTop="8dp"
-                    android:text="Referral Status"
+                    android:text="@string/referral_status"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:visibility="visible" />
@@ -233,7 +233,7 @@
             </RelativeLayout>
 
             <View
-                android:id="@+id/status_color"
+                 android:id="@+id/status_color"
                 android:layout_width="4dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
@@ -244,14 +244,14 @@
 
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/clients_recycler"
+             android:id="@+id/clients_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/card_separator_third" />
 
     </LinearLayout>
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

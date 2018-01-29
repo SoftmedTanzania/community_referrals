@@ -9,10 +9,10 @@
     <android.support.design.widget.AppBarLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:id="@+id/app_bar_layout"
+         android:id="@+id/app_bar_layout"
         android:theme="@style/AppTheme.AppBarOverlay">
         <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/toolbar"
+             android:id="@+id/toolbar"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/ec_main_header_height"
             android:background="@color/colorPrimary"
@@ -20,7 +20,7 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:focusableInTouchMode="true">
             <RelativeLayout
-                android:id="@+id/register_nav_bar_container"
+                 android:id="@+id/register_nav_bar_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <ImageView
@@ -28,10 +28,10 @@
                     android:layout_height="45dp"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_logo_white"
-                    android:id="@+id/toolbar_logo"/>
+                     android:id="@+id/toolbar_logo"/>
 
                 <LinearLayout
-                    android:id="@+id/title"
+                     android:id="@+id/title"
                     android:paddingTop="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mfumo wa Rufaa"
+                        android:text="@string/appdetails"
                         android:textColor="@color/white"
                         android:layout_marginRight="16dp"
                         android:layout_marginLeft="4dp"
@@ -52,17 +52,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Logged user"
+                        android:text="@string/logged_user"
                         android:textColor="@color/white"
                         android:layout_marginRight="16dp"
                         android:layout_marginLeft="4dp"
                         android:textSize="16sp"
-                        android:id="@+id/toolbar_user_name"/>
+                         android:id="@+id/toolbar_user_name"/>
 
                 </LinearLayout>
 
                 <org.ei.opensrp.drishti.util.DonutChart
-                    android:id="@+id/donutChart"
+                     android:id="@+id/donutChart"
                     android:layout_marginLeft="16dp"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/title"
@@ -75,7 +75,7 @@
 
                 <RelativeLayout
                     android:layout_marginLeft="32dp"
-                    android:id="@+id/key_one"
+                     android:id="@+id/key_one"
                     android:layout_toRightOf="@id/donutChart"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
@@ -84,18 +84,17 @@
                     <View
                         android:layout_marginTop="2dp"
                         android:layout_marginBottom="2dp"
-                        android:id="@+id/indicator_one"
+                         android:id="@+id/indicator_one"
                         android:layout_width="2dp"
                         android:layout_marginRight="8dp"
                         android:layout_height="match_parent"
                         android:background="#00FF00"/>
                     <TextView
-                        android:id="@+id/count_one"
+                         android:id="@+id/count_one"
                         android:textColor="@color/mdtp_white"
                         android:layout_toRightOf="@id/indicator_one"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="21"
                         android:textSize="15sp"/>
                     <TextView
                         android:textColor="@color/mdtp_white"
@@ -103,12 +102,12 @@
                         android:layout_toRightOf="@id/indicator_one"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Success"
+                        android:text="@string/success_text"
                         android:textSize="10sp"/>
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/key_two"
+                     android:id="@+id/key_two"
                     android:layout_marginLeft="16dp"
                     android:layout_toRightOf="@id/key_one"
                     android:layout_marginTop="8dp"
@@ -116,7 +115,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
                     <View
-                        android:id="@+id/indicator_two"
+                         android:id="@+id/indicator_two"
                         android:layout_marginTop="2dp"
                         android:layout_marginBottom="2dp"
                         android:layout_width="2dp"
@@ -124,12 +123,11 @@
                         android:layout_height="match_parent"
                         android:background="#ffaa00"/>
                     <TextView
-                        android:id="@+id/count_two"
+                         android:id="@+id/count_two"
                         android:textColor="@color/mdtp_white"
                         android:layout_toRightOf="@id/indicator_two"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="4"
                         android:textSize="15sp"/>
                     <TextView
                         android:textColor="@color/mdtp_white"
@@ -137,11 +135,11 @@
                         android:layout_toRightOf="@id/indicator_two"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Unsuccessful"
+                        android:text="@string/unsuccessful_text"
                         android:textSize="10sp"/>
                 </RelativeLayout>
                 <RelativeLayout
-                    android:id="@+id/key_three"
+                     android:id="@+id/key_three"
                     android:layout_marginLeft="16dp"
                     android:layout_toRightOf="@id/key_two"
                     android:layout_marginTop="8dp"
@@ -149,7 +147,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
                     <View
-                        android:id="@+id/indicator_three"
+                         android:id="@+id/indicator_three"
                         android:layout_marginTop="2dp"
                         android:layout_marginBottom="2dp"
                         android:layout_width="2dp"
@@ -157,12 +155,11 @@
                         android:layout_height="match_parent"
                         android:background="#ff1100"/>
                     <TextView
-                        android:id="@+id/count_three"
+                         android:id="@+id/count_three"
                         android:textColor="@color/mdtp_white"
                         android:layout_toRightOf="@id/indicator_three"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
                         android:textSize="15sp"/>
                     <TextView
                         android:textColor="@color/mdtp_white"
@@ -170,13 +167,13 @@
                         android:layout_toRightOf="@id/indicator_three"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="form(s) unsynced"
+                        android:text="@string/unsynced_text"
                         android:textSize="10sp"/>
                 </RelativeLayout>
 
                 <ImageButton
                     android:visibility="gone"
-                    android:id="@+id/btn_back_to_home"
+                     android:id="@+id/btn_back_to_home"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_alignParentLeft="true"
@@ -188,7 +185,7 @@
                     android:src="@drawable/homestacks" />
 
                 <LinearLayout
-                    android:id="@+id/title_layout"
+                     android:id="@+id/title_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_toRightOf="@id/btn_back_to_home"
@@ -198,14 +195,14 @@
                     android:paddingRight="13dp">
 
                     <org.ei.opensrp.view.customControls.CustomFontTextView
-                        android:id="@+id/txt_title_label"
+                         android:id="@+id/txt_title_label"
                         style="@style/CustomFontTextViewStyle.NavBar.Black"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent" />
 
                     <org.ei.opensrp.view.customControls.CustomFontTextView
-                        android:id="@+id/btn_report_month"
+                         android:id="@+id/btn_report_month"
                         style="@style/CustomFontTextViewStyle.NavBar.Black"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -214,7 +211,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/search_layout"
+                     android:id="@+id/search_layout"
                     android:visibility="gone"
                     android:layout_width="@dimen/ec_main_header_search_layout_width"
                     android:layout_height="fill_parent"
@@ -226,7 +223,7 @@
                     android:paddingLeft="15dp">
 
                     <EditText
-                        android:id="@+id/edt_search"
+                         android:id="@+id/edt_search"
                         android:layout_width="@dimen/ec_main_header_search_box_width"
                         android:layout_height="fill_parent"
                         android:background="@android:color/transparent"
@@ -236,7 +233,7 @@
                         android:textSize="15sp" />
 
                     <ImageButton
-                        android:id="@+id/btn_search_cancel"
+                         android:id="@+id/btn_search_cancel"
                         android:layout_width="@dimen/ec_main_header_search_cancel_button_width"
                         android:layout_height="fill_parent"
                         android:background="@android:color/transparent"
@@ -248,7 +245,7 @@
 
                 <ImageButton
                     android:visibility="gone"
-                    android:id="@+id/register_client"
+                     android:id="@+id/register_client"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_toLeftOf="@id/search_layout"
@@ -260,7 +257,7 @@
 
                 <ImageButton
                     android:visibility="gone"
-                    android:id="@+id/filter_selection"
+                     android:id="@+id/filter_selection"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_toLeftOf="@id/register_client"
@@ -272,7 +269,7 @@
 
                 <ImageButton
                     android:visibility="gone"
-                    android:id="@+id/sort_selection"
+                     android:id="@+id/sort_selection"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_toLeftOf="@id/filter_selection"
@@ -289,7 +286,7 @@
                     android:orientation="vertical"></LinearLayout>
 
                 <org.ei.opensrp.view.customControls.CustomFontTextView
-                    android:id="@+id/service_mode_selection"
+                     android:id="@+id/service_mode_selection"
                     android:visibility="gone"
                     style="@style/CustomFontTextViewStyle.NavBar.Bold"
                     android:layout_width="wrap_content"
@@ -318,7 +315,7 @@
         </android.support.percent.PercentRelativeLayout>
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
+             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
@@ -330,7 +327,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />

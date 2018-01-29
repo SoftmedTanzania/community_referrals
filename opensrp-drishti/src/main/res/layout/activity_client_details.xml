@@ -22,7 +22,7 @@
                 android:visibility="gone">
 
                 <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
+                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@color/primary"
@@ -33,12 +33,12 @@
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/app_name"
+                             android:id="@+id/app_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="4dp"
-                            android:text="HTMR"
+                            android:text="@string/appname"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
 
@@ -85,37 +85,36 @@
                                 android:background="@color/card_separator_third">
 
                                 <TextView
-                                    android:id="@+id/client_name"
+                                     android:id="@+id/client_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerVertical="true"
                                     android:layout_marginLeft="32dp"
                                     android:layout_marginTop="32dp"
-                                    android:text="New Client Registration Form"
+                                    android:text="@string/client_reg_title"
                                     android:textColor="@color/black"
                                     android:textSize="42sp" />
 
                                 <TextView
-                                    android:id="@+id/cbhs_number_title"
+                                     android:id="@+id/cbhs_number_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@id/client_name"
                                     android:layout_marginLeft="32dp"
                                     android:layout_marginTop="16dp"
-                                    android:text="CBHS #"
+                                    android:text="@string/cbhs_number"
                                     android:textColor="@color/card_title_text"
                                     android:textSize="14sp"
                                     android:visibility="invisible" />
 
                                 <TextView
-                                    android:id="@+id/cbhs_number_value"
+                                     android:id="@+id/cbhs_number_value"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@id/client_name"
                                     android:layout_marginLeft="16dp"
                                     android:layout_marginTop="16dp"
                                     android:layout_toRightOf="@+id/cbhs_number_title"
-                                    android:text="0001/0001/000001"
                                     android:textColor="@color/card_title_text"
                                     android:textSize="14sp"
                                     android:visibility="invisible" />
@@ -143,7 +142,7 @@
                                         android:layout_height="wrap_content">
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/editTextfName"
+                                             android:id="@+id/editTextfName"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="0dp"
@@ -162,7 +161,7 @@
                                             app:met_floatingLabelTextColor="@color/primary" />
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/editTextmName"
+                                             android:id="@+id/editTextmName"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="16dp"
@@ -195,7 +194,7 @@
                                         android:layout_height="wrap_content">
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/editTextlName"
+                                             android:id="@+id/editTextlName"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
@@ -211,7 +210,7 @@
                                             app:met_floatingLabelTextColor="@color/primary" />
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/edittextPhone"
+                                             android:id="@+id/edittextPhone"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="16dp"
@@ -255,7 +254,7 @@
                                         android:layout_marginTop="8dp">
 
                                         <fr.ganfra.materialspinner.MaterialSpinner
-                                            android:id="@+id/spinnerGender"
+                                             android:id="@+id/spinnerGender"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="16dp"
@@ -273,7 +272,7 @@
 
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/reg_dob"
+                                             android:id="@+id/reg_dob"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="16dp"
@@ -307,7 +306,7 @@
                                         android:layout_height="wrap_content">
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/editTextKijiji"
+                                             android:id="@+id/editTextKijiji"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_marginTop="8dp"
@@ -324,7 +323,7 @@
 
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/editTextVillageLeader"
+                                             android:id="@+id/editTextVillageLeader"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="16dp"
@@ -353,12 +352,12 @@
                                 android:visibility="invisible" />
 
                             <TextView
-                                android:id="@+id/referer_title"
+                                 android:id="@+id/referer_title"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="32dp"
                                 android:layout_marginTop="8dp"
-                                android:text="Taarifa za rufaa"
+                                android:text="@string/referral_details"
                                 android:textColor="@color/card_title_text"
                                 android:textSize="14sp" />
 
@@ -378,7 +377,7 @@
                                     android:background="@color/white">
 
                                     <com.rengwuxian.materialedittext.MaterialEditText
-                                        android:id="@+id/reason_for_referral"
+                                         android:id="@+id/reason_for_referral"
                                         android:layout_width="match_parent"
                                         android:layout_height="48dp"
                                         android:layout_weight="0.5"
@@ -407,7 +406,7 @@
                                     android:layout_weight="0.3">
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
-                                        android:id="@+id/spinnerService"
+                                         android:id="@+id/spinnerService"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginRight="16dp"
@@ -423,7 +422,7 @@
                                         app:paddingStart="16dp"
                                         app:ms_floatingLabelColor="@color/primary_text" />
                                     <fr.ganfra.materialspinner.MaterialSpinner
-                                        android:id="@+id/spinnerFacility"
+                                         android:id="@+id/spinnerFacility"
                                         android:layout_below="@+id/spinnerService"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -456,11 +455,11 @@
                                     android:layout_weight="0.3">
 
                                     <TextView
-                                        android:id="@+id/clinical_information_title"
+                                         android:id="@+id/clinical_information_title"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="8dp"
-                                        android:text="Taarifa Nyingine"
+                                        android:text="@string/other_details"
                                         android:textColor="@color/card_title_text"
                                         android:textSize="14sp" />
 
@@ -470,7 +469,7 @@
                                         android:orientation="vertical">
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/editTextDiscountId"
+                                             android:id="@+id/editTextDiscountId"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="16dp"
@@ -486,7 +485,7 @@
                                             app:met_floatingLabelTextColor="@color/primary" />
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/editTextOthers"
+                                             android:id="@+id/editTextOthers"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="16dp"
@@ -519,10 +518,10 @@
                                     android:layout_weight="0.3">
 
                                     <TextView
-                                        android:id="@+id/flags_title"
+                                         android:id="@+id/flags_title"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Vidokezo vya hatari"
+                                        android:text="@string/danger_signs"
                                         android:textColor="@color/card_title_text"
                                         android:textSize="14sp" />
 
@@ -534,7 +533,7 @@
 
                                         <CheckBox
                                             android:visibility="gone"
-                                            android:id="@+id/checkbox2weekCough"
+                                             android:id="@+id/checkbox2weekCough"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:paddingBottom="12dp"
@@ -545,7 +544,7 @@
 
                                         <CheckBox
                                             android:visibility="gone"
-                                            android:id="@+id/checkboxfever"
+                                             android:id="@+id/checkboxfever"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:paddingBottom="12dp"
@@ -556,7 +555,7 @@
 
                                         <CheckBox
                                             android:visibility="gone"
-                                            android:id="@+id/checkboxWeightLoss"
+                                             android:id="@+id/checkboxWeightLoss"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:paddingBottom="12dp"
@@ -569,7 +568,7 @@
 
                                         <CheckBox
                                             android:visibility="gone"
-                                            android:id="@+id/checkboxSevereSweating"
+                                             android:id="@+id/checkboxSevereSweating"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:paddingBottom="12dp"
@@ -580,7 +579,7 @@
 
                                         <CheckBox
                                             android:visibility="gone"
-                                            android:id="@+id/checkboxBloodCough"
+                                             android:id="@+id/checkboxBloodCough"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:paddingBottom="12dp"
@@ -592,7 +591,7 @@
                                         <CheckBox
 
                                             android:visibility="gone"
-                                            android:id="@+id/checkboxLostFollowup"
+                                             android:id="@+id/checkboxLostFollowup"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:paddingBottom="12dp"
@@ -603,7 +602,7 @@
                                         <CheckBox
 
                                             android:visibility="gone"
-                                            android:id="@+id/checkboxIsVomiting"
+                                             android:id="@+id/checkboxIsVomiting"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:paddingBottom="12dp"
@@ -614,7 +613,7 @@
                                         <CheckBox
 
                                             android:visibility="gone"
-                                            android:id="@+id/checkboxHasHeadache"
+                                             android:id="@+id/checkboxHasHeadache"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:paddingBottom="12dp"
@@ -625,7 +624,7 @@
                                         <CheckBox
 
                                             android:visibility="gone"
-                                            android:id="@+id/checkboxhas_affected_partner"
+                                             android:id="@+id/checkboxhas_affected_partner"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:paddingBottom="12dp"
@@ -636,7 +635,7 @@
                                         <CheckBox
 
                                             android:visibility="gone"
-                                            android:id="@+id/checkboxis_at_hot_spot"
+                                             android:id="@+id/checkboxis_at_hot_spot"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:paddingBottom="12dp"
@@ -647,7 +646,7 @@
                                         <CheckBox
 
                                             android:visibility="gone"
-                                            android:id="@+id/checkboxhas_loss_of_appetite"
+                                             android:id="@+id/checkboxhas_loss_of_appetite"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:paddingBottom="12dp"
@@ -658,7 +657,7 @@
                                         <CheckBox
 
                                             android:visibility="gone"
-                                            android:id="@+id/checkboxhas_symptomps_for_associative_diseases"
+                                             android:id="@+id/checkboxhas_symptomps_for_associative_diseases"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:paddingBottom="12dp"
@@ -686,13 +685,13 @@
                                 android:layout_height="100dp">
 
                                 <Button
-                                    android:id="@+id/referal_button"
+                                     android:id="@+id/referal_button"
                                     android:layout_width="200dp"
                                     android:layout_height="60dp"
                                     android:layout_alignParentRight="true"
                                     android:layout_centerVertical="true"
                                     android:layout_marginRight="16dp"
-                                    android:text="Rufaa"
+                                    android:text="@string/refer_client"
                                     android:textColor="@color/card_title_text" />
 
 
