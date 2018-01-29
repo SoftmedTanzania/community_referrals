@@ -148,7 +148,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
             final  String myUrl =  DRISHTI_BASE_PATH + OPENSRP_REFERRAL_SERVICES_URL_PATH;
             final String result = null;
 
-            Response<String> stringResponse  = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl,"sean", "Admin123");
+            Response<String> stringResponse  = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl,getUsername(),getPassword());
             ReferralServiceDataModel service;
             Log.d(TAG,"referral service failure is "+stringResponse.isFailure());
             JSONArray jsonArray = new JSONArray();

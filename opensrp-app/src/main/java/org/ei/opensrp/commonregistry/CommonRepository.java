@@ -76,7 +76,11 @@ public class CommonRepository extends DrishtiRepository {
 
     @Override
     protected void onCreate(SQLiteDatabase database) {
-        database.execSQL(common_SQL);
+        try {
+            database.execSQL(common_SQL);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         if (StringUtils.isNotBlank(common_ID_INDEX_SQL)) {
             database.execSQL(common_ID_INDEX_SQL);
         }

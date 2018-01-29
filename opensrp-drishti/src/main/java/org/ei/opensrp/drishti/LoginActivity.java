@@ -403,6 +403,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void localLoginWith(String userName, String password) {
         context.userService().localLogin(userName, password);
+
+        ((BoreshaAfyaApplication)getApplication()).setUsername(userName);
+        ((BoreshaAfyaApplication)getApplication()).setPassword(password);
         goToHome();
         DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
@@ -410,6 +413,8 @@ public class LoginActivity extends AppCompatActivity {
     private void remoteLoginWith(String userName, String password, String userInfo) {
         context.userService().remoteLogin(userName, password, userInfo);
 
+        ((BoreshaAfyaApplication)getApplication()).setUsername(userName);
+        ((BoreshaAfyaApplication)getApplication()).setPassword(password);
         goToHome();
         DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
