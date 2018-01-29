@@ -6,6 +6,8 @@ import org.ei.opensrp.repository.FormDataRepository;
 import org.ei.opensrp.util.Log;
 import android.webkit.JavascriptInterface;
 
+import com.google.gson.Gson;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,7 +79,12 @@ public class FormSubmissionRouter {
     @JavascriptInterface
     public void route(String instanceId) throws Exception {
         FormSubmission submission = formDataRepository.fetchFromSubmission(instanceId);
+        Log.logDebug("submission fetched value ="+new Gson().toJson(submission));
+        Log.logDebug("submission fetched value ="+submission.formName());
+        Log.logDebug("submission fetched instanceid ="+instanceId);
         FormSubmissionHandler handler = handlerMap.get(submission.formName());
+
+        Log.logDebug("submission fetched handler ="+ new Gson().toJson(handler));
         if (handler == null) {
             logWarn("Could not find a handler due to unknown form submission: " + submission);
         } else {

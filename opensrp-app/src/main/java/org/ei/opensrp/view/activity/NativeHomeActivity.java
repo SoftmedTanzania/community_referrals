@@ -188,7 +188,7 @@ public class NativeHomeActivity extends SecuredActivity {
                 navigationController.startECSmartRegistry();
 
             } else if (i == R.id.btn_anc_register) {
-                navigationController.startANCSmartRegistry();
+                navigationController.startCHWSmartRegistry();
 
             } else if (i == R.id.btn_pnc_register) {
                 navigationController.startPNCSmartRegistry();

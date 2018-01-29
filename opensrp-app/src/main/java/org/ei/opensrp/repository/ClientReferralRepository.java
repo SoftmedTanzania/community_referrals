@@ -125,23 +125,23 @@ public class ClientReferralRepository extends DrishtiRepository {
     }
 
 
-    public ContentValues createValuesFor(ClientReferral clientReferralPersonObject) {
+    public ContentValues createValuesFor(ClientReferral clientReferral) {
 
         ContentValues values = new ContentValues();
-        values.put(ID_COLUMN, clientReferralPersonObject.getId());
-        values.put(Relational_ID, clientReferralPersonObject.getRelationalid());
-        values.put(fName, clientReferralPersonObject.getFirst_name());
-        values.put(mName, clientReferralPersonObject.getMiddle_name());
-        values.put(lName, clientReferralPersonObject.getSurname());
-        values.put(CBHS, clientReferralPersonObject.getCommunity_based_hiv_service());
-        values.put(CTCNumber, clientReferralPersonObject.getCtc_number());
-        values.put(ReferralDate, clientReferralPersonObject.getReferral_date());
-        values.put(ReferralFacility, clientReferralPersonObject.getFacility_id());
-        values.put(ReferralReason, clientReferralPersonObject.getReferral_reason());
-        values.put(Service, clientReferralPersonObject.getReferral_service_id());
-        values.put(Status, clientReferralPersonObject.getStatus());
-        values.put(IS_VALID, clientReferralPersonObject.getIs_valid());
-        values.put(DETAILS_COLUMN, new Gson().toJson(clientReferralPersonObject));
+        values.put(ID_COLUMN, clientReferral.getId());
+        values.put(Relational_ID, clientReferral.getRelationalid());
+        values.put(fName, clientReferral.getFirst_name());
+        values.put(mName, clientReferral.getMiddle_name());
+        values.put(lName, clientReferral.getSurname());
+        values.put(CBHS, clientReferral.getCommunity_based_hiv_service());
+        values.put(CTCNumber, clientReferral.getCtc_number());
+        values.put(ReferralDate, clientReferral.getReferral_date());
+        values.put(ReferralFacility, clientReferral.getFacility_id());
+        values.put(ReferralReason, clientReferral.getReferral_reason());
+        values.put(Service, clientReferral.getReferral_service_id());
+        values.put(Status, clientReferral.getStatus());
+        values.put(IS_VALID, clientReferral.getIs_valid());
+        values.put(DETAILS_COLUMN, new Gson().toJson(clientReferral));
         return values;
     }
     private List<ClientReferral> readAll(Cursor cursor) {

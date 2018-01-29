@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.hardware.camera2.params.Face;
 
+import com.google.gson.Gson;
+
 import net.sqlcipher.database.SQLiteDatabase;
 import org.apache.commons.lang3.StringUtils;
 import org.ei.opensrp.domain.Facility;
@@ -16,11 +18,13 @@ import static net.sqlcipher.DatabaseUtils.longForQuery;
 import static org.apache.commons.lang3.StringUtils.repeat;
 
 public class FacilityRepository extends DrishtiRepository {
-    private static final String CHILD_SQL = "CREATE TABLE facility(id VARCHAR PRIMARY KEY, name VARCHAR)";
+    private static final String CHILD_SQL = "CREATE TABLE facility(id VARCHAR PRIMARY KEY,relationalid VARCHAR,details VARCHAR, name VARCHAR)";
     public static final String FACILITY = "facility";
     private static final String ID_COLUMN = "id";
+    private static final String RELATIONAL_COLUMN = "relationalid";
+    private static final String DETAILS_COLUMN = "details";
     private static final String NAME = "name";
-    public static final String[] FACILITY_TABLE_COLUMNS = {ID_COLUMN, NAME};
+    public static final String[] FACILITY_TABLE_COLUMNS = {ID_COLUMN, RELATIONAL_COLUMN,DETAILS_COLUMN,NAME};
     
 
     @Override
@@ -106,7 +110,9 @@ public class FacilityRepository extends DrishtiRepository {
     public ContentValues createValuesFor(Facility facility) {
         ContentValues values = new ContentValues();
         values.put(ID_COLUMN, facility.getOpenMRSUIID());
+        values.put(RELATIONAL_COLUMN, facility.getOpenMRSUIID());
         values.put(NAME, facility.getFacilityName());
+        values.put(DETAILS_COLUMN, new Gson().toJson(facility));
         return values;
     }
 

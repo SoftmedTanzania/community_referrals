@@ -58,9 +58,28 @@
                 <category android:name="com.example.gcm"/>
             </intent-filter>
         </receiver>
+        <service android:name="org.ei.opensrp.drishti.Service.MyGcmListenerService"
+                 android:exported="false">
+            <intent-filter><action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+            </intent-filter>
+        </service>
 
+        <service android:name="org.ei.opensrp.drishti.Service.MyInstanceIDListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+            </intent-filter>
+        </service>
         <service android:name="org.ei.opensrp.drishti.Service.RegistrationIntentService"
                 android:exported="false">
+        </service>
+        <service android:name="org.ei.opensrp.drishti.Service.MyInstanceIDService"
+                 android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+            </intent-filter>
         </service>
         <service android:enabled="true"
             android:name="org.ei.opensrp.drishti.Service.FacilityService"
@@ -95,23 +114,6 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="ee4140a3b1692ec32e688110a280538c7b44e10e" />
-
-        <activity
-            android:name=".ChwReferralReports"
-            android:theme="@style/AppTheme.MaterialDesign.NoActionBar">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity
-            android:name=".ReportSearchActivity"
-            android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
-
-
         <activity
             android:name=".ClientsFormRegisterActivity"
             android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />

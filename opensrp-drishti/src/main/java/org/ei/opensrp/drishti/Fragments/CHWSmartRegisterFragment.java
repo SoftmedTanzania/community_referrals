@@ -38,6 +38,7 @@ import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
 import org.ei.opensrp.drishti.ChwSmartRegisterActivity;
 import org.ei.opensrp.drishti.LoginActivity;
+import org.ei.opensrp.drishti.NavigationController;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.pageradapter.CHWPagerAdapter;
@@ -51,6 +52,7 @@ import org.ei.opensrp.sync.SyncAfterFetchListener;
 import org.ei.opensrp.sync.SyncProgressIndicator;
 import org.ei.opensrp.sync.UpdateActionsTask;
 import org.ei.opensrp.view.activity.DrishtiApplication;
+import org.ei.opensrp.view.activity.SecuredActivity;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.ei.opensrp.view.contract.HomeContext;
 import org.ei.opensrp.view.controller.NativeAfterANMDetailsFetchListener;
@@ -72,6 +74,7 @@ import static org.ei.opensrp.event.Event.SYNC_COMPLETED;
 import static org.ei.opensrp.event.Event.SYNC_STARTED;
 
 public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+    SecuredActivity securedActivity;
     private static final String TAG = CHWSmartRegisterFragment.class.getSimpleName();
     private String locationDialogTAG = "locationDialogTAG";
     private JSONObject fieldOverides = new JSONObject();
@@ -94,6 +97,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     private PendingFormSubmissionService pendingFormSubmissionService;
     static final String DATABASE_NAME = "drishti.db";
     RelativeLayout pendingForm;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,10 +107,14 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        navigationController = new NavigationController(getActivity(), anmController);
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         this.inflater = inflater;
         v = inflater.inflate(R.layout.activity_chwregister, container, false);
         onInitialization();
+        setHasOptionsMenu(true);
+
         imageButton = (ImageButton) v.findViewById(R.id.register_client);
 
         adapter = new CHWPagerAdapter(getActivity().getSupportFragmentManager());
@@ -200,7 +208,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         TextView username = (TextView) v.findViewById(R.id.toolbar_user_name);
         pendingForm = (RelativeLayout) v.findViewById(R.id.key_three);
         pending = (TextView) v.findViewById(R.id.count_three);
-        username.setText("Logged as "+((BoreshaAfyaApplication)getActivity().getApplication()).getUsername());
+        username.setText("Logged in as "+((BoreshaAfyaApplication)getActivity().getApplication()).getUsername());
         successView =  (TextView) v.findViewById(R.id.count_one);
         unsuccessView =  (TextView) v.findViewById(R.id.count_two);
         return v;
@@ -242,6 +250,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                 updateMenuItem.setActionView(null);
             }
             updateRegisterCounts();
+            refreshListView();
         }
     };
 
@@ -263,6 +272,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         updateRegisterCounts();
         updateSyncIndicator();
         updateRemainingFormsToSyncCount();
+        refreshListView();
     }
 
     public void updateRegisterCounts() {
@@ -304,14 +314,22 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         }).start();
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {
+        // Do something that differs the Activity's menu here
+        inflater.inflate(R.menu.menu_main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
 
+    }
 
 
     public void onPrepareOptionsMenu(Menu menu) {
+        Log.d(TAG,"am in preparationOptionMenu");
+        super.onPrepareOptionsMenu(menu);
         updateMenuItem = menu.findItem(R.id.updateMenuItem);
         remainingFormsToSyncMenuItem = menu.findItem(R.id.remainingFormsToSyncMenuItem);
 
-        updateSyncIndicator();
+//        updateSyncIndicator();
         updateRemainingFormsToSyncCount();
 
     }
@@ -326,11 +344,12 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     };
 
     public void updateFromServer() {
-        updateRemainingFormsToSyncCount();
         UpdateActionsTask updateActionsTask = new UpdateActionsTask(
                 context, context().actionService(), context().formSubmissionSyncService(),
                 new SyncProgressIndicator(), context().allFormVersionSyncService());
         updateActionsTask.updateFromServer(new SyncAfterFetchListener());
+
+        updateRemainingFormsToSyncCount();
     }
 
     @Override
@@ -345,12 +364,12 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
     private void updateSyncIndicator() {
 
-//        if (updateMenuItem != null) {
-//            if (context().allSharedPreferences().fetchIsSyncInProgress()) {
-//                updateMenuItem.setActionView(R.layout.progress);
-//            } else
-//                updateMenuItem.setActionView(null);
-//        }
+        if (updateMenuItem != null) {
+            if (context().allSharedPreferences().fetchIsSyncInProgress()) {
+                updateMenuItem.setActionView(R.layout.progress);
+            } else
+                updateMenuItem.setActionView(null);
+        }
 
     }
 
@@ -392,18 +411,16 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     public void refreshListView() {
         try {
             ReferredClientsFragment referredClientsFragment = (ReferredClientsFragment) findFragmentByPosition(0);
-            if (referredClientsFragment != null) {
-                referredClientsFragment.populateData();
-            }
+            referredClientsFragment.populateData();
+
         }catch (Exception e){
             e.printStackTrace();
         }
 
         try {
             FollowupClientsFragment followupClientsFragment = (FollowupClientsFragment) findFragmentByPosition(1);
-            if (followupClientsFragment != null) {
-                followupClientsFragment.populateData();
-            }
+            followupClientsFragment.populateData();
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -416,17 +433,19 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     }
 
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.updateMenuItem:
+                updateMenuItem = item;
                 updateFromServer();
                 if (context().allSharedPreferences().fetchIsSyncInProgress()) {
                     Log.d(TAG,"am in sync progress");
                     item.setActionView(R.layout.progress);
-                } else
+                } else{
                     item.setActionView(null);
+                    Log.d(TAG,"am in sync progress aAFTER");}
 
                 return true;
 
@@ -438,7 +457,6 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                 ((BoreshaAfyaApplication)getActivity().getApplication()).logoutCurrentUser();
 
                 return true;
-
             case R.id.switchLanguageMenuItem:
                 String newLanguagePreference = context().userService().switchLanguagePreference();
 //                String newLanguagePreference = LoginActivity.switchLanguagePreference();

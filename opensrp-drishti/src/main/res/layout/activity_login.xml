@@ -2,7 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-     android:id="@+id/coordinatorLogin"
+    android:id="@+id/coordinatorLogin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f5f5f5"
@@ -35,7 +35,7 @@
                 android:background="#398FE5" />
 
             <android.support.v7.widget.Toolbar
-                 android:id="@+id/mToolbar"
+                android:id="@+id/mToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_marginTop="24dp"
@@ -47,7 +47,7 @@
         </FrameLayout>
 
         <LinearLayout
-             android:id="@+id/login_layout"
+            android:id="@+id/login_layout"
             android:layout_centerHorizontal="true"
             app:layout_marginTopPercent="30%"
             android:layout_width="300dp"
@@ -62,12 +62,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/login_button"
+                android:text="Login"
                 android:layout_marginLeft="8dp"
                 android:textStyle="bold"
                 android:textColor="#306AA3"/>
             <com.rengwuxian.materialedittext.MaterialEditText
-                 android:id="@+id/editTextUsername"
+                android:id="@+id/editTextUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -86,7 +86,7 @@
 
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                 android:id="@+id/editTextPassword"
+                android:id="@+id/editTextPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -103,7 +103,7 @@
                 app:met_floatingLabelTextColor="@color/primary"/>
 
             <Button
-                 android:id="@+id/buttonSignIn"
+                android:id="@+id/buttonSignIn"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:layout_marginBottom="24dp"
@@ -111,7 +111,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/shape_round_button"
-                android:text="@string/login_button"
+                android:text="Sign In"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
@@ -120,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/powered_by"
+                android:text="Powered by OpenSRP"
                 android:textColor="@color/hint_text"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -163,7 +163,7 @@
 
 
         <ImageView
-             android:id="@+id/logo"
+            android:id="@+id/logo"
             android:layout_marginTop="32dp"
             android:layout_width="56dp"
             android:layout_height="56dp"
@@ -176,20 +176,20 @@
             android:paddingTop="8dp"
             android:layout_marginLeft="8dp"
             android:layout_height="wrap_content"
-            android:text="@string/appname"
-             android:id="@+id/title_one"
+            android:text="htmr"
+            android:id="@+id/title_one"
             android:textStyle="bold"
             android:textColor="@color/mdtp_white"
             android:textSize="32sp"/>
 
         <TextView android:layout_width="wrap_content"
             android:layout_below="@id/title_one"
-             android:id="@+id/title_two"
+            android:id="@+id/title_two"
             android:layout_toRightOf="@id/logo"
             android:paddingTop="8dp"
             android:layout_marginLeft="8dp"
             android:layout_height="wrap_content"
-            android:text="@string/appdetail"
+            android:text="Referral"
             android:textColor="@color/mdtp_white"
             android:textSize="18sp"/>
 
@@ -199,7 +199,7 @@
             android:paddingTop="8dp"
             android:layout_marginLeft="8dp"
             android:layout_height="wrap_content"
-            android:text="@string/appdetails2"
+            android:text="Application"
             android:textColor="@color/mdtp_white"
             android:textSize="16sp"/>
     </android.support.percent.PercentRelativeLayout>

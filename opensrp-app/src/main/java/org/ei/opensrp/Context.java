@@ -12,6 +12,7 @@ import org.ei.opensrp.commonregistry.CommonFtsObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectClients;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.commonregistry.CommonRepositoryInformationHolder;
+import org.ei.opensrp.domain.Indicator;
 import org.ei.opensrp.repository.AlertRepository;
 import org.ei.opensrp.repository.AllAlerts;
 import org.ei.opensrp.repository.AllBeneficiaries;
@@ -29,6 +30,7 @@ import org.ei.opensrp.repository.FacilityRepository;
 import org.ei.opensrp.repository.FormDataRepository;
 import org.ei.opensrp.repository.FormsVersionRepository;
 import org.ei.opensrp.repository.ImageRepository;
+import org.ei.opensrp.repository.IndicatorRepository;
 import org.ei.opensrp.repository.MotherRepository;
 import org.ei.opensrp.repository.ReferralServiceRepository;
 import org.ei.opensrp.repository.ReportRepository;
@@ -203,7 +205,7 @@ public class Context {
     private SavehasFacilityInfoTask savehasFacilityInfoTask;
     private SavehasReferralServiceInfoTask savehasReferralServiceInfoTask;
     private SaveRegistrationIdInfoTask saveRegistrationIdInfoTask;
-
+    private IndicatorRepository indicatorRepository;
     private ANMController anmController;
     private ANMLocationController anmLocationController;
 
@@ -486,6 +488,7 @@ public class Context {
     }
 
     public FormSubmissionSyncService formSubmissionSyncService() {
+        initRepository();
         if (formSubmissionSyncService == null) {
             formSubmissionSyncService = new FormSubmissionSyncService(formSubmissionService(), httpAgent(), formDataRepository(), allSettings(), allSharedPreferences(), configuration());
         }
@@ -499,7 +502,7 @@ public class Context {
         return httpAgent;
     }
 
-    protected Repository initRepository() {
+    public Repository initRepository() {
         if (configuration().appName().equals(AllConstants.APP_NAME_INDONESIA)) {
             return null;
         }
@@ -518,6 +521,7 @@ public class Context {
             drishtireposotorylist.add(reportRepository());
             drishtireposotorylist.add(formDataRepository());
             drishtireposotorylist.add(serviceProvidedRepository());
+            drishtireposotorylist.add(indicatorRepository());
             drishtireposotorylist.add(formsVersionRepository());
             drishtireposotorylist.add(imageRepository());
             for (int i = 0; i < bindtypes.size(); i++) {
@@ -649,6 +653,12 @@ public class Context {
             clientReferralRepository = new ClientReferralRepository();
         }
         return clientReferralRepository;
+    }
+    private IndicatorRepository indicatorRepository() {
+        if (indicatorRepository == null) {
+            indicatorRepository = new IndicatorRepository();
+        }
+        return indicatorRepository;
     }
 
 
@@ -828,6 +838,7 @@ public class Context {
     }
 
     public PendingFormSubmissionService pendingFormSubmissionService() {
+        initRepository();
         if (pendingFormSubmissionService == null) {
             pendingFormSubmissionService = new PendingFormSubmissionService(formDataRepository());
         }
@@ -835,6 +846,7 @@ public class Context {
     }
 
     public ANMController anmController() {
+        initRepository();
         if (anmController == null) {
             anmController = new ANMController(anmService(), listCache(), homeContextCache());
         }
@@ -933,6 +945,7 @@ public class Context {
     }
 
     public CommonRepository commonrepository(String tablename) {
+
         if (MapOfCommonRepository == null) {
             MapOfCommonRepository = new HashMap<String, CommonRepository>();
         }
@@ -944,9 +957,15 @@ public class Context {
                 }
             }
             if (commonFtsObject != null && commonFtsObject.containsTable(tablename)) {
-                MapOfCommonRepository.put(bindtypes.get(index).getBindtypename(), new CommonRepository(commonFtsObject, bindtypes.get(index).getBindtypename(), bindtypes.get(index).getColumnNames()));
+                CommonRepository commonRepository = new CommonRepository(commonFtsObject, bindtypes.get(index).getBindtypename(), bindtypes.get(index).getColumnNames());
+                commonRepository.updateMasterRepository(repository);
+
+                MapOfCommonRepository.put(bindtypes.get(index).getBindtypename(), commonRepository);
             } else {
-                MapOfCommonRepository.put(bindtypes.get(index).getBindtypename(), new CommonRepository(bindtypes.get(index).getBindtypename(), bindtypes.get(index).getColumnNames()));
+                CommonRepository commonRepository = new CommonRepository(bindtypes.get(index).getBindtypename(), bindtypes.get(index).getColumnNames());
+                commonRepository.updateMasterRepository(repository);
+
+                MapOfCommonRepository.put(bindtypes.get(index).getBindtypename(),commonRepository);
             }
         }
         return MapOfCommonRepository.get(tablename);

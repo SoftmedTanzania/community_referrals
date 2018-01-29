@@ -1,0 +1,235 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#e5e5e5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <include  layout="@layout/ancdetail_nav_bar" />
+        <android.support.v7.widget.CardView
+            android:id="@+id/demographics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="16dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="2dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/title_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/primary"
+                    android:layout_margin="8dp"
+                    android:text="Tarifa za mama mjamzito kwenye mahudhurio"
+                    />
+                <ImageView
+                    android:layout_below="@+id/title_one"
+                    android:layout_alignParentLeft="true"
+                    android:id="@+id/iconCalendar"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:padding="1dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/ic_calendar_today"
+                    android:tint="@color/primary" />
+
+                <TextView
+                    android:layout_below="@+id/title_one"
+                    android:layout_toRightOf="@+id/iconCalendar"
+                    android:id="@+id/textDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="8dp"
+                    android:text="dd mmm yyyy"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_below="@+id/title_one"
+                    android:layout_toRightOf="@+id/textDate"
+                    android:id="@+id/iconPhone"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="100dp"
+                    android:padding="1dp"
+                    android:src="@drawable/ic_cellphone_android"
+                    android:tint="@color/primary" />
+
+                <TextView
+                    android:layout_below="@+id/title_one"
+                    android:layout_toRightOf="@+id/iconPhone"
+                    android:id="@+id/textPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="8dp"
+                    android:hint="Namba ya simu"
+                    android:textColor="@color/secondary_text"
+                    android:textColorHint="@color/hint_text" />
+
+                <EditText
+                    android:layout_below="@+id/iconCalendar"
+                    android:layout_alignParentLeft="true"
+                    android:id="@+id/editTextClinicName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:hint="Jina la kliniki la Rufaa"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textColor="@color/secondary_text"
+                    android:textColorHint="@color/hint_text"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_toRightOf="@+id/editTextClinicName"
+                    android:layout_alignBottom="@+id/editTextClinicName"
+                    android:id="@+id/accountIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="80dp"
+                    android:alpha="0.5"
+                    android:src="@drawable/ic_account_circle" />
+
+                <EditText
+                    android:layout_alignBottom="@+id/editTextClinicName"
+                    android:layout_toRightOf="@+id/accountIcon"
+                    android:id="@+id/editTextMotherName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:hint="Andika Jina la Mama"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPersonName|textFilter|textCapWords"
+                    android:minWidth="80dp"
+                    android:paddingLeft="32dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/secondary_text"
+                    android:textColorHint="@color/hint_text"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:layout_below="@+id/editTextClinicName"
+                    android:id="@+id/editTextMotherId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"
+                    android:hint="No. ya Utambulisho"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/hint_text"
+                    android:textSize="14sp" />
+                <EditText
+                    android:layout_alignBottom="@+id/editTextMotherId"
+                    android:layout_toRightOf="@+id/editTextMotherId"
+                    android:id="@+id/editTextMotherAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:hint="Umri wa Mama"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/hint_text"
+                    android:textSize="14sp" />
+                <EditText
+                    android:layout_below="@id/editTextMotherId"
+                    android:id="@+id/editTextPartnerName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="24dp"
+                    android:hint="Jina la Mume/Mwenzi"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/hint_text"
+                    android:textSize="14sp" />
+                <TextView
+                    android:layout_below="@+id/editTextPartnerName"
+                    android:id="@+id/title_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Mahali anapoishi"
+                    android:textAllCaps="true"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:layout_below="@+id/title_two"
+                    android:id="@+id/editTextWilaya"
+                    android:layout_width="192dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="Wilaya"
+                    android:inputType="text"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/hint_text"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:layout_below="@+id/editTextWilaya"
+                    android:id="@+id/editTextKata"
+                    android:layout_width="192dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"
+                    android:hint="Kata"
+                    android:inputType="number"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/hint_text"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:layout_below="@+id/editTextKata"
+                    android:id="@+id/editTextKijiji"
+                    android:layout_width="192dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"
+                    android:hint="Kijiji"
+                    android:inputType="number"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/hint_text"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>

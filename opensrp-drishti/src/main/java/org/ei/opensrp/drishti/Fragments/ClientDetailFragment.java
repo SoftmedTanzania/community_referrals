@@ -132,13 +132,12 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
         String ageS="";
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-            Date d = sdf.parse(reg_date);
+            Date d = dateFormat.parse(reg_date);
             Calendar cal = Calendar.getInstance();
             Calendar today = Calendar.getInstance();
             cal.setTime(d);
 
             int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
-            Log.d(TAG,"age is ="+age);
             Integer ageInt = new Integer(age);
             ageS = ageInt.toString();
 

@@ -1,7 +1,10 @@
 package org.ei.opensrp.event;
 
+import com.google.gson.Gson;
+
 import org.apache.commons.lang3.ObjectUtils;
 import org.ei.opensrp.domain.FetchStatus;
+import org.ei.opensrp.util.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -40,6 +43,8 @@ public class Event<CallbackType> {
     public void notifyListeners(CallbackType data) {
         for (WeakReference<Listener<CallbackType>> listener : listeners) {
             if (listener.get() != null) {
+                Log.logInfo("am in notification");
+                Log.logInfo("am in notification value = "+data);
                 listener.get().onEvent(data);
             }
         }

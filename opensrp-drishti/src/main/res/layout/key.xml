@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_weight="1"
+    android:layout_height="40dp">
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:textColor="#c61515"
+        android:layout_marginBottom="16dp"
+        android:text="Risks Selected :- "
+        />
+    <TextView
+        android:id="@+id/pressure"
+        android:padding="8dp"
+        android:gravity="left"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:textColor="#c61515"
+        android:text=" High blood pressure"/>
+    <TextView
+        android:id="@+id/sugar"
+        android:padding="8dp"
+        android:gravity="left"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:textColor="#c61515"
+        android:text="Height below 150cm"/>
+</TableRow>
+
+
+
+

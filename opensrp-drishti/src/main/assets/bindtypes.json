@@ -15,7 +15,12 @@
     {
       "name": "referral_service",
       "columns": [
-        {"name":"name"}
+        {"name":"name"},{"name":"category"},{"name":"isActive"},{"name":"indicators"}
+      ]
+    },{
+      "name": "indicator",
+      "columns": [
+        {"name":"referralServiceIndicatorId"},{"name":"referralIndicatorId"},{"name":"isActive"},{"name":"indicatorName"}
       ]
     },
     {

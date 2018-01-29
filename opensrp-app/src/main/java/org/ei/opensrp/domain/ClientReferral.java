@@ -1,6 +1,7 @@
 package org.ei.opensrp.domain;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Created by kency on 11/20/17.
@@ -8,21 +9,10 @@ import java.io.Serializable;
 
 public class ClientReferral implements Serializable {
 
-    private String id, relationalid,details, referral_feedback,first_name, middle_name, surname,last_ctc_date, facility_id, referral_reason, is_valid, service_provider_mobile_number, ward, village,Kijitongoji, village_leader, service_provider_group, service_provider_uiid, phone_number, referral_service_id, gender, community_based_hiv_service, ctc_number,Status;
+    private String id, relationalid,details, referral_feedback,other_notes,service_given_to_patient,referral_uuid,first_name, middle_name, surname,last_ctc_date, facility_id, referral_reason, is_valid, service_provider_mobile_number, ward, village,Kijitongoji, village_leader, service_provider_group, service_provider_uiid, phone_number, referral_service_id, gender, community_based_hiv_service, ctc_number,Status;
     private long  date_of_birth, referral_date;
-    private boolean has_2Week_cough,
-            has_fever,
-            had_weight_loss,
-            has_severe_sweating,
-            has_symptomps_for_associative_diseases,
-            has_affected_partner,
-            has_headache,
-            has_diarrhea,
-            has_blood_cough,
-            is_at_hot_spot,
-            is_lost_follow_up,
-            is_shaking,
-            is_vomiting;
+    private boolean test_result;
+    private String indicator_ids;
     public ClientReferral(){
 
     }
@@ -57,6 +47,29 @@ public class ClientReferral implements Serializable {
         this.is_valid = is_valid;
     }
 
+    public String getOther_notes() {
+        return other_notes;
+    }
+
+    public void setOther_notes(String other_notes) {
+        this.other_notes = other_notes;
+    }
+
+    public String getService_given_to_patient() {
+        return service_given_to_patient;
+    }
+
+    public void setService_given_to_patient(String service_given_to_patient) {
+        this.service_given_to_patient = service_given_to_patient;
+    }
+
+    public boolean isTest_result() {
+        return test_result;
+    }
+
+    public void setTest_result(boolean test_result) {
+        this.test_result = test_result;
+    }
 
     public String getId() {
         return id;
@@ -80,6 +93,24 @@ public class ClientReferral implements Serializable {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+
+
+    public String getReferral_uuid() {
+        return referral_uuid;
+    }
+
+    public void setReferral_uuid(String referral_uuid) {
+        this.referral_uuid = referral_uuid;
+    }
+
+    public String getIndicator_ids() {
+        return indicator_ids;
+    }
+
+    public void setIndicator_ids(String indicator_ids) {
+        this.indicator_ids = indicator_ids;
     }
 
     public String getStatus() {
@@ -115,21 +146,6 @@ public class ClientReferral implements Serializable {
         return ctc_number;
     }
 
-    public boolean isHas_2Week_cough() {
-        return has_2Week_cough;
-    }
-
-    public void setHas_2Week_cough(boolean has_2Week_cough) {
-        this.has_2Week_cough = has_2Week_cough;
-    }
-
-    public boolean is_shaking() {
-        return is_shaking;
-    }
-
-    public void setIs_shaking(boolean is_shaking) {
-        this.is_shaking = is_shaking;
-    }
 
     public String getReferral_feedback() {
         return referral_feedback;
@@ -139,29 +155,6 @@ public class ClientReferral implements Serializable {
         this.referral_feedback = referral_feedback;
     }
 
-    public boolean is_at_hot_spot() {
-        return is_at_hot_spot;
-    }
-
-    public void setIs_at_hot_spot(boolean is_at_hot_spot) {
-        this.is_at_hot_spot = is_at_hot_spot;
-    }
-
-    public boolean isHas_fever() {
-        return has_fever;
-    }
-
-    public void setHas_fever(boolean has_fever) {
-        this.has_fever = has_fever;
-    }
-
-    public boolean isHad_weight_loss() {
-        return had_weight_loss;
-    }
-
-    public void setHad_weight_loss(boolean had_weight_loss) {
-        this.had_weight_loss = had_weight_loss;
-    }
 
     public String getLast_ctc_date() {
         return last_ctc_date;
@@ -177,74 +170,6 @@ public class ClientReferral implements Serializable {
 
     public void setService_provider_mobile_number(String service_provider_mobile_number) {
         this.service_provider_mobile_number = service_provider_mobile_number;
-    }
-
-    public boolean isHas_symptomps_for_associative_diseases() {
-        return has_symptomps_for_associative_diseases;
-    }
-
-    public void setHas_symptomps_for_associative_diseases(boolean has_symptomps_for_associative_diseases) {
-        this.has_symptomps_for_associative_diseases = has_symptomps_for_associative_diseases;
-    }
-
-    public boolean isHas_affected_partner() {
-        return has_affected_partner;
-    }
-
-    public void setHas_affected_partner(boolean has_affected_partner) {
-        this.has_affected_partner = has_affected_partner;
-    }
-
-    public boolean isHas_headache() {
-        return has_headache;
-    }
-
-    public void setHas_headache(boolean has_headache) {
-        this.has_headache = has_headache;
-    }
-
-    public boolean isHas_diarrhea() {
-        return has_diarrhea;
-    }
-
-    public void setHas_diarrhea(boolean has_diarrhea) {
-        this.has_diarrhea = has_diarrhea;
-    }
-
-    public boolean is_lost_follow_up() {
-        return is_lost_follow_up;
-    }
-
-    public boolean is_vomiting() {
-        return is_vomiting;
-    }
-
-    public void setIs_vomiting(boolean is_vomiting) {
-        this.is_vomiting = is_vomiting;
-    }
-
-    public boolean isHas_severe_sweating() {
-        return has_severe_sweating;
-    }
-
-    public void setHas_severe_sweating(boolean has_severe_sweating) {
-        this.has_severe_sweating = has_severe_sweating;
-    }
-
-    public boolean isHas_blood_cough() {
-        return has_blood_cough;
-    }
-
-    public void setHas_blood_cough(boolean has_blood_cough) {
-        this.has_blood_cough = has_blood_cough;
-    }
-
-    public boolean isIs_lost_follow_up() {
-        return is_lost_follow_up;
-    }
-
-    public void setIs_lost_follow_up(boolean is_lost_follow_up) {
-        this.is_lost_follow_up = is_lost_follow_up;
     }
 
     public void setCtc_number(String ctc_number) {

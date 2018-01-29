@@ -16,13 +16,12 @@ public class NavigationController extends org.ei.opensrp.view.controller.Navigat
     }
 
     @Override
-    public void startANCSmartRegistry() {
+    public void startCHWSmartRegistry() {
         activity.startActivity(new Intent(activity, ChwSmartRegisterActivity.class));
     }
 
     @Override
     public void startPNCActivity() {
-//        activity.startActivity(new Intent(activity, PncActivity.class));
     }
 
 }

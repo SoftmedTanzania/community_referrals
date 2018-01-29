@@ -76,11 +76,7 @@ public class CommonRepository extends DrishtiRepository {
 
     @Override
     protected void onCreate(SQLiteDatabase database) {
-        try {
-            database.execSQL(common_SQL);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        database.execSQL(common_SQL);
         if (StringUtils.isNotBlank(common_ID_INDEX_SQL)) {
             database.execSQL(common_ID_INDEX_SQL);
         }
@@ -109,7 +105,7 @@ public class CommonRepository extends DrishtiRepository {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
         Log.d("customInsert", "tableName = " + TABLE_NAME);
         database.update(TABLE_NAME, contentValues, ID_COLUMN + " = ?", new String[]{caseId});
-         Cursor cursor = database.rawQuery("select * from wazazi_salama_mother",null);
+         Cursor cursor = database.rawQuery("select * from client_referral",null);
         Log.d("customInsert", "table details " + new Gson().toJson(cursor));
 
     }

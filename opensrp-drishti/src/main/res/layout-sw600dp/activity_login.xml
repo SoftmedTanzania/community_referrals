@@ -6,7 +6,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-         android:id="@+id/background"
+        android:id="@+id/background"
         android:scaleType="centerCrop"/>
 
     <View
@@ -94,7 +94,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="64dp"
         android:scaleType="centerCrop"
-         android:id="@+id/login_screen_logo"
+        android:id="@+id/login_screen_logo"
         android:src="@drawable/ic_logo_white"/>
 
     <TextView
@@ -104,7 +104,7 @@
         android:layout_marginLeft="16dp"
         android:layout_toRightOf="@id/login_screen_logo"
         android:textSize="32sp"
-        android:text="@string/appname"
+        android:text="htmr"
         android:textColor="@color/white"
         android:textStyle="bold"/>
 
@@ -112,23 +112,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-         android:id="@+id/referral_text"
+        android:id="@+id/referral_text"
         android:layout_below="@id/login_screen_logo"
         android:layout_toRightOf="@id/login_screen_logo"
         android:textSize="24sp"
         android:textColor="@color/white"
-        android:text="@string/appdetail"/>
+        android:text="Referral"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-         android:id="@+id/application_text"
+        android:id="@+id/application_text"
         android:layout_below="@id/referral_text"
         android:layout_toRightOf="@id/login_screen_logo"
         android:textSize="24sp"
         android:textColor="@color/white"
-        android:text="@string/appdetails2"/>
+        android:text="Application"/>
 
     <RelativeLayout
         android:layout_width="400dp"
@@ -137,7 +137,7 @@
         android:paddingLeft="32dp"
         android:paddingTop="16dp"
         android:paddingBottom="32dp"
-         android:id="@+id/credential_card"
+        android:id="@+id/credential_card"
         android:layout_marginTop="96dp"
         android:layout_marginBottom="96dp"
         android:layout_marginRight="52dp"
@@ -149,7 +149,7 @@
         <ImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
-             android:id="@+id/lock_ico"
+            android:id="@+id/lock_ico"
             android:layout_marginTop="16dp"
             android:src="@drawable/ic_lock_open_black_36dp"
             android:scaleType="centerCrop"/>
@@ -160,8 +160,8 @@
             android:textSize="16sp"
             android:layout_marginTop="8dp"
             android:layout_below="@id/lock_ico"
-            android:text="@string/login_button"
-             android:id="@+id/login_title"
+            android:text="Login"
+            android:id="@+id/login_title"
             android:textColor="@color/black"/>
 
         <TextView
@@ -170,8 +170,8 @@
             android:textSize="14sp"
             android:layout_marginTop="4dp"
             android:layout_below="@id/login_title"
-            android:text="@string/login_details"
-             android:id="@+id/login_msg"
+            android:text="Enter username and password"
+            android:id="@+id/login_msg"
             android:textColor="@color/card_grid_text"/>
 
 
@@ -188,7 +188,7 @@
                 android:layout_marginTop="16dp">
 
                 <com.rengwuxian.materialedittext.MaterialEditText
-                     android:id="@+id/editTextUsername"
+                    android:id="@+id/editTextUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -207,7 +207,7 @@
 
 
                 <com.rengwuxian.materialedittext.MaterialEditText
-                     android:id="@+id/editTextPassword"
+                    android:id="@+id/editTextPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -234,8 +234,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginBottom="20px"
-                android:text="@string/login_button"
-                 android:id="@+id/buttonSignIn"
+                android:text="Login"
+                android:id="@+id/buttonSignIn"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:background="@color/card_title_text"/>
@@ -247,14 +247,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-         android:id="@+id/login_messages"
+        android:id="@+id/login_messages"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="60dp"
         android:layout_marginTop="16dp"
         android:textSize="18sp"
         android:textColor="@color/black"
-        android:text="@string/login_process"
+        android:text="Logging in"
         android:layout_below="@id/credential_card"/>
 
 </RelativeLayout>

@@ -6,7 +6,7 @@
     android:paddingTop="2dp">
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-         android:id="@+id/card_view"
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
@@ -18,7 +18,7 @@
 
             <ImageView
                 android:tintMode="multiply"
-                 android:id="@+id/profilePic"
+                android:id="@+id/profilePic"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:layout_marginTop="16dp"
@@ -27,16 +27,17 @@
                 android:src="@drawable/user_icon" />
 
             <org.ei.opensrp.view.customControls.CustomFontTextView
-                 android:id="@+id/name"
+                android:id="@+id/name"
                 android:layout_alignTop="@id/profilePic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:textSize="18sp"
+                android:text="Martha Shaka"
                 android:layout_toRightOf="@+id/profilePic" />
 
             <org.ei.opensrp.view.customControls.CustomFontTextView
-                 android:id="@+id/phone_number"
+                android:id="@+id/phone_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/textDate"
@@ -46,10 +47,11 @@
                 android:layout_below="@id/name"
                 android:layout_marginTop="4dp"
                 android:gravity="center_vertical"
+                android:text="08 Jan 17"
                 android:textSize="13sp" />
 
             <org.ei.opensrp.view.customControls.CustomFontTextView
-                 android:id="@+id/community_based_hiv_service"
+                android:id="@+id/community_based_hiv_service"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/name"
@@ -65,20 +67,20 @@
                 android:orientation="horizontal">
                 <Button
                     style="?android:attr/borderlessButtonStyle"
-                     android:id="@+id/button_details"
+                    android:id="@+id/button_details"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
-                    android:text="@string/details_button"
+                    android:text="Details"
                     android:textColor="#2D69A5"
                     android:layout_below="@id/profilePic"/>
 
                 <Button
-                     android:id="@+id/button_followup"
+                    android:id="@+id/button_followup"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_toRightOf="@id/button_details"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
-                    android:text="@string/follow_up_button"
+                    android:text="Follow up"
                     android:textColor="#2D69A5"
                     android:layout_below="@id/profilePic"/>
             </LinearLayout>

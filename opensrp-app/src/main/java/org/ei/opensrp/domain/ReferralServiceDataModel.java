@@ -2,41 +2,89 @@ package org.ei.opensrp.domain;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * Created by ali on 9/5/17.
+ * Created by Martha on 1/1/18.
  */
 
 public class ReferralServiceDataModel {
 
     private static final String TAG = ReferralServiceDataModel.class.getSimpleName();
-    private String serviceName, serviceId;
+    private String serviceName, id,relationalid,category,isActive;
+
+    private Map<String, String> details;
 
     public ReferralServiceDataModel() {
 
     }
 
-    public ReferralServiceDataModel(String serviceId, String name) {
-        this.serviceId = serviceId;
+    public ReferralServiceDataModel(String id, String name,String isActive,String category) {
+        this.id = id;
         this.serviceName = name;
+        this.details = null;
+        this.relationalid = id;
+        this.isActive = isActive;
+        this.category = category;
 
     }
 
-    public String getId() {
-        return serviceId;
-    }
 
-    public void setId(String serviceId) {
-        this.serviceId = serviceId;
-    }
 
-    public String getName() {
+    public String getServiceName() {
         return serviceName;
     }
 
-    public void setName(String name) {
-        this.serviceName = name;
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getRelationalid() {
+        return relationalid;
+    }
+
+    public void setRelationalid(String relationalid) {
+        this.relationalid = relationalid;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(String isActive) {
+        this.isActive = isActive;
+    }
+
+    public Map<String, String> getDetails() {
+        return details;
+    }
+
+    public void setDetails(Map<String, String> details) {
+        this.details = details;
     }
 
 }

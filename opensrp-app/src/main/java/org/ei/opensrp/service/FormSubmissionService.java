@@ -1,5 +1,7 @@
 package org.ei.opensrp.service;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.ei.opensrp.commonregistry.AllCommonsRepository;
@@ -20,6 +22,8 @@ import static org.ei.opensrp.util.EasyMap.create;
 import static org.ei.opensrp.util.Log.logError;
 
 public class FormSubmissionService {
+
+    private static final String TAG = FormSubmissionService.class.getSimpleName();
     private ZiggyService ziggyService;
     private FormDataRepository formDataRepository;
     private AllSettings allSettings;
@@ -116,6 +120,7 @@ public class FormSubmissionService {
         if(allCommonsRepositoryMap != null && !allCommonsRepositoryMap.isEmpty()) {
             AllCommonsRepository allCommonsRepository = allCommonsRepositoryMap.get(bindType);
             if(allCommonsRepository != null){
+                Log.d(TAG,"am in updateFTSsearch entityId = "+entityId);
                 return allCommonsRepository.updateSearch(entityId);
             }
         }

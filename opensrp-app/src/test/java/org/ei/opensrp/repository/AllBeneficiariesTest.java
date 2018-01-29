@@ -22,7 +22,9 @@ public class AllBeneficiariesTest {
     @Mock
     private ChildRepository childRepository;
     @Mock
-    private AlertRepository alertRepository;
+    private AlertRepository alertRepository;;
+    @Mock
+    private ClientReferralRepository clientReferralRepository;
     @Mock
     private TimelineEventRepository timelineEventRepository;
     @Mock
@@ -35,7 +37,7 @@ public class AllBeneficiariesTest {
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        allBeneficiaries = new AllBeneficiaries(motherRepository, childRepository, alertRepository, timelineEventRepository);
+        allBeneficiaries = new AllBeneficiaries(motherRepository,clientReferralRepository,childRepository, alertRepository, timelineEventRepository);
     }
 
     @Test

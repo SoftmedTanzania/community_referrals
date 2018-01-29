@@ -22,7 +22,7 @@
                 android:visibility="gone">
 
                 <android.support.v7.widget.Toolbar
-                     android:id="@+id/toolbar"
+                    android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@color/primary"
@@ -33,12 +33,12 @@
                         android:layout_height="match_parent">
 
                         <TextView
-                             android:id="@+id/app_name"
+                            android:id="@+id/app_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="4dp"
-                            android:text="@string/appname"
+                            android:text="HTMR"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
 
@@ -85,36 +85,37 @@
                                 android:background="@color/card_separator_third">
 
                                 <TextView
-                                     android:id="@+id/client_name"
+                                    android:id="@+id/client_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerVertical="true"
                                     android:layout_marginLeft="32dp"
                                     android:layout_marginTop="32dp"
-                                    android:text="@string/client_reg_title"
+                                    android:text="New Client Registration Form"
                                     android:textColor="@color/black"
                                     android:textSize="42sp" />
 
                                 <TextView
-                                     android:id="@+id/cbhs_number_title"
+                                    android:id="@+id/cbhs_number_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@id/client_name"
                                     android:layout_marginLeft="32dp"
                                     android:layout_marginTop="16dp"
-                                    android:text="@string/cbhs_number"
+                                    android:text="CBHS #"
                                     android:textColor="@color/card_title_text"
                                     android:textSize="14sp"
                                     android:visibility="invisible" />
 
                                 <TextView
-                                     android:id="@+id/cbhs_number_value"
+                                    android:id="@+id/cbhs_number_value"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@id/client_name"
                                     android:layout_marginLeft="16dp"
                                     android:layout_marginTop="16dp"
                                     android:layout_toRightOf="@+id/cbhs_number_title"
+                                    android:text="0001/0001/000001"
                                     android:textColor="@color/card_title_text"
                                     android:textSize="14sp"
                                     android:visibility="invisible" />
@@ -141,7 +142,7 @@
                                         android:layout_height="wrap_content">
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                             android:id="@+id/editTextfName"
+                                            android:id="@+id/editTextfName"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="0dp"
@@ -160,7 +161,7 @@
                                             app:met_floatingLabelTextColor="@color/primary" />
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                             android:id="@+id/editTextmName"
+                                            android:id="@+id/editTextmName"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="16dp"
@@ -193,7 +194,7 @@
                                         android:layout_height="wrap_content">
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                             android:id="@+id/editTextlName"
+                                            android:id="@+id/editTextlName"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
@@ -209,7 +210,7 @@
                                             app:met_floatingLabelTextColor="@color/primary" />
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                             android:id="@+id/edittextPhone"
+                                            android:id="@+id/edittextPhone"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="16dp"
@@ -253,7 +254,7 @@
                                         android:layout_marginTop="8dp">
 
                                         <fr.ganfra.materialspinner.MaterialSpinner
-                                             android:id="@+id/spinnerGender"
+                                            android:id="@+id/spinnerGender"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="16dp"
@@ -271,7 +272,7 @@
 
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                             android:id="@+id/reg_dob"
+                                            android:id="@+id/reg_dob"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="16dp"
@@ -305,7 +306,7 @@
                                         android:layout_height="wrap_content">
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                             android:id="@+id/editTextKijiji"
+                                            android:id="@+id/editTextKijiji"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_marginTop="8dp"
@@ -320,7 +321,7 @@
 
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                             android:id="@+id/editTextVillageLeader"
+                                            android:id="@+id/editTextVillageLeader"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="16dp"
@@ -347,12 +348,12 @@
                                 android:visibility="invisible" />
 
                             <TextView
-                                 android:id="@+id/referer_title"
+                                android:id="@+id/referer_title"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="32dp"
                                 android:layout_marginTop="8dp"
-                                android:text="@string/referral_details"
+                                android:text="Taarifa za rufaa"
                                 android:textColor="@color/card_title_text"
                                 android:textSize="14sp" />
 
@@ -370,7 +371,7 @@
                                     android:layout_weight="0.6">
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
-                                         android:id="@+id/spinnerService"
+                                        android:id="@+id/spinnerService"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         app:ms_arrowColor="@color/accent"
@@ -383,22 +384,23 @@
                                         app:ms_multiline="true"
                                         app:ms_thickness="1dp"
                                         app:ms_floatingLabelColor="@color/primary_text" />
-                                    <fr.ganfra.materialspinner.MaterialSpinner
-                                         android:id="@+id/spinnerFacility"
+
+                                    <TextView
+
+                                        android:layout_marginRight="16dp"
+                                        android:id="@+id/facility_titleview"
                                         android:layout_below="@+id/spinnerService"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        app:ms_arrowColor="@color/accent"
-                                        app:ms_arrowSize="14dp"
+                                        android:text="Jina la kliniki aliyoshauriwa kwenda"/>
+                                    <AutoCompleteTextView
+                                        android:textSize="14sp"
                                         android:layout_marginRight="16dp"
-                                        app:ms_baseColor="@color/accent"
-                                        app:ms_enableFloatingLabel="true"
-                                        app:ms_hint="Jina la kliniki aliyoshauriwa kwenda"
-                                        app:ms_hintColor="@color/black_translucent"
-                                        app:ms_multiline="true"
-                                        app:ms_thickness="1dp"
-                                        app:ms_floatingLabelColor="@color/primary_text"/>
-
+                                        android:ems="10"
+                                        android:layout_below="@+id/facility_titleview"
+                                        android:id="@+id/autocomplete_facility"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"/>
                                 </RelativeLayout>
 
                                 <View
@@ -415,11 +417,11 @@
                                     android:layout_weight="0.3">
 
                                     <TextView
-                                         android:id="@+id/clinical_information_title"
+                                        android:id="@+id/clinical_information_title"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="8dp"
-                                        android:text="@string/other_details"
+                                        android:text="Taarifa Nyingine"
                                         android:textColor="@color/card_title_text"
                                         android:textSize="14sp" />
 
@@ -430,7 +432,7 @@
                                         android:orientation="vertical">
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                             android:id="@+id/reason_for_referral"
+                                            android:id="@+id/reason_for_referral"
                                             android:layout_width="match_parent"
                                             android:layout_height="48dp"
                                             android:layout_marginTop="16dp"
@@ -445,22 +447,22 @@
                                             app:met_floatingLabelTextColor="@color/primary" />
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                             android:id="@+id/editTextDiscountId"
+                                            android:id="@+id/editTextDiscountId"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="16dp"
-                                            android:hint="@string/cbhs_number"
+                                            android:hint="Namba ya CBHS"
                                             android:imeOptions="actionNext"
                                             android:inputType="text"
                                             android:textColor="@color/primary_text"
                                             android:textColorHint="@color/black_translucent"
                                             android:textSize="14sp"
                                             app:met_floatingLabel="normal"
-                                            app:met_floatingLabelText="@string/cbhs_number"
+                                            app:met_floatingLabelText="Namba ya mteja ya community_based_hiv_service"
                                             app:met_floatingLabelTextColor="@color/primary" />
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                             android:id="@+id/editTextOthers"
+                                            android:id="@+id/editTextOthers"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="16dp"
@@ -495,154 +497,22 @@
                                     android:layout_weight="0.3">
 
                                     <TextView
-                                         android:id="@+id/flags_title"
+                                        android:id="@+id/flags_title"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="@string/danger_signs"
+                                        android:text="Vidokezo vya hatari"
                                         android:textColor="@color/card_title_text"
                                         android:textSize="14sp" />
 
                                     <LinearLayout
+                                        android:id="@+id/check_add_layout"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_below="@id/flags_title"
                                         android:layout_marginBottom="16dp"
                                         android:orientation="vertical">
 
-                                        <CheckBox
-                                            android:visibility="gone"
-                                             android:id="@+id/checkbox2weekCough"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:paddingBottom="12dp"
-                                            android:paddingTop="12dp"
-                                            android:text="Kikohozi zaidi ya wiki mbili"
-                                            android:textColor="@color/secondary_text"
-                                            android:textSize="14sp" />
 
-                                        <CheckBox
-                                            android:visibility="gone"
-                                             android:id="@+id/checkboxfever"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:paddingBottom="12dp"
-                                            android:paddingTop="12dp"
-                                            android:text="Homa zaidi ya wiki mbili"
-                                            android:textColor="@color/secondary_text"
-                                            android:textSize="14sp" />
-
-                                        <CheckBox
-                                            android:visibility="gone"
-                                             android:id="@+id/checkboxWeightLoss"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:paddingBottom="12dp"
-                                            android:paddingTop="12dp"
-                                            android:text="Kupungua uzito"
-                                            android:textColor="@color/secondary_text"
-                                            android:textSize="14sp" />
-
-
-
-                                        <CheckBox
-                                            android:visibility="gone"
-                                             android:id="@+id/checkboxSevereSweating"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:paddingBottom="12dp"
-                                            android:paddingTop="12dp"
-                                            android:text="Kutokwa na jasho usiku zaidi ya wiki mbili"
-                                            android:textColor="@color/secondary_text"
-                                            android:textSize="14sp" />
-
-                                        <CheckBox
-                                            android:visibility="gone"
-                                             android:id="@+id/checkboxBloodCough"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:paddingBottom="12dp"
-                                            android:paddingTop="12dp"
-                                            android:text="Kukohoa makohozi yenye mchanganyiko na damu"
-                                            android:textColor="@color/secondary_text"
-                                            android:textSize="14sp" />
-
-                                        <CheckBox
-
-                                            android:visibility="gone"
-                                             android:id="@+id/checkboxLostFollowup"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:paddingBottom="12dp"
-                                            android:paddingTop="12dp"
-                                            android:text="Kusitisha dawa"
-                                            android:textColor="@color/secondary_text"
-                                            android:textSize="14sp" />
-                                        <CheckBox
-
-                                            android:visibility="gone"
-                                             android:id="@+id/checkboxIsVomiting"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:paddingBottom="12dp"
-                                            android:paddingTop="12dp"
-                                            android:text="Anatapika"
-                                            android:textColor="@color/secondary_text"
-                                            android:textSize="14sp" />
-                                        <CheckBox
-
-                                            android:visibility="gone"
-                                             android:id="@+id/checkboxHasHeadache"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:paddingBottom="12dp"
-                                            android:paddingTop="12dp"
-                                            android:text="Anaumwa Kichwa"
-                                            android:textColor="@color/secondary_text"
-                                            android:textSize="14sp" />
-                                        <CheckBox
-
-                                            android:visibility="gone"
-                                             android:id="@+id/checkboxhas_affected_partner"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:paddingBottom="12dp"
-                                            android:paddingTop="12dp"
-                                            android:text="Ana mwenza mwenye maambukizi"
-                                            android:textColor="@color/secondary_text"
-                                            android:textSize="14sp" />
-                                        <CheckBox
-
-                                            android:visibility="gone"
-                                             android:id="@+id/checkboxis_at_hot_spot"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:paddingBottom="12dp"
-                                            android:paddingTop="12dp"
-                                            android:text="Yupo sehemu hatarishi"
-                                            android:textColor="@color/secondary_text"
-                                            android:textSize="14sp" />
-                                        <CheckBox
-
-                                            android:visibility="gone"
-                                             android:id="@+id/checkboxhas_loss_of_appetite"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:paddingBottom="12dp"
-                                            android:paddingTop="12dp"
-                                            android:text="Hana hamu ya kula"
-                                            android:textColor="@color/secondary_text"
-                                            android:textSize="14sp" />
-                                        <CheckBox
-
-                                            android:visibility="gone"
-                                             android:id="@+id/checkboxhas_symptomps_for_associative_diseases"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:paddingBottom="12dp"
-                                            android:paddingTop="12dp"
-                                            android:text="Ana magonjwa nyemelezi"
-                                            android:textColor="@color/secondary_text"
-                                            android:textSize="14sp" />
                                     </LinearLayout>
 
                                 </RelativeLayout>
@@ -663,13 +533,13 @@
                                 android:layout_height="100dp">
 
                                 <Button
-                                     android:id="@+id/referal_button"
+                                    android:id="@+id/referal_button"
                                     android:layout_width="200dp"
                                     android:layout_height="60dp"
                                     android:layout_alignParentRight="true"
                                     android:layout_centerVertical="true"
                                     android:layout_marginRight="16dp"
-                                    android:text="@string/refer_client"
+                                    android:text="Rufaa"
                                     android:textColor="@color/card_title_text" />
 
 

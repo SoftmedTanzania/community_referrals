@@ -35,6 +35,7 @@ public class FormSubmissionSyncService {
     private AllSharedPreferences allSharedPreferences;
     private FormSubmissionService formSubmissionService;
     private DristhiConfiguration configuration;
+
     private final int MAX_SIZE = 50;
 
     public FormSubmissionSyncService(FormSubmissionService formSubmissionService, HTTPAgent httpAgent,
@@ -57,6 +58,7 @@ public class FormSubmissionSyncService {
             e.printStackTrace();
         }
         return pullFromServer();
+
     }
 
     public void pushToServer() {

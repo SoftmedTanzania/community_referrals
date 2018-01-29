@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <TextView
-         android:id="@+id/textHeaderName"
+        android:id="@+id/textHeaderName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -14,7 +14,7 @@
         android:gravity="center"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
-        android:text="@string/confirm_delete"
+        android:text="Confirm Delete"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
         android:textSize="16sp" />
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@string/confirm_delete_details"
+            android:text="This mother will be permanently deleted. Continue?"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -59,7 +59,7 @@
 
 
         <TextView
-             android:id="@+id/textCancel"
+            android:id="@+id/textCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
@@ -68,13 +68,13 @@
             android:paddingEnd="10dp"
             android:paddingStart="10dp"
             android:paddingTop="4dp"
-            android:text="@string/button_cancel"
+            android:text="Cancel"
             android:textAllCaps="true"
             android:textColor="@android:color/holo_red_light"
             android:textSize="16sp" />
 
         <TextView
-             android:id="@+id/textOk"
+            android:id="@+id/textOk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
@@ -83,7 +83,7 @@
             android:paddingEnd="16dp"
             android:paddingStart="16dp"
             android:paddingTop="4dp"
-            android:text="@string/ok"
+            android:text="OK"
             android:textColor="@android:color/holo_blue_light"
             android:textSize="16sp" />
     </LinearLayout>

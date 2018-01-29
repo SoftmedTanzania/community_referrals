@@ -4,23 +4,33 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import net.sqlcipher.database.SQLiteDatabase;
 import org.apache.commons.lang3.StringUtils;
+import org.ei.opensrp.domain.Indicator;
 import org.ei.opensrp.domain.ReferralServiceDataModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static net.sqlcipher.DatabaseUtils.longForQuery;
 import static org.apache.commons.lang3.StringUtils.repeat;
 
 public class ReferralServiceRepository extends DrishtiRepository {
     private static final String TAG = ReferralServiceRepository.class.getSimpleName();
-    private static final String CHILD_SQL = "CREATE TABLE referral_service(id VARCHAR PRIMARY KEY, name VARCHAR)";
+    private static final String CHILD_SQL = "CREATE TABLE referral_service(id VARCHAR PRIMARY KEY,relationalid VARCHAR,is_valid VARCHAR,category VARCHAR,details VARCHAR,indicators VARCHAR, name VARCHAR)";
     public static final String REFERRAL_SERVICE = "referral_service";
     private static final String ID_COLUMN = "id";
+    private static final String RELATIONAL_COLUMN = "relationalid";
+    private static final String DETAILS_COLUMN = "details";
     private static final String NAME = "name";
-    public static final String[] REFERRAL_SERVICE_TABLE_COLUMNS = {ID_COLUMN, NAME};
+    private static final String CATEGORY = "category";
+    private static final String INDICATOR = "indicators";
+    private static final String IS_VALID = "is_valid";
+    public static final String[] REFERRAL_SERVICE_TABLE_COLUMNS = {ID_COLUMN, RELATIONAL_COLUMN,CATEGORY,INDICATOR,IS_VALID,DETAILS_COLUMN,NAME};
     public static final String NOT_CLOSED = "false";
 
     @Override
@@ -104,7 +114,11 @@ public class ReferralServiceRepository extends DrishtiRepository {
     public ContentValues createValuesFor(ReferralServiceDataModel referralServiceDataModel) {
         ContentValues values = new ContentValues();
         values.put(ID_COLUMN, referralServiceDataModel.getId());
-        values.put(NAME, referralServiceDataModel.getName());
+        values.put(RELATIONAL_COLUMN, referralServiceDataModel.getId());
+        values.put(NAME, referralServiceDataModel.getServiceName());
+        values.put(CATEGORY, referralServiceDataModel.getServiceName());
+        values.put(IS_VALID, referralServiceDataModel.getIsActive());
+        values.put(DETAILS_COLUMN, new Gson().toJson(referralServiceDataModel));
         Log.d(TAG,"values"+values);
         return values;
     }
@@ -113,9 +127,9 @@ public class ReferralServiceRepository extends DrishtiRepository {
         cursor.moveToFirst();
         List<ReferralServiceDataModel> referralServicesListDataModel = new ArrayList<ReferralServiceDataModel>();
         while (!cursor.isAfterLast()) {
-            referralServicesListDataModel.add(new ReferralServiceDataModel(cursor.getString(0), cursor.getString(1))
 
-            );
+            referralServicesListDataModel.add(new ReferralServiceDataModel(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3)));
+
             cursor.moveToNext();
         }
         cursor.close();
@@ -136,7 +150,10 @@ public class ReferralServiceRepository extends DrishtiRepository {
     private ReferralServiceDataModel serviceFromCursor(Cursor cursor) {
         return new ReferralServiceDataModel(
                 getColumnValueByAlias(cursor, REFERRAL_SERVICE, ID_COLUMN),
-                getColumnValueByAlias(cursor, REFERRAL_SERVICE, NAME));
+                getColumnValueByAlias(cursor, REFERRAL_SERVICE, NAME),
+                getColumnValueByAlias(cursor, REFERRAL_SERVICE, IS_VALID),
+                getColumnValueByAlias(cursor, REFERRAL_SERVICE, CATEGORY));
+
     }
 
     private String getColumnValueByAlias(Cursor cursor, String table, String column) {

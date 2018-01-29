@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.nfc.Tag;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 
@@ -33,6 +34,8 @@ import static org.ei.opensrp.domain.SyncStatus.PENDING;
 import static org.ei.opensrp.domain.SyncStatus.SYNCED;
 
 public class FormDataRepository extends DrishtiRepository {
+
+    private static final String TAG = FormDataRepository.class.getSimpleName();
     private static final String FORM_SUBMISSION_SQL = "CREATE TABLE form_submission(instanceId VARCHAR PRIMARY KEY, entityId VARCHAR, " +
             "formName VARCHAR, instance VARCHAR, version VARCHAR, serverVersion VARCHAR, formDataDefinitionVersion VARCHAR, syncStatus VARCHAR)";
     public static final String INSTANCE_ID_COLUMN = "instanceId";
@@ -54,7 +57,7 @@ public class FormDataRepository extends DrishtiRepository {
     public FormDataRepository() {
         TABLE_COLUMN_MAP = new HashMap<String, String[]>();
         TABLE_COLUMN_MAP.put(EligibleCoupleRepository.EC_TABLE_NAME, EligibleCoupleRepository.EC_TABLE_COLUMNS);
-        TABLE_COLUMN_MAP.put(MotherRepository.MOTHER_TABLE_NAME, MotherRepository.MOTHER_TABLE_COLUMNS);
+        TABLE_COLUMN_MAP.put(ClientReferralRepository.CLIENT_REFERRAL, ClientReferralRepository.CLIENT_REFERRAL_TABLE_COLUMNS);
         TABLE_COLUMN_MAP.put(ChildRepository.CHILD_TABLE_NAME, ChildRepository.CHILD_TABLE_COLUMNS);
 
         if(Context.getInstance().configuration().appName().equals(APP_NAME_INDONESIA)) return;
@@ -171,6 +174,7 @@ public class FormDataRepository extends DrishtiRepository {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(SERVER_VERSION_COLUMN, serverVersion);
+        Log.d(TAG,"server version= "+serverVersion +"instance Id ="+instanceId);
         database.update(FORM_SUBMISSION_TABLE_NAME, values, INSTANCE_ID_COLUMN + " = ?", new String[]{instanceId});
     }
 

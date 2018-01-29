@@ -22,7 +22,6 @@ import android.widget.TextView;
 
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
 import org.ei.opensrp.domain.ReportMonth;
-import org.ei.opensrp.drishti.AncRegisterListAdapter;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
@@ -91,15 +90,7 @@ public abstract class SecuredNativeSmartRegisterFragment extends SecuredFragment
         return currentServiceModeOption;
     }
 
-    public AncRegisterListAdapter getClientsAdapter() {
-        return clientsAdapter;
-    }
 
-    public void setClientsAdapter(AncRegisterListAdapter clientsAdapter) {
-        this.clientsAdapter = clientsAdapter;
-    }
-
-    private AncRegisterListAdapter clientsAdapter;
 
     private FilterOption currentVillageFilter;
     private SortOption currentSortOption;
@@ -171,7 +162,6 @@ public abstract class SecuredNativeSmartRegisterFragment extends SecuredFragment
 
             @Override
             protected void onPostExecute(Void result) {
-                clientsView.setAdapter(clientsAdapter);
                 if(isAdded()) {
                     paginationViewHandler.refresh();
                     clientsProgressView.setVisibility(View.GONE);
@@ -454,12 +444,10 @@ public abstract class SecuredNativeSmartRegisterFragment extends SecuredFragment
 
     public void gotoNextPage() {
 //        clientsAdapter.nextPage();
-        clientsAdapter.notifyDataSetChanged();
     }
 
     public void goBackToPreviousPage() {
 //        clientsAdapter.previousPage();
-        clientsAdapter.notifyDataSetChanged();
     }
 
     public class NavBarActionsHandler implements View.OnClickListener {

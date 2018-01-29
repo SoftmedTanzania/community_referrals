@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableRow
+         xmlns:android="http://schemas.android.com/apk/res/android"
+         android:layout_weight="1"
+        android:background="@drawable/cell_shape_header"
+        android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="0.1"
+                        android:padding="4dp"
+                        android:id="@+id/sn"
+                        android:text="SN#"
+                        android:background="@drawable/cell_shape_header"
+                        android:layout_height="wrap_content"
+                        />
+                    <TextView
+                        android:padding="4dp"
+                        android:layout_weight="0.1"
+                        android:id="@+id/mothers_name"
+                        android:background="@drawable/cell_shape_header"
+                        android:text="Jina La mama"
+                        android:layout_height="wrap_content"
+                        />
+                    <TextView
+                        android:padding="4dp"
+                        android:layout_weight="0.1"
+                        android:id="@+id/vllage"
+                        android:text="Village"
+                        android:background="@drawable/cell_shape_header"
+                        android:layout_height="wrap_content"
+                        />
+                    <TextView
+                        android:layout_weight="0.1"
+                        android:padding="4dp"
+                        android:id="@+id/textPhone"
+                        android:text="Mobile #"
+                        android:background="@drawable/cell_shape_header"
+                        android:layout_height="wrap_content"
+                        />
+                    <TextView
+                        android:layout_weight="0.1"
+                        android:padding="4dp"
+                        android:id="@+id/risk"
+                        android:text="Risk referral_status"
+                        android:background="@drawable/cell_shape_header"
+                        android:layout_height="wrap_content"
+                        />
+
+                    <TextView
+                        android:layout_weight="0.1"
+                        android:padding="4dp"
+                        android:id="@+id/App1"
+                        android:text="App1"
+                        android:background="@drawable/cell_shape_header"
+                        android:layout_height="wrap_content"
+                        />
+                    <TextView
+                        android:layout_weight="0.1"
+                        android:padding="4dp"
+                        android:id="@+id/App2"
+                        android:text="App2"
+                        android:background="@drawable/cell_shape_header"
+                        android:layout_height="wrap_content"
+                        />
+                    <TextView
+                        android:layout_weight="0.1"
+                        android:padding="4dp"
+                        android:id="@+id/App3"
+                        android:text="App3"
+                        android:background="@drawable/cell_shape_header"
+                        android:layout_height="wrap_content"
+                        />
+                    <TextView
+                        android:layout_weight="0.1"
+                        android:padding="4dp"
+                        android:id="@+id/App4"
+                        android:text="App4"
+                        android:background="@drawable/cell_shape_header"
+                        android:layout_height="wrap_content"
+                        />
+                    <TextView
+                        android:layout_weight="0.1"
+                        android:padding="4dp"
+                        android:id="@+id/edd"
+                        android:text="EDD"
+                        android:background="@drawable/cell_shape_header"
+                        android:layout_height="wrap_content"
+                        />
+                </TableRow>
+
+

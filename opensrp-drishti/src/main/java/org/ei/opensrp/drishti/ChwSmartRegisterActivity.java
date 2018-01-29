@@ -9,7 +9,6 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -24,10 +23,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,17 +43,13 @@ import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
 import org.ei.opensrp.drishti.DataModels.FollowUp;
 import org.ei.opensrp.drishti.Fragments.FollowupClientsFragment;
-import org.ei.opensrp.drishti.Fragments.ReferredClientsFragment;
-import org.ei.opensrp.drishti.Fragments.ClientRegistrationFormFragment;
 import org.ei.opensrp.drishti.Fragments.CHWSmartRegisterFragment;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.Repository.FollowUpPersonObject;
 import org.ei.opensrp.drishti.Repository.FollowUpRepository;
 import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.pageradapter.BaseRegisterActivityPagerAdapter;
-import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.drishti.util.Utils;
-import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.repository.ClientReferralRepository;
@@ -67,11 +59,8 @@ import org.ei.opensrp.sync.SyncProgressIndicator;
 import org.ei.opensrp.sync.UpdateActionsTask;
 import org.ei.opensrp.util.FormUtils;
 import org.ei.opensrp.view.activity.*;
-import org.ei.opensrp.view.contract.HomeContext;
 import org.ei.opensrp.view.contract.SmartRegisterClient;
 import org.ei.opensrp.view.contract.SmartRegisterClients;
-import org.ei.opensrp.view.controller.NativeAfterANMDetailsFetchListener;
-import org.ei.opensrp.view.controller.NativeUpdateANMDetailsTask;
 import org.ei.opensrp.view.controller.VillageController;
 import org.ei.opensrp.view.dialog.DialogOption;
 import org.ei.opensrp.view.dialog.DialogOptionMapper;
@@ -90,6 +79,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -106,20 +96,9 @@ import static android.view.View.VISIBLE;
 import static java.lang.String.valueOf;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.ei.opensrp.drishti.util.Utils.generateRandomUUIDString;
-import static org.ei.opensrp.event.Event.ACTION_HANDLED;
-import static org.ei.opensrp.event.Event.FORM_SUBMITTED;
-import static org.ei.opensrp.event.Event.SYNC_COMPLETED;
-import static org.ei.opensrp.event.Event.SYNC_STARTED;
 
 public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener {
     private static final String TAG = ChwSmartRegisterActivity.class.getSimpleName();
-    private Context context;
-    private long unsuccesfulCount = 0;
-    private long succesfulCount = 0;
-    private SmartRegisterClientsProvider clientProvider = null;
-    private CommonPersonObjectController controller;
-    private VillageController villageController;
-    private DialogOptionMapper dialogOptionMapper;
     private JSONObject fieldOverides = new JSONObject();
     @Bind(R.id.view_pager)
     public    OpenSRPViewPager mPager;
@@ -129,18 +108,15 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private Fragment mBaseFragment;
     private Gson gson = new Gson();
     private CommonRepository commonRepository;
-    private android.content.Context appContext;
     private Cursor cursor;
     private static final String TABLE_NAME = "client_referral";
-    private PendingFormSubmissionService pendingFormSubmissionService;
-    private MenuItem updateMenuItem;
-    private MenuItem remainingFormsToSyncMenuItem;
     private String wardId =null;
     public static MaterialSpinner spinnerReason,spinnerClientAvailable;
     public static int availableSelection = -1,reasonSelection = -1;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     static final String DATABASE_NAME = "drishti.db";
     private SecuredActivity securedActivity;
+    private LinearLayout flags_layout;
     String message ="";
     Calendar today = Calendar.getInstance();
     @Override
@@ -198,6 +174,8 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         String gsonClient = Utils.convertStandardJSONString(clientReferralPersonObject.getDetails());
         ClientReferral clientReferral = new Gson().fromJson(gsonClient,ClientReferral.class);
 
+        Log.d(TAG,"clientobject ="+ gson.toJson(clientReferralPersonObject));
+        Log.d(TAG,"clientobject 2="+gsonClient);
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
                 .setCancelable(true);
@@ -217,14 +195,11 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         String reg_date = dateFormat.format(clientReferral.getDate_of_birth());
         String ageS="";
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-            Date d = sdf.parse(reg_date);
+            Date d = dateFormat.parse(reg_date);
             Calendar cal = Calendar.getInstance();
             Calendar today = Calendar.getInstance();
             cal.setTime(d);
-
             int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
-            Log.d(TAG,"age is ="+age);
             Integer ageInt = new Integer(age);
             ageS = ageInt.toString();
 
@@ -247,29 +222,27 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         TextView villageleader = (TextView) dialogView.findViewById(R.id.viewVillageLeader);
 
 
-        textName.setText(clientReferral.getFirst_name() +" "+clientReferral.getMiddle_name()+" "+clientReferral.getSurname());
+        textName.setText(clientReferralPersonObject.getFirst_name() +" "+clientReferralPersonObject.getMiddle_name()+" "+clientReferralPersonObject.getSurname());
 //
         textAge.setText(ageS + " years");
         cbhs.setText(clientReferral.getCommunity_based_hiv_service());
-        referral_service.setText(getReferralServiceName(clientReferral.getReferral_service_id()));
-        facility.setText(getFacilityName(clientReferral.getFacility_id()));
-        if(!clientReferral.getCtc_number().isEmpty())
-            ctc_number.setText(clientReferral.getCtc_number());
+        referral_service.setText(getReferralServiceName(clientReferralPersonObject.getReferral_service_id()));
+        facility.setText(getFacilityName(clientReferralPersonObject.getFacility_id()));
+        if(!clientReferralPersonObject.getCtc_number().isEmpty())
+            ctc_number.setText(clientReferralPersonObject.getCtc_number());
         else
             ctc_number.setText("-");
-        referral_reason.setText(clientReferral.getReferral_reason());
+        referral_reason.setText(clientReferralPersonObject.getReferral_reason());
         phoneNumber.setText(clientReferral.getPhone_number());
         villageleader.setText(clientReferral.getVillage_leader());
         physicalAddress.setText(clientReferral.getVillage());
-//        Todo to check the checkbox and displayed selected values
-//        textrisk.setText("high");
         if((clientReferral.getGender()).equals("KE")){
             gender.setText("Mwanamke");
         }
         else     {
             gender.setText("Mwanaume");
         }
-        setIndicators(dialogView,clientReferralPersonObject);
+        setIndicators(dialogView,gsonClient);
     }
 
     public void showPreRegistrationVisitDialog(final ClientReferralPersonObject clientReferralPersonObject)
@@ -302,7 +275,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         String gsonClient = Utils.convertStandardJSONString(clientReferralPersonObject.getDetails());
         Log.d(TAG, "gsonMom = " + gsonClient);
-//        final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
@@ -381,183 +353,44 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         return commonPersonObjectList.get(0).getColumnmaps().get("name");
     }
 
-    public void showFollowUpDetailsDialog(ClientReferralPersonObject clientReferralPersonObject) {
+    public void setIndicators(View view,String object) {
+        try{
 
-        String gsonMom = Utils.convertStandardJSONString(clientReferralPersonObject.getDetails());
-        Log.d(TAG, "gsonMom = " + gsonMom);
-        ClientReferral clientReferral = new Gson().fromJson(gsonMom,ClientReferral.class);
-        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_details, null);
 
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
-        dialogBuilder.setView(dialogView)
-                .setCancelable(true);
-        final AlertDialog dialog = dialogBuilder.create();
-        dialog.show();
-        dialog.getWindow().setLayout(800,700);
+            JSONObject jsonObj = new JSONObject(object);
+            Log.d(TAG,"jason indicators "+jsonObj.get("indicator_ids"));
+            String list = jsonObj.getString("indicator_ids").toString();
+            Log.d(TAG,"list"+list);
+            list = list.replace("[","");
+            list = list.replace("\"","");
+            list = list.replace("]","");
+            Log.d(TAG,"list"+list);
+            List<String> myList = new ArrayList<String>(Arrays.asList(list.split(",")));
+            Log.d(TAG,"inidcators list "+myList.get(0)+"size "+myList.size());
+            flags_layout = (LinearLayout) view.findViewById(R.id.flags_layout);
+            flags_layout.removeAllViewsInLayout();
+            for(int m =0; m< myList.size(); m++){
+                final TextView rowTextView = new TextView(this);
 
-        Button cancel = (Button) dialogView.findViewById(R.id.ok_button);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
+                // set some properties of rowTextView or something
+                rowTextView.setText(getIndicatorName(myList.get(m)));
+                rowTextView.setPadding(10,10,10,0);
+                // add the textview to the linearlayout
+                flags_layout.addView(rowTextView);
             }
-        });
+        }catch (JSONException e){
 
-
-        String reg_date = dateFormat.format(clientReferral.getDate_of_birth());
-        String ageS="";
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-            Date d = sdf.parse(reg_date);
-            Calendar cal = Calendar.getInstance();
-            Calendar today = Calendar.getInstance();
-            cal.setTime(d);
-
-            int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
-            Log.d(TAG,"age is ="+age);
-            Integer ageInt = new Integer(age);
-            ageS = ageInt.toString();
-
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
-        TextView textName = (TextView) dialogView.findViewById(R.id.client_name);
-        TextView textAge = (TextView) dialogView.findViewById(R.id.agevalue);
-        TextView cbhs = (TextView) dialogView.findViewById(R.id.cbhs_number_value);
-        TextView referral_service = (TextView) dialogView.findViewById(R.id.viewService);
-        TextView facility = (TextView) dialogView.findViewById(R.id.viewFacility);
-        TextView ctc_number = (TextView) dialogView.findViewById(R.id.ctc_number);
-        TextView referral_reason = (TextView) dialogView.findViewById(R.id.reason_for_referral);
-        TextView gender = (TextView) dialogView.findViewById(R.id.gendervalue);
-        TextView phoneNumber = (TextView) dialogView.findViewById(R.id.viewPhone);
-        TextView physicalAddress = (TextView) dialogView.findViewById(R.id.editTextKijiji);
-        TextView villageleader = (TextView) dialogView.findViewById(R.id.viewVillageLeader);
-
-
-        textName.setText(clientReferral.getFirst_name() +" "+clientReferral.getMiddle_name()+" "+clientReferral.getSurname());
-//
-        textAge.setText(ageS + " years");
-        cbhs.setText(clientReferral.getCommunity_based_hiv_service());
-        referral_service.setText(getReferralServiceName(clientReferral.getReferral_service_id()));
-        facility.setText(getFacilityName(clientReferral.getFacility_id()));
-        if(!clientReferral.getCtc_number().isEmpty())
-            ctc_number.setText(clientReferral.getCtc_number());
-        else
-            ctc_number.setText("-");
-        referral_reason.setText(clientReferral.getReferral_reason());
-        phoneNumber.setText(clientReferral.getPhone_number());
-        villageleader.setText(clientReferral.getVillage_leader());
-        physicalAddress.setText(clientReferral.getVillage());
-//        Todo to check the checkbox and displayed selected values
-//        textrisk.setText("high");
-        if((clientReferral.getGender()).equals("KE")){
-            gender.setText("Mwanamke");
-        }
-        else     {
-            gender.setText("Mwanaume");
-        }
-        setIndicators(dialogView,clientReferralPersonObject);
     }
 
-    public void setIndicators(View view,ClientReferralPersonObject clientReferralPersonObject){
+    public String getIndicatorName(String id){
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM indicator where referralServiceIndicatorId ='"+ id +"'");
 
-        String service_name = getReferralServiceName(clientReferralPersonObject.getReferral_service_id());
+        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "indicator");
+        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
 
-        TextView indicatorOne = (TextView) view.findViewById(R.id.checkbox2weekCough);
-        TextView indicatorTwo = (TextView) view.findViewById(R.id.checkboxfever);
-        TextView indicatorThree = (TextView) view.findViewById(R.id.checkboxWeightLoss);
-        TextView indicatorFour = (TextView) view.findViewById(R.id.checkboxSevereSweating);
-        TextView indicatorFive = (TextView) view.findViewById(R.id.checkboxBloodCough);
-        TextView indicatorSix = (TextView) view.findViewById(R.id.checkboxLostFollowup);
-        String details = clientReferralPersonObject.getDetails();
-        Log.d(TAG,"details ="+details);
-        ClientReferral clientReferral =  gson.fromJson(details, ClientReferral.class);
-        Log.d(TAG,"details ="+clientReferral.toString());
-        if(service_name.equals("Rufaa kwenda kliniki kutibiwa malaria")){
-            if(clientReferral.is_shaking()) {
-                indicatorOne.setVisibility(VISIBLE);
-                indicatorOne.setText("Anatetemeka");
-            }
-            if(clientReferral.isHas_fever()) {
-                indicatorTwo.setVisibility(VISIBLE);
-                indicatorTwo.setText("Anahoma kali");
-            }
-            if(clientReferral.is_vomiting()) {
-                indicatorThree.setVisibility(VISIBLE);
-                indicatorThree.setText("Anatapika");
-            }
-            if(clientReferral.is_shaking()) {
-                indicatorFour.setVisibility(VISIBLE);
-                indicatorFour.setText("Anatetemeka");
-            }
-            if(clientReferral.isHas_diarrhea()) {
-                indicatorFive.setVisibility(VISIBLE);
-                indicatorFive.setText("Anaharisha");
-            }
-            if(clientReferral.isHas_headache()) {
-                indicatorSix.setVisibility(VISIBLE);
-                indicatorSix.setText("Anaumwa kichwa");
-            }
-
-        }
-        else if(service_name.equals("Rufaa kwenda kliniki ya ushauri nasaha na upimaji")|| service_name.equals("Rufaa kwenda kupata huduma za kuzuia maambukizi toka kwa mama kwenda kwa mtoto")){
-
-            if(clientReferral.isHad_weight_loss()) {
-                indicatorOne.setVisibility(VISIBLE);
-                indicatorOne.setText("Kupunguwa uzito");
-            }
-            if(clientReferral.isHas_fever()) {
-                indicatorTwo.setVisibility(VISIBLE);
-                indicatorTwo.setText("Anahoma kali");
-            }
-            if(clientReferral.is_at_hot_spot()) {
-                indicatorThree.setVisibility(VISIBLE);
-                indicatorThree.setText("yupo sehemu hatarishi");
-            }
-            if(clientReferral.is_lost_follow_up()) {
-                indicatorFour.setVisibility(VISIBLE);
-                indicatorFour.setText("Kusitishwa dawa");
-            }
-            if(clientReferral.isHas_affected_partner()) {
-                indicatorFive.setVisibility(VISIBLE);
-                indicatorFive.setText("Ana mwenza mwenye maambukizi");
-            }
-            if(clientReferral.isHas_symptomps_for_associative_diseases()) {
-                indicatorSix.setVisibility(VISIBLE);
-                indicatorSix.setText("Ana magonjwa nyemelezi");
-            }
-        }
-        else if(service_name.equals("Rufaa kwenda kliniki ya kutibu kifua kikuu")){
-
-            if(clientReferral.isHad_weight_loss()) {
-                indicatorOne.setVisibility(VISIBLE);
-                indicatorOne.setText("Kupunguwa uzito");
-            }
-            if(clientReferral.isHas_fever()) {
-                indicatorTwo.setVisibility(VISIBLE);
-                indicatorTwo.setText("Anahoma kali");
-            }
-            if(clientReferral.isHas_2Week_cough()) {
-                indicatorThree.setVisibility(VISIBLE);
-                indicatorThree.setText("kikohozi zaidi ya wiki mbili");
-            }
-            if(clientReferral.is_lost_follow_up()) {
-                indicatorFour.setVisibility(VISIBLE);
-                indicatorFour.setText("Kusitishwa dawa");
-            }
-            if(clientReferral.isHas_severe_sweating()) {
-                indicatorFive.setVisibility(VISIBLE);
-                indicatorFive.setText("Kutokwa na jasho usiku zaidi ya week 2");
-            }
-            if(clientReferral.isHas_blood_cough()) {
-                indicatorSix.setVisibility(VISIBLE);
-                indicatorSix.setText("kukohoa makohozi yenye mchanganyiko na damu");
-            }
-        }
-
+        return commonPersonObjectList.get(0).getColumnmaps().get("indicatorName");
     }
 
     public void showFollowUpFormDialog(final ClientReferralPersonObject clientperson) {
@@ -687,13 +520,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public void confirmDelete(final ClientReferralPersonObject mother) {
         String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
         Log.d(TAG, "gsonMom = " + gsonMom);
-//        final PregnantMom pregnantMom = new Gson().fromJson(gsonMom,PregnantMom.class);
-//        pregnantMom.setIs_valid("false");
-
-        //todo martha how to set is_valid in the pregnant mother for this passed motherpersonal object
-//        JSONArray arr = new JSONArray(gsonMom);
-//        JSONObject jObj = arr.getJSONObject(0);
-//        String date = jObj.getString("is_valid");
 
         final View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_confirm_delete, null);
 
@@ -766,8 +592,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     @Override
     protected void onResumption() {
         LoginActivity.setLanguage();
-        updateSyncIndicator();
-        updateRemainingFormsToSyncCount();
     }
 
     @Override
@@ -842,6 +666,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         intent.putExtra("selectedLocation",locationSelected);
         startActivityForResult(intent,90);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
@@ -857,26 +682,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         @Override
         public DialogOption[] getDialogOptions() {
             return getEditOptions();
-        }
-
-        @Override
-        public void onDialogOptionSelection(DialogOption option, Object tag) {
-            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
-        }
-    }
-
-    private class EditDialogOptionModelForANC implements DialogOptionModel {
-        String ancvisittext;
-        String ancvisitstatus;
-
-        public EditDialogOptionModelForANC(String text, String status) {
-            ancvisittext = text;
-            ancvisitstatus = status;
-        }
-
-        @Override
-        public DialogOption[] getDialogOptions() {
-            return getEditOptionsforanc(ancvisittext, ancvisitstatus);
         }
 
         @Override
@@ -963,6 +768,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
 
     }
+
     @Override
     public void startFormActivity(String formName, String entityId, String metaData) {
         Log.d(TAG, "starting form = "+formName);
@@ -979,17 +785,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 if (data == null) {
                     data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
-                 if(formName.equals("pregnant_mothers_pre_registration")){
-                    ClientRegistrationFormFragment displayFormFragment = (ClientRegistrationFormFragment) getDisplayFormFragmentAtIndex(formIndex);
-                    if (displayFormFragment != null) {
-                        Log.d(TAG, "form data = " + data);
-                        displayFormFragment.setFormData(data);
-                        displayFormFragment.setWardId(wardId);
-                        displayFormFragment.setRecordId(entityId);
-                        displayFormFragment.setFieldOverides(metaData);
-                    }
 
-                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -997,161 +793,10 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     }
 
-
-    public void updateSearchView() {
-        getSearchView().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            }
-
-            @Override
-            public void onTextChanged(final CharSequence cs, int start, int before, int count) {
-                (new AsyncTask() {
-                    SmartRegisterClients filteredClients;
-
-                    @Override
-                    protected Object doInBackground(Object[] params) {
-//                        currentSearchFilter = new ElcoSearchOption(cs.toString());
-//                        setCurrentSearchFilter(new ElcoSearchOption(cs.toString()));
-                        filteredClients = getClientsAdapter().getListItemProvider()
-                                .updateClients(getCurrentVillageFilter(), getCurrentServiceModeOption(),
-                                        getCurrentSearchFilter(), getCurrentSortOption());
-
-
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(Object o) {
-//                        clientsAdapter
-//                                .refreshList(currentVillageFilter, currentServiceModeOption,
-//                                        currentSearchFilter, currentSortOption);
-                        getClientsAdapter().refreshClients(filteredClients);
-                        getClientsAdapter().notifyDataSetChanged();
-                        getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
-                        super.onPostExecute(o);
-                    }
-                }).execute();
-//                currentSearchFilter = new HHSearchOption(cs.toString());
-//                clientsAdapter
-//                        .refreshList(currentVillageFilter, currentServiceModeOption,
-//                                currentSearchFilter, currentSortOption);
-//
-//                searchCancelView.setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-    }
-
     @Override
     public void saveFormSubmission(String formSubmission, final String id, String formName, JSONObject fieldOverrides) {
         // save the form
-
-        if(formName.equals("client_referral_form")){
-            final ClientReferral clientReferral = gson.fromJson(formSubmission, ClientReferral.class);
-           clientReferral.setId(id);
-           ContentValues values = new ClientReferralRepository().createValuesFor(clientReferral);
-            Log.d(TAG, "values = " + gson.toJson(values));
-
-            CommonRepository commonRepository = context().commonrepository("client_referral");
-            commonRepository.customInsert(values);
-
-            CommonPersonObject c = commonRepository.findByCaseID(id);
-            List<FormField> formFields = new ArrayList<>();
-
-
-            formFields.add(new FormField("id", c.getCaseId(), commonRepository.TABLE_NAME + "." + "id"));
-
-
-            formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
-
-
-
-            FormData formData;
-            FormInstance formInstance;
-            FormSubmission submission;
-            if(clientReferral.getReferral_service_id().equals("Kliniki ya kutibu kifua kikuu")){
-                for ( String key : c.getDetails().keySet() ) {
-                    Log.d(TAG,"key = "+key);
-                    FormField f = null;
-                    f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
-                    if(key.equals("facility_id")){
-                        f = new FormField(key, c.getDetails().get(key), "facility.id");
-                    }
-                    formFields.add(f);
-                }
-
-
-                Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
-                Log.d(TAG,"am in tb");
-                formData = new FormData("client_referral","/model/instance/client_tb_referral_form/",formFields,null);
-                formInstance  = new FormInstance(formData,"1");
-                submission= new FormSubmission(generateRandomUUIDString(),id,"client_tb_referral_form",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
-
-            }else if(clientReferral.getReferral_service_id().equals("Rufaa kwenda kliniki ya TB na Matunzo (CTC)")){
-                Log.d(TAG,"am in hiv");
-                for ( String key : c.getDetails().keySet() ) {
-                    Log.d(TAG,"key = "+key);
-
-                    if(key.equals("has2WeekCough")||key.equals("hasFever")||key.equals("hadWeightLoss")||key.equals("hasSevereSweating")||key.equals("hasBloodCough")||key.equals("isIs_lost_follow_up")){
-
-                    }else if(key.equals("facility_id")){
-                        FormField f = new FormField(key, c.getDetails().get(key), "facility.id");
-                        formFields.add(f);
-                    }else{
-                        FormField f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
-                        formFields.add(f);
-                    }
-
-                }
-                Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
-                formData = new FormData("client_referral","/model/instance/client_hiv_referral_form/",formFields,null);
-                formInstance  = new FormInstance(formData,"1");
-                submission= new FormSubmission(generateRandomUUIDString(),id,"client_hiv_referral_form",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
-
-            }else{
-                Log.d(TAG,"am in general");
-                for ( String key : c.getDetails().keySet() ) {
-                    Log.d(TAG,"key = "+key);
-                    if(key.equals("has2WeekCough")||key.equals("CTCNumber")||key.equals("hasFever")||key.equals("hadWeightLoss")||key.equals("hasSevereSweating")||key.equals("hasBloodCough")||key.equals("isIs_lost_follow_up")){
-
-                    }else if(key.equals("facility_id")){
-                        FormField f = new FormField(key, c.getDetails().get(key), "facility.id");
-                        formFields.add(f);
-                    }else{
-                        FormField f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
-                        formFields.add(f);
-                    }
-                }
-                Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
-                formData = new FormData("client_referral","/model/instance/client_referral_form/",formFields,null);
-                formInstance  = new FormInstance(formData,"1");
-                submission= new FormSubmission(generateRandomUUIDString(),id,"client_referral_form",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
-            }
-
-            context().formDataRepository().saveFormSubmission(submission);
-
-            Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
-
-            UpdateContent();
-            new  org.ei.opensrp.drishti.util.AsyncTask<Void, Void, Void>(){
-                @Override
-                protected Void doInBackground(Void... params) {
-                    if(!clientReferral.getPhone_number().equals(""))
-                        Utils.sendRegistrationAlert(clientReferral.getPhone_number());
-                    return null;
-                }
-            }.execute();
-
-
-        }
-        else if(formName.equals("follow_up_form"))
+        if(formName.equals("follow_up_form"))
          {
 
             final FollowUp followUp = gson.fromJson(formSubmission, FollowUp.class);
@@ -1214,65 +859,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     }
 
 
-//    public void updateFormSubmission(MotherPersonObject motherPersonObject, String id){
-//
-//
-//        ContentValues values = new CustomMotherRepository().createValuesFor(motherPersonObject);
-//        Log.d(TAG,"values to be updated ="+ new Gson().toJson(values));
-//        Log.d(TAG," mother id to be updated ="+ id);
-//        Log.d(TAG," mother id to be updated ="+ motherPersonObject.getId());
-//        CommonRepository commonRepository = context().commonrepository("wazazi_salama_mother");
-//        commonRepository.customUpdateTable("wazazi_salama_mother",values,motherPersonObject.getId());
-//
-//        CommonRepository cRepository = context().commonrepository("wazazi_salama_mother");
-//
-//        CommonPersonObject c = cRepository.findByCaseID(id);
-//        List<FormField> formFields = new ArrayList<>();
-//
-//
-//        formFields.add(new FormField("id", c.getCaseId(), commonRepository.TABLE_NAME + "." + "id"));
-//
-//
-//        formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
-//
-//        for ( String key : c.getDetails().keySet() ) {
-//            Log.d(TAG,"key = "+key);
-//            FormField f = null;
-//            if(!key.equals("FACILITY_ID")) {
-//                f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
-//            }else{
-//                f = new FormField(key, c.getDetails().get(key), "facility.id");
-//            }
-//            formFields.add(f);
-//        }
-//
-//        for ( String key : c.getColumnmaps().keySet() ) {
-//            Log.d(TAG,"key = "+key);
-//            FormField f = null;
-//            if(!key.equals("FACILITY_ID")) {
-//                f = new FormField(key, c.getColumnmaps().get(key), commonRepository.TABLE_NAME + "." + key);
-//            }else{
-//                f = new FormField(key, c.getColumnmaps().get(key), "facility.id");
-//            }
-//
-//            formFields.add(f);
-//
-//
-//        }
-//        Log.d(TAG,"fieldes = "+ new Gson().toJson(formFields));
-//
-//        FormData formData = new FormData("wazazi_salama_mother","/model/instance/Wazazi_Salama_ANC_Registration/",formFields,null);
-//        FormInstance formInstance = new FormInstance(formData,"1");
-//        FormSubmission submission = context().formDataRepository().fetchFromSubmissionByEntity(motherPersonObject.getId());
-//
-//        Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
-//
-//        FormSubmission updatedSubmission = new FormSubmission(submission.instanceId(), submission.entityId(), submission.formName(), new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
-//        context().formDataRepository().updateFormSubmission(updatedSubmission);
-//
-//        Log.d(TAG,"submission content = "+ new Gson().toJson(updatedSubmission));
-//    }r
-
     public void switchToBaseFragment(final String data) {
         Log.v("we are here", "switchtobasegragment");
         final int prevPageIndex = currentPage;
@@ -1281,14 +867,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             public void run() {
                 // TODO: 9/17/17 this is a hack
 
-//
-//                if(currentPage==1) {//for supervisors
-//                    ChwSmartRegisterFragment registerFragment = (ChwSmartRegisterFragment) findFragmentByPosition(0);
-//                    if (registerFragment != null) {
-//                        registerFragment.refreshListView();
-//                    }
-//                    mPager.setCurrentItem(0, true);
-//                }else
           if(currentPage==2) {//for chws
                     finish();
                 }
@@ -1378,12 +956,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     public void retrieveAndSaveUnsubmittedFormData() {
         if (currentActivityIsShowingForm()) {
-//            try {
-//                AncSmartRegisterFragment formFragment = (AncSmartRegisterFragment) getDisplayFormFragmentAtIndex(currentPage);
-//                formFragment.saveCurrentFormData();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
         }
     }
 
@@ -1421,30 +993,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         registerFragment.updateRegisterCounts();
         registerFragment.updateRemainingFormsToSyncCount();
     }
-
-    private void updateSyncIndicator() {
-        if (updateMenuItem != null) {
-            if (context().allSharedPreferences().fetchIsSyncInProgress()) {
-                updateMenuItem.setActionView(R.layout.progress);
-            } else
-                updateMenuItem.setActionView(null);
-        }
-    }
-
-    private void updateRemainingFormsToSyncCount() {
-        if (remainingFormsToSyncMenuItem == null) {
-            return;
-        }
-
-        long size = pendingFormSubmissionService.pendingFormSubmissionCount();
-        if (size > 0) {
-            remainingFormsToSyncMenuItem.setTitle(valueOf(size) + " " + getString(R.string.unsynced_forms_count_message));
-            remainingFormsToSyncMenuItem.setVisible(true);
-        } else {
-            remainingFormsToSyncMenuItem.setVisible(false);
-        }
-    }
-
 
     public boolean backUpDataBase() {
         boolean result = true;

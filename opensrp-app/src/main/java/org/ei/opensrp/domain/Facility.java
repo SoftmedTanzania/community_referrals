@@ -7,11 +7,16 @@ import java.util.ArrayList;
  */
 
 public class Facility  {
-    private String facilityName, openMRSUIID;
+    private String facilityName, id,relationalid,details;
+
+
 
     public Facility(String facilityName, String openMRSUIID) {
         this.facilityName = facilityName;
-        this.openMRSUIID = openMRSUIID;
+        this.id = openMRSUIID;
+        this.relationalid = openMRSUIID;
+        this.details =null;
+
     }
 
     public String getFacilityName() {
@@ -23,10 +28,26 @@ public class Facility  {
     }
 
     public String getOpenMRSUIID() {
-        return openMRSUIID;
+        return id;
     }
 
     public void setOpenMRSUIID(String openMRSUIID) {
-        this.openMRSUIID = openMRSUIID;
+        this.facilityName = openMRSUIID;
+    }
+
+    public String getRelationalid() {
+        return relationalid;
+    }
+
+    public void setRelationalid(String relationalid) {
+        this.relationalid = relationalid;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 }

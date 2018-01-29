@@ -13,7 +13,7 @@ import java.util.Map;
  */
 
 public class ReferralServiceObject {
-    private String id, relationalId, Name;
+    private String id, relationalId, Name,category;
 
     private String details;
     private Map<String, String> columnMap;
@@ -29,10 +29,11 @@ public class ReferralServiceObject {
         this.relationalId = relationalId;
     }
     public ReferralServiceObject(String id,
-                                     String name){
+                                     String name,String category){
 
             this.id = id;
             this.Name = name;
+            this.category = category;
         }
 
     // alternative constructor so you don't pass bucha stuff, PregnantMom contains everything
@@ -44,6 +45,14 @@ public class ReferralServiceObject {
         this.Name = facility.getFacilityName();
         this.details = new Gson().toJson(facility);
 
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getId() {

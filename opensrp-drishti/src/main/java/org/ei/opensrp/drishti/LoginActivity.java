@@ -2,7 +2,6 @@ package org.ei.opensrp.drishti;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,7 +12,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -39,31 +37,25 @@ import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.Facility;
 import org.ei.opensrp.domain.LoginResponse;
+import org.ei.opensrp.domain.ReferralServiceDataModel;
 import org.ei.opensrp.domain.Response;
 import org.ei.opensrp.domain.ResponseStatus;
 import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
-
-import org.ei.opensrp.domain.ReferralServiceDataModel;
-
-import org.ei.opensrp.drishti.Application.Config;
+import org.ei.opensrp.drishti.Service.FacilityService;
 import org.ei.opensrp.drishti.Service.ReferralService;
 import org.ei.opensrp.drishti.Service.RegistrationIntentService;
 import org.ei.opensrp.drishti.util.AsyncTask;
 import org.ei.opensrp.drishti.util.SmallDiagonalCutPathDrawable;
-import org.ei.opensrp.repository.FacilityRepository;
-import org.ei.opensrp.repository.ReferralServiceRepository;
-import org.ei.opensrp.drishti.Service.FacilityService;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.repository.AllSharedPreferences;
+import org.ei.opensrp.repository.FacilityRepository;
+import org.ei.opensrp.repository.ReferralServiceRepository;
 import org.ei.opensrp.sync.DrishtiSyncScheduler;
 import org.ei.opensrp.util.Log;
 import org.ei.opensrp.view.BackgroundAction;
 import org.ei.opensrp.view.LockingBackgroundTask;
 import org.ei.opensrp.view.ProgressIndicator;
 import org.ei.opensrp.view.activity.SettingsActivity;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -215,8 +207,8 @@ public class LoginActivity extends AppCompatActivity {
         int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
         if (resultCode != ConnectionResult.SUCCESS) {
             if (apiAvailability.isUserResolvableError(resultCode)) {
-//                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
-//                        .show();
+                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+                        .show();
             } else {
                 Log.logDebug( "This device is not supported.");
                 finish();
@@ -403,9 +395,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void localLoginWith(String userName, String password) {
         context.userService().localLogin(userName, password);
-
-        ((BoreshaAfyaApplication)getApplication()).setUsername(userName);
-        ((BoreshaAfyaApplication)getApplication()).setPassword(password);
         goToHome();
         DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
@@ -413,8 +402,6 @@ public class LoginActivity extends AppCompatActivity {
     private void remoteLoginWith(String userName, String password, String userInfo) {
         context.userService().remoteLogin(userName, password, userInfo);
 
-        ((BoreshaAfyaApplication)getApplication()).setUsername(userName);
-        ((BoreshaAfyaApplication)getApplication()).setPassword(password);
         goToHome();
         DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
@@ -438,6 +425,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         final String regId =  context.allSettings().fetchRegistartionId();
+        Log.logDebug("registration token "+regId);
         // Check if regid already presents
         Log.logDebug("registration id"+regId);
         if (regId.equals("")) {

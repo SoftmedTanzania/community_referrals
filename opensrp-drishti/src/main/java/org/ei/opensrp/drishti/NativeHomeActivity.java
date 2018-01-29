@@ -1,6 +1,5 @@
 package org.ei.opensrp.drishti;
 
-import android.database.Cursor;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
@@ -17,7 +16,6 @@ import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
 import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
 import org.ei.opensrp.drishti.util.OrientationHelper;
 import org.ei.opensrp.event.Listener;
-import org.ei.opensrp.repository.ClientReferralRepository;
 import org.ei.opensrp.service.PendingFormSubmissionService;
 import org.ei.opensrp.sync.SyncAfterFetchListener;
 import org.ei.opensrp.sync.SyncProgressIndicator;
@@ -336,7 +334,7 @@ public class NativeHomeActivity extends SecuredActivity {
             switch (view.getId()) {
 
                 case R.id.btn_anc_register:
-                    navigationController.startANCSmartRegistry();
+                    navigationController.startCHWSmartRegistry();
                     break;
 
 //                case R.id.btn_pnc_register:

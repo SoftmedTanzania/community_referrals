@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +38,7 @@ import java.util.Locale;
 public class CHWRegisterRecyclerAdapter extends
         RecyclerView.Adapter<CHWRegisterRecyclerAdapter.ViewHolder> {
 
+    private static String TAG = CHWRegisterRecyclerAdapter.class.getSimpleName();
     private List<ClientReferralPersonObject> clients;
     private Context mContext;
     private ClientReferralPersonObject client;
@@ -66,6 +68,9 @@ public class CHWRegisterRecyclerAdapter extends
 
         client = clients.get(position);
         String gsonReferral = Utils.convertStandardJSONString(client.getDetails());
+
+        Log.d(TAG, "gsonReferral = " + gsonReferral);
+
         final ClientReferral clientReferral = new Gson().fromJson(gsonReferral,ClientReferral.class);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
@@ -74,7 +79,7 @@ public class CHWRegisterRecyclerAdapter extends
         TextView CBHS = viewHolder.CBHSTextView;
 
         phoneNumberTextView.setText(clientReferral.getPhone_number());
-        viewHolder.nameTextView.setText(clientReferral.getFirst_name()+" " + clientReferral.getMiddle_name()+", "+clientReferral.getSurname());
+        viewHolder.nameTextView.setText(client.getFirst_name()+" " + client.getMiddle_name()+", "+client.getSurname());
 
         if(clientReferral.getCommunity_based_hiv_service()!=null) {
             if(!clientReferral.getCommunity_based_hiv_service().equals(""))

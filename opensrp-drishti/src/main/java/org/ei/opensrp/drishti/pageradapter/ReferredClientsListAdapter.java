@@ -22,6 +22,7 @@ import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.util.Utils;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -34,11 +35,11 @@ public class ReferredClientsListAdapter extends
         RecyclerView.Adapter<ReferredClientsListAdapter.ViewHolder> {
     private static String TAG = ReferredClientsListAdapter.class.getSimpleName();
     private CommonRepository commonRepository;
-    private List<ClientReferralPersonObject> client;
+    private List<ClientReferralPersonObject> clients = new ArrayList<>();;
     private Context mContext;
 
-    public ReferredClientsListAdapter(Context context, List<ClientReferralPersonObject> clients, CommonRepository commonRepository) {
-        client = clients;
+    public ReferredClientsListAdapter(Context context, List<ClientReferralPersonObject> client, CommonRepository commonRepository) {
+        clients = client;
         mContext = context;
         this.commonRepository = commonRepository;
 
@@ -61,20 +62,23 @@ public class ReferredClientsListAdapter extends
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
-        ClientReferralPersonObject clientReferralPersonObject = client.get(position);
 
-        String gsonReferral = Utils.convertStandardJSONString(clientReferralPersonObject.getDetails());
-        Log.d(TAG, "gsonReferral = " + gsonReferral);
-        ClientReferral clientReferral = new Gson().fromJson(gsonReferral, ClientReferral.class);
+         ClientReferralPersonObject client = clients.get(position);
+
+        String gsonReferral = Utils.convertStandardJSONString(client.getDetails());
+        Log.d(TAG, "gsonReferral0 = " +gsonReferral);
+        final ClientReferral clientReferral = new Gson().fromJson(gsonReferral,ClientReferral.class);
+        Log.d(TAG, "gsonReferral1 = " +new Gson().toJson(clientReferral));
+        Log.d(TAG, "gsonReferral2 = " + new Gson().toJson(client.getDetails()));
 
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
 
-        viewHolder.nameTextView.setText(clientReferral.getFirst_name()+" "+clientReferral.getMiddle_name()+" "+clientReferral.getSurname());
-        viewHolder.referralReason.setText(clientReferral.getReferral_reason());
-        viewHolder.scheduleDateTextView.setText(dateFormat.format(clientReferral.getReferral_date()));
-        viewHolder.serviceName.setText(getReferralServiceName(clientReferral.getReferral_service_id()));
+        viewHolder.nameTextView.setText(client.getFirst_name()+" "+client.getMiddle_name()+" "+client.getSurname());
+        viewHolder.referralReason.setText(client.getReferral_reason());
+        viewHolder.scheduleDateTextView.setText(dateFormat.format(client.getReferral_date()));
+        viewHolder.serviceName.setText(getReferralServiceName(client.getReferral_service_id()));
 
 
         if(clientReferral.getStatus().equals("0")){
@@ -93,7 +97,8 @@ public class ReferredClientsListAdapter extends
 
     @Override
     public int getItemCount() {
-        return client.size();
+        return clients.size();
+//        return 0;
     }
 
 
@@ -113,7 +118,9 @@ public class ReferredClientsListAdapter extends
                 @Override
                 public void onClick(View view) {
                     // pass client referral to show details
-                    ((ChwSmartRegisterActivity) mContext).showPreRegistrationDetailsDialog(client.get(getAdapterPosition()));
+
+                    Log.d(TAG, "gsonReferral3 = " + new Gson().toJson(clients.get(getAdapterPosition())));
+                    ((ChwSmartRegisterActivity) mContext).showPreRegistrationDetailsDialog(clients.get(getAdapterPosition()));
                 }
             });
 
@@ -136,11 +143,11 @@ public class ReferredClientsListAdapter extends
                 switch (item.getItemId()) {
                     // TODO: handle option selected
                     case R.id.popOpt1:
-                        ((ChwSmartRegisterActivity) mContext).showPreRegistrationVisitDialog(client.get(position));
+                        ((ChwSmartRegisterActivity) mContext).showPreRegistrationVisitDialog(clients.get(position));
                         return true;
 
                     case R.id.popOpt2:
-                        ((ChwSmartRegisterActivity) mContext).showPreRegistrationDetailsDialog(client.get(position));
+                        ((ChwSmartRegisterActivity) mContext).showPreRegistrationDetailsDialog(clients.get(position));
                         return true;
 
                     default:

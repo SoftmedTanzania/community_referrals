@@ -32,7 +32,6 @@ import org.ei.opensrp.cursoradapter.CursorFilterOption;
 import org.ei.opensrp.cursoradapter.CursorSortOption;
 import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
 import org.ei.opensrp.domain.ReportMonth;
-import org.ei.opensrp.drishti.AncRegisterListAdapter;
 
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
@@ -117,21 +116,11 @@ public abstract class SecuredNativeSmartRegisterCursorAdapterFragment extends or
         return currentServiceModeOption;
     }
 
-    public AncRegisterListAdapter getClientsCursorAdapter() {
-        return clientAdapter;
-    }
-
-    public void setClientsAdapter(AncRegisterListAdapter clientsAdapter) {
-        this.clientAdapter = clientsAdapter;
-    }
-
-    public AncRegisterListAdapter clientAdapter;
 
     private FilterOption currentVillageFilter;
 
     private SortOption currentSortOption;
 
-    AncRegisterListAdapter listAdapter;
 
     public View mView;
 
@@ -192,7 +181,6 @@ public abstract class SecuredNativeSmartRegisterCursorAdapterFragment extends or
                     String query = "SELECT * FROM wazazi_salama_mother";
                     Cursor cursor = motherRepository.RawCustomQueryForAdapter(query);
                     Log.d("onResumption", "query = " + query);
-                    listAdapter = new AncRegisterListAdapter(context(), motherRepository, cursor, getContext());
 
                     return null;
                 }
@@ -206,7 +194,6 @@ public abstract class SecuredNativeSmartRegisterCursorAdapterFragment extends or
 
                 @Override
                 protected void onPostExecute(Void result) {
-                    clientsView.setAdapter(listAdapter);
                     if (isAdded()) {
 //                    paginationViewHandler.refresh();
                         clientsProgressView.setVisibility(View.GONE);

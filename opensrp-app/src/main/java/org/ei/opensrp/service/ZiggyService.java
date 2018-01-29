@@ -26,7 +26,7 @@ public class ZiggyService {
     private Context context;
     private ScriptableObject scope;
     private Function saveFunction;
-
+    private org.ei.opensrp.Context appcontext;
     public ZiggyService(ZiggyFileLoader ziggyFileLoader, FormDataRepository dataRepository, FormSubmissionRouter formSubmissionRouter) {
         this.ziggyFileLoader = ziggyFileLoader;
         this.dataRepository = dataRepository;

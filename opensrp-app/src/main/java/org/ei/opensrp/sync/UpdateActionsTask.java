@@ -1,7 +1,10 @@
 package org.ei.opensrp.sync;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import org.ei.opensrp.domain.DownloadStatus;
 import org.ei.opensrp.domain.FetchStatus;
@@ -24,6 +27,7 @@ public class UpdateActionsTask {
     private AllFormVersionSyncService allFormVersionSyncService;
     private AdditionalSyncService additionalSyncService;
 
+    private static final String TAG = UpdateActionsTask.class.getSimpleName();
     public UpdateActionsTask(Context context, ActionService actionService, FormSubmissionSyncService formSubmissionSyncService, ProgressIndicator progressIndicator,
                              AllFormVersionSyncService allFormVersionSyncService) {
         this.actionService = actionService;
@@ -48,9 +52,13 @@ public class UpdateActionsTask {
             public FetchStatus actionToDoInBackgroundThread() {
 
                 FetchStatus fetchStatusForForms = formSubmissionSyncService.sync();
+                Log.d(TAG,"fetched Status "+new Gson().toJson(fetchStatusForForms));
                 FetchStatus fetchStatusForActions = actionService.fetchNewActions();
+
+                Log.d(TAG,"fetchStatusForActions "+new Gson().toJson(fetchStatusForActions));
                 FetchStatus fetchStatusAdditional = additionalSyncService == null ? nothingFetched : additionalSyncService.sync();
 
+                Log.d(TAG,"fetchStatusAdditional "+new Gson().toJson(fetchStatusAdditional));
                 if(org.ei.opensrp.Context.getInstance().configuration().shouldSyncForm()) {
 
                     allFormVersionSyncService.verifyFormsInFolder();
@@ -62,6 +70,7 @@ public class UpdateActionsTask {
                     }
 
                     if(fetchVersionStatus == fetched || downloadStatus == DownloadStatus.downloaded) {
+                        Log.d(TAG,"am in fetched ");
                         return fetched;
                     }
                 }

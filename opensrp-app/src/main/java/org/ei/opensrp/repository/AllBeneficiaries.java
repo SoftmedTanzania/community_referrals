@@ -1,9 +1,11 @@
 package org.ei.opensrp.repository;
 
+import android.content.ContentValues;
 import android.util.Log;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.ei.opensrp.domain.Child;
+import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.domain.EligibleCouple;
 import org.ei.opensrp.domain.Mother;
 
@@ -139,5 +141,12 @@ public class AllBeneficiaries {
 
     public void updateMother(Mother mother) {
         motherRepository.update(mother);
+    }
+
+    public void updateClientReferral(ClientReferral clientReferral) {
+        clientReferralRepository.update(clientReferral);
+    }
+    public ClientReferral findClientReferral(String id) {
+        return clientReferralRepository.find(id);
     }
 }

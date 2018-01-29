@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.domain.ClientReferral;
+import org.ei.opensrp.domain.Indicator;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.Repository.FacilityObject;
 import org.ei.opensrp.drishti.Repository.ReferralServiceObject;
@@ -80,7 +81,7 @@ public class Utils {
 
     public static ClientReferralPersonObject convertToClientPersonObject(CommonPersonObject commonPersonObject) {
         String details = commonPersonObject.getColumnmaps().get("details");
-        Log.d(TAG, "details string = " + convertStandardJSONString(details));
+        Log.d(TAG, "details string commonPersonObject = " + convertStandardJSONString(details));
         try {
             return new ClientReferralPersonObject(
                     commonPersonObject.getColumnmaps().get("id"),
@@ -121,7 +122,7 @@ public class Utils {
                     commonPersonObject.getReferral_service_id(),
                     commonPersonObject.getStatus(),
                     commonPersonObject.getIs_valid(),
-                    new Gson().toJson(commonPersonObject)
+                    commonPersonObject.getDetails()
             );
         } catch (Exception e) {
             e.printStackTrace();
@@ -129,8 +130,6 @@ public class Utils {
         }
     }
     public static FacilityObject convertToFacilityObject(CommonPersonObject commonPersonObject) {
-        String details = commonPersonObject.getColumnmaps().get("id");
-        Log.d(TAG, "details string = " + details);
         try {
             return new FacilityObject(
                     commonPersonObject.getColumnmaps().get("id"),
@@ -140,14 +139,26 @@ public class Utils {
             e.printStackTrace();
             return null;
         }
+    } public static Indicator convertToIndicatorObject(CommonPersonObject commonPersonObject) {
+        String details = commonPersonObject.getColumnmaps().get("indicatorName");
+        try {
+            return new Indicator(
+                    commonPersonObject.getColumnmaps().get("id"),
+                    commonPersonObject.getColumnmaps().get("referralIndicatorId"),
+                    commonPersonObject.getColumnmaps().get("indicatorName"),
+                    commonPersonObject.getColumnmaps().get("isActive")
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
     public static ReferralServiceObject convertToServiceObject(CommonPersonObject commonPersonObject) {
-        String details = commonPersonObject.getColumnmaps().get("name");
-        Log.d(TAG, "details string = " + details);
         try {
             return new ReferralServiceObject(
                     commonPersonObject.getColumnmaps().get("id"),
-                    commonPersonObject.getColumnmaps().get("name")
+                    commonPersonObject.getColumnmaps().get("name"),
+                    commonPersonObject.getColumnmaps().get("category")
             );
         } catch (Exception e) {
             e.printStackTrace();
@@ -160,7 +171,9 @@ public class Utils {
         List<ClientReferralPersonObject> clientReferralPersonObjects = new ArrayList<>();
         for (CommonPersonObject common : commonPersonObjectsList) {
             clientReferralPersonObjects.add(convertToClientPersonObject(common));
+
         }
+        Log.d(TAG, "client person Object string = " + clientReferralPersonObjects.toString());
 
 
         return clientReferralPersonObjects;
@@ -183,6 +196,15 @@ public class Utils {
 
         return facilityObjects;
     }
+    public static List<Indicator> convertToIndicatorList(List<CommonPersonObject> commonPersonObjectsList) {
+        List<Indicator> indicatorObjects = new ArrayList<>();
+        for (CommonPersonObject common : commonPersonObjectsList) {
+            indicatorObjects.add(convertToIndicatorObject(common));
+        }
+
+
+        return indicatorObjects;
+    }
     public static List<ReferralServiceObject> convertToServiceObjectList(List<CommonPersonObject> commonPersonObjectsList) {
         List<ReferralServiceObject> facilityObjects = new ArrayList<>();
         for (CommonPersonObject common : commonPersonObjectsList) {
@@ -193,11 +215,25 @@ public class Utils {
         return facilityObjects;
     }
     public static String convertStandardJSONString(String data_json) {
+
         data_json = data_json.replaceAll("\\\\r\\\\n", "");
         data_json = data_json.replace("\"{", "{");
         data_json = data_json.replace("}\",", "},");
         data_json = data_json.replace("}\"", "}");
         data_json = data_json.replace("\\", "");
+        if(data_json.contains("indicator_ids")){
+            int start = data_json.indexOf("[");
+            int end = data_json.indexOf("]");
+            String indicator = data_json.substring(start,end);
+            String indicator1 = data_json.substring(start,end);
+            Log.d(TAG,"indicator b4 "+indicator);
+            indicator1 = indicator1.replace('\"','*');
+            indicator1 = indicator1.replace("*","(+");
+            String indicator2 = indicator1.replace('+','"');
+            indicator2 = indicator2.replace('(','\\');
+            Log.d(TAG,"indicator after "+indicator2);
+            data_json = data_json.replace(indicator,indicator2);
+        }
         return data_json;
     }
 
