@@ -294,7 +294,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
                     LinearLayout.LayoutParams checkParams = new LinearLayout.LayoutParams(
                             Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
                     checkParams.setMargins(10, 10, 0, 10);
-                    checkParams.gravity = Gravity.CENTER;
+                    checkParams.gravity = Gravity.LEFT;
                     
                     parentLayout.addView(checkBox, checkParams);
 
