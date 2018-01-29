@@ -377,8 +377,6 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
 
 
                 if((spinnerService.getSelectedItem().toString()).equals("Rufaa kwenda kliniki ya kutibu kifua kikuu")){
-
-
                     findViewById(R.id.checkboxis_at_hot_spot).setVisibility(View.GONE);
                     findViewById(R.id.checkboxHasHeadache).setVisibility(View.GONE);
                     findViewById(R.id.checkboxIsVomiting).setVisibility(View.GONE);
@@ -397,13 +395,10 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
                     checkBoxreasonFour.setVisibility(View.VISIBLE);
                     checkBoxresonFive.setVisibility(View.VISIBLE);
                     checkBoxreasonSix.setVisibility(View.VISIBLE);
-//                    tbLayout.setVisibility(View.VISIBLE);
                     CTCLayout.setVisibility(View.VISIBLE);
                     fName = "client_tb_referral_form";
 
                 }else if((spinnerService.getSelectedItem().toString()).equals("Rufaa kwenda kliniki ya ushauri nasaha na upimaji")||(spinnerService.getSelectedItem().toString()).equals("Rufaa kwenda kupata huduma za kuzuia maambukizi toka kwa mama kwenda kwa mtoto") ){
-
-
                     findViewById(R.id.checkboxHasHeadache).setVisibility(View.GONE);
                     findViewById(R.id.checkboxBloodCough).setVisibility(View.GONE);
                     findViewById(R.id.checkbox2weekCough).setVisibility(View.GONE);
@@ -423,13 +418,10 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
                     checkBoxreasonFour.setVisibility(View.VISIBLE);
                     checkBoxresonFive.setVisibility(View.VISIBLE);
                     checkBoxreasonSix.setVisibility(View.VISIBLE);
-
-//                    tbLayout.setVisibility(View.GONE);
                     CTCLayout.setVisibility(View.VISIBLE);
                     fName = "client_hiv_referral_form";
 
                 }else if((spinnerService.getSelectedItem().toString()).equals("Rufaa kwenda kliniki kutibiwa malaria") ){
-
                     findViewById(R.id.checkboxis_at_hot_spot).setVisibility(View.GONE);
                     findViewById(R.id.checkboxWeightLoss).setVisibility(View.GONE);
                     findViewById(R.id.checkboxBloodCough).setVisibility(View.GONE);
