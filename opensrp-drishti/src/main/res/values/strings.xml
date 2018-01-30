@@ -522,9 +522,11 @@
     <string name="no_results_found">Hakuna majibu yaliomechi taarifa ulizoweka.</string>
 
     <string-array name="gender">
-        <item>Mwanaume</item>
-        <item>Mwanamke</item>
+        <item>Male</item>
+        <item>Female</item>
     </string-array>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
     <string name="gcm_send_message">Token retrieved and sent to server! You can now use gcmsender to
@@ -595,4 +597,12 @@
     <string name="title_unsuccessful">Unsuccessful</string>
     <string name="not_synced">Not Synced</string>
     <string name="logged_user">User</string>
+    <string name="wrong_facility">Please fill in the correct referral facility</string>
+    <string name="missing_facility">Please fill in the referral facility</string>
+    <string name="missing_services">Please fill in the referral service</string>
+    <string name="wrong_mobile_number">Please fill in the correct mobile number if any</string>
+    <string name="unfilled_information">Please fill all required information</string>
+    <string name="missing_gender">Please select clients gender</string>
+    <string name="missing_physical_address">Please select Clients Physical address</string>
+    <string name="missing_missing_referral_reason">Please fill in the referral reason</string>
 </resources>

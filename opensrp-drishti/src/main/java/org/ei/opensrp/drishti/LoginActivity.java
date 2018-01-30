@@ -133,10 +133,10 @@ public class LoginActivity extends AppCompatActivity {
         setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
 
-
-        findViewById(R.id.credential_card).setBackground(new SmallDiagonalCutPathDrawable());
-        ImageView v = (ImageView)findViewById(R.id.background);
-        Glide.with(getApplicationContext()).load(R.drawable.clint_adair).into(v);
+//
+//        findViewById(R.id.credential_card).setBackground(new SmallDiagonalCutPathDrawable());
+//        ImageView v = (ImageView)findViewById(R.id.background);
+//        Glide.with(getApplicationContext()).load(R.drawable.clint_adair).into(v);
         setLanguage();
 
     }

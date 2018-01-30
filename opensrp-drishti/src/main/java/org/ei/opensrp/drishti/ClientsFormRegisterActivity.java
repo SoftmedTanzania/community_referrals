@@ -246,8 +246,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
         facilitytextView.setAdapter(facilityAdapter);
 
 
-
-        String[] ITEMS = {"ME", "KE"};
+        String[] ITEMS = getResources().getStringArray(R.array.gender);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ITEMS);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGender = (MaterialSpinner) findViewById(R.id.spinnerGender);
@@ -265,7 +264,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
 
                 String service = spinnerService.getSelectedItem().toString();
                 List<Indicator> indicator = new ArrayList<Indicator>();
-                if(service.equals("Aina za huduma")){
+                if(service.equals("Aina za huduma") || service.equals("Referral Services")){
 
                 }else {
 
@@ -444,14 +443,13 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
                 || TextUtils.isEmpty(editTextDiscountId.getText())
 
                 ) {
-
-            message = "Tafadhali jaza taarifa zote muhimu";
+            message = getResources().getString(R.string.unfilled_information);
             makeToast();
 
             return false;
 
         } else if (TextUtils.isEmpty(facilitytextView.getText())) {
-            message = "Tafadhali chagua kituo cha rufaa ya mteja";
+            message = getResources().getString(R.string.missing_facility);
             makeToast();
             return false;
 
@@ -459,39 +457,39 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
             int size = facilityList.size();
             boolean sameValue = false;
             for(int j = 0; j < size; j++){
-                if(facilitytextView.getText().toString().equalsIgnoreCase(facilityList.get(0)))
+                if(facilitytextView.getText().toString().equals(facilityList.get(0)))
                     sameValue =true;
             }
             if (sameValue){
 
                 return sameValue;
             }else{
-                message = "Tafadhali chagua kituo cha rufaa ya mteja kilicho sahihi";
+                message = getResources().getString(R.string.wrong_facility);
                 makeToast();
 
                 return sameValue;
             }
 
         }else if (spinnerGender.getSelectedItemPosition() <=0) {
-            message = "Tafadhali chagua jinsia ya mteja";
+            message = getResources().getString(R.string.missing_gender);
             makeToast();
             return false;
 
         }else if (spinnerService.getSelectedItemPosition() <= 0 ) {
-            message = "Tafadhali chagua aina ya huduma";
+            message = getResources().getString(R.string.missing_services);
             makeToast();
             return false;
 
         } else if (TextUtils.isEmpty(textPhone.getText())) {
-            message = "Tafadhali andika namba ya simu sahihi";
+            message = getResources().getString(R.string.wrong_mobile_number);
             makeToast();
             return false;
         } else if (TextUtils.isEmpty(editTextKijiji.getText())) {
-            message = "Tafadhali jaza mahali anapoishi";
+            message = getResources().getString(R.string.missing_physical_address);
             makeToast();
             return false;
         } else  if (TextUtils.isEmpty(editTextReferralReason.getText())) {
-            message = "Tafadhali andika sababu ya rufaa ya mteja";
+            message = getResources().getString(R.string.missing_missing_referral_reason);
             makeToast();
             return false;
         }else
@@ -512,7 +510,10 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
         referral.setIs_valid("true");
         referral.setPhone_number(textPhone.getText().toString());
         referral.setFacility_id(getFacilityId(facilitytextView.getText().toString()));
-        referral.setGender(spinnerGender.getSelectedItem().toString());
+        if(spinnerGender.getSelectedItem().toString().equalsIgnoreCase("female") || spinnerGender.getSelectedItem().toString().contains("ke"))
+            referral.setGender("1");
+        else
+            referral.setGender("0");
         referral.setVillage_leader(editTextVillageLeader.getText().toString());
         referral.setReferral_reason(editTextReferralReason.getText().toString());
         referral.setReferral_service_id(getReferralServiceId(spinnerService.getSelectedItem().toString()));

@@ -236,11 +236,11 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         phoneNumber.setText(clientReferral.getPhone_number());
         villageleader.setText(clientReferral.getVillage_leader());
         physicalAddress.setText(clientReferral.getVillage());
-        if((clientReferral.getGender()).equals("KE")){
-            gender.setText("Mwanamke");
+        if((clientReferral.getGender()).equals("1")){
+            gender.setText(getResources().getString(R.string.female));
         }
         else     {
-            gender.setText("Mwanaume");
+            gender.setText(getResources().getString(R.string.male));
         }
         setIndicators(dialogView,gsonClient);
     }

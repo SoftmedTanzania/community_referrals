@@ -146,11 +146,11 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if((clientReferral.getGender()).equals("KE")){
-            gender.setText("Mwanamke");
+        if((clientReferral.getGender()).equals("1")){
+            gender.setText(getResources().getString(R.string.female));
         }
         else     {
-            gender.setText("Mwanaume");
+            gender.setText(getResources().getString(R.string.male));
         }
         age.setText(ageS + " years");
         name . setText(clientReferral.getFirst_name()+" "+clientReferral.getMiddle_name()+", "+ clientReferral.getSurname());
