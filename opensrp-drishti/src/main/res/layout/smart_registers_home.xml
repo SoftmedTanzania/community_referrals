@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="0.25"
-
         android:gravity="center_vertical"
         android:orientation="vertical">
 
@@ -20,8 +19,6 @@
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="30dp"
             android:orientation="horizontal">
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,7 +40,6 @@
 
                 </FrameLayout>
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_marginTop="16dp"
@@ -52,18 +48,7 @@
                     android:text="ANC"
                     android:layout_gravity="center"
                     android:textColor="#ffffff"/>
-
-
-
-                <!--<org.ei.opensrp.view.customControls.CustomFontTextView-->
-                    <!--android:id="@+id/txt_anc_register_client_count"-->
-                    <!--style="@style/CustomFontTextViewStyle.Badge"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
             </LinearLayout>
-
-
-
         </LinearLayout>
 
     </LinearLayout>
@@ -84,8 +69,6 @@
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="30dp"
             android:orientation="horizontal">
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -116,14 +99,6 @@
                     android:text="PNC"
                     android:layout_gravity="center"
                     android:textColor="#ffffff"/>
-
-
-
-                <!--<org.ei.opensrp.view.customControls.CustomFontTextView-->
-                <!--android:id="@+id/txt_anc_register_client_count"-->
-                <!--style="@style/CustomFontTextViewStyle.Badge"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content" />-->
             </LinearLayout>
 
 
@@ -167,9 +142,7 @@
                         android:scaleType="centerInside"
                         android:layout_margin="16dp"
                         android:src="@drawable/unfpa_reports" />
-
                 </FrameLayout>
-
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -180,13 +153,6 @@
                     android:layout_gravity="center"
                     android:textColor="#ffffff"/>
 
-
-
-                <!--<org.ei.opensrp.view.customControls.CustomFontTextView-->
-                <!--android:id="@+id/txt_anc_register_client_count"-->
-                <!--style="@style/CustomFontTextViewStyle.Badge"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content" />-->
             </LinearLayout>
 
 
