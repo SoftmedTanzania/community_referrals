@@ -33,7 +33,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:textSize="18sp"
-                android:text="Martha Shaka"
                 android:layout_toRightOf="@+id/profilePic" />
 
             <org.ei.opensrp.view.customControls.CustomFontTextView
@@ -47,7 +46,6 @@
                 android:layout_below="@id/name"
                 android:layout_marginTop="4dp"
                 android:gravity="center_vertical"
-                android:text="08 Jan 17"
                 android:textSize="13sp" />
 
             <org.ei.opensrp.view.customControls.CustomFontTextView
@@ -70,7 +68,7 @@
                     android:id="@+id/button_details"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
-                    android:text="Details"
+                    android:text="@string/button_details"
                     android:textColor="#2D69A5"
                     android:layout_below="@id/profilePic"/>
 
@@ -80,7 +78,7 @@
                     android:layout_toRightOf="@id/button_details"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
-                    android:text="Follow up"
+                    android:text="@string/button_follow_up"
                     android:textColor="#2D69A5"
                     android:layout_below="@id/profilePic"/>
             </LinearLayout>

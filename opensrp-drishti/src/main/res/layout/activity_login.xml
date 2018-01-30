@@ -62,7 +62,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="@string/title_login"
                 android:layout_marginLeft="8dp"
                 android:textStyle="bold"
                 android:textColor="#306AA3"/>
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="0dp"
-                android:hint="Username"
+                android:hint="@string/hint_username"
                 android:focusable="true"
                 android:imeOptions="actionNext"
                 android:textColor="@color/primary_text"
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="0dp"
-                android:hint="Password"
+                android:hint="@string/hint_password"
                 android:focusable="true"
                 android:imeOptions="actionNext"
                 android:textColor="@color/primary_text"
@@ -111,7 +111,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/shape_round_button"
-                android:text="Sign In"
+                android:text="@string/button_sign_in"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
@@ -120,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Powered by OpenSRP"
+                android:text="@string/powered_bt"
                 android:textColor="@color/hint_text"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -176,7 +176,7 @@
             android:paddingTop="8dp"
             android:layout_marginLeft="8dp"
             android:layout_height="wrap_content"
-            android:text="htmr"
+            android:text="@string/page_title_htmr"
             android:id="@+id/title_one"
             android:textStyle="bold"
             android:textColor="@color/mdtp_white"
@@ -189,7 +189,7 @@
             android:paddingTop="8dp"
             android:layout_marginLeft="8dp"
             android:layout_height="wrap_content"
-            android:text="Referral"
+            android:text="@string/page_title_referral"
             android:textColor="@color/mdtp_white"
             android:textSize="18sp"/>
 
@@ -199,7 +199,7 @@
             android:paddingTop="8dp"
             android:layout_marginLeft="8dp"
             android:layout_height="wrap_content"
-            android:text="Application"
+            android:text="@string/title_login"
             android:textColor="@color/mdtp_white"
             android:textSize="16sp"/>
     </android.support.percent.PercentRelativeLayout>

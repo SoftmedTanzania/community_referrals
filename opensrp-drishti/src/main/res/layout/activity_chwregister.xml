@@ -43,7 +43,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mfumo wa Rufaa"
+                        android:text="@string/app_name_htmr"
                         android:textColor="@color/white"
                         android:layout_marginRight="16dp"
                         android:layout_marginLeft="4dp"
@@ -52,7 +52,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Logged user"
+                        android:text="@string/logged_user"
                         android:textColor="@color/white"
                         android:layout_marginRight="16dp"
                         android:layout_marginLeft="4dp"
@@ -95,7 +95,6 @@
                         android:layout_toRightOf="@id/indicator_one"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="21"
                         android:textSize="15sp"/>
                     <TextView
                         android:textColor="@color/mdtp_white"
@@ -103,7 +102,7 @@
                         android:layout_toRightOf="@id/indicator_one"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Success"
+                        android:text="@string/title_success"
                         android:textSize="10sp"/>
                 </RelativeLayout>
 
@@ -129,7 +128,6 @@
                         android:layout_toRightOf="@id/indicator_two"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="4"
                         android:textSize="15sp"/>
                     <TextView
                         android:textColor="@color/mdtp_white"
@@ -137,7 +135,7 @@
                         android:layout_toRightOf="@id/indicator_two"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Unsuccessful"
+                        android:text="@string/title_unsuccessful"
                         android:textSize="10sp"/>
                 </RelativeLayout>
                 <RelativeLayout
@@ -162,7 +160,6 @@
                         android:layout_toRightOf="@id/indicator_three"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
                         android:textSize="15sp"/>
                     <TextView
                         android:textColor="@color/mdtp_white"
@@ -170,7 +167,7 @@
                         android:layout_toRightOf="@id/indicator_three"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="form(s) unsynced"
+                        android:text="@string/not_synced"
                         android:textSize="10sp"/>
                 </RelativeLayout>
 

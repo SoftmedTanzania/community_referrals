@@ -20,7 +20,7 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"
             android:textStyle="bold"
-            android:text="New Client Registration Form"
+            android:text="@string/title_register_client"
             android:textColor="@color/black"
             android:textSize="24sp" />
         <LinearLayout
@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="CBHS #"
+                android:text="@string/title_cbhs_number"
                 android:textColor="@color/card_title_text"
                 android:textSize="14sp"
                 android:visibility="visible" />
@@ -44,7 +44,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:text="0001/0001/000001"
                 android:textColor="@color/primary_text"
                 android:textSize="14sp"
                 android:visibility="visible" />
@@ -85,7 +84,7 @@
                             android:layout_weight="1"
                             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                             android:focusable="true"
-                            android:text="jinsia"
+                            android:text="@string/client_sex"
                             android:imeOptions="actionNext"
                             android:inputType="textCapWords|textPersonName"
                             android:textColor="@color/card_title_text"
@@ -126,7 +125,7 @@
                             android:gravity="right"
                             android:layout_marginRight="16dp"
                             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                            android:text="Namba ya simu"
+                            android:text="@string/client_phone"
                             android:imeOptions="actionNext"
                             android:inputType="textCapWords|textPersonName"
                             android:textColor="@color/card_grid_text"
@@ -166,7 +165,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
-                            android:text="umri"
+                            android:text="@string/client_age"
                             android:gravity="right"
                             android:layout_marginRight="16dp"
                             app:paddingEnd="16dp"
@@ -205,7 +204,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
-                            android:text="Mahali anapokaa"
+                            android:text="@string/client_address"
                             android:gravity="right"
                             android:layout_marginRight="16dp"
                             app:paddingEnd="16dp"
@@ -244,7 +243,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
-                            android:text="M/kiti wa mtaa"
+                            android:text="@string/client_veo"
                             android:gravity="right"
                             android:layout_marginRight="16dp"
                             app:paddingEnd="16dp"
@@ -297,13 +296,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:text="sababu ya rufaa"/>
+                        android:text="@string/referral_reason"/>
                     <TextView
                         android:layout_below="@+id/reason_title"
                         android:id="@+id/reason_for_referral"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:layout_weight="0.5"
                         android:textColorHint="@color/hint_text"
                         android:textSize="14sp" />
 
@@ -326,7 +324,7 @@
                         android:id="@+id/service_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Aina ya rufaa"
+                        android:text="@string/referral_type"
                         android:textColor="@color/black"/>
                     <TextView
                         android:id="@+id/viewService"
@@ -343,7 +341,7 @@
                         android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kituo cha rufaa"/>
+                        android:text="@string/referral_facility"/>
                     <TextView
                         android:id="@+id/viewFacility"
                         android:layout_below="@+id/facility_title"
@@ -372,7 +370,7 @@
                         android:id="@+id/flags_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Vidokezo vya hatari"
+                        android:text="@string/danger_signs"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
@@ -469,7 +467,7 @@
                         android:id="@+id/clinical_information_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Taarifa Nyingine"
+                        android:text="@string/other_info"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
@@ -485,7 +483,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="8dp"
                             android:layout_marginTop="16dp"
-                            android:text="Namba ya CTC"
+                            android:text="@string/title_ctc_number"
                             android:textColor="@color/primary_text"
                             android:textColorHint="@color/hint_text"
                             android:textSize="14sp"
@@ -527,7 +525,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16dp"
                     android:layout_toLeftOf="@id/referal_button"
-                    android:text="ok"
+                    android:text="@string/button_ok"
                     android:textColor="@color/white" />
 
 

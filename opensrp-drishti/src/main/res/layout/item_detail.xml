@@ -51,7 +51,7 @@
                 android:textSize="16sp"
                 android:textColor="#000"
                 android:layout_height="wrap_content"
-                android:text="28 Years"/>
+                />
             <View
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
@@ -65,7 +65,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Female"/>
+                />
         </LinearLayout>
 
         <android.support.v7.widget.CardView
@@ -105,7 +105,7 @@
                         android:textSize="13sp"
                         android:layout_marginLeft="16dp"
                         android:textColor="#000"
-                        android:text="Residence"/>
+                        android:text="@string/client_address"/>
                     <ImageView
                         android:layout_marginLeft="16dp"
                         android:id="@+id/contacts_icon"
@@ -124,7 +124,7 @@
                         android:textColor="#000"
                         android:layout_marginLeft="16dp"
                         android:textSize="13sp"
-                        android:text="Contacts"/>
+                        android:text="@string/client_phone"/>
                     <ImageView
                         android:layout_marginLeft="16dp"
                         android:id="@+id/sponsors_icon"
@@ -144,7 +144,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="#000"
                         android:textSize="13sp"
-                        android:text="Sponsors"/>
+                        android:text="@string/client_helper"/>
                 </RelativeLayout>
 
                 <LinearLayout
@@ -161,7 +161,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
                         android:textColor="@color/client_list_header_text_color"
-                        android:text="Residence"/>
+                        />
                     <TextView
                         android:id="@+id/contacts"
                         android:layout_marginTop="8dp"
@@ -170,7 +170,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
                         android:textColor="@color/client_list_header_text_color"
-                        android:text="Contacts"/>
+                        />
                     <TextView
                         android:id="@+id/sponsor"
                         android:layout_marginTop="8dp"
@@ -179,7 +179,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
                         android:textColor="@color/client_list_header_text_color"
-                        android:text=" - "/>
+                        />
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -220,7 +220,7 @@
                         android:textSize="13sp"
                         android:layout_marginLeft="16dp"
                         android:textColor="#000"
-                        android:text="Referred"/>
+                        android:text="@string/referral_facility"/>
                     <ImageView
                         android:layout_marginLeft="16dp"
                         android:id="@+id/visits_icon"
@@ -239,7 +239,7 @@
                         android:textColor="#000"
                         android:layout_marginLeft="16dp"
                         android:textSize="13sp"
-                        android:text="Visits"/>
+                        android:text="@string/visits_number"/>
                     <ImageView
                         android:layout_marginLeft="16dp"
                         android:id="@+id/reasons_icon"
@@ -259,7 +259,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="#000"
                         android:textSize="13sp"
-                        android:text="Reasons"/>
+                        android:text="@string/referral_reason"/>
                 </RelativeLayout>
 
                 <LinearLayout
@@ -276,7 +276,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
                         android:textColor="@color/client_list_header_text_color"
-                        android:text="Reffered"/>
+                        />
                     <TextView
                         android:layout_marginTop="8dp"
                         android:layout_marginLeft="32dp"
@@ -284,7 +284,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
                         android:textColor="@color/client_list_header_text_color"
-                        android:text=" - "/>
+                       />
                     <TextView
                         android:id="@+id/followUp_reason"
                         android:layout_marginTop="8dp"
@@ -293,7 +293,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
                         android:textColor="@color/client_list_header_text_color"
-                        android:text="Amesitisha Huduma Gafla"/>
+                        />
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -333,7 +333,7 @@
                         android:textSize="13sp"
                         android:layout_marginLeft="16dp"
                         android:textColor="#000"
-                        android:text="Date"/>
+                        android:text="@string/referral_date"/>
                     <ImageView
                         android:layout_marginLeft="16dp"
                         android:id="@+id/chw_id_icon"
@@ -352,7 +352,7 @@
                         android:textColor="#000"
                         android:layout_marginLeft="16dp"
                         android:textSize="13sp"
-                        android:text="Feedback"/>
+                        android:text="@string/referral_feedback"/>
                     <ImageView
                         android:layout_marginLeft="16dp"
                         android:id="@+id/note_icon"
@@ -372,7 +372,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="#000"
                         android:textSize="13sp"
-                        android:text="Note"/>
+                        android:text="@string/referral_note"/>
                 </RelativeLayout>
 
                 <LinearLayout
@@ -389,7 +389,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
                         android:textColor="@color/client_list_header_text_color"
-                        android:text="Date"/>
+                        />
                     <TextView
                         android:id="@+id/feedback"
                         android:layout_marginTop="8dp"
@@ -398,7 +398,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
                         android:textColor="@color/client_list_header_text_color"
-                        android:text="Alifika kituoni na kupata huduma"/>
+                        />
                     <TextView
                         android:id="@+id/note"
                         android:layout_marginTop="8dp"
@@ -407,7 +407,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
                         android:textColor="@color/client_list_header_text_color"
-                        android:text="Maelekezo ya daktari"/>
+                        />
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>

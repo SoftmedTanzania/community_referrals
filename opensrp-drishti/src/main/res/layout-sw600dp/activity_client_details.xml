@@ -38,7 +38,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="4dp"
-                            android:text="HTMR"
+                            android:text="@string/app_name_htmr"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
 
@@ -91,7 +91,7 @@
                                     android:layout_centerVertical="true"
                                     android:layout_marginLeft="32dp"
                                     android:layout_marginTop="32dp"
-                                    android:text="New Client Registration Form"
+                                    android:text="@string/title_register_client"
                                     android:textColor="@color/black"
                                     android:textSize="42sp" />
 
@@ -102,7 +102,7 @@
                                     android:layout_below="@id/client_name"
                                     android:layout_marginLeft="32dp"
                                     android:layout_marginTop="16dp"
-                                    android:text="CBHS #"
+                                    android:text="@string/title_cbhs_number"
                                     android:textColor="@color/card_title_text"
                                     android:textSize="14sp"
                                     android:visibility="invisible" />
@@ -115,7 +115,6 @@
                                     android:layout_marginLeft="16dp"
                                     android:layout_marginTop="16dp"
                                     android:layout_toRightOf="@+id/cbhs_number_title"
-                                    android:text="0001/0001/000001"
                                     android:textColor="@color/card_title_text"
                                     android:textSize="14sp"
                                     android:visibility="invisible" />
@@ -150,7 +149,7 @@
                                             android:layout_weight="0.2"
                                             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                                             android:focusable="true"
-                                            android:hint="Jina la kwanza"
+                                            android:hint="@string/client_firstname"
                                             android:imeOptions="actionNext"
                                             android:inputType="textCapWords|textPersonName"
                                             android:textColor="@color/primary_text"
@@ -167,7 +166,7 @@
                                             android:layout_marginLeft="16dp"
                                             android:layout_weight="0.2"
                                             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                            android:hint="Jina la kati"
+                                            android:hint="@string/client_middlename"
                                             android:imeOptions="actionNext"
                                             android:inputType="textCapWords|textPersonName"
                                             android:textColor="@color/primary_text"
@@ -199,7 +198,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
                                             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                            android:hint="Jina la mwisho"
+                                            android:hint="@string/client_surname"
                                             android:imeOptions="actionNext"
                                             android:inputType="textCapWords|textPersonName"
                                             android:textColor="@color/primary_text"
@@ -215,7 +214,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="16dp"
                                             android:layout_weight="1"
-                                            android:hint="Namba ya simu"
+                                            android:hint="@string/client_phone"
                                             android:imeOptions="actionNext"
                                             android:inputType="number"
                                             android:textColor="@color/primary_text"
@@ -263,7 +262,7 @@
                                             app:ms_arrowSize="14dp"
                                             app:ms_baseColor="@color/accent"
                                             app:ms_enableFloatingLabel="false"
-                                            app:ms_hint="Chagua jinsia"
+                                            app:ms_hint="@string/client_sex"
                                             app:ms_hintColor="@color/hint_text"
                                             app:ms_multiline="false"
                                             app:ms_thickness="1dp"
@@ -280,7 +279,7 @@
                                             android:clickable="true"
                                             android:editable="false"
                                             android:focusable="false"
-                                            android:hint="Tarehe ya Kuzaliwa"
+                                            android:hint="@string/client_birthday"
                                             android:inputType="date"
                                             android:textColor="@color/text_black"
                                             android:textSize="14sp"
@@ -311,7 +310,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_marginTop="8dp"
                                             android:layout_weight="1"
-                                            android:hint="Mahali anapokaa"
+                                            android:hint="@string/client_address"
                                             android:imeOptions="actionNext"
                                             android:textColor="@color/primary_text"
                                             android:textColorHint="@color/hint_text"
@@ -327,7 +326,7 @@
                                             android:layout_marginLeft="16dp"
                                             android:layout_marginTop="8dp"
                                             android:layout_weight="1"
-                                            android:hint="Jina la mwenyekiti wa kijitongoji"
+                                            android:hint="@string/client_veo"
                                             android:textColor="@color/primary_text"
                                             android:textColorHint="@color/hint_text"
                                             android:textSize="14sp"
@@ -353,7 +352,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="32dp"
                                 android:layout_marginTop="8dp"
-                                android:text="Taarifa za rufaa"
+                                android:text="@string/referral_details"
                                 android:textColor="@color/card_title_text"
                                 android:textSize="14sp" />
 
@@ -379,7 +378,7 @@
                                         app:ms_baseColor="@color/accent"
                                         android:layout_marginRight="16dp"
                                         app:ms_enableFloatingLabel="false"
-                                        app:ms_hint="Aina za huduma"
+                                        app:ms_hint="@string/referral_services"
                                         app:ms_hintColor="@color/black_translucent"
                                         app:ms_multiline="true"
                                         app:ms_thickness="1dp"
@@ -392,7 +391,7 @@
                                         android:layout_below="@+id/spinnerService"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="Jina la kliniki aliyoshauriwa kwenda"/>
+                                        android:text="@string/visit_facility"/>
                                     <AutoCompleteTextView
                                         android:textSize="14sp"
                                         android:layout_marginRight="16dp"
@@ -421,7 +420,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="8dp"
-                                        android:text="Taarifa Nyingine"
+                                        android:text="@string/other_info"
                                         android:textColor="@color/card_title_text"
                                         android:textSize="14sp" />
 
@@ -438,7 +437,7 @@
                                             android:layout_marginTop="16dp"
                                             android:layout_marginRight="16dp"
                                             android:layout_weight="0.5"
-                                            android:hint="Sababu ya Rufaa"
+                                            android:hint="@string/referral_reason"
                                             android:imeOptions="actionNext"
                                             android:textColor="@color/primary_text"
                                             android:textColorHint="@color/hint_text"
@@ -451,7 +450,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="16dp"
-                                            android:hint="Namba ya CBHS"
+                                            android:hint="@string/title_cbhs_number"
                                             android:imeOptions="actionNext"
                                             android:inputType="text"
                                             android:textColor="@color/primary_text"
@@ -466,7 +465,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="16dp"
-                                            android:hint="Namba ya CTC"
+                                            android:hint="@string/title_ctc_number"
                                             android:imeOptions="actionNext"
                                             android:inputType="text"
                                             android:textColor="@color/primary_text"
@@ -500,7 +499,7 @@
                                         android:id="@+id/flags_title"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Vidokezo vya hatari"
+                                        android:text="@string/danger_signs"
                                         android:textColor="@color/card_title_text"
                                         android:textSize="14sp" />
 
@@ -537,7 +536,7 @@
                                     android:layout_alignParentRight="true"
                                     android:layout_centerVertical="true"
                                     android:layout_marginRight="16dp"
-                                    android:text="Rufaa"
+                                    android:text="@string/button_refer_client"
                                     android:textColor="@color/card_title_text" />
 
 

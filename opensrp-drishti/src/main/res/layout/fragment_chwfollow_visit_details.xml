@@ -31,7 +31,7 @@
                     android:textSize="18sp"
                     android:id="@+id/patient_name_title"
                     android:textColor="@color/white"
-                    android:text="Kutembelewa" />
+                    android:text="@string/title_visiting" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
                     android:textSize="18sp"
                     android:id="@+id/patient_name"
                     android:textColor="@color/white"
-                    android:text="Jonh Doe" />
+                    />
 
             </LinearLayout>
 
@@ -69,7 +69,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="32dp"
                         android:layout_centerVertical="true"
-                        android:text="Mrejesho wa Rufaa :"
+                        android:text="@string/referral_feedback"
                         android:textColor="@color/white"/>
                     <TextView
                         android:layout_toRightOf="@+id/textViewReferralReason"
@@ -80,7 +80,6 @@
                         android:divider="@null"
                         android:layout_marginLeft="32dp"
                         android:layout_marginRight="16dp"
-                        android:text="Alifika kituoni na kupewa huduma stahiki"
                         android:textColor="@color/white"
                         android:textSize="14sp"/>
 
@@ -106,7 +105,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_centerVertical="true"
-                        android:text="Sababu ya kufuatiliwa :"
+                        android:text="@string/followup_reasons"
                         android:textColor="@color/white"/>
                     <TextView
                         android:layout_toRightOf="@+id/textViewReferralService"
@@ -117,7 +116,6 @@
                         android:divider="@null"
                         android:layout_marginLeft="32dp"
                         android:layout_marginRight="16dp"
-                        android:text="Amesitisha huduma gafla"
                         android:textColor="@color/white"
                         android:textSize="14sp"/>
 
@@ -143,7 +141,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="32dp"
                         android:layout_centerVertical="true"
-                        android:text="Anahudumiwa :"
+                        android:text="@string/health_facility"
                         android:textColor="@color/white"/>
                     <TextView
                         android:layout_toRightOf="@+id/textViewReferralfacility"
@@ -154,7 +152,6 @@
                         android:divider="@null"
                         android:layout_marginLeft="64dp"
                         android:layout_marginRight="16dp"
-                        android:text="mt meru hospital"
                         android:textColor="@color/white"
                         android:textSize="14sp"/>
 
@@ -182,7 +179,7 @@
                     app:ms_arrowSize="14dp"
                     app:ms_baseColor="@color/accent"
                     app:ms_enableFloatingLabel="false"
-                    app:ms_hint="Umekutana na Mteja"
+                    app:ms_hint="@string/hint_met_client"
                     app:ms_hintColor="@color/hint_text"
                     app:ms_multiline="false"
                     app:ms_thickness="1dp"
@@ -209,7 +206,7 @@
                     app:ms_arrowSize="14dp"
                     app:ms_baseColor="@color/accent"
                     app:ms_enableFloatingLabel="false"
-                    app:ms_hint="sababu ya kutokwenda kliniki"
+                    app:ms_hint="@string/hint_missing_reasons"
                     app:ms_hintColor="@color/hint_text"
                     app:ms_multiline="false"
                     app:ms_thickness="1dp"
@@ -231,7 +228,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="0dp"
-                    android:hint="Hali ya mgonjwa ulipomtembelea"
+                    android:hint="@string/client_condition"
                     android:paddingLeft="4dp"
                     android:paddingRight="4dp"
                     android:textColor="@color/white"
@@ -265,7 +262,7 @@
                     android:layout_marginRight="16dp"
                     android:id="@+id/tuma_button"
                     android:background="@drawable/border_four"
-                    android:text="Hifadhi"
+                    android:text="@string/button_save"
                     android:textSize="14sp"
                     android:layout_marginTop="32dp"/>
 
@@ -277,7 +274,7 @@
                     android:layout_toLeftOf="@id/tuma_button"
                     android:id="@+id/cancel_button"
                     android:background="@drawable/border_four"
-                    android:text="Futa"
+                    android:text="@string/button_delete"
                     android:textSize="14sp"
                     android:layout_marginTop="32dp"/>
 

@@ -104,7 +104,7 @@
         android:layout_marginLeft="16dp"
         android:layout_toRightOf="@id/login_screen_logo"
         android:textSize="32sp"
-        android:text="htmr"
+        android:text="@string/app_name_htmr"
         android:textColor="@color/white"
         android:textStyle="bold"/>
 
@@ -117,7 +117,7 @@
         android:layout_toRightOf="@id/login_screen_logo"
         android:textSize="24sp"
         android:textColor="@color/white"
-        android:text="Referral"/>
+        android:text="@string/page_title_referral"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -128,7 +128,7 @@
         android:layout_toRightOf="@id/login_screen_logo"
         android:textSize="24sp"
         android:textColor="@color/white"
-        android:text="Application"/>
+        />
 
     <RelativeLayout
         android:layout_width="400dp"
@@ -160,7 +160,7 @@
             android:textSize="16sp"
             android:layout_marginTop="8dp"
             android:layout_below="@id/lock_ico"
-            android:text="Login"
+            android:text="@string/title_login"
             android:id="@+id/login_title"
             android:textColor="@color/black"/>
 
@@ -170,7 +170,7 @@
             android:textSize="14sp"
             android:layout_marginTop="4dp"
             android:layout_below="@id/login_title"
-            android:text="Enter username and password"
+            android:text="@string/title_login_description"
             android:id="@+id/login_msg"
             android:textColor="@color/card_grid_text"/>
 
@@ -193,7 +193,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="0dp"
-                    android:hint="Username"
+                    android:hint="@string/hint_username"
                     android:focusable="true"
                     android:imeOptions="actionNext"
                     android:textColor="@color/primary_text"
@@ -213,7 +213,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="0dp"
-                    android:hint="Password"
+                    android:hint="@string/hint_password"
                     android:focusable="true"
                     android:imeOptions="actionNext"
                     android:textColor="@color/primary_text"
@@ -234,7 +234,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginBottom="20px"
-                android:text="Login"
+                android:text="@string/button_login"
                 android:id="@+id/buttonSignIn"
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -254,7 +254,7 @@
         android:layout_marginTop="16dp"
         android:textSize="18sp"
         android:textColor="@color/black"
-        android:text="Logging in"
+        android:text="@string/process_logging_in"
         android:layout_below="@id/credential_card"/>
 
 </RelativeLayout>
