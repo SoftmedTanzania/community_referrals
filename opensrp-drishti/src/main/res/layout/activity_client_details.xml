@@ -115,7 +115,6 @@
                                     android:layout_marginLeft="16dp"
                                     android:layout_marginTop="16dp"
                                     android:layout_toRightOf="@+id/cbhs_number_title"
-                                    "0001/0001/000001"
                                     android:textColor="@color/card_title_text"
                                     android:textSize="14sp"
                                     android:visibility="invisible" />

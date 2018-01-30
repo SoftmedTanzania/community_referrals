@@ -153,14 +153,14 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
 
         TextView tabContent = (TextView) tabLinearLayout.findViewById(R.id.tabContent);
-        tabContent.setText("Wakufuatilia");
+        tabContent.setText("Received Referrals");
         tabContent.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_trending_down_white_24dp, 0, 0, 0);
 
 
 
         LinearLayout tabLinearLayout2 = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
         TextView tabContent2 = (TextView) tabLinearLayout2.findViewById(R.id.tabContent);
-        tabContent2.setText("Rufaa ya awali");
+        tabContent2.setText("Sent Referrals");
         tabContent2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_trending_up_white_24dp, 0, 0, 0);
 
 
