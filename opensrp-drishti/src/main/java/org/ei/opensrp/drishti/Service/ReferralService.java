@@ -11,8 +11,6 @@ import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
  */
 public class ReferralService extends IntentService {
     private static final String TAG = ReferralService.class.getSimpleName();
-
-
     public ReferralService() {
         super("ReferralService");
     }

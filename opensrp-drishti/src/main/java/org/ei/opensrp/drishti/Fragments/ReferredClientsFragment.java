@@ -108,7 +108,6 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                     StringBuilder queryBuilder = new StringBuilder("SELECT * FROM ");
 
                     queryBuilder.append(TABLE_NAME);
-//                     execute query
                     new QueryTask().execute(
                             queryBuilder.toString(),
                             TABLE_NAME,
@@ -454,7 +453,6 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                 Log.d(TAG, "resultList " + resultList.size() + "items");
                 Log.d(TAG, "resultList " + new Gson().toJson(resultList));
 
-//                clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(resultList);
                 clientReferralPersonObjectList = Utils.convertToClientReferralList(resultList);
                 ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList, commonRepository);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());

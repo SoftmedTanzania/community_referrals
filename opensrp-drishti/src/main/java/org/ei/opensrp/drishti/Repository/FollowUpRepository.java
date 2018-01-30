@@ -18,7 +18,6 @@ public class FollowUpRepository {
     public static final String IS_VALID = "is_valid";
 
 
-
     public ContentValues createValuesFor(FollowUpPersonObject followUp) {
 
         ContentValues values = new ContentValues();

@@ -39,11 +39,6 @@ public class LocationSelectorDialogFragment extends DialogFragment {
 
     OnLocationSelectedListener mCallback;
 
-
-    public interface OnLocationSelectedListener {
-        public void OnLocationSelected(String locationSelected);
-    }
-
     public static LocationSelectorDialogFragment newInstance(
             SecuredNativeSmartRegisterActivity activity,
             DialogOptionModel dialogOptionModel,
@@ -153,6 +148,10 @@ public class LocationSelectorDialogFragment extends DialogFragment {
             }
 
         }
+    }
+
+    public interface OnLocationSelectedListener {
+        public void OnLocationSelected(String locationSelected);
     }
 
 }

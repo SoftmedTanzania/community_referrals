@@ -132,7 +132,6 @@ public class CHWRegisterRecyclerAdapter extends
             followup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // pass clients to show follow up form
                     ((ChwSmartRegisterActivity) mContext).showFollowUpFormDialog(clients.get(getAdapterPosition()));
                 }
             });

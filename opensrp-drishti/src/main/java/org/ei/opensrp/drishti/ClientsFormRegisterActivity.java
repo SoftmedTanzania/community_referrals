@@ -407,11 +407,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
             @SuppressWarnings("deprecation")
             @Override
             public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-                // get picked date
-                // update view
                 GregorianCalendar pickedDate = new GregorianCalendar(year, monthOfYear, dayOfMonth);
-//                if (id == R.id.textDate)
-//                    textDate.setText(dateFormat.format(pickedDate.getTimeInMillis()));
                 if (id == R.id.reg_dob)
                     dob = pickedDate.getTimeInMillis();
                     dobTextView.setText(dateFormat.format(pickedDate.getTimeInMillis()));

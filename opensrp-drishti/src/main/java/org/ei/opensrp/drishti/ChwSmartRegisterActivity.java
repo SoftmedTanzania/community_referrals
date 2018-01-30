@@ -109,8 +109,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private Gson gson = new Gson();
     private CommonRepository commonRepository;
     private Cursor cursor;
-    private static final String TABLE_NAME = "client_referral";
-    private String wardId =null;
     public static MaterialSpinner spinnerReason,spinnerClientAvailable;
     public static int availableSelection = -1,reasonSelection = -1;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
@@ -124,8 +122,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        // orientation
-//        OrientationHelper.setProperOrientationForDevice(ChwSmartRegisterActivity.this);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         securedActivity = new SecuredActivity() {
             @Override
@@ -353,10 +349,9 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         return commonPersonObjectList.get(0).getColumnmaps().get("name");
     }
 
+    //TODO Coze reimplement this
     public void setIndicators(View view,String object) {
         try{
-
-
             JSONObject jsonObj = new JSONObject(object);
             Log.d(TAG,"jason indicators "+jsonObj.get("indicator_ids"));
             String list = jsonObj.getString("indicator_ids").toString();
@@ -371,15 +366,12 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             flags_layout.removeAllViewsInLayout();
             for(int m =0; m< myList.size(); m++){
                 final TextView rowTextView = new TextView(this);
-
-                // set some properties of rowTextView or something
                 rowTextView.setText(getIndicatorName(myList.get(m)));
                 rowTextView.setPadding(10,10,10,0);
-                // add the textview to the linearlayout
                 flags_layout.addView(rowTextView);
             }
         }catch (JSONException e){
-
+            e.printStackTrace();
         }
 
     }
@@ -403,13 +395,19 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
         final View view =  dialogView.findViewById(R.id.textview2);
         final EditText client_condition = (EditText)dialogView.findViewById(R.id.client_status);
+
+        //TODO Coze reimplement this
         String[] ITEMS = {"Amehama mji", "Amefariki","Ameenda kituo kingine","Sababu nyinginezo"};
+
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ITEMS);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerReason = (MaterialSpinner) dialogView.findViewById(R.id.spinnerReason);
         spinnerReason.setAdapter(adapter);
 
+        //TODO Coze reimplement this
         String[] options = {"ndio", "hapana"};
+
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, options);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerClientAvailable = (MaterialSpinner) dialogView.findViewById(R.id.spinnerClientAvailable);
@@ -419,10 +417,12 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i >= 0) {
+                    //TODO Coze reimplement this
                     spinnerClientAvailable.setFloatingLabelText("Umemkutana na  mteja?");
                     availableSelection = i;
                 }
 
+                //TODO Coze reimplement this
                 if(spinnerClientAvailable.getSelectedItem().toString().equals("ndio")){
                     spinnerReason.setVisibility(VISIBLE);
                     client_condition.setVisibility(VISIBLE);
@@ -442,6 +442,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i >= 0) {
+                    //TODO Coze reimplement this
                     spinnerReason.setFloatingLabelText("Chagua sababu ya kutokwenda kliniki");
                     reasonSelection = i;
                 }
@@ -533,7 +534,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         dialogView.findViewById(R.id.textOk).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // todo: delete mother
+                // todo: Coze delete mother
 
                 FollowupClientsFragment preRegisterFragment = (FollowupClientsFragment) findFragmentByPosition(currentPage);
                 preRegisterFragment.refreshListView();
@@ -555,14 +556,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     private String[] buildFormNameList() {
         List<String> formNames = new ArrayList<String>();
-        formNames.add("pregnant_mothers_registration");
-        formNames.add("pregnant_mothers_pre_registration");
-        formNames.add("anc_reminder_visit_1");
-        formNames.add("anc_reminder_visit_2");
-        formNames.add("anc_reminder_visit_3");
-        formNames.add("anc_reminder_visit_4");
-        formNames.add("birthnotificationpregnancystatusfollowup");
-
+        formNames.add("main_form");
 
         DialogOption[] options = getEditOptions();
         for (int i = 0; i < options.length; i++){
@@ -630,33 +624,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         };
     }
 
-    public DialogOption[] getEditOptionsforanc(String visittext, String alertstatus) {
-        String ancvisittext = "Not Synced";
-        String ancalertstatus = alertstatus;
-        ancvisittext = visittext;
-
-        HashMap<String, String> overridemap = new HashMap<String, String>();
-
-
-        if (ancvisittext.contains("ANC4")) {
-            overridemap.put("ANC4_current_formStatus", alertstatus);
-            return new DialogOption[]{new OpenFormOption(getResources().getString(R.string.anc4form), "anc_reminder_visit_4", formController, overridemap, OpenFormOption.ByColumnAndByDetails.bydefault)};
-        } else if (ancvisittext.contains("ANC3")) {
-            Log.v("anc3 form status", alertstatus);
-            overridemap.put("ANC3_current_formStatus", alertstatus);
-            return new DialogOption[]{new OpenFormOption(getResources().getString(R.string.anc3form), "anc_reminder_visit_3", formController, overridemap, OpenFormOption.ByColumnAndByDetails.bydefault)};
-        } else if (ancvisittext.contains("ANC2")) {
-            overridemap.put("ANC2_current_formStatus", alertstatus);
-            return new DialogOption[]{new OpenFormOption(getResources().getString(R.string.anc2form), "anc_reminder_visit_2", formController, overridemap, OpenFormOption.ByColumnAndByDetails.bydefault)};
-        } else if (ancvisittext.contains("ANC1")) {
-            Log.v("anc1 form status", alertstatus);
-            overridemap.put("anc1_current_formStatus", alertstatus);
-            return new DialogOption[]{new OpenFormOption(getResources().getString(R.string.anc1form), "anc_reminder_visit_1", formController, overridemap, OpenFormOption.ByColumnAndByDetails.bydefault)};
-        } else {
-            return new DialogOption[]{};
-        }
-    }
-
     @Override
     public void OnLocationSelected(String locationSelected) {
         // set registration fragment
@@ -675,18 +642,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             if (resultCode == RESULT_OK) {
                 UpdateContent();
             }
-        }
-    }
-
-    private class EditDialogOptionModelfornbnf implements DialogOptionModel {
-        @Override
-        public DialogOption[] getDialogOptions() {
-            return getEditOptions();
-        }
-
-        @Override
-        public void onDialogOptionSelection(DialogOption option, Object tag) {
-            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
         }
     }
 
@@ -866,7 +821,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void run() {
                 // TODO: 9/17/17 this is a hack
-
           if(currentPage==2) {//for chws
                     finish();
                 }

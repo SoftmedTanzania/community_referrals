@@ -65,13 +65,6 @@ public class BaseRegisterActivityPagerAdapter extends FragmentPagerAdapter {
                 break;
         }
 
-//        Log.d(TAG,"After setting house hold registration Fragment");
-//        Bundle args = new Bundle();
-//        args.putInt(ARG_PAGE, position);
-//        if(fragment!=null) {
-//            fragment.setArguments(args);
-//        }
-//        Log.d(TAG,"After and before returning fragment");
         return fragment;
     }
 

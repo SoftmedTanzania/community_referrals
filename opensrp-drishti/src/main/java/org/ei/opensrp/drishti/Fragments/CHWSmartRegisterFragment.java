@@ -329,7 +329,6 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         updateMenuItem = menu.findItem(R.id.updateMenuItem);
         remainingFormsToSyncMenuItem = menu.findItem(R.id.remainingFormsToSyncMenuItem);
 
-//        updateSyncIndicator();
         updateRemainingFormsToSyncCount();
 
     }
@@ -445,7 +444,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                     item.setActionView(R.layout.progress);
                 } else{
                     item.setActionView(null);
-                    Log.d(TAG,"am in sync progress aAFTER");}
+                    Log.d(TAG,"am in sync progress after");}
 
                 return true;
 
@@ -459,11 +458,9 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                 return true;
             case R.id.switchLanguageMenuItem:
                 String newLanguagePreference = context().userService().switchLanguagePreference();
-//                String newLanguagePreference = LoginActivity.switchLanguagePreference();
 
                 LoginActivity.setLanguage();
                 Toast.makeText(getActivity(), "Language preference set to " + newLanguagePreference + ". Please restart the application.", LENGTH_SHORT).show();
-//                getActivity().recreate();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

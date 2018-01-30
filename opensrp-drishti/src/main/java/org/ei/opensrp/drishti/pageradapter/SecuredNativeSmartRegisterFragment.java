@@ -221,10 +221,6 @@ public abstract class SecuredNativeSmartRegisterFragment extends SecuredFragment
             @Override
             public void onTextChanged(CharSequence cs, int start, int before, int count) {
                 currentSearchFilter = new ECSearchOption(cs.toString());
-                //TODO handle this implementation for searching the list
-//                clientsAdapter
-//                        .refreshList(currentVillageFilter, currentServiceModeOption,
-//                                currentSearchFilter, currentSortOption);
 
                 searchCancelView.setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
             }
@@ -286,13 +282,6 @@ public abstract class SecuredNativeSmartRegisterFragment extends SecuredFragment
     }
 
     private void setupAdapter() {
-//        clientsAdapter = adapter();
-//        clientsAdapter.registerDataSetObserver(new DataSetObserver() {
-//            @Override
-//            public void onChanged() {
-//                paginationViewHandler.refresh();
-//            }
-//        });
     }
 
     protected SmartRegisterPaginatedAdapter adapter() {
@@ -302,9 +291,6 @@ public abstract class SecuredNativeSmartRegisterFragment extends SecuredFragment
     protected void onServiceModeSelection(ServiceModeOption serviceModeOption, View view) {
         currentServiceModeOption = serviceModeOption;
         serviceModeView.setText(serviceModeOption.name());
-//        clientsAdapter
-//                .refreshList(currentVillageFilter, currentServiceModeOption,
-//                        currentSearchFilter, currentSortOption);
 
         populateClientListHeaderView(serviceModeOption.getHeaderProvider(), view);
     }
@@ -313,17 +299,11 @@ public abstract class SecuredNativeSmartRegisterFragment extends SecuredFragment
         Log.v("he pressed this",sortBy.name());
         currentSortOption = sortBy;
         appliedSortView.setText(sortBy.name());
-//        clientsAdapter
-//                .refreshList(currentVillageFilter, currentServiceModeOption,
-//                        currentSearchFilter, currentSortOption);
     }
 
     public void onFilterSelection(FilterOption filter) {
         currentVillageFilter = filter;
         appliedVillageFilterView.setText(filter.name());
-//        clientsAdapter
-//                .refreshList(currentVillageFilter, currentServiceModeOption,
-//                        currentSearchFilter, currentSortOption);
     }
 
     protected void onEditSelection(EditOption editOption, SmartRegisterClient client) {
@@ -416,16 +396,9 @@ public abstract class SecuredNativeSmartRegisterFragment extends SecuredFragment
 
         private int getCurrentPageCount() {
             return 2;
-//            return clientsAdapter.currentPage() + 1 > clientsAdapter.pageCount() ? clientsAdapter.pageCount() : clientsAdapter.currentPage() + 1;
         }
 
         public void refresh() {
-//            pageInfoView.setText(
-//                    format(getResources().getString(R.string.str_page_info),
-//                            (getCurrentPageCount()),
-//                            (clientsAdapter.pageCount())));
-//            nextPageView.setVisibility(clientsAdapter.hasNextPage() ? VISIBLE : INVISIBLE);
-//            previousPageView.setVisibility(clientsAdapter.hasPreviousPage() ? VISIBLE : INVISIBLE);
         }
 
         @Override

@@ -13,7 +13,7 @@ import java.util.Map;
  */
 
 public class FollowUpPersonObject {
-    private String id, relationalId, comment, token,  follow_up_reason, is_valid, sponser_number, sponser_name;
+    private String id, relationalId, comment, token, follow_up_reason, is_valid, sponser_number, sponser_name;
     private long follow_up_date;
     private String details;
     private Map<String, String> columnMap;
@@ -28,7 +28,7 @@ public class FollowUpPersonObject {
                                 String follow_up_reason,
                                 String is_valid,
                                 String details
-                                      ) {
+    ) {
         this.details = details;
         this.id = id;
         this.comment = Comment;
