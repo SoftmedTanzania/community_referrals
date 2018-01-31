@@ -425,7 +425,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
         datePickerDialog.setCancelColor(ContextCompat.getColor(getApplicationContext(), android.R.color.holo_red_light));
 
         datePickerDialog.setVersion(DatePickerDialog.Version.VERSION_1);
-        datePickerDialog.setAccentColor(ContextCompat.getColor(getApplicationContext(), R.color.primary));
+        datePickerDialog.setAccentColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary));
 
         // show dialog
         datePickerDialog.show(this.getFragmentManager(), "DatePickerDialog");

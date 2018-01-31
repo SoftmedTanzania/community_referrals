@@ -208,7 +208,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         TextView username = (TextView) v.findViewById(R.id.toolbar_user_name);
         pendingForm = (RelativeLayout) v.findViewById(R.id.key_three);
         pending = (TextView) v.findViewById(R.id.count_three);
-        username.setText("Logged in as "+((BoreshaAfyaApplication)getActivity().getApplication()).getUsername());
+        username.setText(getResources().getString(R.string.logged_user)+" "+((BoreshaAfyaApplication)getActivity().getApplication()).getUsername());
         successView =  (TextView) v.findViewById(R.id.count_one);
         unsuccessView =  (TextView) v.findViewById(R.id.count_two);
         return v;

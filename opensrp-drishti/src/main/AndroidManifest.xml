@@ -95,7 +95,7 @@
         <activity
             android:name=".ChwSmartRegisterActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.MaterialDesign.NoActionBar"/>
 
         <meta-data
             android:name="io.fabric.ApiKey"
@@ -104,7 +104,7 @@
             android:name=".ClientsFormRegisterActivity"
             android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
 
-        <activity
+        <activityf
             android:name=".ClientsDetailsActivity"
             android:label="@string/title_item_detail"
             android:theme="@style/AppTheme.NoActionBar"/>

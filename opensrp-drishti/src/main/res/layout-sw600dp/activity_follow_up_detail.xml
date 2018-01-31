@@ -95,14 +95,14 @@
                         android:layout_marginBottom="16dp"
                         android:layout_marginTop="?attr/actionBarSize"
                         android:src="@drawable/ic_calendar_today"
-                        android:tint="@color/primary" />
+                        android:tint="@color/colorPrimary" />
 
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
-                        android:background="@color/primary" />
+                        android:background="@color/colorPrimary" />
 
                     <TextView
                         android:id="@+id/textDate"
@@ -128,14 +128,14 @@
                         android:layout_height="32dp"
                         android:layout_marginBottom="16dp"
                         android:src="@drawable/ic_account_circle"
-                        android:tint="@color/primary" />
+                        android:tint="@color/colorPrimary" />
 
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
-                        android:background="@color/primary" />
+                        android:background="@color/colorPrimary" />
 
                     <TextView
                         android:id="@+id/textMotherName"
@@ -161,14 +161,14 @@
                         android:layout_height="32dp"
                         android:layout_marginBottom="16dp"
                         android:src="@drawable/ic_card"
-                        android:tint="@color/primary" />
+                        android:tint="@color/colorPrimary" />
 
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
-                        android:background="@color/primary" />
+                        android:background="@color/colorPrimary" />
 
                     <TextView
                         android:id="@+id/textMotherId"
@@ -193,14 +193,14 @@
                         android:layout_height="32dp"
                         android:layout_marginBottom="16dp"
                         android:src="@drawable/ic_local_mall"
-                        android:tint="@color/primary" />
+                        android:tint="@color/colorPrimary" />
 
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
-                        android:background="@color/primary" />
+                        android:background="@color/colorPrimary" />
 
                     <TextView
                         android:id="@+id/textFacility"

@@ -29,7 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:textColor="@color/primary"
+                    android:textColor="@color/colorPrimary"
                     android:layout_margin="8dp"
                     android:text="Tarifa za mama mjamzito kwenye mahudhurio"
                     />
@@ -42,7 +42,7 @@
                     android:padding="1dp"
                     android:layout_margin="8dp"
                     android:src="@drawable/ic_calendar_today"
-                    android:tint="@color/primary" />
+                    android:tint="@color/colorPrimary" />
 
                 <TextView
                     android:layout_below="@+id/title_one"
@@ -65,7 +65,7 @@
                     android:layout_marginLeft="100dp"
                     android:padding="1dp"
                     android:src="@drawable/ic_cellphone_android"
-                    android:tint="@color/primary" />
+                    android:tint="@color/colorPrimary" />
 
                 <TextView
                     android:layout_below="@+id/title_one"

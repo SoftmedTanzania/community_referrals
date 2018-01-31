@@ -25,7 +25,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="@color/primary"
+                    android:background="@color/colorPrimary"
                     app:popupTheme="@style/AppTheme.PopupOverlay">
 
                     <RelativeLayout
@@ -61,7 +61,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="140dp"
-                        android:background="@color/primary" />
+                        android:background="@color/colorPrimary" />
 
                     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -157,7 +157,7 @@
                                             android:textSize="14sp"
                                             app:met_floatingLabel="normal"
                                             app:met_floatingLabelText="Jina la kwanza"
-                                            app:met_floatingLabelTextColor="@color/primary" />
+                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
                                             android:id="@+id/editTextmName"
@@ -174,7 +174,7 @@
                                             android:textSize="16sp"
                                             app:met_floatingLabel="normal"
                                             app:met_floatingLabelText="Jina la kati"
-                                            app:met_floatingLabelTextColor="@color/primary" />
+                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
 
                                     </LinearLayout>
 
@@ -206,7 +206,7 @@
                                             android:textSize="16sp"
                                             app:met_floatingLabel="normal"
                                             app:met_floatingLabelText="Jina la mwisho"
-                                            app:met_floatingLabelTextColor="@color/primary" />
+                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
                                             android:id="@+id/edittextPhone"
@@ -222,7 +222,7 @@
                                             android:textSize="14sp"
                                             app:met_floatingLabel="normal"
                                             app:met_floatingLabelText="Namba ya simu ya Mteja"
-                                            app:met_floatingLabelTextColor="@color/primary" />
+                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
 
 
                                     </LinearLayout>
@@ -285,7 +285,7 @@
                                             android:textSize="14sp"
                                             app:met_floatingLabel="normal"
                                             app:met_floatingLabelText="Date of birth"
-                                            app:met_floatingLabelTextColor="@color/primary"
+                                            app:met_floatingLabelTextColor="@color/colorPrimary"
                                             app:met_iconRight="@drawable/ic_calendar_today" />
 
 
@@ -316,7 +316,7 @@
                                             android:textColorHint="@color/hint_text"
                                             android:textSize="14sp"
                                             app:met_floatingLabelText="Mahali anapokaa"
-                                            app:met_floatingLabelTextColor="@color/primary" />
+                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
 
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
@@ -331,7 +331,7 @@
                                             android:textColorHint="@color/hint_text"
                                             android:textSize="14sp"
                                             app:met_floatingLabelText="Mahali anapokaa"
-                                            app:met_floatingLabelTextColor="@color/primary" />
+                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
                                     </LinearLayout>
 
                                 </RelativeLayout>
@@ -443,7 +443,7 @@
                                             android:textColorHint="@color/hint_text"
                                             android:textSize="14sp"
                                             app:met_floatingLabelText="Mahali anapokaa"
-                                            app:met_floatingLabelTextColor="@color/primary" />
+                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
                                             android:id="@+id/editTextDiscountId"
@@ -458,7 +458,7 @@
                                             android:textSize="14sp"
                                             app:met_floatingLabel="normal"
                                             app:met_floatingLabelText="Namba ya mteja ya community_based_hiv_service"
-                                            app:met_floatingLabelTextColor="@color/primary" />
+                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
                                             android:id="@+id/editTextOthers"
@@ -474,7 +474,7 @@
                                             android:layout_marginBottom="16dp"
                                             app:met_floatingLabel="normal"
                                             app:met_floatingLabelText="Namba ya CTC"
-                                            app:met_floatingLabelTextColor="@color/primary" />
+                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
 
 
 

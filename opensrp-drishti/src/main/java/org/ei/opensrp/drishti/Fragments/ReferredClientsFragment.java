@@ -314,7 +314,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
         datePickerDialog.setCancelColor(ContextCompat.getColor(getContext(), android.R.color.holo_red_light));
 
         datePickerDialog.setVersion(DatePickerDialog.Version.VERSION_1);
-        datePickerDialog.setAccentColor(ContextCompat.getColor(getContext(), R.color.primary));
+        datePickerDialog.setAccentColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
 
         // show dialog
         datePickerDialog.show(getActivity().getFragmentManager(), "DatePickerDialog");
