@@ -121,7 +121,11 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
 
-        return commonPersonObjectList.get(0).getColumnmaps().get("name");
+        if(commonPersonObjectList.size()>0) {
+            return commonPersonObjectList.get(0).getColumnmaps().get("name");
+        }else{
+            return "";
+        }
     }
 
     private void setDetails(ClientReferral clientReferral){
