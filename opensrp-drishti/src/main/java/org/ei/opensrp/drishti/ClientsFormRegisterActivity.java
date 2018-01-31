@@ -23,7 +23,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -33,7 +32,6 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.ClientReferral;
-import org.ei.opensrp.domain.Facility;
 import org.ei.opensrp.domain.Indicator;
 import org.ei.opensrp.domain.SyncStatus;
 import org.ei.opensrp.domain.form.FormData;
@@ -105,7 +103,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_client_details);
+        setContentView(R.layout.activity_client_registration_form);
         setReferralServiceList();
         setFacilistList();
         setupviews();
@@ -220,8 +218,6 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
         editTextfName = (EditText)   findViewById(R.id.editTextfName);
         editTextmName = (EditText)   findViewById(R.id.editTextmName);
         editTextlName = (EditText)   findViewById(R.id.editTextlName);
-        //todo martha implement on age data entry
-//        editTextAge = (EditText)   findViewById(R.id.editTextMotherAge);
         editTextReferralReason = (EditText)   findViewById(R.id.reason_for_referral);
         editTextVillageLeader = (EditText)   findViewById(R.id.editTextVillageLeader);
 
@@ -285,15 +281,15 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
                 for(int k=0; k<size;k++){
                     CheckBox checkBox = new CheckBox(getApplicationContext());
                     checkBox.setId(k);
-                    checkBox.setPadding(0,10,0,10);
+                    checkBox.setPadding(0,0,0,0);
                     checkBox.setTextColor(getResources().getColor(R.color.secondary_text));
                     checkBox.setText(indicator.get(k).getIndicatorName());
                     checkBox.setTextSize(14);
 
                     LinearLayout.LayoutParams checkParams = new LinearLayout.LayoutParams(
                             Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
-                    checkParams.setMargins(10, 10, 0, 10);
-                    checkParams.gravity = Gravity.LEFT;
+                    checkParams.setMargins(0, 8, 0, 8);
+                    checkParams.gravity = Gravity.START;
                     
                     parentLayout.addView(checkBox, checkParams);
 
@@ -411,9 +407,6 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
                 if (id == R.id.reg_dob)
                     dob = pickedDate.getTimeInMillis();
                     dobTextView.setText(dateFormat.format(pickedDate.getTimeInMillis()));
-
-
-
             }
         };
 
@@ -495,7 +488,6 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
 
     public ClientReferral getClientReferral() {
         ClientReferral referral = new ClientReferral();
-
         referral.setReferral_date(today.getTimeInMillis());
         referral.setDate_of_birth(dob);
         referral.setCommunity_based_hiv_service(editTextDiscountId.getText().toString());
@@ -507,9 +499,9 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
         referral.setPhone_number(textPhone.getText().toString());
         referral.setFacility_id(getFacilityId(facilitytextView.getText().toString()));
         if(spinnerGender.getSelectedItem().toString().equalsIgnoreCase("female") || spinnerGender.getSelectedItem().toString().contains("ke"))
-            referral.setGender("1");
+            referral.setGender("Female");
         else
-            referral.setGender("0");
+            referral.setGender("Male");
         referral.setVillage_leader(editTextVillageLeader.getText().toString());
         referral.setReferral_reason(editTextReferralReason.getText().toString());
         referral.setReferral_service_id(getReferralServiceId(spinnerService.getSelectedItem().toString()));
@@ -520,10 +512,8 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
         referral.setOther_notes(null);
         referral.setService_provider_uiid(((BoreshaAfyaApplication)getApplication()).getCurrentUserID());
         referral.setService_provider_group(((BoreshaAfyaApplication)getApplication()).getTeam_uuid());
-
         for(int i=0; i<parentLayout.getChildCount(); i++) {
             CheckBox nextChild = (CheckBox) parentLayout.getChildAt(i);
-
             if (nextChild.isChecked()) {
                 CheckBox check = nextChild;
                 if (check.isChecked()) {

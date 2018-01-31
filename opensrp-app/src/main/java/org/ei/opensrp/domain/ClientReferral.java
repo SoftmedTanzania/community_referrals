@@ -9,13 +9,19 @@ import java.util.Map;
 
 public class ClientReferral implements Serializable {
 
-    private String id, relationalid,details, referral_feedback,other_notes,service_given_to_patient,referral_uuid,first_name, middle_name, surname,last_ctc_date, facility_id, referral_reason, is_valid, service_provider_mobile_number, ward, village,Kijitongoji, village_leader, service_provider_group, service_provider_uiid, phone_number, referral_service_id, gender, community_based_hiv_service, ctc_number,Status;
-    private long  date_of_birth, referral_date;
+    private String id, relationalid, details, referral_feedback, other_notes,
+            service_given_to_patient, referral_uuid, first_name, middle_name, surname, facility_id,
+            referral_reason, is_valid, service_provider_mobile_number, ward, village, Kijitongoji,
+            village_leader, service_provider_group, service_provider_uiid, phone_number,
+            referral_service_id, gender, community_based_hiv_service, ctc_number, Status;
+    private long date_of_birth, referral_date;
     private boolean test_result;
     private String indicator_ids;
-    public ClientReferral(){
+
+    public ClientReferral() {
 
     }
+
     public ClientReferral(String id,
                           String relationalId,
                           String first_name,
@@ -96,7 +102,6 @@ public class ClientReferral implements Serializable {
     }
 
 
-
     public String getReferral_uuid() {
         return referral_uuid;
     }
@@ -142,10 +147,17 @@ public class ClientReferral implements Serializable {
         return date_of_birth;
     }
 
+    public void setDate_of_birth(long date_of_birth) {
+        this.date_of_birth = date_of_birth;
+    }
+
     public String getCtc_number() {
         return ctc_number;
     }
 
+    public void setCtc_number(String ctc_number) {
+        this.ctc_number = ctc_number;
+    }
 
     public String getReferral_feedback() {
         return referral_feedback;
@@ -153,15 +165,6 @@ public class ClientReferral implements Serializable {
 
     public void setReferral_feedback(String referral_feedback) {
         this.referral_feedback = referral_feedback;
-    }
-
-
-    public String getLast_ctc_date() {
-        return last_ctc_date;
-    }
-
-    public void setLast_ctc_date(String last_ctc_date) {
-        this.last_ctc_date = last_ctc_date;
     }
 
     public String getService_provider_mobile_number() {
@@ -172,20 +175,20 @@ public class ClientReferral implements Serializable {
         this.service_provider_mobile_number = service_provider_mobile_number;
     }
 
-    public void setCtc_number(String ctc_number) {
-        this.ctc_number = ctc_number;
-    }
-
-    public void setDate_of_birth(long date_of_birth) {
-        this.date_of_birth = date_of_birth;
-    }
-
     public String getFirst_name() {
         return first_name;
     }
 
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
     public String getIs_valid() {
         return is_valid;
+    }
+
+    public void setIs_valid(String is_valid) {
+        this.is_valid = is_valid;
     }
 
     public String getReferral_reason() {
@@ -194,14 +197,6 @@ public class ClientReferral implements Serializable {
 
     public void setReferral_reason(String referral_reason) {
         this.referral_reason = referral_reason;
-    }
-
-    public void setIs_valid(String is_valid) {
-        this.is_valid = is_valid;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
     }
 
     public long getReferral_date() {

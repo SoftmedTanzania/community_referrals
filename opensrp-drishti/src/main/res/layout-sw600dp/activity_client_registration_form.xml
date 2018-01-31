@@ -359,12 +359,13 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp"
                                 android:background="@color/white"
                                 android:orientation="horizontal"
                                 android:padding="16dp">
 
                                 <RelativeLayout
+                                    android:paddingStart="16dp"
+                                    android:paddingEnd="16dp"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="0.6">
@@ -376,7 +377,6 @@
                                         app:ms_arrowColor="@color/accent"
                                         app:ms_arrowSize="14dp"
                                         app:ms_baseColor="@color/accent"
-                                        android:layout_marginRight="16dp"
                                         app:ms_enableFloatingLabel="false"
                                         app:ms_hint="@string/referral_services"
                                         app:ms_hintColor="@color/black_translucent"
@@ -385,18 +385,17 @@
                                         app:ms_floatingLabelColor="@color/primary_text" />
 
                                     <TextView
-
-                                        android:layout_marginRight="16dp"
                                         android:id="@+id/facility_titleview"
                                         android:layout_below="@+id/spinnerService"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:text="@string/visit_facility"/>
                                     <AutoCompleteTextView
+                                        android:layout_marginLeft="-4dp"
                                         android:textSize="14sp"
-                                        android:layout_marginRight="16dp"
                                         android:ems="10"
-                                        android:layout_below="@+id/facility_titleview"
+                                        android:hint="@string/visit_facility_hint"
+                                        android:layout_below="@id/facility_titleview"
                                         android:id="@+id/autocomplete_facility"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"/>
