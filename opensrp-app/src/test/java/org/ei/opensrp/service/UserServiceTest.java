@@ -3,8 +3,6 @@ package org.ei.opensrp.service;
 import org.ei.opensrp.repository.*;
 import org.ei.opensrp.sync.SaveTeamInfoTask;
 import org.ei.opensrp.sync.SaveUserInfoTask;
-import org.json.JSONObject;
-import org.mockito.Spy;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.domain.User;
 import org.opensrp.api.util.EntityUtils;
@@ -22,7 +20,7 @@ import org.mockito.Mock;
 import java.util.Map;
 
 import static org.ei.opensrp.AllConstants.ENGLISH_LOCALE;
-import static org.ei.opensrp.AllConstants.KANNADA_LOCALE;
+import static org.ei.opensrp.AllConstants.SWAHILI_LOCALE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -151,12 +149,12 @@ public class UserServiceTest {
 
         userService.switchLanguagePreference();
 
-        verify(allSharedPreferences).saveLanguagePreference(KANNADA_LOCALE);
+        verify(allSharedPreferences).saveLanguagePreference(SWAHILI_LOCALE);
     }
 
     @Test
     public void shouldSwitchLanguageToEnglish() throws Exception {
-        when(allSharedPreferences.fetchLanguagePreference()).thenReturn(KANNADA_LOCALE);
+        when(allSharedPreferences.fetchLanguagePreference()).thenReturn(SWAHILI_LOCALE);
 
         userService.switchLanguagePreference();
 

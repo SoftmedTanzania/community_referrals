@@ -2,7 +2,6 @@ package org.ei.opensrp.service;
 
 import android.util.Log;
 
-import org.ei.opensrp.AllConstants;
 import org.ei.opensrp.DristhiConfiguration;
 import org.ei.opensrp.domain.LoginResponse;
 import org.ei.opensrp.domain.Response;
@@ -188,8 +187,8 @@ public class UserService {
     public String switchLanguagePreference() {
         String preferredLocale = allSharedPreferences.fetchLanguagePreference();
         if (ENGLISH_LOCALE.equals(preferredLocale)) {
-            allSharedPreferences.saveLanguagePreference(KANNADA_LOCALE);
-            return KANNADA_LANGUAGE;
+            allSharedPreferences.saveLanguagePreference(SWAHILI_LOCALE);
+            return SWAHILI_LANGUAGE;
         } else {
             allSharedPreferences.saveLanguagePreference(ENGLISH_LOCALE);
             return ENGLISH_LANGUAGE;
