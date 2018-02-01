@@ -456,7 +456,7 @@
                                             android:textColorHint="@color/black_translucent"
                                             android:textSize="14sp"
                                             app:met_floatingLabel="normal"
-                                            app:met_floatingLabelText="Namba ya mteja ya community_based_hiv_service"
+                                            app:met_floatingLabelText="@string/title_cbhs_number"
                                             app:met_floatingLabelTextColor="@color/colorPrimary" />
 
                                         <com.rengwuxian.materialedittext.MaterialEditText

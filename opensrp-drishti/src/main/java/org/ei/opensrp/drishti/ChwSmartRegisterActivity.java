@@ -170,22 +170,12 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         String gsonClient = Utils.convertStandardJSONString(clientReferralPersonObject.getDetails());
         ClientReferral clientReferral = new Gson().fromJson(gsonClient,ClientReferral.class);
 
-        Log.d(TAG,"clientobject ="+ gson.toJson(clientReferralPersonObject));
-        Log.d(TAG,"clientobject 2="+gsonClient);
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
                 .setCancelable(true);
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
-        dialog.getWindow().setLayout(800,600);
-
-        Button cancel = (Button) dialogView.findViewById(R.id.ok_button);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
+        dialog.getWindow().setLayout(1000,650);
 
 
         String reg_date = dateFormat.format(clientReferral.getDate_of_birth());
@@ -367,7 +357,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             for(int m =0; m< myList.size(); m++){
                 final TextView rowTextView = new TextView(this);
                 rowTextView.setText(getIndicatorName(myList.get(m)));
-                rowTextView.setPadding(10,10,10,0);
+                rowTextView.setPadding(0,10,10,0);
                 flags_layout.addView(rowTextView);
             }
         }catch (JSONException e){
@@ -393,7 +383,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         final FollowUp referral = new Gson().fromJson(gsonClient,FollowUp.class);
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
-        final View view =  dialogView.findViewById(R.id.textview2);
         final EditText client_condition = (EditText)dialogView.findViewById(R.id.client_status);
 
         //TODO Coze reimplement this

@@ -118,7 +118,6 @@ public class ReferredClientsListAdapter extends
                 @Override
                 public void onClick(View view) {
                     // pass client referral to show details
-
                     Log.d(TAG, "gsonReferral3 = " + new Gson().toJson(clients.get(getAdapterPosition())));
                     ((ChwSmartRegisterActivity) mContext).showPreRegistrationDetailsDialog(clients.get(getAdapterPosition()));
                 }

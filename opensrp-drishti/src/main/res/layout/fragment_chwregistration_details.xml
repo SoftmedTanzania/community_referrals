@@ -2,39 +2,35 @@
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <RelativeLayout
-        android:paddingBottom="16dp"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/card_separator_third">
-
+        android:layout_height="72dp"
+        android:background="@color/colorPrimaryDark">
         <TextView
+            android:layout_marginTop="8dp"
             android:id="@+id/client_name"
+            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="16dp"
             android:textStyle="bold"
             android:text="@string/title_register_client"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textColor="@color/white"
+            android:textSize="20sp" />
         <LinearLayout
+            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/client_name">
+            android:layout_marginTop="8dp">
             <TextView
                 android:id="@+id/cbhs_number_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:text="@string/title_cbhs_number"
-                android:textColor="@color/card_title_text"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:visibility="visible" />
 
@@ -43,14 +39,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:textColor="@color/primary_text"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:visibility="visible" />
         </LinearLayout>
 
-    </RelativeLayout>
 
+    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -65,12 +60,10 @@
                 android:layout_marginTop="16dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp">
-
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="16dp">
-
+                    android:layout_marginBottom="8dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -80,13 +73,11 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:gravity="right"
+                            android:textStyle="bold"
                             android:layout_marginRight="16dp"
                             android:layout_weight="1"
-                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                             android:focusable="true"
                             android:text="@string/client_sex"
-                            android:imeOptions="actionNext"
-                            android:inputType="textCapWords|textPersonName"
                             android:textColor="@color/card_title_text"
                             android:textColorHint="@color/hint_text"
                             android:textSize="14sp" />
@@ -107,12 +98,10 @@
 
 
                 </RelativeLayout>
-
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="16dp">
-
+                    android:layout_marginBottom="8dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -124,12 +113,8 @@
                             android:layout_weight="1"
                             android:gravity="right"
                             android:layout_marginRight="16dp"
-                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:text="@string/client_phone"
-                            android:imeOptions="actionNext"
-                            android:inputType="textCapWords|textPersonName"
-                            android:textColor="@color/card_grid_text"
-                            android:textColorHint="@color/hint_text"
+                            android:textStyle="bold"
                             android:textSize="14sp" />
 
                         <TextView
@@ -139,7 +124,6 @@
                             android:layout_marginLeft="16dp"
                             android:layout_weight="1"
                             android:hint="@string/client_phone"
-                            android:imeOptions="actionNext"
                             android:inputType="number"
                             android:textColor="@color/primary_text"
                             android:textColorHint="@color/hint_text"
@@ -149,16 +133,14 @@
                     </LinearLayout>
 
                 </RelativeLayout>
-
                 <RelativeLayout
+                    android:layout_marginBottom="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="16dp">
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:id="@+id/age"
@@ -166,6 +148,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
                             android:text="@string/client_age"
+                            android:textStyle="bold"
                             android:gravity="right"
                             android:layout_marginRight="16dp"
                             app:paddingEnd="16dp"
@@ -189,22 +172,20 @@
 
                     </LinearLayout>
                 </RelativeLayout>
-
                 <RelativeLayout
+                    android:layout_marginBottom="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="16dp">
-
+                    android:layout_height="wrap_content">
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
                             android:text="@string/client_address"
+                            android:textStyle="bold"
                             android:gravity="right"
                             android:layout_marginRight="16dp"
                             app:paddingEnd="16dp"
@@ -228,22 +209,20 @@
 
                     </LinearLayout>
                 </RelativeLayout>
-
                 <RelativeLayout
+                    android:layout_marginBottom="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="16dp">
-
+                    android:layout_height="wrap_content">
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
                             android:text="@string/client_veo"
+                            android:textStyle="bold"
                             android:gravity="right"
                             android:layout_marginRight="16dp"
                             app:paddingEnd="16dp"
@@ -266,9 +245,7 @@
 
                     </LinearLayout>
                 </RelativeLayout>
-
             </LinearLayout>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -276,8 +253,6 @@
                 android:layout_marginRight="4dp"
                 android:background="@color/cyan_100"
                 android:visibility="invisible" />
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -292,6 +267,7 @@
                     android:layout_weight="1"
                     android:background="@color/white">
                     <TextView
+                        android:textStyle="bold"
                         android:id="@+id/reason_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -326,9 +302,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/referral_type"
+                        android:textStyle="bold"
                         android:textColor="@color/black"/>
                     <TextView
                         android:id="@+id/viewService"
+                        android:layout_marginTop="4dp"
                         android:layout_below="@+id/service_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -337,6 +315,7 @@
                         app:paddingStart="16dp" />
                     <TextView
                         android:id="@+id/facility_title"
+                        android:textStyle="bold"
                         android:layout_below="@+id/viewService"
                         android:layout_marginTop="8dp"
                         android:textColor="@color/black"
@@ -369,6 +348,7 @@
 
                     <TextView
                         android:id="@+id/flags_title"
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/danger_signs"
@@ -380,75 +360,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_below="@id/flags_title"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:visibility="gone"
-                            android:id="@+id/checkbox2weekCough"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="12dp"
-                            android:paddingTop="12dp"
-                            android:text="Kikohozi zaidi ya wiki mbili"
-                            android:textColor="@color/secondary_text"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:visibility="gone"
-                            android:id="@+id/checkboxfever"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="12dp"
-                            android:paddingTop="12dp"
-                            android:text="Homa zaidi ya wiki mbili"
-                            android:textColor="@color/secondary_text"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:visibility="gone"
-                            android:id="@+id/checkboxWeightLoss"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="12dp"
-                            android:paddingTop="12dp"
-                            android:text="Kupungua uzito"
-                            android:textColor="@color/secondary_text"
-                            android:textSize="12sp" />
-
-
-                        <TextView
-                            android:visibility="gone"
-                            android:id="@+id/checkboxSevereSweating"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="12dp"
-                            android:paddingTop="12dp"
-                            android:text="Kutokwa na jasho usiku zaidi ya wiki mbili"
-                            android:textColor="@color/secondary_text"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:visibility="gone"
-                            android:id="@+id/checkboxBloodCough"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="12dp"
-                            android:paddingTop="12dp"
-                            android:text="Kukohoa makohozi yenye mchanganyiko na damu"
-                            android:textColor="@color/secondary_text"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:visibility="gone"
-                            android:id="@+id/checkboxLostFollowup"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="12dp"
-                            android:paddingTop="12dp"
-                            android:text="Kusitisha dawa"
-                            android:textColor="@color/secondary_text"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                        android:orientation="vertical"/>
 
                 </RelativeLayout>
 
@@ -470,6 +382,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/other_info"
+                        android:textStyle="bold"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
@@ -497,42 +410,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="8dp"
                             android:hint="@string/title_ctc_number"
-                            android:textColor="@color/primary_text"
-                            android:textColorHint="@color/hint_text"
+                            android:textColor="@color/hint_text"
                             android:textSize="14sp"/>
 
 
                     </LinearLayout>
 
                 </RelativeLayout>
-
-
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@color/card_separator" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp">
-                <Button
-                    android:layout_alignParentRight="true"
-                    android:id="@+id/ok_button"
-                    android:layout_width="200dp"
-                    android:layout_height="60dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="16dp"
-                    android:layout_toLeftOf="@id/referal_button"
-                    android:text="@string/button_ok"
-                    android:textColor="@color/white" />
-
-
-            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

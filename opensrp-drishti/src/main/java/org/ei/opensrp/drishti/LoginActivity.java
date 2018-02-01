@@ -517,10 +517,10 @@ public class LoginActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(userNameEditText.getText())
                 || TextUtils.isEmpty(passwordEditText.getText())) {
             // tell user to enter username and pwd
-            Snackbar.make(
-                    findViewById(R.id.coordinatorLogin),
-                    R.string.provide_username_password,
-                    Snackbar.LENGTH_SHORT).show();
+//            Snackbar.make(
+//                    findViewById(R.id.coordinatorLogin),
+//                    R.string.provide_username_password,
+//                    Snackbar.LENGTH_SHORT).show();
             return false;
         } else
             return true;

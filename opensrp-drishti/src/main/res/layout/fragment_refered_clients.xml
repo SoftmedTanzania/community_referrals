@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="@color/card_separator"
-            android:gravity="bottom"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <fr.ganfra.materialspinner.MaterialSpinner
@@ -115,24 +115,17 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/card_grid_tex"
                 android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="@color/card_separator"
-            android:paddingBottom="16dp">
-
             <Button
                 android:id="@+id/filter_button"
-                android:layout_width="120dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="16dp"
                 android:text="@string/button_search" />
 
-        </RelativeLayout>
+        </LinearLayout>
+
+
 
 
         <LinearLayout

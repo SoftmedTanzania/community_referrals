@@ -426,17 +426,12 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
 
 
     public boolean isFormSubmissionOk() {
-        if (     TextUtils.isEmpty(editTextfName.getText())
-                || TextUtils.isEmpty(editTextlName.getText())
-                || TextUtils.isEmpty(editTextVillageLeader.getText())
-                || TextUtils.isEmpty(editTextDiscountId.getText())
-
-                ) {
+        if (TextUtils.isEmpty(editTextfName.getText())  ||
+                TextUtils.isEmpty(editTextlName.getText()) ||
+                TextUtils.isEmpty(editTextVillageLeader.getText())) {
             message = getResources().getString(R.string.unfilled_information);
             makeToast();
-
             return false;
-
         } else if (TextUtils.isEmpty(facilitytextView.getText())) {
             message = getResources().getString(R.string.missing_facility);
             makeToast();
