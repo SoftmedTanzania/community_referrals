@@ -81,10 +81,10 @@ public class ReferredClientsListAdapter extends
         viewHolder.serviceName.setText(getReferralServiceName(client.getReferral_service_id()));
 
 
-        if(clientReferral.getStatus().equals("0")){
+        if(client.getReferral_status().equals("0")){
             viewHolder.referralStatus.setText("Pending");
             viewHolder.statusIcon.setBackgroundColor(mContext.getResources().getColor(R.color.blue_400));
-        }else if(clientReferral.getStatus().equals("1")){
+        }else if(client.getReferral_status().equals("1")){
             viewHolder.referralStatus.setText("Successful");
             viewHolder.statusIcon.setBackgroundColor(mContext.getResources().getColor(R.color.green_400));
         }else{

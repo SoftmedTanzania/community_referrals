@@ -66,7 +66,7 @@ public class ClientReferralPersonObject {
         this.referral_date = clientReferral.getReferral_date();
         this.referral_reason = clientReferral.getReferral_reason();
         this.is_valid = clientReferral.getIs_valid();
-        this.referral_status = clientReferral.getStatus();
+        this.referral_status = clientReferral.getReferral_status();
         this.facility_id = clientReferral.getFacility_id();
         this.details = new Gson().toJson(clientReferral);
 

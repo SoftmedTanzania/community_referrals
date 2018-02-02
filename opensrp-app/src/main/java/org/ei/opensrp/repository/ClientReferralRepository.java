@@ -30,10 +30,10 @@ public class ClientReferralRepository extends DrishtiRepository {
     public static final String ReferralFacility = "facility_id";
     public static final String ReferralReason = "referral_reason";
     public static final String Service = "referral_service_id";
-    public static final String Status = "referral_status";
+    public static final String ReferralStatus = "referral_status";
     public static final String IS_VALID = "is_valid";
     public static final String DETAILS_COLUMN = "details";
-    public static final String[] CLIENT_REFERRAL_TABLE_COLUMNS = {ID_COLUMN, Relational_ID, fName, mName, lName, CBHS, CTCNumber, ReferralDate, ReferralFacility, ReferralReason, Service, Status, IS_VALID,DETAILS_COLUMN};
+    public static final String[] CLIENT_REFERRAL_TABLE_COLUMNS = {ID_COLUMN, Relational_ID, fName, mName, lName, CBHS, CTCNumber, ReferralDate, ReferralFacility, ReferralReason, Service, ReferralStatus, IS_VALID,DETAILS_COLUMN};
     
 
     @Override
@@ -76,7 +76,7 @@ public class ClientReferralRepository extends DrishtiRepository {
     public ClientReferral findByServiceStatus(String name) {
 
         SQLiteDatabase database = masterRepository.getReadableDatabase();
-        Cursor cursor = database.query(CLIENT_REFERRAL, CLIENT_REFERRAL_TABLE_COLUMNS, Status + " = ?", new String[]{name}, null, null, null, null);
+        Cursor cursor = database.query(CLIENT_REFERRAL, CLIENT_REFERRAL_TABLE_COLUMNS, ReferralStatus + " = ?", new String[]{name}, null, null, null, null);
         List<ClientReferral> children = readAll(cursor);
 
         if (children.isEmpty()) {
@@ -87,7 +87,7 @@ public class ClientReferralRepository extends DrishtiRepository {
     public void updateStatus(String caseId, String name ){
         SQLiteDatabase database = masterRepository.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(Status, name);
+        values.put(ReferralStatus, name);
         database.update(CLIENT_REFERRAL, values, ID_COLUMN + " = ?", new String[]{caseId});
     }
 
@@ -103,12 +103,12 @@ public class ClientReferralRepository extends DrishtiRepository {
 
     public long unsuccesfulcount() {
         return longForQuery(masterRepository.getReadableDatabase(), "SELECT COUNT(1) FROM " + CLIENT_REFERRAL
-                        + " WHERE " + Status + " = ? ",
+                        + " WHERE " + ReferralStatus + " = ? ",
                 new String[]{"0"});
     }
     public long succesfulcount() {
         return longForQuery(masterRepository.getReadableDatabase(), "SELECT COUNT(1) FROM " + CLIENT_REFERRAL
-                        + " WHERE " + Status + " = ? ",
+                        + " WHERE " + ReferralStatus + " = ? ",
                 new String[]{"1"});
     }
     private String tableColumnsForQuery(String tableName, String[] tableColumns) {
@@ -139,7 +139,7 @@ public class ClientReferralRepository extends DrishtiRepository {
         values.put(ReferralFacility, clientReferral.getFacility_id());
         values.put(ReferralReason, clientReferral.getReferral_reason());
         values.put(Service, clientReferral.getReferral_service_id());
-        values.put(Status, clientReferral.getStatus());
+        values.put(ReferralStatus, clientReferral.getReferral_status());
         values.put(IS_VALID, clientReferral.getIs_valid());
         values.put(DETAILS_COLUMN, new Gson().toJson(clientReferral));
         return values;
@@ -148,8 +148,6 @@ public class ClientReferralRepository extends DrishtiRepository {
     public ContentValues createValuesUpdateValues(ClientReferral clientReferral) {
 
         ContentValues values = new ContentValues();
-        values.put(ID_COLUMN, clientReferral.getId());
-        values.put(Relational_ID, clientReferral.getRelationalid());
         values.put(DETAILS_COLUMN, new Gson().toJson(clientReferral));
         return values;
     }
@@ -192,7 +190,7 @@ public class ClientReferralRepository extends DrishtiRepository {
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, ReferralFacility),
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, ReferralReason),
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, Service),
-                getColumnValueByAlias(cursor, CLIENT_REFERRAL, Status),
+                getColumnValueByAlias(cursor, CLIENT_REFERRAL, ReferralStatus),
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, IS_VALID),
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, DETAILS_COLUMN));
 

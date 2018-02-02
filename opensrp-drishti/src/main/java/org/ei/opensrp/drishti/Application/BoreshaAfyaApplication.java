@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.support.multidex.MultiDex;
-import android.util.Base64;
 import android.util.Pair;
 
 import com.crashlytics.android.Crashlytics;
@@ -13,9 +12,7 @@ import com.google.gson.Gson;
 
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
-import org.apache.http.protocol.HTTP;
 import org.ei.opensrp.Context;
-import org.ei.opensrp.DristhiConfiguration;
 import org.ei.opensrp.commonregistry.CommonFtsObject;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
@@ -24,25 +21,16 @@ import org.ei.opensrp.domain.Facility;
 import org.ei.opensrp.domain.Indicator;
 import org.ei.opensrp.domain.ReferralServiceDataModel;
 import org.ei.opensrp.domain.Response;
-import org.ei.opensrp.domain.ResponseStatus;
 import org.ei.opensrp.drishti.LoginActivity;
 import org.ei.opensrp.drishti.NativeHomeActivity;
 import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.util.Utils;
-import org.ei.opensrp.repository.AllSettings;
-import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.repository.ClientReferralRepository;
 import org.ei.opensrp.repository.FacilityRepository;
 import org.ei.opensrp.repository.IndicatorRepository;
 import org.ei.opensrp.repository.ReferralServiceRepository;
 import org.ei.opensrp.sync.DrishtiSyncScheduler;
-import org.ei.opensrp.sync.SaveRegistrationIdInfoTask;
-import org.ei.opensrp.sync.SavehasFacilityInfoTask;
-import org.ei.opensrp.sync.SavehasReferralServiceInfoTask;
-import org.ei.opensrp.view.BackgroundAction;
-import org.ei.opensrp.view.LockingBackgroundTask;
-import org.ei.opensrp.view.ProgressIndicator;
 import org.ei.opensrp.view.activity.DrishtiApplication;
 import org.ei.opensrp.view.activity.SecuredActivity;
 import org.ei.opensrp.view.receiver.SyncBroadcastReceiver;
@@ -50,28 +38,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import cz.msebera.android.httpclient.Header;
-import cz.msebera.android.httpclient.entity.ByteArrayEntity;
-import cz.msebera.android.httpclient.message.BasicHeader;
 import io.fabric.sdk.android.Fabric;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 import static org.ei.opensrp.AllConstants.DRISHTI_BASE_PATH;
 import static org.ei.opensrp.AllConstants.GSM_SERVER_URL;
 import static org.ei.opensrp.AllConstants.OPENSRP_FACILITY_URL_PATH;
-import static org.ei.opensrp.AllConstants.OPENSRP_LOCATION_URL_PATH;
 import static org.ei.opensrp.AllConstants.OPENSRP_REFERRAL_SERVICES_URL_PATH;
 import static org.ei.opensrp.util.Log.logInfo;
-import java.util.Iterator;
+
 import java.util.Random;
-import java.util.Map.Entry;
 
 
 import android.app.AlertDialog;
@@ -240,19 +220,23 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
 
         Cursor cursor = commonRepository.RawCustomQueryForAdapter("select * FROM client_referral WHERE "+CommonRepository.ID_COLUMN+" = '"+id+"'");
 
-        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "client_referral");
+        try {
+            List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "client_referral");
 
-        ClientReferralPersonObject clientReferralPersonObject = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList).get(0);
+            ClientReferralPersonObject clientReferralPersonObject = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList).get(0);
 
-        ClientReferral clientReferral = new Gson().fromJson(clientReferralPersonObject.getDetails(),ClientReferral.class);
-        clientReferral.setStatus(referralStatus);
-        clientReferral.setReferral_feedback(feedback);
-        clientReferral.setService_given_to_patient(serviceGiven);
-        clientReferral.setTest_result(testResult);
+            ClientReferral clientReferral = new Gson().fromJson(clientReferralPersonObject.getDetails(), ClientReferral.class);
+            clientReferral.setReferral_status(referralStatus);
+            clientReferral.setReferral_feedback(feedback);
+            clientReferral.setServices_given_to_patient(serviceGiven);
+            clientReferral.setTest_results(testResult);
 
-        ContentValues values = new ClientReferralRepository().createValuesUpdateValues(clientReferral);
-        commonRepository.customUpdate(values,id);
-        Log.d(TAG,"updated values = "+ values.toString());
+            ContentValues values = new ClientReferralRepository().createValuesUpdateValues(clientReferral);
+            commonRepository.customUpdate(values, id);
+            Log.d(TAG, "updated values = " + values.toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void getFacilities() {

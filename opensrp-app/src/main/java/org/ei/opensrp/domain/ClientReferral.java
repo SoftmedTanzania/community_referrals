@@ -1,7 +1,6 @@
 package org.ei.opensrp.domain;
 
 import java.io.Serializable;
-import java.util.Map;
 
 /**
  * Created by kency on 11/20/17.
@@ -10,12 +9,12 @@ import java.util.Map;
 public class ClientReferral implements Serializable {
 
     private String id, relationalid, details, referral_feedback, other_notes,
-            service_given_to_patient, referral_uuid, first_name, middle_name, surname, facility_id,
+            services_given_to_patient, referral_uuid, first_name, middle_name, surname, facility_id,
             referral_reason, is_valid, service_provider_mobile_number, ward, village, Kijitongoji,
             village_leader, service_provider_group, service_provider_uiid, phone_number,
-            referral_service_id, gender, community_based_hiv_service, ctc_number, Status;
+            referral_service_id, gender, community_based_hiv_service, ctc_number, referral_status;
     private long date_of_birth, referral_date;
-    private boolean test_result;
+    private boolean test_results;
     private String indicator_ids;
 
     public ClientReferral() {
@@ -39,7 +38,7 @@ public class ClientReferral implements Serializable {
     ) {
         this.details = details;
         this.id = id;
-        this.Status = referral_status;
+        this.referral_status = referral_status;
         this.community_based_hiv_service = community_based_hiv_service;
         this.ctc_number = ctc_number;
         this.relationalid = relationalId;
@@ -61,20 +60,20 @@ public class ClientReferral implements Serializable {
         this.other_notes = other_notes;
     }
 
-    public String getService_given_to_patient() {
-        return service_given_to_patient;
+    public String getServices_given_to_patient() {
+        return services_given_to_patient;
     }
 
-    public void setService_given_to_patient(String service_given_to_patient) {
-        this.service_given_to_patient = service_given_to_patient;
+    public void setServices_given_to_patient(String services_given_to_patient) {
+        this.services_given_to_patient = services_given_to_patient;
     }
 
-    public boolean isTest_result() {
-        return test_result;
+    public boolean isTest_results() {
+        return test_results;
     }
 
-    public void setTest_result(boolean test_result) {
-        this.test_result = test_result;
+    public void setTest_results(boolean test_results) {
+        this.test_results = test_results;
     }
 
     public String getId() {
@@ -118,12 +117,12 @@ public class ClientReferral implements Serializable {
         this.indicator_ids = indicator_ids;
     }
 
-    public String getStatus() {
-        return Status;
+    public String getReferral_status() {
+        return referral_status;
     }
 
-    public void setStatus(String status) {
-        Status = status;
+    public void setReferral_status(String referral_status) {
+        this.referral_status = referral_status;
     }
 
     public String getMiddle_name() {

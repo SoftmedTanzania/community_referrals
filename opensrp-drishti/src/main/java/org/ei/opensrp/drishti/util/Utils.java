@@ -120,7 +120,7 @@ public class Utils {
                     commonPersonObject.getFacility_id(),
                     commonPersonObject.getReferral_reason(),
                     commonPersonObject.getReferral_service_id(),
-                    commonPersonObject.getStatus(),
+                    commonPersonObject.getReferral_status(),
                     commonPersonObject.getIs_valid(),
                     commonPersonObject.getDetails()
             );

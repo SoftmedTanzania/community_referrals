@@ -2,7 +2,6 @@ package org.ei.opensrp.drishti.Fragments;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -162,7 +161,7 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
         facility.setText(getFacilityName(clientReferral.getFacility_id()));
         referedDate.setText(dateFormat.format(clientReferral.getReferral_date()));
         residence.setText(clientReferral.getVillage()+" M/kiti -:"+clientReferral.getVillage_leader());
-        note.setText(clientReferral.getStatus());
+        note.setText(clientReferral.getReferral_status());
 
     }
 }

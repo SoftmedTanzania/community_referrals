@@ -66,6 +66,15 @@
                 "name": "village_leader"
             },
             {
+                "name": "services_given_to_patient"
+            },
+            {
+                "name": "other_notes"
+            },
+            {
+                "name": "test_results"
+            },
+            {
                 "name": "service_provider_uiid"
             },
             {

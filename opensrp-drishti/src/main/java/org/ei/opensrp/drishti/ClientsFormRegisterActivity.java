@@ -133,7 +133,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
                 if (isFormSubmissionOk()) {
                     //setting default values
                     clientReferral = getClientReferral();
-                    clientReferral.setStatus("0");
+                    clientReferral.setReferral_status("0");
 
                     // convert to json
                     String gsonReferral = gson.toJson(clientReferral);
@@ -168,13 +168,8 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
             CommonPersonObject c = commonRepository.findByCaseID(id);
             List<FormField> formFields = new ArrayList<>();
 
-
             formFields.add(new FormField("id", c.getCaseId(), commonRepository.TABLE_NAME + "." + "id"));
-
-
             formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
-
-
 
             FormData formData;
             FormInstance formInstance;
@@ -502,9 +497,9 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
         referral.setReferral_service_id(getReferralServiceId(spinnerService.getSelectedItem().toString()));
         referral.setWard(wardId);
         referral.setCtc_number(editTextCTCNumber.getText().toString());
-        referral.setTest_result(false);
-        referral.setService_given_to_patient(null);
-        referral.setOther_notes(null);
+        referral.setTest_results(false);
+        referral.setServices_given_to_patient("");
+        referral.setOther_notes("");
         referral.setService_provider_uiid(((BoreshaAfyaApplication)getApplication()).getCurrentUserID());
         referral.setService_provider_group(((BoreshaAfyaApplication)getApplication()).getTeam_uuid());
         for(int i=0; i<parentLayout.getChildCount(); i++) {
