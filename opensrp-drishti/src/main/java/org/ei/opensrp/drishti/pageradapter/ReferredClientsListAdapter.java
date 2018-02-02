@@ -162,6 +162,11 @@ public class ReferredClientsListAdapter extends
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "referral_service");
 
-        return commonPersonObjectList.get(0).getColumnmaps().get("name");
+        try {
+            return commonPersonObjectList.get(0).getColumnmaps().get("name");
+        }catch (Exception e){
+            e.printStackTrace();
+            return "";
+        }
     }
 }

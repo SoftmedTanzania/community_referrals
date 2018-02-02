@@ -3,6 +3,7 @@ package org.ei.opensrp.drishti.Application;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.support.multidex.MultiDex;
 import android.util.Base64;
 import android.util.Pair;
@@ -16,6 +17,7 @@ import org.apache.http.protocol.HTTP;
 import org.ei.opensrp.Context;
 import org.ei.opensrp.DristhiConfiguration;
 import org.ei.opensrp.commonregistry.CommonFtsObject;
+import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.domain.Facility;
@@ -235,16 +237,20 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     public void updateReferralStatus(String id,String feedback,String serviceGiven, boolean testResult, String referralStatus){
 
         commonRepository = context.commonrepository("client_referral");
-        ClientReferralPersonObject clientPersonObject = Utils.convertToClientPersonObject(commonRepository.findByCaseID(id));
 
-        Log.d(TAG,"values to be updated = "+ Utils.convertStandardJSONString(clientPersonObject.getDetails()));
-        ClientReferral clientReferral = new Gson().fromJson(Utils.convertStandardJSONString(clientPersonObject.getDetails()),ClientReferral.class);
+        Cursor cursor = commonRepository.RawCustomQueryForAdapter("select * FROM client_referral WHERE "+CommonRepository.ID_COLUMN+" = '"+id+"'");
+
+        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "client_referral");
+
+        ClientReferralPersonObject clientReferralPersonObject = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList).get(0);
+
+        ClientReferral clientReferral = new Gson().fromJson(clientReferralPersonObject.getDetails(),ClientReferral.class);
         clientReferral.setStatus(referralStatus);
         clientReferral.setReferral_feedback(feedback);
         clientReferral.setService_given_to_patient(serviceGiven);
         clientReferral.setTest_result(testResult);
 
-        ContentValues values = new ClientReferralRepository().createValuesFor(clientReferral);
+        ContentValues values = new ClientReferralRepository().createValuesUpdateValues(clientReferral);
         commonRepository.customUpdate(values,id);
         Log.d(TAG,"updated values = "+ values.toString());
     }

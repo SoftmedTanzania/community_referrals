@@ -144,6 +144,17 @@ public class ClientReferralRepository extends DrishtiRepository {
         values.put(DETAILS_COLUMN, new Gson().toJson(clientReferral));
         return values;
     }
+
+    public ContentValues createValuesUpdateValues(ClientReferral clientReferral) {
+
+        ContentValues values = new ContentValues();
+        values.put(ID_COLUMN, clientReferral.getId());
+        values.put(Relational_ID, clientReferral.getRelationalid());
+        values.put(DETAILS_COLUMN, new Gson().toJson(clientReferral));
+        return values;
+    }
+
+
     private List<ClientReferral> readAll(Cursor cursor) {
         cursor.moveToFirst();
         List<ClientReferral> referralServicesListDataModel = new ArrayList<ClientReferral>();

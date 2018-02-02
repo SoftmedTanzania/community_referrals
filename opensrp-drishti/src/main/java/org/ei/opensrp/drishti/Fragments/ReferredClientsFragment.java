@@ -87,6 +87,10 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + TABLE_NAME);
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
+
+        Log.d(TAG,"clients_list : "+new Gson().toJson(commonPersonObjectList));
+
+
         clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
         Log.d(TAG, "clientReferrallist = " + gson.toJson(commonPersonObjectList));
         clientsListAdapter = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList, commonRepository);
