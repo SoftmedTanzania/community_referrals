@@ -148,6 +148,7 @@ public class ClientReferralRepository extends DrishtiRepository {
     public ContentValues createValuesUpdateValues(ClientReferral clientReferral) {
 
         ContentValues values = new ContentValues();
+        values.put(ReferralStatus, clientReferral.getReferral_status());
         values.put(DETAILS_COLUMN, new Gson().toJson(clientReferral));
         return values;
     }

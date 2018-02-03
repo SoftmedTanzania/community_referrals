@@ -90,7 +90,6 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
 
         Log.d(TAG,"clients_list : "+new Gson().toJson(commonPersonObjectList));
 
-
         clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
         Log.d(TAG, "clientReferrallist = " + gson.toJson(commonPersonObjectList));
         clientsListAdapter = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList, commonRepository);
