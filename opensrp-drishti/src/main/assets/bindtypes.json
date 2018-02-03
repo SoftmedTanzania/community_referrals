@@ -24,10 +24,8 @@
       ]
     },
     {
-      "name": "follow_up",
-      "columns": [
-        {"name":"follow_up_reason"},{"name":"comment"},{"name":"follow_up_date"},{"name":"is_valid"}
-      ]
+      "name": "followup_client",
+      "columns": [{"name":"first_name"},{"name":"middle_name"},{"name":"surname"},{"name":"referral_status"}]
     }
   ]
 }

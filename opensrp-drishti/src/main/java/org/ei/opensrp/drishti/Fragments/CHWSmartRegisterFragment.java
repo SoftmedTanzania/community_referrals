@@ -2,14 +2,11 @@ package org.ei.opensrp.drishti.Fragments;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -28,13 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.google.gson.Gson;
-import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-
 import org.ei.opensrp.Context;
-import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
-import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
 import org.ei.opensrp.drishti.ChwSmartRegisterActivity;
 import org.ei.opensrp.drishti.LoginActivity;
@@ -43,27 +34,19 @@ import org.ei.opensrp.drishti.R;
 import org.ei.opensrp.drishti.Repository.LocationSelectorDialogFragment;
 import org.ei.opensrp.drishti.pageradapter.CHWPagerAdapter;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
-import org.ei.opensrp.drishti.util.AsyncTask;
+import org.ei.opensrp.drishti.util.FitDoughnut;
 import org.ei.opensrp.event.Listener;
-import org.ei.opensrp.drishti.util.DonutChart;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.service.PendingFormSubmissionService;
 import org.ei.opensrp.sync.SyncAfterFetchListener;
 import org.ei.opensrp.sync.SyncProgressIndicator;
 import org.ei.opensrp.sync.UpdateActionsTask;
-import org.ei.opensrp.view.activity.DrishtiApplication;
 import org.ei.opensrp.view.activity.SecuredActivity;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.ei.opensrp.view.contract.HomeContext;
 import org.ei.opensrp.view.controller.NativeAfterANMDetailsFetchListener;
 import org.ei.opensrp.view.controller.NativeUpdateANMDetailsTask;
 import org.json.JSONObject;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Locale;
 
 import static android.os.Looper.getMainLooper;
 import static android.widget.Toast.LENGTH_SHORT;
@@ -89,7 +72,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     TextView successView, unsuccessView;
     Long success = (long) 0;
     Long unsuccess = (long) 0;
-    private DonutChart donutChart;
+    private FitDoughnut donutChart;
 
     private android.content.Context context;
     private MenuItem updateMenuItem;
@@ -137,7 +120,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         });
 
 
-        donutChart = (DonutChart)v.findViewById(R.id.donutChart) ;
+
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -211,6 +194,11 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         username.setText(getResources().getString(R.string.logged_user)+" "+((BoreshaAfyaApplication)getActivity().getApplication()).getUsername());
         successView =  (TextView) v.findViewById(R.id.count_one);
         unsuccessView =  (TextView) v.findViewById(R.id.count_two);
+
+        donutChart = (FitDoughnut) v.findViewById(R.id.donutChart);
+        donutChart.startAnimateLoading();
+        updateFromServer();
+
         return v;
     }
 
@@ -306,6 +294,8 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                         unsuccessView =  (TextView) v.findViewById(R.id.count_two);
                         successView.setText(valueOf(homeContext.getSucessReferralCount()));
                         unsuccessView.setText(valueOf(homeContext.getUnsucessReferralCount()));
+
+                        donutChart.stopAnimateLoading(60.f);
                     }
                 };
                 mainHandler.post(myRunnable);
@@ -437,6 +427,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.updateMenuItem:
+                donutChart.startAnimateLoading();
                 updateMenuItem = item;
                 updateFromServer();
                 if (context().allSharedPreferences().fetchIsSyncInProgress()) {

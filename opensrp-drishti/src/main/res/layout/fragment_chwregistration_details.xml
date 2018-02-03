@@ -279,6 +279,26 @@
                         android:layout_weight="0.5"
                         android:textColorHint="@color/hint_text"
                         android:textSize="14sp" />
+                    <TextView
+                        android:visibility="gone"
+                        android:layout_below="@id/reason_for_referral"
+                        android:textStyle="bold"
+                        android:layout_marginTop="8dp"
+                        android:id="@+id/referral_feedback_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/red_500"
+                        android:text="@string/referral_feedback"/>
+                    <TextView
+                        android:visibility="gone"
+                        android:layout_below="@id/referral_feedback_title"
+                        android:id="@+id/referral_feedback"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_weight="0.5"
+                        android:textColor="@color/red_500"
+                        android:textColorHint="@color/hint_text"
+                        android:textSize="14sp" />
 
                 </RelativeLayout>
 

@@ -27,6 +27,7 @@ import com.google.gson.Gson;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.domain.Indicator;
+import org.ei.opensrp.drishti.Repository.ClientFollowupPersonObject;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.Repository.FacilityObject;
 import org.ei.opensrp.drishti.Repository.ReferralServiceObject;
@@ -104,6 +105,42 @@ public class Utils {
             return null;
         }
     }
+
+    public static ClientFollowupPersonObject convertToClientFollowupPersonObject(CommonPersonObject commonPersonObject) {
+        String details = commonPersonObject.getColumnmaps().get("details");
+        Log.d(TAG, "details string commonPersonObject = " + convertStandardJSONString(details));
+        try {
+            return new ClientFollowupPersonObject(
+                    commonPersonObject.getColumnmaps().get("id"),
+                    commonPersonObject.getColumnmaps().get("relationalid"),
+                    commonPersonObject.getColumnmaps().get("first_name"),
+                    commonPersonObject.getColumnmaps().get("middle_name"),
+                    commonPersonObject.getColumnmaps().get("surname"),
+                    commonPersonObject.getColumnmaps().get("community_based_hiv_service"),
+                    commonPersonObject.getColumnmaps().get("ctc_number"),
+                    commonPersonObject.getColumnmaps().get("is_valid"),
+                    commonPersonObject.getColumnmaps().get("referral_reason"),
+                    commonPersonObject.getColumnmaps().get("gender"),
+                    commonPersonObject.getColumnmaps().get("phone_number"),
+                    commonPersonObject.getColumnmaps().get("care_taker_name"),
+                    commonPersonObject.getColumnmaps().get("care_taker_name_phone_number"),
+                    commonPersonObject.getColumnmaps().get("care_taker_relationship"),
+                    commonPersonObject.getColumnmaps().get("facility_id"),
+                    commonPersonObject.getColumnmaps().get("referral_service_id"),
+                    commonPersonObject.getColumnmaps().get("referral_status"),
+                    Long.parseLong(commonPersonObject.getColumnmaps().get("visit_date")),
+                    Long.parseLong(commonPersonObject.getColumnmaps().get("date_of_birth")),
+                    Long.parseLong(commonPersonObject.getColumnmaps().get("referral_date")),
+                    commonPersonObject.getColumnmaps().get("village"),
+                    commonPersonObject.getColumnmaps().get("details")
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
     public static ClientReferralPersonObject convertToClientObject(ClientReferral commonPersonObject) {
         String details = new Gson().toJson(commonPersonObject);
         Log.d(TAG, "details string = " + details);
@@ -178,6 +215,17 @@ public class Utils {
 
         return clientReferralPersonObjects;
     }
+
+    public static List<ClientFollowupPersonObject> convertToClientFollowupPersonObjectList(List<CommonPersonObject> commonPersonObjectsList) {
+        List<ClientFollowupPersonObject> clientFollowupPersonObjects = new ArrayList<>();
+        for (CommonPersonObject common : commonPersonObjectsList) {
+            clientFollowupPersonObjects.add(convertToClientFollowupPersonObject(common));
+
+        }
+
+        return clientFollowupPersonObjects;
+    }
+
     public static List<ClientReferralPersonObject> convertToClientReferralList(List<ClientReferral> commonPersonObjectsList) {
         List<ClientReferralPersonObject> clientReferralPersonObjects = new ArrayList<>();
         for (ClientReferral common : commonPersonObjectsList) {

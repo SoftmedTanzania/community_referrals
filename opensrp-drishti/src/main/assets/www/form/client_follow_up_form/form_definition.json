@@ -1,0 +1,87 @@
+{
+    "form_data_definition_version": "4",
+    "form": {
+        "bind_type": "followup_client",
+        "default_bind_path": "/model/instance/client_follow_up_form/",
+        "fields": [
+            {
+                "name": "id"
+            },
+            {
+                "name": "relationalid"
+            },
+            {
+                "name": "first_name"
+            },
+            {
+                "name": "middle_name"
+            },
+            {
+                "name": "date_of_birth"
+            },
+            {
+                "name": "community_based_hiv_service"
+            },
+            {
+                "name": "ctc_number"
+            },
+            {
+                "name": "care_taker_name"
+            },
+            {
+                "name": "care_taker_name_phone_number"
+            },
+            {
+                "name": "care_taker_relationship"
+            },
+            {
+                "name": "facility_id"
+            },
+            {
+                "name": "referral_reason"
+            },
+            {
+                "name": "gender"
+            },
+            {
+                "name": "phone_number"
+            },
+            {
+                "name": "comment"
+            },
+            {
+                "name": "referral_status"
+            },
+            {
+                "name": "service_provider_uiid"
+            },
+            {
+                "name": "date_of_birth"
+            },
+            {
+                "name": "follow_up_date"
+            },
+            {
+                "name": "is_valid"
+            },
+            {
+                "name": "follow_up_reason"
+            },
+            {
+                "name": "service_provider_uiid"
+            },
+            {
+                "name": "service_provider_group"
+            },
+            {
+                "name": "service_provider_mobile_number"
+            },
+            {
+                "name": "village"
+            },
+            {
+                "name": "visit_date"
+            }
+        ]
+    }
+}

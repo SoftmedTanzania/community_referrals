@@ -19,6 +19,7 @@ import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.drishti.Fragments.ClientDetailFragment;
+import org.ei.opensrp.drishti.Repository.ClientFollowupPersonObject;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
@@ -31,7 +32,7 @@ import java.util.Locale;
 public class ClientsDetailsActivity extends SecuredNativeSmartRegisterActivity {
 
     private  TextView name,age,gender,facility,feedback,contacts,sponsor,referedReason,residence,referedDate,note;
-    private ClientReferral clientReferral;
+    private ClientFollowupPersonObject clientFollowupPersonObject;
     private CommonRepository commonRepository;
     private Cursor cursor;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
@@ -64,8 +65,8 @@ public class ClientsDetailsActivity extends SecuredNativeSmartRegisterActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(ClientDetailFragment.CLIENT_REFERRAL,
-                    getIntent().getStringExtra(ClientDetailFragment.CLIENT_REFERRAL));
+            arguments.putString(ClientDetailFragment.CLIENT_FOLLOWUP,
+                    getIntent().getStringExtra(ClientDetailFragment.CLIENT_FOLLOWUP));
             ClientDetailFragment fragment = new ClientDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
@@ -76,7 +77,7 @@ public class ClientsDetailsActivity extends SecuredNativeSmartRegisterActivity {
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
 
-        clientReferral = (ClientReferral) bundle.getSerializable("client_referral");
+        clientFollowupPersonObject = (ClientFollowupPersonObject) bundle.getSerializable("client_followup");
 
 
         name = (TextView) findViewById(R.id.name);
@@ -92,7 +93,7 @@ public class ClientsDetailsActivity extends SecuredNativeSmartRegisterActivity {
         note = (TextView)   findViewById(R.id.note);
 
 
-        String reg_date = dateFormat.format(clientReferral.getDate_of_birth());
+        String reg_date = dateFormat.format(clientFollowupPersonObject.getDate_of_birth());
         String ageS="";
         try {
             Date d = dateFormat.parse(reg_date);
@@ -107,19 +108,19 @@ public class ClientsDetailsActivity extends SecuredNativeSmartRegisterActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if((clientReferral.getGender()).equals("1")){
+        if((clientFollowupPersonObject.getGender()).equalsIgnoreCase(getResources().getString(R.string.female))){
             gender.setText(getResources().getString(R.string.female));
         }
         else     {
             gender.setText(getResources().getString(R.string.male));
         }
         age.setText(ageS + " years");
-        name . setText(clientReferral.getFirst_name()+" "+clientReferral.getMiddle_name()+", "+ clientReferral.getSurname());
-        contacts.setText(clientReferral.getPhone_number());
-        facility.setText(getFacilityName(clientReferral.getFacility_id()));
-        referedReason.setText(getFacilityName(clientReferral.getReferral_reason()));
-        referedDate.setText(dateFormat.format(clientReferral.getReferral_date()));
-        residence.setText(clientReferral.getVillage()+" M/kiti -:"+clientReferral.getVillage_leader());
+        name . setText(clientFollowupPersonObject.getFirst_name()+" "+clientFollowupPersonObject.getMiddle_name()+", "+ clientFollowupPersonObject.getSurname());
+        contacts.setText(clientFollowupPersonObject.getPhone_number());
+        facility.setText(getFacilityName(clientFollowupPersonObject.getFacility_id()));
+        referedReason.setText(getFacilityName(clientFollowupPersonObject.getReferral_reason()));
+        referedDate.setText(dateFormat.format(clientFollowupPersonObject.getReferral_date()));
+//        residence.setText(clientFollowupPersonObject.getVillage()+" M/kiti -:"+clientFollowupPersonObject.getVillage_leader());
         note.setText("-");
     }
 

@@ -23,6 +23,7 @@ import org.ei.opensrp.drishti.ChwSmartRegisterActivity;
 import org.ei.opensrp.drishti.ClientsDetailsActivity;
 import org.ei.opensrp.drishti.Fragments.ClientDetailFragment;
 import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.drishti.Repository.ClientFollowupPersonObject;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.util.Utils;
 
@@ -39,12 +40,12 @@ public class CHWRegisterRecyclerAdapter extends
         RecyclerView.Adapter<CHWRegisterRecyclerAdapter.ViewHolder> {
 
     private static String TAG = CHWRegisterRecyclerAdapter.class.getSimpleName();
-    private List<ClientReferralPersonObject> clients;
+    private List<ClientFollowupPersonObject> clients;
     private Context mContext;
-    private ClientReferralPersonObject client;
+    private ClientFollowupPersonObject client;
     private boolean mTwoPane=true;
 
-    public CHWRegisterRecyclerAdapter(Context context, List<ClientReferralPersonObject> clients) {
+    public CHWRegisterRecyclerAdapter(Context context, List<ClientFollowupPersonObject> clients) {
         this.clients = clients;
         this.mContext = context;
     }
@@ -67,30 +68,25 @@ public class CHWRegisterRecyclerAdapter extends
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
         client = clients.get(position);
-        String gsonReferral = Utils.convertStandardJSONString(client.getDetails());
-
-        Log.d(TAG, "gsonReferral = " + gsonReferral);
-
-        final ClientReferral clientReferral = new Gson().fromJson(gsonReferral,ClientReferral.class);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
         // Set item views based on your views and data model
         TextView phoneNumberTextView = viewHolder.phoneNumberTextView;
         TextView CBHS = viewHolder.CBHSTextView;
 
-        phoneNumberTextView.setText(clientReferral.getPhone_number());
+        phoneNumberTextView.setText(client.getPhone_number());
         viewHolder.nameTextView.setText(client.getFirst_name()+" " + client.getMiddle_name()+", "+client.getSurname());
 
-        if(clientReferral.getCommunity_based_hiv_service()!=null) {
-            if(!clientReferral.getCommunity_based_hiv_service().equals(""))
-                CBHS.setText("CBHS : " + clientReferral.getCommunity_based_hiv_service());
+        if(client.getCommunity_based_hiv_service()!=null) {
+            if(!client.getCommunity_based_hiv_service().equals(""))
+                CBHS.setText("CBHS : " + client.getCommunity_based_hiv_service());
         }
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mTwoPane) {
-                    ClientDetailFragment fragment = ClientDetailFragment.newInstance(clientReferral);
+                    ClientDetailFragment fragment = ClientDetailFragment.newInstance(client);
                     ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction()
                             .replace(R.id.item_detail_container, fragment)
                             .commit();
@@ -99,7 +95,7 @@ public class CHWRegisterRecyclerAdapter extends
                     Intent intent = new Intent(context, ClientsDetailsActivity.class);
 
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("client_referral", clientReferral);
+                    bundle.putSerializable("client_followup", client);
                     intent.putExtras(bundle);
 
                     context.startActivity(intent);

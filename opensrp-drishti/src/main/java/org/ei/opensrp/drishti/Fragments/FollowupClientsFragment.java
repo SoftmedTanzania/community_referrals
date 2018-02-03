@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.drishti.Repository.ClientFollowupPersonObject;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.pageradapter.CHWRegisterRecyclerAdapter;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
@@ -31,13 +32,13 @@ public class FollowupClientsFragment extends SecuredNativeSmartRegisterCursorAda
     private CommonRepository commonRepository;
     private Gson gson = new Gson();
     private android.content.Context appContext;
-    private List<ClientReferralPersonObject> clientReferralPersonObjectList = new ArrayList<>();
+    private List<ClientFollowupPersonObject> clientFollowupPersonObjects = new ArrayList<>();
     private Cursor cursor;
     private boolean mTwoPane;
     private View v;
     private RecyclerView recyclerView;
     private static final String TAG = FollowupClientsFragment.class.getSimpleName(),
-            TABLE_NAME = "client_referral";
+            TABLE_NAME = "followup_client";
 
 
     public FollowupClientsFragment() {
@@ -70,16 +71,16 @@ public class FollowupClientsFragment extends SecuredNativeSmartRegisterCursorAda
         v= inflater.inflate(R.layout.fragment_chwregistration, container, false);
 
         recyclerView = (RecyclerView)v.findViewById(R.id.item_list);
-        commonRepository = context().commonrepository("client_referral");
+        commonRepository = context().commonrepository("followup_client");
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME );
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
 
-        this.clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
-        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + clientReferralPersonObjectList.size());
+        this.clientFollowupPersonObjects = Utils.convertToClientFollowupPersonObjectList(commonPersonObjectList);
+        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + clientFollowupPersonObjects.size());
 
-        CHWRegisterRecyclerAdapter chwRegisterRecyclerAdapter = new CHWRegisterRecyclerAdapter(getActivity(),clientReferralPersonObjectList);
+        CHWRegisterRecyclerAdapter chwRegisterRecyclerAdapter = new CHWRegisterRecyclerAdapter(getActivity(),clientFollowupPersonObjects);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 
@@ -138,10 +139,9 @@ public class FollowupClientsFragment extends SecuredNativeSmartRegisterCursorAda
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
 
-        this.clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
-        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + clientReferralPersonObjectList.size());
+        this.clientFollowupPersonObjects = Utils.convertToClientFollowupPersonObjectList(commonPersonObjectList);
 
-        CHWRegisterRecyclerAdapter chwRegisterRecyclerAdapter = new CHWRegisterRecyclerAdapter(getActivity(),clientReferralPersonObjectList);
+        CHWRegisterRecyclerAdapter chwRegisterRecyclerAdapter = new CHWRegisterRecyclerAdapter(getActivity(),clientFollowupPersonObjects);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 

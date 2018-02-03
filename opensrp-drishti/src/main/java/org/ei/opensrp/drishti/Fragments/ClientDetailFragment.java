@@ -14,6 +14,7 @@ import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.drishti.R;
+import org.ei.opensrp.drishti.Repository.ClientFollowupPersonObject;
 import org.ei.opensrp.drishti.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.drishti.util.LargeDiagonalCutPathDrawable;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
@@ -30,8 +31,8 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
      * The fragment argument representing the item ID that this fragment
      * represents.
      */
-    public static final String CLIENT_REFERRAL = "item_id";
-    public ClientReferral clientReferral;
+    public static final String CLIENT_FOLLOWUP = "item_id";
+    public ClientFollowupPersonObject clientFollowupPersonObject;
     private static final String TAG = ClientDetailFragment.class.getSimpleName();
 
     private CommonRepository commonRepository;
@@ -43,10 +44,10 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
     public ClientDetailFragment() {
     }
 
-    public static ClientDetailFragment newInstance(ClientReferral clientReferral) {
+    public static ClientDetailFragment newInstance(ClientFollowupPersonObject followupPersonObject) {
         ClientDetailFragment fragment = new ClientDetailFragment();
         Bundle args = new Bundle();
-        args.putSerializable(CLIENT_REFERRAL, clientReferral);
+        args.putSerializable(CLIENT_FOLLOWUP, followupPersonObject);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,7 +56,7 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            clientReferral = (ClientReferral) getArguments().getSerializable(CLIENT_REFERRAL);
+            clientFollowupPersonObject = (ClientFollowupPersonObject) getArguments().getSerializable(CLIENT_FOLLOWUP);
         }
     }
 
@@ -82,7 +83,7 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
         note = (TextView) rootView.findViewById(R.id.note);
         rootView.findViewById(R.id.details_layout).setBackground(new LargeDiagonalCutPathDrawable());
 
-        setDetails(clientReferral);
+        setDetails(clientFollowupPersonObject);
 
         return rootView;
     }
@@ -127,11 +128,11 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
         }
     }
 
-    private void setDetails(ClientReferral clientReferral){
+    private void setDetails(ClientFollowupPersonObject clientFollowupPersonObject){
 
-        this.clientReferral = clientReferral;
+        this.clientFollowupPersonObject = clientFollowupPersonObject;
 
-        String reg_date = dateFormat.format(clientReferral.getDate_of_birth());
+        String reg_date = dateFormat.format(clientFollowupPersonObject.getDate_of_birth());
         String ageS="";
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
@@ -149,19 +150,20 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if((clientReferral.getGender()).equals("1")){
+        if((clientFollowupPersonObject.getGender()).equalsIgnoreCase(getResources().getString(R.string.female))){
             gender.setText(getResources().getString(R.string.female));
         }
         else     {
             gender.setText(getResources().getString(R.string.male));
         }
         age.setText(ageS + " years");
-        name . setText(clientReferral.getFirst_name()+" "+clientReferral.getMiddle_name()+", "+ clientReferral.getSurname());
-        contacts.setText(clientReferral.getPhone_number());
-        facility.setText(getFacilityName(clientReferral.getFacility_id()));
-        referedDate.setText(dateFormat.format(clientReferral.getReferral_date()));
-        residence.setText(clientReferral.getVillage()+" M/kiti -:"+clientReferral.getVillage_leader());
-        note.setText(clientReferral.getReferral_status());
+        name . setText(clientFollowupPersonObject.getFirst_name()+" "+clientFollowupPersonObject.getMiddle_name()+", "+ clientFollowupPersonObject.getSurname());
+        contacts.setText(clientFollowupPersonObject.getPhone_number());
+        facility.setText(getFacilityName(clientFollowupPersonObject.getFacility_id()));
+        referedDate.setText(dateFormat.format(clientFollowupPersonObject.getReferral_date()));
+//        residence.setText(clientFollowupPersonObject.getVillage()+" M/kiti -:"+clientFollowupPersonObject.getVillage_leader());
+        residence.setText(clientFollowupPersonObject.getVillage());
+        note.setText(clientFollowupPersonObject.getReferral_status());
 
     }
 }

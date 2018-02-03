@@ -8,7 +8,7 @@
         "to": "client_referral.facility_id"
     },
     {
-        "parent": "client_referral",
+        "parent": "facility",
         "child": "follow_up",
         "field": "client follow up",
         "kind": "one_to_many",

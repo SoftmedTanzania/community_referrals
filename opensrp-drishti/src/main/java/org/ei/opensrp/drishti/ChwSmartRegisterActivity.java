@@ -44,6 +44,7 @@ import org.ei.opensrp.drishti.Application.BoreshaAfyaApplication;
 import org.ei.opensrp.drishti.DataModels.FollowUp;
 import org.ei.opensrp.drishti.Fragments.FollowupClientsFragment;
 import org.ei.opensrp.drishti.Fragments.CHWSmartRegisterFragment;
+import org.ei.opensrp.drishti.Repository.ClientFollowupPersonObject;
 import org.ei.opensrp.drishti.Repository.ClientReferralPersonObject;
 import org.ei.opensrp.drishti.Repository.FollowUpPersonObject;
 import org.ei.opensrp.drishti.Repository.FollowUpRepository;
@@ -206,6 +207,13 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         TextView phoneNumber = (TextView) dialogView.findViewById(R.id.viewPhone);
         TextView physicalAddress = (TextView) dialogView.findViewById(R.id.editTextKijiji);
         TextView villageleader = (TextView) dialogView.findViewById(R.id.viewVillageLeader);
+
+        if(clientReferralPersonObject.getReferral_status().equals("1")) {
+            dialogView.findViewById(R.id.referral_feedback_title).setVisibility(VISIBLE);
+            TextView referralFeedback = (TextView) dialogView.findViewById(R.id.referral_feedback);
+            referralFeedback.setVisibility(VISIBLE);
+            referralFeedback.setText(clientReferral.getOther_notes());
+        }
 
 
         textName.setText(clientReferralPersonObject.getFirst_name() +" "+clientReferralPersonObject.getMiddle_name()+" "+clientReferralPersonObject.getSurname());
@@ -375,7 +383,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         return commonPersonObjectList.get(0).getColumnmaps().get("indicatorName");
     }
 
-    public void showFollowUpFormDialog(final ClientReferralPersonObject clientperson) {
+    public void showFollowUpFormDialog(final ClientFollowupPersonObject clientperson) {
 
         String gsonClient = Utils.convertStandardJSONString(clientperson.getDetails());
         Log.d(TAG, "gsonMom = " + gsonClient);
