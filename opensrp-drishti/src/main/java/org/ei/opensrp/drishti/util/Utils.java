@@ -110,6 +110,27 @@ public class Utils {
         String details = commonPersonObject.getColumnmaps().get("details");
         Log.d(TAG, "details string commonPersonObject = " + convertStandardJSONString(details));
         try {
+            long visitDate = 0,dob=0,referralDate=0;
+            try{
+                visitDate = Long.parseLong(commonPersonObject.getColumnmaps().get("visit_date"));
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            try{
+                dob = Long.parseLong(commonPersonObject.getColumnmaps().get("date_of_birth"));
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            try{
+                referralDate = Long.parseLong(commonPersonObject.getColumnmaps().get("referral_date"));
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
             return new ClientFollowupPersonObject(
                     commonPersonObject.getColumnmaps().get("id"),
                     commonPersonObject.getColumnmaps().get("relationalid"),
@@ -127,10 +148,7 @@ public class Utils {
                     commonPersonObject.getColumnmaps().get("care_taker_relationship"),
                     commonPersonObject.getColumnmaps().get("facility_id"),
                     commonPersonObject.getColumnmaps().get("referral_service_id"),
-                    commonPersonObject.getColumnmaps().get("referral_status"),
-                    Long.parseLong(commonPersonObject.getColumnmaps().get("visit_date")),
-                    Long.parseLong(commonPersonObject.getColumnmaps().get("date_of_birth")),
-                    Long.parseLong(commonPersonObject.getColumnmaps().get("referral_date")),
+                    commonPersonObject.getColumnmaps().get("referral_status"),visitDate,dob,referralDate,
                     commonPersonObject.getColumnmaps().get("village"),
                     commonPersonObject.getColumnmaps().get("details")
             );

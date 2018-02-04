@@ -5,7 +5,8 @@
         "default_bind_path": "/model/instance/client_follow_up_form/",
         "fields": [
             {
-                "name": "id"
+                "name": "id",
+                "shouldLoadValue": true
             },
             {
                 "name": "relationalid"

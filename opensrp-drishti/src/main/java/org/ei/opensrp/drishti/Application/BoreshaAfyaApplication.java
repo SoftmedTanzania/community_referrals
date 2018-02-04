@@ -227,7 +227,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
 
             ClientReferral clientReferral = new Gson().fromJson(clientReferralPersonObject.getDetails(), ClientReferral.class);
             clientReferral.setReferral_status(referralStatus);
-            clientReferral.setReferral_feedback(feedback);
+            clientReferral.setOther_notes(feedback);
             clientReferral.setServices_given_to_patient(serviceGiven);
             clientReferral.setTest_results(testResult);
 

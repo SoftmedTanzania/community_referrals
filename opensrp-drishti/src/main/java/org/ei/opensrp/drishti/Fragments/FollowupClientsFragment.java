@@ -71,14 +71,15 @@ public class FollowupClientsFragment extends SecuredNativeSmartRegisterCursorAda
         v= inflater.inflate(R.layout.fragment_chwregistration, container, false);
 
         recyclerView = (RecyclerView)v.findViewById(R.id.item_list);
-        commonRepository = context().commonrepository("followup_client");
+        commonRepository = context().commonrepository(TABLE_NAME);
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME );
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
-        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
 
         this.clientFollowupPersonObjects = Utils.convertToClientFollowupPersonObjectList(commonPersonObjectList);
         Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + clientFollowupPersonObjects.size());
+        ;
+        Log.d(TAG, "followup commonPersonList = " + gson.toJson(clientFollowupPersonObjects));
 
         CHWRegisterRecyclerAdapter chwRegisterRecyclerAdapter = new CHWRegisterRecyclerAdapter(getActivity(),clientFollowupPersonObjects);
 
@@ -133,13 +134,15 @@ public class FollowupClientsFragment extends SecuredNativeSmartRegisterCursorAda
 
     }
     protected void populateData() {
-        commonRepository = context().commonrepository("client_referral");
+        commonRepository = context().commonrepository(TABLE_NAME);
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME );
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
 
         this.clientFollowupPersonObjects = Utils.convertToClientFollowupPersonObjectList(commonPersonObjectList);
+
+        Log.d(TAG, "followup commonPersonList = " + gson.toJson(clientFollowupPersonObjects));
 
         CHWRegisterRecyclerAdapter chwRegisterRecyclerAdapter = new CHWRegisterRecyclerAdapter(getActivity(),clientFollowupPersonObjects);
 

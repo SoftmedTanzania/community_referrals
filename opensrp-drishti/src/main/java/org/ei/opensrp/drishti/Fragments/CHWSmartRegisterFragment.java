@@ -264,26 +264,12 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     }
 
     public void updateRegisterCounts() {
-        NativeUpdateANMDetailsTask task = new NativeUpdateANMDetailsTask(Context.getInstance().anmController());
-        task.fetch(new NativeAfterANMDetailsFetchListener() {
-            @Override
-            public void afterFetch(HomeContext anmDetails) {
-                // TODO: 9/14/17 update counts after fetch
-                 updateRegisterCounts(anmDetails);
-            }
-        });
-    }
-
-
-    private void updateRegisterCounts(final HomeContext homeContext) {
-
         new Thread(new Runnable() {
             @Override
             public void run() {
 
-                Log.d(TAG,"succesfulcount --"+homeContext.getSucessReferralCount());
-                Log.d(TAG,"unsuccesfulcount --"+homeContext.getUnsucessReferralCount());
-
+                final long successfullCount =  context().allBeneficiaries().successCount();
+                final long unsuccessfullCount =  context().allBeneficiaries().unsuccessCount();
 
                 Handler mainHandler = new Handler(getMainLooper());
 
@@ -292,8 +278,8 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                     public void run() {
                         successView =  (TextView) v.findViewById(R.id.count_one);
                         unsuccessView =  (TextView) v.findViewById(R.id.count_two);
-                        successView.setText(valueOf(homeContext.getSucessReferralCount()));
-                        unsuccessView.setText(valueOf(homeContext.getUnsucessReferralCount()));
+                        successView.setText(valueOf(successfullCount));
+                        unsuccessView.setText(valueOf(unsuccessfullCount));
 
                         donutChart.stopAnimateLoading(60.f);
                     }
@@ -303,6 +289,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
             }
         }).start();
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {

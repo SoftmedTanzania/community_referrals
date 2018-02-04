@@ -9,10 +9,10 @@
     },
     {
         "parent": "facility",
-        "child": "follow_up",
+        "child": "followup_client",
         "field": "client follow up",
         "kind": "one_to_many",
-        "from": "follow_up.id",
-        "to": "follow_up.relationalid"
+        "from": "facility.id",
+        "to": "followup_client.facility_id"
     }
 ]

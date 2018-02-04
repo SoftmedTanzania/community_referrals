@@ -42,12 +42,14 @@ public class CHWRegisterRecyclerAdapter extends
     private static String TAG = CHWRegisterRecyclerAdapter.class.getSimpleName();
     private List<ClientFollowupPersonObject> clients;
     private Context mContext;
-    private ClientFollowupPersonObject client;
     private boolean mTwoPane=true;
 
     public CHWRegisterRecyclerAdapter(Context context, List<ClientFollowupPersonObject> clients) {
         this.clients = clients;
         this.mContext = context;
+
+
+        Log.d(TAG,"follow up adapter constructor : "+new Gson().toJson(clients));
     }
 
     private Context getContext() {
@@ -67,7 +69,10 @@ public class CHWRegisterRecyclerAdapter extends
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
-        client = clients.get(position);
+        final ClientFollowupPersonObject client = clients.get(position);
+
+        Log.d(TAG,"follow up adapter : "+new Gson().toJson(clients));
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
         // Set item views based on your views and data model
