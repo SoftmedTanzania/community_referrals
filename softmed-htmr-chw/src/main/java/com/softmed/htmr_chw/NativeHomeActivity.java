@@ -98,7 +98,7 @@ public class NativeHomeActivity extends SecuredActivity {
         setupViews();
         initialize();
         DisplayFormFragment.formInputErrorMessage = getResources().getString(com.softmed.htmr_chw.R.string.forminputerror);
-        DisplayFormFragment.okMessage = getResources().getString(com.softmed.htmr_chw.R.string.okforminputerror);
+        DisplayFormFragment.okMessage = getResources().getString(R.string.button_ok);
 
 
 

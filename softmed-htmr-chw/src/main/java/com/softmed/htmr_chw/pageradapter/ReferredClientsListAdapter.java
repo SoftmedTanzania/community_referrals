@@ -82,13 +82,13 @@ public class ReferredClientsListAdapter extends
 
 
         if(client.getReferral_status().equals("0")){
-            viewHolder.referralStatus.setText("Pending");
+            viewHolder.referralStatus.setText(R.string.pending_label);
             viewHolder.statusIcon.setBackgroundColor(mContext.getResources().getColor(R.color.blue_400));
         }else if(client.getReferral_status().equals("1")){
-            viewHolder.referralStatus.setText("Successful");
+            viewHolder.referralStatus.setText(R.string.suceessful_label);
             viewHolder.statusIcon.setBackgroundColor(mContext.getResources().getColor(R.color.green_400));
         }else{
-            viewHolder.referralStatus.setText("Unsuccessful");
+            viewHolder.referralStatus.setText(R.string.unsuccessful_label);
             viewHolder.statusIcon.setBackgroundColor(mContext.getResources().getColor(R.color.red_400));
         }
 
@@ -128,34 +128,6 @@ public class ReferredClientsListAdapter extends
 
     }
 
-    public void showPop(final int position, View anchor) {
-
-        PopupMenu popupMenu = new PopupMenu((ChwSmartRegisterActivity) mContext, anchor);
-        // inflate menu xml res
-        popupMenu.getMenuInflater().inflate(R.menu.menu_follow_up_details, popupMenu.getMenu());
-        popupMenu.show();
-
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-
-                switch (item.getItemId()) {
-                    // TODO: handle option selected
-                    case R.id.popOpt1:
-                        ((ChwSmartRegisterActivity) mContext).showPreRegistrationVisitDialog(clients.get(position));
-                        return true;
-
-                    case R.id.popOpt2:
-                        ((ChwSmartRegisterActivity) mContext).showPreRegistrationDetailsDialog(clients.get(position));
-                        return true;
-
-                    default:
-                        return false;
-                }
-            }
-        });
-
-    }
 
     public String getReferralServiceName(String id){
         Cursor cursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service where id ='"+ id +"'");

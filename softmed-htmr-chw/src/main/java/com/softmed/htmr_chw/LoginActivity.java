@@ -478,6 +478,10 @@ public class LoginActivity extends AppCompatActivity {
     public static void setLanguage() {
         AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
         String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+
+
+        android.util.Log.d(TAG,"set Locale : "+preferredLocale);
+
         Resources res = Context.getInstance().applicationContext().getResources();
         // Change locale settings in the app.
         DisplayMetrics dm = res.getDisplayMetrics();

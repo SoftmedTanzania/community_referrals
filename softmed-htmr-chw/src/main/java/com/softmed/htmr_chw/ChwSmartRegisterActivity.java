@@ -603,7 +603,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public DialogOption[] getEditOptions() {
         return new DialogOption[]{
 
-                new OpenFormOption(getResources().getString(R.string.nbnf), "birthnotificationpregnancystatusfollowup", formController)
         };
     }
 
@@ -840,24 +839,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                                 })
                         .show();
             } else {
-                new AlertDialog.Builder(this)
-                        .setMessage(R.string.mcareform_back_confirm_dialog_message)
-                        .setTitle(R.string.mcareform_back_confirm_dialog_title)
-                        .setCancelable(false)
-                        .setPositiveButton(R.string.mcareyes_button_label,
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,
-                                                        int whichButton) {
-                                        switchToBaseFragment(null);
-                                    }
-                                })
-                        .setNegativeButton(R.string.mcareno_button_label,
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,
-                                                        int whichButton) {
-                                    }
-                                })
-                        .show();
+
             }
 
         } else if (currentPage == 0 || currentPage == 3) {

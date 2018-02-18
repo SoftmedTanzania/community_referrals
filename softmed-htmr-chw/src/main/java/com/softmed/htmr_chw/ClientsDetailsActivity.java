@@ -1,11 +1,13 @@
 package com.softmed.htmr_chw;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
@@ -13,12 +15,14 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 
 import com.softmed.htmr_chw.Fragments.ClientDetailFragment;
 import com.softmed.htmr_chw.Repository.ClientFollowupPersonObject;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
+import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
 import java.text.SimpleDateFormat;
@@ -27,8 +31,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class ClientsDetailsActivity extends SecuredNativeSmartRegisterActivity {
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
+public class ClientsDetailsActivity extends SecuredNativeSmartRegisterActivity {
+    private static final String TAG = ClientsDetailsActivity.class.getSimpleName();
     private  TextView name,age,gender,facility,feedback,contacts,sponsor,referedReason,residence,referedDate,note;
     private ClientFollowupPersonObject clientFollowupPersonObject;
     private CommonRepository commonRepository;
@@ -120,6 +126,8 @@ public class ClientsDetailsActivity extends SecuredNativeSmartRegisterActivity {
         referedDate.setText(dateFormat.format(clientFollowupPersonObject.getReferral_date()));
 //        residence.setText(clientFollowupPersonObject.getVillage()+" M/kiti -:"+clientFollowupPersonObject.getVillage_leader());
         note.setText("-");
+
+        setLanguage();
     }
 
     public String getFacilityName(String id){
@@ -169,6 +177,22 @@ public class ClientsDetailsActivity extends SecuredNativeSmartRegisterActivity {
 
     @Override
     public void startRegistration() {
+
+    }
+
+    public static void setLanguage() {
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+
+
+        android.util.Log.d(TAG,"set Locale : "+preferredLocale);
+
+        Resources res = Context.getInstance().applicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(preferredLocale);
+        res.updateConfiguration(conf, dm);
 
     }
 }

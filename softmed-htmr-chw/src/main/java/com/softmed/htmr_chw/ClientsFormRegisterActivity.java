@@ -6,12 +6,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -43,6 +45,7 @@ import com.softmed.htmr_chw.Repository.FacilityObject;
 import com.softmed.htmr_chw.Repository.ReferralServiceObject;
 import com.softmed.htmr_chw.util.Utils;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
+import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.repository.ClientReferralRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
@@ -56,6 +59,7 @@ import java.util.Locale;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static java.lang.String.valueOf;
 import static com.softmed.htmr_chw.util.Utils.generateRandomUUIDString;
 
@@ -103,6 +107,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setLanguage();
         setContentView(com.softmed.htmr_chw.R.layout.activity_client_registration_form);
         setReferralServiceList();
         setFacilistList();
@@ -255,12 +260,12 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
 
                 String service = spinnerService.getSelectedItem().toString();
                 List<Indicator> indicator = new ArrayList<Indicator>();
-                if(service.equals("Aina za huduma") || service.equals("Referral Services")){
+                if(service.equals("Huduma iliyotolewa rufaa") || service.equals("Referral Services")){
 
                 }else {
 
                     parentLayout = (LinearLayout) findViewById(com.softmed.htmr_chw.R.id.check_add_layout);
-                    Log.d(TAG,"service"+service);
+                    Log.d(TAG," Coze Service : "+service);
                     categoryValue = getCategory(service);
                     if(categoryValue.equalsIgnoreCase("malaria")){
                         Log.d(TAG,"category"+categoryValue);
@@ -571,6 +576,22 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
         Toast.makeText(this,
                 message,
                 Toast.LENGTH_LONG).show();
+    }
+
+    public static void setLanguage() {
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(org.ei.opensrp.Context.getInstance().applicationContext()));
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+
+
+        android.util.Log.d(TAG,"set Locale : "+preferredLocale);
+
+        Resources res = org.ei.opensrp.Context.getInstance().applicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(preferredLocale);
+        res.updateConfiguration(conf, dm);
+
     }
 
 }

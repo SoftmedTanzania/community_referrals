@@ -132,14 +132,14 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
 
         TextView tabContent = (TextView) tabLinearLayout.findViewById(R.id.tabContent);
-        tabContent.setText("Received Referrals");
+        tabContent.setText(R.string.received_referrals_label);
         tabContent.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_trending_down_white_24dp, 0, 0, 0);
 
 
 
         LinearLayout tabLinearLayout2 = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
         TextView tabContent2 = (TextView) tabLinearLayout2.findViewById(R.id.tabContent);
-        tabContent2.setText("Sent Referrals");
+        tabContent2.setText(R.string.sent_referrals_label);
         tabContent2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_trending_up_white_24dp, 0, 0, 0);
 
 
@@ -177,10 +177,19 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                 new Toolbar.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        // Handle menu item click event
-
-                        onOptionsItemSelected(item);
-                        return true;
+                        switch (item.getItemId()) {
+                            case com.softmed.htmr_chw.R.id.updateMenuItem:
+                                onOptionsItemSelected(item);
+                                return true;
+                            case com.softmed.htmr_chw.R.id.switchLanguageMenuItem:
+                                String newLanguagePreference = LoginActivity.switchLanguagePreference();
+                                LoginActivity.setLanguage();
+                                Toast.makeText(getActivity(), "Language preference set to " + newLanguagePreference + ". Please restart the application.", LENGTH_SHORT).show();
+                                getActivity().recreate();
+                                return true;
+                            default:
+                                return onOptionsItemSelected(item);
+                        }
                     }
                 });
 
