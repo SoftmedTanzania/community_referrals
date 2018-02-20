@@ -75,7 +75,7 @@
     <string name="referral_services">Referral Services</string>
     <string name="referral_details">Referral Details</string>
     <string name="title_success">Success</string>
-    <string name="title_unsuccessful">Unsuccessful</string>
+    <string name="title_unsuccessful">Pending</string>
     <string name="not_synced">Not Synced</string>
     <string name="logged_user">Logged in as </string>
     <string name="wrong_facility">Please fill in the correct referral facility</string>

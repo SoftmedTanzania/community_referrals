@@ -30,7 +30,7 @@
     <string name="powered_bt">Powered by OpenSRP</string>
     <string name="page_title_htmr">htmr</string>
     <string name="page_title_referral">Referral \nApplication</string>
-    <string name="hint_username">"Jina "</string>
+    <string name="hint_username">Jina</string>
     <string name="hint_password">Neno la siri</string>
     <string name="button_login">Ingia</string>
     <string name="process_logging_in">Logging in...</string>
@@ -56,7 +56,7 @@
     <string name="button_delete">Futa</string>
     <string name="hint_met_client">Umempata mteja?</string>
     <string name="hint_missing_reasons">Reasons for missing the appointment</string>
-    <string name="client_condition">Client\'s condition during visit</string>
+    <string name="client_condition">Hali ya mteja wakati wa ufwatiliaji</string>
     <string name="client_middlename">JIna la kati</string>
     <string name="client_birthday">Tarehe ya kuzaliwa</string>
     <string name="button_search">Tafuta</string>
@@ -74,10 +74,10 @@
     <string name="referral_services">Huduma iliyotolewa rufaa</string>
     <string name="referral_details">Taarifa za rufaa</string>
     <string name="title_success">Imefanikiwa</string>
-    <string name="title_unsuccessful">Haijafanikiwa</string>
+    <string name="title_unsuccessful">Inasubiri</string>
     <string name="not_synced">Not Synced</string>
     <string name="logged_user">Umeingia kama</string>
-    <string name="wrong_facility">Tafadhali chagua jna sahihi la kituo cha afya</string>
+    <string name="wrong_facility">Tafadhali chagua jina sahihi la kituo cha afya</string>
     <string name="missing_facility">Tafadhali jaza jina la kituo cha afya</string>
     <string name="missing_services">Tafadhali chagua huduma ya rufaa</string>
     <string name="wrong_mobile_number">Tafadhali jaza namba ya simu sahihi</string>

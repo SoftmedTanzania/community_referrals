@@ -427,8 +427,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
 
     public boolean isFormSubmissionOk() {
         if (TextUtils.isEmpty(editTextfName.getText())  ||
-                TextUtils.isEmpty(editTextlName.getText()) ||
-                TextUtils.isEmpty(editTextVillageLeader.getText())) {
+                TextUtils.isEmpty(editTextlName.getText())) {
             message = getResources().getString(com.softmed.htmr_chw.R.string.unfilled_information);
             makeToast();
             return false;
@@ -438,20 +437,18 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
             return false;
 
         }else if (!TextUtils.isEmpty(facilitytextView.getText())) {
-            int size = facilityList.size();
-            boolean sameValue = false;
-            for(int j = 0; j < size; j++){
-                if(facilitytextView.getText().toString().equals(facilityList.get(0)))
-                    sameValue =true;
-            }
-            if (sameValue){
+            String facilityName = facilitytextView.getText().toString();
 
-                return sameValue;
-            }else{
+            facilityName = facilityName.trim();
+            int index = facilitiesList.indexOf(facilityName);
+
+            if(index<=0){
                 message = getResources().getString(com.softmed.htmr_chw.R.string.wrong_facility);
                 makeToast();
 
-                return sameValue;
+                return false;
+            }else {
+                return true;
             }
 
         }else if (spinnerGender.getSelectedItemPosition() <=0) {
@@ -464,10 +461,6 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
             makeToast();
             return false;
 
-        } else if (TextUtils.isEmpty(textPhone.getText())) {
-            message = getResources().getString(com.softmed.htmr_chw.R.string.wrong_mobile_number);
-            makeToast();
-            return false;
         } else if (TextUtils.isEmpty(editTextKijiji.getText())) {
             message = getResources().getString(com.softmed.htmr_chw.R.string.missing_physical_address);
             makeToast();
