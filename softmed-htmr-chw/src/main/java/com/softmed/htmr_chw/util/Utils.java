@@ -327,7 +327,7 @@ public class Utils {
 
         URL url = null;
         try {
-            url = new URL("http://139.162.151.34:8080/api/v2/flow_starts.json");
+            url = new URL("http://45.56.90.103:8080/api/v2/flow_starts.json");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
