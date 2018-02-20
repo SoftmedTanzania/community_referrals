@@ -260,7 +260,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
 
                 String service = spinnerService.getSelectedItem().toString();
                 List<Indicator> indicator = new ArrayList<Indicator>();
-                if(service.equals("Huduma iliyotolewa rufaa") || service.equals("Referral Services")){
+                if(service.equals(getResources().getString(R.string.referral_services))){
 
                 }else {
 
