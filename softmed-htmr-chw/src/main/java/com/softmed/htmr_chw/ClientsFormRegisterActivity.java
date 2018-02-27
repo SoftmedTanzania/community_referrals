@@ -438,14 +438,15 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
 
         }else if (!TextUtils.isEmpty(facilitytextView.getText())) {
             String facilityName = facilitytextView.getText().toString();
-
+            Log.d(TAG,"facility name = "+facilityName);
             facilityName = facilityName.trim();
-            int index = facilitiesList.indexOf(facilityName);
+            int index = facilityList.indexOf(facilityName);
+
+            Log.d(TAG,"facility name index = "+facilityName);
 
             if(index<=0){
                 message = getResources().getString(com.softmed.htmr_chw.R.string.wrong_facility);
                 makeToast();
-
                 return false;
             }else {
                 return true;
