@@ -3,7 +3,7 @@
     {
       "name": "client_referral",
       "columns": [
-        {"name":"first_name"},{"name":"middle_name"},{"name":"surname"},{"name":"community_based_hiv_service"},{"name":"ctc_number"},{"name":"referral_date"},{"name":"facility_id"},{"name":"referral_reason"},{"name":"referral_service_id"},{"name":"is_valid"},{"name":"referral_status"}
+        {"name":"first_name"},{"name":"middle_name"},{"name":"surname"},{"name":"community_based_hiv_service"},{"name":"ctc_number"},{"name":"referral_date"},{"name":"facility_id"},{"name":"referral_reason"},{"name":"referral_service_id"},{"name":"is_valid"},{"name":"referral_status"},{"name":"gender"}
       ]
     },
     {

@@ -90,6 +90,7 @@
     <string name="unknown_response">login failed. Try later</string>
     <string name="no_internet_connectivity">No internet connection. Please ensure data connectivity</string>
     <string name="sent_referrals_label">Sent Referrals</string>
+    <string name="reports_label">Reports</string>
     <string name="received_referrals_label">Received Referrals</string>
     <string name="suceessful_label">Successful</string>
     <string name="unsuccessful_label">Unsuccessful</string>

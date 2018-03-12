@@ -143,8 +143,15 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         tabContent2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_trending_up_white_24dp, 0, 0, 0);
 
 
+        LinearLayout tabLinearLayout3 = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
+        TextView tabContent3 = (TextView) tabLinearLayout3.findViewById(R.id.tabContent);
+        tabContent3.setText(R.string.reports_label);
+        tabContent3.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_event_note_white_24dp, 0, 0, 0);
+
+
         tabs.getTabAt(0).setCustomView(tabContent2);
         tabs.getTabAt(1).setCustomView(tabContent);
+        tabs.getTabAt(2).setCustomView(tabContent3);
 
 
         final int colorWhite = ContextCompat.getColor(getActivity(), android.R.color.white);

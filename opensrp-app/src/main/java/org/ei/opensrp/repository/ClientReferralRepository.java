@@ -22,6 +22,7 @@ public class ClientReferralRepository extends DrishtiRepository {
     public static final String ID_COLUMN = "id";
     public static final String Relational_ID = "relationalid";
     public static final String fName = "first_name";
+    public static final String gender = "gender";
     public static final String mName = "middle_name";
     public static final String lName = "surname";
     public static final String CBHS = "community_based_hiv_service";
@@ -140,6 +141,7 @@ public class ClientReferralRepository extends DrishtiRepository {
         values.put(ReferralReason, clientReferral.getReferral_reason());
         values.put(Service, clientReferral.getReferral_service_id());
         values.put(ReferralStatus, clientReferral.getReferral_status());
+        values.put(gender, clientReferral.getGender());
         values.put(IS_VALID, clientReferral.getIs_valid());
         values.put(DETAILS_COLUMN, new Gson().toJson(clientReferral));
         return values;

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.softmed.htmr_chw.Fragments.ReferredClientsFragment;
 import com.softmed.htmr_chw.Fragments.FollowupClientsFragment;
+import com.softmed.htmr_chw.Fragments.ReportFragment;
 
 
 /**
@@ -26,6 +27,9 @@ public class CHWPagerAdapter extends FragmentPagerAdapter {
 
             case 1:
                 return new FollowupClientsFragment();
+
+            case 2:
+                return new ReportFragment();
             default:
                 return null;
         }
@@ -33,7 +37,7 @@ public class CHWPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -44,6 +48,9 @@ public class CHWPagerAdapter extends FragmentPagerAdapter {
 
             case 1:
                 return "rufaa ya awali";
+
+            case 2:
+                return "reports";
 
             default:
                 return String.valueOf(position + 1);
