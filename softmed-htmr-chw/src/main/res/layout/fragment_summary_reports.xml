@@ -8,22 +8,23 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:background="@color/white">
+        android:background="#f5f5f5">
 
         <LinearLayout
             android:id="@+id/data_view"
             android:visibility="visible"
-            android:paddingBottom="32dp"
+            android:background="@color/white"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:gravity="center_vertical"
                 android:id="@+id/linear_title">
 
@@ -73,42 +74,25 @@
 
             </LinearLayout>
 
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:minHeight="200dp"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/summary_table"
-                    android:background="@color/card_grid_tex">
-                    <include layout="@layout/view_summary_item"/>
-                    <include layout="@layout/view_summary_item"/>
-                    <include layout="@layout/view_summary_item"/>
-                    <include layout="@layout/view_summary_item"/>
-                    <include layout="@layout/view_summary_item"/>
-                </LinearLayout>
-
-
-            </RelativeLayout>
         </LinearLayout>
 
         <View
-            android:layout_marginTop="4dp"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/card_grid_tex"/>
 
         <TableLayout
+            android:background="#f5f5f5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/services_table"/>
 
     </LinearLayout>
 
-    <include layout="@layout/view_fragment_reports_date_picker"/>
-
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/view_fragment_reports_date_picker"/>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

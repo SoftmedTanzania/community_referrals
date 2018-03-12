@@ -22,6 +22,9 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Calendar;
 
@@ -41,6 +44,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
     private LinearLayout dateFromLayout, dateToLayout;
     private Button applyDateRangeButton;
     private CommonRepository commonRepository;
+    private TableLayout servicesTable;
 
     public ReportFragment() {
     }
@@ -125,9 +129,11 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
         applyDateRangeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                servicesTable.removeAllViews();
                 loadReportData();
             }
         });
+        servicesTable = (TableLayout)rowview.findViewById(R.id.services_table);
 
 
         return rowview;
@@ -161,62 +167,103 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
 
     private void loadReportData(){
 
-        new AsyncTask<Void, Void, Void>(){
+        new AsyncTask<Void, String, String>(){
 
             @Override
-            protected Void doInBackground(Void... voids) {
+            protected String doInBackground(Void... voids) {
 
                 Cursor servicesCursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service INNER JOIN client_referral ON  referral_service.id = client_referral.referral_service_id GROUP BY referral_service.id" );
 
                 Log.d(TAG," services count count :=  "+servicesCursor.getCount());
 
+                JSONArray jsonArray = new JSONArray();
                 for(int i=0;i<servicesCursor.getCount();i++){
                     servicesCursor.moveToPosition(i);
                     Log.d(TAG," services name :=  "+servicesCursor.getString(servicesCursor.getColumnIndex("name")));
 
-                    int serviveId = servicesCursor.getInt(servicesCursor.getColumnIndex("id"));
+                    int serviveId = servicesCursor.getInt(0);
                     Log.d(TAG," services id :=  "+serviveId);
 
-                    Cursor cursorMaleCount = commonRepository.RawCustomQueryForAdapter("select count(*) FROM "+TABLE_NAME+ " WHERE referral_service_id = "+serviveId+" AND  referral_status= 'true' AND gender = 'Male'" );
-                    Cursor cursorFemaleCount = commonRepository.RawCustomQueryForAdapter("select count(*) FROM "+TABLE_NAME+ " WHERE referral_service_id = "+serviveId+" AND  referral_status= 'true' AND gender = 'Female'" );
+                    Cursor cursorMaleCount = commonRepository.RawCustomQueryForAdapter("select count(*) as c FROM "+TABLE_NAME+ " WHERE referral_service_id = "+serviveId+" AND  referral_status<>2 AND  gender = 'Male'" );
+                    cursorMaleCount.moveToFirst();
+                    Cursor cursorFemaleCount = commonRepository.RawCustomQueryForAdapter("select count(*) as c FROM "+TABLE_NAME+ " WHERE referral_service_id = "+serviveId+" AND  referral_status<>2 AND gender = 'Female'" );
+                    cursorFemaleCount.moveToFirst();
 
+                    JSONObject serviceDetails = new JSONObject();
+                    try {
+                        serviceDetails.put("Male",cursorMaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
+                        serviceDetails.put("Female",cursorFemaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
+                        serviceDetails.put("Service",servicesCursor.getString(servicesCursor.getColumnIndex("name")));
+                        serviceDetails.put("Total",cursorMaleCount.getInt(cursorMaleCount.getColumnIndex("c"))+cursorFemaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+                    Log.d(TAG," male count   :=  "+cursorMaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
+                    Log.d(TAG," female count :=  "+cursorFemaleCount.getInt(cursorFemaleCount.getColumnIndex("c")));
+
+                    jsonArray.put(serviceDetails);
 
 
                 }
 
 
 
-//                listOfIndicators = BaseActivity.baseDatabase.referralServiceIndicatorsDao().getAllServices();
-
-                return null;
+                return jsonArray.toString();
             }
 
             @Override
-            protected void onPostExecute(Void aVoid) {
+            protected void onPostExecute(String aVoid) {
                 super.onPostExecute(aVoid);
-//
-//                for (ReferralServiceIndicators service : listOfIndicators){
-//                    View tableView = layoutInflater.inflate(R.layout.single_service_report_table_item, null);
-//
-//                    TextView serviceName = (TextView) tableView.findViewById(R.id.service_name);
-//
-//                    TextView maleTotal  = (TextView) tableView.findViewById(R.id.male_total);
-//                    TextView femaleTotal = (TextView) tableView.findViewById(R.id.female_total);
-//                    TextView total = (TextView) tableView.findViewById(R.id.total);
-//
-//                    TextView maleAttendedCount = (TextView) tableView.findViewById(R.id.male_attended);
-//                    TextView femaleAttendedCount = (TextView) tableView.findViewById(R.id.female_attended);
-//                    TextView totalAttended = (TextView) tableView.findViewById(R.id.total_attended);
-//
-//                    TextView maleUnattended = (TextView) tableView.findViewById(R.id.male_pending);
-//                    TextView femaleUnattended = (TextView) tableView.findViewById(R.id.female_pending);
-//                    TextView totalUnattended = (TextView) tableView.findViewById(R.id.total_pending);
-//
-//                    serviceName.setText(service.getServiceName());
-//
-//                    servicesTable.addView(tableView);
-//
-//                }
+                JSONArray services = null;
+                try {
+                    services = new JSONArray(aVoid);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                for (int i=0;i<services.length();i++){
+
+                    JSONObject object = null;
+                    try {
+                        object = services.getJSONObject(i);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    View tableView = getActivity().getLayoutInflater().inflate(R.layout.view_summary_item, null);
+
+                    TextView sn = (TextView) tableView.findViewById(R.id.sn_title);
+                    TextView serviceName = (TextView) tableView.findViewById(R.id.service_name);
+                    TextView maleTotal  = (TextView) tableView.findViewById(R.id.male_count);
+                    TextView femaleTotal = (TextView) tableView.findViewById(R.id.female_count);
+                    TextView total = (TextView) tableView.findViewById(R.id.total);
+
+                    sn.setText((i+1)+"");
+                    try {
+                        serviceName.setText(object.getString("Service"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        maleTotal.setText(object.getString("Male"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        femaleTotal.setText(object.getString("Female"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        total.setText(object.getString("Total"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    servicesTable.addView(tableView);
+
+                }
 
             }
         }.execute();

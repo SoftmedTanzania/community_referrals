@@ -98,6 +98,7 @@ public class Utils {
                     commonPersonObject.getColumnmaps().get("referral_service_id"),
                     commonPersonObject.getColumnmaps().get("referral_status"),
                     commonPersonObject.getColumnmaps().get("is_valid"),
+                    commonPersonObject.getColumnmaps().get("gender"),
                     commonPersonObject.getColumnmaps().get("details")
             );
         } catch (Exception e) {
@@ -177,6 +178,7 @@ public class Utils {
                     commonPersonObject.getReferral_service_id(),
                     commonPersonObject.getReferral_status(),
                     commonPersonObject.getIs_valid(),
+                    commonPersonObject.getGender(),
                     commonPersonObject.getDetails()
             );
         } catch (Exception e) {
@@ -327,7 +329,7 @@ public class Utils {
 
         URL url = null;
         try {
-            url = new URL("http://139.162.151.34:8080/api/v2/flow_starts.json");
+            url = new URL("http://45.56.90.103:8080/api/v2/flow_starts.json");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

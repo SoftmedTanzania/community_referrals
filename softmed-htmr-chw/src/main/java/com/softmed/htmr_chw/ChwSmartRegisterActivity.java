@@ -216,7 +216,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         phoneNumber.setText(clientReferral.getPhone_number());
         villageleader.setText(clientReferral.getVillage_leader());
         physicalAddress.setText(clientReferral.getVillage());
-        if((clientReferral.getGender()).equals("1")){
+        if((clientReferralPersonObject.getGender()).equals(getResources().getString(R.string.female))){
             gender.setText(getResources().getString(R.string.female));
         }
         else     {

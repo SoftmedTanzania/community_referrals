@@ -13,7 +13,7 @@ import java.util.Map;
  */
 
 public class ClientReferralPersonObject {
-    private String id, relationalId, first_name, middle_name, surname, community_based_hiv_service, ctc_number, is_valid, referral_reason, facility_id, referral_service_id, referral_status;
+    private String id, relationalId, first_name, middle_name,gender, surname, community_based_hiv_service, ctc_number, is_valid, referral_reason, facility_id, referral_service_id, referral_status;
     private long referral_date;
     private String details;
     private Map<String, String> columnMap;
@@ -31,6 +31,7 @@ public class ClientReferralPersonObject {
                                       String referral_service_id,
                                       String referral_status,
                                       String is_valid,
+                                      String gender,
                                       String details
                                       ) {
         this.details = details;
@@ -47,6 +48,7 @@ public class ClientReferralPersonObject {
         this.referral_reason = ReferralReason;
         this.referral_service_id = referral_service_id;
         this.is_valid = is_valid;
+        this.gender = gender;
     }
 
     // alternative constructor so you don't pass bucha stuff, PregnantMom contains everything
@@ -68,6 +70,7 @@ public class ClientReferralPersonObject {
         this.is_valid = clientReferral.getIs_valid();
         this.referral_status = clientReferral.getReferral_status();
         this.facility_id = clientReferral.getFacility_id();
+        this.gender = clientReferral.getGender();
         this.details = new Gson().toJson(clientReferral);
 
     }
@@ -182,6 +185,14 @@ public class ClientReferralPersonObject {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public Map<String, String> getColumnMap() {
