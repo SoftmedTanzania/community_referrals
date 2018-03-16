@@ -1,98 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:background="#f5f5f5">
-
-        <LinearLayout
-            android:id="@+id/data_view"
-            android:visibility="visible"
-            android:background="@color/white"
-            android:gravity="center_horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:gravity="center_vertical"
-                android:id="@+id/linear_title">
-
-                <TextView
-                    android:layout_marginLeft="16dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.05"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/sn_title"
-                    android:text="Sn"
-                    android:textStyle="bold"/>
-
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="0.2"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/child_names_title"
-                    android:text="Service"
-                    android:textStyle="bold"/>
-
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.1"
-                    android:gravity="center_horizontal"
-                    android:textStyle="bold"
-                    android:text="Male"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.1"
-                    android:gravity="center_horizontal"
-                    android:textStyle="bold"
-                    android:text="Female" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="0.1"
-                    android:gravity="center_horizontal"
-                    android:id="@+id/mothers_contacts_title"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:text="Total"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/card_grid_tex"/>
-
-        <TableLayout
-            android:background="#f5f5f5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/services_table"/>
-
-    </LinearLayout>
-
     <android.support.v7.widget.CardView
+        android:id="@+id/toolbar_card"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <include layout="@layout/view_fragment_reports_date_picker"/>
     </android.support.v7.widget.CardView>
-</LinearLayout>
+
+    <ScrollView
+        android:layout_above="@id/toolbar_card"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+        <android.support.percent.PercentRelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.CardView
+                android:layout_margin="8dp"
+                android:id="@+id/chart_card"
+                app:layout_widthPercent="50%"
+                android:background="#e5e5e5"
+                android:layout_height="wrap_content">
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/chart1"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp" />
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_margin="8dp"
+                android:id="@+id/chart_card2"
+                android:layout_toRightOf="@id/chart_card"
+                app:layout_widthPercent="50%"
+                android:background="#e5e5e5"
+                android:layout_height="wrap_content">
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/chart2"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp" />
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_below="@id/chart_card"
+                android:layout_margin="8dp"
+                app:layout_widthPercent="100%"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#f5f5f5">
+
+                <LinearLayout
+                    android:id="@+id/data_view"
+                    android:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text="Succesful Referrals Summary Report"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:gravity="center_vertical"
+                        android:id="@+id/linear_title">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.05"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/sn_title"
+                            android:text="Sn"
+                            android:textStyle="bold"/>
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.2"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/child_names_title"
+                            android:text="Service"
+                            android:textStyle="bold"/>
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:gravity="center_horizontal"
+                            android:textStyle="bold"
+                            android:text="Male"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:gravity="center_horizontal"
+                            android:textStyle="bold"
+                            android:text="Female" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.1"
+                            android:gravity="center_horizontal"
+                            android:id="@+id/mothers_contacts_title"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:text="Total"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/card_grid_tex"/>
+
+                <TableLayout
+                    android:background="#f5f5f5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/services_table"/>
+
+            </LinearLayout>
+
+        </android.support.percent.PercentRelativeLayout>
+
+
+    </ScrollView>
+</RelativeLayout>
