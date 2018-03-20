@@ -495,9 +495,8 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         TextView facility = (TextView) dialog.findViewById(R.id.textview_facility);
         facility.setText(getFacilityName(clientperson.getFacility_id()));
 
-        TextView service = (TextView) dialog.findViewById(R.id.textview_feedback);
-
         TextView referral_reason = (TextView) dialog.findViewById(R.id.textview_followupreason);
+        referral_reason.setText(clientperson.getReferral_reason());
 
     }
 
@@ -744,8 +743,8 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             Log.d(TAG, "motherPersonObject = " + gson.toJson(followUpPersonObject));
             Log.d(TAG, "values = " + gson.toJson(values));
 
-            CommonRepository commonRepository = context().commonrepository("follow_up");
-            commonRepository.customInsert(values);
+            CommonRepository commonRepository = context().commonrepository("followup_client");
+            commonRepository.customUpdate(values,id);
 
             CommonPersonObject c = commonRepository.findByCaseID(uuid);
             List<FormField> formFields = new ArrayList<>();

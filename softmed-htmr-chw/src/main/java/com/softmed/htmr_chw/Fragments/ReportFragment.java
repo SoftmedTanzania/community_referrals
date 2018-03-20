@@ -57,6 +57,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * Created by coze on 06/03/18.
@@ -273,7 +274,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
 
         Legend l2 = mChart2.getLegend();
         l2.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        l2.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        l2.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         l2.setOrientation(Legend.LegendOrientation.HORIZONTAL);
         l2.setDrawInside(false);
         l2.setForm(Legend.LegendForm.SQUARE);
@@ -512,7 +513,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
 
 
             }
-        }.execute();
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
     }
 
