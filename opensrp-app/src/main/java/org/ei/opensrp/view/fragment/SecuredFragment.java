@@ -50,7 +50,11 @@ public abstract class SecuredFragment extends Fragment {
 
         logoutListener = new Listener<Boolean>() {
             public void onEvent(Boolean data) {
-                getActivity().finish();
+                try {
+                    getActivity().finish();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         };
         ON_LOGOUT.addListener(logoutListener);

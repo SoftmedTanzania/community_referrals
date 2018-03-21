@@ -17,11 +17,6 @@
       "columns": [
         {"name":"name"},{"name":"category"},{"name":"isActive"},{"name":"indicators"}
       ]
-    },{
-      "name": "indicator",
-      "columns": [
-        {"name":"referralServiceIndicatorId"},{"name":"referralIndicatorId"},{"name":"isActive"},{"name":"indicatorName"}
-      ]
     },
     {
       "name": "followup_client",

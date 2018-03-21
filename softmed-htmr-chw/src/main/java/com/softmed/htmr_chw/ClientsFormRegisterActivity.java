@@ -47,6 +47,7 @@ import com.softmed.htmr_chw.util.Utils;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.repository.ClientReferralRepository;
+import org.ei.opensrp.repository.IndicatorRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
 
@@ -95,7 +96,8 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
     private ClientReferral clientReferral;
     private Gson gson = new Gson();
     private JSONObject fieldOverides = new JSONObject();
-    private CommonRepository commonRepository,commonRepository1;
+    private CommonRepository commonRepository;
+    private IndicatorRepository indicatorRepository;
     private Cursor cursor;
     private MaterialEditText dobTextView;
     private List<ReferralServiceObject> referralServiceList;
@@ -113,6 +115,8 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
         setFacilistList();
         setupviews();
 
+
+        indicatorRepository = context().indicatorRepository();
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         toolbar = (Toolbar) findViewById(com.softmed.htmr_chw.R.id.toolbar);
@@ -354,9 +358,13 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
 
 
     private void setFacilistList(){
-        commonRepository1 = context().commonrepository("facility");
         //todo martha edit the query
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility");
+
+        for (int i = 0; i<cursor.getCount();i++){
+            cursor.moveToPosition(i);
+            Log.d(TAG,"facility Name = "+cursor.getString(cursor.getColumnIndex("name")));
+        }
 
         List<CommonPersonObject> commonPersonObjectList2 = commonRepository.readAllcommonForField(cursor, "facility");
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList2));
@@ -530,7 +538,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
     }
 
     public List<Indicator> getIndicator(String id){
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM indicator where referralIndicatorId ='"+ id +"'");
+        cursor = indicatorRepository.RawCustomQueryForAdapter("select * FROM indicator where referralIndicatorId ='"+ id +"'");
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "indicator");
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));

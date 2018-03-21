@@ -507,6 +507,7 @@ public class Context {
             return null;
         }
         if (repository == null) {
+            Log.d("j4","initializing repos");
             assignbindtypes();
             ArrayList<DrishtiRepository> drishtireposotorylist = new ArrayList<DrishtiRepository>();
             drishtireposotorylist.add(settingsRepository());
@@ -654,7 +655,7 @@ public class Context {
         }
         return clientReferralRepository;
     }
-    private IndicatorRepository indicatorRepository() {
+    public IndicatorRepository indicatorRepository() {
         if (indicatorRepository == null) {
             indicatorRepository = new IndicatorRepository();
         }

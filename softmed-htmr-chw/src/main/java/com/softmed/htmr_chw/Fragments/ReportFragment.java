@@ -194,7 +194,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
 
         mChart1.setDragDecelerationFrictionCoef(0.95f);
 
-        mChart1.setCenterText(generateCenterSpannableText());
+//        mChart1.setCenterText(generateCenterSpannableText());
 
         mChart1.setDrawHoleEnabled(true);
         mChart1.setHoleColor(Color.WHITE);

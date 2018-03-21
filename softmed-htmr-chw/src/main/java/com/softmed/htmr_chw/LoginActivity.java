@@ -407,19 +407,8 @@ public class LoginActivity extends AppCompatActivity {
         BoreshaAfyaApplication.setCrashlyticsUser(context);
 
         startActivity(new Intent(this, ChwSmartRegisterActivity.class));
-        if((context.allSettings().fetchhasFacility()).equals("true")) {
-            android.util.Log.d(TAG,"has the list of facility already");
-        }else{
-            android.util.Log.d(TAG,"starting facility service");
-            startService(new Intent(this, FacilityService.class));
-        }
-
-        if((context.allSettings().fetchhasReferralService()).equals("true")) {
-            android.util.Log.d(TAG,"has the list of service already");
-        }else{
-            android.util.Log.d(TAG,"starting referral service");
-            startService(new Intent(this, ReferralService.class));
-        }
+        startService(new Intent(this, FacilityService.class));
+        startService(new Intent(this, ReferralService.class));
 
         final String regId =  context.allSettings().fetchRegistartionId();
         Log.logDebug("registration token "+regId);

@@ -21,7 +21,14 @@ import static org.apache.commons.lang3.StringUtils.repeat;
 
 public class IndicatorRepository extends DrishtiRepository {
     private static final String TAG = IndicatorRepository.class.getSimpleName();
-    private static final String CHILD_SQL = "CREATE TABLE indicator(referralIndicatorId VARCHAR PRIMARY KEY,indicatorName VARCHAR,isActive VARCHAR,referralServiceIndicatorId VARCHAR,isActive VARCHAR)";
+    private static final String TABLE_NAME = "indicator";
+    private static final String CHILD_SQL = "CREATE TABLE indicator(" +
+            "referralIndicatorId INTEGER NOT NULL," +
+            "indicatorName VARCHAR," +
+            "isActive VARCHAR," +
+            "referralServiceIndicatorId INTEGER NOT NULL," +
+            "PRIMARY KEY (referralIndicatorId, referralServiceIndicatorId)" +
+            ")";
     public static final String INDICATOR = "indicator";
     private static final String REFERRAL_SERVICE_INDICATOR_ID = "referralServiceIndicatorId";
     private static final String INDICATOR_NAME = "indicatorName";
@@ -33,6 +40,7 @@ public class IndicatorRepository extends DrishtiRepository {
     @Override
     protected void onCreate(SQLiteDatabase database) {
         database.execSQL(CHILD_SQL);
+        Log.d(TAG,"Indicator repository created successfully");
     }
 
     public void add(Indicator referralServiceDataModel) {
@@ -54,7 +62,7 @@ public class IndicatorRepository extends DrishtiRepository {
 
     public Indicator find(String caseId) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
-        Cursor cursor = database.query(INDICATOR, REFERRAL_SERVICE_TABLE_COLUMNS, REFERRAL_SERVICE_INDICATOR_ID + " = ?", new String[]{caseId}, null, null, null, null);
+        Cursor cursor = database.query(INDICATOR, REFERRAL_SERVICE_TABLE_COLUMNS, REFERRAL_INDICATOR_ID + " = ?", new String[]{caseId}, null, null, null, null);
         List<Indicator> children = readAll(cursor);
 
         if (children.isEmpty()) {
@@ -163,5 +171,20 @@ public class IndicatorRepository extends DrishtiRepository {
     public void delete(String childId) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
         database.delete(INDICATOR, REFERRAL_SERVICE_INDICATOR_ID + "= ?", new String[]{childId});
+    }
+
+    public Cursor RawCustomQueryForAdapter(String query) {
+        Log.i(getClass().getName(), query);
+        SQLiteDatabase database = masterRepository.getReadableDatabase();
+        Cursor cursor = database.rawQuery(query, null);
+        return cursor;
+    }
+
+    public void customInsert(ContentValues contentValues) {
+        SQLiteDatabase database = masterRepository.getWritableDatabase();
+        Log.d("customInsert", "tableName = " + TABLE_NAME);
+        Log.d("customInsert", "content values = " + contentValues.toString());
+        database.insert(TABLE_NAME, null, contentValues);
+
     }
 }

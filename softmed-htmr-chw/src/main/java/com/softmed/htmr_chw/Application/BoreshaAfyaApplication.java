@@ -21,11 +21,13 @@ import org.ei.opensrp.domain.Facility;
 import org.ei.opensrp.domain.Indicator;
 import org.ei.opensrp.domain.ReferralServiceDataModel;
 import org.ei.opensrp.domain.Response;
+
 import com.softmed.htmr_chw.LoginActivity;
 import com.softmed.htmr_chw.NativeHomeActivity;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Repository.ClientReferralPersonObject;
 import com.softmed.htmr_chw.util.Utils;
+
 import org.ei.opensrp.repository.ClientReferralRepository;
 import org.ei.opensrp.repository.FacilityRepository;
 import org.ei.opensrp.repository.IndicatorRepository;
@@ -60,6 +62,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.PowerManager;
 import android.util.Log;
+
 /**
  * Created by koros on 1/22/16.
  */
@@ -75,58 +78,57 @@ import android.util.Log;
 public class BoreshaAfyaApplication extends DrishtiApplication {
     private static final String TAG = BoreshaAfyaApplication.class.getSimpleName();
     private ReferralServiceRepository serviceRepository;
-    private int userType=0;//0=CHW and 1=Facility health care worker
-    public  String currentUserID,team_uuid, phone_number,team_name,team_location_id,registration_id = "";
-    public static String username,password;
-    private  final int MAX_ATTEMPTS = 5;
-    private  final int BACKOFF_MILLI_SECONDS = 2000;
-    private  final Random random = new Random();
+    private int userType = 0;//0=CHW and 1=Facility health care worker
+    public String currentUserID, team_uuid, phone_number, team_name, team_location_id, registration_id = "";
+    public static String username, password;
+    private final int MAX_ATTEMPTS = 5;
+    private final int BACKOFF_MILLI_SECONDS = 2000;
+    private final Random random = new Random();
     public Context context;
-    private CommonRepository commonRepository1,commonRepository,commonRepository2;
+    private CommonRepository commonRepository1, commonRepository, commonRepository2;
+    private IndicatorRepository indicatorRepository;
     private boolean hasFacility = false;
     private boolean hasService = false;
 
     private SecuredActivity securedActivity;
-    public void register(final Context context, final String userId,final  String facility, final String regId) {
+
+    public void register(final Context context, final String userId, final String facility, final String regId) {
 
         Log.i(TAG, "registering device (regId = " + regId + ")");
 
-        String serverUrl =  DRISHTI_BASE_PATH + GSM_SERVER_URL;
-        Log.d(TAG,"URL to register = "+serverUrl);
+        String serverUrl = DRISHTI_BASE_PATH + GSM_SERVER_URL;
+        Log.d(TAG, "URL to register = " + serverUrl);
 
         JSONObject object = new JSONObject();
         try {
-            object.put("facilityUiid",facility);
-            object.put("userUiid",userId);
-            object.put("googlePushNotificationToken",regId);
-            object.put("userType",0);
+            object.put("facilityUiid", facility);
+            object.put("userUiid", userId);
+            object.put("googlePushNotificationToken", regId);
+            object.put("userType", 0);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
-
         Response response1 = null;
-        Log.d(TAG,"parameters string = "+object.toString());
-        try{
-            response1 = Context.getInstance().getHttpAgent().post(serverUrl,object.toString());
-            Log.d(TAG,"response is failure "+response1.isFailure());
-            if(response1.isFailure()){
+        Log.d(TAG, "parameters string = " + object.toString());
+        try {
+            response1 = Context.getInstance().getHttpAgent().post(serverUrl, object.toString());
+            Log.d(TAG, "response is failure " + response1.isFailure());
+            if (response1.isFailure()) {
 
-            }else{
+            } else {
                 context.userService().saveRegistrationInfo(regId);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
     public void setReferralService() {
-        commonRepository = context.commonrepository("indicator");
+        indicatorRepository = context.indicatorRepository();
         commonRepository1 = context.commonrepository("referral_service");
-        long count = commonRepository.count();
-        if (count == 0 ) {
 
         //String to place our result in
         final String myUrl = DRISHTI_BASE_PATH + OPENSRP_REFERRAL_SERVICES_URL_PATH;
@@ -138,7 +140,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         JSONArray jsonArray = new JSONArray();
         try {
             jsonArray = new JSONArray(stringResponse.payload());
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         for (int i = 0; i < jsonArray.length(); i++) {
@@ -147,20 +149,24 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
                 explrObject = jsonArray.getJSONObject(i);
                 Log.d(TAG, "string response " + explrObject.toString());
 
-                JSONArray array =  explrObject.getJSONArray("indicators");
+                JSONArray array = explrObject.getJSONArray("indicators");
 
-                for(int j = 0; j < array.length(); j++ ){
-                    Indicator indicator = new Gson().fromJson(array.get(j).toString(),Indicator.class);
+                for (int j = 0; j < array.length(); j++) {
+                    Indicator indicator = new Gson().fromJson(array.get(j).toString(), Indicator.class);
                     indicator.setReferralIndicatorId(explrObject.getString("serviceId"));
                     Log.d(TAG, "string response indicators 2" + new Gson().toJson(indicator));
 
                     ContentValues values = new IndicatorRepository().createValuesFor(indicator);
                     android.util.Log.d(TAG, "values indicator = " + new Gson().toJson(values));
-                    commonRepository.customInsert(values);
+                    try {
+                        indicatorRepository.customInsert(values);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
 
 
-                service = new ReferralServiceDataModel(explrObject.getString("serviceId"),explrObject.getString("serviceName"),explrObject.getString("category"),explrObject.getString("isActive"));
+                service = new ReferralServiceDataModel(explrObject.getString("serviceId"), explrObject.getString("serviceName"), explrObject.getString("category"), explrObject.getString("isActive"));
                 if (service.getId().equals("")) {
                     Log.d(TAG, "service table is empty");
 
@@ -169,7 +175,12 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
                     Log.d(TAG, "referral services downloaded " + service.toString());
                     ContentValues values = new ReferralServiceRepository().createValuesFor(service);
                     android.util.Log.d(TAG, "values services = " + new Gson().toJson(values));
-                    commonRepository1.customInsert(values);
+                    try {
+                        commonRepository1.customInsert(values);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e(TAG, "failed to insert referral service : " + e.getMessage());
+                    }
                     context.userService().saveHasReferralServiceInfo("true");
                 }
             } catch (JSONException e) {
@@ -177,7 +188,6 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
             }
         }
         setHasService(true);
-    }
     }
 
     public void initializeReferralService() {
@@ -187,38 +197,38 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
             if (count > 0) {
                 setHasService(true);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void deleteReferralService( String value){
-        ( (NativeHomeActivity)getApplicationContext()).updateFromServer();
-        Log.d(TAG,"message = "+value);
+    public void deleteReferralService(String value) {
+        ((NativeHomeActivity) getApplicationContext()).updateFromServer();
+        Log.d(TAG, "message = " + value);
     }
 
-    public void updateReferralService(String value){
+    public void updateReferralService(String value) {
 
-        ( (NativeHomeActivity)getApplicationContext()).updateFromServer();
-        Log.d(TAG,"message = "+value);
+        ((NativeHomeActivity) getApplicationContext()).updateFromServer();
+        Log.d(TAG, "message = " + value);
     }
 
-    public void deleteFacility( String value){
+    public void deleteFacility(String value) {
 
-        ( (NativeHomeActivity)getApplicationContext()).updateFromServer();
-        Log.d(TAG,"message = "+value);
+        ((NativeHomeActivity) getApplicationContext()).updateFromServer();
+        Log.d(TAG, "message = " + value);
     }
 
-    public void updateFacility(String value){
-        ((NativeHomeActivity)getApplicationContext()).updateFromServer();
-        Log.d(TAG,"message = "+value);
+    public void updateFacility(String value) {
+        ((NativeHomeActivity) getApplicationContext()).updateFromServer();
+        Log.d(TAG, "message = " + value);
     }
 
-    public void updateReferralStatus(String id,String feedback,String serviceGiven, boolean testResult, String referralStatus){
+    public void updateReferralStatus(String id, String feedback, String serviceGiven, boolean testResult, String referralStatus) {
 
         commonRepository = context.commonrepository("client_referral");
 
-        Cursor cursor = commonRepository.RawCustomQueryForAdapter("select * FROM client_referral WHERE "+CommonRepository.ID_COLUMN+" = '"+id+"'");
+        Cursor cursor = commonRepository.RawCustomQueryForAdapter("select * FROM client_referral WHERE " + CommonRepository.ID_COLUMN + " = '" + id + "'");
 
         try {
             List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "client_referral");
@@ -234,45 +244,42 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
             ContentValues values = new ClientReferralRepository().createValuesUpdateValues(clientReferral);
             commonRepository.customUpdate(values, id);
             Log.d(TAG, "updated values = " + values.toString());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void getFacilities() {
         commonRepository2 = context.commonrepository("facility");
+        final String myUrl = DRISHTI_BASE_PATH + OPENSRP_FACILITY_URL_PATH;
+        Response<String> results = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl, "sean", "Admin123");
+        Log.d(TAG, "facility failure is " + results.isFailure());
+        Log.d(TAG, "this is the result of facility" + results.payload());
 
-        long count = commonRepository2.count();
-        if (count == 0 ) {
-            //String to place our result in
+        try {
+            JSONArray jsonArray = new JSONArray(results.payload());
+            for (int i = 0; i < jsonArray.length(); i++) {
+                Facility facility;
+                JSONObject explrObject = jsonArray.getJSONObject(i);
+                facility = new Facility(explrObject.getString("facilityName"), explrObject.getString("openMRSUIID"));
+                if (facility.getOpenMRSUIID().equals("") || facility.getOpenMRSUIID() == null || facility.getFacilityName().equals("") || facility.getFacilityName() == null) {
+                    Log.d(TAG, "facility is empty");
 
-            final  String myUrl = DRISHTI_BASE_PATH + OPENSRP_FACILITY_URL_PATH;
-            Response<String>  results = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl,"sean", "Admin123");
-            Log.d(TAG,"facility failure is "+results.isFailure());
-            Log.d(TAG,"this is the result of facility"+results.payload());
-
-            try {
-                JSONArray jsonArray = new JSONArray(results.payload());
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    Facility facility;
-                    JSONObject explrObject = jsonArray.getJSONObject(i);
-                    facility = new Facility(explrObject.getString("facilityName"),explrObject.getString("openMRSUIID"));
-                    if (facility.getOpenMRSUIID().equals("")) {
-                        Log.d(TAG,"facility table is empty");
-
-                    } else {
-                        Log.d(TAG,"facility downloaded "+facility.getFacilityName());
-                        ContentValues values = new FacilityRepository().createValuesFor(facility);
-                        android.util.Log.d(TAG, "values facility = " + new Gson().toJson(values));
+                } else {
+                    Log.d(TAG, "facility downloaded " + facility.getFacilityName());
+                    ContentValues values = new FacilityRepository().createValuesFor(facility);
+                    android.util.Log.d(TAG, "values facility = " + new Gson().toJson(values));
+                    try {
                         commonRepository2.customInsert(values);
-                        context.userService().saveHasFacilityInfo("true");
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+                    context.userService().saveHasFacilityInfo("true");
                 }
-            }catch (Exception e){
-                e.printStackTrace();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
     }
 
     public void initializeHasFacilities() {
@@ -282,7 +289,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
             if (count > 0) {
                 setHasFacility(true);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -290,32 +297,29 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
 
     public void setFollowContent(String value) {
         //synchronization process
-        ( (NativeHomeActivity)getApplicationContext()).updateFromServer();
-        Log.d(TAG,"message = "+value);
+        ((NativeHomeActivity) getApplicationContext()).updateFromServer();
+        Log.d(TAG, "message = " + value);
 
     }
 
     public void updateReferralStatus(String value) {
         //get data from the server
-        ( (NativeHomeActivity)getApplicationContext()).updateFromServer();
-        Log.d(TAG,"message = "+value);
+        ((NativeHomeActivity) getApplicationContext()).updateFromServer();
+        Log.d(TAG, "message = " + value);
     }
 
 
-
     // Checking for all possible internet providers
-    public boolean isConnectingToInternet(){
+    public boolean isConnectingToInternet() {
 
         ConnectivityManager connectivity =
                 (ConnectivityManager) getSystemService(
                         android.content.Context.CONNECTIVITY_SERVICE);
-        if (connectivity != null)
-        {
+        if (connectivity != null) {
             NetworkInfo[] info = connectivity.getAllNetworkInfo();
             if (info != null)
                 for (int i = 0; i < info.length; i++)
-                    if (info[i].getState() == NetworkInfo.State.CONNECTED)
-                    {
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
                         return true;
                     }
 
@@ -340,7 +344,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         // Set Dialog Message
         alertDialog.setMessage(message);
 
-        if(status != null)
+        if (status != null)
             // Set alert dialog icon
             alertDialog.setIcon((status) ? R.drawable.ic_check_black_24dp : R.drawable.ic_clear_black_24dp);
 
@@ -357,7 +361,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
 
     private PowerManager.WakeLock wakeLock;
 
-    public  void acquireWakeLock() {
+    public void acquireWakeLock() {
         if (wakeLock != null) wakeLock.release();
 
         PowerManager pm = (PowerManager)
@@ -370,8 +374,9 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         wakeLock.acquire();
     }
 
-    public  void releaseWakeLock() {
-        if (wakeLock != null) wakeLock.release(); wakeLock = null;
+    public void releaseWakeLock() {
+        if (wakeLock != null) wakeLock.release();
+        wakeLock = null;
     }
 
     @Override
@@ -398,7 +403,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
 
 
     @Override
-    public void logoutCurrentUser(){
+    public void logoutCurrentUser() {
         cleanUpSyncState();
         securedActivity = new SecuredActivity() {
             @Override
@@ -414,9 +419,14 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getApplicationContext().startActivity(intent);
-        context.userService().logoutSession();
+        try {
+            context.userService().logoutSession();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    public void logoutUser(){
+
+    public void logoutUser() {
         cleanUpSyncState();
     }
 
@@ -449,49 +459,52 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
                 getBaseContext().getResources().getDisplayMetrics());
     }
 
-    private String[] getFtsSearchFields(String tableName){
-        if (tableName.equals("wazazi_salama_mother")){
-            String[] ftsSearchFields =  { "MOTHERS_FIRST_NAME","MOTHERS_LAST_NAME", "MOTHERS_LAST_MENSTRUATION_DATE", "MOTHERS_ID", "Is_PNC", "alerts.visitCode" };
+    private String[] getFtsSearchFields(String tableName) {
+        if (tableName.equals("wazazi_salama_mother")) {
+            String[] ftsSearchFields = {"MOTHERS_FIRST_NAME", "MOTHERS_LAST_NAME", "MOTHERS_LAST_MENSTRUATION_DATE", "MOTHERS_ID", "Is_PNC", "alerts.visitCode"};
             return ftsSearchFields;
         }
         return null;
     }
+
     protected void attachBaseContext(android.content.Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
     }
-    private String[] getFtsSortFields(String tableName){
-        if(tableName.equals("wazazi_salama_mother")){
-            String[] sortFields = { "MOTHERS_FIRST_NAME","MOTHERS_LAST_NAME", "EXPECTED_DELIVERY_DATE", "MOTHERS_SORTVALUE", "PNC_STATUS", "alerts.Ante_Natal_Care_Reminder_Visit", "alerts.BirthNotificationPregnancyStatusFollowUp", "alerts.Post_Natal_Care_Reminder_Visit"};
+
+    private String[] getFtsSortFields(String tableName) {
+        if (tableName.equals("wazazi_salama_mother")) {
+            String[] sortFields = {"MOTHERS_FIRST_NAME", "MOTHERS_LAST_NAME", "EXPECTED_DELIVERY_DATE", "MOTHERS_SORTVALUE", "PNC_STATUS", "alerts.Ante_Natal_Care_Reminder_Visit", "alerts.BirthNotificationPregnancyStatusFollowUp", "alerts.Post_Natal_Care_Reminder_Visit"};
             return sortFields;
-        } else if(tableName.equals("child")){
-            String[] sortFields = {"GENDER",  "motherCaseId", "alerts.Essential_Newborn_Care_Checklist"};
+        } else if (tableName.equals("child")) {
+            String[] sortFields = {"GENDER", "motherCaseId", "alerts.Essential_Newborn_Care_Checklist"};
             return sortFields;
         }
         return null;
     }
 
-    private String[] getFtsMainConditions(String tableName){
-        if(tableName.equals("wazazi_salama_mother")){
+    private String[] getFtsMainConditions(String tableName) {
+        if (tableName.equals("wazazi_salama_mother")) {
             String[] mainConditions = {"MOTHERS_NAME", "Is_PNC", "details"};
             return mainConditions;
-        } else if(tableName.equals("child")){
-            String[] mainConditions = {"GENDER",  "details"};
+        } else if (tableName.equals("child")) {
+            String[] mainConditions = {"GENDER", "details"};
             return mainConditions;
         }
         return null;
     }
 
-    private String[] getFtsTables(){
-        String[] ftsTables = {  "wazazi_salama_mother", "child" };
+    private String[] getFtsTables() {
+        String[] ftsTables = {"wazazi_salama_mother", "child"};
         return ftsTables;
     }
 
     /**
      * Map value Pair<TableName, updateVisitCode>
+     *
      * @return
      */
-    private Map<String, Pair<String, Boolean>> getAlertScheduleMap(){
+    private Map<String, Pair<String, Boolean>> getAlertScheduleMap() {
         Map<String, Pair<String, Boolean>> map = new HashMap<String, Pair<String, Boolean>>();
         map.put("Ante Natal Care Reminder Visit", Pair.create("wazazi_salama_mother", true));
 //        map.put("BirthNotificationPregnancyStatusFollowUp",  Pair.create("mcaremother", false));
@@ -501,14 +514,14 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         return map;
     }
 
-    private String[] getAlertFilterVisitCodes(){
-        String[] ftsTables = { "ancrv_1", "ancrv_2", "ancrv_3", "ancrv_4" };
+    private String[] getAlertFilterVisitCodes() {
+        String[] ftsTables = {"ancrv_1", "ancrv_2", "ancrv_3", "ancrv_4"};
         return ftsTables;
     }
 
-    private CommonFtsObject createCommonFtsObject(){
+    private CommonFtsObject createCommonFtsObject() {
         CommonFtsObject commonFtsObject = new CommonFtsObject(getFtsTables());
-        for(String ftsTable: commonFtsObject.getTables()){
+        for (String ftsTable : commonFtsObject.getTables()) {
             commonFtsObject.updateSearchFields(ftsTable, getFtsSearchFields(ftsTable));
             commonFtsObject.updateSortFields(ftsTable, getFtsSortFields(ftsTable));
             commonFtsObject.updateMainConditions(ftsTable, getFtsMainConditions(ftsTable));
@@ -517,8 +530,9 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         commonFtsObject.updateAlertFilterVisitCodes(getAlertFilterVisitCodes());
         return commonFtsObject;
     }
+
     public static void setCrashlyticsUser(Context context) {
-        if(context != null && context.userService() != null
+        if (context != null && context.userService() != null
                 && context.allSharedPreferences() != null) {
             Crashlytics.setUserName(context.allSharedPreferences().fetchRegisteredANM());
         }
@@ -536,7 +550,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         return currentUserID;
     }
 
-    public  void setCurrentUserID(String currentUserID) {
+    public void setCurrentUserID(String currentUserID) {
         this.currentUserID = currentUserID;
     }
 
