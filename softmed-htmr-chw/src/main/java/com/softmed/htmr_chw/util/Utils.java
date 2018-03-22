@@ -197,12 +197,12 @@ public class Utils {
             return null;
         }
     } public static Indicator convertToIndicatorObject(CommonPersonObject commonPersonObject) {
-        String details = commonPersonObject.getColumnmaps().get("indicatorName");
         try {
             return new Indicator(
                     commonPersonObject.getColumnmaps().get("id"),
-                    commonPersonObject.getColumnmaps().get("referralIndicatorId"),
+                    commonPersonObject.getColumnmaps().get("relationalid"),
                     commonPersonObject.getColumnmaps().get("indicatorName"),
+                    commonPersonObject.getColumnmaps().get("indicatorNameSw"),
                     commonPersonObject.getColumnmaps().get("isActive")
             );
         } catch (Exception e) {
@@ -212,9 +212,11 @@ public class Utils {
     }
     public static ReferralServiceObject convertToServiceObject(CommonPersonObject commonPersonObject) {
         try {
+            Log.d(TAG,"swahili names : "+commonPersonObject.getColumnmaps().get("name_sw"));
             return new ReferralServiceObject(
                     commonPersonObject.getColumnmaps().get("id"),
                     commonPersonObject.getColumnmaps().get("name"),
+                    commonPersonObject.getColumnmaps().get("name_sw"),
                     commonPersonObject.getColumnmaps().get("category")
             );
         } catch (Exception e) {

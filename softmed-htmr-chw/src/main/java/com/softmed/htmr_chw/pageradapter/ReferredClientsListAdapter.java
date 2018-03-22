@@ -16,6 +16,8 @@ import com.google.gson.Gson;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.ClientReferral;
+import org.ei.opensrp.repository.AllSharedPreferences;
+
 import com.softmed.htmr_chw.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Repository.ClientReferralPersonObject;
@@ -25,6 +27,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static org.ei.opensrp.AllConstants.SWAHILI_LOCALE;
 
 
 /**
@@ -134,8 +139,15 @@ public class ReferredClientsListAdapter extends
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "referral_service");
 
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(org.ei.opensrp.Context.getInstance().applicationContext()));
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+
         try {
-            return commonPersonObjectList.get(0).getColumnmaps().get("name");
+            if(preferredLocale.equals(SWAHILI_LOCALE)){
+                return commonPersonObjectList.get(0).getColumnmaps().get("name_sw");
+            }else {
+                return commonPersonObjectList.get(0).getColumnmaps().get("name");
+            }
         }catch (Exception e){
             e.printStackTrace();
             return "";

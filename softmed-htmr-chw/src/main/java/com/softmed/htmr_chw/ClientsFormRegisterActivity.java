@@ -61,8 +61,8 @@ import java.util.Locale;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
-import static java.lang.String.valueOf;
 import static com.softmed.htmr_chw.util.Utils.generateRandomUUIDString;
+import static org.ei.opensrp.AllConstants.ENGLISH_LOCALE;
 
 /**
  * Created by issy on 11/17/17.
@@ -105,16 +105,22 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
     ArrayList<String> genderList = new ArrayList<String>();
     public Dialog referalDialogue;
     public String categoryValue;
+    private String preferredLocale;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(org.ei.opensrp.Context.getInstance().applicationContext()));
+        preferredLocale = allSharedPreferences.fetchLanguagePreference();
+
+
         setLanguage();
+
         setContentView(com.softmed.htmr_chw.R.layout.activity_client_registration_form);
         setReferralServiceList();
         setFacilistList();
         setupviews();
-
 
         indicatorRepository = context().indicatorRepository();
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -262,17 +268,21 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
                 }
 
 
-                String service = spinnerService.getSelectedItem().toString();
+                String service = "";
+                try {
+                    service = spinnerService.getSelectedItem().toString();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 List<Indicator> indicator = new ArrayList<Indicator>();
                 if(service.equals(getResources().getString(R.string.referral_services))){
 
-                }else {
+                }else if (!service.equals("")){
 
                     parentLayout = (LinearLayout) findViewById(com.softmed.htmr_chw.R.id.check_add_layout);
                     Log.d(TAG," Coze Service : "+service);
                     categoryValue = getCategory(service);
                     if(categoryValue.equalsIgnoreCase("malaria")){
-                        Log.d(TAG,"category"+categoryValue);
                         editTextReferralReason.setVisibility(View.GONE);
                     }else
                         editTextReferralReason.setVisibility(View.VISIBLE);
@@ -287,9 +297,12 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
                     checkBox.setId(k);
                     checkBox.setPadding(0,0,0,0);
                     checkBox.setTextColor(getResources().getColor(com.softmed.htmr_chw.R.color.secondary_text));
-                    checkBox.setText(indicator.get(k).getIndicatorName());
-                    checkBox.setTextSize(14);
+                    if(preferredLocale.equals(ENGLISH_LOCALE))
+                        checkBox.setText(indicator.get(k).getIndicatorName());
+                    else
+                        checkBox.setText(indicator.get(k).getIndicatorNameSw());
 
+                    checkBox.setTextSize(14);
                     LinearLayout.LayoutParams checkParams = new LinearLayout.LayoutParams(
                             Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
                     checkParams.setMargins(0, 8, 0, 8);
@@ -343,15 +356,17 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service");
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "referral_service");
-        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
+        Log.d(TAG, "serviceList = " + gson.toJson(commonPersonObjectList));
 
         this.referralServiceList = Utils.convertToServiceObjectList(commonPersonObjectList);
         int size = referralServiceList.size();
 
         for(int i =0; size > i; i++  ){
-
-
-            serviceList.add(referralServiceList.get(i).getName());
+            if(preferredLocale.equals(ENGLISH_LOCALE))
+                serviceList.add(referralServiceList.get(i).getName());
+            else{
+                serviceList.add(referralServiceList.get(i).getNameSw());
+            }
         }
         Log.d(TAG, "service list"+serviceList.toString());
     }
@@ -541,7 +556,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
         cursor = indicatorRepository.RawCustomQueryForAdapter("select * FROM indicator where referralIndicatorId ='"+ id +"'");
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "indicator");
-        Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
+        Log.d(TAG, "indicator list = " + gson.toJson(commonPersonObjectList));
 
         List<Indicator> indicator = Utils.convertToIndicatorList(commonPersonObjectList);
         return indicator;
@@ -557,7 +572,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
     }
 
     public String getReferralServiceId(String name){
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service where name ='"+ name +"'");
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service where name ='"+ name +"' OR name_sw ='"+ name +"'");
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "referral_service");
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
@@ -566,7 +581,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
     }
 
     public String getCategory(String name){
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service where category ='"+ name +"'");
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service where name ='"+ name +"' OR name_sw ='"+ name +"'");
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "referral_service");
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
@@ -580,11 +595,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
                 Toast.LENGTH_LONG).show();
     }
 
-    public static void setLanguage() {
-        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(org.ei.opensrp.Context.getInstance().applicationContext()));
-        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
-
-
+    private void setLanguage() {
         android.util.Log.d(TAG,"set Locale : "+preferredLocale);
 
         Resources res = org.ei.opensrp.Context.getInstance().applicationContext().getResources();

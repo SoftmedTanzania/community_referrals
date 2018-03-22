@@ -15,7 +15,7 @@
     {
       "name": "referral_service",
       "columns": [
-        {"name":"name"},{"name":"category"},{"name":"isActive"},{"name":"indicators"}
+        {"name":"name"},{"name":"name_sw"},{"name":"category"},{"name":"isActive"},{"name":"indicators"}
       ]
     },
     {

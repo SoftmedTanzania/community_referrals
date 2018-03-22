@@ -19,7 +19,7 @@ import java.util.Map;
 public class ReferralServiceDataModel {
 
     private static final String TAG = ReferralServiceDataModel.class.getSimpleName();
-    private String serviceName, id,relationalid,category,isActive;
+    private String serviceName,serviceNameSw, id,relationalid,category,isActive;
 
     private Map<String, String> details;
 
@@ -27,9 +27,10 @@ public class ReferralServiceDataModel {
 
     }
 
-    public ReferralServiceDataModel(String id, String name,String isActive,String category) {
+    public ReferralServiceDataModel(String id, String serviceName,String serviceNameSw, String isActive,String category) {
         this.id = id;
-        this.serviceName = name;
+        this.serviceName = serviceName;
+        this.serviceNameSw = serviceNameSw;
         this.details = null;
         this.relationalid = id;
         this.isActive = isActive;
@@ -69,6 +70,14 @@ public class ReferralServiceDataModel {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getServiceNameSw() {
+        return serviceNameSw;
+    }
+
+    public void setServiceNameSw(String serviceNameSw) {
+        this.serviceNameSw = serviceNameSw;
     }
 
     public String getIsActive() {

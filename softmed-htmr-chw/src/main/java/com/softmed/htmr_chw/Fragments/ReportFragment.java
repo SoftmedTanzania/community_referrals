@@ -194,7 +194,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
 
         mChart1.setDragDecelerationFrictionCoef(0.95f);
 
-//        mChart1.setCenterText(generateCenterSpannableText());
+        mChart1.setCenterText(generateCenterSpannableText());
 
         mChart1.setDrawHoleEnabled(true);
         mChart1.setHoleColor(Color.WHITE);
@@ -519,13 +519,14 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
 
     private SpannableString generateCenterSpannableText() {
 
-        SpannableString s = new SpannableString("Successful Referrals\nreferred by "+((BoreshaAfyaApplication)getActivity().getApplication()).getUsername());
-        s.setSpan(new RelativeSizeSpan(1.7f), 0, 20, 0);
-        s.setSpan(new StyleSpan(Typeface.NORMAL), 0, 32, 0);
-        s.setSpan(new ForegroundColorSpan(Color.GRAY), 20, 32, 0);
-        s.setSpan(new RelativeSizeSpan(.8f), 20, 32, 0);
-        s.setSpan(new StyleSpan(Typeface.ITALIC), 20, s.length(), 0);
-        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), 32, s.length(), 0);
+//        SpannableString s = new SpannableString("Successful Referrals\nreferred by "+((BoreshaAfyaApplication)getActivity().getApplication()).getUsername());
+        SpannableString s = new SpannableString("Successful\nReferrals");
+//        s.setSpan(new RelativeSizeSpan(1.7f), 0, 20, 0);
+//        s.setSpan(new StyleSpan(Typeface.NORMAL), 0, 32, 0);
+//        s.setSpan(new ForegroundColorSpan(Color.GRAY), 20, 32, 0);
+//        s.setSpan(new RelativeSizeSpan(.8f), 20, 32, 0);
+//        s.setSpan(new StyleSpan(Typeface.ITALIC), 20, s.length(), 0);
+//        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), 32, s.length(), 0);
         return s;
     }
 

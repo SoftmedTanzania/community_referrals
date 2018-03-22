@@ -25,6 +25,7 @@ public class IndicatorRepository extends DrishtiRepository {
     private static final String CHILD_SQL = "CREATE TABLE indicator(" +
             "referralIndicatorId INTEGER NOT NULL," +
             "indicatorName VARCHAR," +
+            "indicatorNameSw VARCHAR," +
             "isActive VARCHAR," +
             "referralServiceIndicatorId INTEGER NOT NULL," +
             "PRIMARY KEY (referralIndicatorId, referralServiceIndicatorId)" +
@@ -32,9 +33,10 @@ public class IndicatorRepository extends DrishtiRepository {
     public static final String INDICATOR = "indicator";
     private static final String REFERRAL_SERVICE_INDICATOR_ID = "referralServiceIndicatorId";
     private static final String INDICATOR_NAME = "indicatorName";
+    private static final String INDICATOR_NAME_SW = "indicatorNameSw";
     private static final String REFERRAL_INDICATOR_ID = "referralIndicatorId";
     private static final String IS_ACTIVE = "isActive";
-    public static final String[] REFERRAL_SERVICE_TABLE_COLUMNS = {REFERRAL_SERVICE_INDICATOR_ID, REFERRAL_INDICATOR_ID, IS_ACTIVE, INDICATOR_NAME};
+    public static final String[] REFERRAL_SERVICE_TABLE_COLUMNS = {REFERRAL_SERVICE_INDICATOR_ID, REFERRAL_INDICATOR_ID, IS_ACTIVE, INDICATOR_NAME,INDICATOR_NAME_SW};
     public static final String NOT_CLOSED = "false";
 
     @Override
@@ -120,6 +122,7 @@ public class IndicatorRepository extends DrishtiRepository {
         ContentValues values = new ContentValues();
         values.put(REFERRAL_SERVICE_INDICATOR_ID, indicator.getReferralServiceIndicatorId());
         values.put(INDICATOR_NAME, indicator.getIndicatorName());
+        values.put(INDICATOR_NAME_SW, indicator.getIndicatorNameSw());
         values.put(REFERRAL_INDICATOR_ID, indicator.getReferralIndicatorId());
         values.put(IS_ACTIVE, indicator.getIsActive());
         Log.d(TAG,"values"+values);
@@ -131,7 +134,7 @@ public class IndicatorRepository extends DrishtiRepository {
         List<Indicator> indicator = new ArrayList<Indicator>();
         while (!cursor.isAfterLast()) {
           
-            indicator.add(new Indicator(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3)));
+            indicator.add(new Indicator(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),cursor.getString(4)));
                     
             cursor.moveToNext();
         }
@@ -155,6 +158,7 @@ public class IndicatorRepository extends DrishtiRepository {
                 getColumnValueByAlias(cursor, INDICATOR, REFERRAL_SERVICE_INDICATOR_ID),
                 getColumnValueByAlias(cursor, INDICATOR, REFERRAL_INDICATOR_ID),
                 getColumnValueByAlias(cursor, INDICATOR, INDICATOR_NAME),
+                getColumnValueByAlias(cursor, INDICATOR, INDICATOR_NAME_SW),
                 getColumnValueByAlias(cursor, INDICATOR, IS_ACTIVE));
                
     }

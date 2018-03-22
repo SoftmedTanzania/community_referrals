@@ -5,16 +5,17 @@ package org.ei.opensrp.domain;
  */
 
 public class Indicator {
-    private String referralServiceIndicatorId, referralIndicatorId,indicatorName,isActive;
+    private String referralServiceIndicatorId, referralIndicatorId,indicatorName,indicatorNameSw,isActive;
 
     public Indicator(){
 
     }
 
-    public Indicator(String id, String referralIndicatorId,String indicatorName,String isActive) {
+    public Indicator(String id, String referralIndicatorId,String indicatorName,String indicatorNameSw, String isActive) {
         this.referralServiceIndicatorId = id;
         this.referralIndicatorId = referralIndicatorId;
         this.indicatorName = indicatorName;
+        this.indicatorNameSw = indicatorNameSw;
         this.isActive = isActive;
 
     }
@@ -41,6 +42,14 @@ public class Indicator {
 
     public void setIndicatorName(String indicatorName) {
         this.indicatorName = indicatorName;
+    }
+
+    public String getIndicatorNameSw() {
+        return indicatorNameSw;
+    }
+
+    public void setIndicatorNameSw(String indicatorNameSw) {
+        this.indicatorNameSw = indicatorNameSw;
     }
 
     public String getIsActive() {

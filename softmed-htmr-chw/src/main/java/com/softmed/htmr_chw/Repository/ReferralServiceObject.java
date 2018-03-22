@@ -11,26 +11,18 @@ import java.util.Map;
  */
 
 public class ReferralServiceObject {
-    private String id, relationalId, Name,category;
+    private String id, relationalId, name,nameSw,category;
 
     private String details;
     private Map<String, String> columnMap;
 
+
     public ReferralServiceObject(String id,
-                                 String relationalId,
-                                 String name,
-                                 String details
-                                      ) {
-        this.details = details;
-        this.id = id;
-        this.Name = name;
-        this.relationalId = relationalId;
-    }
-    public ReferralServiceObject(String id,
-                                     String name,String category){
+                                     String name,String name_sw,String category){
 
             this.id = id;
-            this.Name = name;
+            this.name = name;
+            this.nameSw = name_sw;
             this.category = category;
         }
 
@@ -40,7 +32,7 @@ public class ReferralServiceObject {
 
         this.id = id;
         this.relationalId = relationalId;
-        this.Name = facility.getFacilityName();
+        this.name = facility.getFacilityName();
         this.details = new Gson().toJson(facility);
 
     }
@@ -81,16 +73,24 @@ public class ReferralServiceObject {
         return columnMap;
     }
 
+    public String getNameSw() {
+        return nameSw;
+    }
+
+    public void setNameSw(String nameSw) {
+        this.nameSw = nameSw;
+    }
+
     public void setColumnMap(Map<String, String> columnMap) {
         this.columnMap = columnMap;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        this.Name = name;
+        this.name = name;
     }
 
     }

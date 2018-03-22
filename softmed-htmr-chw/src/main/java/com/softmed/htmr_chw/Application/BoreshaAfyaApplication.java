@@ -166,7 +166,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
                 }
 
 
-                service = new ReferralServiceDataModel(explrObject.getString("serviceId"), explrObject.getString("serviceName"), explrObject.getString("category"), explrObject.getString("isActive"));
+                service = new ReferralServiceDataModel(explrObject.getString("serviceId"), explrObject.getString("serviceName"),explrObject.getString("serviceNameSw"), explrObject.getString("category"), explrObject.getString("isActive"));
                 if (service.getId().equals("")) {
                     Log.d(TAG, "service table is empty");
 
