@@ -85,7 +85,7 @@
                                 android:background="@color/card_separator_third">
 
                                 <TextView
-                                    android:id="@+id/client_name"
+                                    android:id="@+id/form_heading"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerVertical="true"
@@ -95,30 +95,38 @@
                                     android:textColor="@color/black"
                                     android:textSize="42sp" />
 
-                                <TextView
-                                    android:id="@+id/cbhs_number_title"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@id/client_name"
+                                <View
+                                    android:layout_width="200dp"
+                                    android:layout_height="5dp"
+                                    android:id="@+id/strip_one"
                                     android:layout_marginLeft="32dp"
-                                    android:layout_marginTop="16dp"
-                                    android:text="@string/title_cbhs_number"
-                                    android:textColor="@color/card_title_text"
-                                    android:textSize="14sp"
-                                    android:visibility="invisible" />
+                                    android:layout_marginTop="8dp"
+                                    android:layout_below="@id/form_heading"
+                                    android:background="@color/card_separator"/>
+
+
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="32dp"
+                                android:background="@color/card_separator_third">
 
                                 <TextView
-                                    android:id="@+id/cbhs_number_value"
+                                    android:id="@+id/initial_information_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_below="@id/client_name"
-                                    android:layout_marginLeft="16dp"
+                                    android:textSize="16sp"
                                     android:layout_marginTop="16dp"
-                                    android:layout_toRightOf="@+id/cbhs_number_title"
-                                    android:textColor="@color/card_title_text"
-                                    android:textSize="14sp"
-                                    android:visibility="invisible" />
-
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="@string/initial_information"/>
+                                <View
+                                    android:layout_below="@id/initial_information_title"
+                                    android:layout_width="60dp"
+                                    android:layout_height="5dp"
+                                    android:id="@+id/strip"
+                                    android:layout_marginTop="8dp"
+                                    android:background="@color/card_separator"/>
                             </RelativeLayout>
 
 
@@ -266,8 +274,7 @@
                                             app:ms_hintColor="@color/hint_text"
                                             app:ms_multiline="false"
                                             app:ms_thickness="1dp"
-                                            app:paddingEnd="16dp"
-                                            app:paddingStart="16dp" />
+                                            app:paddingEnd="16dp" />
 
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
@@ -347,14 +354,22 @@
                                 android:visibility="invisible" />
 
                             <TextView
-                                android:id="@+id/referer_title"
+                                android:id="@+id/referral_details_heading"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="32dp"
                                 android:layout_marginTop="8dp"
                                 android:text="@string/referral_details"
-                                android:textColor="@color/card_title_text"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="14sp" />
+
+                            <View
+                                android:layout_width="60dp"
+                                android:layout_height="5dp"
+                                android:id="@+id/strip_two"
+                                android:layout_marginLeft="32dp"
+                                android:layout_marginTop="8dp"
+                                android:background="@color/card_separator"/>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -389,13 +404,21 @@
                                         android:layout_below="@+id/spinnerService"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:textColor="@color/colorPrimary"
                                         android:text="@string/visit_facility"/>
+                                    <View
+                                        android:layout_below="@id/facility_titleview"
+                                        android:layout_width="60dp"
+                                        android:layout_height="3dp"
+                                        android:id="@+id/strip_five"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@color/card_separator"/>
                                     <AutoCompleteTextView
                                         android:layout_marginLeft="-4dp"
                                         android:textSize="14sp"
                                         android:ems="10"
                                         android:hint="@string/visit_facility_hint"
-                                        android:layout_below="@id/facility_titleview"
+                                        android:layout_below="@id/strip_five"
                                         android:id="@+id/autocomplete_facility"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"/>
@@ -420,11 +443,18 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="8dp"
                                         android:text="@string/other_info"
-                                        android:textColor="@color/card_title_text"
+                                        android:textColor="@color/colorPrimary"
                                         android:textSize="14sp" />
+                                    <View
+                                        android:layout_below="@id/clinical_information_title"
+                                        android:layout_width="60dp"
+                                        android:layout_height="3dp"
+                                        android:id="@+id/strip_three"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@color/card_separator"/>
 
                                     <LinearLayout
-                                        android:layout_below="@id/clinical_information_title"
+                                        android:layout_below="@id/strip_three"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:orientation="vertical">
@@ -499,14 +529,22 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/danger_signs"
-                                        android:textColor="@color/card_title_text"
+                                        android:textColor="@color/colorPrimary"
                                         android:textSize="14sp" />
+
+                                    <View
+                                        android:layout_below="@id/flags_title"
+                                        android:layout_width="60dp"
+                                        android:layout_height="3dp"
+                                        android:id="@+id/strip_four"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@color/card_separator"/>
 
                                     <LinearLayout
                                         android:id="@+id/check_add_layout"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_below="@id/flags_title"
+                                        android:layout_below="@id/strip_four"
                                         android:gravity="left"
                                         android:layout_marginBottom="16dp"
                                         android:orientation="vertical"/>
@@ -516,22 +554,15 @@
 
                             </LinearLayout>
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginLeft="16dp"
-                                android:layout_marginRight="16dp"
-                                android:background="@color/card_separator" />
-
-
                             <RelativeLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="100dp">
+                                android:background="@color/card_separator_third"
+                                android:layout_height="84dp">
 
                                 <Button
                                     android:id="@+id/referal_button"
                                     android:layout_width="200dp"
-                                    android:layout_height="60dp"
+                                    android:layout_height="48dp"
                                     android:layout_alignParentRight="true"
                                     android:layout_centerVertical="true"
                                     android:layout_marginRight="16dp"

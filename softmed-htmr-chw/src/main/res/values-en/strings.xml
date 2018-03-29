@@ -41,7 +41,7 @@
     <string name="client_sex">Sex</string>
     <string name="client_phone">Phone</string>
     <string name="client_age">Age</string>
-    <string name="client_address">Address</string>
+    <string name="client_address">Map Cue</string>
     <string name="client_veo">VEO</string>
     <string name="referral_reason">Referral Reason</string>
     <string name="referral_type">Referral Type</string>
@@ -94,5 +94,8 @@
     <string name="unsuccessful_label">Unsuccessful</string>
     <string name="received_referrals_label">Received Referrals</string>
     <string name="pending_label">Pending</string>
+    <string name="other_notes_title">Other Information/Medical Advice</string>
+
+    <string name="initial_information">Initial Information</string>
 
 </resources>

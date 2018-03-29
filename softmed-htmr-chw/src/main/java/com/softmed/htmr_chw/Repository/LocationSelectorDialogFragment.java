@@ -112,7 +112,8 @@ public class LocationSelectorDialogFragment extends DialogFragment {
                 if (node.isLeaf()) {
                     String locationjson = "";
                     TreeNode traversingnode = node;
-                    locationjson = traversingnode.getLocationId();
+//                    locationjson = traversingnode.getLocationId();
+                    locationjson = traversingnode.getName();
 //
                     if (mCallback != null) {
                         mCallback.OnLocationSelected(locationjson);

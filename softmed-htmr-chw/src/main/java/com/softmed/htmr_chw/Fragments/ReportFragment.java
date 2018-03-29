@@ -47,6 +47,7 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
+import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,6 +59,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.ThreadPoolExecutor;
+
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static org.ei.opensrp.AllConstants.ENGLISH_LOCALE;
 
 /**
  * Created by coze on 06/03/18.
@@ -78,6 +82,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
     private TableLayout servicesTable;
     private  PieChart mChart1;
     private BarChart mChart2;
+    private String preferredLocale;
 
     public ReportFragment() {
     }
@@ -91,6 +96,10 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         final View rowview = inflater.inflate(R.layout.fragment_summary_reports, null);
+
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(org.ei.opensrp.Context.getInstance().applicationContext()));
+        preferredLocale = allSharedPreferences.fetchLanguagePreference();
+
 
 
         commonRepository = context().commonrepository(TABLE_NAME);
@@ -357,7 +366,11 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                 JSONArray jsonArray = new JSONArray();
                 for(int i=0;i<providedReferralsServicesCursor.getCount();i++){
                     providedReferralsServicesCursor.moveToPosition(i);
-                    categoryNames.add(providedReferralsServicesCursor.getString(providedReferralsServicesCursor.getColumnIndex("name")));
+
+                    if(preferredLocale.equals(ENGLISH_LOCALE))
+                        categoryNames.add(providedReferralsServicesCursor.getString(providedReferralsServicesCursor.getColumnIndex("name")));
+                    else
+                        categoryNames.add(providedReferralsServicesCursor.getString(providedReferralsServicesCursor.getColumnIndex("name_sw")));
 
                     int serviveId = providedReferralsServicesCursor.getInt(0);
 

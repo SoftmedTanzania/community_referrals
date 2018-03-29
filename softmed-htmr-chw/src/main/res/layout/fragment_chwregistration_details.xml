@@ -210,6 +210,7 @@
                     </LinearLayout>
                 </RelativeLayout>
                 <RelativeLayout
+                    android:visibility="gone"
                     android:layout_marginBottom="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -271,11 +272,18 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:text="@string/referral_reason"/>
+                    <View
+                        android:layout_below="@id/reason_title"
+                        android:layout_width="60dp"
+                        android:layout_height="3dp"
+                        android:id="@+id/strip_one"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/card_separator"/>
                     <TextView
-                        android:layout_below="@+id/reason_title"
+                        android:layout_below="@+id/strip_one"
                         android:id="@+id/reason_for_referral"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="0.5"
                         android:textColorHint="@color/hint_text"
                         android:textSize="14sp" />
@@ -289,14 +297,51 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/red_500"
                         android:text="@string/referral_feedback"/>
+                    <View
+                        android:layout_below="@id/referral_feedback_title"
+                        android:layout_width="60dp"
+                        android:layout_height="3dp"
+                        android:visibility="gone"
+                        android:id="@+id/strip_six"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/card_separator"/>
                     <TextView
                         android:visibility="gone"
-                        android:layout_below="@id/referral_feedback_title"
+                        android:layout_below="@id/strip_six"
                         android:id="@+id/referral_feedback"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="0.5"
+                        android:textColor="@color/red_400"
+                        android:textColorHint="@color/hint_text"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:visibility="gone"
+                        android:layout_below="@id/referral_feedback"
+                        android:textStyle="bold"
+                        android:layout_marginTop="8dp"
+                        android:id="@+id/other_notes_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/red_500"
+                        android:text="@string/other_notes_title"/>
+                    <View
+                        android:layout_below="@id/other_notes_title"
+                        android:layout_width="60dp"
+                        android:layout_height="3dp"
+                        android:id="@+id/strip_seven"
+                        android:visibility="gone"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/card_separator"/>
+                    <TextView
+                        android:visibility="gone"
+                        android:layout_below="@id/strip_seven"
+                        android:id="@+id/other_notes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:textColor="@color/red_400"
                         android:textColorHint="@color/hint_text"
                         android:textSize="14sp" />
 
@@ -322,10 +367,17 @@
                         android:text="@string/referral_type"
                         android:textStyle="bold"
                         android:textColor="@color/black"/>
+                    <View
+                        android:layout_below="@id/service_title"
+                        android:layout_width="60dp"
+                        android:layout_height="3dp"
+                        android:id="@+id/strip_two"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/card_separator"/>
                     <TextView
                         android:id="@+id/viewService"
                         android:layout_marginTop="4dp"
-                        android:layout_below="@+id/service_title"
+                        android:layout_below="@+id/strip_two"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
@@ -340,9 +392,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/referral_facility"/>
+                    <View
+                        android:layout_below="@id/facility_title"
+                        android:layout_width="60dp"
+                        android:layout_height="3dp"
+                        android:id="@+id/strip_five"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/card_separator"/>
                     <TextView
                         android:id="@+id/viewFacility"
-                        android:layout_below="@+id/facility_title"
+                        android:layout_below="@+id/strip_five"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
@@ -372,12 +431,19 @@
                         android:text="@string/danger_signs"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
+                    <View
+                        android:layout_below="@id/flags_title"
+                        android:layout_width="60dp"
+                        android:layout_height="3dp"
+                        android:id="@+id/strip_three"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/card_separator"/>
 
                     <LinearLayout
                         android:id="@+id/flags_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_below="@id/flags_title"
+                        android:layout_below="@id/strip_three"
                         android:orientation="vertical"/>
 
                 </RelativeLayout>
@@ -403,9 +469,16 @@
                         android:textStyle="bold"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
+                    <View
+                        android:layout_below="@id/clinical_information_title"
+                        android:layout_width="60dp"
+                        android:layout_height="3dp"
+                        android:id="@+id/strip_four"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/card_separator"/>
 
                     <LinearLayout
-                        android:layout_below="@id/clinical_information_title"
+                        android:layout_below="@id/strip_four"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">

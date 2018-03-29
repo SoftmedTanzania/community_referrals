@@ -95,5 +95,7 @@
     <string name="suceessful_label">Successful</string>
     <string name="unsuccessful_label">Unsuccessful</string>
     <string name="pending_label">Pending</string>
+    <string name="other_notes_title">Other Notes</string>
 
+    <string name="initial_information">Initial Information</string>
 </resources>

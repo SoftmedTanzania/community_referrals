@@ -194,11 +194,22 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         TextView physicalAddress = (TextView) dialogView.findViewById(R.id.editTextKijiji);
         TextView villageleader = (TextView) dialogView.findViewById(R.id.viewVillageLeader);
 
-        if(clientReferralPersonObject.getReferral_status().equals("1")) {
+        if(clientReferralPersonObject.getReferral_status().equals("1") && !clientReferral.getServices_given_to_patient().equals("")) {
             dialogView.findViewById(R.id.referral_feedback_title).setVisibility(VISIBLE);
+            dialogView.findViewById(R.id.referral_feedback).setVisibility(VISIBLE);
+            dialogView.findViewById(R.id.strip_six).setVisibility(VISIBLE);
             TextView referralFeedback = (TextView) dialogView.findViewById(R.id.referral_feedback);
             referralFeedback.setVisibility(VISIBLE);
-            referralFeedback.setText(clientReferral.getOther_notes());
+            referralFeedback.setText(clientReferral.getServices_given_to_patient());
+        }
+
+        if(!clientReferral.getOther_notes().equals("")) {
+            dialogView.findViewById(R.id.other_notes_title).setVisibility(VISIBLE);
+            dialogView.findViewById(R.id.other_notes).setVisibility(VISIBLE);
+            dialogView.findViewById(R.id.strip_seven).setVisibility(VISIBLE);
+            TextView otherNotes = (TextView) dialogView.findViewById(R.id.other_notes);
+            otherNotes.setVisibility(VISIBLE);
+            otherNotes.setText(clientReferral.getOther_notes());
         }
 
 
@@ -621,7 +632,8 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         Log.d(TAG,"am here after result");
         if (requestCode == 90) {
             if (resultCode == RESULT_OK) {
-                UpdateContent();
+                Log.d(TAG,"am here after result2");
+                updateFromServer();
             }
         }
     }
@@ -896,22 +908,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     }
 
 
-    public void updateFromServer() {
-        UpdateActionsTask updateActionsTask = new UpdateActionsTask(
-                this, context().actionService(), context().formSubmissionSyncService(),
-                new SyncProgressIndicator(), context().allFormVersionSyncService());
-        updateActionsTask.updateFromServer(new SyncAfterFetchListener());
-    }
-
-    public void UpdateContent(){
-        CHWSmartRegisterFragment registerFragment = (CHWSmartRegisterFragment) getDisplayFormFragmentAtIndex(0);
-        if (registerFragment != null) {
-            registerFragment.refreshListView();
-        }
-        registerFragment.updateRegisterCounts();
-        registerFragment.updateRemainingFormsToSyncCount();
-    }
-
     public boolean backUpDataBase() {
         boolean result = true;
 
@@ -964,5 +960,15 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         attachLogoutMenuItem(menu);
         return true;
     }
+
+    public void updateFromServer() {
+        UpdateActionsTask updateActionsTask = new UpdateActionsTask(
+                ChwSmartRegisterActivity.this, context().actionService(), context().formSubmissionSyncService(),
+                new SyncProgressIndicator(), context().allFormVersionSyncService());
+        updateActionsTask.updateFromServer(new SyncAfterFetchListener());
+
+        ((CHWSmartRegisterFragment)mBaseFragment).updateRemainingFormsToSyncCount();
+    }
+
 
 }

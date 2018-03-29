@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -25,6 +26,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -106,6 +108,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
     public Dialog referalDialogue;
     public String categoryValue;
     private String preferredLocale;
+    private  Typeface robotoBold,robotoCondenced;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,6 +116,9 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
 
         AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(org.ei.opensrp.Context.getInstance().applicationContext()));
         preferredLocale = allSharedPreferences.fetchLanguagePreference();
+
+        robotoBold = Typeface.createFromAsset(getAssets(), "roboto_bold.ttf");
+        robotoCondenced = Typeface.createFromAsset(getAssets(), "roboto_condensed.ttf");
 
 
         setLanguage();
@@ -220,6 +226,13 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
     }
 
     private void setupviews(){
+
+        ((TextView)findViewById(com.softmed.htmr_chw.R.id.form_heading)).setTypeface(robotoBold);
+        ((TextView)findViewById(com.softmed.htmr_chw.R.id.initial_information_title)).setTypeface(robotoBold);
+        ((TextView)findViewById(com.softmed.htmr_chw.R.id.referral_details_heading)).setTypeface(robotoBold);
+        ((TextView)findViewById(com.softmed.htmr_chw.R.id.clinical_information_title)).setTypeface(robotoBold);
+        ((TextView)findViewById(com.softmed.htmr_chw.R.id.flags_title)).setTypeface(robotoBold);
+        ((TextView)findViewById(com.softmed.htmr_chw.R.id.facility_titleview)).setTypeface(robotoBold);
 
         textPhone = (EditText)   findViewById(com.softmed.htmr_chw.R.id.edittextPhone);
         dobTextView = (MaterialEditText)   findViewById(com.softmed.htmr_chw.R.id.reg_dob);
@@ -388,7 +401,6 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
         int size2 = facilitiesList.size();
 
         for(int i =0; size2 > i; i++  ){
-
             facilityList.add(facilitiesList.get(i).getName());
         }
         Log.d(TAG, "facility list"+facilityList.toString());
@@ -463,11 +475,17 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
             String facilityName = facilitytextView.getText().toString();
             Log.d(TAG,"facility name = "+facilityName);
             facilityName = facilityName.trim();
-            int index = facilityList.indexOf(facilityName);
 
-            Log.d(TAG,"facility name index = "+facilityName);
+            int index = -1;
+            for(int i=0;i<facilityList.size();i++){
+                Log.d(TAG,"facility name at index   "+i+" = "+facilityList.get(i));
+                if(facilityList.get(i).equalsIgnoreCase(facilityName))
+                    index = i;
+            }
 
-            if(index<=0){
+            Log.d(TAG,"facility name index = "+index);
+
+            if(index<0){
                 message = getResources().getString(com.softmed.htmr_chw.R.string.wrong_facility);
                 makeToast();
                 return false;
@@ -563,7 +581,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
     }
 
     public String getIndicatorId(String name){
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM indicator where indicatorName ='"+ name +"'");
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM indicator where indicatorName ='"+ name +"' OR indicatorNameSw = '"+name+"' ");
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "indicator");
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));

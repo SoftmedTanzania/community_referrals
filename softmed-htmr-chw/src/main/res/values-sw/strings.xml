@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">HTM-Referrals</string>
     <string-array name="gender">
-        <item>Male</item>
-        <item>Female</item>
+        <item>Mwanaume</item>
+        <item>Mwanamke</item>
     </string-array>
     <string name="male">Mwanaume</string>
     <string name="female">Mwanamke</string>
@@ -41,7 +41,7 @@
     <string name="client_sex">Jinsia</string>
     <string name="client_phone">Namba ya simu</string>
     <string name="client_age">Umri</string>
-    <string name="client_address">Anwani</string>
+    <string name="client_address">Anapokaa</string>
     <string name="client_veo">VEO</string>
     <string name="referral_reason">Sababu ya rufaa</string>
     <string name="referral_type">Aina ya rufaa</string>
@@ -95,5 +95,7 @@
     <string name="unsuccessful_label">Haijafanikiwa</string>
     <string name="received_referrals_label">Rufaa zilizopokelewa</string>
     <string name="pending_label">Inasubiri</string>
+    <string name="other_notes_title">Taarifa nyingine/Ushauri</string>
+    <string name="initial_information">Taarifa za Awali</string>
 
 </resources>
