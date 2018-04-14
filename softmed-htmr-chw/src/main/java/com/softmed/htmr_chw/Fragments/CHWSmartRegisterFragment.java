@@ -293,7 +293,16 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                         successView.setText(valueOf(successfullCount));
                         unsuccessView.setText(valueOf(unsuccessfullCount));
 
-                        donutChart.stopAnimateLoading(60.f);
+
+                        float v = 0.0f;
+                        try {
+                            v = (successfullCount * 1.0f) / (successfullCount + unsuccessfullCount);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                        Log.d(TAG,"donutchart value = "+v);
+                        donutChart.stopAnimateLoading(v*100);
                     }
                 };
                 mainHandler.post(myRunnable);
@@ -363,14 +372,17 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
     public void updateRemainingFormsToSyncCount() {
 
-
-        long size = pendingFormSubmissionService.pendingFormSubmissionCount();
-        Log.d(TAG,"pending from submission ="+size);
-        if (size > 0) {
-            pending.setText(valueOf(size) + " " + getString(R.string.unsynced_forms_count_message));
-            pendingForm.setVisibility(View.VISIBLE);
-        } else {
-            pendingForm.setVisibility(View.GONE);
+        try {
+            long size = pendingFormSubmissionService.pendingFormSubmissionCount();
+            Log.d(TAG, "pending from submission =" + size);
+            if (size > 0) {
+                pending.setText(valueOf(size) + " " + getString(R.string.unsynced_forms_count_message));
+                pendingForm.setVisibility(View.VISIBLE);
+            } else {
+                pendingForm.setVisibility(View.GONE);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -438,9 +450,9 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
                 return true;
 
-            case R.id.help:
-                Toast.makeText(getActivity(), "help implementation under construction", LENGTH_SHORT).show();
-                return true;
+//            case R.id.help:
+//                Toast.makeText(getActivity(), "help implementation under construction", LENGTH_SHORT).show();
+//                return true;
 
             case R.id.logout:
                 ((BoreshaAfyaApplication)getActivity().getApplication()).logoutCurrentUser();

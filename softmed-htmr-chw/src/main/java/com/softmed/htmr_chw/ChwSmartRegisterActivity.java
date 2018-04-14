@@ -218,6 +218,9 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         textAge.setText(ageS + " years");
         cbhs.setText(clientReferral.getCommunity_based_hiv_service());
         referral_service.setText(getReferralServiceName(clientReferralPersonObject.getReferral_service_id()));
+
+        Log.d(TAG,"facility id = "+clientReferralPersonObject.getFacility_id());
+
         facility.setText(getFacilityName(clientReferralPersonObject.getFacility_id()));
         if(!clientReferralPersonObject.getCtc_number().isEmpty())
             ctc_number.setText(clientReferralPersonObject.getCtc_number());
