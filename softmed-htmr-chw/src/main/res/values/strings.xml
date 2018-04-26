@@ -85,6 +85,7 @@
     <string name="unfilled_information">Please fill all required information</string>
     <string name="missing_gender">Please select clients gender</string>
     <string name="missing_physical_address">Please select Clients Physical address</string>
+    <string name="incorrect_phone_number">Please enter a valid Phone Number</string>
     <string name="missing_missing_referral_reason">Please fill in the referral reason</string>
     <string name="visit_facility_hint">Enter facility name</string> <string name="unauthorized">Please check the credentials</string>
     <string name="unknown_response">login failed. Try later</string>

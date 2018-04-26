@@ -94,6 +94,7 @@
     <string name="unsuccessful_label">Unsuccessful</string>
     <string name="received_referrals_label">Received Referrals</string>
     <string name="pending_label">Pending</string>
+    <string name="incorrect_phone_number">Please enter a valid Phone Number</string>
     <string name="other_notes_title">Other Information/Medical Advice</string>
 
     <string name="initial_information">Initial Information</string>

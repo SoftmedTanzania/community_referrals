@@ -59,6 +59,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 
@@ -461,16 +463,45 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
 
 
     public boolean isFormSubmissionOk() {
+        Log.d(TAG,"selected gender position = "+spinnerGender.getSelectedItemPosition());
+        Log.d(TAG,"valid phone number  = "+validCellPhone(textPhone.getText().toString()));
+
+
         if (TextUtils.isEmpty(editTextfName.getText())  ||
                 TextUtils.isEmpty(editTextlName.getText())) {
             message = getResources().getString(com.softmed.htmr_chw.R.string.unfilled_information);
             makeToast();
             return false;
-        } else if (TextUtils.isEmpty(facilitytextView.getText())) {
+        }else if (TextUtils.isEmpty(facilitytextView.getText())) {
             message = getResources().getString(com.softmed.htmr_chw.R.string.missing_facility);
             makeToast();
             return false;
 
+        }else if (spinnerGender.getSelectedItemPosition() ==0) {
+            message = getResources().getString(com.softmed.htmr_chw.R.string.missing_gender);
+            makeToast();
+            return false;
+
+        }else if (spinnerService.getSelectedItemPosition() == 0 ) {
+            message = getResources().getString(com.softmed.htmr_chw.R.string.missing_services);
+            makeToast();
+            return false;
+
+        }else if (TextUtils.isEmpty(editTextKijiji.getText())) {
+            message = getResources().getString(com.softmed.htmr_chw.R.string.missing_physical_address);
+            makeToast();
+            return false;
+        }
+//        else if (TextUtils.isEmpty(editTextReferralReason.getText())) {
+//            message = getResources().getString(com.softmed.htmr_chw.R.string.missing_missing_referral_reason);
+//            makeToast();
+//            return false;
+//        }
+        else if(!TextUtils.isEmpty(textPhone.getText()) && !validCellPhone(textPhone.getText().toString())){
+                message = getResources().getString(R.string.incorrect_phone_number);
+                textPhone.setError(message);
+                makeToast();
+                return false;
         }else if (!TextUtils.isEmpty(facilitytextView.getText())) {
             String facilityName = facilitytextView.getText().toString();
             Log.d(TAG,"facility name = "+facilityName);
@@ -489,31 +520,20 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
                 message = getResources().getString(com.softmed.htmr_chw.R.string.wrong_facility);
                 makeToast();
                 return false;
-            }else {
+            }else{
                 return true;
             }
 
-        }else if (spinnerGender.getSelectedItemPosition() <=0) {
-            message = getResources().getString(com.softmed.htmr_chw.R.string.missing_gender);
-            makeToast();
-            return false;
-
-        }else if (spinnerService.getSelectedItemPosition() <= 0 ) {
-            message = getResources().getString(com.softmed.htmr_chw.R.string.missing_services);
-            makeToast();
-            return false;
-
-        } else if (TextUtils.isEmpty(editTextKijiji.getText())) {
-            message = getResources().getString(com.softmed.htmr_chw.R.string.missing_physical_address);
-            makeToast();
-            return false;
-        } else  if (TextUtils.isEmpty(editTextReferralReason.getText())) {
-            message = getResources().getString(com.softmed.htmr_chw.R.string.missing_missing_referral_reason);
-            makeToast();
-            return false;
         }else
-            // all good
             return true;
+    }
+
+    public boolean validCellPhone(String number)
+    {
+        Pattern pattern = Pattern.compile("\\d{10}");
+        Matcher matcher = pattern.matcher(number);
+        return matcher.matches();
+
     }
 
     public ClientReferral getClientReferral() {

@@ -251,7 +251,22 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
 
     public void getFacilities() {
         commonRepository2 = context.commonrepository("facility");
-        final String myUrl = DRISHTI_BASE_PATH + OPENSRP_FACILITY_URL_PATH;
+
+        JSONObject teamInfo = null;
+        try {
+            teamInfo = new JSONObject(context.allSettings().fetchTeamInformation());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String teamFacility = null;
+        try {
+            teamFacility = teamInfo.getJSONObject("team").getJSONObject("location").getString("uuid");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final String myUrl = DRISHTI_BASE_PATH + OPENSRP_FACILITY_URL_PATH+teamFacility;
+
         Response<String> results = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl, "sean", "Admin123");
         Log.d(TAG, "facility failure is " + results.isFailure());
         Log.d(TAG, "this is the result of facility" + results.payload());
