@@ -467,28 +467,37 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
         Log.d(TAG,"valid phone number  = "+validCellPhone(textPhone.getText().toString()));
 
 
-        if (TextUtils.isEmpty(editTextfName.getText())  ||
-                TextUtils.isEmpty(editTextlName.getText())) {
+        if (TextUtils.isEmpty(editTextfName.getText())) {
             message = getResources().getString(com.softmed.htmr_chw.R.string.unfilled_information);
+            editTextfName.setError(message);
+            makeToast();
+            return false;
+        }else if (TextUtils.isEmpty(editTextlName.getText())) {
+            message = getResources().getString(com.softmed.htmr_chw.R.string.unfilled_information);
+            editTextlName.setError(message);
             makeToast();
             return false;
         }else if (TextUtils.isEmpty(facilitytextView.getText())) {
             message = getResources().getString(com.softmed.htmr_chw.R.string.missing_facility);
+            facilitytextView.setError(message);
             makeToast();
             return false;
 
         }else if (spinnerGender.getSelectedItemPosition() ==0) {
             message = getResources().getString(com.softmed.htmr_chw.R.string.missing_gender);
+            spinnerGender.setError(message);
             makeToast();
             return false;
 
         }else if (spinnerService.getSelectedItemPosition() == 0 ) {
             message = getResources().getString(com.softmed.htmr_chw.R.string.missing_services);
+            spinnerService.setError(message);
             makeToast();
             return false;
 
         }else if (TextUtils.isEmpty(editTextKijiji.getText())) {
             message = getResources().getString(com.softmed.htmr_chw.R.string.missing_physical_address);
+            editTextKijiji.setError(message);
             makeToast();
             return false;
         }
@@ -497,7 +506,12 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
 //            makeToast();
 //            return false;
 //        }
-        else if(!TextUtils.isEmpty(textPhone.getText()) && !validCellPhone(textPhone.getText().toString())){
+        else if(!TextUtils.isEmpty(textPhone.getText()) && textPhone.getText().toString().length()<10){
+            message = getResources().getString(R.string.incorrect_phone_number);
+            textPhone.setError(message);
+            makeToast();
+            return false;
+        }else if(!TextUtils.isEmpty(textPhone.getText()) && !validCellPhone(textPhone.getText().toString())){
                 message = getResources().getString(R.string.incorrect_phone_number);
                 textPhone.setError(message);
                 makeToast();
@@ -518,6 +532,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
 
             if(index<0){
                 message = getResources().getString(com.softmed.htmr_chw.R.string.wrong_facility);
+                facilitytextView.setError(message);
                 makeToast();
                 return false;
             }else{
