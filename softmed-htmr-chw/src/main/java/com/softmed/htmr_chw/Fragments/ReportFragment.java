@@ -335,28 +335,35 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                 categoryNames.clear();
                 sizes.clear();
 
+                Cursor receivedMaleReferralsServicesCursor = null;
+                Cursor receivedFemaleReferralsServicesCursor = null;
+
                 Cursor providedReferralsServicesCursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service INNER JOIN client_referral ON  referral_service.id = client_referral.referral_service_id "+
                         (fromDateTimestamp!=0?" AND referral_date > "+fromDateTimestamp:"")  +
                         (toDateTimestamp!=0?" AND referral_date < "+toDateTimestamp:"")  +
                         "  GROUP BY referral_service.id" );
 
-                Cursor receivedMaleReferralsServicesCursor = commonRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Male'  AND service_provider_uiid = '"+((BoreshaAfyaApplication)getActivity().getApplication()).getCurrentUserID()+"' "+
-                        (fromDateTimestamp!=0?" AND referral_date > "+fromDateTimestamp:"")  +
-                        (toDateTimestamp!=0?" AND referral_date < "+toDateTimestamp:""));
-                Cursor receivedFemaleReferralsServicesCursor = commonRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Female' AND service_provider_uiid = '"+((BoreshaAfyaApplication)getActivity().getApplication()).getCurrentUserID()+"' "+
-                        (fromDateTimestamp!=0?" AND referral_date > "+fromDateTimestamp:"")  +
-                        (toDateTimestamp!=0?" AND referral_date < "+toDateTimestamp:""));
+                try {
+                    receivedMaleReferralsServicesCursor = commonRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Male'  AND service_provider_uiid = '" + ((BoreshaAfyaApplication) getActivity().getApplication()).getCurrentUserID() + "' " +
+                            (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
+                            (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : ""));
+                    receivedFemaleReferralsServicesCursor = commonRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Female' AND service_provider_uiid = '" + ((BoreshaAfyaApplication) getActivity().getApplication()).getCurrentUserID() + "' " +
+                            (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
+                            (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : ""));
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
 
                 JSONObject receivedReferrals = new JSONObject();
                 try {
                     receivedReferrals.put("femaleCount",receivedMaleReferralsServicesCursor.getCount());
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 try {
                     receivedReferrals.put("maleCount",receivedFemaleReferralsServicesCursor.getCount());
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -390,7 +397,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                         serviceDetails.put("Service",providedReferralsServicesCursor.getString(providedReferralsServicesCursor.getColumnIndex("name")));
                         serviceDetails.put("Total",cursorMaleCount.getInt(cursorMaleCount.getColumnIndex("c"))+cursorFemaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
                         sizes.add(cursorMaleCount.getInt(cursorMaleCount.getColumnIndex("c"))+cursorFemaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
-                    } catch (JSONException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
@@ -406,12 +413,12 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                 JSONObject chartsData = new JSONObject();
                 try {
                     chartsData.put("chart1",jsonArray);
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 try {
                     chartsData.put("chart2",receivedReferrals);
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -430,13 +437,13 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                 JSONObject chartsData = null;
                 try {
                     chartsData = new JSONObject(aVoid);
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 JSONArray services = new JSONArray();
                 try {
                     services = chartsData.getJSONArray("chart1");
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -445,7 +452,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                     JSONObject object = null;
                     try {
                         object = services.getJSONObject(i);
-                    } catch (JSONException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     View tableView = getActivity().getLayoutInflater().inflate(R.layout.view_summary_item, null);
@@ -459,22 +466,22 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                     sn.setText((i+1)+"");
                     try {
                         serviceName.setText(object.getString("Service"));
-                    } catch (JSONException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     try {
                         maleTotal.setText(object.getString("Male"));
-                    } catch (JSONException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     try {
                         femaleTotal.setText(object.getString("Female"));
-                    } catch (JSONException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     try {
                         total.setText(object.getString("Total"));
-                    } catch (JSONException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     servicesTable.addView(tableView);
@@ -485,20 +492,20 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                 JSONObject followupPatients = new JSONObject();
                 try {
                     followupPatients = chartsData.getJSONObject("chart2");
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
                 int maleCount = 0;
                 try {
                     maleCount = followupPatients.getInt("maleCount");
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 int femaleCount = 0;
                 try {
                     femaleCount = followupPatients.getInt("femaleCount");
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 

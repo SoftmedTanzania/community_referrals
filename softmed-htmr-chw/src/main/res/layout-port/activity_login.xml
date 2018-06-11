@@ -223,6 +223,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_height="32dp"
                     android:layout_width="72dp"
+                    android:visibility="invisible"
                     android:alpha="0.3"
                     android:src="@drawable/deloitte"/>
                 <ImageView
@@ -231,12 +232,14 @@
                     android:layout_height="46dp"
                     android:layout_width="72dp"
                     android:alpha="0.3"
+                    android:visibility="invisible"
                     android:src="@drawable/fhi360"/>
                 <ImageView
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
                     android:layout_height="56dp"
                     android:layout_width="50dp"
+                    android:visibility="invisible"
                     android:alpha="0.3"
                     android:src="@drawable/engender"/>
                 <ImageView
@@ -244,6 +247,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_height="36dp"
                     android:layout_width="120dp"
+                    android:visibility="invisible"
                     android:alpha="0.3"
                     android:src="@drawable/pmi"/>
                 <ImageView
@@ -251,12 +255,14 @@
                     android:layout_marginLeft="8dp"
                     android:layout_height="36dp"
                     android:layout_width="72dp"
+                    android:visibility="invisible"
                     android:alpha="0.3"
                     android:src="@drawable/mdh"/>
                 <ImageView
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
                     android:layout_height="36dp"
+                    android:visibility="invisible"
                     android:layout_width="72dp"
                     android:alpha="0.3"
                     android:src="@drawable/pepfar"/>
@@ -265,6 +271,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_height="36dp"
                     android:layout_width="72dp"
+                    android:visibility="invisible"
                     android:alpha="0.7"
                     android:src="@drawable/usaid"/>
 

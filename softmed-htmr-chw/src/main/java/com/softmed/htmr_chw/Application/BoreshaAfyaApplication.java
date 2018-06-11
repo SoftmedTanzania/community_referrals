@@ -16,6 +16,7 @@ import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonFtsObject;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
+import org.ei.opensrp.domain.ClientFollowup;
 import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.domain.Facility;
 import org.ei.opensrp.domain.Indicator;
@@ -30,6 +31,7 @@ import com.softmed.htmr_chw.util.Utils;
 
 import org.ei.opensrp.repository.ClientReferralRepository;
 import org.ei.opensrp.repository.FacilityRepository;
+import org.ei.opensrp.repository.FollowupClientRepository;
 import org.ei.opensrp.repository.IndicatorRepository;
 import org.ei.opensrp.repository.ReferralServiceRepository;
 import org.ei.opensrp.sync.DrishtiSyncScheduler;
@@ -78,6 +80,7 @@ import android.util.Log;
 public class BoreshaAfyaApplication extends DrishtiApplication {
     private static final String TAG = BoreshaAfyaApplication.class.getSimpleName();
     private ReferralServiceRepository serviceRepository;
+    private FollowupClientRepository followupClientRepository;
     private int userType = 0;//0=CHW and 1=Facility health care worker
     public String currentUserID, team_uuid, phone_number, team_name, team_location_id, registration_id = "";
     public static String username, password;
@@ -249,6 +252,12 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         }
     }
 
+
+    public void insertFollowup(ClientFollowup clientFollowup) {
+        followupClientRepository.add(clientFollowup);
+    }
+
+
     public void getFacilities() {
         commonRepository2 = context.commonrepository("facility");
 
@@ -412,6 +421,13 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         if (serviceRepository == null) {
             serviceRepository = new ReferralServiceRepository();
         }
+
+
+        if (followupClientRepository == null) {
+            followupClientRepository = new FollowupClientRepository();
+        }
+
+
         initializeReferralService();
         initializeHasFacilities();
     }

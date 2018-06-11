@@ -261,7 +261,7 @@ public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActiv
         spinnerService = (MaterialSpinner)   findViewById(com.softmed.htmr_chw.R.id.spinnerService);
         spinnerService.setAdapter(serviceAdapter);
 
-        facilityAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, facilityList);
+        facilityAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, facilityList);
          facilitytextView = (AutoCompleteTextView) findViewById(com.softmed.htmr_chw.R.id.autocomplete_facility);
         facilitytextView.setThreshold(1);
         facilitytextView.setAdapter(facilityAdapter);

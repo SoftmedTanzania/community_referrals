@@ -201,7 +201,7 @@ public class NativeHomeActivity extends SecuredActivity {
         ACTION_HANDLED.addListener(updateANMDetailsListener);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("HTM-Referrals");
+        getSupportActionBar().setTitle("TRCMIS");
         LoginActivity.setLanguage();
     }
 

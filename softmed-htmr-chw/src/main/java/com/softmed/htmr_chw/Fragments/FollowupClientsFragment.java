@@ -71,18 +71,20 @@ public class FollowupClientsFragment extends SecuredNativeSmartRegisterCursorAda
 
         recyclerView = (RecyclerView)v.findViewById(R.id.item_list);
         commonRepository = context().commonrepository(TABLE_NAME);
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM "+TABLE_NAME );
+        try {
+            cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + TABLE_NAME);
 
-        List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
+            List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
 
-        this.clientFollowupPersonObjects = Utils.convertToClientFollowupPersonObjectList(commonPersonObjectList);
-        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + clientFollowupPersonObjects.size());
-        ;
-        Log.d(TAG, "followup commonPersonList = " + gson.toJson(clientFollowupPersonObjects));
+            this.clientFollowupPersonObjects = Utils.convertToClientFollowupPersonObjectList(commonPersonObjectList);
+            Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + clientFollowupPersonObjects.size());
+            ;
+            Log.d(TAG, "followup commonPersonList = " + gson.toJson(clientFollowupPersonObjects));
 
-        CHWRegisterRecyclerAdapter chwRegisterRecyclerAdapter = new CHWRegisterRecyclerAdapter(getActivity(),clientFollowupPersonObjects);
+            CHWRegisterRecyclerAdapter chwRegisterRecyclerAdapter = new CHWRegisterRecyclerAdapter(getActivity(), clientFollowupPersonObjects);
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+
 
 
         if (v.findViewById(R.id.item_detail_container) != null) {
@@ -104,6 +106,9 @@ public class FollowupClientsFragment extends SecuredNativeSmartRegisterCursorAda
         }
 
         recyclerView.setAdapter(chwRegisterRecyclerAdapter);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         return v;
     }

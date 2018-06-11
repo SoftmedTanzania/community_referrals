@@ -18,7 +18,13 @@ import com.google.android.gms.gcm.GcmListenerService;
 
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.BackgroundUpdateService;
+import com.softmed.htmr_chw.DataModels.FollowUp;
+import com.softmed.htmr_chw.Repository.ClientFollowupPersonObject;
+
+import org.ei.opensrp.domain.ClientFollowup;
 import org.ei.opensrp.view.activity.LoginActivity;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MyGcmListenerService extends GcmListenerService {
 
@@ -42,48 +48,56 @@ public class MyGcmListenerService extends GcmListenerService {
         Log.d(TAG, "data bundle: " + data.toString());
         Log.d(TAG, "data size: " + data.size());
 
-        String client_id= data.getString("referralUUID");
-        String feedback= data.getString("otherNotes");
-        String serviceGivenToPatient= data.getString("serviceGivenToPatient");
-        boolean testResult= Boolean.parseBoolean(data.getString("testResults"));
-        String referralStatus= data.getString("referralStatus");
-        ((BoreshaAfyaApplication)getApplication()).updateReferralStatus(client_id,feedback,serviceGivenToPatient,testResult,referralStatus);
+        org.ei.opensrp.Context context = org.ei.opensrp.Context.getInstance().updateApplicationContext(this.getApplicationContext());
+        context.userService().isValidLocalLogin(context.allSharedPreferences().fetchRegisteredANM(), context.allSettings().fetchANMPassword());
+
+        String type= data.getString("type");
+        if(type.equals("PatientReferral")){
+            Log.d(TAG,"patientsDTO = "+data.getString("patientsDTO"));
+
+            try {
+                JSONObject object = new JSONObject(data.getString("patientsDTO"));
+
+                ClientFollowup clientFollowup = new ClientFollowup();
+                clientFollowup.setId(object.getString("patientId"));
+                clientFollowup.setFirst_name(object.getString("firstName"));
+                clientFollowup.setMiddle_name( object.getString("middle_name"));
+                clientFollowup.setSurname( object.getString("surname"));
+                clientFollowup.setGender( object.getString("gender"));
+                clientFollowup.setPhone_number( object.getString("phone_number"));
+                clientFollowup.setCommunity_based_hiv_service( object.getString("community_based_hiv_service"));
+                clientFollowup.setMap_cue( object.getString("map_cue"));
+                clientFollowup.setWard( object.getString("ward"));
+                clientFollowup.setReferral_reason( object.getString("referral_reason"));
+                clientFollowup.setCare_taker_name( object.getString("care_taker_name"));
+                clientFollowup.setCare_taker_name_phone_number( object.getString("care_taker_name"));
+                clientFollowup.setCare_taker_relationship( object.getString("care_taker_relationship"));
+                clientFollowup.setCtc_number(  object.getString("ctc_number"));
+                clientFollowup.setFacility_id(  object.getString("facility_id"));
+                clientFollowup.setReferral_status( object.getString("referral_status"));
+                clientFollowup.setService_provider_uiid( object.getString("service_provider_uiid"));
+
+                clientFollowup.setReferral_date(Long.valueOf(object.getString("referral_date")));
+                clientFollowup.setVisit_date(Long.valueOf(object.getString("visit_date")));
+                clientFollowup.setDate_of_birth(Long.valueOf(object.getString("date_of_birth")));
 
 
+                ((BoreshaAfyaApplication)getApplication()).insertFollowup(clientFollowup);
 
-         if (from.startsWith("/chw_feedback/")){
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-            startService(new Intent(this, BackgroundUpdateService.class)
-                    .putExtra("type", "follow_up")
-                    .putExtra("client_id", data.getString("client_id"))
-                    .putExtra("follow_up_reason", data.getString("follow_up_reason")));
+        }else if(type.equals("ReferralFeedback") || type.equals("FailedReferrals")){
+            String client_id= data.getString("referralUUID");
+            String feedback= data.getString("otherNotes");
+            String serviceGivenToPatient= data.getString("serviceGivenToPatient");
+            boolean testResult= Boolean.parseBoolean(data.getString("testResults"));
+            String referralStatus= data.getString("referralStatus");
+
+            ((BoreshaAfyaApplication)getApplication()).updateReferralStatus(client_id,feedback,serviceGivenToPatient,testResult,referralStatus);
 
 
-
-        }else if (from.startsWith("/facility/")){
-            //todo martha how to process a list of a feedback
-            startService(new Intent(this, BackgroundUpdateService.class)
-                    .putExtra("type", "facility"));
-        }else if (from.startsWith("/facility_update/")){
-            //todo martha how to process a list of a feedback
-            startService(new Intent(this, BackgroundUpdateService.class)
-                    .putExtra("type", "facility_delete"));
-
-        }else if (from.startsWith("/facility_delete/")){
-            //todo martha how to process a list of a feedback
-            startService(new Intent(this, BackgroundUpdateService.class)
-                    .putExtra("type", "facility_update"));
-        }else if (from.startsWith("/referral_service_update/")){
-            //todo martha how to process a list of a feedback
-            startService(new Intent(this, BackgroundUpdateService.class)
-                    .putExtra("type", "referral_service_delete"));
-
-        }else if (from.startsWith("/referral_service_delete/")){
-            //todo martha how to process a list of a feedback
-            startService(new Intent(this, BackgroundUpdateService.class)
-                    .putExtra("type", "referral_service_update"));
-        }else{
-            // normal downstream message.
         }
 
         sendNotification(message);
@@ -139,7 +153,7 @@ public class MyGcmListenerService extends GcmListenerService {
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(org.ei.opensrp.R.drawable.ic_htmr)
-                .setContentTitle("HTMR Notification")
+                .setContentTitle("TRCMIS Notification")
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)

@@ -17,7 +17,7 @@ import static net.sqlcipher.DatabaseUtils.longForQuery;
 import static org.apache.commons.lang3.StringUtils.repeat;
 
 public class ClientReferralRepository extends DrishtiRepository {
-    private static final String CHILD_SQL = "CREATE TABLE ClientReferral(id VARCHAR PRIMARY KEY, relationalid VARCHAR, first_name VARCHAR, middle_name VARCHAR, surname VARCHAR, community_based_hiv_service VARCHAR, ctc_number VARCHAR, referral_date VARCHAR, facility_id VARCHAR, referral_reason VARCHAR, referral_service_id VARCHAR, referral_status VARCHAR, is_valid VARCHAR, details VARCHAR)";
+    private static final String CHILD_SQL = "CREATE TABLE client_referral(id VARCHAR PRIMARY KEY, relationalid VARCHAR, first_name VARCHAR, middle_name VARCHAR, surname VARCHAR,gender VARCHAR, community_based_hiv_service VARCHAR, ctc_number VARCHAR, referral_date VARCHAR, facility_id VARCHAR, referral_reason VARCHAR, referral_service_id VARCHAR, referral_status VARCHAR, is_valid VARCHAR, details VARCHAR)";
     public static final String CLIENT_REFERRAL = "client_referral";
     public static final String ID_COLUMN = "id";
     public static final String Relational_ID = "relationalid";
