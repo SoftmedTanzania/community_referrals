@@ -20,7 +20,8 @@ import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 
 import com.softmed.htmr_chw.Fragments.ClientDetailFragment;
-import com.softmed.htmr_chw.Repository.ClientFollowupPersonObject;
+
+import org.ei.opensrp.domain.ClientFollowup;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
@@ -36,7 +37,7 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 public class ClientsDetailsActivity extends SecuredNativeSmartRegisterActivity {
     private static final String TAG = ClientsDetailsActivity.class.getSimpleName();
     private  TextView name,age,gender,facility,feedback,contacts,sponsor,referedReason,residence,referedDate,note;
-    private ClientFollowupPersonObject clientFollowupPersonObject;
+    private ClientFollowup clientFollowupPersonObject;
     private CommonRepository commonRepository;
     private Cursor cursor;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
@@ -81,7 +82,7 @@ public class ClientsDetailsActivity extends SecuredNativeSmartRegisterActivity {
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
 
-        clientFollowupPersonObject = (ClientFollowupPersonObject) bundle.getSerializable("client_followup");
+        clientFollowupPersonObject = (ClientFollowup) bundle.getSerializable("client_followup");
 
 
         name = (TextView) findViewById(com.softmed.htmr_chw.R.id.name);

@@ -15,11 +15,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
-
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
-import com.softmed.htmr_chw.BackgroundUpdateService;
-import com.softmed.htmr_chw.DataModels.FollowUp;
-import com.softmed.htmr_chw.Repository.ClientFollowupPersonObject;
 
 import org.ei.opensrp.domain.ClientFollowup;
 import org.ei.opensrp.view.activity.LoginActivity;

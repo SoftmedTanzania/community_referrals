@@ -48,6 +48,7 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
+import org.ei.opensrp.repository.FollowupClientRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -79,6 +80,8 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
     private LinearLayout dateFromLayout, dateToLayout;
     private Button applyDateRangeButton;
     private CommonRepository commonRepository;
+
+    private FollowupClientRepository followupClientRepository;
     private TableLayout servicesTable;
     private  PieChart mChart1;
     private BarChart mChart2;
@@ -102,6 +105,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
 
 
 
+        followupClientRepository = context().followupClientRepository();
         commonRepository = context().commonrepository(TABLE_NAME);
 
         dateRangeFromText = (TextView) rowview.findViewById(R.id.date_range_from);
@@ -338,16 +342,16 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                 Cursor receivedMaleReferralsServicesCursor = null;
                 Cursor receivedFemaleReferralsServicesCursor = null;
 
-                Cursor providedReferralsServicesCursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service INNER JOIN client_referral ON  referral_service.id = client_referral.referral_service_id "+
+                Cursor providedReferralsServicesCursor = followupClientRepository.RawCustomQueryForAdapter("select * FROM referral_service INNER JOIN client_referral ON  referral_service.id = client_referral.referral_service_id "+
                         (fromDateTimestamp!=0?" AND referral_date > "+fromDateTimestamp:"")  +
                         (toDateTimestamp!=0?" AND referral_date < "+toDateTimestamp:"")  +
                         "  GROUP BY referral_service.id" );
 
                 try {
-                    receivedMaleReferralsServicesCursor = commonRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Male'  AND service_provider_uiid = '" + ((BoreshaAfyaApplication) getActivity().getApplication()).getCurrentUserID() + "' " +
+                    receivedMaleReferralsServicesCursor = followupClientRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Male'  AND service_provider_uiid = '" + ((BoreshaAfyaApplication) getActivity().getApplication()).getCurrentUserID() + "' " +
                             (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
                             (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : ""));
-                    receivedFemaleReferralsServicesCursor = commonRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Female' AND service_provider_uiid = '" + ((BoreshaAfyaApplication) getActivity().getApplication()).getCurrentUserID() + "' " +
+                    receivedFemaleReferralsServicesCursor = followupClientRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Female' AND service_provider_uiid = '" + ((BoreshaAfyaApplication) getActivity().getApplication()).getCurrentUserID() + "' " +
                             (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
                             (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : ""));
                 }catch (Exception e){

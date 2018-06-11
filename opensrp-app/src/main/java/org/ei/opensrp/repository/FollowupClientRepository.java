@@ -2,6 +2,8 @@ package org.ei.opensrp.repository;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
+
 import com.google.gson.Gson;
 import net.sqlcipher.database.SQLiteDatabase;
 import org.apache.commons.lang3.StringUtils;
@@ -63,16 +65,16 @@ public class FollowupClientRepository extends DrishtiRepository {
         database.update(CLIENT_FOLLOWUP, createValuesFor(clientFollowup), ID_COLUMN + " = ?", new String[]{clientFollowup.getId()});
     }
 
-    public List<ClientReferral> all() {
+    public List<ClientFollowup> all() {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.query(CLIENT_FOLLOWUP, CLIENT_FOLLOWUP_TABLE_COLUMNS, null, null, null, null, null);
         return readAll(cursor);
     }
 
-    public ClientReferral find(String caseId) {
+    public ClientFollowup find(String caseId) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.query(CLIENT_FOLLOWUP, CLIENT_FOLLOWUP_TABLE_COLUMNS, ID_COLUMN + " = ?", new String[]{caseId}, null, null, null, null);
-        List<ClientReferral> children = readAll(cursor);
+        List<ClientFollowup> children = readAll(cursor);
 
         if (children.isEmpty()) {
             return null;
@@ -80,16 +82,16 @@ public class FollowupClientRepository extends DrishtiRepository {
         return children.get(0);
     }
 
-    public List<ClientReferral> findClientReferralByCaseIds(String... caseIds) {
+    public List<ClientFollowup> findClientReferralByCaseIds(String... caseIds) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.rawQuery(String.format("SELECT * FROM %s WHERE %s IN (%s)", CLIENT_FOLLOWUP, ID_COLUMN, insertPlaceholdersForInClause(caseIds.length)), caseIds);
         return readAll(cursor);
     }
-    public ClientReferral findByServiceStatus(String name) {
+    public ClientFollowup findByServiceStatus(String name) {
 
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.query(CLIENT_FOLLOWUP, CLIENT_FOLLOWUP_TABLE_COLUMNS, REFERRAL_STATUS + " = ?", new String[]{name}, null, null, null, null);
-        List<ClientReferral> children = readAll(cursor);
+        List<ClientFollowup> children = readAll(cursor);
 
         if (children.isEmpty()) {
             return null;
@@ -103,7 +105,7 @@ public class FollowupClientRepository extends DrishtiRepository {
         database.update(CLIENT_FOLLOWUP, values, ID_COLUMN + " = ?", new String[]{caseId});
     }
 
-    public List<ClientReferral> findByServiceCaseId(String caseId) {
+    public List<ClientFollowup> findByServiceCaseId(String caseId) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.query(CLIENT_FOLLOWUP, CLIENT_FOLLOWUP_TABLE_COLUMNS, ID_COLUMN + " = ?", new String[]{caseId}, null, null, null, null);
         return readAll(cursor);
@@ -178,17 +180,22 @@ public class FollowupClientRepository extends DrishtiRepository {
     }
 
 
-    private List<ClientReferral> readAll(Cursor cursor) {
+    private List<ClientFollowup> readAll(Cursor cursor) {
         cursor.moveToFirst();
-        List<ClientReferral> referralServicesListDataModel = new ArrayList<ClientReferral>();
+        List<ClientFollowup> referralServicesListDataModel = new ArrayList<ClientFollowup>();
         while (!cursor.isAfterLast()) {
-            referralServicesListDataModel.add(new ClientReferral(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getLong(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12), cursor.getString(13))
-
-            );
+            referralServicesListDataModel.add(clientFromCursor(cursor));
             cursor.moveToNext();
         }
         cursor.close();
         return referralServicesListDataModel;
+    }
+
+    public Cursor RawCustomQueryForAdapter(String query) {
+        Log.i(getClass().getName(), query);
+        SQLiteDatabase database = masterRepository.getReadableDatabase();
+        Cursor cursor = database.rawQuery(query, null);
+        return cursor;
     }
 
 

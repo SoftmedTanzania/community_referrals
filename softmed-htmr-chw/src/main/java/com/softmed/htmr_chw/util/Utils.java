@@ -23,14 +23,13 @@ import android.os.Build.VERSION_CODES;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.softmed.htmr_chw.Repository.ClientReferralPersonObject;
+import com.softmed.htmr_chw.Repository.FacilityObject;
+import com.softmed.htmr_chw.Repository.ReferralServiceObject;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.domain.Indicator;
-import com.softmed.htmr_chw.Repository.ClientFollowupPersonObject;
-import com.softmed.htmr_chw.Repository.ClientReferralPersonObject;
-import com.softmed.htmr_chw.Repository.FacilityObject;
-import com.softmed.htmr_chw.Repository.ReferralServiceObject;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -99,58 +98,6 @@ public class Utils {
                     commonPersonObject.getColumnmaps().get("referral_status"),
                     commonPersonObject.getColumnmaps().get("is_valid"),
                     commonPersonObject.getColumnmaps().get("gender"),
-                    commonPersonObject.getColumnmaps().get("details")
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static ClientFollowupPersonObject convertToClientFollowupPersonObject(CommonPersonObject commonPersonObject) {
-        String details = commonPersonObject.getColumnmaps().get("details");
-        Log.d(TAG, "details string commonPersonObject = " + convertStandardJSONString(details));
-        try {
-            long visitDate = 0,dob=0,referralDate=0;
-            try{
-                visitDate = Long.parseLong(commonPersonObject.getColumnmaps().get("visit_date"));
-
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-
-            try{
-                dob = Long.parseLong(commonPersonObject.getColumnmaps().get("date_of_birth"));
-
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            try{
-                referralDate = Long.parseLong(commonPersonObject.getColumnmaps().get("referral_date"));
-
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-
-            return new ClientFollowupPersonObject(
-                    commonPersonObject.getColumnmaps().get("id"),
-                    commonPersonObject.getColumnmaps().get("relationalid"),
-                    commonPersonObject.getColumnmaps().get("first_name"),
-                    commonPersonObject.getColumnmaps().get("middle_name"),
-                    commonPersonObject.getColumnmaps().get("surname"),
-                    commonPersonObject.getColumnmaps().get("community_based_hiv_service"),
-                    commonPersonObject.getColumnmaps().get("ctc_number"),
-                    commonPersonObject.getColumnmaps().get("is_valid"),
-                    commonPersonObject.getColumnmaps().get("referral_reason"),
-                    commonPersonObject.getColumnmaps().get("gender"),
-                    commonPersonObject.getColumnmaps().get("phone_number"),
-                    commonPersonObject.getColumnmaps().get("care_taker_name"),
-                    commonPersonObject.getColumnmaps().get("care_taker_name_phone_number"),
-                    commonPersonObject.getColumnmaps().get("care_taker_relationship"),
-                    commonPersonObject.getColumnmaps().get("facility_id"),
-                    commonPersonObject.getColumnmaps().get("referral_service_id"),
-                    commonPersonObject.getColumnmaps().get("referral_status"),visitDate,dob,referralDate,
-                    commonPersonObject.getColumnmaps().get("village"),
                     commonPersonObject.getColumnmaps().get("details")
             );
         } catch (Exception e) {
@@ -238,15 +185,7 @@ public class Utils {
         return clientReferralPersonObjects;
     }
 
-    public static List<ClientFollowupPersonObject> convertToClientFollowupPersonObjectList(List<CommonPersonObject> commonPersonObjectsList) {
-        List<ClientFollowupPersonObject> clientFollowupPersonObjects = new ArrayList<>();
-        for (CommonPersonObject common : commonPersonObjectsList) {
-            clientFollowupPersonObjects.add(convertToClientFollowupPersonObject(common));
 
-        }
-
-        return clientFollowupPersonObjects;
-    }
 
     public static List<ClientReferralPersonObject> convertToClientReferralList(List<ClientReferral> commonPersonObjectsList) {
         List<ClientReferralPersonObject> clientReferralPersonObjects = new ArrayList<>();

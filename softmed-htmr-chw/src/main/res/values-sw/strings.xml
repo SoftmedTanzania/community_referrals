@@ -99,4 +99,13 @@
     <string name="other_notes_title">Taarifa nyingine/Ushauri</string>
     <string name="initial_information">Taarifa za Awali</string>
 
+
+    <string name="yes_button_label">Ndio</string>
+    <string name="no_button_label">Hapana</string>
+    <string name="followup_qn_met_with_client">Je, Umemkutana na  mteja?</string>
+    <string name="followup_qn_reasons_for_not_visiting_clinic">Chagua sababu ya kutohunduria hospitali</string>
+    <string name="toast_message_select_reasons_for_missing_appointment">Tafadhali chagua sababu ya mteja kutohunduria hospitali</string>
+    <string name="folloup_feedback_moved_to_another_facility">Amefariki</string>
+    <string name="followup_feedback_other_reasons">Sababu nyinginezo</string>
+
 </resources>

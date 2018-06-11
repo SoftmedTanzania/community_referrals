@@ -9,13 +9,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.softmed.htmr_chw.R;
+import com.softmed.htmr_chw.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
+import com.softmed.htmr_chw.util.LargeDiagonalCutPathDrawable;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
-import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.Repository.ClientFollowupPersonObject;
-import com.softmed.htmr_chw.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
-import com.softmed.htmr_chw.util.LargeDiagonalCutPathDrawable;
+import org.ei.opensrp.domain.ClientFollowup;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
@@ -26,27 +26,23 @@ import java.util.List;
 import java.util.Locale;
 
 public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
-    /**
-     * The fragment argument representing the item ID that this fragment
-     * represents.
-     */
     public static final String CLIENT_FOLLOWUP = "item_id";
-    public ClientFollowupPersonObject clientFollowupPersonObject;
     private static final String TAG = ClientDetailFragment.class.getSimpleName();
-
+    public ClientFollowup clientFollowup;
     private CommonRepository commonRepository;
     private Cursor cursor;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
     private Gson gson = new Gson();
-    private  TextView name,age,gender,facility,feedback,contacts,sponsor,referedReason,residence,referedDate,note;
+    private TextView name, age, gender, facility, feedback, contacts, sponsor, referedReason, residence, referedDate, note;
+
     public ClientDetailFragment() {
     }
 
-    public static ClientDetailFragment newInstance(ClientFollowupPersonObject followupPersonObject) {
+    public static ClientDetailFragment newInstance(ClientFollowup clientFollowup) {
         ClientDetailFragment fragment = new ClientDetailFragment();
         Bundle args = new Bundle();
-        args.putSerializable(CLIENT_FOLLOWUP, followupPersonObject);
+        args.putSerializable(CLIENT_FOLLOWUP, clientFollowup);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,7 +51,7 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            clientFollowupPersonObject = (ClientFollowupPersonObject) getArguments().getSerializable(CLIENT_FOLLOWUP);
+            clientFollowup = (ClientFollowup) getArguments().getSerializable(CLIENT_FOLLOWUP);
         }
     }
 
@@ -82,7 +78,7 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
         note = (TextView) rootView.findViewById(R.id.note);
         rootView.findViewById(R.id.details_layout).setBackground(new LargeDiagonalCutPathDrawable());
 
-        setDetails(clientFollowupPersonObject);
+        setDetails(clientFollowup);
 
         return rootView;
     }
@@ -112,27 +108,25 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
 
     }
 
-    public String getFacilityName(String id){
+    public String getFacilityName(String id) {
 
         commonRepository = context().commonrepository("facility");
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility where id ='"+ id +"'");
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility where id ='" + id + "'");
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
 
-        if(commonPersonObjectList.size()>0) {
+        if (commonPersonObjectList.size() > 0) {
             return commonPersonObjectList.get(0).getColumnmaps().get("name");
-        }else{
+        } else {
             return "";
         }
     }
 
-    private void setDetails(ClientFollowupPersonObject clientFollowupPersonObject){
+    private void setDetails(ClientFollowup clientFollowup) {
 
-        this.clientFollowupPersonObject = clientFollowupPersonObject;
-
-        String reg_date = dateFormat.format(clientFollowupPersonObject.getDate_of_birth());
-        String ageS="";
+        String reg_date = dateFormat.format(clientFollowup.getDate_of_birth());
+        String ageS = "";
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
             Date d = dateFormat.parse(reg_date);
@@ -145,24 +139,22 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
             ageS = ageInt.toString();
 
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if((clientFollowupPersonObject.getGender()).equalsIgnoreCase(getResources().getString(R.string.female))){
+        if ((clientFollowup.getGender()).equalsIgnoreCase(getResources().getString(R.string.female))) {
             gender.setText(getResources().getString(R.string.female));
-        }
-        else     {
+        } else {
             gender.setText(getResources().getString(R.string.male));
         }
         age.setText(ageS + " years");
-        name . setText(clientFollowupPersonObject.getFirst_name()+" "+clientFollowupPersonObject.getMiddle_name()+", "+ clientFollowupPersonObject.getSurname());
-        contacts.setText(clientFollowupPersonObject.getPhone_number());
-        facility.setText(getFacilityName(clientFollowupPersonObject.getFacility_id()));
-        referedDate.setText(dateFormat.format(clientFollowupPersonObject.getReferral_date()));
-//        residence.setText(clientFollowupPersonObject.getVillage()+" M/kiti -:"+clientFollowupPersonObject.getVillage_leader());
-        residence.setText(clientFollowupPersonObject.getVillage());
-        note.setText(clientFollowupPersonObject.getReferral_status());
+        name.setText(clientFollowup.getFirst_name() + " " + clientFollowup.getMiddle_name() + ", " + clientFollowup.getSurname());
+        contacts.setText(clientFollowup.getPhone_number());
+        facility.setText(getFacilityName(clientFollowup.getFacility_id()));
+        referedDate.setText(dateFormat.format(clientFollowup.getReferral_date()));
+//        residence.setText(clientFollowup.getVillage()+" M/kiti -:"+clientFollowup.getVillage_leader());
+        residence.setText(clientFollowup.getVillage());
+        note.setText(clientFollowup.getReferral_status());
 
     }
 }

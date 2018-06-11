@@ -24,22 +24,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-
-import org.ei.opensrp.Context;
-import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
-import org.ei.opensrp.commonregistry.CommonPersonObject;
-import org.ei.opensrp.domain.ClientReferral;
-import org.ei.opensrp.domain.SyncStatus;
-import org.ei.opensrp.domain.form.FormData;
-import org.ei.opensrp.domain.form.FormField;
-import org.ei.opensrp.domain.form.FormInstance;
-import org.ei.opensrp.domain.form.FormSubmission;
-import org.ei.opensrp.commonregistry.CommonRepository;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.DataModels.FollowUp;
-import com.softmed.htmr_chw.Fragments.FollowupClientsFragment;
 import com.softmed.htmr_chw.Fragments.CHWSmartRegisterFragment;
-import com.softmed.htmr_chw.Repository.ClientFollowupPersonObject;
 import com.softmed.htmr_chw.Repository.ClientReferralPersonObject;
 import com.softmed.htmr_chw.Repository.FollowUpPersonObject;
 import com.softmed.htmr_chw.Repository.FollowUpRepository;
@@ -47,13 +34,26 @@ import com.softmed.htmr_chw.Repository.LocationSelectorDialogFragment;
 import com.softmed.htmr_chw.pageradapter.BaseRegisterActivityPagerAdapter;
 import com.softmed.htmr_chw.util.AsyncTask;
 import com.softmed.htmr_chw.util.Utils;
+
+import org.ei.opensrp.Context;
+import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
+import org.ei.opensrp.commonregistry.CommonPersonObject;
+import org.ei.opensrp.commonregistry.CommonRepository;
+import org.ei.opensrp.domain.ClientFollowup;
+import org.ei.opensrp.domain.ClientReferral;
+import org.ei.opensrp.domain.SyncStatus;
+import org.ei.opensrp.domain.form.FormData;
+import org.ei.opensrp.domain.form.FormField;
+import org.ei.opensrp.domain.form.FormInstance;
+import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.sync.SyncAfterFetchListener;
 import org.ei.opensrp.sync.SyncProgressIndicator;
 import org.ei.opensrp.sync.UpdateActionsTask;
 import org.ei.opensrp.util.FormUtils;
-import org.ei.opensrp.view.activity.*;
+import org.ei.opensrp.view.activity.SecuredActivity;
+import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.ei.opensrp.view.dialog.DialogOption;
 import org.ei.opensrp.view.dialog.DialogOptionModel;
 import org.ei.opensrp.view.dialog.OpenFormOption;
@@ -81,14 +81,19 @@ import fr.ganfra.materialspinner.MaterialSpinner;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.View.VISIBLE;
-import static java.lang.String.valueOf;
 import static com.softmed.htmr_chw.util.Utils.generateRandomUUIDString;
 
 public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener {
+    static final String DATABASE_NAME = "drishti.db";
     private static final String TAG = ChwSmartRegisterActivity.class.getSimpleName();
-    private JSONObject fieldOverides = new JSONObject();
+    public static MaterialSpinner spinnerReason, spinnerClientAvailable;
+    public static int availableSelection = -1, reasonSelection = -1;
     @Bind(R.id.view_pager)
-    public    OpenSRPViewPager mPager;
+    public OpenSRPViewPager mPager;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+    String message = "";
+    Calendar today = Calendar.getInstance();
+    private JSONObject fieldOverides = new JSONObject();
     private FragmentPagerAdapter mPagerAdapter;
     private int currentPage;
     private String[] formNames = new String[]{};
@@ -96,14 +101,9 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private Gson gson = new Gson();
     private CommonRepository commonRepository;
     private Cursor cursor;
-    public static MaterialSpinner spinnerReason,spinnerClientAvailable;
-    public static int availableSelection = -1,reasonSelection = -1;
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-    static final String DATABASE_NAME = "drishti.db";
     private SecuredActivity securedActivity;
     private LinearLayout flags_layout;
-    String message ="";
-    Calendar today = Calendar.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,7 +140,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         currentPage = 3;
         initialize();
         setValuesInBoreshaAfya();
-        Log.d(TAG, "table columns ="+new Gson().toJson(context().commonrepository("referral_service").common_TABLE_COLUMNS));
+        Log.d(TAG, "table columns =" + new Gson().toJson(context().commonrepository("referral_service").common_TABLE_COLUMNS));
 
 
     }
@@ -155,18 +155,18 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
         String gsonClient = Utils.convertStandardJSONString(clientReferralPersonObject.getDetails());
-        ClientReferral clientReferral = new Gson().fromJson(gsonClient,ClientReferral.class);
+        ClientReferral clientReferral = new Gson().fromJson(gsonClient, ClientReferral.class);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
                 .setCancelable(true);
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
-        dialog.getWindow().setLayout(1000,650);
+        dialog.getWindow().setLayout(1000, 650);
 
 
         String reg_date = dateFormat.format(clientReferral.getDate_of_birth());
-        String ageS="";
+        String ageS = "";
         try {
             Date d = dateFormat.parse(reg_date);
             Calendar cal = Calendar.getInstance();
@@ -175,7 +175,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
             Integer ageInt = new Integer(age);
             ageS = ageInt.toString();
-
 
 
         } catch (Exception e) {
@@ -194,7 +193,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         TextView physicalAddress = (TextView) dialogView.findViewById(R.id.editTextKijiji);
         TextView villageleader = (TextView) dialogView.findViewById(R.id.viewVillageLeader);
 
-        if(clientReferralPersonObject.getReferral_status().equals("1") && !clientReferral.getServices_given_to_patient().equals("")) {
+        if (clientReferralPersonObject.getReferral_status().equals("1") && !clientReferral.getServices_given_to_patient().equals("")) {
             dialogView.findViewById(R.id.referral_feedback_title).setVisibility(VISIBLE);
             dialogView.findViewById(R.id.referral_feedback).setVisibility(VISIBLE);
             dialogView.findViewById(R.id.strip_six).setVisibility(VISIBLE);
@@ -203,7 +202,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             referralFeedback.setText(clientReferral.getServices_given_to_patient());
         }
 
-        if(!clientReferral.getOther_notes().equals("")) {
+        if (!clientReferral.getOther_notes().equals("")) {
             dialogView.findViewById(R.id.other_notes_title).setVisibility(VISIBLE);
             dialogView.findViewById(R.id.other_notes).setVisibility(VISIBLE);
             dialogView.findViewById(R.id.strip_seven).setVisibility(VISIBLE);
@@ -213,16 +212,16 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         }
 
 
-        textName.setText(clientReferralPersonObject.getFirst_name() +" "+clientReferralPersonObject.getMiddle_name()+" "+clientReferralPersonObject.getSurname());
+        textName.setText(clientReferralPersonObject.getFirst_name() + " " + clientReferralPersonObject.getMiddle_name() + " " + clientReferralPersonObject.getSurname());
 //
         textAge.setText(ageS + " years");
         cbhs.setText(clientReferral.getCommunity_based_hiv_service());
         referral_service.setText(getReferralServiceName(clientReferralPersonObject.getReferral_service_id()));
 
-        Log.d(TAG,"facility id = "+clientReferralPersonObject.getFacility_id());
+        Log.d(TAG, "facility id = " + clientReferralPersonObject.getFacility_id());
 
         facility.setText(getFacilityName(clientReferralPersonObject.getFacility_id()));
-        if(!clientReferralPersonObject.getCtc_number().isEmpty())
+        if (!clientReferralPersonObject.getCtc_number().isEmpty())
             ctc_number.setText(clientReferralPersonObject.getCtc_number());
         else
             ctc_number.setText("-");
@@ -230,93 +229,12 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         phoneNumber.setText(clientReferral.getPhone_number());
         villageleader.setText(clientReferral.getVillage_leader());
         physicalAddress.setText(clientReferral.getVillage());
-        if((clientReferralPersonObject.getGender()).equals(getResources().getString(R.string.female))){
+        if ((clientReferralPersonObject.getGender()).equals(getResources().getString(R.string.female))) {
             gender.setText(getResources().getString(R.string.female));
-        }
-        else     {
+        } else {
             gender.setText(getResources().getString(R.string.male));
         }
-        setIndicators(dialogView,gsonClient);
-    }
-
-    public void showPreRegistrationVisitDialog(final ClientReferralPersonObject clientReferralPersonObject)
-    {
-
-        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_visit_details, null);
-        String[] ITEMS = {"Amehama", "Amefariki","Ameenda kituo kingine","Sababu nyinginezo"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ITEMS);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerReason = (MaterialSpinner) dialogView.findViewById(R.id.spinnerReason);
-        spinnerReason.setAdapter(adapter);
-
-        spinnerReason.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i >= 0) {
-                    spinnerReason.setFloatingLabelText("Chagua sababu ya kutokwenda kliniki");
-                    reasonSelection = i;
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-
-        spinnerReason.setSelection(reasonSelection);
-
-        String gsonClient = Utils.convertStandardJSONString(clientReferralPersonObject.getDetails());
-        Log.d(TAG, "gsonMom = " + gsonClient);
-
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
-        dialogBuilder.setView(dialogView)
-                .setCancelable(false);
-
-        final AlertDialog dialog = dialogBuilder.create();
-        dialog.show();
-        Button button_yes = (Button) dialogView.findViewById(R.id.tuma_button);
-        Button button_no = (Button) dialogView.findViewById(R.id.cancel_button);
-
-        button_yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (spinnerReason.getSelectedItemPosition() <=0) {
-                    // no radio checked
-                    message = "Tafadhali chagua sababu ya mteja kutokwenda kliniki";
-                    makeToast();
-                }else {
-
-                    ClientReferral clientReferral = new Gson().fromJson(clientReferralPersonObject.getDetails(), ClientReferral.class);
-
-                    if (spinnerReason.getSelectedItem().toString().equals("Amehama") || spinnerReason.getSelectedItem().toString().equals("Amefariki"))
-                        clientReferral.setIs_valid("false");
-
-                    clientReferral.setReferral_feedback(spinnerReason.getSelectedItem().toString());
-                    Toast.makeText(ChwSmartRegisterActivity.this, "Asante kwa kumtembelea tena " + clientReferralPersonObject.getFirst_name() + " " + clientReferralPersonObject.getMiddle_name() + " " + clientReferralPersonObject.getSurname(), Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                }
-            }
-        });
-        button_no.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-        TextView textName = (TextView) dialogView.findViewById(R.id.patient_name);
-        textName.setText(clientReferralPersonObject.getFirst_name()+" "+clientReferralPersonObject.getMiddle_name()+" "+ clientReferralPersonObject.getSurname());
-
-        TextView facility = (TextView) dialog.findViewById(R.id.textview_facility);
-        facility.setText(getFacilityName(clientReferralPersonObject.getFacility_id()));
-
-        TextView service = (TextView) dialog.findViewById(R.id.textview_referral);
-        service.setText(getReferralServiceName(clientReferralPersonObject.getReferral_service_id()));
-
-        TextView referral_reason = (TextView) dialog.findViewById(R.id.textview_service);
-        referral_reason.setText(clientReferralPersonObject.getReferral_reason());
+        setIndicators(dialogView, gsonClient);
     }
 
     private void makeToast() {
@@ -325,10 +243,10 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 Toast.LENGTH_LONG).show();
     }
 
-    public String getFacilityName(String id){
+    public String getFacilityName(String id) {
 
         commonRepository = context().commonrepository("facility");
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility where id ='"+ id +"'");
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility where id ='" + id + "'");
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
@@ -336,10 +254,10 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         return commonPersonObjectList.get(0).getColumnmaps().get("name");
     }
 
-    public String getReferralServiceName(String id){
+    public String getReferralServiceName(String id) {
 
         commonRepository = context().commonrepository("referral_service");
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service where id ='"+ id +"'");
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service where id ='" + id + "'");
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "referral_service");
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
@@ -348,34 +266,34 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     }
 
     //TODO Coze reimplement this
-    public void setIndicators(View view,String object) {
-        try{
+    public void setIndicators(View view, String object) {
+        try {
             JSONObject jsonObj = new JSONObject(object);
-            Log.d(TAG,"jason indicators "+jsonObj.get("indicator_ids"));
+            Log.d(TAG, "jason indicators " + jsonObj.get("indicator_ids"));
             String list = jsonObj.getString("indicator_ids").toString();
-            Log.d(TAG,"list"+list);
-            list = list.replace("[","");
-            list = list.replace("\"","");
-            list = list.replace("]","");
-            Log.d(TAG,"list"+list);
+            Log.d(TAG, "list" + list);
+            list = list.replace("[", "");
+            list = list.replace("\"", "");
+            list = list.replace("]", "");
+            Log.d(TAG, "list" + list);
             List<String> myList = new ArrayList<String>(Arrays.asList(list.split(",")));
-            Log.d(TAG,"inidcators list "+myList.get(0)+"size "+myList.size());
+            Log.d(TAG, "inidcators list " + myList.get(0) + "size " + myList.size());
             flags_layout = (LinearLayout) view.findViewById(R.id.flags_layout);
             flags_layout.removeAllViewsInLayout();
-            for(int m =0; m< myList.size(); m++){
+            for (int m = 0; m < myList.size(); m++) {
                 final TextView rowTextView = new TextView(this);
                 rowTextView.setText(getIndicatorName(myList.get(m)));
-                rowTextView.setPadding(0,10,10,0);
+                rowTextView.setPadding(0, 10, 10, 0);
                 flags_layout.addView(rowTextView);
             }
-        }catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
     }
 
-    public String getIndicatorName(String id){
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM indicator where referralServiceIndicatorId ='"+ id +"'");
+    public String getIndicatorName(String id) {
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM indicator where referralServiceIndicatorId ='" + id + "'");
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "indicator");
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
@@ -383,18 +301,17 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         return commonPersonObjectList.get(0).getColumnmaps().get("indicatorName");
     }
 
-    public void showFollowUpFormDialog(final ClientFollowupPersonObject clientperson) {
+    public void showFollowUpFormDialog(final ClientFollowup clientperson) {
 
         String gsonClient = Utils.convertStandardJSONString(clientperson.getDetails());
         Log.d(TAG, "gsonMom = " + gsonClient);
 
-        final FollowUp referral = new Gson().fromJson(gsonClient,FollowUp.class);
+        final FollowUp referral = new Gson().fromJson(gsonClient, FollowUp.class);
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
-        final EditText client_condition = (EditText)dialogView.findViewById(R.id.client_status);
+        final EditText client_condition = (EditText) dialogView.findViewById(R.id.client_status);
 
-        //TODO Coze reimplement this
-        String[] ITEMS = {"Amehama mji", "Amefariki","Ameenda kituo kingine","Sababu nyinginezo"};
+        String[] ITEMS = {getString(R.string.followup_feedback_patient_moved), getString(R.string.followup_feedback_patient_died), getString(R.string.folloup_feedback_moved_to_another_facility), getString(R.string.followup_feedback_other_reasons)};
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ITEMS);
@@ -402,8 +319,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         spinnerReason = (MaterialSpinner) dialogView.findViewById(R.id.spinnerReason);
         spinnerReason.setAdapter(adapter);
 
-        //TODO Coze reimplement this
-        String[] options = {"ndio", "hapana"};
+        String[] options = {getResources().getString(R.string.yes_button_label), getResources().getString(R.string.no_button_label)};
 
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, options);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -414,17 +330,15 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i >= 0) {
-                    //TODO Coze reimplement this
-                    spinnerClientAvailable.setFloatingLabelText("Umemkutana na  mteja?");
+                    spinnerClientAvailable.setFloatingLabelText(getString(R.string.followup_qn_met_with_client));
                     availableSelection = i;
                 }
 
-                //TODO Coze reimplement this
-                if(spinnerClientAvailable.getSelectedItem().toString().equals("ndio")){
+                if (spinnerClientAvailable.getSelectedItem().toString().equals(getString(R.string.yes_button_label))) {
                     spinnerReason.setVisibility(VISIBLE);
                     client_condition.setVisibility(VISIBLE);
                     view.setVisibility(View.GONE);
-                }else{
+                } else {
                     spinnerReason.setVisibility(View.GONE);
                     client_condition.setVisibility(View.GONE);
                 }
@@ -439,8 +353,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i >= 0) {
-                    //TODO Coze reimplement this
-                    spinnerReason.setFloatingLabelText("Chagua sababu ya kutokwenda kliniki");
+                    spinnerReason.setFloatingLabelText(getString(R.string.followup_qn_reasons_for_not_visiting_clinic));
                     reasonSelection = i;
                 }
 
@@ -473,12 +386,12 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(spinnerClientAvailable.getSelectedItem().toString().equals("ndio")){
-                    if (spinnerReason.getSelectedItemPosition() <=0) {
+                if (spinnerClientAvailable.getSelectedItem().toString().equals(getString(R.string.yes_button_label))) {
+                    if (spinnerReason.getSelectedItemPosition() <= 0) {
                         // no radio checked
-                        message = "Tafadhali chagua sababu ya mteja kutokwenda kliniki";
+                        message = getString(R.string.toast_message_select_reasons_for_missing_appointment);
                         makeToast();
-                    }else {
+                    } else {
                         referral.setFollow_up_date(today.getTimeInMillis());
                         referral.setComment(client_condition.getText().toString());
                         referral.setFollow_up_reason(spinnerReason.getSelectedItem().toString());
@@ -494,9 +407,8 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                         Toast.makeText(ChwSmartRegisterActivity.this, "Asante kwa kumtembelea " + clientperson.getFirst_name() + " " + clientperson.getSurname(), Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
-                }
-                else {
-                    Toast.makeText(ChwSmartRegisterActivity.this, "Tafadhali hakikisha unamtafuta tena kumjulia hali " + clientperson.getFirst_name() +" "+clientperson.getSurname(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ChwSmartRegisterActivity.this, "Tafadhali hakikisha unamtafuta tena kumjulia hali " + clientperson.getFirst_name() + " " + clientperson.getSurname(), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
 
@@ -504,7 +416,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
 
         TextView textName = (TextView) dialogView.findViewById(R.id.patient_name);
-        textName.setText(clientperson.getFirst_name()+" "+clientperson.getMiddle_name()+" "+ clientperson.getSurname());
+        textName.setText(clientperson.getFirst_name() + " " + clientperson.getMiddle_name() + " " + clientperson.getSurname());
 
         TextView facility = (TextView) dialog.findViewById(R.id.textview_facility);
         facility.setText(getFacilityName(clientperson.getFacility_id()));
@@ -514,48 +426,12 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     }
 
-    public void confirmDelete(final ClientReferralPersonObject mother) {
-        String gsonMom = Utils.convertStandardJSONString(mother.getDetails());
-        Log.d(TAG, "gsonMom = " + gsonMom);
-
-        final View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_confirm_delete, null);
-
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
-        dialogBuilder.setView(dialogView)
-                .setCancelable(false);
-        final AlertDialog dialog = dialogBuilder.create();
-        dialog.show();
-
-
-        dialogView.findViewById(R.id.textOk).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // todo: Coze delete mother
-
-                FollowupClientsFragment preRegisterFragment = (FollowupClientsFragment) findFragmentByPosition(currentPage);
-                preRegisterFragment.refreshListView();
-                Toast.makeText(ChwSmartRegisterActivity.this, "umemfuta " + mother.getFirst_name() +" "+mother.getSurname(), Toast.LENGTH_SHORT).show();
-
-                dialog.dismiss();
-            }
-        });
-
-        dialogView.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-
-    }
-
     private String[] buildFormNameList() {
         List<String> formNames = new ArrayList<String>();
         formNames.add("main_form");
 
         DialogOption[] options = getEditOptions();
-        for (int i = 0; i < options.length; i++){
+        for (int i = 0; i < options.length; i++) {
             formNames.add(((OpenFormOption) options[i]).getFormName());
         }
         return formNames.toArray(new String[formNames.size()]);
@@ -622,30 +498,30 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     @Override
     public void OnLocationSelected(String locationSelected) {
         // set registration fragment
-        Log.d(TAG,"Location selected"+locationSelected);
+        Log.d(TAG, "Location selected" + locationSelected);
 
         Intent intent = new Intent(this, ClientsFormRegisterActivity.class);
-        intent.putExtra("selectedLocation",locationSelected);
-        startActivityForResult(intent,90);
+        intent.putExtra("selectedLocation", locationSelected);
+        startActivityForResult(intent, 90);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
-        Log.d(TAG,"am here after result");
+        Log.d(TAG, "am here after result");
         if (requestCode == 90) {
             if (resultCode == RESULT_OK) {
-                Log.d(TAG,"am here after result2");
+                Log.d(TAG, "am here after result2");
                 updateFromServer();
             }
         }
     }
 
-    private void setValuesInBoreshaAfya(){
+    private void setValuesInBoreshaAfya() {
 
-        String userDetailsString = context().allSettings().settingsRepository.querySetting("userInformation","");
-        String teamDetailsString = context().allSettings().settingsRepository.querySetting("teamInformation","");
-        android.util.Log.d(TAG,"team details "+teamDetailsString);
+        String userDetailsString = context().allSettings().settingsRepository.querySetting("userInformation", "");
+        String teamDetailsString = context().allSettings().settingsRepository.querySetting("teamInformation", "");
+        android.util.Log.d(TAG, "team details " + teamDetailsString);
         JSONObject teamSettings = null;
         try {
             teamSettings = new JSONObject(teamDetailsString);
@@ -653,11 +529,11 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
             JSONObject team_details = null;
             try {
-                android.util.Log.d(TAG,"teamSettings = "+teamSettings.toString());
+                android.util.Log.d(TAG, "teamSettings = " + teamSettings.toString());
                 team_details = teamSettings.getJSONObject("team");
-                android.util.Log.d(TAG,"team jason "+team_details.get("uuid").toString()+" "+team_details.get("teamName").toString());
-                ((BoreshaAfyaApplication)getApplication()).setTeam_uuid(team_details.get("uuid").toString());
-                ((BoreshaAfyaApplication)getApplication()).setTeam_name(team_details.get("teamName").toString());
+                android.util.Log.d(TAG, "team jason " + team_details.get("uuid").toString() + " " + team_details.get("teamName").toString());
+                ((BoreshaAfyaApplication) getApplication()).setTeam_uuid(team_details.get("uuid").toString());
+                ((BoreshaAfyaApplication) getApplication()).setTeam_name(team_details.get("teamName").toString());
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -666,8 +542,8 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             JSONObject userLocationSettings = null;
             try {
                 userLocationSettings = team_details.getJSONObject("location");
-                android.util.Log.d(TAG,"teamSettings location id= "+userLocationSettings.get("uuid").toString());
-                ((BoreshaAfyaApplication)getApplication()).setTeam_location_id(userLocationSettings.get("uuid").toString());
+                android.util.Log.d(TAG, "teamSettings location id= " + userLocationSettings.get("uuid").toString());
+                ((BoreshaAfyaApplication) getApplication()).setTeam_location_id(userLocationSettings.get("uuid").toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -689,12 +565,12 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //            android.util.Log.d(TAG,"usersettings = "+userSettings.toString());
             roles = userSettings.getJSONArray("roles");
             int count = roles.length();
-            for (int i =0 ; i<count ; i++){
+            for (int i = 0; i < count; i++) {
                 try {
-                    if(roles.getString(i).equals("Organizational: Health Facility User")){
-                        ((BoreshaAfyaApplication)getApplication()).setUserType(0);
-                    }else if (roles.getString(i).equals("Organizational: CHW")){
-                        ((BoreshaAfyaApplication)getApplication()).setUserType(0);
+                    if (roles.getString(i).equals("Organizational: Health Facility User")) {
+                        ((BoreshaAfyaApplication) getApplication()).setUserType(0);
+                    } else if (roles.getString(i).equals("Organizational: CHW")) {
+                        ((BoreshaAfyaApplication) getApplication()).setUserType(0);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -708,25 +584,23 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         try {
             attributes = userSettings.getJSONObject("attributes");
 
-            ((BoreshaAfyaApplication)getApplication()).setCurrentUserID(attributes.get("_PERSON_UUID").toString());
-            ((BoreshaAfyaApplication)getApplication()).setUsername(userSettings.get("username").toString());
+            ((BoreshaAfyaApplication) getApplication()).setCurrentUserID(attributes.get("_PERSON_UUID").toString());
+            ((BoreshaAfyaApplication) getApplication()).setUsername(userSettings.get("username").toString());
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
-
-
     }
 
     @Override
     public void startFormActivity(String formName, String entityId, String metaData) {
-        Log.d(TAG, "starting form = "+formName);
-        Log.d(TAG, "recordId form = "+entityId);
+        Log.d(TAG, "starting form = " + formName);
+        Log.d(TAG, "recordId form = " + entityId);
 
         int formIndex = FormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
-        Log.d(TAG, "starting form index = "+formIndex);
+        Log.d(TAG, "starting form index = " + formIndex);
         mPager.setCurrentItem(formIndex, true);
         try {
             if (entityId != null || metaData != null) {
@@ -747,8 +621,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     @Override
     public void saveFormSubmission(String formSubmission, final String id, String formName, JSONObject fieldOverrides) {
         // save the form
-        if(formName.equals("follow_up_form"))
-         {
+        if (formName.equals("follow_up_form")) {
 
             final FollowUp followUp = gson.fromJson(formSubmission, FollowUp.class);
 
@@ -759,7 +632,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             Log.d(TAG, "values = " + gson.toJson(values));
 
             CommonRepository commonRepository = context().commonrepository("followup_client");
-            commonRepository.customUpdate(values,id);
+            commonRepository.customUpdate(values, id);
 
             CommonPersonObject c = commonRepository.findByCaseID(uuid);
             List<FormField> formFields = new ArrayList<>();
@@ -770,37 +643,34 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
             formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
 
-            for ( String key : c.getDetails().keySet() ) {
-                Log.d(TAG,"key = "+key);
+            for (String key : c.getDetails().keySet()) {
+                Log.d(TAG, "key = " + key);
                 FormField f = null;
-                if(!key.equals("facility_id")) {
+                if (!key.equals("facility_id")) {
                     f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
-                }else{
+                } else {
                     f = new FormField(key, c.getDetails().get(key), "facility.id");
                 }
                 formFields.add(f);
             }
 
 
-            Log.d(TAG,"form field = "+ new Gson().toJson(formFields));
+            Log.d(TAG, "form field = " + new Gson().toJson(formFields));
 
-            FormData formData = new FormData("follow_up","/model/instance/Follow_Up_Form/",formFields,null);
-            FormInstance formInstance = new FormInstance(formData,"1");
-            FormSubmission submission = new FormSubmission(generateRandomUUIDString(),uuid,"client_referral",new Gson().toJson(formInstance),"4", SyncStatus.PENDING,"4");
+            FormData formData = new FormData("follow_up", "/model/instance/Follow_Up_Form/", formFields, null);
+            FormInstance formInstance = new FormInstance(formData, "1");
+            FormSubmission submission = new FormSubmission(generateRandomUUIDString(), uuid, "client_referral", new Gson().toJson(formInstance), "4", SyncStatus.PENDING, "4");
             context().formDataRepository().saveFormSubmission(submission);
 
-            Log.d(TAG,"submission content = "+ new Gson().toJson(submission));
+            Log.d(TAG, "submission content = " + new Gson().toJson(submission));
 
 
-
-
-
-            new  AsyncTask<Void, Void, Void>(){
+            new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected Void doInBackground(Void... params) {
                     CommonRepository commonRepository = context().commonrepository("client_referral");
                     CommonPersonObject c = commonRepository.findByCaseID(id);
-                    if(!c.getDetails().get("PhoneNumber").equals(""))
+                    if (!c.getDetails().get("PhoneNumber").equals(""))
                         Utils.sendRegistrationAlert(c.getDetails().get("PhoneNumber"));
                     return null;
                 }
@@ -817,7 +687,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void run() {
                 // TODO: 9/17/17 this is a hack
-          if(currentPage==2) {//for chws
+                if (currentPage == 2) {//for chws
                     finish();
                 }
             }
@@ -902,11 +772,11 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //        retrieveAndSaveUnsubmittedFormData();
     }
 
-    public int getFormIndex(String formName){
+    public int getFormIndex(String formName) {
         return FormUtils.getIndexForFormName(formName, formNames) + 1;
     }
 
-    public void switchToPage(int pageNumber){
+    public void switchToPage(int pageNumber) {
         mPager.setCurrentItem(pageNumber);
     }
 
@@ -970,7 +840,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 new SyncProgressIndicator(), context().allFormVersionSyncService());
         updateActionsTask.updateFromServer(new SyncAfterFetchListener());
 
-        ((CHWSmartRegisterFragment)mBaseFragment).updateRemainingFormsToSyncCount();
+        ((CHWSmartRegisterFragment) mBaseFragment).updateRemainingFormsToSyncCount();
     }
 
 

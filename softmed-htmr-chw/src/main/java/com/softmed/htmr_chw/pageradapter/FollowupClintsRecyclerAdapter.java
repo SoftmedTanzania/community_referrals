@@ -13,12 +13,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-
 import com.softmed.htmr_chw.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.ClientsDetailsActivity;
 import com.softmed.htmr_chw.Fragments.ClientDetailFragment;
 import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.Repository.ClientFollowupPersonObject;
+
+import org.ei.opensrp.domain.ClientFollowup;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -29,20 +29,20 @@ import java.util.Locale;
  * Created by martha on 8/22/17.
  */
 
-public class CHWRegisterRecyclerAdapter extends
-        RecyclerView.Adapter<CHWRegisterRecyclerAdapter.ViewHolder> {
+public class FollowupClintsRecyclerAdapter extends
+        RecyclerView.Adapter<FollowupClintsRecyclerAdapter.ViewHolder> {
 
-    private static String TAG = CHWRegisterRecyclerAdapter.class.getSimpleName();
-    private List<ClientFollowupPersonObject> clients;
+    private static String TAG = FollowupClintsRecyclerAdapter.class.getSimpleName();
+    private List<ClientFollowup> clients;
     private Context mContext;
-    private boolean mTwoPane=true;
+    private boolean mTwoPane = true;
 
-    public CHWRegisterRecyclerAdapter(Context context, List<ClientFollowupPersonObject> clients) {
+    public FollowupClintsRecyclerAdapter(Context context, List<ClientFollowup> clients) {
         this.clients = clients;
         this.mContext = context;
 
 
-        Log.d(TAG,"follow up adapter constructor : "+new Gson().toJson(clients));
+        Log.d(TAG, "follow up adapter constructor : " + new Gson().toJson(clients));
     }
 
     private Context getContext() {
@@ -62,9 +62,9 @@ public class CHWRegisterRecyclerAdapter extends
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
-        final ClientFollowupPersonObject client = clients.get(position);
+        final ClientFollowup client = clients.get(position);
 
-        Log.d(TAG,"follow up adapter : "+new Gson().toJson(clients));
+        Log.d(TAG, "follow up adapter : " + new Gson().toJson(clients));
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
@@ -73,10 +73,10 @@ public class CHWRegisterRecyclerAdapter extends
         TextView CBHS = viewHolder.CBHSTextView;
 
         phoneNumberTextView.setText(client.getPhone_number());
-        viewHolder.nameTextView.setText(client.getFirst_name()+" " + client.getMiddle_name()+", "+client.getSurname());
+        viewHolder.nameTextView.setText(client.getFirst_name() + " " + client.getMiddle_name() + ", " + client.getSurname());
 
-        if(client.getCommunity_based_hiv_service()!=null) {
-            if(!client.getCommunity_based_hiv_service().equals(""))
+        if (client.getCommunity_based_hiv_service() != null) {
+            if (!client.getCommunity_based_hiv_service().equals(""))
                 CBHS.setText("CBHS : " + client.getCommunity_based_hiv_service());
         }
 
@@ -85,7 +85,7 @@ public class CHWRegisterRecyclerAdapter extends
             public void onClick(View v) {
                 if (mTwoPane) {
                     ClientDetailFragment fragment = ClientDetailFragment.newInstance(client);
-                    ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction()
+                    ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction()
                             .replace(R.id.item_detail_container, fragment)
                             .commit();
                 } else {
@@ -112,7 +112,7 @@ public class CHWRegisterRecyclerAdapter extends
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView nameTextView, phoneNumberTextView, CBHSTextView;
-        Button details,followup;
+        Button details, followup;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -135,7 +135,7 @@ public class CHWRegisterRecyclerAdapter extends
 
     }
 
-    public void setIsInTwoPane(boolean mTwoPane){
+    public void setIsInTwoPane(boolean mTwoPane) {
         this.mTwoPane = mTwoPane;
     }
 }
