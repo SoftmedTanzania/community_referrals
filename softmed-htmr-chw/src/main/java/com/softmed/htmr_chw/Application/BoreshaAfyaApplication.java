@@ -424,7 +424,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
 
 
         if (followupClientRepository == null) {
-            followupClientRepository = new FollowupClientRepository();
+            followupClientRepository = context.followupClientRepository();
         }
 
 

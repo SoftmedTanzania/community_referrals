@@ -17,9 +17,9 @@ import static org.apache.commons.lang3.StringUtils.repeat;
 public class FollowupClientRepository extends DrishtiRepository {
     private static final String CHILD_SQL = "CREATE TABLE followup_client(id VARCHAR PRIMARY KEY, relationalid VARCHAR, " +
             "first_name VARCHAR, middle_name VARCHAR, surname VARCHAR,gender VARCHAR," +
-            "phone_number VARCHAR, community_based_hiv_service VARCHAR,map_cue VARCHAR, ward VARCHAR, care_taker_name VARCHAR," +
+            "phone_number VARCHAR, community_based_hiv_service VARCHAR,map_cue VARCHAR, ward VARCHAR,ctc_number VARCHAR, care_taker_name VARCHAR," +
             "care_taker_phone_number VARCHAR,care_taker_relationship VARCHAR, visit_date VARCHAR,date_of_birth VARCHAR,referral_date VARCHAR, " +
-            "facility_id VARCHAR, referral_reason VARCHAR, service_provider_uiid VARCHAR,referral_status VARCHAR, is_valid VARCHAR, details VARCHAR)";
+            "facility_id VARCHAR, referral_reason VARCHAR, service_provider_uiid VARCHAR, referral_status VARCHAR, is_valid VARCHAR, details VARCHAR)";
     public static final String CLIENT_FOLLOWUP = "followup_client";
     public static final String ID_COLUMN = "id";
     public static final String Relational_ID = "relationalid";
@@ -46,7 +46,7 @@ public class FollowupClientRepository extends DrishtiRepository {
     public static final String DETAILS_COLUMN = "details";
     public static final String[] CLIENT_FOLLOWUP_TABLE_COLUMNS = {ID_COLUMN, Relational_ID, FNAME,
             MNAME, LNAME, CBHS, CTCNumber, GENDER, PHONE_NUMBER, CARE_TAKER_NAME, FACILITY_ID,MAP_CUE,WARD,
-            CARE_TAKER_PHONE_NUMBER,CARE_TAKER_RELATIONSHIP,VISIT_DATE,REFERRAL_DATE,DATE_OF_BIRTH,REFERRAL_REASON,
+            CARE_TAKER_PHONE_NUMBER,CARE_TAKER_RELATIONSHIP,VISIT_DATE,REFERRAL_DATE,REFERRAL_STATUS,DATE_OF_BIRTH,REFERRAL_REASON,
             SERVICE_PROVIDER_UUID,IS_VALID,DETAILS_COLUMN};
     
 
@@ -202,7 +202,7 @@ public class FollowupClientRepository extends DrishtiRepository {
 
     private ClientFollowup clientFromCursor(Cursor cursor) {
         ClientFollowup clientFollowup = new ClientFollowup();
-        clientFollowup.setId( getColumnValueByAlias(cursor, CLIENT_FOLLOWUP, ID_COLUMN));
+        clientFollowup.setId(getColumnValueByAlias(cursor, CLIENT_FOLLOWUP, ID_COLUMN));
         clientFollowup.setFirst_name( getColumnValueByAlias(cursor, CLIENT_FOLLOWUP, FNAME));
         clientFollowup.setMiddle_name( getColumnValueByAlias(cursor, CLIENT_FOLLOWUP, MNAME));
         clientFollowup.setSurname( getColumnValueByAlias(cursor, CLIENT_FOLLOWUP, LNAME));
@@ -230,7 +230,7 @@ public class FollowupClientRepository extends DrishtiRepository {
     }
 
     private String getColumnValueByAlias(Cursor cursor, String table, String column) {
-        return cursor.getString(cursor.getColumnIndex(table + column));
+        return cursor.getString(cursor.getColumnIndex(column));
     }
 
     private String insertPlaceholdersForInClause(int length) {
