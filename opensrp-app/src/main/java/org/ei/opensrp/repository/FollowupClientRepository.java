@@ -18,7 +18,7 @@ public class FollowupClientRepository extends DrishtiRepository {
     private static final String CHILD_SQL = "CREATE TABLE followup_client(id VARCHAR PRIMARY KEY, relationalid VARCHAR, " +
             "first_name VARCHAR, middle_name VARCHAR, surname VARCHAR,gender VARCHAR," +
             "phone_number VARCHAR, community_based_hiv_service VARCHAR,map_cue VARCHAR, ward VARCHAR,ctc_number VARCHAR, care_taker_name VARCHAR," +
-            "care_taker_phone_number VARCHAR,care_taker_relationship VARCHAR, visit_date VARCHAR,date_of_birth VARCHAR,referral_date VARCHAR, " +
+            "care_taker_phone_number VARCHAR,care_taker_relationship VARCHAR, visit_date VARCHAR,referral_feedback VARCHAR,date_of_birth VARCHAR,referral_date VARCHAR, " +
             "facility_id VARCHAR, referral_reason VARCHAR, service_provider_uiid VARCHAR, referral_status VARCHAR, is_valid VARCHAR, details VARCHAR)";
     public static final String CLIENT_FOLLOWUP = "followup_client";
     public static final String ID_COLUMN = "id";
@@ -40,13 +40,14 @@ public class FollowupClientRepository extends DrishtiRepository {
     public static final String CTCNumber = "ctc_number";
     public static final String FACILITY_ID = "facility_id";
     public static final String REFERRAL_REASON = "referral_reason";
+    public static final String REFERRAL_FEEDBACK = "referral_feedback";
     public static final String REFERRAL_STATUS = "referral_status";
     public static final String SERVICE_PROVIDER_UUID = "service_provider_uiid";
     public static final String IS_VALID = "is_valid";
     public static final String DETAILS_COLUMN = "details";
     public static final String[] CLIENT_FOLLOWUP_TABLE_COLUMNS = {ID_COLUMN, Relational_ID, FNAME,
             MNAME, LNAME, CBHS, CTCNumber, GENDER, PHONE_NUMBER, CARE_TAKER_NAME, FACILITY_ID,MAP_CUE,WARD,
-            CARE_TAKER_PHONE_NUMBER,CARE_TAKER_RELATIONSHIP,VISIT_DATE,REFERRAL_DATE,REFERRAL_STATUS,DATE_OF_BIRTH,REFERRAL_REASON,
+            CARE_TAKER_PHONE_NUMBER,CARE_TAKER_RELATIONSHIP,VISIT_DATE,REFERRAL_DATE,REFERRAL_STATUS,DATE_OF_BIRTH,REFERRAL_REASON,REFERRAL_FEEDBACK,
             SERVICE_PROVIDER_UUID,IS_VALID,DETAILS_COLUMN};
     
 
@@ -165,6 +166,7 @@ public class FollowupClientRepository extends DrishtiRepository {
         values.put(REFERRAL_STATUS, clientFollowup.getReferral_status());
         values.put(SERVICE_PROVIDER_UUID, clientFollowup.getService_provider_uiid());
         values.put(IS_VALID, clientFollowup.getIs_valid());
+        values.put(REFERRAL_FEEDBACK, clientFollowup.getReferral_feedback());
 
         values.put(DETAILS_COLUMN, new Gson().toJson(clientFollowup));
         return values;
@@ -225,6 +227,7 @@ public class FollowupClientRepository extends DrishtiRepository {
         clientFollowup.setReferral_date(Long.valueOf(getColumnValueByAlias(cursor, CLIENT_FOLLOWUP, REFERRAL_DATE)));
         clientFollowup.setVisit_date(Long.valueOf(getColumnValueByAlias(cursor, CLIENT_FOLLOWUP, VISIT_DATE)));
         clientFollowup.setDate_of_birth(Long.valueOf(getColumnValueByAlias(cursor, CLIENT_FOLLOWUP, DATE_OF_BIRTH)));
+        clientFollowup.setReferral_feedback(getColumnValueByAlias(cursor, CLIENT_FOLLOWUP, REFERRAL_FEEDBACK));
 
         return clientFollowup;
     }

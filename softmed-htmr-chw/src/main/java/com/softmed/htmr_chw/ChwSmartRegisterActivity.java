@@ -25,14 +25,10 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
-import com.softmed.htmr_chw.DataModels.FollowUp;
 import com.softmed.htmr_chw.Fragments.CHWSmartRegisterFragment;
 import com.softmed.htmr_chw.Repository.ClientReferralPersonObject;
-import com.softmed.htmr_chw.Repository.FollowUpPersonObject;
-import com.softmed.htmr_chw.Repository.FollowUpRepository;
 import com.softmed.htmr_chw.Repository.LocationSelectorDialogFragment;
 import com.softmed.htmr_chw.pageradapter.BaseRegisterActivityPagerAdapter;
-import com.softmed.htmr_chw.util.AsyncTask;
 import com.softmed.htmr_chw.util.Utils;
 
 import org.ei.opensrp.Context;
@@ -41,11 +37,7 @@ import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.ClientFollowup;
 import org.ei.opensrp.domain.ClientReferral;
-import org.ei.opensrp.domain.SyncStatus;
-import org.ei.opensrp.domain.form.FormData;
 import org.ei.opensrp.domain.form.FormField;
-import org.ei.opensrp.domain.form.FormInstance;
-import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.sync.SyncAfterFetchListener;
@@ -213,7 +205,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
 
         textName.setText(clientReferralPersonObject.getFirst_name() + " " + clientReferralPersonObject.getMiddle_name() + " " + clientReferralPersonObject.getSurname());
-//
+
         textAge.setText(ageS + " years");
         cbhs.setText(clientReferral.getCommunity_based_hiv_service());
         referral_service.setText(getReferralServiceName(clientReferralPersonObject.getReferral_service_id()));
@@ -301,12 +293,9 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         return commonPersonObjectList.get(0).getColumnmaps().get("indicatorName");
     }
 
-    public void showFollowUpFormDialog(final ClientFollowup clientperson) {
+    public void showFollowUpFormDialog(final ClientFollowup followup) {
 
-        String gsonClient = Utils.convertStandardJSONString(clientperson.getDetails());
-        Log.d(TAG, "gsonMom = " + gsonClient);
 
-        final FollowUp referral = new Gson().fromJson(gsonClient, FollowUp.class);
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
         final EditText client_condition = (EditText) dialogView.findViewById(R.id.client_status);
@@ -330,7 +319,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i >= 0) {
-                    spinnerClientAvailable.setFloatingLabelText(getString(R.string.followup_qn_met_with_client));
                     availableSelection = i;
                 }
 
@@ -392,23 +380,71 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                         message = getString(R.string.toast_message_select_reasons_for_missing_appointment);
                         makeToast();
                     } else {
-                        referral.setFollow_up_date(today.getTimeInMillis());
-                        referral.setComment(client_condition.getText().toString());
-                        referral.setFollow_up_reason(spinnerReason.getSelectedItem().toString());
-                        referral.setIsValid("true");
+                        followup.setVisit_date(today.getTimeInMillis());
+                        followup.setReferral_feedback(client_condition.getText().toString());
 
-                        String gsonReferral = gson.toJson(referral);
-                        Log.d(TAG, "referral = " + gsonReferral);
-
-                        // todo start form submission
-                        saveFormSubmission(gsonReferral, clientperson.getId(), "follow_up_form", fieldOverides);
+                        context().followupClientRepository().update(followup);
 
 
-                        Toast.makeText(ChwSmartRegisterActivity.this, "Asante kwa kumtembelea " + clientperson.getFirst_name() + " " + clientperson.getSurname(), Toast.LENGTH_SHORT).show();
+                        //TODO finish up sending of referral feedbacks of the followup
+
+//                        final String uuid = generateRandomUUIDString();
+//
+//
+//                        context().followupClientRepository().update(followup);
+//
+//
+//                        List<FormField> formFields = new ArrayList<>();
+//
+//
+//                        formFields.add(new FormField("id", followup.getId(), commonRepository.TABLE_NAME + "." + "id"));
+//
+//
+//                        formFields.add(new FormField("relationalid", followup.getId(), commonRepository.TABLE_NAME + "." + "relationalid"));
+//
+//                        for (String key : followup.getDetails().keySet()) {
+//                            Log.d(TAG, "key = " + key);
+//                            FormField f = null;
+//                            if (!key.equals("facility_id")) {
+//                                f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
+//                            } else {
+//                                f = new FormField(key, c.getDetails().get(key), "facility.id");
+//                            }
+//                            formFields.add(f);
+//                        }
+//
+//
+//                        Log.d(TAG, "form field = " + new Gson().toJson(formFields));
+//
+//                        FormData formData = new FormData("follow_up", "/model/instance/Follow_Up_Form/", formFields, null);
+//                        FormInstance formInstance = new FormInstance(formData, "1");
+//                        FormSubmission submission = new FormSubmission(generateRandomUUIDString(), uuid, "client_referral", new Gson().toJson(formInstance), "4", SyncStatus.PENDING, "4");
+//                        context().formDataRepository().saveFormSubmission(submission);
+//
+//                        Log.d(TAG, "submission content = " + new Gson().toJson(submission));
+//
+//
+//                        new AsyncTask<Void, Void, Void>() {
+//                            @Override
+//                            protected Void doInBackground(Void... params) {
+//                                CommonRepository commonRepository = context().commonrepository("client_referral");
+//                                CommonPersonObject c = commonRepository.findByCaseID(id);
+//                                if (!c.getDetails().get("PhoneNumber").equals(""))
+//                                    Utils.sendRegistrationAlert(c.getDetails().get("PhoneNumber"));
+//                                return null;
+//                            }
+//                        }.execute();
+
+
+
+
+
+
+                        Toast.makeText(ChwSmartRegisterActivity.this, "Asante kwa kumtembelea " + followup.getFirst_name() + " " + followup.getSurname(), Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 } else {
-                    Toast.makeText(ChwSmartRegisterActivity.this, "Tafadhali hakikisha unamtafuta tena kumjulia hali " + clientperson.getFirst_name() + " " + clientperson.getSurname(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChwSmartRegisterActivity.this, "Tafadhali hakikisha unamtafuta tena kumjulia hali " + followup.getFirst_name() + " " + followup.getSurname(), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
 
@@ -416,13 +452,13 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
 
         TextView textName = (TextView) dialogView.findViewById(R.id.patient_name);
-        textName.setText(clientperson.getFirst_name() + " " + clientperson.getMiddle_name() + " " + clientperson.getSurname());
+        textName.setText(followup.getFirst_name() + " " + followup.getMiddle_name() + " " + followup.getSurname());
 
         TextView facility = (TextView) dialog.findViewById(R.id.textview_facility);
-        facility.setText(getFacilityName(clientperson.getFacility_id()));
+        facility.setText(getFacilityName(followup.getFacility_id()));
 
         TextView referral_reason = (TextView) dialog.findViewById(R.id.textview_followupreason);
-        referral_reason.setText(clientperson.getReferral_reason());
+        referral_reason.setText(followup.getReferral_reason());
 
     }
 
@@ -500,7 +536,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         // set registration fragment
         Log.d(TAG, "Location selected" + locationSelected);
 
-        Intent intent = new Intent(this, ClientsFormRegisterActivity.class);
+        Intent intent = new Intent(this, ReferralClientsFormRegisterActivity.class);
         intent.putExtra("selectedLocation", locationSelected);
         startActivityForResult(intent, 90);
     }
@@ -622,60 +658,60 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public void saveFormSubmission(String formSubmission, final String id, String formName, JSONObject fieldOverrides) {
         // save the form
         if (formName.equals("follow_up_form")) {
-
-            final FollowUp followUp = gson.fromJson(formSubmission, FollowUp.class);
-
-            final String uuid = generateRandomUUIDString();
-            FollowUpPersonObject followUpPersonObject = new FollowUpPersonObject(uuid, id, followUp);
-            ContentValues values = new FollowUpRepository().createValuesFor(followUpPersonObject);
-            Log.d(TAG, "motherPersonObject = " + gson.toJson(followUpPersonObject));
-            Log.d(TAG, "values = " + gson.toJson(values));
-
-            CommonRepository commonRepository = context().commonrepository("followup_client");
-            commonRepository.customUpdate(values, id);
-
-            CommonPersonObject c = commonRepository.findByCaseID(uuid);
-            List<FormField> formFields = new ArrayList<>();
-
-
-            formFields.add(new FormField("id", c.getCaseId(), commonRepository.TABLE_NAME + "." + "id"));
-
-
-            formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
-
-            for (String key : c.getDetails().keySet()) {
-                Log.d(TAG, "key = " + key);
-                FormField f = null;
-                if (!key.equals("facility_id")) {
-                    f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
-                } else {
-                    f = new FormField(key, c.getDetails().get(key), "facility.id");
-                }
-                formFields.add(f);
-            }
-
-
-            Log.d(TAG, "form field = " + new Gson().toJson(formFields));
-
-            FormData formData = new FormData("follow_up", "/model/instance/Follow_Up_Form/", formFields, null);
-            FormInstance formInstance = new FormInstance(formData, "1");
-            FormSubmission submission = new FormSubmission(generateRandomUUIDString(), uuid, "client_referral", new Gson().toJson(formInstance), "4", SyncStatus.PENDING, "4");
-            context().formDataRepository().saveFormSubmission(submission);
-
-            Log.d(TAG, "submission content = " + new Gson().toJson(submission));
-
-
-            new AsyncTask<Void, Void, Void>() {
-                @Override
-                protected Void doInBackground(Void... params) {
-                    CommonRepository commonRepository = context().commonrepository("client_referral");
-                    CommonPersonObject c = commonRepository.findByCaseID(id);
-                    if (!c.getDetails().get("PhoneNumber").equals(""))
-                        Utils.sendRegistrationAlert(c.getDetails().get("PhoneNumber"));
-                    return null;
-                }
-            }.execute();
-
+            //TODO handle saving of followup forms
+//            final FollowUp followUp = gson.fromJson(formSubmission, FollowUp.class);
+//
+//            final String uuid = generateRandomUUIDString();
+//            FollowUpPersonObject followUpPersonObject = new FollowUpPersonObject(uuid, id, followUp);
+//            ContentValues values = new FollowUpRepository().createValuesFor(followUpPersonObject);
+//            Log.d(TAG, "motherPersonObject = " + gson.toJson(followUpPersonObject));
+//            Log.d(TAG, "values = " + gson.toJson(values));
+//
+//            CommonRepository commonRepository = context().commonrepository("followup_client");
+//            commonRepository.customUpdate(values, id);
+//
+//            CommonPersonObject c = commonRepository.findByCaseID(uuid);
+//            List<FormField> formFields = new ArrayList<>();
+//
+//
+//            formFields.add(new FormField("id", c.getCaseId(), commonRepository.TABLE_NAME + "." + "id"));
+//
+//
+//            formFields.add(new FormField("relationalid", c.getCaseId(), commonRepository.TABLE_NAME + "." + "relationalid"));
+//
+//            for (String key : c.getDetails().keySet()) {
+//                Log.d(TAG, "key = " + key);
+//                FormField f = null;
+//                if (!key.equals("facility_id")) {
+//                    f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
+//                } else {
+//                    f = new FormField(key, c.getDetails().get(key), "facility.id");
+//                }
+//                formFields.add(f);
+//            }
+//
+//
+//            Log.d(TAG, "form field = " + new Gson().toJson(formFields));
+//
+//            FormData formData = new FormData("follow_up", "/model/instance/Follow_Up_Form/", formFields, null);
+//            FormInstance formInstance = new FormInstance(formData, "1");
+//            FormSubmission submission = new FormSubmission(generateRandomUUIDString(), uuid, "client_referral", new Gson().toJson(formInstance), "4", SyncStatus.PENDING, "4");
+//            context().formDataRepository().saveFormSubmission(submission);
+//
+//            Log.d(TAG, "submission content = " + new Gson().toJson(submission));
+//
+//
+//            new AsyncTask<Void, Void, Void>() {
+//                @Override
+//                protected Void doInBackground(Void... params) {
+//                    CommonRepository commonRepository = context().commonrepository("client_referral");
+//                    CommonPersonObject c = commonRepository.findByCaseID(id);
+//                    if (!c.getDetails().get("PhoneNumber").equals(""))
+//                        Utils.sendRegistrationAlert(c.getDetails().get("PhoneNumber"));
+//                    return null;
+//                }
+//            }.execute();
+//
         }
     }
 

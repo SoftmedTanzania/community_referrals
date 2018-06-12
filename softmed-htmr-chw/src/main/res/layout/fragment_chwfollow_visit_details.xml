@@ -116,15 +116,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
                     android:layout_weight="0.5"
+                    android:layout_marginLeft="16dp"
                     app:ms_arrowColor="@color/accent"
                     app:ms_arrowSize="14dp"
                     app:ms_baseColor="@color/accent"
                     app:ms_enableFloatingLabel="false"
                     app:ms_hint="@string/hint_met_client"
+                    app:ms_hintColor="@color/hint_text"
                     app:ms_multiline="false"
                     app:ms_thickness="1dp"
-                    app:paddingStart="32dp"
-                    app:paddingEnd="32dp" />
+                    app:paddingEnd="16dp"
+                    app:paddingStart="16dp" />
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="4dp"
@@ -140,6 +142,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
                     android:layout_weight="0.5"
+                    android:layout_marginLeft="16dp"
                     app:ms_arrowColor="@color/accent"
                     app:ms_arrowSize="14dp"
                     app:ms_baseColor="@color/accent"
@@ -163,6 +166,8 @@
                     android:layout_height="wrap_content"
                     android:focusable="true"
                     app:paddingStart="32dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
                     app:paddingEnd="32dp"
                     android:hint="@string/client_condition"
                     android:layout_marginTop="8dp"

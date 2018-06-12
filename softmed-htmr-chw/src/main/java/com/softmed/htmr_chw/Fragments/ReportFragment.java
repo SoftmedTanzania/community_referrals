@@ -348,10 +348,10 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                         "  GROUP BY referral_service.id" );
 
                 try {
-                    receivedMaleReferralsServicesCursor = followupClientRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Male'  AND service_provider_uiid = '" + ((BoreshaAfyaApplication) getActivity().getApplication()).getCurrentUserID() + "' " +
+                    receivedMaleReferralsServicesCursor = followupClientRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Male'  " +
                             (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
                             (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : ""));
-                    receivedFemaleReferralsServicesCursor = followupClientRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Female' AND service_provider_uiid = '" + ((BoreshaAfyaApplication) getActivity().getApplication()).getCurrentUserID() + "' " +
+                    receivedFemaleReferralsServicesCursor = followupClientRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Female'  " +
                             (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
                             (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : ""));
                 }catch (Exception e){

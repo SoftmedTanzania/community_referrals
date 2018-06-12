@@ -25,9 +25,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     public static final String CLIENT_FOLLOWUP = "item_id";
-    private static final String TAG = ClientDetailFragment.class.getSimpleName();
+    private static final String TAG = FollowupClientDetailFragment.class.getSimpleName();
     public ClientFollowup clientFollowup;
     private CommonRepository commonRepository;
     private Cursor cursor;
@@ -36,11 +36,11 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
     private Gson gson = new Gson();
     private TextView name, age, gender, facility, feedback, contacts, sponsor, referedReason, residence, referedDate, note;
 
-    public ClientDetailFragment() {
+    public FollowupClientDetailFragment() {
     }
 
-    public static ClientDetailFragment newInstance(ClientFollowup clientFollowup) {
-        ClientDetailFragment fragment = new ClientDetailFragment();
+    public static FollowupClientDetailFragment newInstance(ClientFollowup clientFollowup) {
+        FollowupClientDetailFragment fragment = new FollowupClientDetailFragment();
         Bundle args = new Bundle();
         args.putSerializable(CLIENT_FOLLOWUP, clientFollowup);
         fragment.setArguments(args);
@@ -150,9 +150,10 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
         age.setText(ageS + " years");
         name.setText(clientFollowup.getFirst_name() + " " + clientFollowup.getMiddle_name() + ", " + clientFollowup.getSurname());
         contacts.setText(clientFollowup.getPhone_number());
+        referedReason.setText(clientFollowup.getReferral_reason());
         facility.setText(getFacilityName(clientFollowup.getFacility_id()));
         referedDate.setText(dateFormat.format(clientFollowup.getReferral_date()));
-        sponsor.setText(clientFollowup.getCare_taker_name()+"\n"+clientFollowup.getCare_taker_name_phone_number());
+        sponsor.setText(clientFollowup.getCare_taker_relationship()+"\n"+clientFollowup.getCare_taker_name()+"\n"+clientFollowup.getCare_taker_name_phone_number());
         residence.setText(clientFollowup.getMap_cue());
         note.setText(clientFollowup.getReferral_status());
 

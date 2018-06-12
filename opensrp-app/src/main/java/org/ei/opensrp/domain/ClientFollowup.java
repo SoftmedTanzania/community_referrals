@@ -11,7 +11,7 @@ public class ClientFollowup implements Serializable {
     private String id, relationalid, details,  other_notes,
               first_name, middle_name, surname, facility_id,
             referral_reason, is_valid, service_provider_mobile_number, ward, village, map_cue,
-            village_leader, service_provider_group, service_provider_uiid, phone_number,
+            village_leader, service_provider_group, service_provider_uiid, phone_number,referral_feedback,
             referral_service_id, gender, community_based_hiv_service, ctc_number, referral_status,care_taker_name,care_taker_name_phone_number,care_taker_relationship;
     private long date_of_birth, visit_date,referral_date;
 
@@ -221,6 +221,14 @@ public class ClientFollowup implements Serializable {
 
     public void setCare_taker_relationship(String care_taker_relationship) {
         this.care_taker_relationship = care_taker_relationship;
+    }
+
+    public String getReferral_feedback() {
+        return referral_feedback;
+    }
+
+    public void setReferral_feedback(String referral_feedback) {
+        this.referral_feedback = referral_feedback;
     }
 
     public long getDate_of_birth() {

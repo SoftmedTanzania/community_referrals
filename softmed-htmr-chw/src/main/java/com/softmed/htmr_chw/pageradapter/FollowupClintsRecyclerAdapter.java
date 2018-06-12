@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.softmed.htmr_chw.ChwSmartRegisterActivity;
-import com.softmed.htmr_chw.ClientsDetailsActivity;
-import com.softmed.htmr_chw.Fragments.ClientDetailFragment;
+import com.softmed.htmr_chw.FollowupClientsDetailsActivity;
+import com.softmed.htmr_chw.Fragments.FollowupClientDetailFragment;
 import com.softmed.htmr_chw.R;
 
 import org.ei.opensrp.domain.ClientFollowup;
@@ -84,13 +84,13 @@ public class FollowupClintsRecyclerAdapter extends
             @Override
             public void onClick(View v) {
                 if (mTwoPane) {
-                    ClientDetailFragment fragment = ClientDetailFragment.newInstance(client);
+                    FollowupClientDetailFragment fragment = FollowupClientDetailFragment.newInstance(client);
                     ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction()
                             .replace(R.id.item_detail_container, fragment)
                             .commit();
                 } else {
                     Context context = v.getContext();
-                    Intent intent = new Intent(context, ClientsDetailsActivity.class);
+                    Intent intent = new Intent(context, FollowupClientsDetailsActivity.class);
 
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("client_followup", client);

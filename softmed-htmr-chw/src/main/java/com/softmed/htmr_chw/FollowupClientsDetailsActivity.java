@@ -34,8 +34,8 @@ import java.util.Locale;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
-public class ClientsDetailsActivity extends SecuredNativeSmartRegisterActivity {
-    private static final String TAG = ClientsDetailsActivity.class.getSimpleName();
+public class FollowupClientsDetailsActivity extends SecuredNativeSmartRegisterActivity {
+    private static final String TAG = FollowupClientsDetailsActivity.class.getSimpleName();
     private  TextView name,age,gender,facility,feedback,contacts,sponsor,referedReason,residence,referedDate,note;
     private ClientFollowup clientFollowupPersonObject;
     private CommonRepository commonRepository;

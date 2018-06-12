@@ -72,10 +72,10 @@ import static org.ei.opensrp.AllConstants.ENGLISH_LOCALE;
  * Created by issy on 11/17/17.
  */
 
-public class ClientsFormRegisterActivity extends SecuredNativeSmartRegisterActivity {
+public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegisterActivity {
 
     private Toolbar toolbar;
-    private static final String TAG = ClientsFormRegisterActivity.class.getSimpleName();
+    private static final String TAG = ReferralClientsFormRegisterActivity.class.getSimpleName();
     public static AutoCompleteTextView facilitytextView;
     public static EditText editTextfName,editTextmName,editTextlName,editTextVillageLeader, editTextAge, editTextCTCNumber,
             editTextDiscountId,editTextKijiji,editTextReferralReason;

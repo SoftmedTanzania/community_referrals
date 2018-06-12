@@ -174,21 +174,10 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/referral_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/login_screen_logo"
-                android:layout_marginLeft="16dp"
-                android:layout_toRightOf="@id/login_screen_logo"
-                android:text="Referral"
-                android:textColor="@color/white"
-                android:textSize="24sp" />
-
-            <TextView
                 android:id="@+id/application_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/referral_text"
+                android:layout_below="@id/login_screen_logo"
                 android:layout_marginLeft="16dp"
                 android:layout_toRightOf="@id/login_screen_logo"
                 android:text="@string/page_title_referral"
