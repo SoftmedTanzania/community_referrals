@@ -19,7 +19,7 @@ import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 
-import com.softmed.htmr_chw.Fragments.ClientDetailFragment;
+import com.softmed.htmr_chw.Fragments.FollowupClientDetailFragment;
 
 import org.ei.opensrp.domain.ClientFollowup;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
@@ -70,9 +70,9 @@ public class ClientsDetailsActivity extends SecuredNativeSmartRegisterActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(ClientDetailFragment.CLIENT_FOLLOWUP,
-                    getIntent().getStringExtra(ClientDetailFragment.CLIENT_FOLLOWUP));
-            ClientDetailFragment fragment = new ClientDetailFragment();
+            arguments.putString(FollowupClientDetailFragment.CLIENT_FOLLOWUP,
+                    getIntent().getStringExtra(FollowupClientDetailFragment.CLIENT_FOLLOWUP));
+            FollowupClientDetailFragment fragment = new FollowupClientDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(com.softmed.htmr_chw.R.id.item_detail_container, fragment)

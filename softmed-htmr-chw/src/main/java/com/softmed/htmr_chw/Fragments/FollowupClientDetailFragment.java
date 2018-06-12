@@ -63,7 +63,7 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.item_detail, container, false);
+        View rootView = inflater.inflate(R.layout.followup_client_details, container, false);
 
         name = (TextView) rootView.findViewById(R.id.name);
         contacts = (TextView) rootView.findViewById(R.id.contacts);
@@ -152,8 +152,8 @@ public class ClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapte
         contacts.setText(clientFollowup.getPhone_number());
         facility.setText(getFacilityName(clientFollowup.getFacility_id()));
         referedDate.setText(dateFormat.format(clientFollowup.getReferral_date()));
-//        residence.setText(clientFollowup.getVillage()+" M/kiti -:"+clientFollowup.getVillage_leader());
-        residence.setText(clientFollowup.getVillage());
+        sponsor.setText(clientFollowup.getCare_taker_name()+"\n"+clientFollowup.getCare_taker_name_phone_number());
+        residence.setText(clientFollowup.getMap_cue());
         note.setText(clientFollowup.getReferral_status());
 
     }
