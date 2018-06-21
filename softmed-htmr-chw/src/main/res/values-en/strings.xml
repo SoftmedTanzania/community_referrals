@@ -96,6 +96,7 @@
     <string name="pending_label">Pending</string>
     <string name="incorrect_phone_number">Please enter a valid Phone Number</string>
     <string name="other_notes_title">Other Information/Medical Advice</string>
+    <string name="button_cancel">CANCEL</string>
 
     <string name="initial_information">Initial Information</string>
     <string name="followup_qn_met_with_client">Have you met with the client?</string>
@@ -103,5 +104,6 @@
     <string name="toast_message_select_reasons_for_missing_appointment">Please select client\'s reasons for missing the appointment</string>
     <string name="folloup_feedback_moved_to_another_facility">Has shifted to another facility</string>
     <string name="followup_feedback_other_reasons">Other Reasons</string>
+    <string name="followup_thankyou_note_part_one">Thank you for visiting </string>
 
 </resources>

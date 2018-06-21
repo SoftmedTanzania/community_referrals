@@ -36,7 +36,7 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class FollowupClientsDetailsActivity extends SecuredNativeSmartRegisterActivity {
     private static final String TAG = FollowupClientsDetailsActivity.class.getSimpleName();
-    private  TextView name,age,gender,facility,feedback,contacts,sponsor,referedReason,residence,referedDate,note;
+    private  TextView name,age,gender,facility,feedback,contacts,sponsor,referedReason,residence,referedDate,visitDate;
     private ClientFollowup clientFollowupPersonObject;
     private CommonRepository commonRepository;
     private Cursor cursor;
@@ -95,7 +95,7 @@ public class FollowupClientsDetailsActivity extends SecuredNativeSmartRegisterAc
         referedDate = (TextView)   findViewById(com.softmed.htmr_chw.R.id.refered_date);
         referedReason = (TextView)   findViewById(com.softmed.htmr_chw.R.id.followUp_reason);
         feedback = (TextView)   findViewById(com.softmed.htmr_chw.R.id.feedback);
-        note = (TextView)   findViewById(com.softmed.htmr_chw.R.id.note);
+        visitDate = (TextView)   findViewById(com.softmed.htmr_chw.R.id.visitDate);
 
 
         String reg_date = dateFormat.format(clientFollowupPersonObject.getDate_of_birth());
@@ -120,13 +120,16 @@ public class FollowupClientsDetailsActivity extends SecuredNativeSmartRegisterAc
             gender.setText(getResources().getString(com.softmed.htmr_chw.R.string.male));
         }
         age.setText(ageS + " years");
-        name . setText(clientFollowupPersonObject.getFirst_name()+" "+clientFollowupPersonObject.getMiddle_name()+", "+ clientFollowupPersonObject.getSurname());
+        name.setText(clientFollowupPersonObject.getFirst_name() + " " + clientFollowupPersonObject.getMiddle_name() + ", " + clientFollowupPersonObject.getSurname());
         contacts.setText(clientFollowupPersonObject.getPhone_number());
+        referedReason.setText(clientFollowupPersonObject.getReferral_reason());
         facility.setText(getFacilityName(clientFollowupPersonObject.getFacility_id()));
-        referedReason.setText(getFacilityName(clientFollowupPersonObject.getReferral_reason()));
         referedDate.setText(dateFormat.format(clientFollowupPersonObject.getReferral_date()));
-//        residence.setText(clientFollowupPersonObject.getVillage()+" M/kiti -:"+clientFollowupPersonObject.getVillage_leader());
-        note.setText("-");
+        sponsor.setText(clientFollowupPersonObject.getCare_taker_relationship()+"\n"+clientFollowupPersonObject.getCare_taker_name()+"\n"+clientFollowupPersonObject.getCare_taker_name_phone_number());
+        residence.setText(clientFollowupPersonObject.getMap_cue());
+
+        feedback.setText(clientFollowupPersonObject.getReferral_feedback());
+        visitDate.setText(clientFollowupPersonObject.getReferral_feedback());
 
         setLanguage();
     }

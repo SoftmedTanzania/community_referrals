@@ -27,6 +27,7 @@ public class AllSettings {
 
     public void registerANM(String userName, String password) {
         preferences.updateANMUserName(userName);
+        preferences.updateANMPassword(password);
         settingsRepository.updateSetting(ANM_PASSWORD_PREFERENCE_KEY, password);
     }
 

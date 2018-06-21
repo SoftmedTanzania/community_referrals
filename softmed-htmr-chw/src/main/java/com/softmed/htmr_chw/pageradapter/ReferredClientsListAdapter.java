@@ -85,16 +85,20 @@ public class ReferredClientsListAdapter extends
         viewHolder.scheduleDateTextView.setText(dateFormat.format(client.getReferral_date()));
         viewHolder.serviceName.setText(getReferralServiceName(client.getReferral_service_id()));
 
+        try {
 
-        if(client.getReferral_status().equals("0")){
-            viewHolder.referralStatus.setText(R.string.pending_label);
-            viewHolder.statusIcon.setBackgroundColor(mContext.getResources().getColor(R.color.blue_400));
-        }else if(client.getReferral_status().equals("1")){
-            viewHolder.referralStatus.setText(R.string.suceessful_label);
-            viewHolder.statusIcon.setBackgroundColor(mContext.getResources().getColor(R.color.green_400));
-        }else{
-            viewHolder.referralStatus.setText(R.string.unsuccessful_label);
-            viewHolder.statusIcon.setBackgroundColor(mContext.getResources().getColor(R.color.red_400));
+            if (client.getReferral_status().equals("0")) {
+                viewHolder.referralStatus.setText(R.string.pending_label);
+                viewHolder.statusIcon.setBackgroundColor(mContext.getResources().getColor(R.color.blue_400));
+            } else if (client.getReferral_status().equals("1")) {
+                viewHolder.referralStatus.setText(R.string.suceessful_label);
+                viewHolder.statusIcon.setBackgroundColor(mContext.getResources().getColor(R.color.green_400));
+            } else {
+                viewHolder.referralStatus.setText(R.string.unsuccessful_label);
+                viewHolder.statusIcon.setBackgroundColor(mContext.getResources().getColor(R.color.red_400));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
 

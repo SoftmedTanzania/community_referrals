@@ -209,7 +209,7 @@
                     android:layout_toLeftOf="@id/tuma_button"
                     android:id="@+id/cancel_button"
                     android:background="@drawable/border_four"
-                    android:text="@string/button_delete"
+                    android:text="@string/button_cancel"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginTop="32dp"/>

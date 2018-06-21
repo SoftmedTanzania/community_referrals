@@ -80,7 +80,7 @@ public class FollowupClintsRecyclerAdapter extends
                 CBHS.setText("CBHS : " + client.getCommunity_based_hiv_service());
         }
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+        viewHolder.details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mTwoPane) {

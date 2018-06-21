@@ -436,7 +436,7 @@
                                 android:layout_marginTop="8dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
-                                android:src="@drawable/ic_note_black_24dp"/>
+                                android:src="@drawable/ic_date_range_black_24dp"/>
                             <TextView
                                 android:layout_toRightOf="@id/note_icon"
                                 android:layout_alignTop="@id/note_icon"
@@ -447,7 +447,7 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="#000"
                                 android:textSize="13sp"
-                                android:text="@string/referral_note"/>
+                                android:text="Visit Date"/>
                         </RelativeLayout>
 
                         <LinearLayout
@@ -467,7 +467,7 @@
                                 android:textColor="@color/client_list_header_text_color"
                                 />
                             <TextView
-                                android:id="@+id/note"
+                                android:id="@+id/visitDate"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginLeft="32dp"
                                 android:layout_width="wrap_content"

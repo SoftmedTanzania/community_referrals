@@ -88,10 +88,9 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
 
-        Log.d(TAG,"clients_list : "+new Gson().toJson(commonPersonObjectList));
 
         clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
-        Log.d(TAG, "clientReferrallist = " + gson.toJson(commonPersonObjectList));
+
         clientsListAdapter = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList, commonRepository);
         Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + clientReferralPersonObjectList.size());
 
@@ -109,7 +108,6 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
             public void onClick(View view) {
                 if (isQueryInitializationOk()) {
                     StringBuilder queryBuilder = new StringBuilder("SELECT * FROM ");
-
                     queryBuilder.append(TABLE_NAME);
                     new QueryTask().execute(
                             queryBuilder.toString(),
@@ -414,6 +412,8 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
             String id = commonPersonObject.getColumnmaps().get("id");
             String relationid = commonPersonObject.getColumnmaps().get("relationalid");
             String fname = commonPersonObject.getColumnmaps().get("first_name");
+            String gender = commonPersonObject.getColumnmaps().get("gender");
+            String referralStatus = commonPersonObject.getColumnmaps().get("referral_status");
             String mname = commonPersonObject.getColumnmaps().get("middle_name");
             String facility_id = commonPersonObject.getColumnmaps().get("facility_id");
             Long referral_date = Long.parseLong(commonPersonObject.getColumnmaps().get("referral_date"));
@@ -426,6 +426,10 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
 
             client.setFirst_name(fname);
             client.setId(id);
+            client.setGender(gender);
+            client.setReferral_status(referralStatus);
+
+
             client.setCtc_number(ctc_number);
             client.setRelationalid(relationid);
             client.setMiddle_name(mname);

@@ -6,6 +6,7 @@ import static org.ei.opensrp.AllConstants.*;
 
 public class AllSharedPreferences {
     public static final String ANM_IDENTIFIER_PREFERENCE_KEY = "anmIdentifier";
+    public static final String ANM_PASSWORD = "anmp";
     private static final String HOST = "HOST";
     private static final String PORT = "PORT";
     private SharedPreferences preferences;
@@ -20,6 +21,14 @@ public class AllSharedPreferences {
 
     public String fetchRegisteredANM() {
         return preferences.getString(ANM_IDENTIFIER_PREFERENCE_KEY, "").trim();
+    }
+
+    public void updateANMPassword(String pass) {
+        preferences.edit().putString(ANM_PASSWORD, pass).commit();
+    }
+
+    public String fetchRegisteredANMPassword() {
+        return preferences.getString(ANM_PASSWORD, "").trim();
     }
 
     public String fetchLanguagePreference() {

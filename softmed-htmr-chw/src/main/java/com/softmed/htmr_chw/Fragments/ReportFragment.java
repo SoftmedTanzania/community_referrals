@@ -361,12 +361,12 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
 
                 JSONObject receivedReferrals = new JSONObject();
                 try {
-                    receivedReferrals.put("femaleCount",receivedMaleReferralsServicesCursor.getCount());
+                    receivedReferrals.put("maleCount",receivedMaleReferralsServicesCursor.getCount());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 try {
-                    receivedReferrals.put("maleCount",receivedFemaleReferralsServicesCursor.getCount());
+                    receivedReferrals.put("femaleCount",receivedFemaleReferralsServicesCursor.getCount());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

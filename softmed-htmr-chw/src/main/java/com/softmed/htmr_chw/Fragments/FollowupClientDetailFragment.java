@@ -34,7 +34,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
     private Gson gson = new Gson();
-    private TextView name, age, gender, facility, feedback, contacts, sponsor, referedReason, residence, referedDate, note;
+    private TextView name, age, gender, facility, feedback, contacts, sponsor, referedReason, residence, referedDate, visitDate;
 
     public FollowupClientDetailFragment() {
     }
@@ -75,7 +75,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         referedDate = (TextView) rootView.findViewById(R.id.refered_date);
         referedReason = (TextView) rootView.findViewById(R.id.followUp_reason);
         feedback = (TextView) rootView.findViewById(R.id.feedback);
-        note = (TextView) rootView.findViewById(R.id.note);
+        visitDate = (TextView) rootView.findViewById(R.id.visitDate);
         rootView.findViewById(R.id.details_layout).setBackground(new LargeDiagonalCutPathDrawable());
 
         setDetails(clientFollowup);
@@ -153,9 +153,17 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         referedReason.setText(clientFollowup.getReferral_reason());
         facility.setText(getFacilityName(clientFollowup.getFacility_id()));
         referedDate.setText(dateFormat.format(clientFollowup.getReferral_date()));
-        sponsor.setText(clientFollowup.getCare_taker_relationship()+"\n"+clientFollowup.getCare_taker_name()+"\n"+clientFollowup.getCare_taker_name_phone_number());
+
+
+        sponsor.setText((clientFollowup.getCare_taker_relationship().equals("null")?"":clientFollowup.getCare_taker_relationship())+"\n"+
+                (clientFollowup.getCare_taker_name().equals("null")?"": clientFollowup.getCare_taker_name())+"\n"+
+                (clientFollowup.getCare_taker_name_phone_number().equals("null")?"": clientFollowup.getCare_taker_name_phone_number()));
         residence.setText(clientFollowup.getMap_cue());
-        note.setText(clientFollowup.getReferral_status());
+
+        feedback.setText(clientFollowup.getReferral_feedback());
+        visitDate.setText(dateFormat.format(clientFollowup.getVisit_date()));
+
+
 
     }
 }

@@ -98,6 +98,7 @@
     <string name="pending_label">Pending</string>
     <string name="other_notes_title">Other Notes</string>
 
+    <string name="button_cancel">CANCEL</string>
     <string name="initial_information">Initial Information</string>
     <string name="followup_qn_met_with_client">Have you met with the client?</string>
     <string name="followup_qn_reasons_for_not_visiting_clinic">Reasons for not attending the appointment</string>
@@ -106,4 +107,6 @@
     <string name="followup_feedback_patient_died">Client Died</string>
     <string name="followup_feedback_patient_moved">Client has shifted to another facility</string>
     <string name="followup_feedback_other_reasons">Other Reasons</string>
+    <string name="followup_thankyou_note_part_one">Thank you for visiting </string>
+    <string name="followup_clint_not_found_responce">Please keep looking for the client and obtain more information on his/her where abouts</string>
 </resources>

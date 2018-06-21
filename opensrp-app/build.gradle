@@ -52,8 +52,8 @@ android {
         //applicationId "org.ei.opensrp"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 2
-        versionName "0.1.1"
+        versionCode 1
+        versionName "0.0.1"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
     }
 

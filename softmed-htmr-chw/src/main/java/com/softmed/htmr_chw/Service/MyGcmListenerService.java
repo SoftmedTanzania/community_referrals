@@ -48,7 +48,7 @@ public class MyGcmListenerService extends GcmListenerService {
         org.ei.opensrp.Context context = org.ei.opensrp.Context.getInstance().updateApplicationContext(this.getApplicationContext());
 
         Log.d(TAG,"username = "+context.allSharedPreferences().fetchRegisteredANM());
-        Log.d(TAG,"password = "+context.allSettings().fetchANMPassword());
+        Log.d(TAG,"password = "+context.allSharedPreferences().fetchRegisteredANMPassword());
 
         context.userService().isValidLocalLogin(context.allSharedPreferences().fetchRegisteredANM(), context.allSettings().fetchANMPassword());
 

@@ -185,13 +185,17 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         TextView physicalAddress = (TextView) dialogView.findViewById(R.id.editTextKijiji);
         TextView villageleader = (TextView) dialogView.findViewById(R.id.viewVillageLeader);
 
-        if (clientReferralPersonObject.getReferral_status().equals("1") && !clientReferral.getServices_given_to_patient().equals("")) {
-            dialogView.findViewById(R.id.referral_feedback_title).setVisibility(VISIBLE);
-            dialogView.findViewById(R.id.referral_feedback).setVisibility(VISIBLE);
-            dialogView.findViewById(R.id.strip_six).setVisibility(VISIBLE);
-            TextView referralFeedback = (TextView) dialogView.findViewById(R.id.referral_feedback);
-            referralFeedback.setVisibility(VISIBLE);
-            referralFeedback.setText(clientReferral.getServices_given_to_patient());
+        try {
+            if (clientReferralPersonObject.getReferral_status().equals("1") && !clientReferral.getServices_given_to_patient().equals("")) {
+                dialogView.findViewById(R.id.referral_feedback_title).setVisibility(VISIBLE);
+                dialogView.findViewById(R.id.referral_feedback).setVisibility(VISIBLE);
+                dialogView.findViewById(R.id.strip_six).setVisibility(VISIBLE);
+                TextView referralFeedback = (TextView) dialogView.findViewById(R.id.referral_feedback);
+                referralFeedback.setVisibility(VISIBLE);
+                referralFeedback.setText(clientReferral.getServices_given_to_patient());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
         if (!clientReferral.getOther_notes().equals("")) {
@@ -208,7 +212,12 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         textAge.setText(ageS + " years");
         cbhs.setText(clientReferral.getCommunity_based_hiv_service());
-        referral_service.setText(getReferralServiceName(clientReferralPersonObject.getReferral_service_id()));
+
+        try {
+            referral_service.setText(getReferralServiceName(clientReferralPersonObject.getReferral_service_id()));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         Log.d(TAG, "facility id = " + clientReferralPersonObject.getFacility_id());
 
@@ -221,10 +230,15 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         phoneNumber.setText(clientReferral.getPhone_number());
         villageleader.setText(clientReferral.getVillage_leader());
         physicalAddress.setText(clientReferral.getVillage());
-        if ((clientReferralPersonObject.getGender()).equals(getResources().getString(R.string.female))) {
-            gender.setText(getResources().getString(R.string.female));
-        } else {
-            gender.setText(getResources().getString(R.string.male));
+
+        try {
+            if ((clientReferralPersonObject.getGender()).equals(getResources().getString(R.string.female))) {
+                gender.setText(getResources().getString(R.string.female));
+            } else {
+                gender.setText(getResources().getString(R.string.male));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         setIndicators(dialogView, gsonClient);
     }
@@ -325,7 +339,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 if (spinnerClientAvailable.getSelectedItem().toString().equals(getString(R.string.yes_button_label))) {
                     spinnerReason.setVisibility(VISIBLE);
                     client_condition.setVisibility(VISIBLE);
-                    view.setVisibility(View.GONE);
+//                    view.setVisibility(View.GONE);
                 } else {
                     spinnerReason.setVisibility(View.GONE);
                     client_condition.setVisibility(View.GONE);
@@ -440,11 +454,11 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
 
 
-                        Toast.makeText(ChwSmartRegisterActivity.this, "Asante kwa kumtembelea " + followup.getFirst_name() + " " + followup.getSurname(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChwSmartRegisterActivity.this, getString(R.string.followup_thankyou_note_part_one) + followup.getFirst_name() + " " + followup.getSurname(), Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 } else {
-                    Toast.makeText(ChwSmartRegisterActivity.this, "Tafadhali hakikisha unamtafuta tena kumjulia hali " + followup.getFirst_name() + " " + followup.getSurname(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChwSmartRegisterActivity.this, getString(R.string.followup_clint_not_found_responce) + followup.getFirst_name() + " " + followup.getSurname(), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
 

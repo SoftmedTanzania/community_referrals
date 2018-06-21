@@ -54,6 +54,7 @@
     <string name="health_facility">Kituo cha afya</string>
     <string name="button_save">Hifadhi</string>
     <string name="button_delete">Futa</string>
+    <string name="button_cancel">ONDOKA</string>
     <string name="hint_met_client">Umempata mteja?</string>
     <string name="hint_missing_reasons">Reasons for missing the appointment</string>
     <string name="client_condition">Hali ya mteja wakati wa ufwatiliaji</string>
@@ -107,5 +108,8 @@
     <string name="toast_message_select_reasons_for_missing_appointment">Tafadhali chagua sababu ya mteja kutohunduria hospitali</string>
     <string name="folloup_feedback_moved_to_another_facility">Amefariki</string>
     <string name="followup_feedback_other_reasons">Sababu nyinginezo</string>
+    <string name="followup_thankyou_note_part_one">Asante kwa kumtembelea </string>
+
+    <string name="followup_clint_not_found_responce">Tafadhali hakikisha unamtafuta tena kumjulia hali</string>
 
 </resources>
