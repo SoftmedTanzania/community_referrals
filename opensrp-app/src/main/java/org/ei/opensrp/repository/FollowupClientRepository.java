@@ -226,6 +226,9 @@ public class FollowupClientRepository extends DrishtiRepository {
 
         clientFollowup.setReferral_date(Long.valueOf(getColumnValueByAlias(cursor, CLIENT_FOLLOWUP, REFERRAL_DATE)));
         clientFollowup.setVisit_date(Long.valueOf(getColumnValueByAlias(cursor, CLIENT_FOLLOWUP, VISIT_DATE)));
+
+        Log.d("testing...","date of birth : "+getColumnValueByAlias(cursor, CLIENT_FOLLOWUP, DATE_OF_BIRTH));
+
         clientFollowup.setDate_of_birth(Long.valueOf(getColumnValueByAlias(cursor, CLIENT_FOLLOWUP, DATE_OF_BIRTH)));
         clientFollowup.setReferral_feedback(getColumnValueByAlias(cursor, CLIENT_FOLLOWUP, REFERRAL_FEEDBACK));
 

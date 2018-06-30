@@ -126,6 +126,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
     private void setDetails(ClientFollowup clientFollowup) {
 
         String reg_date = dateFormat.format(clientFollowup.getDate_of_birth());
+        Log.d(TAG,"Date of Birth : "+clientFollowup.getDate_of_birth() );
         String ageS = "";
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
@@ -155,10 +156,14 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         referedDate.setText(dateFormat.format(clientFollowup.getReferral_date()));
 
 
-        sponsor.setText((clientFollowup.getCare_taker_relationship().equals("null")?"":clientFollowup.getCare_taker_relationship())+"\n"+
-                (clientFollowup.getCare_taker_name().equals("null")?"": clientFollowup.getCare_taker_name())+"\n"+
-                (clientFollowup.getCare_taker_name_phone_number().equals("null")?"": clientFollowup.getCare_taker_name_phone_number()));
-        residence.setText(clientFollowup.getMap_cue());
+        try {
+            sponsor.setText((clientFollowup.getCare_taker_relationship().equals("null") ? "" : clientFollowup.getCare_taker_relationship()) + "\n" +
+                    (clientFollowup.getCare_taker_name().equals("null") ? "" : clientFollowup.getCare_taker_name()) + "\n" +
+                    (clientFollowup.getCare_taker_name_phone_number().equals("null") ? "" : clientFollowup.getCare_taker_name_phone_number()));
+            residence.setText(clientFollowup.getMap_cue());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         feedback.setText(clientFollowup.getReferral_feedback());
         visitDate.setText(dateFormat.format(clientFollowup.getVisit_date()));

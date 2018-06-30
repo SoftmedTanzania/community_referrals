@@ -118,7 +118,7 @@ public class ReferralServiceRepository extends DrishtiRepository {
         values.put(RELATIONAL_COLUMN, referralServiceDataModel.getId());
         values.put(NAME, referralServiceDataModel.getServiceName());
         values.put(NAME_SW, referralServiceDataModel.getServiceNameSw());
-        values.put(CATEGORY, referralServiceDataModel.getServiceName());
+        values.put(CATEGORY, referralServiceDataModel.getCategory());
         values.put(IS_VALID, referralServiceDataModel.getIsActive());
         values.put(DETAILS_COLUMN, new Gson().toJson(referralServiceDataModel));
         Log.d(TAG,"values"+values);

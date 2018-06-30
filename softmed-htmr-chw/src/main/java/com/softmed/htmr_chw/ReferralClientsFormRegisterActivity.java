@@ -367,8 +367,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
     
     private void setReferralServiceList(){
         commonRepository = context().commonrepository("referral_service");
-        //todo martha edit the query
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service");
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service WHERE category <> 'other' ");
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "referral_service");
         Log.d(TAG, "serviceList = " + gson.toJson(commonPersonObjectList));
@@ -377,9 +376,10 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
         int size = referralServiceList.size();
 
         for(int i =0; size > i; i++  ){
-            if(preferredLocale.equals(ENGLISH_LOCALE))
+            Log.d(TAG, "service category : "+referralServiceList.get(i).getCategory());
+            if (preferredLocale.equals(ENGLISH_LOCALE))
                 serviceList.add(referralServiceList.get(i).getName());
-            else{
+            else {
                 serviceList.add(referralServiceList.get(i).getNameSw());
             }
         }
@@ -501,11 +501,11 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
             makeToast();
             return false;
         }
-//        else if (TextUtils.isEmpty(editTextReferralReason.getText())) {
-//            message = getResources().getString(com.softmed.htmr_chw.R.string.missing_missing_referral_reason);
-//            makeToast();
-//            return false;
-//        }
+        else if (TextUtils.isEmpty(editTextReferralReason.getText())) {
+            message = getResources().getString(com.softmed.htmr_chw.R.string.missing_missing_referral_reason);
+            makeToast();
+            return false;
+        }
         else if(!TextUtils.isEmpty(textPhone.getText()) && textPhone.getText().toString().length()<10){
             message = getResources().getString(R.string.incorrect_phone_number);
             textPhone.setError(message);

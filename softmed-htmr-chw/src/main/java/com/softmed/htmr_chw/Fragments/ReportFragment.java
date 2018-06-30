@@ -544,7 +544,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
     private SpannableString generateCenterSpannableText() {
 
 //        SpannableString s = new SpannableString("Successful Referrals\nreferred by "+((BoreshaAfyaApplication)getActivity().getApplication()).getUsername());
-        SpannableString s = new SpannableString("Successful\nReferrals");
+        SpannableString s = new SpannableString("Completed\nReferrals");
 //        s.setSpan(new RelativeSizeSpan(1.7f), 0, 20, 0);
 //        s.setSpan(new StyleSpan(Typeface.NORMAL), 0, 32, 0);
 //        s.setSpan(new ForegroundColorSpan(Color.GRAY), 20, 32, 0);

@@ -64,8 +64,8 @@
                 <com.softmed.htmr_chw.util.FitDoughnut
                     android:id="@+id/donutChart"
                     android:layout_height="36dp"
-                    app:fdColorPrimary="@color/red_500"
-                    app:fdColorSecondary="@color/white"
+                    app:fdColorPrimary="#00FF00"
+                    app:fdColorSecondary="#ffaa00"
                     android:layout_marginLeft="16dp"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/title"

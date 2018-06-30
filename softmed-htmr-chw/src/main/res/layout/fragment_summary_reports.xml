@@ -38,7 +38,7 @@
                     android:id="@+id/title"
                     android:layout_marginLeft="16dp"
                     android:textColor="@color/card_title_text"
-                    android:text="Referrals Summary"/>
+                    android:text="Completed Referrals Summary"/>
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/chart1"
                     android:layout_below="@id/title"
@@ -70,7 +70,7 @@
                     android:id="@+id/title2"
                     android:layout_marginLeft="16dp"
                     android:textColor="@color/card_title_text"
-                    android:text="CHW Followup Summary"/>
+                    android:text="Received Clients Followup Summary"/>
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/chart2"
                     android:layout_below="@id/title2"
@@ -106,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:text="Successful Referrals Summary Report"/>
+                        android:text="Completed Referrals Summary Report"/>
 
                     <LinearLayout
                         android:layout_marginTop="8dp"

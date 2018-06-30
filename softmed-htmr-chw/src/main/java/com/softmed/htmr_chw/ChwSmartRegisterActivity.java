@@ -314,7 +314,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
         final EditText client_condition = (EditText) dialogView.findViewById(R.id.client_status);
 
-        String[] ITEMS = {getString(R.string.followup_feedback_patient_moved), getString(R.string.followup_feedback_patient_died), getString(R.string.folloup_feedback_moved_to_another_facility), getString(R.string.followup_feedback_other_reasons)};
+        String[] ITEMS = {getString(R.string.followup_feedback_patient_moved), getString(R.string.followup_feedback_patient_died),getString(R.string.followup_feedback_other_reasons)};
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ITEMS);

@@ -27,7 +27,7 @@ public class ReferralServiceDataModel {
 
     }
 
-    public ReferralServiceDataModel(String id, String serviceName,String serviceNameSw, String isActive,String category) {
+    public ReferralServiceDataModel(String id, String serviceName,String serviceNameSw, String category,String isActive) {
         this.id = id;
         this.serviceName = serviceName;
         this.serviceNameSw = serviceNameSw;
