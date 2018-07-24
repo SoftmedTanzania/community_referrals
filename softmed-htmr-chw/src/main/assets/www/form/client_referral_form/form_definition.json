@@ -75,6 +75,12 @@
                 "name": "test_results"
             },
             {
+                "name": "is_emergency"
+            },
+            {
+                "name": "appointment_date"
+            },
+            {
                 "name": "service_provider_uiid"
             },
             {

@@ -24,8 +24,10 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +58,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -84,7 +87,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
     private ArrayAdapter<String> serviceAdapter;
     private ArrayAdapter<String>  facilityAdapter;
     private Calendar today;
-    private long dob;
+    private long dob,appointmentDate,defaultAppointmentDate;
     private LinearLayout parentLayout;
     private EditText textPhone;
     private List<String> facilityList = new ArrayList<String>();
@@ -103,7 +106,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
     private CommonRepository commonRepository;
     private IndicatorRepository indicatorRepository;
     private Cursor cursor;
-    private MaterialEditText dobTextView;
+    private MaterialEditText dobTextView,appointmentDateTextView;
     private List<ReferralServiceObject> referralServiceList;
     private List<FacilityObject> facilitiesList;
     ArrayList<String> genderList = new ArrayList<String>();
@@ -111,6 +114,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
     public String categoryValue;
     private String preferredLocale;
     private  Typeface robotoBold,robotoCondenced;
+    private boolean is_emergency = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -236,8 +240,22 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
         ((TextView)findViewById(com.softmed.htmr_chw.R.id.flags_title)).setTypeface(robotoBold);
         ((TextView)findViewById(com.softmed.htmr_chw.R.id.facility_titleview)).setTypeface(robotoBold);
 
+        Switch aSwitch = (Switch)findViewById(R.id.emergency_switch);
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                is_emergency = b;
+                if(b){
+                    findViewById(R.id.appointment_date).setVisibility(View.GONE);
+                }else{
+                    findViewById(R.id.appointment_date).setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         textPhone = (EditText)   findViewById(com.softmed.htmr_chw.R.id.edittextPhone);
         dobTextView = (MaterialEditText)   findViewById(com.softmed.htmr_chw.R.id.reg_dob);
+        appointmentDateTextView = (MaterialEditText)   findViewById(com.softmed.htmr_chw.R.id.appointment_date);
 
 
         editTextfName = (EditText)   findViewById(com.softmed.htmr_chw.R.id.editTextfName);
@@ -262,7 +280,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
         spinnerService.setAdapter(serviceAdapter);
 
         facilityAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, facilityList);
-         facilitytextView = (AutoCompleteTextView) findViewById(com.softmed.htmr_chw.R.id.autocomplete_facility);
+        facilitytextView = (AutoCompleteTextView) findViewById(com.softmed.htmr_chw.R.id.autocomplete_facility);
         facilitytextView.setThreshold(1);
         facilitytextView.setAdapter(facilityAdapter);
 
@@ -298,9 +316,16 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
                     Log.d(TAG," Coze Service : "+service);
                     categoryValue = getCategory(service);
                     if(categoryValue.equalsIgnoreCase("malaria")){
+                        Calendar c = Calendar.getInstance();
+                        c.add(Calendar.DAY_OF_MONTH,1);
+                        defaultAppointmentDate = c.getTimeInMillis();
                         editTextReferralReason.setVisibility(View.GONE);
-                    }else
+                    }else {
+                        Calendar c = Calendar.getInstance();
+                        c.add(Calendar.DAY_OF_MONTH,3);
+                        defaultAppointmentDate = c.getTimeInMillis();
                         editTextReferralReason.setVisibility(View.VISIBLE);
+                    }
 
                     indicator = getIndicator(getReferralServiceId(service));
                     parentLayout.removeAllViewsInLayout();
@@ -360,6 +385,14 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
             public void onClick(View view) {
                 // pick date
                 pickDate(com.softmed.htmr_chw.R.id.reg_dob);
+            }
+        });
+
+        appointmentDateTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // pick date
+                pickDate(com.softmed.htmr_chw.R.id.appointment_date);
             }
         });
 
@@ -441,9 +474,13 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
             @Override
             public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
                 GregorianCalendar pickedDate = new GregorianCalendar(year, monthOfYear, dayOfMonth);
-                if (id == com.softmed.htmr_chw.R.id.reg_dob)
+                if (id == com.softmed.htmr_chw.R.id.reg_dob) {
                     dob = pickedDate.getTimeInMillis();
                     dobTextView.setText(dateFormat.format(pickedDate.getTimeInMillis()));
+                }else if(id == R.id.appointment_date){
+                    appointmentDate = pickedDate.getTimeInMillis();
+                    appointmentDateTextView.setText(dateFormat.format(pickedDate.getTimeInMillis()));
+                }
             }
         };
 
@@ -555,6 +592,15 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
         ClientReferral referral = new ClientReferral();
         referral.setReferral_date(today.getTimeInMillis());
         referral.setDate_of_birth(dob);
+
+        if(!is_emergency) {
+            referral.setAppointment_date(today.getTimeInMillis());
+        }else if(appointmentDate==0){
+            referral.setAppointment_date(defaultAppointmentDate);
+        }else{
+            referral.setAppointment_date(appointmentDate);
+        }
+        referral.setIs_emergency(is_emergency+"");
         referral.setCommunity_based_hiv_service(editTextDiscountId.getText().toString());
         referral.setFirst_name(editTextfName.getText().toString());
         referral.setMiddle_name(editTextmName.getText().toString());

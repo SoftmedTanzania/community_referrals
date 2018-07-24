@@ -38,6 +38,12 @@
         },
         {
           "name": "gender"
+        },
+        {
+          "name": "is_emergency"
+        },
+        {
+          "name": "appointment_date"
         }
       ]
     },

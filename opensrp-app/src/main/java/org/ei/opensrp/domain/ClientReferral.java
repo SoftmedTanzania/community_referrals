@@ -12,8 +12,8 @@ public class ClientReferral implements Serializable {
             services_given_to_patient, referral_uuid, first_name, middle_name, surname, facility_id,
             referral_reason, is_valid, service_provider_mobile_number, ward, village, Kijitongoji,
             village_leader, service_provider_group, service_provider_uiid, phone_number,
-            referral_service_id, gender, community_based_hiv_service, ctc_number, referral_status;
-    private long date_of_birth, referral_date;
+            referral_service_id, gender, community_based_hiv_service, ctc_number, referral_status,is_emergency;
+    private long date_of_birth, referral_date,appointment_date;
     private boolean test_results;
     private String indicator_ids;
 
@@ -29,11 +29,13 @@ public class ClientReferral implements Serializable {
                           String community_based_hiv_service,
                           String ctc_number,
                           Long referral_date,
+                          Long appointment_date,
                           String facility_id,
                           String ReferralReason,
                           String referral_service_id,
                           String referral_status,
                           String is_valid,
+                          String is_emergency,
                           String details
     ) {
         this.details = details;
@@ -46,10 +48,12 @@ public class ClientReferral implements Serializable {
         this.middle_name = middle_name;
         this.surname = surname;
         this.referral_date = referral_date;
+        this.appointment_date = appointment_date;
         this.facility_id = facility_id;
         this.referral_reason = ReferralReason;
         this.referral_service_id = referral_service_id;
         this.is_valid = is_valid;
+        this.is_emergency = is_emergency;
     }
 
     public String getOther_notes() {
@@ -292,6 +296,22 @@ public class ClientReferral implements Serializable {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public long getAppointment_date() {
+        return appointment_date;
+    }
+
+    public void setAppointment_date(long appointment_date) {
+        this.appointment_date = appointment_date;
+    }
+
+    public String getIs_emergency() {
+        return is_emergency;
+    }
+
+    public void setIs_emergency(String is_emergency) {
+        this.is_emergency = is_emergency;
     }
 
     public String getCommunity_based_hiv_service() {

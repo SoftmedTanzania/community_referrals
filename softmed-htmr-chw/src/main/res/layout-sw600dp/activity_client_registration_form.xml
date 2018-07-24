@@ -423,6 +423,32 @@
                                         android:id="@+id/autocomplete_facility"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"/>
+
+
+                                    <Switch
+                                        android:text="Emergency Referral"
+                                        android:layout_marginTop="16dp"
+                                        android:id="@+id/emergency_switch"
+                                        android:layout_below="@id/autocomplete_facility"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                    <com.rengwuxian.materialedittext.MaterialEditText
+                                        android:id="@+id/appointment_date"
+                                        android:layout_width="match_parent"
+                                        android:layout_below="@id/emergency_switch"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="true"
+                                        android:editable="false"
+                                        android:focusable="false"
+                                        android:hint="Appointment Date"
+                                        android:inputType="date"
+                                        android:textColor="@color/text_black"
+                                        android:textSize="14sp"
+                                        app:met_floatingLabel="normal"
+                                        app:met_floatingLabelText="Appointment Date"
+                                        app:met_floatingLabelTextColor="@color/colorPrimary"
+                                        app:met_iconRight="@drawable/ic_calendar_today" />
                                 </RelativeLayout>
 
                                 <View
