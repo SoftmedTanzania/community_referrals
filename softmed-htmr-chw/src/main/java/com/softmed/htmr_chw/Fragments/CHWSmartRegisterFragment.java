@@ -1,13 +1,14 @@
 package com.softmed.htmr_chw.Fragments;
 
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.pm.ActivityInfo;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -76,6 +77,9 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     private PendingFormSubmissionService pendingFormSubmissionService;
     static final String DATABASE_NAME = "drishti.db";
     RelativeLayout pendingForm;
+    private LinearLayout mainMenu;
+    private View fragmentsView;
+    private static boolean isOnTheMainMenu;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -114,6 +118,73 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
             public void onPageScrollStateChanged(int state) {
             }
         });
+
+        final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+
+        isOnTheMainMenu = true;
+        mainMenu = (LinearLayout)v.findViewById(R.id.main_menu);
+        fragmentsView = v.findViewById(R.id.fragments);
+        View referralRegistration  = mainMenu.findViewById(R.id.referral_registration_card);
+        View issuedReferrals  = mainMenu.findViewById(R.id.issued_referral_list_card);
+        View receivedReferralList  = mainMenu.findViewById(R.id.received_referrals_list_card);
+        View reports  = mainMenu.findViewById(R.id.reports);
+
+        referralRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startRegistration();
+            }
+        });
+        issuedReferrals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                isOnTheMainMenu = false;
+                ReferredClientsFragment newFragment = new ReferredClientsFragment();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragments, newFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+                mainMenu.setVisibility(View.GONE);
+                fragmentsView.setVisibility(View.VISIBLE);
+            }
+        });
+
+        receivedReferralList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                isOnTheMainMenu = false;
+
+                FollowupClientsFragment newFragment = new FollowupClientsFragment();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragments, newFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+                mainMenu.setVisibility(View.GONE);
+                fragmentsView.setVisibility(View.VISIBLE);
+            }
+        });
+
+        reports.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isOnTheMainMenu = false;
+
+                ReportFragment newFragment = new ReportFragment();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragments, newFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+                mainMenu.setVisibility(View.GONE);
+                fragmentsView.setVisibility(View.VISIBLE);
+            }
+        });
+
 
 
 
@@ -389,7 +460,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     @Override
     public void startRegistration() {
         Log.d(TAG, "starting registrations");
-        FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
+        android.app.FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
         Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
         if (prev != null) {
             ft.remove(prev);
@@ -397,7 +468,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
                 .newInstance((ChwSmartRegisterActivity) getActivity(), null, context().anmLocationController().get(),
-                        "pregnant_mothers_pre_registration")
+                        "referral_registration")
                 .show(ft, locationDialogTAG);
     }
 
@@ -467,6 +538,19 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public boolean onBackPressed() {
+
+        Log.d(TAG,"BackPressed");
+        if(!isOnTheMainMenu){
+            Log.d(TAG,"BackPressed true");
+            v.findViewById(R.id.main_menu).setVisibility(View.VISIBLE);
+            mainMenu.setVisibility(View.GONE);
+            fragmentsView.setVisibility(View.GONE);
+            return false;
+        }
+        return true;
     }
 
 
