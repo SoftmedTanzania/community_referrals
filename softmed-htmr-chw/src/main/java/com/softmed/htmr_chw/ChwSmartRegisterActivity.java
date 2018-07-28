@@ -1,45 +1,53 @@
 package com.softmed.htmr_chw;
 
 import android.app.AlertDialog;
-import android.content.ContentValues;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.Fragments.CHWSmartRegisterFragment;
+import com.softmed.htmr_chw.Fragments.FollowupClientsFragment;
+import com.softmed.htmr_chw.Fragments.ReferredClientsFragment;
+import com.softmed.htmr_chw.Fragments.ReportFragment;
 import com.softmed.htmr_chw.Repository.ClientReferralPersonObject;
 import com.softmed.htmr_chw.Repository.LocationSelectorDialogFragment;
-import com.softmed.htmr_chw.pageradapter.BaseRegisterActivityPagerAdapter;
+import com.softmed.htmr_chw.util.FitDoughnut;
 import com.softmed.htmr_chw.util.Utils;
 
-import org.ei.opensrp.Context;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.ClientFollowup;
 import org.ei.opensrp.domain.ClientReferral;
-import org.ei.opensrp.domain.form.FormField;
+import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
-import org.ei.opensrp.repository.AllSharedPreferences;
+import org.ei.opensrp.service.PendingFormSubmissionService;
 import org.ei.opensrp.sync.SyncAfterFetchListener;
 import org.ei.opensrp.sync.SyncProgressIndicator;
 import org.ei.opensrp.sync.UpdateActionsTask;
@@ -68,14 +76,19 @@ import java.util.List;
 import java.util.Locale;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
-import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static android.os.Looper.getMainLooper;
 import static android.view.View.VISIBLE;
-import static com.softmed.htmr_chw.util.Utils.generateRandomUUIDString;
+import static android.widget.Toast.LENGTH_SHORT;
+import static java.lang.String.valueOf;
+import static org.ei.opensrp.event.Event.ACTION_HANDLED;
+import static org.ei.opensrp.event.Event.FORM_SUBMITTED;
+import static org.ei.opensrp.event.Event.SYNC_COMPLETED;
+import static org.ei.opensrp.event.Event.SYNC_STARTED;
 
 public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener {
+    private String locationDialogTAG = "locationDialogTAG";
     static final String DATABASE_NAME = "drishti.db";
     private static final String TAG = ChwSmartRegisterActivity.class.getSimpleName();
     public static MaterialSpinner spinnerReason, spinnerClientAvailable;
@@ -95,12 +108,23 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private Cursor cursor;
     private SecuredActivity securedActivity;
     private LinearLayout flags_layout;
+    private Toolbar toolbar;
+    RelativeLayout pendingForm;
+    private LinearLayout mainMenu;
+    private ImageButton imageButton;
+    private static boolean isOnTheMainMenu;
+    private View fragmentsView;
+    private TextView pending;
+    TextView successView, unsuccessView;
+    private FitDoughnut donutChart;
+    private MenuItem updateMenuItem;
+    private PendingFormSubmissionService pendingFormSubmissionService;
+    private LinearLayout tabsLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        setContentView(R.layout.activity_chwregister);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         securedActivity = new SecuredActivity() {
             @Override
@@ -116,23 +140,164 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         formNames = this.buildFormNameList();
         mBaseFragment = new CHWSmartRegisterFragment();
 
-        // Instantiate a ViewPager and a PagerAdapter.
-        mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
-        mPager.setAdapter(mPagerAdapter);
-        mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        navigationController = new NavigationController(this, anmController);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+        onInitialization();
+
+        imageButton = (ImageButton) findViewById(R.id.register_client);
+        tabsLayout = (LinearLayout) findViewById(R.id.tabs);
+
+
+        final FragmentManager fragmentManager = this.getSupportFragmentManager();
+
+
+        isOnTheMainMenu = true;
+        mainMenu = (LinearLayout)findViewById(R.id.main_menu);
+        fragmentsView = findViewById(R.id.fragments);
+        View referralRegistration  = mainMenu.findViewById(R.id.referral_registration_card);
+        View issuedReferrals  = mainMenu.findViewById(R.id.issued_referral_list_card);
+        View receivedReferralList  = mainMenu.findViewById(R.id.received_referrals_list_card);
+        View reports  = mainMenu.findViewById(R.id.reports);
+
+        referralRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPageSelected(int position) {
-                currentPage = position;
-                // onPageChanged(position);
+            public void onClick(View view) {
+                startRegistration();
             }
         });
-        mPager.setOffscreenPageLimit(formNames.length);
+        issuedReferrals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        mPager.setCurrentItem(3);
-        currentPage = 3;
-        initialize();
-        setValuesInBoreshaAfya();
-        Log.d(TAG, "table columns =" + new Gson().toJson(context().commonrepository("referral_service").common_TABLE_COLUMNS));
+                tabsLayout.removeAllViews();
+                LinearLayout tabLinearLayout2 = (LinearLayout) LayoutInflater.from(ChwSmartRegisterActivity.this).inflate(R.layout.custom_tab, null);
+                TextView tabContent2 = (TextView) tabLinearLayout2.findViewById(R.id.tabContent);
+                tabContent2.setText(R.string.sent_referrals_label);
+                tabContent2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_trending_up_white_24dp, 0, 0, 0);
+                tabsLayout.addView(tabLinearLayout2);
+
+                isOnTheMainMenu = false;
+                ReferredClientsFragment newFragment = new ReferredClientsFragment();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragments, newFragment,"tag");
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+                mainMenu.setVisibility(View.GONE);
+                fragmentsView.setVisibility(View.VISIBLE);
+            }
+        });
+
+        receivedReferralList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                tabsLayout.removeAllViews();
+                LinearLayout tabLinearLayout1 = (LinearLayout) LayoutInflater.from(ChwSmartRegisterActivity.this).inflate(R.layout.custom_tab, null);
+                TextView tabContent1 = (TextView) tabLinearLayout1.findViewById(R.id.tabContent);
+                tabContent1.setText(R.string.received_referrals_label);
+                tabContent1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_trending_down_white_24dp, 0, 0, 0);
+                tabsLayout.addView(tabLinearLayout1);
+
+                isOnTheMainMenu = false;
+
+                FollowupClientsFragment newFragment = new FollowupClientsFragment();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragments, newFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+                mainMenu.setVisibility(View.GONE);
+                fragmentsView.setVisibility(View.VISIBLE);
+            }
+        });
+
+        reports.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isOnTheMainMenu = false;
+
+
+                tabsLayout.removeAllViews();
+                LinearLayout tabLinearLayout3 = (LinearLayout) LayoutInflater.from(ChwSmartRegisterActivity.this).inflate(R.layout.custom_tab, null);
+                TextView tabContent3 = (TextView) tabLinearLayout3.findViewById(R.id.tabContent);
+                tabContent3.setText(R.string.reports_label);
+                tabContent3.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_event_note_white_24dp, 0, 0, 0);
+                tabsLayout.addView(tabLinearLayout3);
+
+                ReportFragment newFragment = new ReportFragment();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragments, newFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+                mainMenu.setVisibility(View.GONE);
+                fragmentsView.setVisibility(View.VISIBLE);
+            }
+        });
+
+
+
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startRegistration();
+
+            }
+        });
+
+        LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
+
+        TextView tabContent = (TextView) tabLinearLayout.findViewById(R.id.tabContent);
+        tabContent.setText("Main Menu");
+        tabContent.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sharp_menu_white_48dp, 0, 0, 0);
+        tabsLayout.addView(tabLinearLayout);
+
+
+
+
+
+
+        final int colorWhite = ContextCompat.getColor(this, android.R.color.white);
+        final int colorPrimaryLight = ContextCompat.getColor(this, R.color.primary_light);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
+        toolbar.inflateMenu(R.menu.menu_main);
+        toolbar.setOnMenuItemClickListener(
+                new Toolbar.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case com.softmed.htmr_chw.R.id.updateMenuItem:
+                                onOptionsItemSelected(item);
+                                return true;
+                            case com.softmed.htmr_chw.R.id.switchLanguageMenuItem:
+                                String newLanguagePreference = LoginActivity.switchLanguagePreference();
+                                LoginActivity.setLanguage();
+                                Toast.makeText(ChwSmartRegisterActivity.this, "Language preference set to " + newLanguagePreference + ". Please restart the application.", LENGTH_SHORT).show();
+                                recreate();
+                                return true;
+                            default:
+                                return onOptionsItemSelected(item);
+                        }
+                    }
+                });
+
+        TextView username = (TextView) findViewById(R.id.toolbar_user_name);
+        pendingForm = (RelativeLayout) findViewById(R.id.key_three);
+        pending = (TextView) findViewById(R.id.count_three);
+        username.setText(getResources().getString(R.string.logged_user)+" "+((BoreshaAfyaApplication)this.getApplication()).getUsername());
+        successView =  (TextView) findViewById(R.id.count_one);
+        unsuccessView =  (TextView) findViewById(R.id.count_two);
+
+        donutChart = (FitDoughnut) findViewById(R.id.donutChart);
+        donutChart.startAnimateLoading();
+        updateFromServer();
+
 
 
     }
@@ -142,6 +307,109 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         LoginActivity.setLanguage();
     }
 
+    private Listener<Boolean> onSyncCompleteListener = new Listener<Boolean>() {
+        @Override
+        public void onEvent(Boolean data) {
+            //#TODO: RemainingFormsToSyncCount cannot be updated from a back ground thread!!
+            updateRemainingFormsToSyncCount();
+            if (updateMenuItem != null) {
+                updateMenuItem.setActionView(null);
+            }
+            updateRegisterCounts();
+            refreshListView();
+        }
+    };
+
+    protected void onResumption() {
+        LoginActivity.setLanguage();
+        updateRegisterCounts();
+        updateSyncIndicator();
+        updateRemainingFormsToSyncCount();
+        refreshListView();
+    }
+
+
+    public void refreshListView() {
+        try {
+            ReferredClientsFragment referredClientsFragment = (ReferredClientsFragment) getSupportFragmentManager().findFragmentByTag("tag");;
+            referredClientsFragment.populateData();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        try {
+            FollowupClientsFragment followupClientsFragment = (FollowupClientsFragment) getSupportFragmentManager().findFragmentByTag("tag");
+            followupClientsFragment.populateData();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void updateRemainingFormsToSyncCount() {
+
+        try {
+            long size = pendingFormSubmissionService.pendingFormSubmissionCount();
+            Log.d(TAG, "pending from submission =" + size);
+            if (size > 0) {
+                pending.setText(valueOf(size) + " " + getString(R.string.unsynced_forms_count_message));
+                pendingForm.setVisibility(View.VISIBLE);
+            } else {
+                pendingForm.setVisibility(View.GONE);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void updateSyncIndicator() {
+
+        if (updateMenuItem != null) {
+            if (context().allSharedPreferences().fetchIsSyncInProgress()) {
+                updateMenuItem.setActionView(R.layout.progress);
+            } else
+                updateMenuItem.setActionView(null);
+        }
+
+    }
+
+    public void updateRegisterCounts() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                final long successfullCount =  context().allBeneficiaries().successCount();
+                final long unsuccessfullCount =  context().allBeneficiaries().unsuccessCount();
+
+                Handler mainHandler = new Handler(getMainLooper());
+
+                Runnable myRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        successView =  (TextView) findViewById(R.id.count_one);
+                        unsuccessView =  (TextView) findViewById(R.id.count_two);
+                        successView.setText(valueOf(successfullCount));
+                        unsuccessView.setText(valueOf(unsuccessfullCount));
+
+
+                        float v = 0.0f;
+                        try {
+                            v = (successfullCount * 1.0f) / (successfullCount + unsuccessfullCount);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                        Log.d(TAG,"donutchart value = "+v);
+                        donutChart.stopAnimateLoading(v*100);
+                    }
+                };
+                mainHandler.post(myRunnable);
+
+            }
+        }).start();
+    }
 
     public void showPreRegistrationDetailsDialog(ClientReferralPersonObject clientReferralPersonObject) {
 
@@ -506,11 +774,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     }
 
     @Override
-    protected void onResumption() {
-        LoginActivity.setLanguage();
-    }
-
-    @Override
     protected NavBarOptionsProvider getNavBarOptionsProvider() {
         return null;
     }
@@ -522,10 +785,51 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     @Override
     protected void onInitialization() {
+        pendingFormSubmissionService = context().pendingFormSubmissionService();
+        SYNC_STARTED.addListener(onSyncStartListener);
+        SYNC_COMPLETED.addListener(onSyncCompleteListener);
+        FORM_SUBMITTED.addListener(onFormSubmittedListener);
+        ACTION_HANDLED.addListener(updateANMDetailsListener);
+        updateRegisterCounts();
     }
+
+    private Listener<Boolean> onSyncStartListener = new Listener<Boolean>() {
+        @Override
+        public void onEvent(Boolean data) {
+            if (updateMenuItem != null) {
+                updateMenuItem.setActionView(R.layout.progress);
+            }
+        }
+    };
+
+    private Listener<String> onFormSubmittedListener = new Listener<String>() {
+        @Override
+        public void onEvent(String instanceId) {
+            updateRegisterCounts();
+        }
+    };
+
+    private Listener<String> updateANMDetailsListener = new Listener<String>() {
+        @Override
+        public void onEvent(String data) {
+            updateRegisterCounts();
+        }
+    };
+
 
     @Override
     public void startRegistration() {
+        Log.d(TAG, "starting registrations");
+        android.app.FragmentTransaction ft =getFragmentManager().beginTransaction();
+        android.app.Fragment prev = getFragmentManager().findFragmentByTag(locationDialogTAG);
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+        LocationSelectorDialogFragment
+                .newInstance(this, null, context().anmLocationController().get(),
+                        "referral_registration")
+                .show(ft, locationDialogTAG);
     }
 
     @Override
@@ -670,9 +974,65 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     @Override
     public void onBackPressed() {
-        boolean backPressed = ((CHWSmartRegisterFragment)mBaseFragment).onBackPressed();
-       if( backPressed)
-        super.onBackPressed(); // allow back key only if we are
+        Log.d(TAG,"BackPressed");
+
+
+
+        if(!isOnTheMainMenu){
+
+            tabsLayout.removeAllViews();
+            LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
+            TextView tabContent = (TextView) tabLinearLayout.findViewById(R.id.tabContent);
+            tabContent.setText("Main Menu");
+            tabContent.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sharp_menu_white_48dp, 0, 0, 0);
+            tabsLayout.addView(tabLinearLayout);
+
+
+            Log.d(TAG,"BackPressed true");
+            mainMenu.setVisibility(View.VISIBLE);
+            getSupportFragmentManager().beginTransaction().
+                    remove(getSupportFragmentManager().findFragmentById(R.id.fragments)).commit();
+
+            fragmentsView.setVisibility(View.GONE);
+
+        }else {
+            super.onBackPressed(); // allow back key only if we are
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.updateMenuItem:
+                donutChart.startAnimateLoading();
+                updateMenuItem = item;
+                updateFromServer();
+                if (context().allSharedPreferences().fetchIsSyncInProgress()) {
+                    Log.d(TAG,"am in sync progress");
+                    item.setActionView(R.layout.progress);
+                } else{
+                    item.setActionView(null);
+                    Log.d(TAG,"am in sync progress after");}
+
+                return true;
+
+//            case R.id.help:
+//                Toast.makeText(getActivity(), "help implementation under construction", LENGTH_SHORT).show();
+//                return true;
+
+            case R.id.logout:
+                ((BoreshaAfyaApplication)getApplication()).logoutCurrentUser();
+
+                return true;
+            case R.id.switchLanguageMenuItem:
+                String newLanguagePreference = context().userService().switchLanguagePreference();
+
+                LoginActivity.setLanguage();
+                Toast.makeText(ChwSmartRegisterActivity.this, "Language preference set to " + newLanguagePreference + ". Please restart the application.", LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public Fragment findFragmentByPosition(int position) {

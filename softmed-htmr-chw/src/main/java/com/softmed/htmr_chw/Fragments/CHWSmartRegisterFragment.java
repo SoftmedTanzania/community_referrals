@@ -62,7 +62,6 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     private LayoutInflater inflater;
     private ImageButton imageButton;
     private CHWPagerAdapter adapter;
-    private ViewPager feeds;
     private Toolbar toolbar;
     private View v;
     private TextView pending;
@@ -100,24 +99,6 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
         imageButton = (ImageButton) v.findViewById(R.id.register_client);
 
-        adapter = new CHWPagerAdapter(getActivity().getSupportFragmentManager());
-
-        feeds = (ViewPager) v.findViewById(R.id.viewPager);
-        feeds.setAdapter(adapter);
-
-        feeds.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
 
         final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
@@ -143,7 +124,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                 isOnTheMainMenu = false;
                 ReferredClientsFragment newFragment = new ReferredClientsFragment();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragments, newFragment);
+                transaction.replace(R.id.fragments, newFragment,"tag");
                 transaction.addToBackStack(null);
                 transaction.commit();
 
@@ -197,7 +178,6 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         });
 
         tabs = (TabLayout) v.findViewById(R.id.tabs);
-        tabs.setupWithViewPager(feeds);
 
 
         LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
@@ -220,9 +200,6 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         tabContent3.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_event_note_white_24dp, 0, 0, 0);
 
 
-        tabs.getTabAt(0).setCustomView(tabContent2);
-        tabs.getTabAt(1).setCustomView(tabContent);
-        tabs.getTabAt(2).setCustomView(tabContent3);
 
 
         final int colorWhite = ContextCompat.getColor(getActivity(), android.R.color.white);
@@ -481,7 +458,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     @Override
     public void refreshListView() {
         try {
-            ReferredClientsFragment referredClientsFragment = (ReferredClientsFragment) findFragmentByPosition(0);
+            ReferredClientsFragment referredClientsFragment = (ReferredClientsFragment) getFragmentManager().findFragmentByTag("tag");;
             referredClientsFragment.populateData();
 
         }catch (Exception e){
@@ -489,7 +466,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         }
 
         try {
-            FollowupClientsFragment followupClientsFragment = (FollowupClientsFragment) findFragmentByPosition(1);
+            FollowupClientsFragment followupClientsFragment = (FollowupClientsFragment) getFragmentManager().findFragmentByTag("tag");
             followupClientsFragment.populateData();
 
         }catch (Exception e){
@@ -498,10 +475,6 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
     }
 
-    public android.support.v4.app.Fragment findFragmentByPosition(int position) {
-        FragmentPagerAdapter fragmentPagerAdapter = adapter;
-        return getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + feeds.getId() + ":" + fragmentPagerAdapter.getItemId(position));
-    }
 
 
 

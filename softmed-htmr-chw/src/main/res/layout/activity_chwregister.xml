@@ -313,9 +313,10 @@
                 android:background="@color/cyan_200"/>
         </android.support.percent.PercentRelativeLayout>
 
-        <android.support.design.widget.TabLayout
+        <LinearLayout
+            android:orientation="horizontal"
             android:id="@+id/tabs"
-            android:visibility="gone"
+            android:paddingLeft="16dp"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
@@ -323,7 +324,7 @@
             app:tabIndicatorHeight="2dp"
             app:tabMode="fixed"
             app:tabMaxWidth="0dp"
-            app:tabGravity="fill"/>
+            android:gravity="center_vertical"/>
     </android.support.design.widget.AppBarLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -360,7 +361,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/green_050">
+                        android:background="@color/blue_050">
 
                         <ImageView
                             android:layout_width="80dp"
@@ -396,7 +397,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="5"
-                        android:text="@string/sample_text"/>
+                        android:text="Use this section to register new clients and issue referrals."/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -416,7 +417,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/red_050">
+                        android:background="@color/blue_100">
 
                         <ImageView
                             android:layout_width="80dp"
@@ -452,7 +453,7 @@
                                 android:layout_marginRight="16dp"
                                 android:layout_marginTop="4dp"
                                 android:textColor="@color/card_grid_text"
-                                android:text="2 Pending referrals"/>
+                                android:text=""/>
 
                             <View
                                 android:layout_width="150dp"
@@ -478,7 +479,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="5"
-                        android:text="@string/sample_text"/>
+                        android:text="Use this section to view all referrals issued with their status check"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -497,7 +498,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/red_050">
+                        android:background="@color/blue_050">
 
                         <ImageView
                             android:layout_width="80dp"
@@ -533,11 +534,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="5"
-                        android:text="@string/sample_text"/>
+                        android:text="Use this section to view all clients referred back for close follow up and update all necessary followup information"/>
                 </LinearLayout>
-
-
-
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -555,7 +553,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/orange_050">
+                        android:background="@color/blue_100">
 
                         <ImageView
                             android:layout_width="80dp"
@@ -608,7 +606,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="5"
-                        android:text="@string/sample_text"/>
+                        android:text="Use this section to visualize summary reports."/>
                 </LinearLayout>
 
 
@@ -618,13 +616,6 @@
         </LinearLayout>
 
     </RelativeLayout>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
 </android.support.design.widget.CoordinatorLayout>

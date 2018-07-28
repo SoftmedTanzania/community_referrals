@@ -254,7 +254,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
 
     }
 
-    protected void populateData() {
+    public void populateData() {
         //todo need to select all mothers with usertype id similar to the logged chw user
         commonRepository = context().commonrepository("client_referral");
 

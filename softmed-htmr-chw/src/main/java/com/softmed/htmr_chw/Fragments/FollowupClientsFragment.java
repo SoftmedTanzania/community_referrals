@@ -126,7 +126,7 @@ public class FollowupClientsFragment extends SecuredNativeSmartRegisterCursorAda
 
     }
 
-    protected void populateData() {
+    public void populateData() {
         followupClientRepository = context().followupClientRepository();
 
         FollowupClintsRecyclerAdapter followupClintsRecyclerAdapter = new FollowupClintsRecyclerAdapter(getActivity(), followupClientRepository.all());

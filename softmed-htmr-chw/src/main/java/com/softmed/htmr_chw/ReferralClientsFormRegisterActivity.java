@@ -319,7 +319,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
                         Calendar c = Calendar.getInstance();
                         c.add(Calendar.DAY_OF_MONTH,1);
                         defaultAppointmentDate = c.getTimeInMillis();
-                        editTextReferralReason.setVisibility(View.GONE);
+                        editTextReferralReason.setVisibility(View.VISIBLE);
                     }else {
                         Calendar c = Calendar.getInstance();
                         c.add(Calendar.DAY_OF_MONTH,3);
