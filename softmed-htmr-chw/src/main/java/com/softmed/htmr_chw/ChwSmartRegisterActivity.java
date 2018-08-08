@@ -26,6 +26,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -110,7 +111,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private LinearLayout flags_layout;
     private Toolbar toolbar;
     RelativeLayout pendingForm;
-    private LinearLayout mainMenu;
+    private ScrollView mainMenu;
     private ImageButton imageButton;
     private static boolean isOnTheMainMenu;
     private View fragmentsView;
@@ -137,6 +138,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
             }
         };
+        setValuesInBoreshaAfya();
         formNames = this.buildFormNameList();
         mBaseFragment = new CHWSmartRegisterFragment();
 
@@ -153,7 +155,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
 
         isOnTheMainMenu = true;
-        mainMenu = (LinearLayout)findViewById(R.id.main_menu);
+        mainMenu = (ScrollView)findViewById(R.id.main_menu);
         fragmentsView = findViewById(R.id.fragments);
         View referralRegistration  = mainMenu.findViewById(R.id.referral_registration_card);
         View issuedReferrals  = mainMenu.findViewById(R.id.issued_referral_list_card);
