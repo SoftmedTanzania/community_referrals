@@ -37,7 +37,7 @@
     <string name="title_login_description">Enter username and password</string>
     <string name="button_details">Details</string>
     <string name="button_follow_up">Follow up</string>
-    <string name="title_register_client">New Client Registration Form</string>
+    <string name="title_register_client">New Referral Registration Form</string>
     <string name="client_sex">Sex</string>
     <string name="client_phone">Phone</string>
     <string name="client_age">Age</string>
