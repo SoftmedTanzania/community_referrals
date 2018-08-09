@@ -40,6 +40,7 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
+import com.google.gson.JsonArray;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
@@ -375,6 +376,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                 receivedFemaleReferralsServicesCursor.close();
 
                 JSONArray jsonArray = new JSONArray();
+
                 for(int i=0;i<providedReferralsServicesCursor.getCount();i++){
                     providedReferralsServicesCursor.moveToPosition(i);
 
@@ -385,31 +387,65 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
 
                     int serviveId = providedReferralsServicesCursor.getInt(0);
 
-                    Cursor cursorMaleCount = commonRepository.RawCustomQueryForAdapter("select count(*) as c FROM "+TABLE_NAME+ " WHERE referral_service_id = "+serviveId+" AND  referral_status<>2 AND  gender = 'Male' "+
-                            (fromDateTimestamp!=0?" AND referral_date > "+fromDateTimestamp:"")  +
-                            (toDateTimestamp!=0?" AND referral_date < "+toDateTimestamp:""));
-                    cursorMaleCount.moveToFirst();
-                    Cursor cursorFemaleCount = commonRepository.RawCustomQueryForAdapter("select count(*) as c FROM "+TABLE_NAME+ " WHERE referral_service_id = "+serviveId+" AND  referral_status<>2 AND gender = 'Female' "+
-                            (fromDateTimestamp!=0?" AND referral_date > "+fromDateTimestamp:"")  +
-                            (toDateTimestamp!=0?" AND referral_date < "+toDateTimestamp:""));
-                    cursorFemaleCount.moveToFirst();
-
                     JSONObject serviceDetails = new JSONObject();
                     try {
-                        serviceDetails.put("Male",cursorMaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
-                        serviceDetails.put("Female",cursorFemaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
-                        serviceDetails.put("Service",providedReferralsServicesCursor.getString(providedReferralsServicesCursor.getColumnIndex("name")));
-                        serviceDetails.put("Total",cursorMaleCount.getInt(cursorMaleCount.getColumnIndex("c"))+cursorFemaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
-                        sizes.add(cursorMaleCount.getInt(cursorMaleCount.getColumnIndex("c"))+cursorFemaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
-                    } catch (Exception e) {
+                        serviceDetails.put("Service", providedReferralsServicesCursor.getString(providedReferralsServicesCursor.getColumnIndex("name")));
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
 
-                    jsonArray.put(serviceDetails);
+                    Cursor healthFacilityCursor = followupClientRepository.RawCustomQueryForAdapter("select client_referral.facility_id,facility.name FROM client_referral " +
+                            "INNER JOIN referral_service ON  client_referral.referral_service_id = referral_service.id "+
+                            "INNER JOIN facility ON  client_referral.facility_id = facility.id "+
+                            (fromDateTimestamp!=0?" AND referral_date > "+fromDateTimestamp:"")  +
+                            (toDateTimestamp!=0?" AND referral_date < "+toDateTimestamp:"")  +
+                            "  GROUP BY client_referral.facility_id,facility.name " );
 
-                    cursorMaleCount.close();
-                    cursorFemaleCount.close();
+                    JSONArray facilityReferrals = new JSONArray();
+                    int totalReferrals = 0;
+                    for(int j=0;j<healthFacilityCursor.getCount();j++) {
+                        healthFacilityCursor.moveToPosition(j);
+
+                        Cursor cursorMaleCount = commonRepository.RawCustomQueryForAdapter("select count(*) as c FROM " + TABLE_NAME + " WHERE facility_id = '"+healthFacilityCursor.getString(0)+"' AND referral_service_id = " + serviveId + " AND  referral_status<>2 AND  gender = 'Male' " +
+                                (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
+                                (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : ""));
+                        cursorMaleCount.moveToFirst();
+                        Cursor cursorFemaleCount = commonRepository.RawCustomQueryForAdapter("select count(*) as c FROM " + TABLE_NAME + " WHERE facility_id = '"+healthFacilityCursor.getString(0)+"' AND referral_service_id = " + serviveId + " AND  referral_status<>2 AND gender = 'Female' " +
+                                (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
+                                (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : ""));
+                        cursorFemaleCount.moveToFirst();
+
+                        JSONObject facilityReferralDetails = new JSONObject();
+                        try {
+                            facilityReferralDetails.put("FacilityName", healthFacilityCursor.getString(1));
+                            facilityReferralDetails.put("Male", cursorMaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
+                            facilityReferralDetails.put("Female", cursorFemaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
+                            facilityReferralDetails.put("Total", cursorMaleCount.getInt(cursorMaleCount.getColumnIndex("c")) + cursorFemaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
+
+                            totalReferrals+=(cursorMaleCount.getInt(cursorMaleCount.getColumnIndex("c")) + cursorFemaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        try {
+                            facilityReferrals.put(facilityReferralDetails);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        cursorMaleCount.close();
+                        cursorFemaleCount.close();
+                    }
+                    sizes.add(totalReferrals);
+
+                    try {
+                        serviceDetails.put("facilityReferrals",facilityReferrals);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    jsonArray.put(serviceDetails);
+                    healthFacilityCursor.close();
                 }
 
 
@@ -463,9 +499,6 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
 
                     TextView sn = (TextView) tableView.findViewById(R.id.sn_title);
                     TextView serviceName = (TextView) tableView.findViewById(R.id.service_name);
-                    TextView maleTotal  = (TextView) tableView.findViewById(R.id.male_count);
-                    TextView femaleTotal = (TextView) tableView.findViewById(R.id.female_count);
-                    TextView total = (TextView) tableView.findViewById(R.id.total);
 
                     sn.setText((i+1)+"");
                     try {
@@ -473,21 +506,56 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
+                    JSONArray facilityReferralsSummary = null;
                     try {
-                        maleTotal.setText(object.getString("Male"));
-                    } catch (Exception e) {
+                        facilityReferralsSummary = object.getJSONArray("facilityReferrals");
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    try {
-                        femaleTotal.setText(object.getString("Female"));
-                    } catch (Exception e) {
-                        e.printStackTrace();
+
+                    for(int j=0;j<facilityReferralsSummary.length();j++){
+                        View facilityReferralsSumamryItem = getActivity().getLayoutInflater().inflate(R.layout.view_facility_referrals_summary_item,null);
+
+                        TextView facilityName  = (TextView) facilityReferralsSumamryItem.findViewById(R.id.facility_name);
+                        TextView maleTotal  = (TextView) facilityReferralsSumamryItem.findViewById(R.id.male_count);
+                        TextView femaleTotal = (TextView) facilityReferralsSumamryItem.findViewById(R.id.female_count);
+                        TextView total = (TextView) facilityReferralsSumamryItem.findViewById(R.id.total);
+
+                        JSONObject facilityObject = null;
+                        try {
+                            facilityObject = facilityReferralsSummary.getJSONObject(j);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        try {
+                            facilityName.setText(facilityObject.getString("FacilityName"));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        try {
+                            maleTotal.setText(facilityObject.getString("Male"));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            femaleTotal.setText(facilityObject.getString("Female"));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            total.setText(facilityObject.getString("Total"));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        ((LinearLayout)tableView.findViewById(R.id.facility)).addView(facilityReferralsSumamryItem);
+                        tableView.invalidate();
                     }
-                    try {
-                        total.setText(object.getString("Total"));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+
                     servicesTable.addView(tableView);
 
                 }

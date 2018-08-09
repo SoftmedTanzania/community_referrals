@@ -105,5 +105,6 @@
     <string name="folloup_feedback_moved_to_another_facility">Has shifted to another facility</string>
     <string name="followup_feedback_other_reasons">Other Reasons</string>
     <string name="followup_thankyou_note_part_one">Thank you for visiting </string>
+    <string name="issued_referrals_summary_report">Issued Referrals Summary Report</string>
 
 </resources>

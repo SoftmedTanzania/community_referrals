@@ -106,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:text="Completed Referrals Summary Report"/>
+                        android:text="@string/issued_referrals_summary_report"/>
 
                     <LinearLayout
                         android:layout_marginTop="8dp"
@@ -135,6 +135,14 @@
                             android:text="Service"
                             android:textStyle="bold"/>
 
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:gravity="center_horizontal"
+                            android:textStyle="bold"
+                            android:text="Facility Name"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -176,6 +184,7 @@
                     android:background="#f5f5f5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:divider="#d7d7d7"
                     android:id="@+id/services_table"/>
 
             </LinearLayout>
