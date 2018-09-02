@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="org.ei.opensrp"
     android:installLocation="auto"
-    android:versionCode="32"
-    android:versionName="3.0.1"
     tools:overrideLibrary="org.ei.opensrp">
 
 
@@ -17,9 +15,6 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-    <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="16" />
 
     <application
         android:clearTaskOnLaunch="true"
