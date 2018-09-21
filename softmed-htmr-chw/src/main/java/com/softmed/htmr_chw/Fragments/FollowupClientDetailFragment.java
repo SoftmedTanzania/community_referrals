@@ -156,17 +156,27 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         referedDate.setText(dateFormat.format(clientFollowup.getReferral_date()));
 
 
+        try{
+            residence.setText(clientFollowup.getMap_cue()+", "+clientFollowup.getWard());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         try {
-            sponsor.setText((clientFollowup.getCare_taker_relationship().equals("null") ? "" : clientFollowup.getCare_taker_relationship()) + "\n" +
-                    (clientFollowup.getCare_taker_name().equals("null") ? "" : clientFollowup.getCare_taker_name()) + "\n" +
-                    (clientFollowup.getCare_taker_name_phone_number().equals("null") ? "" : clientFollowup.getCare_taker_name_phone_number()));
-            residence.setText(clientFollowup.getMap_cue());
+            sponsor.setText((clientFollowup.getCare_taker_relationship()!=null ? "" : clientFollowup.getCare_taker_relationship()) + "\n" +
+                    (clientFollowup.getCare_taker_name()!=null ? "" : clientFollowup.getCare_taker_name()) + "\n" +
+                    (clientFollowup.getCare_taker_name_phone_number()!=null ? "" : clientFollowup.getCare_taker_name_phone_number()));
+
         }catch (Exception e){
             e.printStackTrace();
         }
 
         feedback.setText(clientFollowup.getReferral_feedback());
-        visitDate.setText(dateFormat.format(clientFollowup.getVisit_date()));
+
+        if(clientFollowup.getVisit_date()!=0) {
+            visitDate.setText(dateFormat.format(clientFollowup.getVisit_date()));
+        }else{
+            visitDate.setText(R.string.followup_not_conducted);
+        }
 
 
 

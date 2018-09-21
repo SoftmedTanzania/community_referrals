@@ -569,6 +569,8 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     }
 
     public String getIndicatorName(String id) {
+
+        Log.d(TAG,"indicatorId = "+id);
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM indicator where referralServiceIndicatorId ='" + id + "'");
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "indicator");

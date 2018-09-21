@@ -112,5 +112,6 @@
 
     <string name="followup_clint_not_found_responce">Tafadhali hakikisha unamtafuta tena kumjulia hali</string>
     <string name="issued_referrals_summary_report">Ripoti fupi ya rufaa zilizotolewa</string>
+    <string name="followup_not_conducted">Mteja bado hajafwatiliwa</string>
 
 </resources>

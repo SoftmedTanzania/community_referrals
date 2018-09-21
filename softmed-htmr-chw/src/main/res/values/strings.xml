@@ -113,4 +113,5 @@
 
 Aenean quis ex dictum, porttitor nunc id, viverra urna. Suspendisse posuere ex a lectus viverra congue. Etiam ac luctus mi, quis euismod nisl. Pellentesque in volutpat est. Fusce eget dui est. Nam aliquam urna sit amet lacus ullamcorper, eget dapibus tellus sollicitudin. Sed eget leo vel neque varius tempus. Curabitur vestibulum dui nec pellentesque scelerisque. Suspendisse in ex eu ex consequat fermentum. In ut dictum dui. In gravida mauris a tellus tempus gravida. Sed consectetur, est in ornare sodales, dui ex sollicitudin nibh, eget varius ante nibh et ipsum. Ut et turpis tempor nisi faucibus consequat. Integer vestibulum orci quis tellus scelerisque ullamcorper. Sed elit enim, laoreet et felis at, commodo rhoncus orci.</string>
     <string name="issued_referrals_summary_report">Issued Referrals Summary Report</string>
+    <string name="followup_not_conducted">Followup has not yet been conducted</string>
 </resources>
