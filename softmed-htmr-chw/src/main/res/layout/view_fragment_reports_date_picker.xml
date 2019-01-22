@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:text="From"
+                android:text="@string/from_date_picker_label"
                 android:id="@+id/date_range_from"
                 android:textStyle="bold"
                 android:layout_marginLeft="8dp"
@@ -78,7 +78,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="To"
+                android:text="@string/to_date_picker_label"
                 android:id="@+id/date_range_to"
                 android:textStyle="bold"
                 android:layout_marginLeft="8dp"
@@ -94,7 +94,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
             android:id="@+id/apply_date_range_button"
-            android:text="Apply"
+            android:text="@string/apply_button_label"
             android:textAllCaps="false"
             android:textColor="?attr/colorPrimary"
             android:textStyle="bold"/>

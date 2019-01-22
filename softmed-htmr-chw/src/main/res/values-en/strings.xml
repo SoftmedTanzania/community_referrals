@@ -107,5 +107,16 @@
     <string name="followup_thankyou_note_part_one">Thank you for visiting </string>
     <string name="issued_referrals_summary_report">Issued Referrals Summary Report</string>
     <string name="followup_not_conducted">Followup has not yet been conducted</string>
+    <string name="main_menu_label">Main Menu</string>
+    <string name="referred_clients_list_label">Referred Clients List</string>
+    <string name="emergency_referral_title_label">Emergency Referral</string>
+    <string name="completed_referrals_summary_title_label">Completed Referrals Summary</string>
+    <string name="received_clients_followup_summary">Received Clients Followup Summary</string>
+    <string name="from_date_picker_label">From</string>
+    <string name="to_date_picker_label">To</string>
+    <string name="facility_name_label">Facility Name</string>
+    <string name="total_label">Total</string>
+    <string name="completed_referrals_label">Completed Referrals</string>
+    <string name="referred_clients_desc">Use this section to view all referrals issued with their status check</string>
 
 </resources>

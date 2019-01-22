@@ -326,21 +326,24 @@
             app:tabMaxWidth="0dp"
             app:tabMode="fixed"/>
     </android.support.design.widget.AppBarLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <FrameLayout
             android:id="@+id/fragments"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone" />
+
         <ScrollView
             android:id="@+id/main_menu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -353,6 +356,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
                     android:visibility="visible">
+
                     <android.support.v7.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -372,7 +376,7 @@
                                 android:layout_height="80dp"
                                 android:layout_centerVertical="true"
                                 android:layout_marginLeft="32dp"
-                                android:src="@mipmap/ic_new_green"/>
+                                android:src="@mipmap/ic_new_green" />
 
                             <TextView
                                 android:id="@+id/tb_referal_list_text"
@@ -382,17 +386,19 @@
                                 android:layout_marginLeft="16dp"
                                 android:layout_marginRight="16dp"
                                 android:layout_toRightOf="@id/tb_referals_icon"
-                                android:text="Register Clients"
+                                android:text="@string/register_clients_title"
                                 android:textColor="@color/card_grid_text"
-                                android:textSize="14sp"/>
+                                android:textSize="14sp" />
 
                         </RelativeLayout>
 
                     </android.support.v7.widget.CardView>
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -400,15 +406,17 @@
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="8dp"
                             android:maxLines="5"
-                            android:text="Use this section to register new clients and issue referrals."/>
+                            android:text="@string/register_clients_desc" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/issued_referral_list_card"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
                     android:layout_marginTop="4dp"
                     android:visibility="visible">
+
                     <android.support.v7.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -428,7 +436,7 @@
                                 android:layout_height="80dp"
                                 android:layout_centerVertical="true"
                                 android:layout_marginLeft="32dp"
-                                android:src="@mipmap/ic_refered_blue"/>
+                                android:src="@mipmap/ic_refered_blue" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -443,9 +451,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="16dp"
                                     android:layout_marginRight="16dp"
-                                    android:text="Referred Clients List"
+                                    android:text="@string/referred_clients_list_label"
                                     android:textColor="@color/black"
-                                    android:textSize="14sp"/>
+                                    android:textSize="14sp" />
 
                                 <TextView
                                     android:id="@+id/referal_count_text"
@@ -456,14 +464,14 @@
                                     android:layout_marginTop="4dp"
                                     android:text=""
                                     android:textColor="@color/card_grid_text"
-                                    android:textSize="12sp"/>
+                                    android:textSize="12sp" />
 
                                 <View
                                     android:layout_width="150dp"
                                     android:layout_height="1dp"
                                     android:layout_marginLeft="16dp"
                                     android:layout_marginTop="4dp"
-                                    android:background="@color/red_200"/>
+                                    android:background="@color/red_200" />
 
                             </LinearLayout>
 
@@ -471,10 +479,12 @@
                         </RelativeLayout>
 
                     </android.support.v7.widget.CardView>
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -482,14 +492,16 @@
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="8dp"
                             android:maxLines="5"
-                            android:text="Use this section to view all referrals issued with their status check"/>
+                            android:text="@string/referred_clients_desc" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/received_referrals_list_card"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
                     android:layout_marginTop="4dp">
+
                     <android.support.v7.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -509,7 +521,7 @@
                                 android:layout_height="80dp"
                                 android:layout_centerVertical="true"
                                 android:layout_marginLeft="32dp"
-                                android:src="@mipmap/ic_list_red"/>
+                                android:src="@mipmap/ic_list_red" />
 
                             <TextView
                                 android:id="@+id/client_list_text"
@@ -519,17 +531,19 @@
                                 android:layout_marginLeft="16dp"
                                 android:layout_marginRight="16dp"
                                 android:layout_toRightOf="@id/client_list_image"
-                                android:text="Received Referrals"
+                                android:text="@string/received_referrals_label"
                                 android:textColor="@color/card_grid_text"
-                                android:textSize="14sp"/>
+                                android:textSize="14sp" />
 
                         </RelativeLayout>
 
                     </android.support.v7.widget.CardView>
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -537,14 +551,16 @@
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="8dp"
                             android:maxLines="5"
-                            android:text="Use this section to view all clients referred back for close follow up and update all necessary followup information"/>
+                            android:text="@string/received_referrals_desc" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/reports"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
                     android:layout_marginTop="4dp">
+
                     <android.support.v7.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -564,7 +580,7 @@
                                 android:layout_height="80dp"
                                 android:layout_centerVertical="true"
                                 android:layout_marginLeft="32dp"
-                                android:src="@mipmap/ic_report"/>
+                                android:src="@mipmap/ic_report" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -579,9 +595,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="16dp"
                                     android:layout_marginRight="16dp"
-                                    android:text="Reports"
+                                    android:text="@string/reports_label"
                                     android:textColor="@color/black"
-                                    android:textSize="14sp"/>
+                                    android:textSize="14sp" />
 
                                 <TextView
                                     android:id="@+id/referal_feedback_count"
@@ -591,17 +607,19 @@
                                     android:layout_marginRight="16dp"
                                     android:text=""
                                     android:textColor="@color/card_grid_text"
-                                    android:textSize="14sp"/>
+                                    android:textSize="14sp" />
 
                             </LinearLayout>
 
                         </RelativeLayout>
 
                     </android.support.v7.widget.CardView>
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -609,16 +627,14 @@
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="8dp"
                             android:maxLines="5"
-                            android:text="Use this section to visualize summary reports."/>
+                            android:text="@string/use_this_section_to_visualize_summary_reports" />
                     </LinearLayout>
-
 
 
                 </LinearLayout>
 
             </LinearLayout>
         </ScrollView>
-
 
 
     </RelativeLayout>

@@ -447,7 +447,7 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="#000"
                                 android:textSize="13sp"
-                                android:text="Visit Date"/>
+                                android:text="@string/visit_date_label"/>
                         </RelativeLayout>
 
                         <LinearLayout

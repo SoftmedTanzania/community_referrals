@@ -1,18 +1,12 @@
 package com.softmed.htmr_chw.Fragments;
-
-
 import android.app.Activity;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +15,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
-
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -40,12 +33,9 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
-import com.google.gson.JsonArray;
-import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
@@ -54,13 +44,9 @@ import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static org.ei.opensrp.AllConstants.ENGLISH_LOCALE;
@@ -68,14 +54,15 @@ import static org.ei.opensrp.AllConstants.ENGLISH_LOCALE;
 /**
  * Created by coze on 06/03/18.
  */
-public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFragment {
-     static final String TAG = ReportFragment.class.getSimpleName(),TABLE_NAME = "client_referral";;
+public class ReportFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+    static final String TAG = ReportFragment.class.getSimpleName(), TABLE_NAME = "client_referral";
+    ;
     private static final String ARG_POSITION = "position";
     private TableLayout defaultersTable;
     private LinearLayout dataView;
     private View metDOBFrom, metDOBTo;
-    private TextView dateRangeFromText,dateRangeToText;
-    private long toDateTimestamp,fromDateTimestamp;
+    private TextView dateRangeFromText, dateRangeToText;
+    private long toDateTimestamp, fromDateTimestamp;
     final DatePickerDialog fromDatePicker = new DatePickerDialog();
     final DatePickerDialog toDatePicker = new DatePickerDialog();
     private LinearLayout dateFromLayout, dateToLayout;
@@ -84,7 +71,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
 
     private FollowupClientRepository followupClientRepository;
     private TableLayout servicesTable;
-    private  PieChart mChart1;
+    private PieChart mChart1;
     private BarChart mChart2;
     private String preferredLocale;
 
@@ -103,7 +90,6 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
 
         AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(org.ei.opensrp.Context.getInstance().applicationContext()));
         preferredLocale = allSharedPreferences.fetchLanguagePreference();
-
 
 
         followupClientRepository = context().followupClientRepository();
@@ -127,7 +113,6 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
         toDatePicker.setAccentColor(ContextCompat.getColor(getActivity(), com.softmed.htmr_chw.R.color.colorPrimary));
 
 
-
         metDOBTo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,7 +127,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                         toCalendar.set(year, monthOfYear, dayOfMonth);
                         fromDatePicker.setMaxDate(toCalendar);
                         toDateTimestamp = toCalendar.getTimeInMillis();
-                        if (fromDateTimestamp==0) {
+                        if (fromDateTimestamp == 0) {
                             final Snackbar snackbar = Snackbar.make(rowview, "Please select a start date to view the chart", Snackbar.LENGTH_LONG);
                             snackbar.setAction("OK", new View.OnClickListener() {
                                 @Override
@@ -172,8 +157,8 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                         fromCalendar.set(year, monthOfYear, dayOfMonth);
                         toDatePicker.setMinDate(fromCalendar);
                         fromDateTimestamp = fromCalendar.getTimeInMillis();
-                        if(toDateTimestamp==0){
-                            final Snackbar snackbar= Snackbar.make(rowview,"Please select an end date to view the report", Snackbar.LENGTH_LONG);
+                        if (toDateTimestamp == 0) {
+                            final Snackbar snackbar = Snackbar.make(rowview, "Please select an end date to view the report", Snackbar.LENGTH_LONG);
                             snackbar.setAction("OK", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
@@ -192,13 +177,13 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
             @Override
             public void onClick(View view) {
                 servicesTable.removeAllViews();
-                Log.d(TAG,"applying date range");
-                Log.d(TAG,"from time stamp = "+fromDateTimestamp);
-                Log.d(TAG,"to time stamp = "+toDateTimestamp);
-                loadReportData(fromDateTimestamp,toDateTimestamp);
+                Log.d(TAG, "applying date range");
+                Log.d(TAG, "from time stamp = " + fromDateTimestamp);
+                Log.d(TAG, "to time stamp = " + toDateTimestamp);
+                loadReportData(fromDateTimestamp, toDateTimestamp);
             }
         });
-        servicesTable = (TableLayout)rowview.findViewById(R.id.services_table);
+        servicesTable = (TableLayout) rowview.findViewById(R.id.services_table);
 
         //Pie chart configurations
         mChart1 = (PieChart) rowview.findViewById(R.id.chart1);
@@ -240,8 +225,6 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
         // entry label styling
         mChart1.setEntryLabelColor(Color.BLACK);
         mChart1.setEntryLabelTextSize(12f);
-
-
 
 
         //Bar chart configurations
@@ -300,7 +283,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
         // l.setCustom(ColorTemplate.VORDIPLOM_COLORS, new String[] { "abc",
         // "def", "ghj", "ikl", "mno" });
 
-        loadReportData(0,0);
+        loadReportData(0, 0);
 
         return rowview;
     }
@@ -331,9 +314,9 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
     }
 
 
-    private void loadReportData(final long fromDateTimestamp, final long toDateTimestamp){
+    private void loadReportData(final long fromDateTimestamp, final long toDateTimestamp) {
 
-        new AsyncTask<Void, String, String>(){
+        new AsyncTask<Void, String, String>() {
 
             @Override
             protected String doInBackground(Void... voids) {
@@ -343,10 +326,10 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                 Cursor receivedMaleReferralsServicesCursor = null;
                 Cursor receivedFemaleReferralsServicesCursor = null;
 
-                Cursor providedReferralsServicesCursor = followupClientRepository.RawCustomQueryForAdapter("select * FROM referral_service INNER JOIN client_referral ON  referral_service.id = client_referral.referral_service_id "+
-                        (fromDateTimestamp!=0?" AND referral_date > "+fromDateTimestamp:"")  +
-                        (toDateTimestamp!=0?" AND referral_date < "+toDateTimestamp:"")  +
-                        "  GROUP BY referral_service.id" );
+                Cursor providedReferralsServicesCursor = followupClientRepository.RawCustomQueryForAdapter("select * FROM referral_service INNER JOIN client_referral ON  referral_service.id = client_referral.referral_service_id " +
+                        (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
+                        (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : "") +
+                        "  GROUP BY referral_service.id");
 
                 try {
                     receivedMaleReferralsServicesCursor = followupClientRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Male'  " +
@@ -355,19 +338,19 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                     receivedFemaleReferralsServicesCursor = followupClientRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Female'  " +
                             (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
                             (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : ""));
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
 
                 JSONObject receivedReferrals = new JSONObject();
                 try {
-                    receivedReferrals.put("maleCount",receivedMaleReferralsServicesCursor.getCount());
+                    receivedReferrals.put("maleCount", receivedMaleReferralsServicesCursor.getCount());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 try {
-                    receivedReferrals.put("femaleCount",receivedFemaleReferralsServicesCursor.getCount());
+                    receivedReferrals.put("femaleCount", receivedFemaleReferralsServicesCursor.getCount());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -377,10 +360,10 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
 
                 JSONArray jsonArray = new JSONArray();
 
-                for(int i=0;i<providedReferralsServicesCursor.getCount();i++){
+                for (int i = 0; i < providedReferralsServicesCursor.getCount(); i++) {
                     providedReferralsServicesCursor.moveToPosition(i);
 
-                    if(preferredLocale.equals(ENGLISH_LOCALE))
+                    if (preferredLocale.equals(ENGLISH_LOCALE))
                         categoryNames.add(providedReferralsServicesCursor.getString(providedReferralsServicesCursor.getColumnIndex("name")));
                     else
                         categoryNames.add(providedReferralsServicesCursor.getString(providedReferralsServicesCursor.getColumnIndex("name_sw")));
@@ -389,29 +372,32 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
 
                     JSONObject serviceDetails = new JSONObject();
                     try {
-                        serviceDetails.put("Service", providedReferralsServicesCursor.getString(providedReferralsServicesCursor.getColumnIndex("name")));
+                        if (preferredLocale.equals(ENGLISH_LOCALE))
+                            serviceDetails.put("Service", providedReferralsServicesCursor.getString(providedReferralsServicesCursor.getColumnIndex("name")));
+                        else
+                            serviceDetails.put("Service", providedReferralsServicesCursor.getString(providedReferralsServicesCursor.getColumnIndex("name_sw")));
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-
                     Cursor healthFacilityCursor = followupClientRepository.RawCustomQueryForAdapter("select client_referral.facility_id,facility.name FROM client_referral " +
-                            "INNER JOIN referral_service ON  client_referral.referral_service_id = referral_service.id "+
-                            "INNER JOIN facility ON  client_referral.facility_id = facility.id "+
-                            (fromDateTimestamp!=0?" AND referral_date > "+fromDateTimestamp:"")  +
-                            (toDateTimestamp!=0?" AND referral_date < "+toDateTimestamp:"")  +
-                            "  GROUP BY client_referral.facility_id,facility.name " );
+                            "INNER JOIN referral_service ON  client_referral.referral_service_id = referral_service.id " +
+                            "INNER JOIN facility ON  client_referral.facility_id = facility.id " +
+                            (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
+                            (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : "") +
+                            "  GROUP BY client_referral.facility_id,facility.name ");
 
                     JSONArray facilityReferrals = new JSONArray();
                     int totalReferrals = 0;
-                    for(int j=0;j<healthFacilityCursor.getCount();j++) {
+                    for (int j = 0; j < healthFacilityCursor.getCount(); j++) {
                         healthFacilityCursor.moveToPosition(j);
 
-                        Cursor cursorMaleCount = commonRepository.RawCustomQueryForAdapter("select count(*) as c FROM " + TABLE_NAME + " WHERE facility_id = '"+healthFacilityCursor.getString(0)+"' AND referral_service_id = " + serviveId + " AND  referral_status<>2 AND  gender = 'Male' " +
+                        Cursor cursorMaleCount = commonRepository.RawCustomQueryForAdapter("select count(*) as c FROM " + TABLE_NAME + " WHERE facility_id = '" + healthFacilityCursor.getString(0) + "' AND referral_service_id = " + serviveId + " AND  referral_status<>2 AND  gender = 'Male' " +
                                 (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
                                 (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : ""));
                         cursorMaleCount.moveToFirst();
-                        Cursor cursorFemaleCount = commonRepository.RawCustomQueryForAdapter("select count(*) as c FROM " + TABLE_NAME + " WHERE facility_id = '"+healthFacilityCursor.getString(0)+"' AND referral_service_id = " + serviveId + " AND  referral_status<>2 AND gender = 'Female' " +
+                        Cursor cursorFemaleCount = commonRepository.RawCustomQueryForAdapter("select count(*) as c FROM " + TABLE_NAME + " WHERE facility_id = '" + healthFacilityCursor.getString(0) + "' AND referral_service_id = " + serviveId + " AND  referral_status<>2 AND gender = 'Female' " +
                                 (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
                                 (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : ""));
                         cursorFemaleCount.moveToFirst();
@@ -423,7 +409,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                             facilityReferralDetails.put("Female", cursorFemaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
                             facilityReferralDetails.put("Total", cursorMaleCount.getInt(cursorMaleCount.getColumnIndex("c")) + cursorFemaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
 
-                            totalReferrals+=(cursorMaleCount.getInt(cursorMaleCount.getColumnIndex("c")) + cursorFemaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
+                            totalReferrals += (cursorMaleCount.getInt(cursorMaleCount.getColumnIndex("c")) + cursorFemaleCount.getInt(cursorMaleCount.getColumnIndex("c")));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -440,7 +426,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                     sizes.add(totalReferrals);
 
                     try {
-                        serviceDetails.put("facilityReferrals",facilityReferrals);
+                        serviceDetails.put("facilityReferrals", facilityReferrals);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -449,15 +435,14 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                 }
 
 
-
                 JSONObject chartsData = new JSONObject();
                 try {
-                    chartsData.put("chart1",jsonArray);
+                    chartsData.put("chart1", jsonArray);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 try {
-                    chartsData.put("chart2",receivedReferrals);
+                    chartsData.put("chart2", receivedReferrals);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -487,7 +472,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                     e.printStackTrace();
                 }
 
-                for (int i=0;i<services.length();i++){
+                for (int i = 0; i < services.length(); i++) {
 
                     JSONObject object = null;
                     try {
@@ -500,7 +485,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                     TextView sn = (TextView) tableView.findViewById(R.id.sn_title);
                     TextView serviceName = (TextView) tableView.findViewById(R.id.service_name);
 
-                    sn.setText((i+1)+"");
+                    sn.setText((i + 1) + "");
                     try {
                         serviceName.setText(object.getString("Service"));
                     } catch (Exception e) {
@@ -514,11 +499,11 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                         e.printStackTrace();
                     }
 
-                    for(int j=0;j<facilityReferralsSummary.length();j++){
-                        View facilityReferralsSumamryItem = getActivity().getLayoutInflater().inflate(R.layout.view_facility_referrals_summary_item,null);
+                    for (int j = 0; j < facilityReferralsSummary.length(); j++) {
+                        View facilityReferralsSumamryItem = getActivity().getLayoutInflater().inflate(R.layout.view_facility_referrals_summary_item, null);
 
-                        TextView facilityName  = (TextView) facilityReferralsSumamryItem.findViewById(R.id.facility_name);
-                        TextView maleTotal  = (TextView) facilityReferralsSumamryItem.findViewById(R.id.male_count);
+                        TextView facilityName = (TextView) facilityReferralsSumamryItem.findViewById(R.id.facility_name);
+                        TextView maleTotal = (TextView) facilityReferralsSumamryItem.findViewById(R.id.male_count);
                         TextView femaleTotal = (TextView) facilityReferralsSumamryItem.findViewById(R.id.female_count);
                         TextView total = (TextView) facilityReferralsSumamryItem.findViewById(R.id.total);
 
@@ -552,7 +537,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                             e.printStackTrace();
                         }
 
-                        ((LinearLayout)tableView.findViewById(R.id.facility)).addView(facilityReferralsSumamryItem);
+                        ((LinearLayout) tableView.findViewById(R.id.facility)).addView(facilityReferralsSumamryItem);
                         tableView.invalidate();
                     }
 
@@ -585,7 +570,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
                 yVals1.add(new BarEntry(1, maleCount));
                 yVals1.add(new BarEntry(2, femaleCount));
 
-                BarDataSet set1 = new BarDataSet(yVals1, "Followup referrals performed");
+                BarDataSet set1 = new BarDataSet(yVals1, getString(R.string.followup_referrals_chart_key_label));
 
                 set1.setDrawIcons(false);
 
@@ -612,7 +597,7 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
     private SpannableString generateCenterSpannableText() {
 
 //        SpannableString s = new SpannableString("Successful Referrals\nreferred by "+((BoreshaAfyaApplication)getActivity().getApplication()).getUsername());
-        SpannableString s = new SpannableString("Completed\nReferrals");
+        SpannableString s = new SpannableString(getString(R.string.completed_referrals_label));
 //        s.setSpan(new RelativeSizeSpan(1.7f), 0, 20, 0);
 //        s.setSpan(new StyleSpan(Typeface.NORMAL), 0, 32, 0);
 //        s.setSpan(new ForegroundColorSpan(Color.GRAY), 20, 32, 0);
@@ -627,13 +612,13 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
 
     private void setData() {
         ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
-        for (int i = 0; i < sizes.size() ; i++) {
+        for (int i = 0; i < sizes.size(); i++) {
             entries.add(new PieEntry((float) (sizes.get(i)),
                     categoryNames.get(i),
                     getResources().getDrawable(R.drawable.ic_account_box)));
         }
 
-        PieDataSet dataSet = new PieDataSet(entries, "Services");
+        PieDataSet dataSet = new PieDataSet(entries, getString(R.string.referral_services));
 
         dataSet.setDrawIcons(false);
 
@@ -674,30 +659,28 @@ public class ReportFragment  extends SecuredNativeSmartRegisterCursorAdapterFrag
     }
 
 
-    class MyAxisValueFormatter implements IAxisValueFormatter
-    {
+    class MyAxisValueFormatter implements IAxisValueFormatter {
 
         public MyAxisValueFormatter() {
         }
 
         @Override
         public String getFormattedValue(float value, AxisBase axis) {
-            int v = (int)value;
-            return v+"";
+            int v = (int) value;
+            return v + "";
         }
     }
 
-    class XAxisValueFormatter implements IAxisValueFormatter
-    {
+    class XAxisValueFormatter implements IAxisValueFormatter {
         public XAxisValueFormatter() {
         }
 
         @Override
         public String getFormattedValue(float value, AxisBase axis) {
-            if(value==1)
-                return "Male";
+            if (value == 1)
+                return getString(R.string.male);
             else
-                return "Female";
+                return getString(R.string.female);
         }
     }
 }

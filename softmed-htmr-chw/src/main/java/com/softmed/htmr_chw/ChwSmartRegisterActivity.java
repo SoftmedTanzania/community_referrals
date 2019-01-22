@@ -253,7 +253,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
 
         TextView tabContent = (TextView) tabLinearLayout.findViewById(R.id.tabContent);
-        tabContent.setText("Main Menu");
+        tabContent.setText(R.string.main_menu_label);
         tabContent.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sharp_menu_white_48dp, 0, 0, 0);
         tabsLayout.addView(tabLinearLayout);
 
@@ -671,7 +671,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
                         context().followupClientRepository().update(followup);
 
-
                         //TODO finish up sending of referral feedbacks of the followup
 
 //                        final String uuid = generateRandomUUIDString();
@@ -720,11 +719,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //                                return null;
 //                            }
 //                        }.execute();
-
-
-
-
-
 
                         Toast.makeText(ChwSmartRegisterActivity.this, getString(R.string.followup_thankyou_note_part_one) + followup.getFirst_name() + " " + followup.getSurname(), Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
@@ -987,7 +981,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             tabsLayout.removeAllViews();
             LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
             TextView tabContent = (TextView) tabLinearLayout.findViewById(R.id.tabContent);
-            tabContent.setText("Main Menu");
+            tabContent.setText(getResources().getString(R.string.main_menu_label));
             tabContent.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sharp_menu_white_48dp, 0, 0, 0);
             tabsLayout.addView(tabLinearLayout);
 

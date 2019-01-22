@@ -42,7 +42,7 @@
     <string name="client_phone">Namba ya simu</string>
     <string name="client_age">Umri</string>
     <string name="client_address">Anapokaa</string>
-    <string name="client_veo">VEO</string>
+    <string name="client_veo">Mwenyekiti wa Mtaa</string>
     <string name="referral_reason">Sababu ya rufaa</string>
     <string name="referral_type">Aina ya rufaa</string>
     <string name="referral_facility">Kituo cha afya kilichofanyiwa rufaa</string>
@@ -113,5 +113,28 @@
     <string name="followup_clint_not_found_responce">Tafadhali hakikisha unamtafuta tena kumjulia hali</string>
     <string name="issued_referrals_summary_report">Ripoti fupi ya rufaa zilizotolewa</string>
     <string name="followup_not_conducted">Mteja bado hajafwatiliwa</string>
+    <string name="main_menu_label">Menyu kuu</string>
+    <string name="referred_clients_list_label">Ordha ya Rufaa zilizotumwa</string>
+    <string name="reports_label">Ripoti</string>
+    <string name="emergency_referral_title_label">Rufaa za Dharura</string>
+    <string name="completed_referrals_summary_title_label">Ufupisho wa rufaa zote</string>
+    <string name="received_clients_followup_summary">Ufupisho wa rufaa za ufatiliaji</string>
+    <string name="from_date_picker_label">Kuanzia</string>
+    <string name="to_date_picker_label">Mpaka</string>
+    <string name="apply_button_label">Sawa</string>
+    <string name="facility_name_label">Jina la Kituo</string>
+    <string name="total_label">Jumla</string>
+    <string name="completed_referrals_label">Rufaa Zilizokamilika</string>
+    <string name="referred_clients_desc">Ordha ya wateja waliyopewa rufaa (tumia sehemu hii kuona orodha za rufaa zote ulizotuma)</string>
+    <string name="received_referrals_desc">Rufaa zilizotumwa tumia sehemu hii kuona wateja waliotumwa na kituo cha afya kwajili ya ufatiliayi wa karibu na kurudisha mrejesho</string>
+    <string name="use_this_section_to_visualize_summary_reports">Ripoti (tumia sehemu hii kuona muktasari wa repoti).</string>
+    <string name="register_clients_desc">Sajili mteja (tumia sehemu hii kusajili mteja mpya na kutuma rufaa).</string>
+    <string name="followup_feedback_patient_moved">Mteja amehamiya kituo cha kutoa huduma cha afya</string>
+    <string name="followup_feedback_patient_died">Mteja amefariki</string>
+    <string name="appointment_date_label">Appointment Date</string>
+    <string name="followup_referrals_chart_key_label">Ufupisho wa rufaa za ufatiliaji</string>
+    <string name="visit_date_label">Tarehe ya Kumtembelea</string>
+    <string name="register_clients_title">Sajili Mteja</string>
+
 
 </resources>

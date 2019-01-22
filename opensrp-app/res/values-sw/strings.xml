@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="str_switch_language">Badili Lugha</string>
+    <string name="logout_text">Ondoka</string>
+    <string name="unsynced_forms_count_message">form hazijaenda</string>
+
+</resources>
