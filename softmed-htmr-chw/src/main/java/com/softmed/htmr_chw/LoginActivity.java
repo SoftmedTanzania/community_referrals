@@ -33,12 +33,11 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.gson.Gson;
 
 import org.ei.opensrp.Context;
-import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.domain.Facility;
 import org.ei.opensrp.domain.LoginResponse;
-import org.ei.opensrp.domain.ReferralServiceDataModel;
 import org.ei.opensrp.domain.Response;
 import org.ei.opensrp.domain.ResponseStatus;
+
+import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.Service.FacilityService;
 import com.softmed.htmr_chw.Service.ReferralService;
@@ -47,8 +46,6 @@ import com.softmed.htmr_chw.util.AsyncTask;
 import com.softmed.htmr_chw.util.SmallDiagonalCutPathDrawable;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.repository.AllSharedPreferences;
-import org.ei.opensrp.repository.FacilityRepository;
-import org.ei.opensrp.repository.ReferralServiceRepository;
 import org.ei.opensrp.sync.DrishtiSyncScheduler;
 import org.ei.opensrp.util.Log;
 import org.ei.opensrp.view.BackgroundAction;
@@ -58,8 +55,6 @@ import org.ei.opensrp.view.activity.SettingsActivity;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -83,11 +78,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private Button loginButton;
     private ProgressDialog progressDialog;
-    private FacilityService facilityService;
-    private List<ReferralServiceDataModel> serviceData;
-    private ReferralServiceRepository serviceRepository;
-    private FacilityRepository facilityRepository;
-    private CommonRepository commonRepository;
     public static final String ENGLISH_LOCALE = "en";
     public static final String SWAHILI_LOCALE = "sw";
     public static final String ENGLISH_LANGUAGE = "English";
@@ -96,11 +86,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private ProgressBar mRegistrationProgressBar;
-    private TextView mInformationTextView;
-    private boolean isReceiverRegistered;
     AsyncTask<Void, Void, Void> mRegisterTask;
-    private ArrayList<Facility> referralList;
-    private ArrayList<ReferralServiceDataModel> serviceDataModelArrayList;
 
     Intent intent ;
     @Override
@@ -421,7 +407,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 protected Void doInBackground(Void... params) {
-
 //                     Register on our server
 //                     On server creates a new user
                     if (checkPlayServices()) {
@@ -468,7 +453,6 @@ public class LoginActivity extends AppCompatActivity {
         AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
         String preferredLocale = allSharedPreferences.fetchLanguagePreference();
 
-
         android.util.Log.d(TAG,"set Locale : "+preferredLocale);
 
         Resources res = Context.getInstance().applicationContext().getResources();
@@ -508,11 +492,6 @@ public class LoginActivity extends AppCompatActivity {
     private boolean isLoginInitiateOk() {
         if (TextUtils.isEmpty(userNameEditText.getText())
                 || TextUtils.isEmpty(passwordEditText.getText())) {
-            // tell user to enter username and pwd
-//            Snackbar.make(
-//                    findViewById(R.id.coordinatorLogin),
-//                    R.string.provide_username_password,
-//                    Snackbar.LENGTH_SHORT).show();
             return false;
         } else
             return true;

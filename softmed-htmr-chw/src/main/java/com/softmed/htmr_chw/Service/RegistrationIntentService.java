@@ -16,7 +16,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
 
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
-import com.softmed.htmr_chw.QuickstartPreferences;
+import com.softmed.htmr_chw.util.QuickstartPreferences;
 
 import java.io.IOException;
 import java.util.Random;
@@ -87,6 +87,5 @@ public class RegistrationIntentService extends IntentService {
             pubSub.subscribe(token, "/topics/" + topic, null);
         }
     }
-    // [END subscribe_topics]
 
 }

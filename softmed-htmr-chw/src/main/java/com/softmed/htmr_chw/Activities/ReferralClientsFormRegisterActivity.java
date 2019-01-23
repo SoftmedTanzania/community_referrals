@@ -1,4 +1,4 @@
-package com.softmed.htmr_chw;
+package com.softmed.htmr_chw.Activities;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.softmed.htmr_chw.R;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
@@ -58,7 +59,6 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -72,7 +72,7 @@ import static com.softmed.htmr_chw.util.Utils.generateRandomUUIDString;
 import static org.ei.opensrp.AllConstants.ENGLISH_LOCALE;
 
 /**
- * Created by issy on 11/17/17.
+ * Created by coze on 11/17/17.
  */
 
 public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegisterActivity {
@@ -164,8 +164,6 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
 
                     // convert to json
                     String gsonReferral = gson.toJson(clientReferral);
-                    Log.d(TAG, "referral = " + gsonReferral);
-                    Log.d(TAG, "fname = " + formName);
 
                     // todo start form submission
                     saveFormSubmission(gsonReferral, generateRandomUUIDString(), formName, getFormFieldsOverrides());
@@ -311,9 +309,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
                 if(service.equals(getResources().getString(R.string.referral_services))){
 
                 }else if (!service.equals("")){
-
                     parentLayout = (LinearLayout) findViewById(com.softmed.htmr_chw.R.id.check_add_layout);
-                    Log.d(TAG," Coze Service : "+service);
                     categoryValue = getCategory(service);
                     if(categoryValue.equalsIgnoreCase("malaria")){
                         Calendar c = Calendar.getInstance();
@@ -421,7 +417,6 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
 
 
     private void setFacilistList(){
-        //todo martha edit the query
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility");
 
         for (int i = 0; i<cursor.getCount();i++){
@@ -633,8 +628,6 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
             }
         }
         referral.setIndicator_ids(new Gson().toJson(AllCheckbox));
-
-
         return referral;
     }
 
@@ -647,7 +640,6 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
-
         return commonPersonObjectList.get(0).getColumnmaps().get("id");
     }
 

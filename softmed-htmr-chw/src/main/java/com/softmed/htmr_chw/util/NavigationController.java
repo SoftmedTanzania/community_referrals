@@ -1,7 +1,9 @@
-package com.softmed.htmr_chw;
+package com.softmed.htmr_chw.util;
 
 import android.app.Activity;
 import android.content.Intent;
+
+import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 
 import org.ei.opensrp.view.controller.ANMController;
 

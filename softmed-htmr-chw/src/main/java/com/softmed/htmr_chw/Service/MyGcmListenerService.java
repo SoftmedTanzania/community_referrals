@@ -186,12 +186,7 @@ public class MyGcmListenerService extends GcmListenerService {
     @Override
     public void onSendError(String s1, String errorId) {
 
-
     }
-    public void handleIntent(Intent intent) { /* compiled code */ }
-
-
-    // [END receive_message]
 
     /**
      * Create and show a simple notification containing the received GCM message.

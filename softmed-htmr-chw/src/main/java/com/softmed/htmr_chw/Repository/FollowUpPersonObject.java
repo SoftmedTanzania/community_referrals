@@ -1,11 +1,5 @@
 package com.softmed.htmr_chw.Repository;
 
-import com.google.gson.Gson;
-
-import com.softmed.htmr_chw.DataModels.FollowUp;
-
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -41,24 +35,6 @@ public class FollowUpPersonObject {
         this.is_valid = is_valid;
     }
 
-    // alternative constructor so you don't pass bucha stuff, Follow Up contains everything
-
-    public FollowUpPersonObject(String id, String relationalId, FollowUp followUp) {
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyy", Locale.getDefault());
-
-        this.id = id;
-        this.relationalId = relationalId;
-        this.follow_up_date = followUp.getFollow_up_date();
-        this.comment = followUp.getComment();
-        this.follow_up_reason = followUp.getFollow_up_reason();
-        this.token = followUp.getToken();
-        this.sponser_number = followUp.getSponser_mobile_number();
-        this.sponser_name = followUp.getSponser_name();
-        this.is_valid = followUp.getIsValid();
-        this.details = new Gson().toJson(followUp);
-
-    }
 
     public String getId() {
         return id;

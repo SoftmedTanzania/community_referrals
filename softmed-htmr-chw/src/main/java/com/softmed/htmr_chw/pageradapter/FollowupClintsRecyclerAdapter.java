@@ -13,8 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.softmed.htmr_chw.ChwSmartRegisterActivity;
-import com.softmed.htmr_chw.FollowupClientsDetailsActivity;
+import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
+import com.softmed.htmr_chw.Activities.FollowupClientsDetailsActivity;
 import com.softmed.htmr_chw.Fragments.FollowupClientDetailFragment;
 import com.softmed.htmr_chw.R;
 

@@ -1,4 +1,4 @@
-package com.softmed.htmr_chw;
+package com.softmed.htmr_chw.Activities;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -36,9 +36,12 @@ import com.softmed.htmr_chw.Fragments.CHWSmartRegisterFragment;
 import com.softmed.htmr_chw.Fragments.FollowupClientsFragment;
 import com.softmed.htmr_chw.Fragments.ReferredClientsFragment;
 import com.softmed.htmr_chw.Fragments.ReportFragment;
+import com.softmed.htmr_chw.LoginActivity;
+import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Repository.ClientReferralPersonObject;
 import com.softmed.htmr_chw.Repository.LocationSelectorDialogFragment;
 import com.softmed.htmr_chw.util.FitDoughnut;
+import com.softmed.htmr_chw.util.NavigationController;
 import com.softmed.htmr_chw.util.Utils;
 
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
@@ -79,7 +82,6 @@ import java.util.Locale;
 import butterknife.Bind;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
-import static android.os.Looper.getMainLooper;
 import static android.view.View.VISIBLE;
 import static android.widget.Toast.LENGTH_SHORT;
 import static java.lang.String.valueOf;

@@ -1,4 +1,4 @@
-package com.softmed.htmr_chw;
+package com.softmed.htmr_chw.util;
 
 /**
  * Created by kency on 12/11/17.

@@ -2,11 +2,9 @@ package com.softmed.htmr_chw.pageradapter;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -18,7 +16,7 @@ import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.repository.AllSharedPreferences;
 
-import com.softmed.htmr_chw.ChwSmartRegisterActivity;
+import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Repository.ClientReferralPersonObject;
 import com.softmed.htmr_chw.util.Utils;

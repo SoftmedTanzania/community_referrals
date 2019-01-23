@@ -1,4 +1,4 @@
-package com.softmed.htmr_chw;
+package com.softmed.htmr_chw.Activities;
 
 import android.content.Intent;
 import android.content.res.Resources;
