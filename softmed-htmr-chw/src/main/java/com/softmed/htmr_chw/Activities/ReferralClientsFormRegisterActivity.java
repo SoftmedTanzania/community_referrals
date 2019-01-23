@@ -126,7 +126,6 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
         robotoBold = Typeface.createFromAsset(getAssets(), "roboto_bold.ttf");
         robotoCondenced = Typeface.createFromAsset(getAssets(), "roboto_condensed.ttf");
 
-
         setLanguage();
 
         setContentView(com.softmed.htmr_chw.R.layout.activity_client_registration_form);
@@ -172,10 +171,8 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
                     setResult(Activity.RESULT_OK, resultIntent);
                     finish();
                 }
-
             }
         });
-
     }
 
 
