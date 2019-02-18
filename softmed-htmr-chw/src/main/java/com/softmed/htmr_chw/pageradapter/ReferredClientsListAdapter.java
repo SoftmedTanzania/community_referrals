@@ -18,7 +18,6 @@ import org.ei.opensrp.repository.AllSharedPreferences;
 
 import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.Repository.ClientReferralPersonObject;
 import com.softmed.htmr_chw.util.Utils;
 
 import java.text.SimpleDateFormat;
@@ -38,10 +37,10 @@ public class ReferredClientsListAdapter extends
         RecyclerView.Adapter<ReferredClientsListAdapter.ViewHolder> {
     private static String TAG = ReferredClientsListAdapter.class.getSimpleName();
     private CommonRepository commonRepository;
-    private List<ClientReferralPersonObject> clients = new ArrayList<>();;
+    private List<ClientReferral> clients = new ArrayList<>();;
     private Context mContext;
 
-    public ReferredClientsListAdapter(Context context, List<ClientReferralPersonObject> client, CommonRepository commonRepository) {
+    public ReferredClientsListAdapter(Context context, List<ClientReferral> client, CommonRepository commonRepository) {
         clients = client;
         mContext = context;
         this.commonRepository = commonRepository;
@@ -66,7 +65,7 @@ public class ReferredClientsListAdapter extends
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
 
-         ClientReferralPersonObject client = clients.get(position);
+        ClientReferral client = clients.get(position);
 
         String gsonReferral = Utils.convertStandardJSONString(client.getDetails());
         Log.d(TAG, "gsonReferral0 = " +gsonReferral);

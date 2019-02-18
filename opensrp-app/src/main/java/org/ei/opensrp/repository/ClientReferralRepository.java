@@ -17,7 +17,23 @@ import static net.sqlcipher.DatabaseUtils.longForQuery;
 import static org.apache.commons.lang3.StringUtils.repeat;
 
 public class ClientReferralRepository extends DrishtiRepository {
-    private static final String CHILD_SQL = "CREATE TABLE client_referral(id VARCHAR PRIMARY KEY, relationalid VARCHAR, first_name VARCHAR, middle_name VARCHAR, surname VARCHAR,gender VARCHAR, community_based_hiv_service VARCHAR, ctc_number VARCHAR, referral_date VARCHAR,appointment_date VARCHAR, facility_id VARCHAR, referral_reason VARCHAR, referral_service_id VARCHAR, referral_status VARCHAR, is_emergency VARCHAR, is_valid VARCHAR, details VARCHAR)";
+    private static final String CHILD_SQL = "CREATE TABLE client_referral(id VARCHAR PRIMARY KEY, " +
+            "relationalid VARCHAR, " +
+            "first_name VARCHAR, " +
+            "middle_name VARCHAR, " +
+            "surname VARCHAR," +
+            "gender VARCHAR, " +
+            "community_based_hiv_service VARCHAR, " +
+            "ctc_number VARCHAR, " +
+            "referral_date VARCHAR," +
+            "appointment_date VARCHAR, " +
+            "facility_id VARCHAR, " +
+            "referral_reason VARCHAR, " +
+            "referral_service_id VARCHAR, " +
+            "referral_status VARCHAR, " +
+            "is_emergency VARCHAR, " +
+            "is_valid VARCHAR, " +
+            "details VARCHAR)";
     public static final String CLIENT_REFERRAL = "client_referral";
     public static final String ID_COLUMN = "id";
     public static final String Relational_ID = "relationalid";
@@ -36,7 +52,7 @@ public class ClientReferralRepository extends DrishtiRepository {
     public static final String AppointmentDate = "appointment_date";
     public static final String IS_VALID = "is_valid";
     public static final String DETAILS_COLUMN = "details";
-    public static final String[] CLIENT_REFERRAL_TABLE_COLUMNS = {ID_COLUMN, Relational_ID, fName, mName, lName, CBHS, CTCNumber, ReferralDate,AppointmentDate, ReferralFacility, ReferralReason, Service, ReferralStatus, IsEmergency,IS_VALID,DETAILS_COLUMN};
+    public static final String[] CLIENT_REFERRAL_TABLE_COLUMNS = {ID_COLUMN, Relational_ID, fName, mName, lName, CBHS, CTCNumber, ReferralDate,AppointmentDate,gender, ReferralFacility, ReferralReason, Service, ReferralStatus, IsEmergency,IS_VALID,DETAILS_COLUMN};
     
 
     @Override
@@ -164,7 +180,22 @@ public class ClientReferralRepository extends DrishtiRepository {
         cursor.moveToFirst();
         List<ClientReferral> referralServicesListDataModel = new ArrayList<ClientReferral>();
         while (!cursor.isAfterLast()) {
-            referralServicesListDataModel.add(new ClientReferral(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getLong(7), cursor.getLong(8), cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12), cursor.getString(13),cursor.getString(14),cursor.getString(15))
+            referralServicesListDataModel.add(new ClientReferral(cursor.getString(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getString(6),
+                    cursor.getString(7),
+                    cursor.getLong(8), cursor.getLong(9),
+                    cursor.getString(10),
+                    cursor.getString(11),
+                    cursor.getString(12),
+                    cursor.getString(13),
+                    cursor.getString(15),
+                    cursor.getString(14),
+                    cursor.getString(5),
+                    cursor.getString(16))
 
             );
             cursor.moveToNext();
@@ -199,8 +230,9 @@ public class ClientReferralRepository extends DrishtiRepository {
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, ReferralReason),
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, Service),
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, ReferralStatus),
-                getColumnValueByAlias(cursor, CLIENT_REFERRAL, IsEmergency),
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, IS_VALID),
+                getColumnValueByAlias(cursor, CLIENT_REFERRAL, IsEmergency),
+                getColumnValueByAlias(cursor, CLIENT_REFERRAL, gender),
                 getColumnValueByAlias(cursor, CLIENT_REFERRAL, DETAILS_COLUMN));
 
     }

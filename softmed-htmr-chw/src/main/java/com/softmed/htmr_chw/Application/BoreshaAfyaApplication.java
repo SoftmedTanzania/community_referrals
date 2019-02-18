@@ -26,7 +26,6 @@ import org.ei.opensrp.domain.Response;
 import com.softmed.htmr_chw.LoginActivity;
 import com.softmed.htmr_chw.Activities.NativeHomeActivity;
 import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.Repository.ClientReferralPersonObject;
 import com.softmed.htmr_chw.util.Utils;
 
 import org.ei.opensrp.repository.ClientReferralRepository;
@@ -236,9 +235,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         try {
             List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "client_referral");
 
-            ClientReferralPersonObject clientReferralPersonObject = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList).get(0);
-
-            ClientReferral clientReferral = new Gson().fromJson(clientReferralPersonObject.getDetails(), ClientReferral.class);
+            ClientReferral clientReferral = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList).get(0);
             clientReferral.setReferral_status(referralStatus);
             clientReferral.setOther_notes(feedback);
             clientReferral.setServices_given_to_patient(serviceGiven);

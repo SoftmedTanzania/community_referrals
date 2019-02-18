@@ -25,7 +25,6 @@ import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.ClientReferral;
 import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.Repository.ClientReferralPersonObject;
 import com.softmed.htmr_chw.Repository.LocationSelectorDialogFragment;
 import com.softmed.htmr_chw.pageradapter.ReferredClientsListAdapter;
 import com.softmed.htmr_chw.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
@@ -45,7 +44,7 @@ import fr.ganfra.materialspinner.MaterialSpinner;
 
 public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     private CommonRepository commonRepository;
-    private List<ClientReferralPersonObject> clientReferralPersonObjectList = new ArrayList<>();
+    private List<ClientReferral> clientReferralPersonObjectList = new ArrayList<>();
     private Cursor cursor;
     private String locationDialogTAG = "locationDialogTAG";
     private static final String TAG = ReferredClientsFragment.class.getSimpleName(),
@@ -460,7 +459,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                 Log.d(TAG, "resultList " + resultList.size() + "items");
                 Log.d(TAG, "resultList " + new Gson().toJson(resultList));
 
-                clientReferralPersonObjectList = Utils.convertToClientReferralList(resultList);
+                clientReferralPersonObjectList = resultList;
                 ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList, commonRepository);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
@@ -475,7 +474,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                 Log.d(TAG, "Query result is empty!");
                 message = "hakuna taarifa yoyote";
                 makeToast();
-                clientReferralPersonObjectList = Utils.convertToClientReferralList(resultList);
+                clientReferralPersonObjectList = resultList;
                 ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList, commonRepository);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);

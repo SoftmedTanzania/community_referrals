@@ -38,7 +38,6 @@ import com.softmed.htmr_chw.Fragments.ReferredClientsFragment;
 import com.softmed.htmr_chw.Fragments.ReportFragment;
 import com.softmed.htmr_chw.LoginActivity;
 import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.Repository.ClientReferralPersonObject;
 import com.softmed.htmr_chw.Repository.LocationSelectorDialogFragment;
 import com.softmed.htmr_chw.util.FitDoughnut;
 import com.softmed.htmr_chw.util.NavigationController;
@@ -415,11 +414,10 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         }).start();
     }
 
-    public void showPreRegistrationDetailsDialog(ClientReferralPersonObject clientReferralPersonObject) {
+    public void showPreRegistrationDetailsDialog(ClientReferral clientReferral) {
 
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
-        String gsonClient = Utils.convertStandardJSONString(clientReferralPersonObject.getDetails());
-        ClientReferral clientReferral = new Gson().fromJson(gsonClient, ClientReferral.class);
+        String gsonClient = Utils.convertStandardJSONString(clientReferral.getDetails());
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
@@ -458,7 +456,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         TextView villageleader = (TextView) dialogView.findViewById(R.id.viewVillageLeader);
 
         try {
-            if (clientReferralPersonObject.getReferral_status().equals("1") && !clientReferral.getServices_given_to_patient().equals("")) {
+            if (clientReferral.getReferral_status().equals("1") && !clientReferral.getServices_given_to_patient().equals("")) {
                 dialogView.findViewById(R.id.referral_feedback_title).setVisibility(VISIBLE);
                 dialogView.findViewById(R.id.referral_feedback).setVisibility(VISIBLE);
                 dialogView.findViewById(R.id.strip_six).setVisibility(VISIBLE);
@@ -480,31 +478,31 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         }
 
 
-        textName.setText(clientReferralPersonObject.getFirst_name() + " " + clientReferralPersonObject.getMiddle_name() + " " + clientReferralPersonObject.getSurname());
+        textName.setText(clientReferral.getFirst_name() + " " + clientReferral.getMiddle_name() + " " + clientReferral.getSurname());
 
         textAge.setText(ageS + " years");
         cbhs.setText(clientReferral.getCommunity_based_hiv_service());
 
         try {
-            referral_service.setText(getReferralServiceName(clientReferralPersonObject.getReferral_service_id()));
+            referral_service.setText(getReferralServiceName(clientReferral.getReferral_service_id()));
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        Log.d(TAG, "facility id = " + clientReferralPersonObject.getFacility_id());
+        Log.d(TAG, "facility id = " + clientReferral.getFacility_id());
 
-        facility.setText(getFacilityName(clientReferralPersonObject.getFacility_id()));
-        if (!clientReferralPersonObject.getCtc_number().isEmpty())
-            ctc_number.setText(clientReferralPersonObject.getCtc_number());
+        facility.setText(getFacilityName(clientReferral.getFacility_id()));
+        if (!clientReferral.getCtc_number().isEmpty())
+            ctc_number.setText(clientReferral.getCtc_number());
         else
             ctc_number.setText("-");
-        referral_reason.setText(clientReferralPersonObject.getReferral_reason());
+        referral_reason.setText(clientReferral.getReferral_reason());
         phoneNumber.setText(clientReferral.getPhone_number());
         villageleader.setText(clientReferral.getVillage_leader());
         physicalAddress.setText(clientReferral.getVillage());
 
         try {
-            if ((clientReferralPersonObject.getGender()).equals(getResources().getString(R.string.female))) {
+            if ((clientReferral.getGender()).equals(getResources().getString(R.string.female))) {
                 gender.setText(getResources().getString(R.string.female));
             } else {
                 gender.setText(getResources().getString(R.string.male));
@@ -676,17 +674,11 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                         //TODO finish up sending of referral feedbacks of the followup
 
 //                        final String uuid = generateRandomUUIDString();
-//
-//
 //                        context().followupClientRepository().update(followup);
-//
-//
 //                        List<FormField> formFields = new ArrayList<>();
 //
 //
 //                        formFields.add(new FormField("id", followup.getId(), commonRepository.TABLE_NAME + "." + "id"));
-//
-//
 //                        formFields.add(new FormField("relationalid", followup.getId(), commonRepository.TABLE_NAME + "." + "relationalid"));
 //
 //                        for (String key : followup.getDetails().keySet()) {
