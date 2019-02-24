@@ -3,7 +3,6 @@ package org.ei.opensrp.view.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -19,7 +18,6 @@ import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.view.controller.ANMController;
 import org.ei.opensrp.view.controller.FormController;
 import org.ei.opensrp.view.controller.NavigationController;
-import android.support.v7.app.ActionBarActivity;
 
 import java.util.Map;
 

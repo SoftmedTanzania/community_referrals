@@ -97,36 +97,36 @@ public class FollowupClientsDetailsActivity extends SecuredNativeSmartRegisterAc
         feedback = (TextView)   findViewById(com.softmed.htmr_chw.R.id.feedback);
         visitDate = (TextView)   findViewById(com.softmed.htmr_chw.R.id.visitDate);
 
-
-        String reg_date = dateFormat.format(clientFollowupPersonObject.getDate_of_birth());
-        String ageS="";
-        try {
-            Date d = dateFormat.parse(reg_date);
-            Calendar cal = Calendar.getInstance();
-            Calendar today = Calendar.getInstance();
-            cal.setTime(d);
-
-            int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
-            Integer ageInt = new Integer(age);
-            ageS = ageInt.toString();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if((clientFollowupPersonObject.getGender()).equalsIgnoreCase(getResources().getString(com.softmed.htmr_chw.R.string.female))){
-            gender.setText(getResources().getString(com.softmed.htmr_chw.R.string.female));
-        }
-        else     {
-            gender.setText(getResources().getString(com.softmed.htmr_chw.R.string.male));
-        }
-        age.setText(ageS + " years");
-        name.setText(clientFollowupPersonObject.getFirst_name() + " " + clientFollowupPersonObject.getMiddle_name() + ", " + clientFollowupPersonObject.getSurname());
-        contacts.setText(clientFollowupPersonObject.getPhone_number());
-        referedReason.setText(clientFollowupPersonObject.getReferral_reason());
-        facility.setText(getFacilityName(clientFollowupPersonObject.getFacility_id()));
-        referedDate.setText(dateFormat.format(clientFollowupPersonObject.getReferral_date()));
-        sponsor.setText(clientFollowupPersonObject.getCare_taker_relationship()+"\n"+clientFollowupPersonObject.getCare_taker_name()+"\n"+clientFollowupPersonObject.getCare_taker_name_phone_number());
-        residence.setText(clientFollowupPersonObject.getMap_cue());
+//TODO uncomment this
+//        String reg_date = dateFormat.format(clientFollowupPersonObject.getDate_of_birth());
+//        String ageS="";
+//        try {
+//            Date d = dateFormat.parse(reg_date);
+//            Calendar cal = Calendar.getInstance();
+//            Calendar today = Calendar.getInstance();
+//            cal.setTime(d);
+//
+//            int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
+//            Integer ageInt = new Integer(age);
+//            ageS = ageInt.toString();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        if((clientFollowupPersonObject.getGender()).equalsIgnoreCase(getResources().getString(com.softmed.htmr_chw.R.string.female))){
+//            gender.setText(getResources().getString(com.softmed.htmr_chw.R.string.female));
+//        }
+//        else     {
+//            gender.setText(getResources().getString(com.softmed.htmr_chw.R.string.male));
+//        }
+//        age.setText(ageS + " years");
+//        name.setText(clientFollowupPersonObject.getFirst_name() + " " + clientFollowupPersonObject.getMiddle_name() + ", " + clientFollowupPersonObject.getSurname());
+//        contacts.setText(clientFollowupPersonObject.getPhone_number());
+//        referedReason.setText(clientFollowupPersonObject.getReferral_reason());
+//        facility.setText(getFacilityName(clientFollowupPersonObject.getFacility_id()));
+//        referedDate.setText(dateFormat.format(clientFollowupPersonObject.getReferral_date()));
+//        sponsor.setText(clientFollowupPersonObject.getCare_taker_relationship()+"\n"+clientFollowupPersonObject.getCare_taker_name()+"\n"+clientFollowupPersonObject.getCare_taker_name_phone_number());
+//        residence.setText(clientFollowupPersonObject.getMap_cue());
 
         feedback.setText(clientFollowupPersonObject.getReferral_feedback());
         visitDate.setText(clientFollowupPersonObject.getReferral_feedback());

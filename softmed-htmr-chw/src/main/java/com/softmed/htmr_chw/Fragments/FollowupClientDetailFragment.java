@@ -125,58 +125,58 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
 
     private void setDetails(ClientFollowup clientFollowup) {
 
-        String reg_date = dateFormat.format(clientFollowup.getDate_of_birth());
-        Log.d(TAG,"Date of Birth : "+clientFollowup.getDate_of_birth() );
-        String ageS = "";
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-            Date d = dateFormat.parse(reg_date);
-            Calendar cal = Calendar.getInstance();
-            Calendar today = Calendar.getInstance();
-            cal.setTime(d);
-
-            int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
-            Integer ageInt = new Integer(age);
-            ageS = ageInt.toString();
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if ((clientFollowup.getGender()).equalsIgnoreCase(getResources().getString(R.string.female))) {
-            gender.setText(getResources().getString(R.string.female));
-        } else {
-            gender.setText(getResources().getString(R.string.male));
-        }
-        age.setText(ageS + " years");
-        name.setText(clientFollowup.getFirst_name() + " " + clientFollowup.getMiddle_name() + ", " + clientFollowup.getSurname());
-        contacts.setText(clientFollowup.getPhone_number());
-        referedReason.setText(clientFollowup.getReferral_reason());
-        facility.setText(getFacilityName(clientFollowup.getFacility_id()));
-        referedDate.setText(dateFormat.format(clientFollowup.getReferral_date()));
-
-
-        try{
-            residence.setText(clientFollowup.getMap_cue()+", "+clientFollowup.getWard());
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        try {
-            sponsor.setText((clientFollowup.getCare_taker_relationship()!=null ? "" : clientFollowup.getCare_taker_relationship()) + "\n" +
-                    (clientFollowup.getCare_taker_name()!=null ? "" : clientFollowup.getCare_taker_name()) + "\n" +
-                    (clientFollowup.getCare_taker_name_phone_number()!=null ? "" : clientFollowup.getCare_taker_name_phone_number()));
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        feedback.setText(clientFollowup.getReferral_feedback());
-
-        if(clientFollowup.getVisit_date()!=0) {
-            visitDate.setText(dateFormat.format(clientFollowup.getVisit_date()));
-        }else{
-            visitDate.setText(R.string.followup_not_conducted);
-        }
+//        String reg_date = dateFormat.format(clientFollowup.getDate_of_birth());
+//        Log.d(TAG,"Date of Birth : "+clientFollowup.getDate_of_birth() );
+//        String ageS = "";
+//        try {
+//            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+//            Date d = dateFormat.parse(reg_date);
+//            Calendar cal = Calendar.getInstance();
+//            Calendar today = Calendar.getInstance();
+//            cal.setTime(d);
+//
+//            int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
+//            Integer ageInt = new Integer(age);
+//            ageS = ageInt.toString();
+//
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        if ((clientFollowup.getGender()).equalsIgnoreCase(getResources().getString(R.string.female))) {
+//            gender.setText(getResources().getString(R.string.female));
+//        } else {
+//            gender.setText(getResources().getString(R.string.male));
+//        }
+//        age.setText(ageS + " years");
+//        name.setText(clientFollowup.getFirst_name() + " " + clientFollowup.getMiddle_name() + ", " + clientFollowup.getSurname());
+//        contacts.setText(clientFollowup.getPhone_number());
+//        referedReason.setText(clientFollowup.getReferral_reason());
+//        facility.setText(getFacilityName(clientFollowup.getFacility_id()));
+//        referedDate.setText(dateFormat.format(clientFollowup.getReferral_date()));
+//
+//
+//        try{
+//            residence.setText(clientFollowup.getMap_cue()+", "+clientFollowup.getWard());
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        try {
+//            sponsor.setText((clientFollowup.getCare_taker_relationship()!=null ? "" : clientFollowup.getCare_taker_relationship()) + "\n" +
+//                    (clientFollowup.getCare_taker_name()!=null ? "" : clientFollowup.getCare_taker_name()) + "\n" +
+//                    (clientFollowup.getCare_taker_name_phone_number()!=null ? "" : clientFollowup.getCare_taker_name_phone_number()));
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        feedback.setText(clientFollowup.getReferral_feedback());
+//
+//        if(clientFollowup.getVisit_date()!=0) {
+//            visitDate.setText(dateFormat.format(clientFollowup.getVisit_date()));
+//        }else{
+//            visitDate.setText(R.string.followup_not_conducted);
+//        }
 
 
 

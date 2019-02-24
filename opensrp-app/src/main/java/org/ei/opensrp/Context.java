@@ -5,14 +5,11 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
-import com.google.gson.Gson;
-
 import org.ei.opensrp.commonregistry.AllCommonsRepository;
 import org.ei.opensrp.commonregistry.CommonFtsObject;
 import org.ei.opensrp.commonregistry.CommonPersonObjectClients;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.commonregistry.CommonRepositoryInformationHolder;
-import org.ei.opensrp.domain.Indicator;
 import org.ei.opensrp.repository.AlertRepository;
 import org.ei.opensrp.repository.AllAlerts;
 import org.ei.opensrp.repository.AllBeneficiaries;
@@ -27,7 +24,7 @@ import org.ei.opensrp.repository.ClientReferralRepository;
 import org.ei.opensrp.repository.DrishtiRepository;
 import org.ei.opensrp.repository.EligibleCoupleRepository;
 import org.ei.opensrp.repository.FacilityRepository;
-import org.ei.opensrp.repository.FollowupClientRepository;
+import org.ei.opensrp.repository.ClientFollowupRepository;
 import org.ei.opensrp.repository.FormDataRepository;
 import org.ei.opensrp.repository.FormsVersionRepository;
 import org.ei.opensrp.repository.ImageRepository;
@@ -140,7 +137,7 @@ public class Context {
     private FacilityRepository facilityRepository;
     private ReferralServiceRepository referralServiceRepository;
     private ClientReferralRepository clientReferralRepository;
-    private FollowupClientRepository followupClientRepository;
+    private ClientFollowupRepository clientFollowupRepository;
     private static ImageRepository imageRepository;
 
 
@@ -658,11 +655,11 @@ public class Context {
         }
         return clientReferralRepository;
     }
-    public FollowupClientRepository followupClientRepository() {
-        if (followupClientRepository == null) {
-            followupClientRepository = new FollowupClientRepository();
+    public ClientFollowupRepository followupClientRepository() {
+        if (clientFollowupRepository == null) {
+            clientFollowupRepository = new ClientFollowupRepository();
         }
-        return followupClientRepository;
+        return clientFollowupRepository;
     }
     public IndicatorRepository indicatorRepository() {
         if (indicatorRepository == null) {

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <RelativeLayout
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6">
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:id="@+id/spinnerService"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ms_arrowColor="@color/accent"
+                app:ms_arrowSize="14dp"
+                app:ms_baseColor="@color/accent"
+                app:ms_enableFloatingLabel="false"
+                app:ms_hint="@string/referral_services"
+                app:ms_hintColor="@color/black_translucent"
+                app:ms_multiline="true"
+                app:ms_thickness="1dp"
+                app:ms_floatingLabelColor="@color/primary_text" />
+
+            <TextView
+                android:id="@+id/facility_titleview"
+                android:layout_below="@+id/spinnerService"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/visit_facility"/>
+            <View
+                android:layout_below="@id/facility_titleview"
+                android:layout_width="60dp"
+                android:layout_height="3dp"
+                android:id="@+id/strip_five"
+                android:layout_marginTop="8dp"
+                android:background="@color/card_separator"/>
+            <AutoCompleteTextView
+                android:layout_marginLeft="-4dp"
+                android:textSize="14sp"
+                android:ems="10"
+                android:hint="@string/visit_facility_hint"
+                android:layout_below="@id/strip_five"
+                android:id="@+id/autocomplete_facility"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+            <Switch
+                android:text="@string/emergency_referral_title_label"
+                android:layout_marginTop="16dp"
+                android:id="@+id/emergency_switch"
+                android:layout_below="@id/autocomplete_facility"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/appointment_date"
+                android:layout_width="match_parent"
+                android:layout_below="@id/emergency_switch"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:editable="false"
+                android:focusable="false"
+                android:hint="@string/appointment_date_label"
+                android:inputType="date"
+                android:textColor="@color/text_black"
+                android:textSize="14sp"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelText="Appointment Date"
+                app:met_floatingLabelTextColor="@color/colorPrimary"
+                app:met_iconRight="@drawable/ic_calendar_today" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/card_separator" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3">
+
+            <TextView
+                android:id="@+id/clinical_information_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/other_info"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+            <View
+                android:layout_below="@id/clinical_information_title"
+                android:layout_width="60dp"
+                android:layout_height="3dp"
+                android:id="@+id/strip_three"
+                android:layout_marginTop="8dp"
+                android:background="@color/card_separator"/>
+
+            <LinearLayout
+                android:layout_below="@id/strip_three"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/reason_for_referral"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="0.5"
+                    android:hint="@string/referral_reason"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/hint_text"
+                    android:textSize="14sp"
+                    app:met_floatingLabelText="Mahali anapokaa"
+                    app:met_floatingLabelTextColor="@color/colorPrimary" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/editTextDiscountId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:hint="@string/title_cbhs_number"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/black_translucent"
+                    android:textSize="14sp"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="@string/title_cbhs_number"
+                    app:met_floatingLabelTextColor="@color/colorPrimary" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/editTextOthers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:hint="@string/title_ctc_number"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/hint_text"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="16dp"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="Namba ya CTC"
+                    app:met_floatingLabelTextColor="@color/colorPrimary" />
+
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/card_separator" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3">
+
+            <TextView
+                android:id="@+id/flags_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/danger_signs"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_below="@id/flags_title"
+                android:layout_width="60dp"
+                android:layout_height="3dp"
+                android:id="@+id/strip_four"
+                android:layout_marginTop="8dp"
+                android:background="@color/card_separator"/>
+
+            <LinearLayout
+                android:id="@+id/check_add_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/strip_four"
+                android:gravity="left"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

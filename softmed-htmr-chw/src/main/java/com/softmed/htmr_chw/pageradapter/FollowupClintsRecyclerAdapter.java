@@ -72,13 +72,13 @@ public class FollowupClintsRecyclerAdapter extends
         TextView phoneNumberTextView = viewHolder.phoneNumberTextView;
         TextView CBHS = viewHolder.CBHSTextView;
 
-        phoneNumberTextView.setText(client.getPhone_number());
-        viewHolder.nameTextView.setText(client.getFirst_name() + " " + client.getMiddle_name() + ", " + client.getSurname());
-
-        if (client.getCommunity_based_hiv_service() != null) {
-            if (!client.getCommunity_based_hiv_service().equals(""))
-                CBHS.setText("CBHS : " + client.getCommunity_based_hiv_service());
-        }
+//        phoneNumberTextView.setText(client.getPhone_number());
+//        viewHolder.nameTextView.setText(client.getFirst_name() + " " + client.getMiddle_name() + ", " + client.getSurname());
+//
+//        if (client.getCommunity_based_hiv_service() != null) {
+//            if (!client.getCommunity_based_hiv_service().equals(""))
+//                CBHS.setText("CBHS : " + client.getCommunity_based_hiv_service());
+//        }
 
         viewHolder.details.setOnClickListener(new View.OnClickListener() {
             @Override

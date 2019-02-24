@@ -8,12 +8,10 @@ import java.io.Serializable;
 
 public class ClientFollowup implements Serializable {
 
-    private String id, relationalid, details,  other_notes,
-              first_name, middle_name, surname, facility_id,
-            referral_reason, is_valid, service_provider_mobile_number, ward, village, map_cue,
-            village_leader, service_provider_group, service_provider_uiid, phone_number,referral_feedback,
-            referral_service_id, gender, community_based_hiv_service, ctc_number, referral_status,care_taker_name,care_taker_name_phone_number,care_taker_relationship;
-    private long date_of_birth, visit_date,referral_date;
+    private String id, relationalid, details,  other_notes, facility_id,
+            referral_reason, is_valid,referral_feedback,client_id,
+            referral_service_id, gender, referral_status,service_provider_uuid;
+    private long  visit_date,referral_date;
 
     public String getId() {
         return id;
@@ -47,30 +45,6 @@ public class ClientFollowup implements Serializable {
         this.other_notes = other_notes;
     }
 
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getMiddle_name() {
-        return middle_name;
-    }
-
-    public void setMiddle_name(String middle_name) {
-        this.middle_name = middle_name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     public String getFacility_id() {
         return facility_id;
     }
@@ -95,68 +69,12 @@ public class ClientFollowup implements Serializable {
         this.is_valid = is_valid;
     }
 
-    public String getService_provider_mobile_number() {
-        return service_provider_mobile_number;
+    public String getReferral_feedback() {
+        return referral_feedback;
     }
 
-    public void setService_provider_mobile_number(String service_provider_mobile_number) {
-        this.service_provider_mobile_number = service_provider_mobile_number;
-    }
-
-    public String getWard() {
-        return ward;
-    }
-
-    public void setWard(String ward) {
-        this.ward = ward;
-    }
-
-    public String getVillage() {
-        return village;
-    }
-
-    public void setVillage(String village) {
-        this.village = village;
-    }
-
-    public String getMap_cue() {
-        return map_cue;
-    }
-
-    public void setMap_cue(String map_cue) {
-        this.map_cue = map_cue;
-    }
-
-    public String getVillage_leader() {
-        return village_leader;
-    }
-
-    public void setVillage_leader(String village_leader) {
-        this.village_leader = village_leader;
-    }
-
-    public String getService_provider_group() {
-        return service_provider_group;
-    }
-
-    public void setService_provider_group(String service_provider_group) {
-        this.service_provider_group = service_provider_group;
-    }
-
-    public String getService_provider_uiid() {
-        return service_provider_uiid;
-    }
-
-    public void setService_provider_uiid(String service_provider_uiid) {
-        this.service_provider_uiid = service_provider_uiid;
-    }
-
-    public String getPhone_number() {
-        return phone_number;
-    }
-
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setReferral_feedback(String referral_feedback) {
+        this.referral_feedback = referral_feedback;
     }
 
     public String getReferral_service_id() {
@@ -175,68 +93,12 @@ public class ClientFollowup implements Serializable {
         this.gender = gender;
     }
 
-    public String getCommunity_based_hiv_service() {
-        return community_based_hiv_service;
-    }
-
-    public void setCommunity_based_hiv_service(String community_based_hiv_service) {
-        this.community_based_hiv_service = community_based_hiv_service;
-    }
-
-    public String getCtc_number() {
-        return ctc_number;
-    }
-
-    public void setCtc_number(String ctc_number) {
-        this.ctc_number = ctc_number;
-    }
-
     public String getReferral_status() {
         return referral_status;
     }
 
     public void setReferral_status(String referral_status) {
         this.referral_status = referral_status;
-    }
-
-    public String getCare_taker_name() {
-        return care_taker_name;
-    }
-
-    public void setCare_taker_name(String care_taker_name) {
-        this.care_taker_name = care_taker_name;
-    }
-
-    public String getCare_taker_name_phone_number() {
-        return care_taker_name_phone_number;
-    }
-
-    public void setCare_taker_name_phone_number(String care_taker_name_phone_number) {
-        this.care_taker_name_phone_number = care_taker_name_phone_number;
-    }
-
-    public String getCare_taker_relationship() {
-        return care_taker_relationship;
-    }
-
-    public void setCare_taker_relationship(String care_taker_relationship) {
-        this.care_taker_relationship = care_taker_relationship;
-    }
-
-    public String getReferral_feedback() {
-        return referral_feedback;
-    }
-
-    public void setReferral_feedback(String referral_feedback) {
-        this.referral_feedback = referral_feedback;
-    }
-
-    public long getDate_of_birth() {
-        return date_of_birth;
-    }
-
-    public void setDate_of_birth(long date_of_birth) {
-        this.date_of_birth = date_of_birth;
     }
 
     public long getVisit_date() {
@@ -253,5 +115,21 @@ public class ClientFollowup implements Serializable {
 
     public void setReferral_date(long referral_date) {
         this.referral_date = referral_date;
+    }
+
+    public String getClient_id() {
+        return client_id;
+    }
+
+    public void setClient_id(String client_id) {
+        this.client_id = client_id;
+    }
+
+    public String getService_provider_uuid() {
+        return service_provider_uuid;
+    }
+
+    public void setService_provider_uuid(String service_provider_uuid) {
+        this.service_provider_uuid = service_provider_uuid;
     }
 }

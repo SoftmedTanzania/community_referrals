@@ -30,7 +30,7 @@ import com.softmed.htmr_chw.util.Utils;
 
 import org.ei.opensrp.repository.ClientReferralRepository;
 import org.ei.opensrp.repository.FacilityRepository;
-import org.ei.opensrp.repository.FollowupClientRepository;
+import org.ei.opensrp.repository.ClientFollowupRepository;
 import org.ei.opensrp.repository.IndicatorRepository;
 import org.ei.opensrp.repository.ReferralServiceRepository;
 import org.ei.opensrp.sync.DrishtiSyncScheduler;
@@ -79,7 +79,7 @@ import android.util.Log;
 public class BoreshaAfyaApplication extends DrishtiApplication {
     private static final String TAG = BoreshaAfyaApplication.class.getSimpleName();
     private ReferralServiceRepository serviceRepository;
-    private FollowupClientRepository followupClientRepository;
+    private ClientFollowupRepository clientFollowupRepository;
     private int userType = 0;//0=CHW and 1=Facility health care worker
     public String currentUserID, team_uuid, phone_number, team_name, team_location_id, registration_id = "";
     public static String username, password;
@@ -251,7 +251,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
 
 
     public void insertFollowup(ClientFollowup clientFollowup) {
-        followupClientRepository.add(clientFollowup);
+        clientFollowupRepository.add(clientFollowup);
     }
 
 
@@ -420,8 +420,8 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         }
 
 
-        if (followupClientRepository == null) {
-            followupClientRepository = context.followupClientRepository();
+        if (clientFollowupRepository == null) {
+            clientFollowupRepository = context.followupClientRepository();
         }
 
 

@@ -12,40 +12,13 @@
                 "name": "relationalid"
             },
             {
-                "name": "first_name"
-            },
-            {
-                "name": "middle_name"
-            },
-            {
-                "name": "date_of_birth"
-            },
-            {
-                "name": "community_based_hiv_service"
-            },
-            {
-                "name": "ctc_number"
-            },
-            {
-                "name": "care_taker_name"
-            },
-            {
-                "name": "care_taker_name_phone_number"
-            },
-            {
-                "name": "care_taker_relationship"
-            },
-            {
                 "name": "facility_id"
             },
             {
+                "name": "client_id"
+            },
+            {
                 "name": "referral_reason"
-            },
-            {
-                "name": "gender"
-            },
-            {
-                "name": "phone_number"
             },
             {
                 "name": "comment"
@@ -55,9 +28,6 @@
             },
             {
                 "name": "service_provider_uiid"
-            },
-            {
-                "name": "date_of_birth"
             },
             {
                 "name": "follow_up_date"
@@ -76,9 +46,6 @@
             },
             {
                 "name": "service_provider_mobile_number"
-            },
-            {
-                "name": "village"
             },
             {
                 "name": "visit_date"

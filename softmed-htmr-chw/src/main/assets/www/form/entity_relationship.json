@@ -14,5 +14,13 @@
         "kind": "one_to_many",
         "from": "facility.id",
         "to": "followup_client.facility_id"
+    },
+    {
+        "parent": "facility",
+        "child": "followup_client",
+        "field": "client follow up",
+        "kind": "one_to_many",
+        "from": "facility.id",
+        "to": "followup_client.facility_id"
     }
 ]

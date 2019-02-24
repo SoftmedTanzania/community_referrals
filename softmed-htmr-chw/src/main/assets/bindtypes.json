@@ -1,8 +1,11 @@
 {
   "bindobjects": [
     {
-      "name": "client_referral",
+      "name": "client",
       "columns": [
+        {
+          "name": "client_id"
+        },
         {
           "name": "first_name"
         },
@@ -13,13 +16,44 @@
           "name": "surname"
         },
         {
+          "name": "date_of_birth"
+        },
+        {
+          "name": "gender"
+        },
+        {
           "name": "community_based_hiv_service"
         },
         {
           "name": "ctc_number"
         },
         {
+          "name": "facility_id"
+        },
+        {
+          "name": "is_valid"
+        },
+        {
+          "name": "care_taker_name"
+        },
+        {
+          "name": "care_taker_phone_number"
+        },
+        {
+          "name": "care_taker_relationship"
+        }
+      ]
+    },{
+      "name": "client_referral",
+      "columns": [
+        {
+          "name": "client_id"
+        },
+        {
           "name": "referral_date"
+        },
+        {
+          "name": "appointment_date"
         },
         {
           "name": "facility_id"
@@ -31,19 +65,13 @@
           "name": "referral_service_id"
         },
         {
-          "name": "is_valid"
-        },
-        {
           "name": "referral_status"
-        },
-        {
-          "name": "gender"
         },
         {
           "name": "is_emergency"
         },
         {
-          "name": "appointment_date"
+          "name": "is_valid"
         }
       ]
     },
@@ -79,19 +107,10 @@
       "name": "followup_client",
       "columns": [
         {
-          "name": "first_name"
+          "name": "client_id"
         },
         {
-          "name": "middle_name"
-        },
-        {
-          "name": "surname"
-        },
-        {
-          "name": "community_based_hiv_service"
-        },
-        {
-          "name": "ctc_number"
+          "name": "referral_date"
         },
         {
           "name": "visit_date"
@@ -103,49 +122,16 @@
           "name": "referral_reason"
         },
         {
-          "name": "other_notes"
-        },
-        {
-          "name": "gender"
-        },
-        {
-          "name": "phone_number"
-        },
-        {
-          "name": "care_taker_name"
-        },
-        {
-          "name": "care_taker_phone_number"
-        },
-        {
-          "name": "care_taker_relationship"
-        },
-        {
-          "name": "referral_date"
-        },
-        {
-          "name": "date_of_birth"
-        },
-        {
-          "name": "map_cue"
-        },
-        {
-          "name": "ward"
+          "name": "referral_feedback"
         },
         {
           "name": "referral_status"
         },
         {
+          "name": "service_provider_uuid"
+        },
+        {
           "name": "is_valid"
-        },
-        {
-          "name": "ward"
-        },
-        {
-          "name": "village"
-        },
-        {
-          "name": "service_provider_uiid"
         }
       ]
     }

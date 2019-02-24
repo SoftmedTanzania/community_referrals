@@ -76,8 +76,8 @@ public class ReferredClientsListAdapter extends
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
-
-        viewHolder.nameTextView.setText(client.getFirst_name()+" "+client.getMiddle_name()+" "+client.getSurname());
+//TODO unhide this
+//        viewHolder.nameTextView.setText(client.getFirst_name()+" "+client.getMiddle_name()+" "+client.getSurname());
         viewHolder.referralReason.setText(client.getReferral_reason());
         viewHolder.scheduleDateTextView.setText(dateFormat.format(client.getReferral_date()));
         viewHolder.serviceName.setText(getReferralServiceName(client.getReferral_service_id()));

@@ -18,11 +18,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-import org.ei.opensrp.Context;
-import org.ei.opensrp.commonregistry.CommonPersonObject;
-import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.domain.ClientReferral;
 import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Repository.LocationSelectorDialogFragment;
@@ -31,8 +26,15 @@ import com.softmed.htmr_chw.pageradapter.SecuredNativeSmartRegisterCursorAdapter
 import com.softmed.htmr_chw.util.AsyncTask;
 import com.softmed.htmr_chw.util.DividerItemDecoration;
 import com.softmed.htmr_chw.util.Utils;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
+import org.ei.opensrp.Context;
+import org.ei.opensrp.commonregistry.CommonPersonObject;
+import org.ei.opensrp.commonregistry.CommonRepository;
+import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -42,27 +44,27 @@ import java.util.Locale;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
 
-public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+public class RegisteredClientsFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     private CommonRepository commonRepository;
     private List<ClientReferral> clientReferralPersonObjectList = new ArrayList<>();
     private Cursor cursor;
     private String locationDialogTAG = "locationDialogTAG";
-    private static final String TAG = ReferredClientsFragment.class.getSimpleName(),
+    private static final String TAG = RegisteredClientsFragment.class.getSimpleName(),
             TABLE_NAME = "client_referral";
     private long startDate = 0, endDate = 0;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private Gson gson = new Gson();
-    private EditText fname, othername, ctc_number, textStartDate, textEndDate;
+    private EditText fname, othername, phoneNumber, textStartDate, textEndDate;
     public String message = "";
-    MaterialSpinner spinnerType;
+    private MaterialSpinner spinnerType;
     private RecyclerView recyclerView;
     private ReferredClientsListAdapter clientsListAdapter;
 
-    public ReferredClientsFragment() {
+    public RegisteredClientsFragment() {
     }
 
-    public static ReferredClientsFragment newInstance() {
-        ReferredClientsFragment fragment = new ReferredClientsFragment();
+    public static RegisteredClientsFragment newInstance() {
+        RegisteredClientsFragment fragment = new RegisteredClientsFragment();
 
         return fragment;
     }
@@ -77,7 +79,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v = inflater.inflate(R.layout.fragment_refered_clients, container, false);
+        View v = inflater.inflate(R.layout.fragment_registered_clients, container, false);
 
         recyclerView = (RecyclerView) v.findViewById(R.id.clients_recycler);
 
@@ -111,7 +113,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
                     new QueryTask().execute(
                             queryBuilder.toString(),
                             TABLE_NAME,
-                            getFname(), getOthername(), getCTCNumber(), getFromDate(), getToDate(), isDateRangeSet());
+                            getFname(), getOthername(), getPhoneNumber(), isDateRangeSet());
 
                 } else {
                     Log.d(TAG, "am in false else");
@@ -132,22 +134,22 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
 
         fname = (EditText) v.findViewById(R.id.client_name_et);
         othername = (EditText) v.findViewById(R.id.client_last_name_et);
-        ctc_number = (EditText) v.findViewById(R.id.client_ctc_number_et);
+        phoneNumber = (EditText) v.findViewById(R.id.client_ctc_number_et);
         textStartDate = (EditText) v.findViewById(R.id.from_date);
         textEndDate = (EditText) v.findViewById(R.id.to_date);
 
-        textStartDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pickDate(0);
-            }
-        });
-        textEndDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pickDate(1);
-            }
-        });
+//        textStartDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                pickDate(0);
+//            }
+//        });
+//        textEndDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                pickDate(1);
+//            }
+//        });
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -177,26 +179,10 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
         return value;
     }
 
-    private String getCTCNumber() {
+    private String getPhoneNumber() {
         String value = "";
-        if (!(ctc_number.getText().toString()).isEmpty()) {
-            value = ctc_number.getText().toString();
-        }
-        return value;
-    }
-
-    private String getFromDate() {
-        String value = "";
-        if (!(textStartDate.getText().toString()).isEmpty()) {
-            value = textStartDate.getText().toString();
-        }
-        return value;
-    }
-
-    private String getToDate() {
-        String value = "";
-        if (!(textEndDate.getText().toString()).isEmpty()) {
-            value = textEndDate.getText().toString();
+        if (!(phoneNumber.getText().toString()).isEmpty()) {
+            value = phoneNumber.getText().toString();
         }
         return value;
     }
@@ -208,7 +194,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
     }
 
     private boolean isQueryInitializationOk() {
-        if ((fname.getText().toString()).isEmpty() && (othername.getText().toString()).isEmpty() && (ctc_number.getText().toString()).isEmpty() && (textStartDate.getText().toString()).isEmpty() && (textEndDate.getText().toString()).isEmpty()) {
+        if ((fname.getText().toString()).isEmpty() && (othername.getText().toString()).isEmpty() && (phoneNumber.getText().toString()).isEmpty() && (textStartDate.getText().toString()).isEmpty() && (textEndDate.getText().toString()).isEmpty()) {
             // date range not defined properly
             message = "hujachagua kitu cha kutafuta";
             makeToast();
@@ -329,7 +315,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
             String tableName = params[1];
             String fName = params[2];
             String other_name = params[3];
-            String ctc_number = params[4];
+            String phone_number = params[4];
             String sdate = params[5];
             String edate = params[6];
             String daterange = params[7];
@@ -352,6 +338,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
             try {
                 for (CommonPersonObject commonPersonObject : commonPersonObjectList) {
 
+                    //TODO fix this
                         // get anc mothers from query result and add them to list
 
                         // convert and add to list
@@ -363,9 +350,9 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
 //                            client = getclientReferral(commonPersonObject);
 //                            if ((client.getMiddle_name().toLowerCase()).contains(other_name.toLowerCase())||(client.getSurname().toLowerCase()).contains(other_name.toLowerCase()))
 //                                ClientReferrals.add(client);
-//                        } else if (!ctc_number.isEmpty()) {
+//                        } else if (!phoneNumber.isEmpty()) {
 //                            client = getclientReferral(commonPersonObject);
-//                            if ((client.getCtc_number().toLowerCase()).contains(ctc_number.toLowerCase()))
+//                            if ((client.getCtc_number().toLowerCase()).contains(phoneNumber.toLowerCase()))
 //                                ClientReferrals.add(client);
 //                        } else if (!sdate.isEmpty()) {
 //                            client = getclientReferral(commonPersonObject);
@@ -403,33 +390,33 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
         }
 
         public ClientReferral getclientReferral(CommonPersonObject commonPersonObject){
-            Log.d(TAG,"person  ="+gson.toJson(commonPersonObject));
-            String details = Utils.convertStandardJSONString(commonPersonObject.getColumnmaps().get("details"));
-            Log.d(TAG, "column details = " + details);
+//            Log.d(TAG,"person  ="+gson.toJson(commonPersonObject));
+//            String details = Utils.convertStandardJSONString(commonPersonObject.getColumnmaps().get("details"));
+//            Log.d(TAG, "column details = " + details);
             ClientReferral client = null;
-            client = gson.fromJson(details, ClientReferral.class);
-            String id = commonPersonObject.getColumnmaps().get("id");
-            String relationid = commonPersonObject.getColumnmaps().get("relationalid");
-            String fname = commonPersonObject.getColumnmaps().get("first_name");
-            String gender = commonPersonObject.getColumnmaps().get("gender");
-            String referralStatus = commonPersonObject.getColumnmaps().get("referral_status");
-            String mname = commonPersonObject.getColumnmaps().get("middle_name");
-            String facility_id = commonPersonObject.getColumnmaps().get("facility_id");
-            Long referral_date = Long.parseLong(commonPersonObject.getColumnmaps().get("referral_date"));
-            String referral_reason = commonPersonObject.getColumnmaps().get("referral_reason");
-            String referral_service_id = commonPersonObject.getColumnmaps().get("referral_service_id");
-            String surname = commonPersonObject.getColumnmaps().get("surname");
-            String ctc_number = commonPersonObject.getColumnmaps().get("ctc_number");
-            String community_based_hiv_service = commonPersonObject.getColumnmaps().get("community_based_hiv_service");
-
-
+//            client = gson.fromJson(details, ClientReferral.class);
+//            String id = commonPersonObject.getColumnmaps().get("id");
+//            String relationid = commonPersonObject.getColumnmaps().get("relationalid");
+//            String fname = commonPersonObject.getColumnmaps().get("first_name");
+//            String gender = commonPersonObject.getColumnmaps().get("gender");
+//            String referralStatus = commonPersonObject.getColumnmaps().get("referral_status");
+//            String mname = commonPersonObject.getColumnmaps().get("middle_name");
+//            String facility_id = commonPersonObject.getColumnmaps().get("facility_id");
+//            Long referral_date = Long.parseLong(commonPersonObject.getColumnmaps().get("referral_date"));
+//            String referral_reason = commonPersonObject.getColumnmaps().get("referral_reason");
+//            String referral_service_id = commonPersonObject.getColumnmaps().get("referral_service_id");
+//            String surname = commonPersonObject.getColumnmaps().get("surname");
+//            String phoneNumber = commonPersonObject.getColumnmaps().get("phoneNumber");
+//            String community_based_hiv_service = commonPersonObject.getColumnmaps().get("community_based_hiv_service");
+//
+//
 //            client.setFirst_name(fname);
 //            client.setId(id);
 //            client.setGender(gender);
 //            client.setReferral_status(referralStatus);
 //
 //
-//            client.setCtc_number(ctc_number);
+//            client.setCtc_number(phoneNumber);
 //            client.setRelationalid(relationid);
 //            client.setMiddle_name(mname);
 //            client.setSurname(surname);
@@ -440,7 +427,7 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
 //            client.setReferral_service_id(referral_service_id);
 //            client.setDetails(details);
 
-            Log.d(TAG,"client gotten = "+new Gson().toJson(client));
+//            Log.d(TAG,"client gotten = "+new Gson().toJson(client));
             return  client;
         }
 

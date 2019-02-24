@@ -410,6 +410,8 @@
                     </LinearLayout>
                 </LinearLayout>
 
+
+
                 <LinearLayout
                     android:id="@+id/issued_referral_list_card"
                     android:layout_width="match_parent"

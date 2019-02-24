@@ -1,7 +1,7 @@
 {
     "form_data_definition_version": "4",
     "form": {
-        "bind_type": "client_referral",
+        "bind_type": "client",
         "default_bind_path": "/model/instance/client_referral_form/",
         "fields": [
             {
@@ -12,49 +12,52 @@
                 "name": "relationalid"
             },
             {
-                "name": "client_id"
+                "name": "first_name"
             },
             {
-                "name": "referral_date"
+                "name": "middle_name"
+            },
+            {
+                "name": "surname"
+            },
+            {
+                "name": "date_of_birth"
+            },
+            {
+                "name": "community_based_hiv_service"
+            },
+            {
+                "name": "ctc_number"
             },
             {
                 "name": "is_valid"
             },
             {
-                "name": "referral_status"
-            },
-            {
                 "name": "facility_id"
             },
             {
-                "name": "referral_reason"
+                "name": "gender"
             },
             {
-                "name": "referral_service_id"
+                "name": "phone_number"
             },
             {
-                "name": "indicator_ids"
+                "name": "ward"
             },
             {
-                "name": "services_given_to_patient"
+                "name": "village"
             },
             {
-                "name": "other_notes"
+                "name": "village_leader"
             },
             {
-                "name": "test_results"
+                "name": "care_taker_name"
             },
             {
-                "name": "is_emergency"
+                "name": "care_taker_name_phone_number"
             },
             {
-                "name": "appointment_date"
-            },
-            {
-                "name": "service_provider_uiid"
-            },
-            {
-                "name": "service_provider_group"
+                "name": "care_taker_relationship"
             },
             {
                 "name": "service_provider_mobile_number"

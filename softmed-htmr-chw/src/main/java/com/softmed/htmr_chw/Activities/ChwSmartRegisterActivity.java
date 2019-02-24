@@ -35,6 +35,7 @@ import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.Fragments.CHWSmartRegisterFragment;
 import com.softmed.htmr_chw.Fragments.FollowupClientsFragment;
 import com.softmed.htmr_chw.Fragments.ReferredClientsFragment;
+import com.softmed.htmr_chw.Fragments.RegisteredClientsFragment;
 import com.softmed.htmr_chw.Fragments.ReportFragment;
 import com.softmed.htmr_chw.LoginActivity;
 import com.softmed.htmr_chw.R;
@@ -163,12 +164,37 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         View receivedReferralList  = mainMenu.findViewById(R.id.received_referrals_list_card);
         View reports  = mainMenu.findViewById(R.id.reports);
 
+        //TODO implement client registration.
+//        referralRegistration.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startRegistration();
+//            }
+//        });
         referralRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startRegistration();
+
+                tabsLayout.removeAllViews();
+                LinearLayout tabLinearLayout2 = (LinearLayout) LayoutInflater.from(ChwSmartRegisterActivity.this).inflate(R.layout.custom_tab, null);
+                TextView tabContent2 = (TextView) tabLinearLayout2.findViewById(R.id.tabContent);
+                tabContent2.setText(R.string.page_title);
+                tabContent2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_trending_up_white_24dp, 0, 0, 0);
+                tabsLayout.addView(tabLinearLayout2);
+
+                isOnTheMainMenu = false;
+                RegisteredClientsFragment newFragment = new RegisteredClientsFragment();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragments, newFragment,"tag");
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+                mainMenu.setVisibility(View.GONE);
+                fragmentsView.setVisibility(View.VISIBLE);
             }
         });
+
+
         issuedReferrals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -415,102 +441,102 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     }
 
     public void showPreRegistrationDetailsDialog(ClientReferral clientReferral) {
-
-        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
-        String gsonClient = Utils.convertStandardJSONString(clientReferral.getDetails());
-
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
-        dialogBuilder.setView(dialogView)
-                .setCancelable(true);
-        final AlertDialog dialog = dialogBuilder.create();
-        dialog.show();
-        dialog.getWindow().setLayout(1000, 650);
-
-
-        String reg_date = dateFormat.format(clientReferral.getDate_of_birth());
-        String ageS = "";
-        try {
-            Date d = dateFormat.parse(reg_date);
-            Calendar cal = Calendar.getInstance();
-            Calendar today = Calendar.getInstance();
-            cal.setTime(d);
-            int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
-            Integer ageInt = new Integer(age);
-            ageS = ageInt.toString();
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        TextView textName = (TextView) dialogView.findViewById(R.id.client_name);
-        TextView textAge = (TextView) dialogView.findViewById(R.id.agevalue);
-        TextView cbhs = (TextView) dialogView.findViewById(R.id.cbhs_number_value);
-        TextView referral_service = (TextView) dialogView.findViewById(R.id.viewService);
-        TextView facility = (TextView) dialogView.findViewById(R.id.viewFacility);
-        TextView ctc_number = (TextView) dialogView.findViewById(R.id.ctc_number);
-        TextView referral_reason = (TextView) dialogView.findViewById(R.id.reason_for_referral);
-        TextView gender = (TextView) dialogView.findViewById(R.id.gendervalue);
-        TextView phoneNumber = (TextView) dialogView.findViewById(R.id.viewPhone);
-        TextView physicalAddress = (TextView) dialogView.findViewById(R.id.editTextKijiji);
-        TextView villageleader = (TextView) dialogView.findViewById(R.id.viewVillageLeader);
-
-        try {
-            if (clientReferral.getReferral_status().equals("1") && !clientReferral.getServices_given_to_patient().equals("")) {
-                dialogView.findViewById(R.id.referral_feedback_title).setVisibility(VISIBLE);
-                dialogView.findViewById(R.id.referral_feedback).setVisibility(VISIBLE);
-                dialogView.findViewById(R.id.strip_six).setVisibility(VISIBLE);
-                TextView referralFeedback = (TextView) dialogView.findViewById(R.id.referral_feedback);
-                referralFeedback.setVisibility(VISIBLE);
-                referralFeedback.setText(clientReferral.getServices_given_to_patient());
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        if (!clientReferral.getOther_notes().equals("")) {
-            dialogView.findViewById(R.id.other_notes_title).setVisibility(VISIBLE);
-            dialogView.findViewById(R.id.other_notes).setVisibility(VISIBLE);
-            dialogView.findViewById(R.id.strip_seven).setVisibility(VISIBLE);
-            TextView otherNotes = (TextView) dialogView.findViewById(R.id.other_notes);
-            otherNotes.setVisibility(VISIBLE);
-            otherNotes.setText(clientReferral.getOther_notes());
-        }
-
-
-        textName.setText(clientReferral.getFirst_name() + " " + clientReferral.getMiddle_name() + " " + clientReferral.getSurname());
-
-        textAge.setText(ageS + " years");
-        cbhs.setText(clientReferral.getCommunity_based_hiv_service());
-
-        try {
-            referral_service.setText(getReferralServiceName(clientReferral.getReferral_service_id()));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        Log.d(TAG, "facility id = " + clientReferral.getFacility_id());
-
-        facility.setText(getFacilityName(clientReferral.getFacility_id()));
-        if (!clientReferral.getCtc_number().isEmpty())
-            ctc_number.setText(clientReferral.getCtc_number());
-        else
-            ctc_number.setText("-");
-        referral_reason.setText(clientReferral.getReferral_reason());
-        phoneNumber.setText(clientReferral.getPhone_number());
-        villageleader.setText(clientReferral.getVillage_leader());
-        physicalAddress.setText(clientReferral.getVillage());
-
-        try {
-            if ((clientReferral.getGender()).equals(getResources().getString(R.string.female))) {
-                gender.setText(getResources().getString(R.string.female));
-            } else {
-                gender.setText(getResources().getString(R.string.male));
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        setIndicators(dialogView, gsonClient);
+//
+//        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
+//        String gsonClient = Utils.convertStandardJSONString(clientReferral.getDetails());
+//
+//        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
+//        dialogBuilder.setView(dialogView)
+//                .setCancelable(true);
+//        final AlertDialog dialog = dialogBuilder.create();
+//        dialog.show();
+//        dialog.getWindow().setLayout(1000, 650);
+//
+//
+//        String reg_date = dateFormat.format(clientReferral.getDate_of_birth());
+//        String ageS = "";
+//        try {
+//            Date d = dateFormat.parse(reg_date);
+//            Calendar cal = Calendar.getInstance();
+//            Calendar today = Calendar.getInstance();
+//            cal.setTime(d);
+//            int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
+//            Integer ageInt = new Integer(age);
+//            ageS = ageInt.toString();
+//
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        TextView textName = (TextView) dialogView.findViewById(R.id.client_name);
+//        TextView textAge = (TextView) dialogView.findViewById(R.id.agevalue);
+//        TextView cbhs = (TextView) dialogView.findViewById(R.id.cbhs_number_value);
+//        TextView referral_service = (TextView) dialogView.findViewById(R.id.viewService);
+//        TextView facility = (TextView) dialogView.findViewById(R.id.viewFacility);
+//        TextView ctc_number = (TextView) dialogView.findViewById(R.id.ctc_number);
+//        TextView referral_reason = (TextView) dialogView.findViewById(R.id.reason_for_referral);
+//        TextView gender = (TextView) dialogView.findViewById(R.id.gendervalue);
+//        TextView phoneNumber = (TextView) dialogView.findViewById(R.id.viewPhone);
+//        TextView physicalAddress = (TextView) dialogView.findViewById(R.id.editTextKijiji);
+//        TextView villageleader = (TextView) dialogView.findViewById(R.id.viewVillageLeader);
+//
+//        try {
+//            if (clientReferral.getReferral_status().equals("1") && !clientReferral.getServices_given_to_patient().equals("")) {
+//                dialogView.findViewById(R.id.referral_feedback_title).setVisibility(VISIBLE);
+//                dialogView.findViewById(R.id.referral_feedback).setVisibility(VISIBLE);
+//                dialogView.findViewById(R.id.strip_six).setVisibility(VISIBLE);
+//                TextView referralFeedback = (TextView) dialogView.findViewById(R.id.referral_feedback);
+//                referralFeedback.setVisibility(VISIBLE);
+//                referralFeedback.setText(clientReferral.getServices_given_to_patient());
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        if (!clientReferral.getOther_notes().equals("")) {
+//            dialogView.findViewById(R.id.other_notes_title).setVisibility(VISIBLE);
+//            dialogView.findViewById(R.id.other_notes).setVisibility(VISIBLE);
+//            dialogView.findViewById(R.id.strip_seven).setVisibility(VISIBLE);
+//            TextView otherNotes = (TextView) dialogView.findViewById(R.id.other_notes);
+//            otherNotes.setVisibility(VISIBLE);
+//            otherNotes.setText(clientReferral.getOther_notes());
+//        }
+//
+//
+//        textName.setText(clientReferral.getFirst_name() + " " + clientReferral.getMiddle_name() + " " + clientReferral.getSurname());
+//
+//        textAge.setText(ageS + " years");
+//        cbhs.setText(clientReferral.getCommunity_based_hiv_service());
+//
+//        try {
+//            referral_service.setText(getReferralServiceName(clientReferral.getReferral_service_id()));
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        Log.d(TAG, "facility id = " + clientReferral.getFacility_id());
+//
+//        facility.setText(getFacilityName(clientReferral.getFacility_id()));
+//        if (!clientReferral.getCtc_number().isEmpty())
+//            ctc_number.setText(clientReferral.getCtc_number());
+//        else
+//            ctc_number.setText("-");
+//        referral_reason.setText(clientReferral.getReferral_reason());
+//        phoneNumber.setText(clientReferral.getPhone_number());
+//        villageleader.setText(clientReferral.getVillage_leader());
+//        physicalAddress.setText(clientReferral.getVillage());
+//
+//        try {
+//            if ((clientReferral.getGender()).equals(getResources().getString(R.string.female))) {
+//                gender.setText(getResources().getString(R.string.female));
+//            } else {
+//                gender.setText(getResources().getString(R.string.male));
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        setIndicators(dialogView, gsonClient);
     }
 
     private void makeToast() {
@@ -661,15 +687,15 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void onClick(View view) {
                 if (spinnerClientAvailable.getSelectedItem().toString().equals(getString(R.string.yes_button_label))) {
-                    if (spinnerReason.getSelectedItemPosition() <= 0) {
-                        // no radio checked
-                        message = getString(R.string.toast_message_select_reasons_for_missing_appointment);
-                        makeToast();
-                    } else {
-                        followup.setVisit_date(today.getTimeInMillis());
-                        followup.setReferral_feedback(client_condition.getText().toString());
-
-                        context().followupClientRepository().update(followup);
+//                    if (spinnerReason.getSelectedItemPosition() <= 0) {
+//                        // no radio checked
+//                        message = getString(R.string.toast_message_select_reasons_for_missing_appointment);
+//                        makeToast();
+//                    } else {
+//                        followup.setVisit_date(today.getTimeInMillis());
+//                        followup.setReferral_feedback(client_condition.getText().toString());
+//
+//                        context().followupClientRepository().update(followup);
 
                         //TODO finish up sending of referral feedbacks of the followup
 
@@ -713,26 +739,26 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //                                return null;
 //                            }
 //                        }.execute();
-
-                        Toast.makeText(ChwSmartRegisterActivity.this, getString(R.string.followup_thankyou_note_part_one) + followup.getFirst_name() + " " + followup.getSurname(), Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }
-                } else {
-                    Toast.makeText(ChwSmartRegisterActivity.this, getString(R.string.followup_clint_not_found_responce) + followup.getFirst_name() + " " + followup.getSurname(), Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
+//
+//                        Toast.makeText(ChwSmartRegisterActivity.this, getString(R.string.followup_thankyou_note_part_one) + followup.getFirst_name() + " " + followup.getSurname(), Toast.LENGTH_SHORT).show();
+//                        dialog.dismiss();
+//                    }
+//                } else {
+//                    Toast.makeText(ChwSmartRegisterActivity.this, getString(R.string.followup_clint_not_found_responce) + followup.getFirst_name() + " " + followup.getSurname(), Toast.LENGTH_SHORT).show();
+//                    dialog.dismiss();
                 }
 
             }
         });
 
-        TextView textName = (TextView) dialogView.findViewById(R.id.patient_name);
-        textName.setText(followup.getFirst_name() + " " + followup.getMiddle_name() + " " + followup.getSurname());
-
-        TextView facility = (TextView) dialog.findViewById(R.id.textview_facility);
-        facility.setText(getFacilityName(followup.getFacility_id()));
-
-        TextView referral_reason = (TextView) dialog.findViewById(R.id.textview_followupreason);
-        referral_reason.setText(followup.getReferral_reason());
+//        TextView textName = (TextView) dialogView.findViewById(R.id.patient_name);
+//        textName.setText(followup.getFirst_name() + " " + followup.getMiddle_name() + " " + followup.getSurname());
+//
+//        TextView facility = (TextView) dialog.findViewById(R.id.textview_facility);
+//        facility.setText(getFacilityName(followup.getFacility_id()));
+//
+//        TextView referral_reason = (TextView) dialog.findViewById(R.id.textview_followupreason);
+//        referral_reason.setText(followup.getReferral_reason());
 
     }
 

@@ -62,58 +62,58 @@ public class MyGcmListenerService extends GcmListenerService {
             try {
                 JSONObject object = new JSONObject(data.getString("patientsDTO"));
 
-                clientFollowup.setFirst_name(object.getString("firstName"));
-                clientFollowup.setMiddle_name(object.getString("middleName"));
-                clientFollowup.setSurname( object.getString("surname"));
-                clientFollowup.setGender( object.getString("gender"));
-                clientFollowup.setPhone_number(object.getString("phoneNumber"));
-
-                try {
-                    clientFollowup.setMap_cue(object.getString("village"));
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-                try {
-                    clientFollowup.setWard( object.getString("ward"));
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-                try {
-                    clientFollowup.setCare_taker_name( object.getString("careTakerName"));
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-                try {
-                    clientFollowup.setCare_taker_name_phone_number( object.getString("careTakerPhoneNumber"));
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-                try {
-                    clientFollowup.setCtc_number(object.getString("ctcNumber"));
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-                try {
-                    clientFollowup.setDate_of_birth(Long.valueOf(object.getString("dateOfBirth")));
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-                try {
-                    clientFollowup.setCare_taker_relationship( object.getString("careTakerRelationship"));
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                try {
-                    clientFollowup.setCommunity_based_hiv_service( object.getString("communityBasedHivService"));
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+//                clientFollowup.setFirst_name(object.getString("firstName"));
+//                clientFollowup.setMiddle_name(object.getString("middleName"));
+//                clientFollowup.setSurname( object.getString("surname"));
+//                clientFollowup.setGender( object.getString("gender"));
+//                clientFollowup.setPhone_number(object.getString("phoneNumber"));
+//
+//                try {
+//                    clientFollowup.setMap_cue(object.getString("village"));
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//
+//                try {
+//                    clientFollowup.setWard( object.getString("ward"));
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//
+//                try {
+//                    clientFollowup.setCare_taker_name( object.getString("careTakerName"));
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//
+//                try {
+//                    clientFollowup.setCare_taker_name_phone_number( object.getString("careTakerPhoneNumber"));
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//
+//                try {
+//                    clientFollowup.setCtc_number(object.getString("ctcNumber"));
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//
+//                try {
+//                    clientFollowup.setDate_of_birth(Long.valueOf(object.getString("dateOfBirth")));
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//
+//                try {
+//                    clientFollowup.setCare_taker_relationship( object.getString("careTakerRelationship"));
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//                try {
+//                    clientFollowup.setCommunity_based_hiv_service( object.getString("communityBasedHivService"));
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
 
 
             } catch (JSONException e) {
@@ -129,7 +129,7 @@ public class MyGcmListenerService extends GcmListenerService {
                 clientFollowup.setFacility_id(  referral.getString("fromFacilityId"));
                 clientFollowup.setReferral_status( referral.getString("referralStatus"));
                 clientFollowup.setReferral_reason( referral.getString("referralReason"));
-                clientFollowup.setService_provider_uiid( referral.getString("serviceProviderUIID"));
+//                clientFollowup.setService_provider_uiid( referral.getString("serviceProviderUIID"));
                 clientFollowup.setReferral_date(Long.valueOf(referral.getString("referralDate")));
                 clientFollowup.setVisit_date(0);
             } catch (JSONException e) {

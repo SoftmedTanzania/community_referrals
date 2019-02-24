@@ -17,7 +17,7 @@ import com.softmed.htmr_chw.pageradapter.SecuredNativeSmartRegisterCursorAdapter
 
 import org.ei.opensrp.domain.ClientFollowup;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
-import org.ei.opensrp.repository.FollowupClientRepository;
+import org.ei.opensrp.repository.ClientFollowupRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import java.util.List;
 
 
 public class FollowupClientsFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
-    private FollowupClientRepository followupClientRepository;
+    private ClientFollowupRepository clientFollowupRepository;
     private Gson gson = new Gson();
     private android.content.Context appContext;
     private List<ClientFollowup> followupClients = new ArrayList<>();
@@ -66,9 +66,9 @@ public class FollowupClientsFragment extends SecuredNativeSmartRegisterCursorAda
         v = inflater.inflate(R.layout.fragment_chwregistration, container, false);
 
         recyclerView = (RecyclerView) v.findViewById(R.id.item_list);
-        followupClientRepository = context().followupClientRepository();
+        clientFollowupRepository = context().followupClientRepository();
         try {
-            followupClients = followupClientRepository.all();
+            followupClients = clientFollowupRepository.all();
 
             FollowupClintsRecyclerAdapter followupClintsRecyclerAdapter = new FollowupClintsRecyclerAdapter(getActivity(), followupClients);
 
@@ -127,9 +127,9 @@ public class FollowupClientsFragment extends SecuredNativeSmartRegisterCursorAda
     }
 
     public void populateData() {
-        followupClientRepository = context().followupClientRepository();
+        clientFollowupRepository = context().followupClientRepository();
 
-        FollowupClintsRecyclerAdapter followupClintsRecyclerAdapter = new FollowupClintsRecyclerAdapter(getActivity(), followupClientRepository.all());
+        FollowupClintsRecyclerAdapter followupClintsRecyclerAdapter = new FollowupClintsRecyclerAdapter(getActivity(), clientFollowupRepository.all());
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 

@@ -81,24 +81,25 @@ public class Utils {
         String details = commonPersonObject.getColumnmaps().get("details");
         Log.d(TAG, "details string commonPersonObject = " + convertStandardJSONString(details));
         try {
+            //TODO uncomment this
             return new ClientReferral(
-                    commonPersonObject.getColumnmaps().get("id"),
-                    commonPersonObject.getColumnmaps().get("relationalid"),
-                    commonPersonObject.getColumnmaps().get("first_name"),
-                    commonPersonObject.getColumnmaps().get("middle_name"),
-                    commonPersonObject.getColumnmaps().get("surname"),
-                    commonPersonObject.getColumnmaps().get("community_based_hiv_service"),
-                    commonPersonObject.getColumnmaps().get("ctc_number"),
-                    Long.parseLong(commonPersonObject.getColumnmaps().get("referral_date")),
-                    Long.parseLong(commonPersonObject.getColumnmaps().get("appointment_date")),
-                    commonPersonObject.getColumnmaps().get("facility_id"),
-                    commonPersonObject.getColumnmaps().get("referral_reason"),
-                    commonPersonObject.getColumnmaps().get("referral_service_id"),
-                    commonPersonObject.getColumnmaps().get("referral_status"),
-                    commonPersonObject.getColumnmaps().get("is_valid"),
-                    commonPersonObject.getColumnmaps().get("is_emergency"),
-                    commonPersonObject.getColumnmaps().get("gender"),
-                    commonPersonObject.getColumnmaps().get("details")
+//                    commonPersonObject.getColumnmaps().get("id"),
+//                    commonPersonObject.getColumnmaps().get("relationalid"),
+//                    commonPersonObject.getColumnmaps().get("first_name"),
+//                    commonPersonObject.getColumnmaps().get("middle_name"),
+//                    commonPersonObject.getColumnmaps().get("surname"),
+//                    commonPersonObject.getColumnmaps().get("community_based_hiv_service"),
+//                    commonPersonObject.getColumnmaps().get("ctc_number"),
+//                    Long.parseLong(commonPersonObject.getColumnmaps().get("referral_date")),
+//                    Long.parseLong(commonPersonObject.getColumnmaps().get("appointment_date")),
+//                    commonPersonObject.getColumnmaps().get("facility_id"),
+//                    commonPersonObject.getColumnmaps().get("referral_reason"),
+//                    commonPersonObject.getColumnmaps().get("referral_service_id"),
+//                    commonPersonObject.getColumnmaps().get("referral_status"),
+//                    commonPersonObject.getColumnmaps().get("is_valid"),
+//                    commonPersonObject.getColumnmaps().get("is_emergency"),
+//                    commonPersonObject.getColumnmaps().get("gender"),
+//                    commonPersonObject.getColumnmaps().get("details")
             );
         } catch (Exception e) {
             e.printStackTrace();

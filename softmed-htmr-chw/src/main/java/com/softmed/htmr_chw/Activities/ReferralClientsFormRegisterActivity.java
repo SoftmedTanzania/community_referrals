@@ -583,7 +583,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
     public ClientReferral getClientReferral() {
         ClientReferral referral = new ClientReferral();
         referral.setReferral_date(today.getTimeInMillis());
-        referral.setDate_of_birth(dob);
+//        referral.setDate_of_birth(dob);
 
         if(!is_emergency) {
             referral.setAppointment_date(today.getTimeInMillis());
@@ -592,39 +592,39 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
         }else{
             referral.setAppointment_date(appointmentDate);
         }
-        referral.setIs_emergency(is_emergency+"");
-        referral.setCommunity_based_hiv_service(editTextDiscountId.getText().toString());
-        referral.setFirst_name(editTextfName.getText().toString());
-        referral.setMiddle_name(editTextmName.getText().toString());
-        referral.setSurname(editTextlName.getText().toString());
-        referral.setVillage(editTextKijiji.getText().toString());
-        referral.setIs_valid("true");
-        referral.setPhone_number(textPhone.getText().toString());
-        referral.setFacility_id(getFacilityId(facilitytextView.getText().toString()));
-        if(spinnerGender.getSelectedItem().toString().equalsIgnoreCase("female") || spinnerGender.getSelectedItem().toString().contains("ke"))
-            referral.setGender("Female");
-        else
-            referral.setGender("Male");
-        referral.setVillage_leader(editTextVillageLeader.getText().toString());
-        referral.setReferral_reason(editTextReferralReason.getText().toString());
-        referral.setReferral_service_id(getReferralServiceId(spinnerService.getSelectedItem().toString()));
-        referral.setWard(wardId);
-        referral.setCtc_number(editTextCTCNumber.getText().toString());
-        referral.setTest_results(false);
-        referral.setServices_given_to_patient("");
-        referral.setOther_notes("");
-        referral.setService_provider_uiid(((BoreshaAfyaApplication)getApplication()).getCurrentUserID());
-        referral.setService_provider_group(((BoreshaAfyaApplication)getApplication()).getTeam_uuid());
-        for(int i=0; i<parentLayout.getChildCount(); i++) {
-            CheckBox nextChild = (CheckBox) parentLayout.getChildAt(i);
-            if (nextChild.isChecked()) {
-                CheckBox check = nextChild;
-                if (check.isChecked()) {
-                    AllCheckbox.add(getIndicatorId(check.getText().toString()));
-                }
-            }
-        }
-        referral.setIndicator_ids(new Gson().toJson(AllCheckbox));
+//        referral.setIs_emergency(is_emergency+"");
+//        referral.setCommunity_based_hiv_service(editTextDiscountId.getText().toString());
+//        referral.setFirst_name(editTextfName.getText().toString());
+//        referral.setMiddle_name(editTextmName.getText().toString());
+//        referral.setSurname(editTextlName.getText().toString());
+//        referral.setVillage(editTextKijiji.getText().toString());
+//        referral.setIs_valid("true");
+//        referral.setPhone_number(textPhone.getText().toString());
+//        referral.setFacility_id(getFacilityId(facilitytextView.getText().toString()));
+//        if(spinnerGender.getSelectedItem().toString().equalsIgnoreCase("female") || spinnerGender.getSelectedItem().toString().contains("ke"))
+//            referral.setGender("Female");
+//        else
+//            referral.setGender("Male");
+//        referral.setVillage_leader(editTextVillageLeader.getText().toString());
+//        referral.setReferral_reason(editTextReferralReason.getText().toString());
+//        referral.setReferral_service_id(getReferralServiceId(spinnerService.getSelectedItem().toString()));
+//        referral.setWard(wardId);
+//        referral.setCtc_number(editTextCTCNumber.getText().toString());
+//        referral.setTest_results(false);
+//        referral.setServices_given_to_patient("");
+//        referral.setOther_notes("");
+//        referral.setService_provider_uiid(((BoreshaAfyaApplication)getApplication()).getCurrentUserID());
+//        referral.setService_provider_group(((BoreshaAfyaApplication)getApplication()).getTeam_uuid());
+//        for(int i=0; i<parentLayout.getChildCount(); i++) {
+//            CheckBox nextChild = (CheckBox) parentLayout.getChildAt(i);
+//            if (nextChild.isChecked()) {
+//                CheckBox check = nextChild;
+//                if (check.isChecked()) {
+//                    AllCheckbox.add(getIndicatorId(check.getText().toString()));
+//                }
+//            }
+//        }
+//        referral.setIndicator_ids(new Gson().toJson(AllCheckbox));
         return referral;
     }
 
