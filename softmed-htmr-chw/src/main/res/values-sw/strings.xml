@@ -135,6 +135,11 @@
     <string name="followup_referrals_chart_key_label">Ufupisho wa rufaa za ufatiliaji</string>
     <string name="visit_date_label">Tarehe ya Kumtembelea</string>
     <string name="register_clients_title">Sajili Mteja</string>
+    <string name="register_clients_button_label">Register Clients</string>
+    <string name="referral_history_label">Referral History</string>
+    <string name="helper_name">Care Taker Name</string>
+    <string name="helper_phone_number">Care Taker Phone Number</string>
+    <string name="gender">Gender</string>
 
 
 </resources>

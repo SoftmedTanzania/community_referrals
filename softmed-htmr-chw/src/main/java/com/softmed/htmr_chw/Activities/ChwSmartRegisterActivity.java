@@ -42,7 +42,6 @@ import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Repository.LocationSelectorDialogFragment;
 import com.softmed.htmr_chw.util.FitDoughnut;
 import com.softmed.htmr_chw.util.NavigationController;
-import com.softmed.htmr_chw.util.Utils;
 
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
@@ -75,7 +74,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -872,7 +870,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         // set registration fragment
         Log.d(TAG, "Location selected" + locationSelected);
 
-        Intent intent = new Intent(this, ReferralClientsFormRegisterActivity.class);
+        Intent intent = new Intent(this, ClientsRegisterFormActivity.class);
         intent.putExtra("selectedLocation", locationSelected);
         startActivityForResult(intent, 90);
     }

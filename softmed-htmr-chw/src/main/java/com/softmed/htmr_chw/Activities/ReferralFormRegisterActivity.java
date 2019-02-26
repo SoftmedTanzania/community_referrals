@@ -33,7 +33,11 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.R;
+import com.softmed.htmr_chw.Repository.FacilityObject;
+import com.softmed.htmr_chw.Repository.ReferralServiceObject;
+import com.softmed.htmr_chw.util.Utils;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
@@ -45,10 +49,6 @@ import org.ei.opensrp.domain.form.FormData;
 import org.ei.opensrp.domain.form.FormField;
 import org.ei.opensrp.domain.form.FormInstance;
 import org.ei.opensrp.domain.form.FormSubmission;
-import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
-import com.softmed.htmr_chw.Repository.FacilityObject;
-import com.softmed.htmr_chw.Repository.ReferralServiceObject;
-import com.softmed.htmr_chw.util.Utils;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.repository.ClientReferralRepository;
@@ -75,10 +75,10 @@ import static org.ei.opensrp.AllConstants.ENGLISH_LOCALE;
  * Created by coze on 11/17/17.
  */
 
-public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegisterActivity {
+public class ReferralFormRegisterActivity extends SecuredNativeSmartRegisterActivity {
 
     private Toolbar toolbar;
-    private static final String TAG = ReferralClientsFormRegisterActivity.class.getSimpleName();
+    private static final String TAG = ReferralFormRegisterActivity.class.getSimpleName();
     public static AutoCompleteTextView facilitytextView;
     public static EditText editTextfName,editTextmName,editTextlName,editTextVillageLeader, editTextAge, editTextCTCNumber,
             editTextDiscountId,editTextKijiji,editTextReferralReason;
@@ -128,7 +128,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
 
         setLanguage();
 
-        setContentView(com.softmed.htmr_chw.R.layout.activity_client_registration_form);
+        setContentView(R.layout.activity_client_registration_form);
         setReferralServiceList();
         setFacilistList();
         setupviews();
@@ -136,7 +136,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
         indicatorRepository = context().indicatorRepository();
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        toolbar = (Toolbar) findViewById(com.softmed.htmr_chw.R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -228,12 +228,12 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
 
     private void setupviews(){
 
-        ((TextView)findViewById(com.softmed.htmr_chw.R.id.form_heading)).setTypeface(robotoBold);
-        ((TextView)findViewById(com.softmed.htmr_chw.R.id.initial_information_title)).setTypeface(robotoBold);
-        ((TextView)findViewById(com.softmed.htmr_chw.R.id.referral_details_heading)).setTypeface(robotoBold);
-        ((TextView)findViewById(com.softmed.htmr_chw.R.id.clinical_information_title)).setTypeface(robotoBold);
-        ((TextView)findViewById(com.softmed.htmr_chw.R.id.flags_title)).setTypeface(robotoBold);
-        ((TextView)findViewById(com.softmed.htmr_chw.R.id.facility_titleview)).setTypeface(robotoBold);
+        ((TextView)findViewById(R.id.form_heading)).setTypeface(robotoBold);
+        ((TextView)findViewById(R.id.initial_information_title)).setTypeface(robotoBold);
+        ((TextView)findViewById(R.id.referral_details_heading)).setTypeface(robotoBold);
+        ((TextView)findViewById(R.id.clinical_information_title)).setTypeface(robotoBold);
+        ((TextView)findViewById(R.id.flags_title)).setTypeface(robotoBold);
+        ((TextView)findViewById(R.id.facility_titleview)).setTypeface(robotoBold);
 
         Switch aSwitch = (Switch)findViewById(R.id.emergency_switch);
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -248,42 +248,42 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
             }
         });
 
-        textPhone = (EditText)   findViewById(com.softmed.htmr_chw.R.id.edittextPhone);
-        dobTextView = (MaterialEditText)   findViewById(com.softmed.htmr_chw.R.id.reg_dob);
-        appointmentDateTextView = (MaterialEditText)   findViewById(com.softmed.htmr_chw.R.id.appointment_date);
+        textPhone = (EditText)   findViewById(R.id.edittextPhone);
+        dobTextView = (MaterialEditText)   findViewById(R.id.reg_dob);
+        appointmentDateTextView = (MaterialEditText)   findViewById(R.id.appointment_date);
 
 
-        editTextfName = (EditText)   findViewById(com.softmed.htmr_chw.R.id.editTextfName);
-        editTextmName = (EditText)   findViewById(com.softmed.htmr_chw.R.id.editTextmName);
-        editTextlName = (EditText)   findViewById(com.softmed.htmr_chw.R.id.editTextlName);
-        editTextReferralReason = (EditText)   findViewById(com.softmed.htmr_chw.R.id.reason_for_referral);
-        editTextVillageLeader = (EditText)   findViewById(com.softmed.htmr_chw.R.id.editTextVillageLeader);
+        editTextfName = (EditText)   findViewById(R.id.editTextfName);
+        editTextmName = (EditText)   findViewById(R.id.editTextmName);
+        editTextlName = (EditText)   findViewById(R.id.editTextlName);
+        editTextReferralReason = (EditText)   findViewById(R.id.reason_for_referral);
+        editTextVillageLeader = (EditText)   findViewById(R.id.editTextVillageLeader);
 
 
         Log.d(TAG, "username"+((BoreshaAfyaApplication)getApplication()).getUsername());
         Log.d(TAG, "team name "+((BoreshaAfyaApplication)getApplication()).getTeam_name());
 
-        editTextDiscountId = (EditText)   findViewById(com.softmed.htmr_chw.R.id.editTextDiscountId);
-        editTextKijiji = (EditText)   findViewById(com.softmed.htmr_chw.R.id.editTextKijiji);
-        editTextCTCNumber = (EditText)   findViewById(com.softmed.htmr_chw.R.id.editTextOthers);
+        editTextDiscountId = (EditText)   findViewById(R.id.editTextDiscountId);
+        editTextKijiji = (EditText)   findViewById(R.id.editTextKijiji);
+        editTextCTCNumber = (EditText)   findViewById(R.id.editTextOthers);
 
-        button = (Button)   findViewById(com.softmed.htmr_chw.R.id.referal_button);
+        button = (Button)   findViewById(R.id.referal_button);
 
         serviceAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, serviceList);
         serviceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerService = (MaterialSpinner)   findViewById(com.softmed.htmr_chw.R.id.spinnerService);
+        spinnerService = (MaterialSpinner)   findViewById(R.id.spinnerService);
         spinnerService.setAdapter(serviceAdapter);
 
         facilityAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, facilityList);
-        facilitytextView = (AutoCompleteTextView) findViewById(com.softmed.htmr_chw.R.id.autocomplete_facility);
+        facilitytextView = (AutoCompleteTextView) findViewById(R.id.autocomplete_facility);
         facilitytextView.setThreshold(1);
         facilitytextView.setAdapter(facilityAdapter);
 
 
-        String[] ITEMS = getResources().getStringArray(com.softmed.htmr_chw.R.array.gender);
+        String[] ITEMS = getResources().getStringArray(R.array.gender);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ITEMS);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerGender = (MaterialSpinner) findViewById(com.softmed.htmr_chw.R.id.spinnerGender);
+        spinnerGender = (MaterialSpinner) findViewById(R.id.spinnerGender);
         spinnerGender.setAdapter(adapter);
 
 
@@ -306,7 +306,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
                 if(service.equals(getResources().getString(R.string.referral_services))){
 
                 }else if (!service.equals("")){
-                    parentLayout = (LinearLayout) findViewById(com.softmed.htmr_chw.R.id.check_add_layout);
+                    parentLayout = (LinearLayout) findViewById(R.id.check_add_layout);
                     categoryValue = getCategory(service);
                     if(categoryValue.equalsIgnoreCase("malaria")){
                         Calendar c = Calendar.getInstance();
@@ -329,7 +329,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
                     CheckBox checkBox = new CheckBox(getApplicationContext());
                     checkBox.setId(k);
                     checkBox.setPadding(0,0,0,0);
-                    checkBox.setTextColor(getResources().getColor(com.softmed.htmr_chw.R.color.secondary_text));
+                    checkBox.setTextColor(getResources().getColor(R.color.secondary_text));
                     if(preferredLocale.equals(ENGLISH_LOCALE))
                         checkBox.setText(indicator.get(k).getIndicatorName());
                     else
@@ -340,7 +340,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
                             Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
                     checkParams.setMargins(0, 8, 0, 8);
                     checkParams.gravity = Gravity.START;
-                    
+
                     parentLayout.addView(checkBox, checkParams);
 
                 }
@@ -377,7 +377,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
             @Override
             public void onClick(View view) {
                 // pick date
-                pickDate(com.softmed.htmr_chw.R.id.reg_dob);
+                pickDate(R.id.reg_dob);
             }
         });
 
@@ -385,12 +385,12 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
             @Override
             public void onClick(View view) {
                 // pick date
-                pickDate(com.softmed.htmr_chw.R.id.appointment_date);
+                pickDate(R.id.appointment_date);
             }
         });
 
     }
-    
+
     private void setReferralServiceList(){
         commonRepository = context().commonrepository("referral_service");
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM referral_service WHERE category <> 'other' ");
@@ -466,7 +466,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
             @Override
             public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
                 GregorianCalendar pickedDate = new GregorianCalendar(year, monthOfYear, dayOfMonth);
-                if (id == com.softmed.htmr_chw.R.id.reg_dob) {
+                if (id == R.id.reg_dob) {
                     dob = pickedDate.getTimeInMillis();
                     dobTextView.setText(dateFormat.format(pickedDate.getTimeInMillis()));
                 }else if(id == R.id.appointment_date){
@@ -484,7 +484,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
         datePickerDialog.setCancelColor(ContextCompat.getColor(getApplicationContext(), android.R.color.holo_red_light));
 
         datePickerDialog.setVersion(DatePickerDialog.Version.VERSION_1);
-        datePickerDialog.setAccentColor(ContextCompat.getColor(getApplicationContext(), com.softmed.htmr_chw.R.color.colorPrimary));
+        datePickerDialog.setAccentColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary));
 
         // show dialog
         datePickerDialog.show(this.getFragmentManager(), "DatePickerDialog");
@@ -497,41 +497,41 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
 
 
         if (TextUtils.isEmpty(editTextfName.getText())) {
-            message = getResources().getString(com.softmed.htmr_chw.R.string.unfilled_information);
+            message = getResources().getString(R.string.unfilled_information);
             editTextfName.setError(message);
             makeToast();
             return false;
         }else if (TextUtils.isEmpty(editTextlName.getText())) {
-            message = getResources().getString(com.softmed.htmr_chw.R.string.unfilled_information);
+            message = getResources().getString(R.string.unfilled_information);
             editTextlName.setError(message);
             makeToast();
             return false;
         }else if (TextUtils.isEmpty(facilitytextView.getText())) {
-            message = getResources().getString(com.softmed.htmr_chw.R.string.missing_facility);
+            message = getResources().getString(R.string.missing_facility);
             facilitytextView.setError(message);
             makeToast();
             return false;
 
         }else if (spinnerGender.getSelectedItemPosition() ==0) {
-            message = getResources().getString(com.softmed.htmr_chw.R.string.missing_gender);
+            message = getResources().getString(R.string.missing_gender);
             spinnerGender.setError(message);
             makeToast();
             return false;
 
         }else if (spinnerService.getSelectedItemPosition() == 0 ) {
-            message = getResources().getString(com.softmed.htmr_chw.R.string.missing_services);
+            message = getResources().getString(R.string.missing_services);
             spinnerService.setError(message);
             makeToast();
             return false;
 
         }else if (TextUtils.isEmpty(editTextKijiji.getText())) {
-            message = getResources().getString(com.softmed.htmr_chw.R.string.missing_physical_address);
+            message = getResources().getString(R.string.missing_physical_address);
             editTextKijiji.setError(message);
             makeToast();
             return false;
         }
         else if (TextUtils.isEmpty(editTextReferralReason.getText())) {
-            message = getResources().getString(com.softmed.htmr_chw.R.string.missing_missing_referral_reason);
+            message = getResources().getString(R.string.missing_missing_referral_reason);
             makeToast();
             return false;
         }
@@ -560,7 +560,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
             Log.d(TAG,"facility name index = "+index);
 
             if(index<0){
-                message = getResources().getString(com.softmed.htmr_chw.R.string.wrong_facility);
+                message = getResources().getString(R.string.wrong_facility);
                 facilitytextView.setError(message);
                 makeToast();
                 return false;
@@ -684,7 +684,7 @@ public class ReferralClientsFormRegisterActivity extends SecuredNativeSmartRegis
     }
 
     private void setLanguage() {
-        android.util.Log.d(TAG,"set Locale : "+preferredLocale);
+        Log.d(TAG,"set Locale : "+preferredLocale);
 
         Resources res = org.ei.opensrp.Context.getInstance().applicationContext().getResources();
         // Change locale settings in the app.

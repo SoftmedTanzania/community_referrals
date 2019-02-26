@@ -81,7 +81,7 @@ public class MyGcmListenerService extends GcmListenerService {
 //                }
 //
 //                try {
-//                    clientFollowup.setCare_taker_name( object.getString("careTakerName"));
+//                    clientFollowup.setHelper_name( object.getString("careTakerName"));
 //                }catch (Exception e){
 //                    e.printStackTrace();
 //                }

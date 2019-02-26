@@ -21,6 +21,7 @@ import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.repository.AllTimelineEvents;
 import org.ei.opensrp.repository.ChildRepository;
 import org.ei.opensrp.repository.ClientReferralRepository;
+import org.ei.opensrp.repository.ClientRepository;
 import org.ei.opensrp.repository.DrishtiRepository;
 import org.ei.opensrp.repository.EligibleCoupleRepository;
 import org.ei.opensrp.repository.FacilityRepository;
@@ -138,6 +139,7 @@ public class Context {
     private ReferralServiceRepository referralServiceRepository;
     private ClientReferralRepository clientReferralRepository;
     private ClientFollowupRepository clientFollowupRepository;
+    private ClientRepository clientRepository;
     private static ImageRepository imageRepository;
 
 
@@ -518,6 +520,7 @@ public class Context {
             drishtireposotorylist.add(facilityRepository());
             drishtireposotorylist.add(clientReferralRepository());
             drishtireposotorylist.add(followupClientRepository());
+            drishtireposotorylist.add(clientRepository());
             drishtireposotorylist.add(referralServiceRepository());
             drishtireposotorylist.add(reportRepository());
             drishtireposotorylist.add(formDataRepository());
@@ -660,6 +663,13 @@ public class Context {
             clientFollowupRepository = new ClientFollowupRepository();
         }
         return clientFollowupRepository;
+    }
+
+    public ClientRepository clientRepository() {
+        if (clientRepository == null) {
+            clientRepository = new ClientRepository();
+        }
+        return clientRepository;
     }
     public IndicatorRepository indicatorRepository() {
         if (indicatorRepository == null) {

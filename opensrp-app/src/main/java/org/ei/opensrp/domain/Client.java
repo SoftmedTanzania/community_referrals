@@ -9,9 +9,9 @@ import java.io.Serializable;
 public class Client implements Serializable {
 
     private String id, relationalid, client_id,details, first_name, middle_name, surname, facility_id,
-            is_valid, service_provider_mobile_number, ward, village, Kijitongoji,care_taker_name,care_taker_phone_number,care_taker_relationship,
+            is_valid, service_provider_mobile_number, ward, village, Kijitongoji, helper_name, helper_phone_number,
             village_leader, service_provider_uiid, phone_number, gender, community_based_hiv_service, ctc_number;
-    private long date_of_birth;
+    private long date_of_birth,status;
     public Client() {
 
     }
@@ -28,9 +28,9 @@ public class Client implements Serializable {
                   String ctc_number,
                   String facility_id,
                   String is_valid,
-                  String care_taker_name,
-                  String care_taker_phone_number,
-                  String care_taker_relationship,
+                  String helper_name,
+                  String helper_phone_number,
+                  long status,
                   String details
     ) {
         this.details = details;
@@ -42,12 +42,12 @@ public class Client implements Serializable {
         this.first_name = first_name;
         this.middle_name = middle_name;
         this.surname = surname;
-        this.care_taker_phone_number = care_taker_phone_number;
-        this.care_taker_relationship = care_taker_relationship;
+        this.helper_phone_number = helper_phone_number;
         this.facility_id = facility_id;
-        this.care_taker_name = care_taker_name;
+        this.helper_name = helper_name;
         this.is_valid = is_valid;
         this.gender = gender;
+        this.status=status;
         this.date_of_birth = date_of_birth;
     }
 
@@ -155,28 +155,20 @@ public class Client implements Serializable {
         Kijitongoji = kijitongoji;
     }
 
-    public String getCare_taker_name() {
-        return care_taker_name;
+    public String getHelper_name() {
+        return helper_name;
     }
 
-    public void setCare_taker_name(String care_taker_name) {
-        this.care_taker_name = care_taker_name;
+    public void setHelper_name(String helper_name) {
+        this.helper_name = helper_name;
     }
 
-    public String getCare_taker_phone_number() {
-        return care_taker_phone_number;
+    public String getHelper_phone_number() {
+        return helper_phone_number;
     }
 
-    public void setCare_taker_phone_number(String care_taker_phone_number) {
-        this.care_taker_phone_number = care_taker_phone_number;
-    }
-
-    public String getCare_taker_relationship() {
-        return care_taker_relationship;
-    }
-
-    public void setCare_taker_relationship(String care_taker_relationship) {
-        this.care_taker_relationship = care_taker_relationship;
+    public void setHelper_phone_number(String helper_phone_number) {
+        this.helper_phone_number = helper_phone_number;
     }
 
     public String getVillage_leader() {
@@ -233,5 +225,13 @@ public class Client implements Serializable {
 
     public void setDate_of_birth(long date_of_birth) {
         this.date_of_birth = date_of_birth;
+    }
+
+    public long getStatus() {
+        return status;
+    }
+
+    public void setStatus(long status) {
+        this.status = status;
     }
 }

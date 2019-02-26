@@ -34,13 +34,13 @@
           "name": "is_valid"
         },
         {
-          "name": "care_taker_name"
+          "name": "helper_name"
         },
         {
-          "name": "care_taker_phone_number"
+          "name": "helper_phone_number"
         },
         {
-          "name": "care_taker_relationship"
+          "name": "status"
         }
       ]
     },{

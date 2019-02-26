@@ -87,7 +87,8 @@
     <string name="missing_physical_address">Please select Clients Physical address</string>
     <string name="incorrect_phone_number">Please enter a valid Phone Number</string>
     <string name="missing_missing_referral_reason">Please fill in the referral reason</string>
-    <string name="visit_facility_hint">Enter facility name</string> <string name="unauthorized">Please check the credentials</string>
+    <string name="visit_facility_hint">Enter facility name</string>
+    <string name="unauthorized">Please check the credentials</string>
     <string name="unknown_response">login failed. Try later</string>
     <string name="no_internet_connectivity">No internet connection. Please ensure data connectivity</string>
     <string name="sent_referrals_label">Sent Referrals</string>
@@ -133,4 +134,10 @@ Aenean quis ex dictum, porttitor nunc id, viverra urna. Suspendisse posuere ex a
     <string name="followup_referrals_chart_key_label">Followup referrals performed</string>
     <string name="visit_date_label">Visit Date</string>
     <string name="register_clients_title">Register Clients</string>
+    <string name="register_clients_button_label">Register Clients</string>
+    <string name="referral_history_label">Referral History</string>
+    <string name="title_activity_client_details">ClientDetails</string>
+    <string name="helper_name">Care Taker Name</string>
+    <string name="helper_phone_number">Care Taker Phone Number</string>
+    <string name="gender">Gender</string>
 </resources>

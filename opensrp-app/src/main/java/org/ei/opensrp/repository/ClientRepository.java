@@ -2,13 +2,13 @@ package org.ei.opensrp.repository;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
 import org.ei.opensrp.domain.Client;
-import org.opensrp.api.constants.Gender;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +29,9 @@ public class ClientRepository extends DrishtiRepository {
             "ctc_number VARCHAR, " +
             "facility_id VARCHAR, " +
             "is_valid VARCHAR, " +
-            "care_taker_name VARCHAR, " +
-            "care_taker_phone_number VARCHAR, " +
-            "care_taker_relationship VARCHAR, " +
+            "helper_name VARCHAR, " +
+            "helper_phone_number VARCHAR, " +
+            "status VARCHAR, " +
             "details VARCHAR)";
     public static final String CLIENT = "client";
     public static final String ID_COLUMN = "id";
@@ -43,14 +43,14 @@ public class ClientRepository extends DrishtiRepository {
     public static final String Surname = "surname";
     public static final String dob = "date_of_birth";
     public static final String CBHS = "community_based_hiv_service";
-    public static final String CTCNumber = "ctc_number";
-    public static final String ReferralFacility = "facility_id";
-    public static final String CareTakerName = "care_taker_name";
-    public static final String CareTakerPhoneNumber = "care_taker_phone_number";
-    public static final String CareTakerRelationship = "care_taker_relationship";
+    public static final String CTC_NUMBER = "ctc_number";
+    public static final String FACILITY_ID = "facility_id";
+    public static final String HELPER_NAME = "helper_name";
+    public static final String HELPER_PHONE_NUMBER = "helper_phone_number";
     public static final String IS_VALID = "is_valid";
+    public static final String status = "status";
     public static final String DETAILS_COLUMN = "details";
-    public static final String[] CLIENT_TABLE_COLUMNS = {ID_COLUMN, Relational_ID,ClientId, fName, mName, Surname,dob, CBHS, CTCNumber,gender, ReferralFacility,CareTakerName,CareTakerPhoneNumber,CareTakerRelationship,IS_VALID,DETAILS_COLUMN};
+    public static final String[] CLIENT_TABLE_COLUMNS = {ID_COLUMN, Relational_ID,ClientId, fName, mName, Surname,dob, CBHS, CTC_NUMBER,gender, FACILITY_ID, HELPER_NAME, HELPER_PHONE_NUMBER,IS_VALID,status,DETAILS_COLUMN};
     
 
     @Override
@@ -117,13 +117,12 @@ public class ClientRepository extends DrishtiRepository {
         values.put(dob, client.getDate_of_birth());
         values.put(DETAILS_COLUMN, new Gson().toJson(client));
         values.put(CBHS, client.getCommunity_based_hiv_service());
-        values.put(CTCNumber, client.getCtc_number());
-        values.put(ReferralFacility, client.getFacility_id());
+        values.put(CTC_NUMBER, client.getCtc_number());
+        values.put(FACILITY_ID, client.getFacility_id());
         values.put(IS_VALID, client.getIs_valid());
-        values.put(CareTakerName, client.getCare_taker_name());
-        values.put(CareTakerPhoneNumber, client.getCare_taker_phone_number());
-        values.put(CareTakerRelationship, client.getCare_taker_relationship());
-        values.put(ReferralFacility, client.getFacility_id());
+        values.put(HELPER_NAME, client.getHelper_name());
+        values.put(HELPER_PHONE_NUMBER, client.getHelper_phone_number());
+        values.put(FACILITY_ID, client.getFacility_id());
         values.put(gender, client.getGender());
         return values;
     }
@@ -146,8 +145,8 @@ public class ClientRepository extends DrishtiRepository {
                     cursor.getString(11),
                     cursor.getString(12),
                     cursor.getString(13),
-                    cursor.getString(15),
-                    cursor.getString(16))
+                    cursor.getLong(14),
+                    cursor.getString(15))
 
             );
             cursor.moveToNext();
@@ -167,6 +166,37 @@ public class ClientRepository extends DrishtiRepository {
         return children;
     }
 
+    public List<Client> RawCustomQueryForAdapter(String query) {
+        Log.i(getClass().getName(), query);
+        SQLiteDatabase database = masterRepository.getReadableDatabase();
+        Cursor cursor = database.rawQuery(query, null);
+
+        List<Client> clients = new ArrayList<Client>();
+        while (!cursor.isAfterLast()) {
+            clients.add(new Client(cursor.getString(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getString(5),
+                    cursor.getLong(6),
+                    cursor.getString(7),
+                    cursor.getString(8), cursor.getString(9),
+                    cursor.getString(10),
+                    cursor.getString(11),
+                    cursor.getString(12),
+                    cursor.getString(13),
+                    cursor.getLong(14),
+                    cursor.getString(15))
+
+            );
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return clients;
+    }
+
     private Client serviceFromCursor(Cursor cursor) {
         return new Client(
                 getColumnValueByAlias(cursor, CLIENT, ID_COLUMN),
@@ -178,12 +208,12 @@ public class ClientRepository extends DrishtiRepository {
                 Long.parseLong(getColumnValueByAlias(cursor, CLIENT, dob)),
                 getColumnValueByAlias(cursor, CLIENT, gender),
                 getColumnValueByAlias(cursor, CLIENT, CBHS),
-                getColumnValueByAlias(cursor, CLIENT, CTCNumber),
-                getColumnValueByAlias(cursor, CLIENT, ReferralFacility),
+                getColumnValueByAlias(cursor, CLIENT, CTC_NUMBER),
+                getColumnValueByAlias(cursor, CLIENT, FACILITY_ID),
                 getColumnValueByAlias(cursor, CLIENT, IS_VALID),
-                getColumnValueByAlias(cursor, CLIENT, CareTakerName),
-                getColumnValueByAlias(cursor, CLIENT, CareTakerPhoneNumber),
-                getColumnValueByAlias(cursor, CLIENT, CareTakerRelationship),
+                getColumnValueByAlias(cursor, CLIENT, HELPER_NAME),
+                getColumnValueByAlias(cursor, CLIENT, HELPER_PHONE_NUMBER),
+                Long.parseLong(getColumnValueByAlias(cursor, CLIENT, status)),
                 getColumnValueByAlias(cursor, CLIENT, DETAILS_COLUMN));
 
     }

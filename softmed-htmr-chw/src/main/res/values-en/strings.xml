@@ -37,7 +37,7 @@
     <string name="title_login_description">Enter username and password</string>
     <string name="button_details">Details</string>
     <string name="button_follow_up">Follow up</string>
-    <string name="title_register_client">New Referral Registration Form</string>
+    <string name="title_register_client">New Client Registration Form</string>
     <string name="client_sex">Sex</string>
     <string name="client_phone">Phone</string>
     <string name="client_age">Age</string>
@@ -97,7 +97,6 @@
     <string name="incorrect_phone_number">Please enter a valid Phone Number</string>
     <string name="other_notes_title">Other Information/Medical Advice</string>
     <string name="button_cancel">CANCEL</string>
-
     <string name="initial_information">Initial Information</string>
     <string name="followup_qn_met_with_client">Have you met with the client?</string>
     <string name="followup_qn_reasons_for_not_visiting_clinic">Reasons for not attending the appointment</string>
@@ -118,5 +117,10 @@
     <string name="total_label">Total</string>
     <string name="completed_referrals_label">Completed Referrals</string>
     <string name="referred_clients_desc">Use this section to view all referrals issued with their status check</string>
+    <string name="register_clients_button_label">Register Clients</string>
+    <string name="referral_history_label">Referral History</string>
+    <string name="helper_name">Helper Name</string>
+    <string name="helper_phone_number">Helper Phone Number</string>
+    <string name="gender">Gender</string>
 
 </resources>

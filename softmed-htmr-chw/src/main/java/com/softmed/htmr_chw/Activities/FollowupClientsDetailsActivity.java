@@ -125,7 +125,7 @@ public class FollowupClientsDetailsActivity extends SecuredNativeSmartRegisterAc
 //        referedReason.setText(clientFollowupPersonObject.getReferral_reason());
 //        facility.setText(getFacilityName(clientFollowupPersonObject.getFacility_id()));
 //        referedDate.setText(dateFormat.format(clientFollowupPersonObject.getReferral_date()));
-//        sponsor.setText(clientFollowupPersonObject.getCare_taker_relationship()+"\n"+clientFollowupPersonObject.getCare_taker_name()+"\n"+clientFollowupPersonObject.getCare_taker_name_phone_number());
+//        sponsor.setText(clientFollowupPersonObject.getCare_taker_relationship()+"\n"+clientFollowupPersonObject.getHelper_name()+"\n"+clientFollowupPersonObject.getCare_taker_name_phone_number());
 //        residence.setText(clientFollowupPersonObject.getMap_cue());
 
         feedback.setText(clientFollowupPersonObject.getReferral_feedback());

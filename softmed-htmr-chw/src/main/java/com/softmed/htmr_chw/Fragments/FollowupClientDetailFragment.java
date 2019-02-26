@@ -163,7 +163,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
 //        }
 //        try {
 //            sponsor.setText((clientFollowup.getCare_taker_relationship()!=null ? "" : clientFollowup.getCare_taker_relationship()) + "\n" +
-//                    (clientFollowup.getCare_taker_name()!=null ? "" : clientFollowup.getCare_taker_name()) + "\n" +
+//                    (clientFollowup.getHelper_name()!=null ? "" : clientFollowup.getHelper_name()) + "\n" +
 //                    (clientFollowup.getCare_taker_name_phone_number()!=null ? "" : clientFollowup.getCare_taker_name_phone_number()));
 //
 //        }catch (Exception e){
