@@ -34,7 +34,7 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
+import com.softmed.htmr_chw.Pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;

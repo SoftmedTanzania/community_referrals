@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.pageradapter.FollowupClintsRecyclerAdapter;
-import com.softmed.htmr_chw.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
+import com.softmed.htmr_chw.Pageradapter.FollowupClintsRecyclerAdapter;
+import com.softmed.htmr_chw.Pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 
 import org.ei.opensrp.domain.ClientFollowup;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;

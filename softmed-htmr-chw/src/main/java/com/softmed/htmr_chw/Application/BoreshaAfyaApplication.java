@@ -23,7 +23,7 @@ import org.ei.opensrp.domain.Indicator;
 import org.ei.opensrp.domain.ReferralServiceDataModel;
 import org.ei.opensrp.domain.Response;
 
-import com.softmed.htmr_chw.LoginActivity;
+import com.softmed.htmr_chw.Activities.LoginActivity;
 import com.softmed.htmr_chw.Activities.NativeHomeActivity;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.util.Utils;

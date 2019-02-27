@@ -117,7 +117,7 @@
     <string name="total_label">Total</string>
     <string name="completed_referrals_label">Completed Referrals</string>
     <string name="referred_clients_desc">Use this section to view all referrals issued with their status check</string>
-    <string name="register_clients_button_label">Register Clients</string>
+    <string name="register_clients_button_label">Registered Clients</string>
     <string name="referral_history_label">Referral History</string>
     <string name="helper_name">Helper Name</string>
     <string name="helper_phone_number">Helper Phone Number</string>

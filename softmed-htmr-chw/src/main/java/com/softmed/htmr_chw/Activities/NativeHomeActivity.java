@@ -14,7 +14,6 @@ import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.ControllerFilterMap;
 import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
-import com.softmed.htmr_chw.LoginActivity;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.util.NavigationController;
 import com.softmed.htmr_chw.util.OrientationHelper;

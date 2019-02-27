@@ -169,16 +169,22 @@
                                             app:met_floatingLabelTextColor="@color/colorPrimary" />
 
 
-                                        <TextView
+                                        <com.rengwuxian.materialedittext.MaterialEditText
                                             android:id="@+id/reg_dob"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
                                             android:hint="@string/client_birthday"
                                             android:textColor="@color/text_black"
-                                            android:textSize="14sp" />
+                                            android:textSize="14sp"
+                                            android:editable="false"
+                                            android:clickable="false"
+                                            android:focusable="false"
+                                            app:met_floatingLabel="normal"
+                                            app:met_floatingLabelText="@string/client_birthday"
+                                            app:met_floatingLabelTextColor="@color/colorPrimary"/>
 
-                                        <TextView
+                                        <com.rengwuxian.materialedittext.MaterialEditText
                                             android:layout_marginLeft="16dp"
                                             android:id="@+id/editTextKijiji"
                                             android:layout_width="0dp"
@@ -189,7 +195,13 @@
                                             android:imeOptions="actionNext"
                                             android:textColor="@color/primary_text"
                                             android:textColorHint="@color/hint_text"
-                                            android:textSize="14sp" />
+                                            android:textSize="14sp"
+                                            android:editable="false"
+                                            android:clickable="false"
+                                            android:focusable="false"
+                                            app:met_floatingLabel="normal"
+                                            app:met_floatingLabelText="@string/client_address"
+                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
 
 
                                     </LinearLayout>
@@ -217,7 +229,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="8dp">
 
-                                        <TextView
+                                        <com.rengwuxian.materialedittext.MaterialEditText
                                             android:id="@+id/cbhs"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
@@ -228,9 +240,15 @@
                                             android:gravity="center_vertical"
                                             android:textColor="@color/primary_text"
                                             android:textColorHint="@color/black_translucent"
-                                            android:textSize="14sp" />
+                                            android:textSize="14sp"
+                                            android:editable="false"
+                                            android:clickable="false"
+                                            android:focusable="false"
+                                            app:met_floatingLabel="normal"
+                                            app:met_floatingLabelText="@string/title_cbhs_number"
+                                            app:met_floatingLabelTextColor="@color/colorPrimary"/>
 
-                                        <TextView
+                                        <com.rengwuxian.materialedittext.MaterialEditText
                                             android:id="@+id/ctc_number"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
@@ -240,9 +258,15 @@
                                             android:hint="@string/title_ctc_number"
                                             android:textColor="@color/primary_text"
                                             android:textColorHint="@color/hint_text"
-                                            android:textSize="14sp" />
+                                            android:textSize="14sp"
+                                            android:editable="false"
+                                            android:clickable="false"
+                                            android:focusable="false"
+                                            app:met_floatingLabel="normal"
+                                            app:met_floatingLabelText="@string/title_ctc_number"
+                                            app:met_floatingLabelTextColor="@color/colorPrimary"/>
 
-                                        <TextView
+                                        <com.rengwuxian.materialedittext.MaterialEditText
                                             android:layout_marginLeft="16dp"
                                             android:id="@+id/edittextPhone"
                                             android:layout_width="0dp"
@@ -255,7 +279,13 @@
                                             android:maxLength="10"
                                             android:textColor="@color/primary_text"
                                             android:textColorHint="@color/hint_text"
-                                            android:textSize="14sp" />
+                                            android:textSize="14sp"
+                                            android:editable="false"
+                                            android:clickable="false"
+                                            android:focusable="false"
+                                            app:met_floatingLabel="normal"
+                                            app:met_floatingLabelText="@string/client_phone"
+                                            app:met_floatingLabelTextColor="@color/colorPrimary"/>
 
 
                                     </LinearLayout>
@@ -276,7 +306,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="8dp">
 
-                                    <TextView
+                                    <com.rengwuxian.materialedittext.MaterialEditText
                                         android:id="@+id/helper_name"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -287,9 +317,15 @@
                                         android:inputType="text"
                                         android:textColor="@color/primary_text"
                                         android:textColorHint="@color/black_translucent"
-                                        android:textSize="14sp" />
+                                        android:textSize="14sp"
+                                        android:editable="false"
+                                        android:clickable="false"
+                                        android:focusable="false"
+                                        app:met_floatingLabel="normal"
+                                        app:met_floatingLabelText="@string/helper_name"
+                                        app:met_floatingLabelTextColor="@color/colorPrimary"/>
 
-                                    <TextView
+                                    <com.rengwuxian.materialedittext.MaterialEditText
                                         android:id="@+id/helper_phone_number"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -298,9 +334,15 @@
                                         android:hint="@string/helper_phone_number"
                                         android:textColor="@color/primary_text"
                                         android:textColorHint="@color/hint_text"
-                                        android:textSize="14sp" />
+                                        android:textSize="14sp"
+                                        android:editable="false"
+                                        android:clickable="false"
+                                        android:focusable="false"
+                                        app:met_floatingLabel="normal"
+                                        app:met_floatingLabelText="@string/helper_phone_number"
+                                        app:met_floatingLabelTextColor="@color/colorPrimary"/>
 
-                                    <TextView
+                                    <com.rengwuxian.materialedittext.MaterialEditText
                                         android:id="@+id/editTextVillageLeader"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -310,7 +352,13 @@
                                         android:hint="@string/client_veo"
                                         android:textColor="@color/primary_text"
                                         android:textColorHint="@color/hint_text"
-                                        android:textSize="14sp" />
+                                        android:textSize="14sp"
+                                        android:editable="false"
+                                        android:clickable="false"
+                                        android:focusable="false"
+                                        app:met_floatingLabel="normal"
+                                        app:met_floatingLabelText="@string/client_veo"
+                                        app:met_floatingLabelTextColor="@color/colorPrimary"/>
 
 
                                 </LinearLayout>

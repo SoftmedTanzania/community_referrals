@@ -41,6 +41,9 @@
         },
         {
           "name": "status"
+        },
+        {
+          "name": "phone_number"
         }
       ]
     },{

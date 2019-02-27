@@ -1,36 +1,22 @@
-package com.softmed.htmr_chw.pageradapter;
+package com.softmed.htmr_chw.Pageradapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.Activities.ClientDetails;
-import com.softmed.htmr_chw.Activities.ClientsRegisterFormActivity;
 import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.util.Utils;
 
-import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.Client;
-import org.ei.opensrp.domain.ClientReferral;
-import org.ei.opensrp.repository.AllSharedPreferences;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-
-import static android.preference.PreferenceManager.getDefaultSharedPreferences;
-import static org.ei.opensrp.AllConstants.SWAHILI_LOCALE;
 
 
 /**

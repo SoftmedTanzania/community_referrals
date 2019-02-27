@@ -1,4 +1,4 @@
-package com.softmed.htmr_chw;
+package com.softmed.htmr_chw.Activities;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -37,7 +37,6 @@ import org.ei.opensrp.domain.LoginResponse;
 import org.ei.opensrp.domain.Response;
 import org.ei.opensrp.domain.ResponseStatus;
 
-import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.Service.FacilityService;
 import com.softmed.htmr_chw.Service.ReferralService;

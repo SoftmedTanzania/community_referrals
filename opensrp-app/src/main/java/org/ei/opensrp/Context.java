@@ -652,7 +652,7 @@ public class Context {
         }
         return facilityRepository;
     }
-    private ClientReferralRepository clientReferralRepository() {
+    public ClientReferralRepository clientReferralRepository() {
         if (clientReferralRepository == null) {
             clientReferralRepository = new ClientReferralRepository();
         }

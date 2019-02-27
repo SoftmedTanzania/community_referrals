@@ -5,7 +5,6 @@ import android.app.FragmentTransaction;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,17 +20,11 @@ import com.google.gson.Gson;
 import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Repository.LocationSelectorDialogFragment;
-import com.softmed.htmr_chw.pageradapter.ClientsListAdapter;
-import com.softmed.htmr_chw.pageradapter.ReferredClientsListAdapter;
-import com.softmed.htmr_chw.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
+import com.softmed.htmr_chw.Pageradapter.ClientsListAdapter;
+import com.softmed.htmr_chw.Pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import com.softmed.htmr_chw.util.AsyncTask;
 import com.softmed.htmr_chw.util.DividerItemDecoration;
-import com.softmed.htmr_chw.util.Utils;
-import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-import org.ei.opensrp.Context;
-import org.ei.opensrp.commonregistry.CommonPersonObject;
-import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.Client;
 import org.ei.opensrp.domain.ClientReferral;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
@@ -40,7 +33,6 @@ import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 

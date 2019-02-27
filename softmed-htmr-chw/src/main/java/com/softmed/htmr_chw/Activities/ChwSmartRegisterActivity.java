@@ -37,7 +37,6 @@ import com.softmed.htmr_chw.Fragments.FollowupClientsFragment;
 import com.softmed.htmr_chw.Fragments.ReferredClientsFragment;
 import com.softmed.htmr_chw.Fragments.RegisteredClientsFragment;
 import com.softmed.htmr_chw.Fragments.ReportFragment;
-import com.softmed.htmr_chw.LoginActivity;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Repository.LocationSelectorDialogFragment;
 import com.softmed.htmr_chw.util.FitDoughnut;

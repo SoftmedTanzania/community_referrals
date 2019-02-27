@@ -26,12 +26,12 @@ import android.widget.Toast;
 
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
-import com.softmed.htmr_chw.LoginActivity;
+import com.softmed.htmr_chw.Activities.LoginActivity;
 import com.softmed.htmr_chw.util.NavigationController;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Repository.LocationSelectorDialogFragment;
-import com.softmed.htmr_chw.pageradapter.CHWPagerAdapter;
-import com.softmed.htmr_chw.pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
+import com.softmed.htmr_chw.Pageradapter.CHWPagerAdapter;
+import com.softmed.htmr_chw.Pageradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import com.softmed.htmr_chw.util.FitDoughnut;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;

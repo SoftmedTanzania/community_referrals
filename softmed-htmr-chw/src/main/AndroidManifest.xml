@@ -94,7 +94,7 @@
             android:enabled="true"></service>
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activities.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus">
             <intent-filter>
@@ -121,10 +121,11 @@
             android:exported="true"
             android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
 
-        <activityf
-            android:name=".ClientsDetailsActivity"
+        <activity
+            android:name=".Activities.ReferralFormRegisterActivity"
             android:label="@string/title_item_detail"
             android:theme="@style/AppTheme.NoActionBar" />
+
 
         <activity
             android:name=".Activities.ClientDetails"

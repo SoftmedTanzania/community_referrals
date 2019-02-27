@@ -31,6 +31,10 @@ public class Client implements Serializable {
                   String helper_name,
                   String helper_phone_number,
                   long status,
+                  String phone_number,
+                  String village,
+                  String village_leader,
+                  String ward,
                   String details
     ) {
         this.details = details;
@@ -48,6 +52,11 @@ public class Client implements Serializable {
         this.is_valid = is_valid;
         this.gender = gender;
         this.status=status;
+        this.village=village;
+        this.ward=ward;
+        this.village_leader=village_leader;
+        this.status=status;
+        this.phone_number = phone_number;
         this.date_of_birth = date_of_birth;
     }
 
