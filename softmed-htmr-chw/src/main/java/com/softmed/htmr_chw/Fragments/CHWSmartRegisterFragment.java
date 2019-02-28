@@ -120,7 +120,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
             public void onClick(View view) {
 
                 isOnTheMainMenu = false;
-                ReferredClientsFragment newFragment = new ReferredClientsFragment();
+                ReferralsListFragment newFragment = new ReferralsListFragment();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.fragments, newFragment,"tag");
                 transaction.addToBackStack(null);
@@ -456,8 +456,8 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     @Override
     public void refreshListView() {
         try {
-            ReferredClientsFragment referredClientsFragment = (ReferredClientsFragment) getFragmentManager().findFragmentByTag("tag");;
-            referredClientsFragment.populateData();
+            ReferralsListFragment referralsListFragment = (ReferralsListFragment) getFragmentManager().findFragmentByTag("tag");;
+            referralsListFragment.populateData();
 
         }catch (Exception e){
             e.printStackTrace();

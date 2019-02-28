@@ -44,8 +44,8 @@ import java.util.Locale;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
 
-public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
-    private static final String TAG = ReferredClientsFragment.class.getSimpleName(),
+public class ReferralsListFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+    private static final String TAG = ReferralsListFragment.class.getSimpleName(),
             TABLE_NAME = "client_referral";
     private CommonRepository commonRepository;
     private List<ClientReferral> clientReferralPersonObjectList = new ArrayList<>();
@@ -60,11 +60,11 @@ public class ReferredClientsFragment extends SecuredNativeSmartRegisterCursorAda
     private RecyclerView recyclerView;
     private ReferredClientsListAdapter clientsListAdapter;
 
-    public ReferredClientsFragment() {
+    public ReferralsListFragment() {
     }
 
-    public static ReferredClientsFragment newInstance() {
-        ReferredClientsFragment fragment = new ReferredClientsFragment();
+    public static ReferralsListFragment newInstance() {
+        ReferralsListFragment fragment = new ReferralsListFragment();
 
         return fragment;
     }

@@ -39,12 +39,12 @@ import java.util.Locale;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
 
-public class RegisteredClientsFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     private ClientRepository clientRepository;
     private List<Client> clients = new ArrayList<>();
     private Cursor cursor;
     private String locationDialogTAG = "locationDialogTAG";
-    private static final String TAG = RegisteredClientsFragment.class.getSimpleName(),
+    private static final String TAG = ClientsListFragment.class.getSimpleName(),
             TABLE_NAME = "client_referral";
     private long startDate = 0, endDate = 0;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
@@ -55,11 +55,11 @@ public class RegisteredClientsFragment extends SecuredNativeSmartRegisterCursorA
     private RecyclerView recyclerView;
     private ClientsListAdapter clientsListAdapter;
 
-    public RegisteredClientsFragment() {
+    public ClientsListFragment() {
     }
 
-    public static RegisteredClientsFragment newInstance() {
-        RegisteredClientsFragment fragment = new RegisteredClientsFragment();
+    public static ClientsListFragment newInstance() {
+        ClientsListFragment fragment = new ClientsListFragment();
 
         return fragment;
     }

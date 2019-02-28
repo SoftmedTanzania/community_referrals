@@ -34,8 +34,8 @@ import com.google.gson.Gson;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.Fragments.CHWSmartRegisterFragment;
 import com.softmed.htmr_chw.Fragments.FollowupClientsFragment;
-import com.softmed.htmr_chw.Fragments.ReferredClientsFragment;
-import com.softmed.htmr_chw.Fragments.RegisteredClientsFragment;
+import com.softmed.htmr_chw.Fragments.ReferralsListFragment;
+import com.softmed.htmr_chw.Fragments.ClientsListFragment;
 import com.softmed.htmr_chw.Fragments.ReportFragment;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Repository.LocationSelectorDialogFragment;
@@ -180,7 +180,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 tabsLayout.addView(tabLinearLayout2);
 
                 isOnTheMainMenu = false;
-                RegisteredClientsFragment newFragment = new RegisteredClientsFragment();
+                ClientsListFragment newFragment = new ClientsListFragment();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.fragments, newFragment,"tag");
                 transaction.addToBackStack(null);
@@ -204,7 +204,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 tabsLayout.addView(tabLinearLayout2);
 
                 isOnTheMainMenu = false;
-                ReferredClientsFragment newFragment = new ReferredClientsFragment();
+                ReferralsListFragment newFragment = new ReferralsListFragment();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.fragments, newFragment,"tag");
                 transaction.addToBackStack(null);
@@ -357,8 +357,8 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     public void refreshListView() {
         try {
-            ReferredClientsFragment referredClientsFragment = (ReferredClientsFragment) getSupportFragmentManager().findFragmentByTag("tag");;
-            referredClientsFragment.populateData();
+            ReferralsListFragment referralsListFragment = (ReferralsListFragment) getSupportFragmentManager().findFragmentByTag("tag");;
+            referralsListFragment.populateData();
 
         }catch (Exception e){
             e.printStackTrace();

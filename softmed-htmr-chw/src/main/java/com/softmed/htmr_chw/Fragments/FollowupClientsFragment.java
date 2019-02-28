@@ -49,8 +49,8 @@ public class FollowupClientsFragment extends SecuredNativeSmartRegisterCursorAda
      * @return A new instance of fragment ReferredClientsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ReferredClientsFragment newInstance() {
-        ReferredClientsFragment fragment = new ReferredClientsFragment();
+    public static ReferralsListFragment newInstance() {
+        ReferralsListFragment fragment = new ReferralsListFragment();
         return fragment;
     }
 
