@@ -26,7 +26,7 @@ import com.softmed.htmr_chw.Repository.FacilityObject;
 import com.softmed.htmr_chw.Repository.ReferralServiceObject;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
-import org.ei.opensrp.domain.ClientReferral;
+import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.domain.Indicator;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -77,12 +77,12 @@ public class Utils {
         return Build.VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN;
     }
 
-    public static ClientReferral convertToClientPersonObject(CommonPersonObject commonPersonObject) {
+    public static Referral convertToClientPersonObject(CommonPersonObject commonPersonObject) {
         String details = commonPersonObject.getColumnmaps().get("details");
         Log.d(TAG, "details string commonPersonObject = " + convertStandardJSONString(details));
         try {
             //TODO uncomment this
-            return new ClientReferral(
+            return new Referral(
 //                    commonPersonObject.getColumnmaps().get("id"),
 //                    commonPersonObject.getColumnmaps().get("relationalid"),
 //                    commonPersonObject.getColumnmaps().get("first_name"),
@@ -148,16 +148,16 @@ public class Utils {
     }
 
 
-    public static List<ClientReferral> convertToClientReferralPersonObjectList(List<CommonPersonObject> commonPersonObjectsList) {
-        List<ClientReferral> clientReferralPersonObjects = new ArrayList<>();
+    public static List<Referral> convertToClientReferralObjectList(List<CommonPersonObject> commonPersonObjectsList) {
+        List<Referral> referralPersonObjects = new ArrayList<>();
         for (CommonPersonObject common : commonPersonObjectsList) {
-            clientReferralPersonObjects.add(convertToClientPersonObject(common));
+            referralPersonObjects.add(convertToClientPersonObject(common));
 
         }
-        Log.d(TAG, "client person Object string = " + clientReferralPersonObjects.toString());
+        Log.d(TAG, "client person Object string = " + referralPersonObjects.toString());
 
 
-        return clientReferralPersonObjects;
+        return referralPersonObjects;
     }
 
 

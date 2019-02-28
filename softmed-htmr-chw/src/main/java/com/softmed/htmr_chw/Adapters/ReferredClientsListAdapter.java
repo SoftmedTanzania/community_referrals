@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.domain.ClientReferral;
+import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.repository.AllSharedPreferences;
 
 import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
@@ -37,10 +37,10 @@ public class ReferredClientsListAdapter extends
         RecyclerView.Adapter<ReferredClientsListAdapter.ViewHolder> {
     private static String TAG = ReferredClientsListAdapter.class.getSimpleName();
     private CommonRepository commonRepository;
-    private List<ClientReferral> clients = new ArrayList<>();;
+    private List<Referral> clients = new ArrayList<>();;
     private Context mContext;
 
-    public ReferredClientsListAdapter(Context context, List<ClientReferral> client, CommonRepository commonRepository) {
+    public ReferredClientsListAdapter(Context context, List<Referral> client, CommonRepository commonRepository) {
         clients = client;
         mContext = context;
         this.commonRepository = commonRepository;
@@ -65,12 +65,12 @@ public class ReferredClientsListAdapter extends
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
 
-        ClientReferral client = clients.get(position);
+        Referral client = clients.get(position);
 
         String gsonReferral = Utils.convertStandardJSONString(client.getDetails());
         Log.d(TAG, "gsonReferral0 = " +gsonReferral);
-        final ClientReferral clientReferral = new Gson().fromJson(gsonReferral,ClientReferral.class);
-        Log.d(TAG, "gsonReferral1 = " +new Gson().toJson(clientReferral));
+        final Referral referral = new Gson().fromJson(gsonReferral,Referral.class);
+        Log.d(TAG, "gsonReferral1 = " +new Gson().toJson(referral));
         Log.d(TAG, "gsonReferral2 = " + new Gson().toJson(client.getDetails()));
 
 

@@ -40,7 +40,7 @@ public class ClientRepository extends DrishtiRepository {
     public static final String TABLE_NAME = "client";
     public static final String ID_COLUMN = "id";
     public static final String Relational_ID = "relationalid";
-    public static final String ClientId = "client_id";
+    public static final String CLIENT_ID = "client_id";
     public static final String fName = "first_name";
     public static final String gender = "gender";
     public static final String mName = "middle_name";
@@ -58,7 +58,7 @@ public class ClientRepository extends DrishtiRepository {
     public static final String WARD = "ward";
     public static final String VILLAGE_LEADER = "village_leader";
     public static final String DETAILS_COLUMN = "details";
-    public static final String[] CLIENT_TABLE_COLUMNS = {ID_COLUMN, Relational_ID,ClientId, fName, mName, Surname, DOB, CBHS, CTC_NUMBER,gender, FACILITY_ID, HELPER_NAME, HELPER_PHONE_NUMBER,IS_VALID, STATUS,PHONE_NUMBER,VILLAGE,VILLAGE_LEADER,WARD,DETAILS_COLUMN};
+    public static final String[] CLIENT_TABLE_COLUMNS = {ID_COLUMN, Relational_ID, CLIENT_ID, fName, mName, Surname, DOB, CBHS, CTC_NUMBER,gender, FACILITY_ID, HELPER_NAME, HELPER_PHONE_NUMBER,IS_VALID, STATUS,PHONE_NUMBER,VILLAGE,VILLAGE_LEADER,WARD,DETAILS_COLUMN};
     
 
     @Override
@@ -118,7 +118,7 @@ public class ClientRepository extends DrishtiRepository {
         ContentValues values = new ContentValues();
         values.put(ID_COLUMN, client.getId());
         values.put(Relational_ID, client.getRelationalid());
-        values.put(ClientId, client.getClient_id());
+        values.put(CLIENT_ID, client.getClient_id());
         values.put(fName, client.getFirst_name());
         values.put(mName, client.getMiddle_name());
         values.put(Surname, client.getSurname());
@@ -222,7 +222,7 @@ public class ClientRepository extends DrishtiRepository {
         return new Client(
                 getColumnValueByAlias(cursor, TABLE_NAME, ID_COLUMN),
                 getColumnValueByAlias(cursor, TABLE_NAME, Relational_ID),
-                getColumnValueByAlias(cursor, TABLE_NAME, ClientId),
+                getColumnValueByAlias(cursor, TABLE_NAME, CLIENT_ID),
                 getColumnValueByAlias(cursor, TABLE_NAME, fName),
                 getColumnValueByAlias(cursor, TABLE_NAME, mName),
                 getColumnValueByAlias(cursor, TABLE_NAME, Surname),

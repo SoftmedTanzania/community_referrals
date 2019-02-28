@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Coze on 11/20/17.
  */
 
-public class ClientReferral implements Serializable {
+public class Referral implements Serializable {
 
     private String id, relationalid, details, referral_feedback, other_notes,
             services_given_to_patient, referral_uuid, facility_id,
@@ -16,23 +16,23 @@ public class ClientReferral implements Serializable {
     private boolean test_results;
     private String indicator_ids;
 
-    public ClientReferral() {
+    public Referral() {
 
     }
 
-    public ClientReferral(String id,
-                          String relationalId,
-                          String clientId,
-                          Long referral_date,
-                          Long appointment_date,
-                          String facility_id,
-                          String ReferralReason,
-                          String referral_service_id,
-                          String referral_status,
-                          String is_emergency,
-                          String is_valid,
-                          String indicator_ids,
-                          String details
+    public Referral(String id,
+                    String relationalId,
+                    String clientId,
+                    Long referral_date,
+                    Long appointment_date,
+                    String facility_id,
+                    String ReferralReason,
+                    String referral_service_id,
+                    String referral_status,
+                    String is_emergency,
+                    String is_valid,
+                    String indicator_ids,
+                    String details
     ) {
         this.details = details;
         this.id = id;

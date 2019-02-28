@@ -39,7 +39,7 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
-import org.ei.opensrp.repository.ClientFollowupRepository;
+import org.ei.opensrp.repository.FollowupReferralRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,7 +69,7 @@ public class ReportFragment extends SecuredNativeSmartRegisterCursorAdapterFragm
     private Button applyDateRangeButton;
     private CommonRepository commonRepository;
 
-    private ClientFollowupRepository clientFollowupRepository;
+    private FollowupReferralRepository followupReferralRepository;
     private TableLayout servicesTable;
     private PieChart mChart1;
     private BarChart mChart2;
@@ -92,7 +92,7 @@ public class ReportFragment extends SecuredNativeSmartRegisterCursorAdapterFragm
         preferredLocale = allSharedPreferences.fetchLanguagePreference();
 
 
-        clientFollowupRepository = context().followupClientRepository();
+        followupReferralRepository = context().followupClientRepository();
         commonRepository = context().commonrepository(TABLE_NAME);
 
         dateRangeFromText = (TextView) rowview.findViewById(R.id.date_range_from);
@@ -326,16 +326,16 @@ public class ReportFragment extends SecuredNativeSmartRegisterCursorAdapterFragm
                 Cursor receivedMaleReferralsServicesCursor = null;
                 Cursor receivedFemaleReferralsServicesCursor = null;
 
-                Cursor providedReferralsServicesCursor = clientFollowupRepository.RawCustomQueryForAdapter("select * FROM referral_service INNER JOIN client_referral ON  referral_service.id = client_referral.referral_service_id " +
+                Cursor providedReferralsServicesCursor = followupReferralRepository.RawCustomQueryForAdapter("select * FROM referral_service INNER JOIN client_referral ON  referral_service.id = client_referral.referral_service_id " +
                         (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
                         (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : "") +
                         "  GROUP BY referral_service.id");
 
                 try {
-                    receivedMaleReferralsServicesCursor = clientFollowupRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Male'  " +
+                    receivedMaleReferralsServicesCursor = followupReferralRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Male'  " +
                             (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
                             (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : ""));
-                    receivedFemaleReferralsServicesCursor = clientFollowupRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Female'  " +
+                    receivedFemaleReferralsServicesCursor = followupReferralRepository.RawCustomQueryForAdapter("select * FROM followup_client WHERE gender = 'Female'  " +
                             (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
                             (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : ""));
                 } catch (Exception e) {
@@ -381,7 +381,7 @@ public class ReportFragment extends SecuredNativeSmartRegisterCursorAdapterFragm
                         e.printStackTrace();
                     }
 
-                    Cursor healthFacilityCursor = clientFollowupRepository.RawCustomQueryForAdapter("select client_referral.facility_id,facility.name FROM client_referral " +
+                    Cursor healthFacilityCursor = followupReferralRepository.RawCustomQueryForAdapter("select client_referral.facility_id,facility.name FROM client_referral " +
                             "INNER JOIN referral_service ON  client_referral.referral_service_id = referral_service.id " +
                             "INNER JOIN facility ON  client_referral.facility_id = facility.id " +
                             (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +

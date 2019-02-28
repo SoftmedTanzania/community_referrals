@@ -8,13 +8,13 @@ import com.google.gson.Gson;
 import net.sqlcipher.database.SQLiteDatabase;
 import org.apache.commons.lang3.StringUtils;
 import org.ei.opensrp.domain.ClientFollowup;
-import org.ei.opensrp.domain.ClientReferral;
+
 import java.util.ArrayList;
 import java.util.List;
 import static net.sqlcipher.DatabaseUtils.longForQuery;
 import static org.apache.commons.lang3.StringUtils.repeat;
 
-public class ClientFollowupRepository extends DrishtiRepository {
+public class FollowupReferralRepository extends DrishtiRepository {
     private static final String CHILD_SQL = "CREATE TABLE followup_client(id VARCHAR PRIMARY KEY, relationalid VARCHAR, " +
             "referral_date VARCHAR, " +
             "visit_date VARCHAR," +

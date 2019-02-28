@@ -1,11 +1,10 @@
 package org.ei.opensrp.repository;
 
-import android.content.ContentValues;
 import android.util.Log;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.ei.opensrp.domain.Child;
-import org.ei.opensrp.domain.ClientReferral;
+import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.domain.EligibleCouple;
 import org.ei.opensrp.domain.Mother;
 
@@ -17,17 +16,17 @@ import static org.ei.opensrp.repository.MotherRepository.TYPE_PNC;
 public class AllBeneficiaries {
     private ChildRepository childRepository;
     private MotherRepository motherRepository;
-    private ClientReferralRepository clientReferralRepository;
+    private ReferralRepository referralRepository;
     private final AlertRepository alertRepository;
     private final TimelineEventRepository timelineEventRepository;
 
-    public AllBeneficiaries(MotherRepository motherRepository, ClientReferralRepository clientReferralRepository,ChildRepository childRepository,
+    public AllBeneficiaries(MotherRepository motherRepository, ReferralRepository referralRepository, ChildRepository childRepository,
                             AlertRepository alertRepository, TimelineEventRepository timelineEventRepository) {
         this.childRepository = childRepository;
         this.motherRepository = motherRepository;
         this.alertRepository = alertRepository;
         this.timelineEventRepository = timelineEventRepository;
-        this.clientReferralRepository = clientReferralRepository;
+        this.referralRepository = referralRepository;
     }
 
     //#TODO
@@ -55,12 +54,12 @@ public class AllBeneficiaries {
     }
 
     public long successCount() {
-        return clientReferralRepository.succesfulcount();
+        return referralRepository.succesfulcount();
     }
 
     public long unsuccessCount() {
-        Log.d("count","the count "+clientReferralRepository.unsuccesfulcount());
-        return clientReferralRepository.unsuccesfulcount();
+        Log.d("count","the count "+ referralRepository.unsuccesfulcount());
+        return referralRepository.unsuccesfulcount();
     }
 
     public long childCount() {
@@ -143,10 +142,10 @@ public class AllBeneficiaries {
         motherRepository.update(mother);
     }
 
-    public void updateClientReferral(ClientReferral clientReferral) {
-        clientReferralRepository.update(clientReferral);
+    public void updateClientReferral(Referral referral) {
+        referralRepository.update(referral);
     }
-    public ClientReferral findClientReferral(String id) {
-        return clientReferralRepository.find(id);
+    public Referral findClientReferral(String id) {
+        return referralRepository.find(id);
     }
 }

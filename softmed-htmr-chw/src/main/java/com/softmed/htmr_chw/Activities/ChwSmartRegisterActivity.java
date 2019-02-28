@@ -46,7 +46,7 @@ import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.ClientFollowup;
-import org.ei.opensrp.domain.ClientReferral;
+import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.service.PendingFormSubmissionService;
@@ -437,7 +437,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         }).start();
     }
 
-    public void showPreRegistrationDetailsDialog(ClientReferral clientReferral) {
+    public void showPreRegistrationDetailsDialog(Referral referral) {
 //
 //        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
 //        String gsonClient = Utils.convertStandardJSONString(clientReferral.getDetails());

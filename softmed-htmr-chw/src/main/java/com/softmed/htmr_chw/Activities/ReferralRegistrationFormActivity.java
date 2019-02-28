@@ -41,7 +41,7 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.domain.ClientReferral;
+import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.domain.Indicator;
 import org.ei.opensrp.domain.SyncStatus;
 import org.ei.opensrp.domain.form.FormData;
@@ -50,7 +50,7 @@ import org.ei.opensrp.domain.form.FormInstance;
 import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
-import org.ei.opensrp.repository.ClientReferralRepository;
+import org.ei.opensrp.repository.ReferralRepository;
 import org.ei.opensrp.repository.IndicatorRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
@@ -94,10 +94,10 @@ public class ReferralRegistrationFormActivity extends SecuredNativeSmartRegister
     private List<String> serviceList = new ArrayList<String>();
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private String formName = "client_referral_form";
-    private ClientReferral clientReferral;
+    private Referral referral;
     private Gson gson = new Gson();
     private JSONObject fieldOverides = new JSONObject();
-    private ClientReferralRepository clientReferralRepository;
+    private ReferralRepository referralRepository;
     private IndicatorRepository indicatorRepository;
     private Cursor cursor;
     private MaterialEditText appointmentDateTextView;
@@ -146,11 +146,11 @@ public class ReferralRegistrationFormActivity extends SecuredNativeSmartRegister
             public void onClick(View v) {
                 if (isFormSubmissionOk()) {
                     //setting default values
-                    clientReferral = getClientReferral();
-                    clientReferral.setReferral_status("0");
+                    referral = getReferral();
+                    referral.setReferral_status("0");
 
                     // convert to json
-                    String gsonReferral = gson.toJson(clientReferral);
+                    String gsonReferral = gson.toJson(referral);
 
                     // todo start form submission
                     saveFormSubmission(gsonReferral, generateRandomUUIDString(), formName, getFormFieldsOverrides());
@@ -167,22 +167,22 @@ public class ReferralRegistrationFormActivity extends SecuredNativeSmartRegister
     @Override
     public void saveFormSubmission(String formSubmission, final String id, String formName, JSONObject fieldOverrides) {
         // save the form
-        final ClientReferral clientReferral = gson.fromJson(formSubmission, ClientReferral.class);
-        clientReferral.setId(id);
+        final Referral referral = gson.fromJson(formSubmission, Referral.class);
+        referral.setId(id);
 
-        clientReferralRepository = context().clientReferralRepository();
-        clientReferralRepository.add(clientReferral);
+        referralRepository = context().clientReferralRepository();
+        referralRepository.add(referral);
 
 
         List<FormField> formFields = new ArrayList<>();
-        formFields.add(new FormField("id", clientReferral.getId(), ClientReferralRepository.TABLE_NAME + "." + "id"));
-        formFields.add(new FormField("relationalid", clientReferral.getClientId(), ClientReferralRepository.TABLE_NAME + "." + "relationalid"));
+        formFields.add(new FormField("id", referral.getId(), ReferralRepository.TABLE_NAME + "." + "id"));
+        formFields.add(new FormField("relationalid", referral.getClientId(), ReferralRepository.TABLE_NAME + "." + "relationalid"));
 
         FormData formData;
         FormInstance formInstance;
         FormSubmission submission;
 
-        String detailsString = new Gson().toJson(clientReferral);
+        String detailsString = new Gson().toJson(referral);
 
         Map<String, String> details = new Gson().<Map<String, String>>fromJson(detailsString, new TypeToken<Map<String, String>>() {
         }.getType());
@@ -193,7 +193,7 @@ public class ReferralRegistrationFormActivity extends SecuredNativeSmartRegister
                 FormField f = new FormField(key, details.get(key), "facility.id");
                 formFields.add(f);
             } else {
-                FormField f = new FormField(key, details.get(key), ClientReferralRepository.TABLE_NAME + "." + key);
+                FormField f = new FormField(key, details.get(key), ReferralRepository.TABLE_NAME + "." + key);
                 formFields.add(f);
             }
         }
@@ -454,8 +454,8 @@ public class ReferralRegistrationFormActivity extends SecuredNativeSmartRegister
     }
 
 
-    public ClientReferral getClientReferral() {
-        ClientReferral referral = new ClientReferral();
+    public Referral getReferral() {
+        Referral referral = new Referral();
         referral.setReferral_date(today.getTimeInMillis());
 
         if (!is_emergency) {

@@ -56,7 +56,7 @@ public class FormDataRepository extends DrishtiRepository {
     public FormDataRepository() {
         TABLE_COLUMN_MAP = new HashMap<String, String[]>();
         TABLE_COLUMN_MAP.put(EligibleCoupleRepository.EC_TABLE_NAME, EligibleCoupleRepository.EC_TABLE_COLUMNS);
-        TABLE_COLUMN_MAP.put(ClientReferralRepository.TABLE_NAME, ClientReferralRepository.CLIENT_REFERRAL_TABLE_COLUMNS);
+        TABLE_COLUMN_MAP.put(ReferralRepository.TABLE_NAME, ReferralRepository.CLIENT_REFERRAL_TABLE_COLUMNS);
         TABLE_COLUMN_MAP.put(ChildRepository.CHILD_TABLE_NAME, ChildRepository.CHILD_TABLE_COLUMNS);
 
         if(Context.getInstance().configuration().appName().equals(APP_NAME_INDONESIA)) return;

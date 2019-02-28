@@ -31,8 +31,10 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.domain.ClientReferral;
+import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
+import org.ei.opensrp.repository.ReferralRepository;
+import org.ei.opensrp.repository.ClientRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
 import java.text.SimpleDateFormat;
@@ -48,7 +50,7 @@ public class ReferralsListFragment extends SecuredNativeSmartRegisterCursorAdapt
     private static final String TAG = ReferralsListFragment.class.getSimpleName(),
             TABLE_NAME = "client_referral";
     private CommonRepository commonRepository;
-    private List<ClientReferral> clientReferralPersonObjectList = new ArrayList<>();
+    private List<Referral> referralPersonObjectList = new ArrayList<>();
     private Cursor cursor;
     private String locationDialogTAG = "locationDialogTAG";
     private long startDate = 0, endDate = 0;
@@ -82,15 +84,19 @@ public class ReferralsListFragment extends SecuredNativeSmartRegisterCursorAdapt
 
         recyclerView = (RecyclerView) v.findViewById(R.id.clients_recycler);
         commonRepository = context().commonrepository("client_referral");
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + TABLE_NAME);
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + ReferralRepository.TABLE_NAME+
+                " INNER JOIN "+ ClientRepository.TABLE_NAME+" USING ("+ ReferralRepository.TABLE_NAME+"."+ ReferralRepository.CLIENT_ID+" = "+ClientRepository.TABLE_NAME+"."+ClientRepository.CLIENT_ID);
+
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
-        clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
-        clientsListAdapter = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList, commonRepository);
 
-        spinnerType = (MaterialSpinner) v.findViewById(R.id.spin_status);
-        FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
-        Button filter = (Button) v.findViewById(R.id.filter_button);
+
+        referralPersonObjectList = Utils.convertToClientReferralObjectList(commonPersonObjectList);
+        clientsListAdapter = new ReferredClientsListAdapter(getActivity(), referralPersonObjectList, commonRepository);
+
+        spinnerType =  v.findViewById(R.id.spin_status);
+        FloatingActionButton fab =  v.findViewById(R.id.fab);
+        Button filter =  v.findViewById(R.id.filter_button);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,8 +119,8 @@ public class ReferralsListFragment extends SecuredNativeSmartRegisterCursorAdapt
                     cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + TABLE_NAME + " where is_valid ='true'");
                     List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
                     Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
-                    clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
-                    ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList, commonRepository);
+                    referralPersonObjectList = Utils.convertToClientReferralObjectList(commonPersonObjectList);
+                    ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), referralPersonObjectList, commonRepository);
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                     recyclerView.setLayoutManager(mLayoutManager);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -250,9 +256,9 @@ public class ReferralsListFragment extends SecuredNativeSmartRegisterCursorAdapt
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + TABLE_NAME);
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
 
-        clientReferralPersonObjectList = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList);
-        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + clientReferralPersonObjectList.size());
-        ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList, commonRepository);
+        referralPersonObjectList = Utils.convertToClientReferralObjectList(commonPersonObjectList);
+        Log.d(TAG, "repo count = " + commonRepository.count() + ", list count = " + referralPersonObjectList.size());
+        ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), referralPersonObjectList, commonRepository);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -307,10 +313,10 @@ public class ReferralsListFragment extends SecuredNativeSmartRegisterCursorAdapt
         datePickerDialog.show(getActivity().getFragmentManager(), "DatePickerDialog");
     }
 
-    private class QueryTask extends AsyncTask<String, Void, List<ClientReferral>> {
+    private class QueryTask extends AsyncTask<String, Void, List<Referral>> {
 
         @Override
-        protected List<ClientReferral> doInBackground(String... params) {
+        protected List<Referral> doInBackground(String... params) {
             publishProgress();
             String query = params[0];
             String tableName = params[1];
@@ -330,8 +336,8 @@ public class ReferralsListFragment extends SecuredNativeSmartRegisterCursorAdapt
 
 
             // obtains client from result
-            ClientReferral client = null;
-            List<ClientReferral> ClientReferrals = new ArrayList<>();
+            Referral client = null;
+            List<Referral> referrals = new ArrayList<>();
 
             SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
             formatter.setLenient(false);
@@ -368,13 +374,13 @@ public class ReferralsListFragment extends SecuredNativeSmartRegisterCursorAdapt
                     cursor.moveToNext();
                 }
 
-                Log.d(TAG, "result client referral size" + ClientReferrals.size());
+                Log.d(TAG, "result client referral size" + referrals.size());
                 // check date range
                 if (daterange.equals("yes")) {
                     Log.d(TAG, "am in the date range");
-                    for (ClientReferral clients : ClientReferrals) {
+                    for (Referral clients : referrals) {
                         if (clients.getReferral_date() < startDate || clients.getReferral_date() > endDate)
-                            ClientReferrals.remove(clients); // remove client referral
+                            referrals.remove(clients); // remove client referral
                     }
                 }
 
@@ -386,15 +392,15 @@ public class ReferralsListFragment extends SecuredNativeSmartRegisterCursorAdapt
                 cursor.close();
             }
 
-            return ClientReferrals;
+            return referrals;
         }
 
-        public ClientReferral getclientReferral(CommonPersonObject commonPersonObject) {
+        public Referral getclientReferral(CommonPersonObject commonPersonObject) {
             Log.d(TAG, "person  =" + gson.toJson(commonPersonObject));
             String details = Utils.convertStandardJSONString(commonPersonObject.getColumnmaps().get("details"));
             Log.d(TAG, "column details = " + details);
-            ClientReferral client = null;
-            client = gson.fromJson(details, ClientReferral.class);
+            Referral client = null;
+            client = gson.fromJson(details, Referral.class);
             String id = commonPersonObject.getColumnmaps().get("id");
             String relationid = commonPersonObject.getColumnmaps().get("relationalid");
             String fname = commonPersonObject.getColumnmaps().get("first_name");
@@ -437,7 +443,7 @@ public class ReferralsListFragment extends SecuredNativeSmartRegisterCursorAdapt
         }
 
         @Override
-        protected void onPostExecute(List<ClientReferral> resultList) {
+        protected void onPostExecute(List<Referral> resultList) {
             super.onPostExecute(resultList);
 
             if (resultList == null) {
@@ -446,8 +452,8 @@ public class ReferralsListFragment extends SecuredNativeSmartRegisterCursorAdapt
                 Log.d(TAG, "resultList " + resultList.size() + "items");
                 Log.d(TAG, "resultList " + new Gson().toJson(resultList));
 
-                clientReferralPersonObjectList = resultList;
-                ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList, commonRepository);
+                referralPersonObjectList = resultList;
+                ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), referralPersonObjectList, commonRepository);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -461,8 +467,8 @@ public class ReferralsListFragment extends SecuredNativeSmartRegisterCursorAdapt
                 Log.d(TAG, "Query result is empty!");
                 message = "hakuna taarifa yoyote";
                 makeToast();
-                clientReferralPersonObjectList = resultList;
-                ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferralPersonObjectList, commonRepository);
+                referralPersonObjectList = resultList;
+                ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), referralPersonObjectList, commonRepository);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());

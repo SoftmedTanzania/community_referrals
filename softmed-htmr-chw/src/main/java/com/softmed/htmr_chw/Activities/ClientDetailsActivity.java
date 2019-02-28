@@ -17,9 +17,9 @@ import com.softmed.htmr_chw.R;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.Client;
-import org.ei.opensrp.domain.ClientReferral;
+import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
-import org.ei.opensrp.repository.ClientReferralRepository;
+import org.ei.opensrp.repository.ReferralRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,7 +31,7 @@ import java.util.Locale;
 
 public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
     private static final String TAG = ClientDetailsActivity.class.getSimpleName();
-    private ClientReferralRepository clientReferralRepository;
+    private ReferralRepository referralRepository;
     private CommonRepository commonRepository;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
@@ -87,15 +87,15 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
             }
         });
 
-        clientReferralRepository = context().clientReferralRepository();
+        referralRepository = context().clientReferralRepository();
 
         Log.d(TAG,"Client ID = "+client.getClient_id());
 
-        List<ClientReferral> clientReferrals = clientReferralRepository.findByClientId(client.getClient_id());
+        List<Referral> referrals = referralRepository.findByClientId(client.getClient_id());
 
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.referral_history);
 
-        for (ClientReferral clientReferral : clientReferrals) {
+        for (Referral referral : referrals) {
             View v = getLayoutInflater().inflate(R.layout.view_referral_history, null);
             TextView referralDate = (TextView) v.findViewById(R.id.referral_date);
             TextView service = (TextView) v.findViewById(R.id.service);
@@ -104,19 +104,19 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
             MaterialEditText appointmentDate = (MaterialEditText) v.findViewById(R.id.appointment_date);
 
             LinearLayout indicatorsLayout = (LinearLayout) v.findViewById(R.id.indicators);
-            setIndicators(indicatorsLayout,clientReferral.getIndicator_ids());
+            setIndicators(indicatorsLayout, referral.getIndicator_ids());
 
             try {
-                service.setText(getReferralServiceName(clientReferral.getReferral_service_id()));
+                service.setText(getReferralServiceName(referral.getReferral_service_id()));
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            referralDate.setText(dateFormat.format(clientReferral.getReferral_date()));
-            appointmentDate.setText(dateFormat.format(clientReferral.getAppointment_date()));
+            referralDate.setText(dateFormat.format(referral.getReferral_date()));
+            appointmentDate.setText(dateFormat.format(referral.getAppointment_date()));
 
-            reasonForReferral.setText(clientReferral.getReferral_reason());
-            facility.setText(getFacilityName(clientReferral.getFacility_id()));
+            reasonForReferral.setText(referral.getReferral_reason());
+            facility.setText(getFacilityName(referral.getFacility_id()));
             linearLayout.addView(v);
         }
 

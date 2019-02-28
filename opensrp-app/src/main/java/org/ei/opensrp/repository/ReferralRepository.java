@@ -8,7 +8,7 @@ import com.google.gson.Gson;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
-import org.ei.opensrp.domain.ClientReferral;
+import org.ei.opensrp.domain.Referral;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
 import static net.sqlcipher.DatabaseUtils.longForQuery;
 import static org.apache.commons.lang3.StringUtils.repeat;
 
-public class ClientReferralRepository extends DrishtiRepository {
+public class ReferralRepository extends DrishtiRepository {
     private static final String CHILD_SQL = "CREATE TABLE client_referral(id VARCHAR PRIMARY KEY, " +
             "relationalid VARCHAR, " +
             "client_id VARCHAR, " +
@@ -52,26 +52,26 @@ public class ClientReferralRepository extends DrishtiRepository {
         database.execSQL(CHILD_SQL);
     }
 
-    public void add(ClientReferral clientReferral) {
+    public void add(Referral referral) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
-        database.insert(TABLE_NAME, null, createValuesFor(clientReferral));
+        database.insert(TABLE_NAME, null, createValuesFor(referral));
     }
 
-    public void update(ClientReferral clientReferral) {
+    public void update(Referral referral) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
-        database.update(TABLE_NAME, createValuesFor(clientReferral), ID_COLUMN + " = ?", new String[]{clientReferral.getId()});
+        database.update(TABLE_NAME, createValuesFor(referral), ID_COLUMN + " = ?", new String[]{referral.getId()});
     }
 
-    public List<ClientReferral> all() {
+    public List<Referral> all() {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.query(TABLE_NAME, CLIENT_REFERRAL_TABLE_COLUMNS, null, null, null, null, null);
         return readAll(cursor);
     }
 
-    public ClientReferral find(String caseId) {
+    public Referral find(String caseId) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.query(TABLE_NAME, CLIENT_REFERRAL_TABLE_COLUMNS, ID_COLUMN + " = ?", new String[]{caseId}, null, null, null, null);
-        List<ClientReferral> children = readAll(cursor);
+        List<Referral> children = readAll(cursor);
 
         if (children.isEmpty()) {
             return null;
@@ -79,26 +79,26 @@ public class ClientReferralRepository extends DrishtiRepository {
         return children.get(0);
     }
 
-    public List<ClientReferral> findByClientId(String caseId) {
+    public List<Referral> findByClientId(String caseId) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.query(TABLE_NAME, CLIENT_REFERRAL_TABLE_COLUMNS, CLIENT_ID + " = ?", new String[]{caseId}, null, null, null, null);
-        List<ClientReferral> children = readAll(cursor);
+        List<Referral> children = readAll(cursor);
 
 
         return children;
     }
 
 
-    public List<ClientReferral> findClientReferralByCaseIds(String... caseIds) {
+    public List<Referral> findClientReferralByCaseIds(String... caseIds) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.rawQuery(String.format("SELECT * FROM %s WHERE %s IN (%s)", TABLE_NAME, ID_COLUMN, insertPlaceholdersForInClause(caseIds.length)), caseIds);
         return readAll(cursor);
     }
-    public ClientReferral findByServiceStatus(String name) {
+    public Referral findByServiceStatus(String name) {
 
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.query(TABLE_NAME, CLIENT_REFERRAL_TABLE_COLUMNS, ReferralStatus + " = ?", new String[]{name}, null, null, null, null);
-        List<ClientReferral> children = readAll(cursor);
+        List<Referral> children = readAll(cursor);
 
         if (children.isEmpty()) {
             return null;
@@ -112,7 +112,7 @@ public class ClientReferralRepository extends DrishtiRepository {
         database.update(TABLE_NAME, values, ID_COLUMN + " = ?", new String[]{caseId});
     }
 
-    public List<ClientReferral> findByServiceCaseId(String caseId) {
+    public List<Referral> findByServiceCaseId(String caseId) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.query(TABLE_NAME, CLIENT_REFERRAL_TABLE_COLUMNS, ID_COLUMN + " = ?", new String[]{caseId}, null, null, null, null);
         return readAll(cursor);
@@ -146,39 +146,39 @@ public class ClientReferralRepository extends DrishtiRepository {
     }
 
 
-    public ContentValues createValuesFor(ClientReferral clientReferral) {
+    public ContentValues createValuesFor(Referral referral) {
 
         ContentValues values = new ContentValues();
-        values.put(ID_COLUMN, clientReferral.getId());
-        values.put(RELATIONAL_ID, clientReferral.getRelationalid());
-        values.put(CLIENT_ID, clientReferral.getClientId());
-        values.put(ReferralDate, clientReferral.getReferral_date());
-        values.put(AppointmentDate, clientReferral.getAppointment_date());
-        values.put(ReferralFacility, clientReferral.getFacility_id());
-        values.put(ReferralReason, clientReferral.getReferral_reason());
-        values.put(Service, clientReferral.getReferral_service_id());
-        values.put(ReferralStatus, clientReferral.getReferral_status());
-        values.put(IS_VALID, clientReferral.getIs_valid());
-        values.put(IsEmergency, clientReferral.getIs_emergency());
-        values.put(INDICATOR_IDS, clientReferral.getIndicator_ids());
-        values.put(DETAILS_COLUMN, new Gson().toJson(clientReferral));
+        values.put(ID_COLUMN, referral.getId());
+        values.put(RELATIONAL_ID, referral.getRelationalid());
+        values.put(CLIENT_ID, referral.getClientId());
+        values.put(ReferralDate, referral.getReferral_date());
+        values.put(AppointmentDate, referral.getAppointment_date());
+        values.put(ReferralFacility, referral.getFacility_id());
+        values.put(ReferralReason, referral.getReferral_reason());
+        values.put(Service, referral.getReferral_service_id());
+        values.put(ReferralStatus, referral.getReferral_status());
+        values.put(IS_VALID, referral.getIs_valid());
+        values.put(IsEmergency, referral.getIs_emergency());
+        values.put(INDICATOR_IDS, referral.getIndicator_ids());
+        values.put(DETAILS_COLUMN, new Gson().toJson(referral));
         return values;
     }
 
-    public ContentValues createValuesUpdateValues(ClientReferral clientReferral) {
+    public ContentValues createValuesUpdateValues(Referral referral) {
 
         ContentValues values = new ContentValues();
-        values.put(ReferralStatus, clientReferral.getReferral_status());
-        values.put(DETAILS_COLUMN, new Gson().toJson(clientReferral));
+        values.put(ReferralStatus, referral.getReferral_status());
+        values.put(DETAILS_COLUMN, new Gson().toJson(referral));
         return values;
     }
 
 
-    private List<ClientReferral> readAll(Cursor cursor) {
+    private List<Referral> readAll(Cursor cursor) {
         cursor.moveToFirst();
-        List<ClientReferral> referralServicesListDataModel = new ArrayList<ClientReferral>();
+        List<Referral> referralServicesListDataModel = new ArrayList<Referral>();
         while (!cursor.isAfterLast()) {
-            referralServicesListDataModel.add(new ClientReferral(cursor.getString(0),
+            referralServicesListDataModel.add(new Referral(cursor.getString(0),
                     cursor.getString(1),
                     cursor.getString(2),
                     cursor.getLong(3),
@@ -198,9 +198,9 @@ public class ClientReferralRepository extends DrishtiRepository {
         return referralServicesListDataModel;
     }
 
-    private List<ClientReferral> readAllChildren(Cursor cursor) {
+    private List<Referral> readAllChildren(Cursor cursor) {
         cursor.moveToFirst();
-        List<ClientReferral> children = new ArrayList<ClientReferral>();
+        List<Referral> children = new ArrayList<Referral>();
         while (!cursor.isAfterLast()) {
             children.add(serviceFromCursor(cursor));
             cursor.moveToNext();
@@ -209,8 +209,8 @@ public class ClientReferralRepository extends DrishtiRepository {
         return children;
     }
 
-    private ClientReferral serviceFromCursor(Cursor cursor) {
-        return new ClientReferral(
+    private Referral serviceFromCursor(Cursor cursor) {
+        return new Referral(
                 getColumnValueByAlias(cursor, TABLE_NAME, ID_COLUMN),
                 getColumnValueByAlias(cursor, TABLE_NAME, RELATIONAL_ID),
                 getColumnValueByAlias(cursor, TABLE_NAME, CLIENT_ID),

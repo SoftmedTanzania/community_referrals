@@ -27,13 +27,13 @@ import org.ei.opensrp.commonregistry.CommonFtsObject;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.ClientFollowup;
-import org.ei.opensrp.domain.ClientReferral;
+import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.domain.Facility;
 import org.ei.opensrp.domain.Indicator;
 import org.ei.opensrp.domain.ReferralServiceDataModel;
 import org.ei.opensrp.domain.Response;
-import org.ei.opensrp.repository.ClientFollowupRepository;
-import org.ei.opensrp.repository.ClientReferralRepository;
+import org.ei.opensrp.repository.FollowupReferralRepository;
+import org.ei.opensrp.repository.ReferralRepository;
 import org.ei.opensrp.repository.FacilityRepository;
 import org.ei.opensrp.repository.IndicatorRepository;
 import org.ei.opensrp.repository.ReferralServiceRepository;
@@ -80,7 +80,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     public String currentUserID, team_uuid, phone_number, team_name, team_location_id, registration_id = "";
     public Context context;
     private ReferralServiceRepository serviceRepository;
-    private ClientFollowupRepository clientFollowupRepository;
+    private FollowupReferralRepository followupReferralRepository;
     private int userType = 0;//0=CHW and 1=Facility health care worker
     private CommonRepository commonRepository1, commonRepository, commonRepository2;
     private IndicatorRepository indicatorRepository;
@@ -238,13 +238,13 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         try {
             List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "client_referral");
 
-            ClientReferral clientReferral = Utils.convertToClientReferralPersonObjectList(commonPersonObjectList).get(0);
-            clientReferral.setReferral_status(referralStatus);
-            clientReferral.setOther_notes(feedback);
-            clientReferral.setServices_given_to_patient(serviceGiven);
-            clientReferral.setTest_results(testResult);
+            Referral referral = Utils.convertToClientReferralObjectList(commonPersonObjectList).get(0);
+            referral.setReferral_status(referralStatus);
+            referral.setOther_notes(feedback);
+            referral.setServices_given_to_patient(serviceGiven);
+            referral.setTest_results(testResult);
 
-            ContentValues values = new ClientReferralRepository().createValuesUpdateValues(clientReferral);
+            ContentValues values = new ReferralRepository().createValuesUpdateValues(referral);
             commonRepository.customUpdate(values, id);
             Log.d(TAG, "updated values = " + values.toString());
         } catch (Exception e) {
@@ -253,7 +253,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     }
 
     public void insertFollowup(ClientFollowup clientFollowup) {
-        clientFollowupRepository.add(clientFollowup);
+        followupReferralRepository.add(clientFollowup);
     }
 
     public void getFacilities() {
@@ -417,8 +417,8 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         }
 
 
-        if (clientFollowupRepository == null) {
-            clientFollowupRepository = context.followupClientRepository();
+        if (followupReferralRepository == null) {
+            followupReferralRepository = context.followupClientRepository();
         }
 
 

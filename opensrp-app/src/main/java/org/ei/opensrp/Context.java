@@ -20,12 +20,12 @@ import org.ei.opensrp.repository.AllSettings;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.repository.AllTimelineEvents;
 import org.ei.opensrp.repository.ChildRepository;
-import org.ei.opensrp.repository.ClientReferralRepository;
+import org.ei.opensrp.repository.ReferralRepository;
 import org.ei.opensrp.repository.ClientRepository;
 import org.ei.opensrp.repository.DrishtiRepository;
 import org.ei.opensrp.repository.EligibleCoupleRepository;
 import org.ei.opensrp.repository.FacilityRepository;
-import org.ei.opensrp.repository.ClientFollowupRepository;
+import org.ei.opensrp.repository.FollowupReferralRepository;
 import org.ei.opensrp.repository.FormDataRepository;
 import org.ei.opensrp.repository.FormsVersionRepository;
 import org.ei.opensrp.repository.ImageRepository;
@@ -137,8 +137,8 @@ public class Context {
     private AllCommonsRepository allCommonPersonObjectsRepository;
     private FacilityRepository facilityRepository;
     private ReferralServiceRepository referralServiceRepository;
-    private ClientReferralRepository clientReferralRepository;
-    private ClientFollowupRepository clientFollowupRepository;
+    private ReferralRepository referralRepository;
+    private FollowupReferralRepository followupReferralRepository;
     private ClientRepository clientRepository;
     private static ImageRepository imageRepository;
 
@@ -652,17 +652,17 @@ public class Context {
         }
         return facilityRepository;
     }
-    public ClientReferralRepository clientReferralRepository() {
-        if (clientReferralRepository == null) {
-            clientReferralRepository = new ClientReferralRepository();
+    public ReferralRepository clientReferralRepository() {
+        if (referralRepository == null) {
+            referralRepository = new ReferralRepository();
         }
-        return clientReferralRepository;
+        return referralRepository;
     }
-    public ClientFollowupRepository followupClientRepository() {
-        if (clientFollowupRepository == null) {
-            clientFollowupRepository = new ClientFollowupRepository();
+    public FollowupReferralRepository followupClientRepository() {
+        if (followupReferralRepository == null) {
+            followupReferralRepository = new FollowupReferralRepository();
         }
-        return clientFollowupRepository;
+        return followupReferralRepository;
     }
 
     public ClientRepository clientRepository() {

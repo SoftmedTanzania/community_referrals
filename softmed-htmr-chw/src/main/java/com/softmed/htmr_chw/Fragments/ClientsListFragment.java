@@ -26,7 +26,7 @@ import com.softmed.htmr_chw.util.AsyncTask;
 import com.softmed.htmr_chw.util.DividerItemDecoration;
 
 import org.ei.opensrp.domain.Client;
-import org.ei.opensrp.domain.ClientReferral;
+import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.ClientRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
@@ -257,7 +257,7 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
 
 
             // obtains client from result
-            ClientReferral client = null;
+            Referral client = null;
             List<Client> receivedClients = new ArrayList<>();
 
             SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");

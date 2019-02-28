@@ -5,7 +5,6 @@ import org.ei.opensrp.domain.ANM;
 import org.ei.opensrp.repository.AllBeneficiaries;
 import org.ei.opensrp.repository.AllEligibleCouples;
 import org.ei.opensrp.repository.AllSharedPreferences;
-import org.ei.opensrp.repository.ClientReferralRepository;
 
 public class ANMService {
     private AllSharedPreferences allSharedPreferences;
