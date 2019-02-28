@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
-import com.softmed.htmr_chw.Activities.FollowupClientsDetailsActivity;
+import com.softmed.htmr_chw.Activities.FollowupReferralDetailsActivity;
 import com.softmed.htmr_chw.Fragments.FollowupClientDetailFragment;
 import com.softmed.htmr_chw.R;
 
@@ -90,7 +90,7 @@ public class FollowupClintsRecyclerAdapter extends
                             .commit();
                 } else {
                     Context context = v.getContext();
-                    Intent intent = new Intent(context, FollowupClientsDetailsActivity.class);
+                    Intent intent = new Intent(context, FollowupReferralDetailsActivity.class);
 
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("client_followup", client);

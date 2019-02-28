@@ -2,8 +2,6 @@ package com.softmed.htmr_chw.Activities;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
@@ -75,9 +73,9 @@ import static org.ei.opensrp.AllConstants.ENGLISH_LOCALE;
  * Created by coze on 11/17/17.
  */
 
-public class ReferralFormRegisterActivity extends SecuredNativeSmartRegisterActivity {
+public class ReferralRegistrationFormActivity extends SecuredNativeSmartRegisterActivity {
 
-    private static final String TAG = ReferralFormRegisterActivity.class.getSimpleName();
+    private static final String TAG = ReferralRegistrationFormActivity.class.getSimpleName();
     public AutoCompleteTextView facilitytextView;
     public EditText editTextReferralReason;
     public Button button;

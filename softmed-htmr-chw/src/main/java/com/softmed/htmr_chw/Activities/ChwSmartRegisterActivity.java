@@ -869,7 +869,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         // set registration fragment
         Log.d(TAG, "Location selected" + locationSelected);
 
-        Intent intent = new Intent(this, ClientsRegisterFormActivity.class);
+        Intent intent = new Intent(this, ClientRegistrationFormActivity.class);
         intent.putExtra("selectedLocation", locationSelected);
         startActivityForResult(intent, 90);
     }

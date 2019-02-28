@@ -55,9 +55,9 @@ import static com.softmed.htmr_chw.util.Utils.generateRandomUUIDString;
  * Created by coze on 11/17/17.
  */
 
-public class ClientsRegisterFormActivity extends SecuredNativeSmartRegisterActivity {
+public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterActivity {
 
-    private static final String TAG = ClientsRegisterFormActivity.class.getSimpleName();
+    private static final String TAG = ClientRegistrationFormActivity.class.getSimpleName();
     public EditText editTextfName, editTextmName, editTextlName, editTextVillageLeader, editTextCTCNumber,
             editTextDiscountId, editTextKijiji, editTextReferralReason, helperName, helperPhoneNumber;
     public Button button;
@@ -131,7 +131,7 @@ public class ClientsRegisterFormActivity extends SecuredNativeSmartRegisterActiv
 //                    setResult(Activity.RESULT_OK, resultIntent);
 //                    finish();
 
-                    Intent intent1 = new Intent(ClientsRegisterFormActivity.this, ClientDetails.class);
+                    Intent intent1 = new Intent(ClientRegistrationFormActivity.this, ClientDetailsActivity.class);
 
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("client", client);

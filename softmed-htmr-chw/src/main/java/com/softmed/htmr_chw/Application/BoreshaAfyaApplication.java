@@ -1,14 +1,24 @@
 package com.softmed.htmr_chw.Application;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.PowerManager;
 import android.support.multidex.MultiDex;
+import android.util.Log;
 import android.util.Pair;
 
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
+import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
+import com.softmed.htmr_chw.Activities.LoginActivity;
+import com.softmed.htmr_chw.R;
+import com.softmed.htmr_chw.util.Utils;
 
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
@@ -22,15 +32,9 @@ import org.ei.opensrp.domain.Facility;
 import org.ei.opensrp.domain.Indicator;
 import org.ei.opensrp.domain.ReferralServiceDataModel;
 import org.ei.opensrp.domain.Response;
-
-import com.softmed.htmr_chw.Activities.LoginActivity;
-import com.softmed.htmr_chw.Activities.NativeHomeActivity;
-import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.util.Utils;
-
+import org.ei.opensrp.repository.ClientFollowupRepository;
 import org.ei.opensrp.repository.ClientReferralRepository;
 import org.ei.opensrp.repository.FacilityRepository;
-import org.ei.opensrp.repository.ClientFollowupRepository;
 import org.ei.opensrp.repository.IndicatorRepository;
 import org.ei.opensrp.repository.ReferralServiceRepository;
 import org.ei.opensrp.sync.DrishtiSyncScheduler;
@@ -45,6 +49,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -53,16 +58,6 @@ import static org.ei.opensrp.AllConstants.GSM_SERVER_URL;
 import static org.ei.opensrp.AllConstants.OPENSRP_FACILITY_URL_PATH;
 import static org.ei.opensrp.AllConstants.OPENSRP_REFERRAL_SERVICES_URL_PATH;
 import static org.ei.opensrp.util.Log.logInfo;
-
-import java.util.Random;
-
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.PowerManager;
-import android.util.Log;
 
 /**
  * Created by koros on 1/22/16.
@@ -78,21 +73,29 @@ import android.util.Log;
 )
 public class BoreshaAfyaApplication extends DrishtiApplication {
     private static final String TAG = BoreshaAfyaApplication.class.getSimpleName();
-    private ReferralServiceRepository serviceRepository;
-    private ClientFollowupRepository clientFollowupRepository;
-    private int userType = 0;//0=CHW and 1=Facility health care worker
-    public String currentUserID, team_uuid, phone_number, team_name, team_location_id, registration_id = "";
     public static String username, password;
     private final int MAX_ATTEMPTS = 5;
     private final int BACKOFF_MILLI_SECONDS = 2000;
     private final Random random = new Random();
+    public String currentUserID, team_uuid, phone_number, team_name, team_location_id, registration_id = "";
     public Context context;
+    private ReferralServiceRepository serviceRepository;
+    private ClientFollowupRepository clientFollowupRepository;
+    private int userType = 0;//0=CHW and 1=Facility health care worker
     private CommonRepository commonRepository1, commonRepository, commonRepository2;
     private IndicatorRepository indicatorRepository;
     private boolean hasFacility = false;
     private boolean hasService = false;
 
     private SecuredActivity securedActivity;
+    private PowerManager.WakeLock wakeLock;
+
+    public static void setCrashlyticsUser(Context context) {
+        if (context != null && context.userService() != null
+                && context.allSharedPreferences() != null) {
+            Crashlytics.setUserName(context.allSharedPreferences().fetchRegisteredANM());
+        }
+    }
 
     public void register(final Context context, final String userId, final String facility, final String regId) {
 
@@ -162,13 +165,13 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
                     android.util.Log.d(TAG, "values indicator = " + new Gson().toJson(values));
                     try {
                         indicatorRepository.customInsert(values);
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
 
 
-                service = new ReferralServiceDataModel(explrObject.getString("serviceId"), explrObject.getString("serviceName"),explrObject.getString("serviceNameSw"), explrObject.getString("category"), explrObject.getString("isActive"));
+                service = new ReferralServiceDataModel(explrObject.getString("serviceId"), explrObject.getString("serviceName"), explrObject.getString("serviceNameSw"), explrObject.getString("category"), explrObject.getString("isActive"));
                 if (service.getId().equals("")) {
                     Log.d(TAG, "service table is empty");
 
@@ -205,24 +208,24 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     }
 
     public void deleteReferralService(String value) {
-        ((NativeHomeActivity) getApplicationContext()).updateFromServer();
+        ((ChwSmartRegisterActivity) getApplicationContext()).updateFromServer();
         Log.d(TAG, "message = " + value);
     }
 
     public void updateReferralService(String value) {
 
-        ((NativeHomeActivity) getApplicationContext()).updateFromServer();
+        ((ChwSmartRegisterActivity) getApplicationContext()).updateFromServer();
         Log.d(TAG, "message = " + value);
     }
 
     public void deleteFacility(String value) {
 
-        ((NativeHomeActivity) getApplicationContext()).updateFromServer();
+        ((ChwSmartRegisterActivity) getApplicationContext()).updateFromServer();
         Log.d(TAG, "message = " + value);
     }
 
     public void updateFacility(String value) {
-        ((NativeHomeActivity) getApplicationContext()).updateFromServer();
+        ((ChwSmartRegisterActivity) getApplicationContext()).updateFromServer();
         Log.d(TAG, "message = " + value);
     }
 
@@ -249,11 +252,9 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         }
     }
 
-
     public void insertFollowup(ClientFollowup clientFollowup) {
         clientFollowupRepository.add(clientFollowup);
     }
-
 
     public void getFacilities() {
         commonRepository2 = context.commonrepository("facility");
@@ -271,7 +272,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
             e.printStackTrace();
         }
 
-        final String myUrl = DRISHTI_BASE_PATH + OPENSRP_FACILITY_URL_PATH+teamFacility;
+        final String myUrl = DRISHTI_BASE_PATH + OPENSRP_FACILITY_URL_PATH + teamFacility;
 
         Response<String> results = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl, "sean", "Admin123");
         Log.d(TAG, "facility failure is " + results.isFailure());
@@ -318,17 +319,16 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
 
     public void setFollowContent(String value) {
         //synchronization process
-        ((NativeHomeActivity) getApplicationContext()).updateFromServer();
+        ((ChwSmartRegisterActivity) getApplicationContext()).updateFromServer();
         Log.d(TAG, "message = " + value);
 
     }
 
     public void updateReferralStatus(String value) {
         //get data from the server
-        ((NativeHomeActivity) getApplicationContext()).updateFromServer();
+        ((ChwSmartRegisterActivity) getApplicationContext()).updateFromServer();
         Log.d(TAG, "message = " + value);
     }
-
 
     // Checking for all possible internet providers
     public boolean isConnectingToInternet() {
@@ -352,7 +352,6 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     void displayMessageOnScreen(Context context, String message) {
 
     }
-
 
     //Function to display simple Alert Dialog
     public void showAlertDialog(Context context, String title, String message,
@@ -379,8 +378,6 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         // Show Alert Message
         alertDialog.show();
     }
-
-    private PowerManager.WakeLock wakeLock;
 
     public void acquireWakeLock() {
         if (wakeLock != null) wakeLock.release();
@@ -428,7 +425,6 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         initializeReferralService();
         initializeHasFacilities();
     }
-
 
     @Override
     public void logoutCurrentUser() {
@@ -557,13 +553,6 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         commonFtsObject.updateAlertScheduleMap(getAlertScheduleMap());
         commonFtsObject.updateAlertFilterVisitCodes(getAlertFilterVisitCodes());
         return commonFtsObject;
-    }
-
-    public static void setCrashlyticsUser(Context context) {
-        if (context != null && context.userService() != null
-                && context.allSharedPreferences() != null) {
-            Crashlytics.setUserName(context.allSharedPreferences().fetchRegisteredANM());
-        }
     }
 
     public int getUserType() {

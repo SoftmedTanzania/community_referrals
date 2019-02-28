@@ -31,18 +31,17 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.gson.Gson;
-
-import org.ei.opensrp.Context;
-import org.ei.opensrp.domain.LoginResponse;
-import org.ei.opensrp.domain.Response;
-import org.ei.opensrp.domain.ResponseStatus;
-
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.Service.FacilityService;
 import com.softmed.htmr_chw.Service.ReferralService;
 import com.softmed.htmr_chw.Service.RegistrationIntentService;
 import com.softmed.htmr_chw.util.AsyncTask;
 import com.softmed.htmr_chw.util.SmallDiagonalCutPathDrawable;
+
+import org.ei.opensrp.Context;
+import org.ei.opensrp.domain.LoginResponse;
+import org.ei.opensrp.domain.Response;
+import org.ei.opensrp.domain.ResponseStatus;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.sync.DrishtiSyncScheduler;
@@ -71,23 +70,62 @@ import static org.ei.opensrp.util.Log.logVerbose;
 
 
 public class LoginActivity extends AppCompatActivity {
+    public static final String ENGLISH_LOCALE = "en";
+    public static final String SWAHILI_LOCALE = "sw";
+    public static final String ENGLISH_LANGUAGE = "English";
+    public static final String SWAHILI_LANGUAGE = "Swahili";
     private static final String TAG = LoginActivity.class.getSimpleName();
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    AsyncTask<Void, Void, Void> mRegisterTask;
+    Intent intent;
     private Context context;
     private EditText userNameEditText;
     private EditText passwordEditText;
     private Button loginButton;
     private ProgressDialog progressDialog;
-    public static final String ENGLISH_LOCALE = "en";
-    public static final String SWAHILI_LOCALE = "sw";
-    public static final String ENGLISH_LANGUAGE = "English";
-    public static final String SWAHILI_LANGUAGE = "Swahili";
-
-    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private ProgressBar mRegistrationProgressBar;
-    AsyncTask<Void, Void, Void> mRegisterTask;
 
-    Intent intent ;
+    public static void setLanguage() {
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+
+        android.util.Log.d(TAG, "set Locale : " + preferredLocale);
+
+        Resources res = Context.getInstance().applicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(preferredLocale);
+        res.updateConfiguration(conf, dm);
+
+    }
+
+    public static String switchLanguagePreference() {
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
+
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+        if (ENGLISH_LOCALE.equals(preferredLocale)) {
+            allSharedPreferences.saveLanguagePreference(SWAHILI_LOCALE);
+            Resources res = Context.getInstance().applicationContext().getResources();
+            // Change locale settings in the app.
+            DisplayMetrics dm = res.getDisplayMetrics();
+            android.content.res.Configuration conf = res.getConfiguration();
+            conf.locale = new Locale(SWAHILI_LOCALE);
+            res.updateConfiguration(conf, dm);
+            return SWAHILI_LANGUAGE;
+        } else {
+            allSharedPreferences.saveLanguagePreference(ENGLISH_LOCALE);
+            Resources res = Context.getInstance().applicationContext().getResources();
+            // Change locale settings in the app.
+            DisplayMetrics dm = res.getDisplayMetrics();
+            android.content.res.Configuration conf = res.getConfiguration();
+            conf.locale = new Locale(ENGLISH_LOCALE);
+            res.updateConfiguration(conf, dm);
+            return ENGLISH_LANGUAGE;
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
             DisplayMetrics dm = res.getDisplayMetrics();
             android.content.res.Configuration conf = res.getConfiguration();
             conf.locale = new Locale(preferredLocale);
-             res.updateConfiguration(conf, dm);
+            res.updateConfiguration(conf, dm);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -117,11 +155,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
         findViewById(com.softmed.htmr_chw.R.id.credential_card).setBackground(new SmallDiagonalCutPathDrawable());
-        ImageView v = (ImageView)findViewById(com.softmed.htmr_chw.R.id.background);
+        ImageView v = (ImageView) findViewById(com.softmed.htmr_chw.R.id.background);
         Glide.with(getApplicationContext()).load(com.softmed.htmr_chw.R.drawable.clint_adair).into(v);
         setLanguage();
 
     }
+
     @Override
     protected void onDestroy() {
         // Cancel AsyncTask
@@ -168,7 +207,6 @@ public class LoginActivity extends AppCompatActivity {
         fillUserIfExists();
     }
 
-
     private boolean checkPlayServices() {
 
         if (GSM_SERVER_URL == null
@@ -177,7 +215,7 @@ public class LoginActivity extends AppCompatActivity {
                 || GOOGLE_SENDER_ID.length() == 0) {
 
             // GCM sernder id / server url is missing
-            ((BoreshaAfyaApplication)getApplication()).showAlertDialog(context, "Configuration Error!",
+            ((BoreshaAfyaApplication) getApplication()).showAlertDialog(context, "Configuration Error!",
                     "Please set your Server URL and GCM Sender ID", false);
             registerReceiver(mRegistrationBroadcastReceiver, new IntentFilter("reg complete string"));
 
@@ -192,13 +230,14 @@ public class LoginActivity extends AppCompatActivity {
                 apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
                         .show();
             } else {
-                Log.logDebug( "This device is not supported.");
+                Log.logDebug("This device is not supported.");
                 finish();
             }
             return false;
         }
         return true;
     }
+
     public void login(final View view) {
 //        hideKeyboard();
         view.setClickable(false);
@@ -257,7 +296,7 @@ public class LoginActivity extends AppCompatActivity {
         if (context.userService().isValidLocalLogin(userName, password)) {
             localLoginWith(userName, password);
         } else {
-            android.util.Log.d("login","am in local login");
+            android.util.Log.d("login", "am in local login");
             showErrorDialog(getString(org.ei.opensrp.R.string.login_failed_dialog_message));
             view.setClickable(true);
         }
@@ -266,7 +305,7 @@ public class LoginActivity extends AppCompatActivity {
     private void remoteLogin(final View view, final String userName, final String password) {
         tryRemoteLogin(userName, password, new Listener<LoginResponse>() {
             public void onEvent(LoginResponse loginResponse) {
-                android.util.Log.d("login","am in remote login");
+                android.util.Log.d("login", "am in remote login");
                 if (loginResponse == SUCCESS) {
                     remoteLoginWith(userName, password, loginResponse.payload());
 
@@ -395,10 +434,10 @@ public class LoginActivity extends AppCompatActivity {
         startService(new Intent(this, FacilityService.class));
         startService(new Intent(this, ReferralService.class));
 
-        final String regId =  context.allSettings().fetchRegistartionId();
-        Log.logDebug("registration token "+regId);
+        final String regId = context.allSettings().fetchRegistartionId();
+        Log.logDebug("registration token " + regId);
         // Check if regid already presents
-        Log.logDebug("registration id"+regId);
+        Log.logDebug("registration id" + regId);
         if (regId.equals("")) {
             // Register with GCM
             intent = new Intent(this, RegistrationIntentService.class);
@@ -415,6 +454,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     return null;
                 }
+
                 @Override
                 protected void onPostExecute(Void result) {
                     mRegisterTask = null;
@@ -446,46 +486,6 @@ public class LoginActivity extends AppCompatActivity {
         ZipFile zf = new ZipFile(applicationInfo.sourceDir);
         ZipEntry ze = zf.getEntry("classes.dex");
         return new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new java.util.Date(ze.getTime()));
-    }
-
-    public static void setLanguage() {
-        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
-        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
-
-        android.util.Log.d(TAG,"set Locale : "+preferredLocale);
-
-        Resources res = Context.getInstance().applicationContext().getResources();
-        // Change locale settings in the app.
-        DisplayMetrics dm = res.getDisplayMetrics();
-        android.content.res.Configuration conf = res.getConfiguration();
-        conf.locale = new Locale(preferredLocale);
-        res.updateConfiguration(conf, dm);
-
-    }
-
-    public static String switchLanguagePreference() {
-        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
-
-        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
-        if (ENGLISH_LOCALE.equals(preferredLocale)) {
-            allSharedPreferences.saveLanguagePreference(SWAHILI_LOCALE);
-            Resources res = Context.getInstance().applicationContext().getResources();
-            // Change locale settings in the app.
-            DisplayMetrics dm = res.getDisplayMetrics();
-            android.content.res.Configuration conf = res.getConfiguration();
-            conf.locale = new Locale(SWAHILI_LOCALE);
-            res.updateConfiguration(conf, dm);
-            return SWAHILI_LANGUAGE;
-        } else {
-            allSharedPreferences.saveLanguagePreference(ENGLISH_LOCALE);
-            Resources res = Context.getInstance().applicationContext().getResources();
-            // Change locale settings in the app.
-            DisplayMetrics dm = res.getDisplayMetrics();
-            android.content.res.Configuration conf = res.getConfiguration();
-            conf.locale = new Locale(ENGLISH_LOCALE);
-            res.updateConfiguration(conf, dm);
-            return ENGLISH_LANGUAGE;
-        }
     }
 
     private boolean isLoginInitiateOk() {

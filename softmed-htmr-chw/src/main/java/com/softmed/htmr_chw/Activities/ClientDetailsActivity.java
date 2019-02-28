@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -24,17 +23,14 @@ import org.ei.opensrp.repository.ClientReferralRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class ClientDetails extends SecuredNativeSmartRegisterActivity {
-    private static final String TAG = ClientDetails.class.getSimpleName();
+public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
+    private static final String TAG = ClientDetailsActivity.class.getSimpleName();
     private ClientReferralRepository clientReferralRepository;
     private CommonRepository commonRepository;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
@@ -84,7 +80,7 @@ public class ClientDetails extends SecuredNativeSmartRegisterActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ClientDetails.this, ReferralFormRegisterActivity.class);
+                Intent intent = new Intent(ClientDetailsActivity.this, ReferralRegistrationFormActivity.class);
                 intent.putExtra("clientName", client.getFirst_name() + " " + client.getMiddle_name() + " " + client.getSurname());
                 intent.putExtra("clientId", client.getClient_id());
                 startActivityForResult(intent, 90);

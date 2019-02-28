@@ -104,10 +104,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.NativeHomeActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".Activities.ChwSmartRegisterActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
@@ -117,18 +113,18 @@
             android:value="ee4140a3b1692ec32e688110a280538c7b44e10e" />
 
         <activity
-            android:name=".Activities.ClientsRegisterFormActivity"
+            android:name=".Activities.ClientRegistrationFormActivity"
             android:exported="true"
             android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
 
         <activity
-            android:name=".Activities.ReferralFormRegisterActivity"
+            android:name=".Activities.ReferralRegistrationFormActivity"
             android:label="@string/title_item_detail"
             android:theme="@style/AppTheme.NoActionBar" />
 
 
         <activity
-            android:name=".Activities.ClientDetails"
+            android:name=".Activities.ClientDetailsActivity"
             android:label="@string/title_activity_client_details"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.softmed.htmr_chw.Activities.ClientDetails;
+import com.softmed.htmr_chw.Activities.ClientDetailsActivity;
 import com.softmed.htmr_chw.R;
 
 import org.ei.opensrp.commonregistry.CommonRepository;
@@ -59,7 +59,7 @@ public class ClientsListAdapter extends
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(mContext, ClientDetails.class);
+                Intent intent1 = new Intent(mContext, ClientDetailsActivity.class);
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("client", client);

@@ -27,15 +27,13 @@ import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
-public class FollowupClientsDetailsActivity extends SecuredNativeSmartRegisterActivity {
-    private static final String TAG = FollowupClientsDetailsActivity.class.getSimpleName();
+public class FollowupReferralDetailsActivity extends SecuredNativeSmartRegisterActivity {
+    private static final String TAG = FollowupReferralDetailsActivity.class.getSimpleName();
     private  TextView name,age,gender,facility,feedback,contacts,sponsor,referedReason,residence,referedDate,visitDate;
     private ClientFollowup clientFollowupPersonObject;
     private CommonRepository commonRepository;
