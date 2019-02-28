@@ -1,4 +1,4 @@
-package com.softmed.htmr_chw.Pageradapter;
+package com.softmed.htmr_chw.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
