@@ -20,14 +20,15 @@ import java.util.List;
 
 
 /**
- * Created by martha on 8/22/17.
+ * Created by Coze on 2/10/19.
  */
 
 public class ClientsListAdapter extends
         RecyclerView.Adapter<ClientsListAdapter.ViewHolder> {
     private static String TAG = ClientsListAdapter.class.getSimpleName();
     private CommonRepository commonRepository;
-    private List<Client> clients = new ArrayList<>();;
+    private List<Client> clients = new ArrayList<>();
+    ;
     private Context mContext;
 
     public ClientsListAdapter(Context context, List<Client> client) {
@@ -42,21 +43,16 @@ public class ClientsListAdapter extends
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View contactView = inflater.inflate(R.layout.client_list_item, parent, false);
-
-
         return new ViewHolder(contactView);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-
-
         final Client client = clients.get(position);
 
-        viewHolder.nameTextView.setText(client.getFirst_name()+" "+client.getMiddle_name()+" "+client.getSurname());
+        viewHolder.nameTextView.setText(client.getFirst_name() + " " + client.getMiddle_name() + " " + client.getSurname());
         viewHolder.phoneNumber.setText(client.getPhone_number());
         viewHolder.village.setText(client.getVillage());
 
@@ -72,14 +68,11 @@ public class ClientsListAdapter extends
                 mContext.startActivity(intent1);
             }
         });
-
-
     }
 
     @Override
     public int getItemCount() {
         return clients.size();
-//        return 0;
     }
 
 
@@ -89,12 +82,11 @@ public class ClientsListAdapter extends
 
         public ViewHolder(View itemView) {
             super(itemView);
-            nameTextView = (TextView) itemView.findViewById(R.id.client_name);
-            phoneNumber = (TextView) itemView.findViewById(R.id.phone_number);
-            age = (TextView) itemView.findViewById(R.id.age);
-            village = (TextView) itemView.findViewById(R.id.village);
-            this.itemView=itemView;
-
+            nameTextView = itemView.findViewById(R.id.client_name);
+            phoneNumber = itemView.findViewById(R.id.phone_number);
+            age = itemView.findViewById(R.id.age);
+            village = itemView.findViewById(R.id.village);
+            this.itemView = itemView;
 
         }
 

@@ -31,6 +31,7 @@ public class ClientReferral implements Serializable {
                           String referral_status,
                           String is_emergency,
                           String is_valid,
+                          String indicator_ids,
                           String details
     ) {
         this.details = details;
@@ -45,6 +46,7 @@ public class ClientReferral implements Serializable {
         this.referral_service_id = referral_service_id;
         this.is_valid = is_valid;
         this.is_emergency = is_emergency;
+        this.indicator_ids = indicator_ids;
     }
 
     public String getId() {

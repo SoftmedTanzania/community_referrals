@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
+        android:id="@+id/referral_date"
         android:text="18th November 2019"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -54,7 +55,7 @@
                 android:background="@color/card_separator" />
 
             <TextView
-                android:id="@+id/spinnerService"
+                android:id="@+id/service"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/divider_one"
@@ -65,7 +66,7 @@
                 android:id="@+id/facility_titleview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/spinnerService"
+                android:layout_below="@id/service"
                 android:layout_marginTop="16dp"
                 android:text="@string/visit_facility"
                 android:textColor="@color/colorPrimary" />
@@ -78,31 +79,22 @@
                 android:layout_marginTop="8dp"
                 android:background="@color/card_separator" />
 
-            <AutoCompleteTextView
-                android:id="@+id/autocomplete_facility"
+            <TextView
+                android:id="@+id/facility_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/strip_five"
-                android:layout_marginLeft="-4dp"
                 android:ems="10"
-                android:hint="@string/visit_facility_hint"
                 android:textSize="14sp" />
-
-
-            <Switch
-                android:id="@+id/emergency_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/autocomplete_facility"
-                android:layout_marginTop="16dp"
-                android:text="@string/emergency_referral_title_label" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/appointment_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/emergency_switch"
-                android:clickable="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/facility_name"
+                android:layout_marginTop="16dp"
+                android:clickable="false"
                 android:editable="false"
                 android:focusable="false"
                 android:hint="@string/appointment_date_label"
@@ -151,7 +143,7 @@
                 android:layout_below="@id/strip_three"
                 android:orientation="vertical">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
+                <TextView
                     android:id="@+id/reason_for_referral"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
@@ -162,9 +154,7 @@
                     android:imeOptions="actionNext"
                     android:textColor="@color/primary_text"
                     android:textColorHint="@color/hint_text"
-                    android:textSize="14sp"
-                    app:met_floatingLabelText="Mahali anapokaa"
-                    app:met_floatingLabelTextColor="@color/colorPrimary" />
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
@@ -202,7 +192,7 @@
                 android:background="@color/card_separator" />
 
             <LinearLayout
-                android:id="@+id/check_add_layout"
+                android:id="@+id/indicators"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/strip_four"

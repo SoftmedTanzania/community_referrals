@@ -136,6 +136,7 @@ public class ClientRepository extends DrishtiRepository {
         values.put(VILLAGE_LEADER, client.getVillage_leader());
         values.put(PHONE_NUMBER, client.getPhone_number());
         values.put(WARD, client.getWard());
+        values.put(DETAILS_COLUMN, new Gson().toJson(client));
         return values;
     }
 

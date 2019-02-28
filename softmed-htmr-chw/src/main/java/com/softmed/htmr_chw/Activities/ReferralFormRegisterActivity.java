@@ -184,7 +184,9 @@ public class ReferralFormRegisterActivity extends SecuredNativeSmartRegisterActi
         FormInstance formInstance;
         FormSubmission submission;
 
-        Map<String, String> details = new Gson().<Map<String, String>>fromJson(clientReferral.getDetails(), new TypeToken<Map<String, String>>() {
+        String detailsString = new Gson().toJson(clientReferral);
+
+        Map<String, String> details = new Gson().<Map<String, String>>fromJson(detailsString, new TypeToken<Map<String, String>>() {
         }.getType());
 
         for (String key : details.keySet()) {
@@ -495,7 +497,9 @@ public class ReferralFormRegisterActivity extends SecuredNativeSmartRegisterActi
     }
 
     public String getFacilityId(String name) {
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility where name ='" + name + "'");
+
+        cursor = commonRepository.customQuery("select * FROM facility where name = ?",new String[] { name });
+//        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility where name ='" + name + "'");
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
         Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));

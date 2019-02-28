@@ -75,6 +75,9 @@
         },
         {
           "name": "is_valid"
+        },
+        {
+          "name": "indicator_ids"
         }
       ]
     },

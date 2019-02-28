@@ -249,6 +249,14 @@ public class CommonRepository extends DrishtiRepository {
         return readAllcommonForField(cursor, tableName);
     }
 
+    public Cursor customQuery(String sql, String[] selections) {
+
+        SQLiteDatabase database = masterRepository.getReadableDatabase();
+        Cursor cursor = database.rawQuery(sql, selections);
+        // database.
+        return cursor;
+    }
+
 
     public List<CommonPersonObject> readAllcommonForField(Cursor cursor, String tableName) {
         List<CommonPersonObject> commons = new ArrayList<CommonPersonObject>();

@@ -28,6 +28,7 @@ public class ClientReferralRepository extends DrishtiRepository {
             "referral_status VARCHAR, " +
             "is_emergency VARCHAR, " +
             "is_valid VARCHAR, " +
+            "indicator_ids VARCHAR, " +
             "details VARCHAR)";
     public static final String TABLE_NAME = "client_referral";
     public static final String ID_COLUMN = "id";
@@ -41,8 +42,9 @@ public class ClientReferralRepository extends DrishtiRepository {
     public static final String IsEmergency = "is_emergency";
     public static final String AppointmentDate = "appointment_date";
     public static final String IS_VALID = "is_valid";
+    public static final String INDICATOR_IDS = "indicator_ids";
     public static final String DETAILS_COLUMN = "details";
-    public static final String[] CLIENT_REFERRAL_TABLE_COLUMNS = {ID_COLUMN, RELATIONAL_ID, CLIENT_ID, ReferralDate,AppointmentDate, ReferralFacility, ReferralReason, Service, ReferralStatus, IsEmergency,IS_VALID,DETAILS_COLUMN};
+    public static final String[] CLIENT_REFERRAL_TABLE_COLUMNS = {ID_COLUMN, RELATIONAL_ID, CLIENT_ID, ReferralDate,AppointmentDate, ReferralFacility, ReferralReason, Service, ReferralStatus, IsEmergency,IS_VALID,INDICATOR_IDS,DETAILS_COLUMN};
     
 
     @Override
@@ -76,6 +78,16 @@ public class ClientReferralRepository extends DrishtiRepository {
         }
         return children.get(0);
     }
+
+    public List<ClientReferral> findByClientId(String caseId) {
+        SQLiteDatabase database = masterRepository.getReadableDatabase();
+        Cursor cursor = database.query(TABLE_NAME, CLIENT_REFERRAL_TABLE_COLUMNS, CLIENT_ID + " = ?", new String[]{caseId}, null, null, null, null);
+        List<ClientReferral> children = readAll(cursor);
+
+
+        return children;
+    }
+
 
     public List<ClientReferral> findClientReferralByCaseIds(String... caseIds) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
@@ -148,6 +160,7 @@ public class ClientReferralRepository extends DrishtiRepository {
         values.put(ReferralStatus, clientReferral.getReferral_status());
         values.put(IS_VALID, clientReferral.getIs_valid());
         values.put(IsEmergency, clientReferral.getIs_emergency());
+        values.put(INDICATOR_IDS, clientReferral.getIndicator_ids());
         values.put(DETAILS_COLUMN, new Gson().toJson(clientReferral));
         return values;
     }
@@ -176,7 +189,8 @@ public class ClientReferralRepository extends DrishtiRepository {
                     cursor.getString(8),
                     cursor.getString(9),
                     cursor.getString(10),
-                    cursor.getString(11))
+                    cursor.getString(11),
+                    cursor.getString(12))
             );
             cursor.moveToNext();
         }
@@ -208,6 +222,7 @@ public class ClientReferralRepository extends DrishtiRepository {
                 getColumnValueByAlias(cursor, TABLE_NAME, ReferralStatus),
                 getColumnValueByAlias(cursor, TABLE_NAME, IsEmergency),
                 getColumnValueByAlias(cursor, TABLE_NAME, IS_VALID),
+                getColumnValueByAlias(cursor, TABLE_NAME, INDICATOR_IDS),
                 getColumnValueByAlias(cursor, TABLE_NAME, DETAILS_COLUMN));
 
     }

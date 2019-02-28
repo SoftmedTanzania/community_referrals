@@ -118,15 +118,14 @@ public class ClientsRegisterFormActivity extends SecuredNativeSmartRegisterActiv
             public void onClick(View v) {
 
                 if (isFormSubmissionOk()) {
-                    Log.d(TAG, "button clicked");
-
                     //setting default values
                     client = getClient();
                     client.setStatus(0);
+                    client.setClient_id(generateRandomUUIDString());
 
                     // convert to json
                     String gsonReferral = gson.toJson(client);
-                    saveFormSubmission(gsonReferral, generateRandomUUIDString(), formName, getFormFieldsOverrides());
+                    saveFormSubmission(gsonReferral, client.getClient_id(), formName, getFormFieldsOverrides());
 //                    Intent resultIntent = new Intent();
 //                    resultIntent.putExtra("status", true);
 //                    setResult(Activity.RESULT_OK, resultIntent);
@@ -139,6 +138,7 @@ public class ClientsRegisterFormActivity extends SecuredNativeSmartRegisterActiv
 
                     intent1.putExtras(bundle);
                     startActivity(intent1);
+                    finish();
                 }
             }
         });
