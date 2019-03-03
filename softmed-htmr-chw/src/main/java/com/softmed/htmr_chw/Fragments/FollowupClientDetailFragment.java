@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Adapters.SecuredNativeSmartRegisterCursorAdapterFragment;
+import com.softmed.htmr_chw.Repository.ClientReferral;
 import com.softmed.htmr_chw.util.LargeDiagonalCutPathDrawable;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
@@ -20,13 +21,15 @@ import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     public static final String CLIENT_FOLLOWUP = "item_id";
     private static final String TAG = FollowupClientDetailFragment.class.getSimpleName();
-    public ClientFollowup clientFollowup;
+    public ClientReferral clientReferral;
     private CommonRepository commonRepository;
     private Cursor cursor;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
@@ -37,10 +40,10 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
     public FollowupClientDetailFragment() {
     }
 
-    public static FollowupClientDetailFragment newInstance(ClientFollowup clientFollowup) {
+    public static FollowupClientDetailFragment newInstance(ClientReferral clientReferral) {
         FollowupClientDetailFragment fragment = new FollowupClientDetailFragment();
         Bundle args = new Bundle();
-        args.putSerializable(CLIENT_FOLLOWUP, clientFollowup);
+        args.putSerializable(CLIENT_FOLLOWUP, clientReferral);
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,7 +52,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            clientFollowup = (ClientFollowup) getArguments().getSerializable(CLIENT_FOLLOWUP);
+            clientReferral = (ClientReferral) getArguments().getSerializable(CLIENT_FOLLOWUP);
         }
     }
 
@@ -76,7 +79,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         visitDate = (TextView) rootView.findViewById(R.id.visitDate);
         rootView.findViewById(R.id.details_layout).setBackground(new LargeDiagonalCutPathDrawable());
 
-        setDetails(clientFollowup);
+        setDetails(clientReferral);
 
         return rootView;
     }
@@ -121,57 +124,56 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         }
     }
 
-    private void setDetails(ClientFollowup clientFollowup) {
+    private void setDetails(ClientReferral clientReferral) {
 
-//        String reg_date = dateFormat.format(clientFollowup.getDate_of_birth());
-//        Log.d(TAG,"Date of Birth : "+clientFollowup.getDate_of_birth() );
-//        String ageS = "";
-//        try {
-//            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-//            Date d = dateFormat.parse(reg_date);
-//            Calendar cal = Calendar.getInstance();
-//            Calendar today = Calendar.getInstance();
-//            cal.setTime(d);
-//
-//            int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
-//            Integer ageInt = new Integer(age);
-//            ageS = ageInt.toString();
-//
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        if ((clientFollowup.getGender()).equalsIgnoreCase(getResources().getString(R.string.female))) {
-//            gender.setText(getResources().getString(R.string.female));
-//        } else {
-//            gender.setText(getResources().getString(R.string.male));
-//        }
-//        age.setText(ageS + " years");
-//        name.setText(clientFollowup.getFirst_name() + " " + clientFollowup.getMiddle_name() + ", " + clientFollowup.getSurname());
-//        contacts.setText(clientFollowup.getPhone_number());
-//        referedReason.setText(clientFollowup.getReferral_reason());
-//        facility.setText(getFacilityName(clientFollowup.getFacility_id()));
-//        referedDate.setText(dateFormat.format(clientFollowup.getReferral_date()));
-//
-//
-//        try{
-//            residence.setText(clientFollowup.getMap_cue()+", "+clientFollowup.getWard());
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        try {
-//            sponsor.setText((clientFollowup.getCare_taker_relationship()!=null ? "" : clientFollowup.getCare_taker_relationship()) + "\n" +
-//                    (clientFollowup.getHelper_name()!=null ? "" : clientFollowup.getHelper_name()) + "\n" +
-//                    (clientFollowup.getCare_taker_name_phone_number()!=null ? "" : clientFollowup.getCare_taker_name_phone_number()));
-//
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//
-//        feedback.setText(clientFollowup.getReferral_feedback());
-//
-//        if(clientFollowup.getVisit_date()!=0) {
-//            visitDate.setText(dateFormat.format(clientFollowup.getVisit_date()));
+        String reg_date = dateFormat.format(clientReferral.getDate_of_birth());
+        Log.d(TAG,"Date of Birth : "+clientReferral.getDate_of_birth() );
+        String ageS = "";
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+            Date d = dateFormat.parse(reg_date);
+            Calendar cal = Calendar.getInstance();
+            Calendar today = Calendar.getInstance();
+            cal.setTime(d);
+
+            int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
+            Integer ageInt = new Integer(age);
+            ageS = ageInt.toString();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if ((clientReferral.getGender()).equalsIgnoreCase(getResources().getString(R.string.female))) {
+            gender.setText(getResources().getString(R.string.female));
+        } else {
+            gender.setText(getResources().getString(R.string.male));
+        }
+        age.setText(ageS + " years");
+        name.setText(clientReferral.getFirst_name() + " " + clientReferral.getMiddle_name() + ", " + clientReferral.getSurname());
+        contacts.setText(clientReferral.getPhone_number());
+        referedReason.setText(clientReferral.getReferral_reason());
+        facility.setText(getFacilityName(clientReferral.getFacility_id()));
+        referedDate.setText(dateFormat.format(clientReferral.getReferral_date()));
+
+
+        try{
+            residence.setText(clientReferral.getVillage()+", "+clientReferral.getWard());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try {
+            sponsor.setText((clientReferral.getHelper_name()==null ? "" : clientReferral.getHelper_name()) + "\n" +
+                    (clientReferral.getHelper_phone_number()==null ? "" : clientReferral.getHelper_phone_number()));
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        feedback.setText(clientReferral.getReferral_feedback());
+
+//        if(clientReferral.getVisit_date()!=0) {
+//            visitDate.setText(dateFormat.format(clientReferral.getVisit_date()));
 //        }else{
 //            visitDate.setText(R.string.followup_not_conducted);
 //        }

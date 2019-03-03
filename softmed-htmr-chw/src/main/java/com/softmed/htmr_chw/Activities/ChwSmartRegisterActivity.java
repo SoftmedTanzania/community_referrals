@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -11,7 +12,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,11 +33,12 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.Fragments.CHWSmartRegisterFragment;
-import com.softmed.htmr_chw.Fragments.FollowupClientsFragment;
+import com.softmed.htmr_chw.Fragments.FollowupReferralsFragment;
 import com.softmed.htmr_chw.Fragments.ReferralsListFragment;
 import com.softmed.htmr_chw.Fragments.ClientsListFragment;
 import com.softmed.htmr_chw.Fragments.ReportFragment;
 import com.softmed.htmr_chw.R;
+import com.softmed.htmr_chw.Repository.ClientReferral;
 import com.softmed.htmr_chw.Repository.LocationSelectorDialogFragment;
 import com.softmed.htmr_chw.util.FitDoughnut;
 import com.softmed.htmr_chw.util.NavigationController;
@@ -45,8 +46,6 @@ import com.softmed.htmr_chw.util.NavigationController;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.domain.ClientFollowup;
-import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.service.PendingFormSubmissionService;
@@ -71,8 +70,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -149,26 +148,59 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         imageButton = (ImageButton) findViewById(R.id.register_client);
         tabsLayout = (LinearLayout) findViewById(R.id.tabs);
 
-
-        final FragmentManager fragmentManager = this.getSupportFragmentManager();
-
-
         isOnTheMainMenu = true;
         mainMenu = (ScrollView)findViewById(R.id.main_menu);
         fragmentsView = findViewById(R.id.fragments);
-        View referralRegistration  = mainMenu.findViewById(R.id.referral_registration_card);
+        View clientRegistration  = mainMenu.findViewById(R.id.referral_registration_card);
+        View clientList  = mainMenu.findViewById(R.id.client_list_card);
         View issuedReferrals  = mainMenu.findViewById(R.id.issued_referral_list_card);
         View receivedReferralList  = mainMenu.findViewById(R.id.received_referrals_list_card);
         View reports  = mainMenu.findViewById(R.id.reports);
 
-        //TODO implement client registration.
-//        referralRegistration.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startRegistration();
-//            }
-//        });
-        referralRegistration.setOnClickListener(new View.OnClickListener() {
+        Typeface robotoBold = Typeface.createFromAsset(getAssets(), "roboto_bold.ttf");
+        Typeface rosarioRegular = Typeface.createFromAsset(getAssets(), "rosario_regular.ttf");
+
+        TextView registerClientTitle = (TextView) findViewById(R.id.register_client_title);
+        TextView clientListTitle = (TextView) findViewById(R.id.client_list_title);
+        TextView referalListTitle = (TextView) findViewById(R.id.referal_list_title);
+        TextView referralsListTitle = (TextView) findViewById(R.id.referrals_list_title);
+        TextView referedClientsTitle = (TextView) findViewById(R.id.refered_clients_title);
+
+
+        TextView registerClientDesc = (TextView) findViewById(R.id.register_client_desc);
+        TextView clientListDesc = (TextView) findViewById(R.id.client_list_desc);
+        TextView referalListDesc = (TextView) findViewById(R.id.referal_list_desc);
+        TextView referralsListDesc = (TextView) findViewById(R.id.referrals_list_desc);
+        TextView referedClientsDesc = (TextView) findViewById(R.id.refered_clients_desc);
+
+        registerClientTitle.setTypeface(robotoBold);
+        clientListTitle.setTypeface(robotoBold);
+        referalListTitle.setTypeface(robotoBold);
+        referralsListTitle.setTypeface(robotoBold);
+        referedClientsTitle.setTypeface(robotoBold);
+
+        registerClientDesc.setTypeface(rosarioRegular);
+        clientListDesc.setTypeface(rosarioRegular);
+        referalListDesc.setTypeface(rosarioRegular);
+        referralsListDesc.setTypeface(rosarioRegular);
+        referedClientsDesc.setTypeface(rosarioRegular);
+
+
+
+
+
+
+
+
+        final FragmentManager fragmentManager = this.getSupportFragmentManager();
+        clientRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startRegistration();
+            }
+        });
+
+        clientList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -228,7 +260,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
                 isOnTheMainMenu = false;
 
-                FollowupClientsFragment newFragment = new FollowupClientsFragment();
+                FollowupReferralsFragment newFragment = new FollowupReferralsFragment();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.fragments, newFragment);
                 transaction.addToBackStack(null);
@@ -280,17 +312,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         tabContent.setText(R.string.main_menu_label);
         tabContent.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sharp_menu_white_48dp, 0, 0, 0);
         tabsLayout.addView(tabLinearLayout);
-
-
-
-
-
-
-        final int colorWhite = ContextCompat.getColor(this, android.R.color.white);
-        final int colorPrimaryLight = ContextCompat.getColor(this, R.color.primary_light);
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-
 
         toolbar.inflateMenu(R.menu.menu_main);
         toolbar.setOnMenuItemClickListener(
@@ -365,8 +387,8 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         }
 
         try {
-            FollowupClientsFragment followupClientsFragment = (FollowupClientsFragment) getSupportFragmentManager().findFragmentByTag("tag");
-            followupClientsFragment.populateData();
+            FollowupReferralsFragment followupReferralsFragment = (FollowupReferralsFragment) getSupportFragmentManager().findFragmentByTag("tag");
+            followupReferralsFragment.populateData();
 
         }catch (Exception e){
             e.printStackTrace();
@@ -437,103 +459,102 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         }).start();
     }
 
-    public void showPreRegistrationDetailsDialog(Referral referral) {
-//
-//        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
-//        String gsonClient = Utils.convertStandardJSONString(clientReferral.getDetails());
-//
-//        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
-//        dialogBuilder.setView(dialogView)
-//                .setCancelable(true);
-//        final AlertDialog dialog = dialogBuilder.create();
-//        dialog.show();
-//        dialog.getWindow().setLayout(1000, 650);
-//
-//
-//        String reg_date = dateFormat.format(clientReferral.getDate_of_birth());
-//        String ageS = "";
-//        try {
-//            Date d = dateFormat.parse(reg_date);
-//            Calendar cal = Calendar.getInstance();
-//            Calendar today = Calendar.getInstance();
-//            cal.setTime(d);
-//            int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
-//            Integer ageInt = new Integer(age);
-//            ageS = ageInt.toString();
-//
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        TextView textName = (TextView) dialogView.findViewById(R.id.client_name);
-//        TextView textAge = (TextView) dialogView.findViewById(R.id.agevalue);
-//        TextView cbhs = (TextView) dialogView.findViewById(R.id.cbhs_number_value);
-//        TextView referral_service = (TextView) dialogView.findViewById(R.id.viewService);
-//        TextView facility = (TextView) dialogView.findViewById(R.id.viewFacility);
-//        TextView ctc_number = (TextView) dialogView.findViewById(R.id.ctc_number);
-//        TextView referral_reason = (TextView) dialogView.findViewById(R.id.reason_for_referral);
-//        TextView gender = (TextView) dialogView.findViewById(R.id.gendervalue);
-//        TextView phoneNumber = (TextView) dialogView.findViewById(R.id.viewPhone);
-//        TextView physicalAddress = (TextView) dialogView.findViewById(R.id.editTextKijiji);
-//        TextView villageleader = (TextView) dialogView.findViewById(R.id.viewVillageLeader);
-//
-//        try {
-//            if (clientReferral.getReferral_status().equals("1") && !clientReferral.getServices_given_to_patient().equals("")) {
-//                dialogView.findViewById(R.id.referral_feedback_title).setVisibility(VISIBLE);
-//                dialogView.findViewById(R.id.referral_feedback).setVisibility(VISIBLE);
-//                dialogView.findViewById(R.id.strip_six).setVisibility(VISIBLE);
-//                TextView referralFeedback = (TextView) dialogView.findViewById(R.id.referral_feedback);
-//                referralFeedback.setVisibility(VISIBLE);
-//                referralFeedback.setText(clientReferral.getServices_given_to_patient());
-//            }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//
-//        if (!clientReferral.getOther_notes().equals("")) {
-//            dialogView.findViewById(R.id.other_notes_title).setVisibility(VISIBLE);
-//            dialogView.findViewById(R.id.other_notes).setVisibility(VISIBLE);
-//            dialogView.findViewById(R.id.strip_seven).setVisibility(VISIBLE);
-//            TextView otherNotes = (TextView) dialogView.findViewById(R.id.other_notes);
-//            otherNotes.setVisibility(VISIBLE);
-//            otherNotes.setText(clientReferral.getOther_notes());
-//        }
-//
-//
-//        textName.setText(clientReferral.getFirst_name() + " " + clientReferral.getMiddle_name() + " " + clientReferral.getSurname());
-//
-//        textAge.setText(ageS + " years");
-//        cbhs.setText(clientReferral.getCommunity_based_hiv_service());
-//
-//        try {
-//            referral_service.setText(getReferralServiceName(clientReferral.getReferral_service_id()));
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//
-//        Log.d(TAG, "facility id = " + clientReferral.getFacility_id());
-//
-//        facility.setText(getFacilityName(clientReferral.getFacility_id()));
-//        if (!clientReferral.getCtc_number().isEmpty())
-//            ctc_number.setText(clientReferral.getCtc_number());
-//        else
-//            ctc_number.setText("-");
-//        referral_reason.setText(clientReferral.getReferral_reason());
-//        phoneNumber.setText(clientReferral.getPhone_number());
-//        villageleader.setText(clientReferral.getVillage_leader());
-//        physicalAddress.setText(clientReferral.getVillage());
-//
-//        try {
-//            if ((clientReferral.getGender()).equals(getResources().getString(R.string.female))) {
-//                gender.setText(getResources().getString(R.string.female));
-//            } else {
-//                gender.setText(getResources().getString(R.string.male));
-//            }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        setIndicators(dialogView, gsonClient);
+    public void showPreRegistrationDetailsDialog(ClientReferral clientReferral) {
+
+        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
+        dialogBuilder.setView(dialogView)
+                .setCancelable(true);
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+        dialog.getWindow().setLayout(1000, 650);
+
+
+        String reg_date = dateFormat.format(clientReferral.getDate_of_birth());
+        String ageS = "";
+        try {
+            Date d = dateFormat.parse(reg_date);
+            Calendar cal = Calendar.getInstance();
+            Calendar today = Calendar.getInstance();
+            cal.setTime(d);
+            int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
+            Integer ageInt = new Integer(age);
+            ageS = ageInt.toString();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        TextView textName = (TextView) dialogView.findViewById(R.id.client_name);
+        TextView textAge = (TextView) dialogView.findViewById(R.id.agevalue);
+        TextView cbhs = (TextView) dialogView.findViewById(R.id.cbhs_number_value);
+        TextView referral_service = (TextView) dialogView.findViewById(R.id.viewService);
+        TextView facility = (TextView) dialogView.findViewById(R.id.viewFacility);
+        TextView ctc_number = (TextView) dialogView.findViewById(R.id.ctc_number);
+        TextView referral_reason = (TextView) dialogView.findViewById(R.id.reason_for_referral);
+        TextView gender = (TextView) dialogView.findViewById(R.id.gendervalue);
+        TextView phoneNumber = (TextView) dialogView.findViewById(R.id.viewPhone);
+        TextView physicalAddress = (TextView) dialogView.findViewById(R.id.editTextKijiji);
+        TextView villageleader = (TextView) dialogView.findViewById(R.id.viewVillageLeader);
+
+        try {
+            if (clientReferral.getReferral_status().equals("1") && !clientReferral.getServices_given_to_patient().equals("")) {
+                dialogView.findViewById(R.id.referral_feedback_title).setVisibility(VISIBLE);
+                dialogView.findViewById(R.id.referral_feedback).setVisibility(VISIBLE);
+                dialogView.findViewById(R.id.strip_six).setVisibility(VISIBLE);
+                TextView referralFeedback = (TextView) dialogView.findViewById(R.id.referral_feedback);
+                referralFeedback.setVisibility(VISIBLE);
+                referralFeedback.setText(clientReferral.getServices_given_to_patient());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        if (!clientReferral.getOther_notes().equals("")) {
+            dialogView.findViewById(R.id.other_notes_title).setVisibility(VISIBLE);
+            dialogView.findViewById(R.id.other_notes).setVisibility(VISIBLE);
+            dialogView.findViewById(R.id.strip_seven).setVisibility(VISIBLE);
+            TextView otherNotes = (TextView) dialogView.findViewById(R.id.other_notes);
+            otherNotes.setVisibility(VISIBLE);
+            otherNotes.setText(clientReferral.getOther_notes());
+        }
+
+
+        textName.setText(clientReferral.getFirst_name() + " " + clientReferral.getMiddle_name() + " " + clientReferral.getSurname());
+
+        textAge.setText(ageS + " years");
+        cbhs.setText(clientReferral.getCommunity_based_hiv_service());
+
+        try {
+            referral_service.setText(getReferralServiceName(clientReferral.getReferral_service_id()));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        Log.d(TAG, "facility id = " + clientReferral.getFacility_id());
+
+        facility.setText(getFacilityName(clientReferral.getFacility_id()));
+        if (!clientReferral.getCtc_number().isEmpty())
+            ctc_number.setText(clientReferral.getCtc_number());
+        else
+            ctc_number.setText("-");
+        referral_reason.setText(clientReferral.getReferral_reason());
+        phoneNumber.setText(clientReferral.getPhone_number());
+        villageleader.setText(clientReferral.getVillage_leader());
+        physicalAddress.setText(clientReferral.getVillage());
+
+        try {
+            if ((clientReferral.getGender()).equals(getResources().getString(R.string.female))) {
+                gender.setText(getResources().getString(R.string.female));
+            } else {
+                gender.setText(getResources().getString(R.string.male));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        setIndicators(((LinearLayout)dialogView.findViewById(R.id.flags_layout)), clientReferral.getIndicator_ids());
     }
 
     private void makeToast() {
@@ -544,6 +565,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     public String getFacilityName(String id) {
 
+        Log.d(TAG,"Facility Id = "+id);
         commonRepository = context().commonrepository("facility");
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility where id ='" + id + "'");
 
@@ -564,32 +586,23 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         return commonPersonObjectList.get(0).getColumnmaps().get("name");
     }
 
-    //TODO Coze reimplement this
-    public void setIndicators(View view, String object) {
+    public void setIndicators(LinearLayout view, String object) {
         try {
-            JSONObject jsonObj = new JSONObject(object);
-            Log.d(TAG, "jason indicators " + jsonObj.get("indicator_ids"));
-            String list = jsonObj.getString("indicator_ids").toString();
-            Log.d(TAG, "list" + list);
-            list = list.replace("[", "");
-            list = list.replace("\"", "");
-            list = list.replace("]", "");
-            Log.d(TAG, "list" + list);
-            List<String> myList = new ArrayList<String>(Arrays.asList(list.split(",")));
-            Log.d(TAG, "inidcators list " + myList.get(0) + "size " + myList.size());
-            flags_layout = (LinearLayout) view.findViewById(R.id.flags_layout);
-            flags_layout.removeAllViewsInLayout();
-            for (int m = 0; m < myList.size(); m++) {
-                final TextView rowTextView = new TextView(this);
-                rowTextView.setText(getIndicatorName(myList.get(m)));
-                rowTextView.setPadding(0, 10, 10, 0);
-                flags_layout.addView(rowTextView);
+            JSONArray indicatorsArray = new JSONArray(object);
+            view.removeAllViewsInLayout();
+
+            for (int m = 0; m < indicatorsArray.length(); m++) {
+                View v  =  getLayoutInflater().inflate(R.layout.indicator_item,null);
+                TextView indicatorName =v.findViewById(R.id.indicator_name);
+                indicatorName.setText(getIndicatorName(indicatorsArray.getString(m)));
+                indicatorName.setPadding(0, 10, 10, 0);
+                view.addView(v);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
+
 
     public String getIndicatorName(String id) {
 
@@ -602,7 +615,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         return commonPersonObjectList.get(0).getColumnmaps().get("indicatorName");
     }
 
-    public void showFollowUpFormDialog(final ClientFollowup followup) {
+    public void showFollowUpFormDialog(final ClientReferral clientReferral) {
 
 
 
@@ -684,20 +697,20 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void onClick(View view) {
                 if (spinnerClientAvailable.getSelectedItem().toString().equals(getString(R.string.yes_button_label))) {
-//                    if (spinnerReason.getSelectedItemPosition() <= 0) {
-//                        // no radio checked
-//                        message = getString(R.string.toast_message_select_reasons_for_missing_appointment);
-//                        makeToast();
-//                    } else {
-//                        followup.setVisit_date(today.getTimeInMillis());
-//                        followup.setReferral_feedback(client_condition.getText().toString());
-//
+                    if (spinnerReason.getSelectedItemPosition() <= 0) {
+                        // no radio checked
+                        message = getString(R.string.toast_message_select_reasons_for_missing_appointment);
+                        makeToast();
+                    } else {
+//                        clientReferral.setVisit_date(today.getTimeInMillis());
+                        clientReferral.setReferral_feedback(client_condition.getText().toString());
+
 //                        context().followupClientRepository().update(followup);
 
                         //TODO finish up sending of referral feedbacks of the followup
 
 //                        final String uuid = generateRandomUUIDString();
-//                        context().followupClientRepository().update(followup);
+//                        context().referralRepository().update(clientReferral);
 //                        List<FormField> formFields = new ArrayList<>();
 //
 //
@@ -724,38 +737,27 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //                        context().formDataRepository().saveFormSubmission(submission);
 //
 //                        Log.d(TAG, "submission content = " + new Gson().toJson(submission));
-//
-//
-//                        new AsyncTask<Void, Void, Void>() {
-//                            @Override
-//                            protected Void doInBackground(Void... params) {
-//                                CommonRepository commonRepository = context().commonrepository("client_referral");
-//                                CommonPersonObject c = commonRepository.findByCaseID(id);
-//                                if (!c.getDetails().get("PhoneNumber").equals(""))
-//                                    Utils.sendRegistrationAlert(c.getDetails().get("PhoneNumber"));
-//                                return null;
-//                            }
-//                        }.execute();
-//
-//                        Toast.makeText(ChwSmartRegisterActivity.this, getString(R.string.followup_thankyou_note_part_one) + followup.getFirst_name() + " " + followup.getSurname(), Toast.LENGTH_SHORT).show();
-//                        dialog.dismiss();
-//                    }
-//                } else {
-//                    Toast.makeText(ChwSmartRegisterActivity.this, getString(R.string.followup_clint_not_found_responce) + followup.getFirst_name() + " " + followup.getSurname(), Toast.LENGTH_SHORT).show();
-//                    dialog.dismiss();
+
+
+                        Toast.makeText(ChwSmartRegisterActivity.this, getString(R.string.followup_thankyou_note_part_one) + clientReferral.getFirst_name() + " " + clientReferral.getSurname(), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                } else {
+                    Toast.makeText(ChwSmartRegisterActivity.this, getString(R.string.followup_clint_not_found_responce) + clientReferral.getFirst_name() + " " + clientReferral.getSurname(), Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
                 }
 
             }
         });
 
-//        TextView textName = (TextView) dialogView.findViewById(R.id.patient_name);
-//        textName.setText(followup.getFirst_name() + " " + followup.getMiddle_name() + " " + followup.getSurname());
-//
-//        TextView facility = (TextView) dialog.findViewById(R.id.textview_facility);
-//        facility.setText(getFacilityName(followup.getFacility_id()));
-//
-//        TextView referral_reason = (TextView) dialog.findViewById(R.id.textview_followupreason);
-//        referral_reason.setText(followup.getReferral_reason());
+        TextView textName = (TextView) dialogView.findViewById(R.id.patient_name);
+        textName.setText(clientReferral.getFirst_name() + " " + clientReferral.getMiddle_name() + " " + clientReferral.getSurname());
+
+        TextView facility = (TextView) dialog.findViewById(R.id.textview_facility);
+        facility.setText(getFacilityName(clientReferral.getFacility_id()));
+
+        TextView referral_reason = (TextView) dialog.findViewById(R.id.textview_followupreason);
+        referral_reason.setText(clientReferral.getReferral_reason());
 
     }
 

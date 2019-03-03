@@ -230,15 +230,10 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     }
 
     public void updateReferralStatus(String id, String feedback, String serviceGiven, boolean testResult, String referralStatus) {
-
-        commonRepository = context.commonrepository("client_referral");
-
-        Cursor cursor = commonRepository.RawCustomQueryForAdapter("select * FROM client_referral WHERE " + CommonRepository.ID_COLUMN + " = '" + id + "'");
+        ReferralRepository referralRepository = context.referralRepository();
+        Referral referral = referralRepository.find(id);
 
         try {
-            List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "client_referral");
-
-            Referral referral = Utils.convertToClientReferralObjectList(commonPersonObjectList).get(0);
             referral.setReferral_status(referralStatus);
             referral.setOther_notes(feedback);
             referral.setServices_given_to_patient(serviceGiven);

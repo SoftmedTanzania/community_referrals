@@ -12,7 +12,7 @@ public class Referral implements Serializable {
             services_given_to_patient, referral_uuid, facility_id,
             referral_reason, is_valid, service_provider_uiid,
             referral_service_id, referral_status,is_emergency,clientId;
-    private long  referral_date,appointment_date;
+    private long  referral_date,appointment_date,referral_type;
     private boolean test_results;
     private String indicator_ids;
 
@@ -32,6 +32,9 @@ public class Referral implements Serializable {
                     String is_emergency,
                     String is_valid,
                     String indicator_ids,
+                    String other_notes,
+                    String services_given_to_patient,
+                    int referral_type,
                     String details
     ) {
         this.details = details;
@@ -46,6 +49,9 @@ public class Referral implements Serializable {
         this.referral_service_id = referral_service_id;
         this.is_valid = is_valid;
         this.is_emergency = is_emergency;
+        this.other_notes=other_notes;
+        this.services_given_to_patient=services_given_to_patient;
+        this.referral_type=referral_type;
         this.indicator_ids = indicator_ids;
     }
 
@@ -199,5 +205,13 @@ public class Referral implements Serializable {
 
     public void setIndicator_ids(String indicator_ids) {
         this.indicator_ids = indicator_ids;
+    }
+
+    public long getReferral_type() {
+        return referral_type;
+    }
+
+    public void setReferral_type(long referral_type) {
+        this.referral_type = referral_type;
     }
 }

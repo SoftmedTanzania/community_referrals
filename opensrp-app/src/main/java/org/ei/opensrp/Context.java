@@ -518,7 +518,7 @@ public class Context {
             drishtireposotorylist.add(timelineEventRepository());
             drishtireposotorylist.add(motherRepository());
             drishtireposotorylist.add(facilityRepository());
-            drishtireposotorylist.add(clientReferralRepository());
+            drishtireposotorylist.add(referralRepository());
             drishtireposotorylist.add(followupClientRepository());
             drishtireposotorylist.add(clientRepository());
             drishtireposotorylist.add(referralServiceRepository());
@@ -576,7 +576,7 @@ public class Context {
     public AllBeneficiaries allBeneficiaries() {
         initRepository();
         if (allBeneficiaries == null) {
-            allBeneficiaries = new AllBeneficiaries(motherRepository(),clientReferralRepository() ,childRepository(), alertRepository(), timelineEventRepository());
+            allBeneficiaries = new AllBeneficiaries(motherRepository(), referralRepository() ,childRepository(), alertRepository(), timelineEventRepository());
         }
         return allBeneficiaries;
     }
@@ -652,7 +652,7 @@ public class Context {
         }
         return facilityRepository;
     }
-    public ReferralRepository clientReferralRepository() {
+    public ReferralRepository referralRepository() {
         if (referralRepository == null) {
             referralRepository = new ReferralRepository();
         }

@@ -1,4 +1,3 @@
 rootProject.name = 'opensrp-app-parent'
 include ':opensrp-app', ':softmed-htmr-chw'
-
 project(':opensrp-app').projectDir = "$rootDir/opensrp-app" as File

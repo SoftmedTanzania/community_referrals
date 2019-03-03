@@ -14,17 +14,22 @@ import com.google.gson.Gson;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Adapters.FollowupClintsRecyclerAdapter;
 import com.softmed.htmr_chw.Adapters.SecuredNativeSmartRegisterCursorAdapterFragment;
+import com.softmed.htmr_chw.Repository.ClientReferral;
+import com.softmed.htmr_chw.util.Utils;
 
+import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.ClientFollowup;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
+import org.ei.opensrp.repository.ClientRepository;
 import org.ei.opensrp.repository.FollowupReferralRepository;
+import org.ei.opensrp.repository.ReferralRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class FollowupClientsFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     private FollowupReferralRepository followupReferralRepository;
     private Gson gson = new Gson();
     private android.content.Context appContext;
@@ -33,22 +38,18 @@ public class FollowupClientsFragment extends SecuredNativeSmartRegisterCursorAda
     private boolean mTwoPane;
     private View v;
     private RecyclerView recyclerView;
-    private static final String TAG = FollowupClientsFragment.class.getSimpleName(),
+    private List<ClientReferral> clientReferrals = new ArrayList<>();
+    private static final String TAG = FollowupReferralsFragment.class.getSimpleName(),
             TABLE_NAME = "followup_client";
 
+    private CommonRepository commonRepository;
 
-    public FollowupClientsFragment() {
+
+    public FollowupReferralsFragment() {
         // Required empty public constructor
     }
 
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment ReferredClientsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ReferralsListFragment newInstance() {
         ReferralsListFragment fragment = new ReferralsListFragment();
         return fragment;
@@ -66,11 +67,16 @@ public class FollowupClientsFragment extends SecuredNativeSmartRegisterCursorAda
         v = inflater.inflate(R.layout.fragment_chwregistration, container, false);
 
         recyclerView = (RecyclerView) v.findViewById(R.id.item_list);
-        followupReferralRepository = context().followupClientRepository();
-        try {
-            followupClients = followupReferralRepository.all();
 
-            FollowupClintsRecyclerAdapter followupClintsRecyclerAdapter = new FollowupClintsRecyclerAdapter(getActivity(), followupClients);
+        commonRepository = context().commonrepository(ReferralRepository.TABLE_NAME);
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + ReferralRepository.TABLE_NAME+
+                " INNER JOIN "+ ClientRepository.TABLE_NAME+" ON "+ ReferralRepository.TABLE_NAME+"."+ ReferralRepository.CLIENT_ID+" = "+ClientRepository.TABLE_NAME+"."+ClientRepository.CLIENT_ID+" WHERE "+ReferralRepository.REFERRAL_TYPE+" = 4");
+
+        clientReferrals  = Utils.convertToClientReferralObjectList(cursor);
+
+        try {
+
+            FollowupClintsRecyclerAdapter followupClintsRecyclerAdapter = new FollowupClintsRecyclerAdapter(getActivity(), clientReferrals);
 
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 
@@ -127,9 +133,14 @@ public class FollowupClientsFragment extends SecuredNativeSmartRegisterCursorAda
     }
 
     public void populateData() {
-        followupReferralRepository = context().followupClientRepository();
+        commonRepository = context().commonrepository(ReferralRepository.TABLE_NAME);
+        Cursor cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + ReferralRepository.TABLE_NAME+
+                " INNER JOIN "+ ClientRepository.TABLE_NAME+" ON "+ ReferralRepository.TABLE_NAME+"."+ ReferralRepository.CLIENT_ID+" = "+ClientRepository.TABLE_NAME+"."+ClientRepository.CLIENT_ID+" WHERE "+ReferralRepository.REFERRAL_TYPE+" = 4");
 
-        FollowupClintsRecyclerAdapter followupClintsRecyclerAdapter = new FollowupClintsRecyclerAdapter(getActivity(), followupReferralRepository.all());
+        clientReferrals  = Utils.convertToClientReferralObjectList(cursor);
+        cursor.close();
+
+        FollowupClintsRecyclerAdapter followupClintsRecyclerAdapter = new FollowupClintsRecyclerAdapter(getActivity(), clientReferrals);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 

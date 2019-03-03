@@ -17,6 +17,7 @@ import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.Activities.FollowupReferralDetailsActivity;
 import com.softmed.htmr_chw.Fragments.FollowupClientDetailFragment;
 import com.softmed.htmr_chw.R;
+import com.softmed.htmr_chw.Repository.ClientReferral;
 
 import org.ei.opensrp.domain.ClientFollowup;
 
@@ -33,11 +34,11 @@ public class FollowupClintsRecyclerAdapter extends
         RecyclerView.Adapter<FollowupClintsRecyclerAdapter.ViewHolder> {
 
     private static String TAG = FollowupClintsRecyclerAdapter.class.getSimpleName();
-    private List<ClientFollowup> clients;
+    private List<ClientReferral> clients;
     private Context mContext;
     private boolean mTwoPane = true;
 
-    public FollowupClintsRecyclerAdapter(Context context, List<ClientFollowup> clients) {
+    public FollowupClintsRecyclerAdapter(Context context, List<ClientReferral> clients) {
         this.clients = clients;
         this.mContext = context;
 
@@ -62,7 +63,7 @@ public class FollowupClintsRecyclerAdapter extends
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
-        final ClientFollowup client = clients.get(position);
+        final ClientReferral client = clients.get(position);
 
         Log.d(TAG, "follow up adapter : " + new Gson().toJson(clients));
 
@@ -72,13 +73,13 @@ public class FollowupClintsRecyclerAdapter extends
         TextView phoneNumberTextView = viewHolder.phoneNumberTextView;
         TextView CBHS = viewHolder.CBHSTextView;
 
-//        phoneNumberTextView.setText(client.getPhone_number());
-//        viewHolder.nameTextView.setText(client.getFirst_name() + " " + client.getMiddle_name() + ", " + client.getSurname());
-//
-//        if (client.getCommunity_based_hiv_service() != null) {
-//            if (!client.getCommunity_based_hiv_service().equals(""))
-//                CBHS.setText("CBHS : " + client.getCommunity_based_hiv_service());
-//        }
+        phoneNumberTextView.setText(client.getPhone_number());
+        viewHolder.nameTextView.setText(client.getFirst_name() + " " + client.getMiddle_name() + ", " + client.getSurname());
+
+        if (client.getCommunity_based_hiv_service() != null) {
+            if (!client.getCommunity_based_hiv_service().equals(""))
+                CBHS.setText("CBHS : " + client.getCommunity_based_hiv_service());
+        }
 
         viewHolder.details.setOnClickListener(new View.OnClickListener() {
             @Override

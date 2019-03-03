@@ -44,10 +44,19 @@
         },
         {
           "name": "phone_number"
+        },
+        {
+          "name": "village"
+        },
+        {
+          "name": "village_leader"
+        },
+        {
+          "name": "ward"
         }
       ]
     },{
-      "name": "client_referral",
+      "name": "referral",
       "columns": [
         {
           "name": "client_id"
@@ -78,6 +87,12 @@
         },
         {
           "name": "indicator_ids"
+        },
+        {
+          "name": "other_notes"
+        },
+        {
+          "name": "services_given_to_patient"
         }
       ]
     },

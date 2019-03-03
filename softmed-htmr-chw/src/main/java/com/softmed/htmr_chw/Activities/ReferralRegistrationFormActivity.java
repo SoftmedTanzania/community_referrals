@@ -152,7 +152,6 @@ public class ReferralRegistrationFormActivity extends SecuredNativeSmartRegister
                     // convert to json
                     String gsonReferral = gson.toJson(referral);
 
-                    // todo start form submission
                     saveFormSubmission(gsonReferral, generateRandomUUIDString(), formName, getFormFieldsOverrides());
                     Intent resultIntent = new Intent();
                     resultIntent.putExtra("status", true);
@@ -170,7 +169,7 @@ public class ReferralRegistrationFormActivity extends SecuredNativeSmartRegister
         final Referral referral = gson.fromJson(formSubmission, Referral.class);
         referral.setId(id);
 
-        referralRepository = context().clientReferralRepository();
+        referralRepository = context().referralRepository();
         referralRepository.add(referral);
 
 
@@ -458,11 +457,12 @@ public class ReferralRegistrationFormActivity extends SecuredNativeSmartRegister
         Referral referral = new Referral();
         referral.setReferral_date(today.getTimeInMillis());
 
-        if (!is_emergency) {
+        if (is_emergency) {
             referral.setAppointment_date(today.getTimeInMillis());
         } else if (appointmentDate == 0) {
             referral.setAppointment_date(defaultAppointmentDate);
         } else {
+            Log.d(TAG,"Setting custom appointmentDate");
             referral.setAppointment_date(appointmentDate);
         }
         referral.setIs_emergency(is_emergency+"");
@@ -475,6 +475,7 @@ public class ReferralRegistrationFormActivity extends SecuredNativeSmartRegister
         referral.setOther_notes("");
         referral.setClientId(bundle.getString("clientId"));
         referral.setService_provider_uiid(((BoreshaAfyaApplication)getApplication()).getCurrentUserID());
+        referral.setReferral_type(1);
 
         List<String> indicatorIds = new ArrayList<String>();
         for(int i=0; i<parentLayout.getChildCount(); i++) {

@@ -17,7 +17,7 @@ import static net.sqlcipher.DatabaseUtils.longForQuery;
 import static org.apache.commons.lang3.StringUtils.repeat;
 
 public class ReferralRepository extends DrishtiRepository {
-    private static final String CHILD_SQL = "CREATE TABLE client_referral(id VARCHAR PRIMARY KEY, " +
+    private static final String CHILD_SQL = "CREATE TABLE referral(id VARCHAR PRIMARY KEY, " +
             "relationalid VARCHAR, " +
             "client_id VARCHAR, " +
             "referral_date VARCHAR," +
@@ -29,8 +29,11 @@ public class ReferralRepository extends DrishtiRepository {
             "is_emergency VARCHAR, " +
             "is_valid VARCHAR, " +
             "indicator_ids VARCHAR, " +
+            "other_notes VARCHAR, " +
+            "services_given_to_patient VARCHAR, " +
+            "referral_type INTEGER, " +
             "details VARCHAR)";
-    public static final String TABLE_NAME = "client_referral";
+    public static final String TABLE_NAME = "referral";
     public static final String ID_COLUMN = "id";
     public static final String RELATIONAL_ID = "relationalid";
     public static final String CLIENT_ID = "client_id";
@@ -43,8 +46,11 @@ public class ReferralRepository extends DrishtiRepository {
     public static final String AppointmentDate = "appointment_date";
     public static final String IS_VALID = "is_valid";
     public static final String INDICATOR_IDS = "indicator_ids";
+    public static final String OTHER_NOTES = "other_notes";
+    public static final String SERVICES_GIVEN_TO_PATIENTS = "services_given_to_patient";
+    public static final String REFERRAL_TYPE = "referral_type";
     public static final String DETAILS_COLUMN = "details";
-    public static final String[] CLIENT_REFERRAL_TABLE_COLUMNS = {ID_COLUMN, RELATIONAL_ID, CLIENT_ID, ReferralDate,AppointmentDate, ReferralFacility, ReferralReason, Service, ReferralStatus, IsEmergency,IS_VALID,INDICATOR_IDS,DETAILS_COLUMN};
+    public static final String[] CLIENT_REFERRAL_TABLE_COLUMNS = {ID_COLUMN, RELATIONAL_ID, CLIENT_ID, ReferralDate,AppointmentDate, ReferralFacility, ReferralReason, Service, ReferralStatus, IsEmergency,IS_VALID,INDICATOR_IDS,OTHER_NOTES,SERVICES_GIVEN_TO_PATIENTS,REFERRAL_TYPE,DETAILS_COLUMN};
     
 
     @Override
@@ -54,7 +60,7 @@ public class ReferralRepository extends DrishtiRepository {
 
     public void add(Referral referral) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
-        database.insert(TABLE_NAME, null, createValuesFor(referral));
+        database.insert(ReferralRepository.TABLE_NAME, null, createValuesFor(referral));
     }
 
     public void update(Referral referral) {
@@ -161,6 +167,9 @@ public class ReferralRepository extends DrishtiRepository {
         values.put(IS_VALID, referral.getIs_valid());
         values.put(IsEmergency, referral.getIs_emergency());
         values.put(INDICATOR_IDS, referral.getIndicator_ids());
+        values.put(OTHER_NOTES, referral.getOther_notes());
+        values.put(REFERRAL_TYPE, referral.getReferral_type());
+        values.put(SERVICES_GIVEN_TO_PATIENTS, referral.getServices_given_to_patient());
         values.put(DETAILS_COLUMN, new Gson().toJson(referral));
         return values;
     }
@@ -190,7 +199,10 @@ public class ReferralRepository extends DrishtiRepository {
                     cursor.getString(9),
                     cursor.getString(10),
                     cursor.getString(11),
-                    cursor.getString(12))
+                    cursor.getString(12),
+                    cursor.getString(13),
+                    cursor.getInt(14),
+                    cursor.getString(15))
             );
             cursor.moveToNext();
         }
@@ -223,6 +235,9 @@ public class ReferralRepository extends DrishtiRepository {
                 getColumnValueByAlias(cursor, TABLE_NAME, IsEmergency),
                 getColumnValueByAlias(cursor, TABLE_NAME, IS_VALID),
                 getColumnValueByAlias(cursor, TABLE_NAME, INDICATOR_IDS),
+                getColumnValueByAlias(cursor, TABLE_NAME, OTHER_NOTES),
+                getColumnValueByAlias(cursor, TABLE_NAME, SERVICES_GIVEN_TO_PATIENTS),
+                Integer.parseInt(getColumnValueByAlias(cursor, TABLE_NAME, REFERRAL_TYPE)),
                 getColumnValueByAlias(cursor, TABLE_NAME, DETAILS_COLUMN));
 
     }

@@ -55,6 +55,7 @@ public class ClientsListAdapter extends
         viewHolder.nameTextView.setText(client.getFirst_name() + " " + client.getMiddle_name() + " " + client.getSurname());
         viewHolder.phoneNumber.setText(client.getPhone_number());
         viewHolder.village.setText(client.getVillage());
+        viewHolder.gender.setText(client.getGender());
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,14 +78,14 @@ public class ClientsListAdapter extends
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView nameTextView, phoneNumber, age, village;
+        public TextView nameTextView, phoneNumber, gender, village;
         public View itemView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.client_name);
             phoneNumber = itemView.findViewById(R.id.phone_number);
-            age = itemView.findViewById(R.id.age);
+            gender = itemView.findViewById(R.id.gender);
             village = itemView.findViewById(R.id.village);
             this.itemView = itemView;
 

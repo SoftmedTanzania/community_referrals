@@ -45,7 +45,7 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
     private Cursor cursor;
     private String locationDialogTAG = "locationDialogTAG";
     private static final String TAG = ClientsListFragment.class.getSimpleName(),
-            TABLE_NAME = "client_referral";
+            TABLE_NAME = "client";
     private long startDate = 0, endDate = 0;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private Gson gson = new Gson();
@@ -108,7 +108,7 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
 
                 } else {
                     Log.d(TAG, "am in false else");
-                    List<Client> clients = clientRepository.RawCustomQueryForAdapter("select * FROM " + TABLE_NAME + " where is_valid ='true'");
+                    List<Client> clients = clientRepository.RawCustomQueryForAdapter("select * FROM " + ClientRepository.TABLE_NAME + " where is_valid ='true'");
 
                     ClientsListAdapter pager = new ClientsListAdapter(getActivity(), clients);
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());

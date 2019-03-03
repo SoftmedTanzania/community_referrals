@@ -139,7 +139,8 @@
     <string name="referral_history_label">Referral History</string>
     <string name="helper_name">Care Taker Name</string>
     <string name="helper_phone_number">Care Taker Phone Number</string>
-    <string name="gender">Gender</string>
+    <string name="gender">Jinsi</string>
+    <string name="client_list_desc">Wateja waliosajiliwa (Tumia sehemu hii kuchagua mteha na kutuma rufaa).</string>
 
 
 </resources>

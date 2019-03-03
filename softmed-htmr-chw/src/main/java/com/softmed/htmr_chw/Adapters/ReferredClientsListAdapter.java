@@ -18,6 +18,7 @@ import org.ei.opensrp.repository.AllSharedPreferences;
 
 import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.R;
+import com.softmed.htmr_chw.Repository.ClientReferral;
 import com.softmed.htmr_chw.util.Utils;
 
 import java.text.SimpleDateFormat;
@@ -37,10 +38,10 @@ public class ReferredClientsListAdapter extends
         RecyclerView.Adapter<ReferredClientsListAdapter.ViewHolder> {
     private static String TAG = ReferredClientsListAdapter.class.getSimpleName();
     private CommonRepository commonRepository;
-    private List<Referral> clients = new ArrayList<>();;
+    private List<ClientReferral> clients = new ArrayList<>();;
     private Context mContext;
 
-    public ReferredClientsListAdapter(Context context, List<Referral> client, CommonRepository commonRepository) {
+    public ReferredClientsListAdapter(Context context, List<ClientReferral> client, CommonRepository commonRepository) {
         clients = client;
         mContext = context;
         this.commonRepository = commonRepository;
@@ -65,19 +66,10 @@ public class ReferredClientsListAdapter extends
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
 
-        Referral client = clients.get(position);
-
-        String gsonReferral = Utils.convertStandardJSONString(client.getDetails());
-        Log.d(TAG, "gsonReferral0 = " +gsonReferral);
-        final Referral referral = new Gson().fromJson(gsonReferral,Referral.class);
-        Log.d(TAG, "gsonReferral1 = " +new Gson().toJson(referral));
-        Log.d(TAG, "gsonReferral2 = " + new Gson().toJson(client.getDetails()));
-
-
+        ClientReferral client = clients.get(position);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
-//TODO unhide this
-//        viewHolder.nameTextView.setText(client.getFirst_name()+" "+client.getMiddle_name()+" "+client.getSurname());
+        viewHolder.nameTextView.setText(client.getFirst_name()+" "+client.getMiddle_name()+" "+client.getSurname());
         viewHolder.referralReason.setText(client.getReferral_reason());
         viewHolder.scheduleDateTextView.setText(dateFormat.format(client.getReferral_date()));
         viewHolder.serviceName.setText(getReferralServiceName(client.getReferral_service_id()));
@@ -104,7 +96,6 @@ public class ReferredClientsListAdapter extends
     @Override
     public int getItemCount() {
         return clients.size();
-//        return 0;
     }
 
 

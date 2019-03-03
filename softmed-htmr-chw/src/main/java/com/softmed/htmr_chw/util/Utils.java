@@ -18,16 +18,21 @@ package com.softmed.htmr_chw.util;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.util.Log;
 
+import com.softmed.htmr_chw.Repository.ClientReferral;
 import com.softmed.htmr_chw.Repository.FacilityObject;
 import com.softmed.htmr_chw.Repository.ReferralServiceObject;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.domain.Indicator;
+import org.ei.opensrp.repository.ClientRepository;
+import org.ei.opensrp.repository.ReferralRepository;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,30 +82,39 @@ public class Utils {
         return Build.VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN;
     }
 
-    public static Referral convertToClientPersonObject(CommonPersonObject commonPersonObject) {
-        String details = commonPersonObject.getColumnmaps().get("details");
-        Log.d(TAG, "details string commonPersonObject = " + convertStandardJSONString(details));
+    public static ClientReferral convertToClientPersonObject(Cursor cursor) {
         try {
-            //TODO uncomment this
-            return new Referral(
-//                    commonPersonObject.getColumnmaps().get("id"),
-//                    commonPersonObject.getColumnmaps().get("relationalid"),
-//                    commonPersonObject.getColumnmaps().get("first_name"),
-//                    commonPersonObject.getColumnmaps().get("middle_name"),
-//                    commonPersonObject.getColumnmaps().get("surname"),
-//                    commonPersonObject.getColumnmaps().get("community_based_hiv_service"),
-//                    commonPersonObject.getColumnmaps().get("ctc_number"),
-//                    Long.parseLong(commonPersonObject.getColumnmaps().get("referral_date")),
-//                    Long.parseLong(commonPersonObject.getColumnmaps().get("appointment_date")),
-//                    commonPersonObject.getColumnmaps().get("facility_id"),
-//                    commonPersonObject.getColumnmaps().get("referral_reason"),
-//                    commonPersonObject.getColumnmaps().get("referral_service_id"),
-//                    commonPersonObject.getColumnmaps().get("referral_status"),
-//                    commonPersonObject.getColumnmaps().get("is_valid"),
-//                    commonPersonObject.getColumnmaps().get("is_emergency"),
-//                    commonPersonObject.getColumnmaps().get("gender"),
-//                    commonPersonObject.getColumnmaps().get("details")
-            );
+            ClientReferral clientReferral =  new ClientReferral();
+            clientReferral.setClient_id(cursor.getString(cursor.getColumnIndex(ClientRepository.CLIENT_ID)));
+            clientReferral.setFirst_name(cursor.getString(cursor.getColumnIndex(ClientRepository.FIRST_NAME)));
+            clientReferral.setMiddle_name(cursor.getString(cursor.getColumnIndex(ClientRepository.MIDDLE_NAME)));
+            clientReferral.setSurname(cursor.getString(cursor.getColumnIndex(ClientRepository.SURNAME)));
+            clientReferral.setGender(cursor.getString(cursor.getColumnIndex(ClientRepository.GENDER)));
+            clientReferral.setDate_of_birth(cursor.getLong(cursor.getColumnIndex(ClientRepository.DOB)));
+
+            clientReferral.setFacility_id(cursor.getString(5));
+
+            clientReferral.setCommunity_based_hiv_service(cursor.getString(cursor.getColumnIndex(ClientRepository.CBHS)));
+            clientReferral.setCtc_number(cursor.getString(cursor.getColumnIndex(ClientRepository.CTC_NUMBER)));
+            clientReferral.setHelper_name(cursor.getString(cursor.getColumnIndex(ClientRepository.HELPER_NAME)));
+            clientReferral.setHelper_phone_number(cursor.getString(cursor.getColumnIndex(ClientRepository.HELPER_PHONE_NUMBER)));
+            clientReferral.setPhone_number(cursor.getString(cursor.getColumnIndex(ClientRepository.PHONE_NUMBER)));
+
+            clientReferral.setReferral_date(cursor.getLong(cursor.getColumnIndex( ReferralRepository.ReferralDate)));
+            clientReferral.setAppointment_date(cursor.getLong(cursor.getColumnIndex( ReferralRepository.AppointmentDate)));
+            clientReferral.setReferral_service_id(cursor.getString(cursor.getColumnIndex(ReferralRepository.Service)));
+            clientReferral.setReferral_status(cursor.getString(cursor.getColumnIndex(ReferralRepository.ReferralStatus)));
+            clientReferral.setReferral_reason(cursor.getString(cursor.getColumnIndex(ReferralRepository.ReferralReason)));
+            clientReferral.setIndicator_ids(cursor.getString(cursor.getColumnIndex(ReferralRepository.INDICATOR_IDS)));
+
+
+            clientReferral.setOther_notes(cursor.getString(cursor.getColumnIndex(ReferralRepository.OTHER_NOTES)));
+            clientReferral.setServices_given_to_patient(cursor.getString(cursor.getColumnIndex(ReferralRepository.SERVICES_GIVEN_TO_PATIENTS)));
+            clientReferral.setVillage(cursor.getString(cursor.getColumnIndex(ClientRepository.VILLAGE)));
+            clientReferral.setWard(cursor.getString(cursor.getColumnIndex(ClientRepository.WARD)));
+
+
+            return clientReferral;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -148,16 +162,23 @@ public class Utils {
     }
 
 
-    public static List<Referral> convertToClientReferralObjectList(List<CommonPersonObject> commonPersonObjectsList) {
-        List<Referral> referralPersonObjects = new ArrayList<>();
-        for (CommonPersonObject common : commonPersonObjectsList) {
-            referralPersonObjects.add(convertToClientPersonObject(common));
+    public static List<ClientReferral> convertToClientReferralObjectList(Cursor cursor) {
+
+        int cursorSize = cursor.getCount();
+        cursor.moveToFirst();
+        Log.d(TAG, DatabaseUtils.dumpCursorToString(cursor));
+
+
+        List<ClientReferral> clientReferrals = new ArrayList<>();
+        for(int i=0;i<cursorSize;i++){
+            cursor.moveToPosition(i);
+
+            ClientReferral clientReferral = convertToClientPersonObject(cursor);
+            clientReferrals.add(clientReferral);
 
         }
-        Log.d(TAG, "client person Object string = " + referralPersonObjects.toString());
 
-
-        return referralPersonObjects;
+        return clientReferrals;
     }
 
 

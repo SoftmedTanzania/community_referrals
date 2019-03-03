@@ -129,7 +129,8 @@ Aenean quis ex dictum, porttitor nunc id, viverra urna. Suspendisse posuere ex a
     <string name="referred_clients_desc">Use this section to view all referrals issued with their status check</string>
     <string name="received_referrals_desc">Use this section to view all clients referred back for close follow up and update all necessary followup information</string>
     <string name="use_this_section_to_visualize_summary_reports">Use this section to visualize summary reports.</string>
-    <string name="register_clients_desc">Use this section to register new clients and issue referrals.</string>
+    <string name="register_clients_desc">Use this section to register new clients.</string>
+    <string name="client_list_desc">Use this section to view all registered clients and issue referrals.</string>
     <string name="appointment_date_label">Appointment Date</string>
     <string name="followup_referrals_chart_key_label">Followup referrals performed</string>
     <string name="visit_date_label">Visit Date</string>

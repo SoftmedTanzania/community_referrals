@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.softmed.htmr_chw.Fragments.ReferralsListFragment;
-import com.softmed.htmr_chw.Fragments.FollowupClientsFragment;
+import com.softmed.htmr_chw.Fragments.FollowupReferralsFragment;
 import com.softmed.htmr_chw.Fragments.ReportFragment;
 
 
@@ -26,7 +26,7 @@ public class CHWPagerAdapter extends FragmentPagerAdapter {
                 return new ReferralsListFragment() ;
 
             case 1:
-                return new FollowupClientsFragment();
+                return new FollowupReferralsFragment();
 
             case 2:
                 return new ReportFragment();

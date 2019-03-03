@@ -1,217 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/card"
     android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:paddingTop="16dp"
+            android:id="@+id/referral_date"
+            android:text="18th November 2019"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <View
+            android:layout_width="60dp"
+            android:layout_height="3dp"
+            android:layout_marginLeft="32dp"
+            android:layout_below="@id/service_title"
+            android:layout_marginTop="8dp"
+            android:background="@color/card_separator" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp">
+                <TextView
+                    android:id="@+id/service_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    android:text="@string/referral_services"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+                <View
+                    android:id="@+id/divider_one"
+                    android:layout_width="60dp"
+                    android:layout_height="3dp"
+                    android:visibility="gone"
+                    android:layout_below="@id/service_title"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/card_separator" />
+
+                <TextView
+                    android:id="@+id/service"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_below="@id/divider_one"
+                    android:layout_marginTop="8dp"
+                    android:hint="@string/referral_services" />
+
+                <TextView
+                    android:id="@+id/facility_titleview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/service"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/visit_facility"
+                    android:textColor="@color/colorPrimary" />
+
+                <View
+                    android:id="@+id/strip_five"
+                    android:layout_width="60dp"
+                    android:layout_height="3dp"
+                    android:layout_below="@id/facility_titleview"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/card_separator" />
+
+                <TextView
+                    android:id="@+id/facility_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/strip_five"
+                    android:ems="10"
+                    android:textSize="14sp" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/appointment_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/facility_name"
+                    android:layout_marginTop="16dp"
+                    android:clickable="false"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/appointment_date_label"
+                    android:inputType="date"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp"
+                    android:layout_marginRight="16dp"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="Appointment Date"
+                    app:met_floatingLabelTextColor="@color/colorPrimary"
+                    app:met_iconRight="@drawable/ic_calendar_today" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/card_separator" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3">
+
+                <TextView
+                    android:id="@+id/clinical_information_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/other_info"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/strip_three"
+                    android:layout_width="60dp"
+                    android:layout_height="3dp"
+                    android:layout_below="@id/clinical_information_title"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/card_separator" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/strip_three"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/reason_for_referral"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_weight="0.5"
+                        android:hint="@string/referral_reason"
+                        android:imeOptions="actionNext"
+                        android:textColor="@color/primary_text"
+                        android:textColorHint="@color/hint_text"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/card_separator" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3">
+
+                <TextView
+                    android:id="@+id/flags_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/danger_signs"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/strip_four"
+                    android:layout_width="60dp"
+                    android:layout_height="3dp"
+                    android:layout_below="@id/flags_title"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/card_separator" />
+
+                <LinearLayout
+                    android:id="@+id/indicators"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/strip_four"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="left"
+                    android:orientation="vertical" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
-        android:id="@+id/referral_date"
-        android:text="18th November 2019"
-        android:textSize="18sp"
+        android:paddingTop="16dp"
+        android:id="@+id/service_label"
+        android:text="HIV"
+        android:layout_marginRight="32dp"
+        android:layout_alignParentRight="true"
+        android:textSize="34sp"
         android:textStyle="bold" />
 
     <View
-        android:layout_width="60dp"
-        android:layout_height="3dp"
-        android:layout_marginLeft="32dp"
-        android:layout_below="@id/service_title"
-        android:layout_marginTop="8dp"
-        android:background="@color/card_separator" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        android:padding="16dp">
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.6"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp">
-
-            <TextView
-                android:id="@+id/service_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/referral_services"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
-
-            <View
-                android:id="@+id/divider_one"
-                android:layout_width="60dp"
-                android:layout_height="3dp"
-                android:layout_below="@id/service_title"
-                android:layout_marginTop="8dp"
-                android:background="@color/card_separator" />
-
-            <TextView
-                android:id="@+id/service"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/divider_one"
-                android:layout_marginTop="8dp"
-                android:hint="@string/referral_services" />
-
-            <TextView
-                android:id="@+id/facility_titleview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/service"
-                android:layout_marginTop="16dp"
-                android:text="@string/visit_facility"
-                android:textColor="@color/colorPrimary" />
-
-            <View
-                android:id="@+id/strip_five"
-                android:layout_width="60dp"
-                android:layout_height="3dp"
-                android:layout_below="@id/facility_titleview"
-                android:layout_marginTop="8dp"
-                android:background="@color/card_separator" />
-
-            <TextView
-                android:id="@+id/facility_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/strip_five"
-                android:ems="10"
-                android:textSize="14sp" />
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/appointment_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/facility_name"
-                android:layout_marginTop="16dp"
-                android:clickable="false"
-                android:editable="false"
-                android:focusable="false"
-                android:hint="@string/appointment_date_label"
-                android:inputType="date"
-                android:textColor="@color/text_black"
-                android:textSize="14sp"
-                app:met_floatingLabel="normal"
-                app:met_floatingLabelText="Appointment Date"
-                app:met_floatingLabelTextColor="@color/colorPrimary"
-                app:met_iconRight="@drawable/ic_calendar_today" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/card_separator" />
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3">
-
-            <TextView
-                android:id="@+id/clinical_information_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/other_info"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
-
-            <View
-                android:id="@+id/strip_three"
-                android:layout_width="60dp"
-                android:layout_height="3dp"
-                android:layout_below="@id/clinical_information_title"
-                android:layout_marginTop="8dp"
-                android:background="@color/card_separator" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/strip_three"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/reason_for_referral"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_weight="0.5"
-                    android:hint="@string/referral_reason"
-                    android:imeOptions="actionNext"
-                    android:textColor="@color/primary_text"
-                    android:textColorHint="@color/hint_text"
-                    android:textSize="14sp" />
-
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/card_separator" />
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3">
-
-            <TextView
-                android:id="@+id/flags_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/danger_signs"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
-
-            <View
-                android:id="@+id/strip_four"
-                android:layout_width="60dp"
-                android:layout_height="3dp"
-                android:layout_below="@id/flags_title"
-                android:layout_marginTop="8dp"
-                android:background="@color/card_separator" />
-
-            <LinearLayout
-                android:id="@+id/indicators"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/strip_four"
-                android:layout_marginBottom="16dp"
-                android:gravity="left"
-                android:orientation="vertical" />
-
-        </RelativeLayout>
-
-
-    </LinearLayout>
-
-    <View
-        android:visibility="gone"
         android:id="@+id/divider"
-        android:layout_width="250dp"
-        android:layout_height="3dp"
+        android:layout_below="@id/details"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/card_separator" />
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#000" />
 
-</LinearLayout>
+</RelativeLayout>

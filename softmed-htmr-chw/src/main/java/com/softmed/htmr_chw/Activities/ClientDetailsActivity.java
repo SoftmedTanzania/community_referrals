@@ -17,8 +17,10 @@ import com.softmed.htmr_chw.R;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.domain.Client;
+import org.ei.opensrp.domain.Indicator;
 import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
+import org.ei.opensrp.repository.IndicatorRepository;
 import org.ei.opensrp.repository.ReferralRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONArray;
@@ -35,6 +37,10 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
     private CommonRepository commonRepository;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
+    public static final int SUCCESSFULLY_REFERED_A_CLIENT = 192;
+    private Client client;
+    private Typeface robotoBold;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +52,7 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
 
-        final Client client = (Client) bundle.getSerializable("client");
-
+        client = (Client) bundle.getSerializable("client");
         TextView clientName = (TextView) findViewById(R.id.client_name);
         MaterialEditText gender = (MaterialEditText) findViewById(R.id.gender);
         MaterialEditText regDob = (MaterialEditText) findViewById(R.id.reg_dob);
@@ -59,7 +64,7 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
         MaterialEditText helperName = (MaterialEditText) findViewById(R.id.helper_name);
         MaterialEditText helperPhoneNumber = (MaterialEditText) findViewById(R.id.helper_phone_number);
 
-        Typeface robotoBold = Typeface.createFromAsset(getAssets(), "roboto_bold.ttf");
+        robotoBold = Typeface.createFromAsset(getAssets(), "roboto_bold.ttf");
 
         ((TextView) findViewById(R.id.client_name)).setTypeface(robotoBold);
         clientName.setText(client.getFirst_name() + " " + client.getMiddle_name() + " " + client.getSurname());
@@ -83,43 +88,14 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
                 Intent intent = new Intent(ClientDetailsActivity.this, ReferralRegistrationFormActivity.class);
                 intent.putExtra("clientName", client.getFirst_name() + " " + client.getMiddle_name() + " " + client.getSurname());
                 intent.putExtra("clientId", client.getClient_id());
-                startActivityForResult(intent, 90);
+                startActivityForResult(intent, SUCCESSFULLY_REFERED_A_CLIENT);
             }
         });
 
-        referralRepository = context().clientReferralRepository();
+        referralRepository = context().referralRepository();
 
         Log.d(TAG,"Client ID = "+client.getClient_id());
-
-        List<Referral> referrals = referralRepository.findByClientId(client.getClient_id());
-
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.referral_history);
-
-        for (Referral referral : referrals) {
-            View v = getLayoutInflater().inflate(R.layout.view_referral_history, null);
-            TextView referralDate = (TextView) v.findViewById(R.id.referral_date);
-            TextView service = (TextView) v.findViewById(R.id.service);
-            TextView facility = (TextView) v.findViewById(R.id.facility_name);
-            TextView reasonForReferral = (TextView) v.findViewById(R.id.reason_for_referral);
-            MaterialEditText appointmentDate = (MaterialEditText) v.findViewById(R.id.appointment_date);
-
-            LinearLayout indicatorsLayout = (LinearLayout) v.findViewById(R.id.indicators);
-            setIndicators(indicatorsLayout, referral.getIndicator_ids());
-
-            try {
-                service.setText(getReferralServiceName(referral.getReferral_service_id()));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            referralDate.setText(dateFormat.format(referral.getReferral_date()));
-            appointmentDate.setText(dateFormat.format(referral.getAppointment_date()));
-
-            reasonForReferral.setText(referral.getReferral_reason());
-            facility.setText(getFacilityName(referral.getFacility_id()));
-            linearLayout.addView(v);
-        }
-
+        setReferralHistory();
 
     }
 
@@ -148,7 +124,41 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
 
     }
 
+    public void setReferralHistory(){
+        List<Referral> referrals = referralRepository.findByClientId(client.getClient_id());
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.referral_history);
+        linearLayout.removeAllViews();
+
+        for (Referral referral : referrals) {
+            View v = getLayoutInflater().inflate(R.layout.view_referral_history, null);
+            TextView referralDate = (TextView) v.findViewById(R.id.referral_date);
+            TextView service = (TextView) v.findViewById(R.id.service);
+            TextView service_label = (TextView) v.findViewById(R.id.service_label);
+            TextView facility = (TextView) v.findViewById(R.id.facility_name);
+            TextView reasonForReferral = (TextView) v.findViewById(R.id.reason_for_referral);
+            MaterialEditText appointmentDate = (MaterialEditText) v.findViewById(R.id.appointment_date);
+
+            LinearLayout indicatorsLayout = (LinearLayout) v.findViewById(R.id.indicators);
+            setIndicators(indicatorsLayout, referral.getIndicator_ids());
+
+            try {
+                service_label.setText(getReferralServiceName(referral.getReferral_service_id()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            referralDate.setText(dateFormat.format(referral.getReferral_date()));
+            appointmentDate.setText(dateFormat.format(referral.getAppointment_date()));
+            service_label.setTypeface(robotoBold);
+
+            reasonForReferral.setText(referral.getReferral_reason());
+            facility.setText(getFacilityName(referral.getFacility_id()));
+            linearLayout.addView(v);
+        }
+    }
+
     public String getFacilityName(String id) {
+        Log.d(TAG,"Facility Id = "+id);
         commonRepository = context().commonrepository("facility");
         Cursor cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility where id ='" + id + "'");
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
@@ -168,11 +178,11 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
             view.removeAllViewsInLayout();
 
             for (int m = 0; m < indicatorsArray.length(); m++) {
-                final TextView rowTextView = new TextView(this);
-
-                rowTextView.setText(" - "+getIndicatorName(indicatorsArray.getString(m)));
-                rowTextView.setPadding(0, 10, 10, 0);
-                view.addView(rowTextView);
+                View v  =  getLayoutInflater().inflate(R.layout.indicator_item,null);
+                TextView indicatorName =v.findViewById(R.id.indicator_name);
+                indicatorName.setText(getIndicatorName(indicatorsArray.getString(m)));
+                indicatorName.setPadding(0, 10, 10, 0);
+                view.addView(v);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -182,13 +192,24 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
     public String getIndicatorName(String id) {
         try {
             Log.d(TAG, "indicatorId = " + id);
-            commonRepository = context().commonrepository("indicator");
-            Cursor cursor = commonRepository.RawCustomQueryForAdapter("select * FROM indicator where referralServiceIndicatorId ='" + id + "'");
-            List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "indicator");
-            return commonPersonObjectList.get(0).getColumnmaps().get("indicatorName");
+            IndicatorRepository indicatorRepository = context().indicatorRepository();
+
+
+            List<Indicator> indicators = indicatorRepository.findServiceByCaseIds(id);
+
+            return indicators.get(0).getIndicatorName();
         }catch (Exception e){
             e.printStackTrace();
         }
         return "";
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(resultCode == RESULT_OK){
+            setReferralHistory();
+        }
+
     }
 }

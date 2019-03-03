@@ -41,10 +41,10 @@ public class ClientRepository extends DrishtiRepository {
     public static final String ID_COLUMN = "id";
     public static final String Relational_ID = "relationalid";
     public static final String CLIENT_ID = "client_id";
-    public static final String fName = "first_name";
-    public static final String gender = "gender";
-    public static final String mName = "middle_name";
-    public static final String Surname = "surname";
+    public static final String FIRST_NAME = "first_name";
+    public static final String GENDER = "gender";
+    public static final String MIDDLE_NAME = "middle_name";
+    public static final String SURNAME = "surname";
     public static final String DOB = "date_of_birth";
     public static final String CBHS = "community_based_hiv_service";
     public static final String CTC_NUMBER = "ctc_number";
@@ -58,7 +58,7 @@ public class ClientRepository extends DrishtiRepository {
     public static final String WARD = "ward";
     public static final String VILLAGE_LEADER = "village_leader";
     public static final String DETAILS_COLUMN = "details";
-    public static final String[] CLIENT_TABLE_COLUMNS = {ID_COLUMN, Relational_ID, CLIENT_ID, fName, mName, Surname, DOB, CBHS, CTC_NUMBER,gender, FACILITY_ID, HELPER_NAME, HELPER_PHONE_NUMBER,IS_VALID, STATUS,PHONE_NUMBER,VILLAGE,VILLAGE_LEADER,WARD,DETAILS_COLUMN};
+    public static final String[] CLIENT_TABLE_COLUMNS = {ID_COLUMN, Relational_ID, CLIENT_ID, FIRST_NAME, MIDDLE_NAME, SURNAME, DOB,GENDER, CBHS, CTC_NUMBER, FACILITY_ID, IS_VALID,HELPER_NAME, HELPER_PHONE_NUMBER, STATUS,PHONE_NUMBER,VILLAGE,VILLAGE_LEADER,WARD,DETAILS_COLUMN};
     
 
     @Override
@@ -119,9 +119,9 @@ public class ClientRepository extends DrishtiRepository {
         values.put(ID_COLUMN, client.getId());
         values.put(Relational_ID, client.getRelationalid());
         values.put(CLIENT_ID, client.getClient_id());
-        values.put(fName, client.getFirst_name());
-        values.put(mName, client.getMiddle_name());
-        values.put(Surname, client.getSurname());
+        values.put(FIRST_NAME, client.getFirst_name());
+        values.put(MIDDLE_NAME, client.getMiddle_name());
+        values.put(SURNAME, client.getSurname());
         values.put(DOB, client.getDate_of_birth());
         values.put(DETAILS_COLUMN, new Gson().toJson(client));
         values.put(CBHS, client.getCommunity_based_hiv_service());
@@ -131,7 +131,7 @@ public class ClientRepository extends DrishtiRepository {
         values.put(HELPER_NAME, client.getHelper_name());
         values.put(HELPER_PHONE_NUMBER, client.getHelper_phone_number());
         values.put(FACILITY_ID, client.getFacility_id());
-        values.put(gender, client.getGender());
+        values.put(GENDER, client.getGender());
         values.put(VILLAGE, client.getVillage());
         values.put(VILLAGE_LEADER, client.getVillage_leader());
         values.put(PHONE_NUMBER, client.getPhone_number());
@@ -190,7 +190,8 @@ public class ClientRepository extends DrishtiRepository {
 
         List<Client> clients = new ArrayList<Client>();
         while (!cursor.isAfterLast()) {
-            clients.add(new Client(cursor.getString(0),
+            clients.add(new Client(
+                    cursor.getString(0),
                     cursor.getString(1),
                     cursor.getString(2),
                     cursor.getString(3),
@@ -223,11 +224,11 @@ public class ClientRepository extends DrishtiRepository {
                 getColumnValueByAlias(cursor, TABLE_NAME, ID_COLUMN),
                 getColumnValueByAlias(cursor, TABLE_NAME, Relational_ID),
                 getColumnValueByAlias(cursor, TABLE_NAME, CLIENT_ID),
-                getColumnValueByAlias(cursor, TABLE_NAME, fName),
-                getColumnValueByAlias(cursor, TABLE_NAME, mName),
-                getColumnValueByAlias(cursor, TABLE_NAME, Surname),
+                getColumnValueByAlias(cursor, TABLE_NAME, FIRST_NAME),
+                getColumnValueByAlias(cursor, TABLE_NAME, MIDDLE_NAME),
+                getColumnValueByAlias(cursor, TABLE_NAME, SURNAME),
                 Long.parseLong(getColumnValueByAlias(cursor, TABLE_NAME, DOB)),
-                getColumnValueByAlias(cursor, TABLE_NAME, gender),
+                getColumnValueByAlias(cursor, TABLE_NAME, GENDER),
                 getColumnValueByAlias(cursor, TABLE_NAME, CBHS),
                 getColumnValueByAlias(cursor, TABLE_NAME, CTC_NUMBER),
                 getColumnValueByAlias(cursor, TABLE_NAME, FACILITY_ID),

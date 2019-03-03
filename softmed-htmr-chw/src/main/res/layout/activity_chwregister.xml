@@ -342,22 +342,25 @@
             android:id="@+id/main_menu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/white"
             android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
                 android:background="@color/white"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/referral_registration_card"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
                     android:visibility="visible">
 
                     <android.support.v7.widget.CardView
+                        android:id="@+id/referral_registration_card"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="2dp"
@@ -378,48 +381,111 @@
                                 android:layout_marginLeft="32dp"
                                 android:src="@mipmap/ic_new_green" />
 
-                            <TextView
-                                android:id="@+id/tb_referal_list_text"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
-                                android:layout_marginLeft="16dp"
-                                android:layout_marginRight="16dp"
                                 android:layout_toRightOf="@id/tb_referals_icon"
-                                android:text="@string/register_clients_title"
-                                android:textColor="@color/card_grid_text"
-                                android:textSize="14sp" />
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/register_client_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="16dp"
+                                    android:layout_marginRight="16dp"
+                                    android:text="@string/register_clients_title"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp" />
+
+                                <TextView
+                                    android:id="@+id/register_client_desc"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="16dp"
+                                    android:layout_marginRight="16dp"
+                                    android:layout_marginTop="4dp"
+                                    android:maxLines="5"
+                                    android:textSize="14sp"
+                                    android:text="@string/register_clients_desc" />
+                            </LinearLayout>
+
 
                         </RelativeLayout>
 
                     </android.support.v7.widget.CardView>
 
-                    <LinearLayout
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/client_list_card"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2">
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:maxLines="5"
-                            android:text="@string/register_clients_desc" />
-                    </LinearLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/blue_050">
+
+                            <ImageView
+                                android:id="@+id/tb_referals_icon"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="32dp"
+                                android:src="@mipmap/ic_client_list" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@id/tb_referals_icon"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/client_list_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="16dp"
+                                    android:layout_marginRight="16dp"
+                                    android:layout_toRightOf="@id/tb_referals_icon"
+                                    android:text="@string/register_clients_title"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp" />
+
+                                <TextView
+                                    android:id="@+id/client_list_desc"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="16dp"
+                                    android:layout_marginRight="8dp"
+                                    android:layout_marginTop="4dp"
+                                    android:maxLines="5"
+                                    android:textSize="14sp"
+                                    android:text="@string/client_list_desc" />
+                            </LinearLayout>
+
+
+                        </RelativeLayout>
+
+                    </android.support.v7.widget.CardView>
+
                 </LinearLayout>
 
 
-
                 <LinearLayout
-                    android:id="@+id/issued_referral_list_card"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="8dp"
                     android:visibility="visible">
 
                     <android.support.v7.widget.CardView
+                        android:id="@+id/issued_referral_list_card"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="2dp"
@@ -448,32 +514,26 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:id="@+id/referal_list_text"
+                                    android:id="@+id/referal_list_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="16dp"
                                     android:layout_marginRight="16dp"
                                     android:text="@string/referred_clients_list_label"
                                     android:textColor="@color/black"
-                                    android:textSize="14sp" />
+                                    android:textSize="20sp" />
 
                                 <TextView
-                                    android:id="@+id/referal_count_text"
+                                    android:id="@+id/referal_list_desc"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="16dp"
                                     android:layout_marginRight="16dp"
                                     android:layout_marginTop="4dp"
-                                    android:text=""
+                                    android:text="@string/referred_clients_desc"
                                     android:textColor="@color/card_grid_text"
-                                    android:textSize="12sp" />
+                                    android:textSize="14sp" />
 
-                                <View
-                                    android:layout_width="150dp"
-                                    android:layout_height="1dp"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_marginTop="4dp"
-                                    android:background="@color/red_200" />
 
                             </LinearLayout>
 
@@ -482,29 +542,9 @@
 
                     </android.support.v7.widget.CardView>
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:maxLines="5"
-                            android:text="@string/referred_clients_desc" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/received_referrals_list_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:layout_marginTop="4dp">
 
                     <android.support.v7.widget.CardView
+                        android:id="@+id/received_referrals_list_card"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="2dp"
@@ -525,50 +565,57 @@
                                 android:layout_marginLeft="32dp"
                                 android:src="@mipmap/ic_list_red" />
 
-                            <TextView
-                                android:id="@+id/client_list_text"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
-                                android:layout_marginLeft="16dp"
-                                android:layout_marginRight="16dp"
                                 android:layout_toRightOf="@id/client_list_image"
-                                android:text="@string/received_referrals_label"
-                                android:textColor="@color/card_grid_text"
-                                android:textSize="14sp" />
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/referrals_list_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="16dp"
+                                    android:layout_marginRight="16dp"
+                                    android:text="@string/received_referrals_label"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp" />
+
+                                <TextView
+                                    android:id="@+id/referrals_list_desc"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="16dp"
+                                    android:layout_marginRight="8dp"
+                                    android:textSize="14sp"
+                                    android:layout_marginTop="4dp"
+                                    android:maxLines="5"
+                                    android:text="@string/received_referrals_desc" />
+
+                            </LinearLayout>
+
 
                         </RelativeLayout>
 
                     </android.support.v7.widget.CardView>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:maxLines="5"
-                            android:text="@string/received_referrals_desc" />
-                    </LinearLayout>
                 </LinearLayout>
 
+
                 <LinearLayout
-                    android:id="@+id/reports"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
-                    android:layout_marginTop="4dp">
+                    android:layout_marginTop="8dp">
 
                     <android.support.v7.widget.CardView
+                        android:id="@+id/reports"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="2dp"
                         android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
+                        android:layout_marginRight="16dp"
                         android:layout_weight="1">
 
                         <RelativeLayout
@@ -592,22 +639,22 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:id="@+id/refered_clients_text"
+                                    android:id="@+id/refered_clients_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="16dp"
                                     android:layout_marginRight="16dp"
                                     android:text="@string/reports_label"
                                     android:textColor="@color/black"
-                                    android:textSize="14sp" />
+                                    android:textSize="20sp" />
 
                                 <TextView
-                                    android:id="@+id/referal_feedback_count"
+                                    android:id="@+id/refered_clients_desc"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="16dp"
                                     android:layout_marginRight="16dp"
-                                    android:text=""
+                                    android:text="@string/use_this_section_to_visualize_summary_reports"
                                     android:textColor="@color/card_grid_text"
                                     android:textSize="14sp" />
 
@@ -620,17 +667,8 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:maxLines="5"
-                            android:text="@string/use_this_section_to_visualize_summary_reports" />
-                    </LinearLayout>
+                        android:layout_marginLeft="8dp"
+                        android:layout_weight="1" />
 
 
                 </LinearLayout>

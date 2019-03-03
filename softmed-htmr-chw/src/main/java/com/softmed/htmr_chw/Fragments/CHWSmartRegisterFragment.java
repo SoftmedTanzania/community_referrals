@@ -137,7 +137,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
                 isOnTheMainMenu = false;
 
-                FollowupClientsFragment newFragment = new FollowupClientsFragment();
+                FollowupReferralsFragment newFragment = new FollowupReferralsFragment();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.fragments, newFragment);
                 transaction.addToBackStack(null);
@@ -464,8 +464,8 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         }
 
         try {
-            FollowupClientsFragment followupClientsFragment = (FollowupClientsFragment) getFragmentManager().findFragmentByTag("tag");
-            followupClientsFragment.populateData();
+            FollowupReferralsFragment followupReferralsFragment = (FollowupReferralsFragment) getFragmentManager().findFragmentByTag("tag");
+            followupReferralsFragment.populateData();
 
         }catch (Exception e){
             e.printStackTrace();

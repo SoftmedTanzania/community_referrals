@@ -223,7 +223,6 @@
                                         android:id="@+id/clinical_information_title"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginTop="8dp"
                                         android:text="@string/other_info"
                                         android:textColor="@color/card_title_text"
                                         android:textSize="14sp" />
@@ -249,36 +248,6 @@
                                             app:met_floatingLabelText="Mahali anapokaa"
                                             app:met_floatingLabelTextColor="@color/colorPrimary" />
 
-                                        <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/editTextDiscountId"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginRight="16dp"
-                                            android:hint="@string/title_cbhs_number"
-                                            android:imeOptions="actionNext"
-                                            android:inputType="text"
-                                            android:textColor="@color/primary_text"
-                                            android:textColorHint="@color/black_translucent"
-                                            android:textSize="14sp"
-                                            app:met_floatingLabel="normal"
-                                            app:met_floatingLabelText="Namba ya mteja ya community_based_hiv_service"
-                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
-
-                                        <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/editTextOthers"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginRight="16dp"
-                                            android:hint="@string/title_ctc_number"
-                                            android:imeOptions="actionNext"
-                                            android:inputType="text"
-                                            android:textColor="@color/primary_text"
-                                            android:textColorHint="@color/hint_text"
-                                            android:textSize="14sp"
-                                            android:layout_marginBottom="16dp"
-                                            app:met_floatingLabel="normal"
-                                            app:met_floatingLabelText="Namba ya CTC"
-                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
 
 
 
