@@ -13,13 +13,11 @@ import com.google.gson.Gson;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.repository.AllSharedPreferences;
 
 import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.Repository.ClientReferral;
-import com.softmed.htmr_chw.util.Utils;
+import com.softmed.htmr_chw.Domain.ClientReferral;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

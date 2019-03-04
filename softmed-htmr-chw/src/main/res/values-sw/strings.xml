@@ -135,13 +135,16 @@
     <string name="followup_referrals_chart_key_label">Ufupisho wa rufaa za ufatiliaji</string>
     <string name="visit_date_label">Tarehe ya Kumtembelea</string>
     <string name="register_clients_title">Sajili Mteja</string>
-    <string name="register_clients_button_label">Register Clients</string>
-    <string name="referral_history_label">Referral History</string>
-    <string name="helper_name">Care Taker Name</string>
-    <string name="helper_phone_number">Care Taker Phone Number</string>
+    <string name="register_clients_button_label">Sajili Mteja</string>
+    <string name="referral_history_label">Rufaa zilizopita</string>
+    <string name="helper_name">Jina la Msaidizi</string>
+    <string name="helper_phone_number">Namba ya simu ya Msaidizi</string>
     <string name="gender">Jinsi</string>
     <string name="client_list_desc">Wateja waliosajiliwa (Tumia sehemu hii kuchagua mteha na kutuma rufaa).</string>
     <string name="referral_issued_by_label">Rufaa imetolewa na</string>
+    <string name="follow_up_client_details">Taarifa za mteja wa kumfwatilila</string>
+    <string name="select_a_client_to_view_the_follow_up_referral_details">Chagua mteja kutoka kwenye orodha ili kuona taarifa zaidi</string>
+    <string name="clients_list">Orodha ya wateja</string>
 
 
 </resources>

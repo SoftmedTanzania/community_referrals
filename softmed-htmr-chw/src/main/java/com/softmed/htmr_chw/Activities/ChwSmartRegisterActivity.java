@@ -39,8 +39,8 @@ import com.softmed.htmr_chw.Fragments.ReferralsListFragment;
 import com.softmed.htmr_chw.Fragments.ClientsListFragment;
 import com.softmed.htmr_chw.Fragments.ReportFragment;
 import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.Repository.ClientReferral;
-import com.softmed.htmr_chw.Repository.LocationSelectorDialogFragment;
+import com.softmed.htmr_chw.Domain.ClientReferral;
+import com.softmed.htmr_chw.Domain.LocationSelectorDialogFragment;
 import com.softmed.htmr_chw.util.FitDoughnut;
 import com.softmed.htmr_chw.util.NavigationController;
 

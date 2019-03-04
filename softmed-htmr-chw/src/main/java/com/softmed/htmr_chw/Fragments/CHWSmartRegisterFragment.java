@@ -29,7 +29,7 @@ import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.Activities.LoginActivity;
 import com.softmed.htmr_chw.util.NavigationController;
 import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.Repository.LocationSelectorDialogFragment;
+import com.softmed.htmr_chw.Domain.LocationSelectorDialogFragment;
 import com.softmed.htmr_chw.Adapters.CHWPagerAdapter;
 import com.softmed.htmr_chw.Adapters.SecuredNativeSmartRegisterCursorAdapterFragment;
 import com.softmed.htmr_chw.util.FitDoughnut;

@@ -14,15 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Adapters.SecuredNativeSmartRegisterCursorAdapterFragment;
-import com.softmed.htmr_chw.Repository.ClientReferral;
-import com.softmed.htmr_chw.util.LargeDiagonalCutPathDrawable;
+import com.softmed.htmr_chw.Domain.ClientReferral;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.domain.ClientFollowup;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
@@ -95,6 +92,8 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         TextView feedbackTitle = rootView.findViewById(R.id.feedback_title);
         TextView helperPhoneNumberTitle = rootView.findViewById(R.id.helper_phone_number_title);
         TextView helperNameTitle = rootView.findViewById(R.id.helper_name_title);
+        TextView service_offered_title = rootView.findViewById(R.id.service_offered_title);
+        TextView service_advice_title = rootView.findViewById(R.id.service_advice_title);
         save = (Button) rootView.findViewById(R.id.save_button);
 
         spinnerReason = (MaterialSpinner) rootView.findViewById(R.id.spinnerClientAvailable);
@@ -138,6 +137,8 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
 
 
         age.setTypeface(robotoRegular);
+        service_offered_title.setTypeface(robotoRegular);
+        service_advice_title.setTypeface(robotoRegular);
         veo.setTypeface(robotoRegular);
         ward.setTypeface(robotoRegular);
         village.setTypeface(robotoRegular);

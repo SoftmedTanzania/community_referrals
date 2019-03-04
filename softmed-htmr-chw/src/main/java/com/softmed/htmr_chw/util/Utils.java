@@ -24,12 +24,11 @@ import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.util.Log;
 
-import com.softmed.htmr_chw.Repository.ClientReferral;
-import com.softmed.htmr_chw.Repository.FacilityObject;
-import com.softmed.htmr_chw.Repository.ReferralServiceObject;
+import com.softmed.htmr_chw.Domain.ClientReferral;
+import com.softmed.htmr_chw.Domain.FacilityObject;
+import com.softmed.htmr_chw.Domain.ReferralServiceObject;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
-import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.domain.Indicator;
 import org.ei.opensrp.repository.ClientRepository;
 import org.ei.opensrp.repository.ReferralRepository;

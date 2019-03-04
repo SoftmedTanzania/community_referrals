@@ -458,7 +458,7 @@
                                 android:layout_marginTop="4dp"
                                 android:textColor="@color/card_title_text"
                                 android:textSize="14sp"
-                                android:text="Kinjekitile Ngwale" />
+                                android:text=" - " />
 
                         </RelativeLayout>
 
@@ -515,7 +515,7 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/service_offered_title"
                                 android:text="@string/hint_missing_reasons"
-                                android:textSize="18sp"
+                                android:textSize="16sp"
                                 android:textColor="@color/card_title_text"/>
                             <RelativeLayout
                                 android:background="@drawable/border_one"
@@ -558,7 +558,7 @@
                                 android:layout_height="40dp"
                                 android:id="@+id/service_advice_title"
                                 android:text="@string/client_condition"
-                                android:textSize="18sp"
+                                android:textSize="16sp"
                                 android:textColor="@color/card_title_text"/>
 
                             <EditText
@@ -591,18 +591,6 @@
                             android:layout_marginRight="16dp"
                             android:textColor="@color/card_title_text"
                             android:text="@string/button_save"/>
-
-                        <Button
-                            android:layout_width="200dp"
-                            android:layout_height="60dp"
-                            android:layout_toLeftOf="@id/save_button"
-                            android:layout_marginRight="16dp"
-                            android:text="Issue Referral"
-                            android:layout_centerVertical="true"
-                            android:id="@+id/referal_button"
-                            android:textColor="@color/card_title_text"
-                            android:background="@drawable/border_one"/>
-
 
 
                     </RelativeLayout>

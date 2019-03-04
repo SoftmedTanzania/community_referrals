@@ -1,6 +1,7 @@
 package com.softmed.htmr_chw.Fragments;
 
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,12 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Adapters.FollowupClintsRecyclerAdapter;
 import com.softmed.htmr_chw.Adapters.SecuredNativeSmartRegisterCursorAdapterFragment;
-import com.softmed.htmr_chw.Repository.ClientReferral;
+import com.softmed.htmr_chw.Domain.ClientReferral;
 import com.softmed.htmr_chw.util.Utils;
 
 import org.ei.opensrp.commonregistry.CommonRepository;
@@ -67,10 +69,21 @@ public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorA
         v = inflater.inflate(R.layout.fragment_chwregistration, container, false);
 
         recyclerView = (RecyclerView) v.findViewById(R.id.item_list);
+        TextView followupDetailsLabel =  v.findViewById(R.id.followup_details_label);
+        TextView followupDesccLael = v.findViewById(R.id.followup_descc_lael);
+
+
+        Typeface robotoRegular = Typeface.createFromAsset(getActivity().getAssets(), "roboto_regular.ttf");
+        Typeface sansBold = Typeface.createFromAsset(getActivity().getAssets(), "google_sans_bold.ttf");
+
+        followupDetailsLabel.setTypeface(sansBold);
+        followupDesccLael.setTypeface(robotoRegular);
+
+
 
         commonRepository = context().commonrepository(ReferralRepository.TABLE_NAME);
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + ReferralRepository.TABLE_NAME+
-                " INNER JOIN "+ ClientRepository.TABLE_NAME+" ON "+ ReferralRepository.TABLE_NAME+"."+ ReferralRepository.CLIENT_ID+" = "+ClientRepository.TABLE_NAME+"."+ClientRepository.CLIENT_ID+" WHERE "+ReferralRepository.REFERRAL_TYPE+" = 1");
+                " INNER JOIN "+ ClientRepository.TABLE_NAME+" ON "+ ReferralRepository.TABLE_NAME+"."+ ReferralRepository.CLIENT_ID+" = "+ClientRepository.TABLE_NAME+"."+ClientRepository.CLIENT_ID+" WHERE "+ReferralRepository.REFERRAL_TYPE+" = 1 LIMIT 0,1b");
 
         clientReferrals  = Utils.convertToClientReferralObjectList(cursor);
 

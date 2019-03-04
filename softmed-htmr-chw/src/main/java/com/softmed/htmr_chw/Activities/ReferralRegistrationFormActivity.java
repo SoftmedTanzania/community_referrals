@@ -34,8 +34,8 @@ import com.google.gson.reflect.TypeToken;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.Repository.FacilityObject;
-import com.softmed.htmr_chw.Repository.ReferralServiceObject;
+import com.softmed.htmr_chw.Domain.FacilityObject;
+import com.softmed.htmr_chw.Domain.ReferralServiceObject;
 import com.softmed.htmr_chw.util.Utils;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 

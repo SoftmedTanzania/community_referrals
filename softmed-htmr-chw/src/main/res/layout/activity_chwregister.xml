@@ -453,7 +453,7 @@
                                     android:layout_marginLeft="16dp"
                                     android:layout_marginRight="16dp"
                                     android:layout_toRightOf="@id/tb_referals_icon"
-                                    android:text="@string/register_clients_title"
+                                    android:text="@string/clients_list"
                                     android:textColor="@color/black"
                                     android:textSize="20sp" />
 

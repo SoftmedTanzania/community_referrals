@@ -1,4 +1,4 @@
-package com.softmed.htmr_chw.Repository;
+package com.softmed.htmr_chw.Domain;
 
 import android.app.Activity;
 import android.app.DialogFragment;

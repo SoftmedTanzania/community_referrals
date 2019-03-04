@@ -18,10 +18,42 @@
         tools:context=".Fragments.ItemListActivity"
         tools:listitem="@layout/item_list_content" />
 
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/grey_500"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"/>
+
     <FrameLayout
         android:id="@+id/item_detail_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3" />
+        android:layout_weight="3">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/followup_details_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="22sp"
+                android:text="@string/follow_up_client_details"/>
+            <TextView
+                android:id="@+id/followup_descc_lael"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="@string/select_a_client_to_view_the_follow_up_referral_details"/>
+        </LinearLayout>
+
+    </FrameLayout>
 
 </LinearLayout>

@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.Repository.LocationSelectorDialogFragment;
+import com.softmed.htmr_chw.Domain.LocationSelectorDialogFragment;
 import com.softmed.htmr_chw.Adapters.ClientsListAdapter;
 import com.softmed.htmr_chw.Adapters.SecuredNativeSmartRegisterCursorAdapterFragment;
 import com.softmed.htmr_chw.util.AsyncTask;

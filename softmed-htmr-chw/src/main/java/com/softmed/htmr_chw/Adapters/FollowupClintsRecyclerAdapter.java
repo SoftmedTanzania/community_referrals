@@ -2,6 +2,7 @@ package com.softmed.htmr_chw.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -17,9 +17,7 @@ import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.Activities.FollowupReferralDetailsActivity;
 import com.softmed.htmr_chw.Fragments.FollowupClientDetailFragment;
 import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.Repository.ClientReferral;
-
-import org.ei.opensrp.domain.ClientFollowup;
+import com.softmed.htmr_chw.Domain.ClientReferral;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -37,11 +35,14 @@ public class FollowupClintsRecyclerAdapter extends
     private List<ClientReferral> clients;
     private Context mContext;
     private boolean mTwoPane = true;
+    private Typeface robotoRegular,sansBold;
 
     public FollowupClintsRecyclerAdapter(Context context, List<ClientReferral> clients) {
         this.clients = clients;
         this.mContext = context;
 
+        robotoRegular = Typeface.createFromAsset(mContext.getAssets(), "roboto_regular.ttf");
+        sansBold = Typeface.createFromAsset(mContext.getAssets(), "google_sans_bold.ttf");
 
         Log.d(TAG, "follow up adapter constructor : " + new Gson().toJson(clients));
     }
@@ -54,7 +55,7 @@ public class FollowupClintsRecyclerAdapter extends
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View contactView = inflater.inflate(R.layout.card_chw_pre_reg, parent, false);
+        View contactView = inflater.inflate(R.layout.followup_referral_item, parent, false);
 
 
         return new ViewHolder(contactView);
@@ -81,7 +82,7 @@ public class FollowupClintsRecyclerAdapter extends
                 CBHS.setText("CBHS : " + client.getCommunity_based_hiv_service());
         }
 
-        viewHolder.details.setOnClickListener(new View.OnClickListener() {
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mTwoPane) {
@@ -113,18 +114,20 @@ public class FollowupClintsRecyclerAdapter extends
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView nameTextView, phoneNumberTextView, CBHSTextView;
-        Button details, followup;
+        View itemView;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            this.itemView=itemView;
             nameTextView = (TextView) itemView.findViewById(R.id.name);
             phoneNumberTextView = (TextView) itemView.findViewById(R.id.phone_number);
             CBHSTextView = (TextView) itemView.findViewById(R.id.community_based_hiv_service);
-            details = (Button) itemView.findViewById(R.id.button_details);
-            followup = (Button) itemView.findViewById(R.id.button_followup);
 
+            nameTextView.setTypeface(sansBold);
+            phoneNumberTextView.setTypeface(sansBold);
+            CBHSTextView.setTypeface(robotoRegular);
 
-            followup.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     ((ChwSmartRegisterActivity) mContext).showFollowUpFormDialog(clients.get(getAdapterPosition()));

@@ -1,4 +1,4 @@
-package com.softmed.htmr_chw.Repository;
+package com.softmed.htmr_chw.Domain;
 
 import com.google.gson.Gson;
 
