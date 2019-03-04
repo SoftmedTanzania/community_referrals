@@ -1,491 +1,623 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/clint_adair"/>
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:app_ms="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/transparent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0.7"
-        android:background="#398FE5" />
+
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <android.support.percent.PercentRelativeLayout
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:id="@+id/details_layout"
-                android:layout_marginTop="16dp"
-                app:layout_marginBottomPercent="5%"
-                app:layout_marginLeftPercent="5%"
-                app:layout_marginRightPercent="5%"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textColor="#398FE5"
-                    android:textStyle="bold"
-                    android:layout_marginTop="16dp"
-                    android:layout_centerHorizontal="true"/>
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:paddingBottom="16dp"
+                android:layout_marginBottom="10dp">
 
                 <LinearLayout
-                    android:id="@+id/other_details"
-                    android:layout_below="@id/name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/age"
-                        android:gravity="right"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:textSize="16sp"
-                        android:textColor="#000"
-                        android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/card_separator_third">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="32dp"
+                            android:layout_marginTop="16dp"
+                            android:textColor="@color/black"
+                            android:text="@string/referral_information"
+                            android:textSize="36sp"
+                            android:id="@+id/heading"/>
+
+                        <View
+                            android:layout_width="200dp"
+                            android:layout_height="5dp"
+                            android:id="@+id/strip_one"
+                            android:layout_marginLeft="32dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_below="@id/heading"
+                            android:background="@color/card_separator"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/strip_one"
+                            android:layout_marginLeft="32dp"
+                            android:layout_marginTop="16dp"
+                            android:textSize="24sp"
+                            android:id="@+id/client_name"
+                            android:text="Juma Khamisi Doe"
+                            android:textColor="@color/colorPrimary"/>
+                        <TextView
+                            android:layout_width="64dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/client_name"
+                            android:layout_marginLeft="32dp"
+                            android:textSize="14sp"
+                            android:id="@+id/gender"
+                            android:textStyle="bold"
+                            android:text="Female"
+                            android:textColor="@color/colorPrimary"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/client_name"
+                            android:layout_marginLeft="10dp"
+                            android:layout_alignParentRight="true"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:layout_marginRight="32dp"
+                            android:id="@+id/phone_number"
+                            android:textColor="@color/colorPrimary"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/strip_one"
+                            android:layout_marginRight="32dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_alignParentRight="true"
+                            android:textSize="16sp"
+                            android:id="@+id/referral_date"
+                            android:text="12.1.1999"
+                            android:textStyle="bold"
+                            android:textColor="@color/card_grid_tex"/>
+
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/strip_one"
+                            android:layout_toLeftOf="@id/referral_date"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginRight="8dp"
+                            android:id="@+id/referral_date_title"
+                            android:textSize="16sp"
+                            android:text="@string/referral_date"
+                            android:textStyle="bold"
+                            android:textColor="@color/card_grid_tex"/>
+
+                    </RelativeLayout>
+
                     <View
-                        android:layout_marginLeft="24dp"
-                        android:layout_marginRight="24dp"
-                        android:layout_width="1dp"
+                        android:layout_width="match_parent"
                         android:layout_height="16dp"
-                        android:background="#000"/>
-                    <TextView
-                        android:id="@+id/gender"
-                        android:textSize="16sp"
-                        android:textColor="#000"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        />
-                </LinearLayout>
+                        android:background="@color/card_separator_third"/>
 
-                <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:layout_below="@id/other_details"
-                    android:id="@+id/demographic_details"
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginRight="32dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    card_view:cardCornerRadius="0dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <RelativeLayout
-                                android:background="#EEEEEE"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:paddingBottom="8dp"
-                                android:orientation="vertical"
-                                android:layout_height="match_parent">
-                                <ImageView
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginLeft="16dp"
-                                    android:id="@+id/residence_icon"
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp"
-                                    android:src="@drawable/ic_home_black_24dp"/>
-                                <TextView
-                                    android:layout_alignTop="@id/residence_icon"
-                                    android:layout_toRightOf="@id/residence_icon"
-                                    android:layout_alignBottom="@id/residence_icon"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="20dp"
-                                    android:gravity="center_vertical"
-                                    android:textSize="13sp"
-                                    android:layout_marginLeft="16dp"
-                                    android:textColor="#000"
-                                    android:text="@string/client_address"/>
-                            </RelativeLayout>
+                        android:background="@color/card_separator_third"
+                        android:paddingLeft="32dp"
+                        android:paddingRight="32dp"
+                        android:orientation="horizontal">
 
-                            <LinearLayout
-                                android:background="#fff"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:layout_height="match_parent">
-                                <TextView
-                                    android:id="@+id/residence"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginLeft="32dp"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="13sp"
-                                    android:textColor="@color/client_list_header_text_color"
-                                    />
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <RelativeLayout
-                                android:background="#EEEEEE"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:paddingBottom="8dp"
-                                android:layout_height="match_parent">
-
-                                <ImageView
-                                    android:layout_marginLeft="16dp"
-                                    android:id="@+id/contacts_icon"
-                                    android:layout_width="16dp"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_height="16dp"
-                                    android:src="@drawable/ic_phone_black_24dp"/>
-                                <TextView
-                                    android:layout_toRightOf="@id/contacts_icon"
-                                    android:layout_alignTop="@id/contacts_icon"
-                                    android:layout_alignBottom="@id/contacts_icon"
-                                    android:layout_width="wrap_content"
-                                    android:gravity="center_vertical"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="#000"
-                                    android:layout_marginLeft="16dp"
-                                    android:textSize="13sp"
-                                    android:text="@string/client_phone"/>
-
-                            </RelativeLayout>
-
-                            <LinearLayout
-                                android:background="#fff"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:layout_height="match_parent">
-                                <TextView
-                                    android:id="@+id/contacts"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginLeft="32dp"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="13sp"
-                                    android:textColor="@color/client_list_header_text_color"
-                                    />
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <RelativeLayout
-                                android:background="#EEEEEE"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:layout_height="match_parent">
-                                <ImageView
-                                    android:layout_marginLeft="16dp"
-                                    android:id="@+id/sponsors_icon"
-                                    android:layout_width="16dp"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginBottom="8dp"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_people_black_24dp"/>
-                                <TextView
-                                    android:layout_toRightOf="@id/sponsors_icon"
-                                    android:layout_alignTop="@id/sponsors_icon"
-                                    android:layout_alignBottom="@id/sponsors_icon"
-                                    android:layout_width="wrap_content"
-                                    android:gravity="center_vertical"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="#000"
-                                    android:textSize="13sp"
-                                    android:text="@string/client_helper"/>
-                            </RelativeLayout>
-
-                            <LinearLayout
-                                android:background="#fff"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:layout_height="match_parent">
-                                <TextView
-                                    android:id="@+id/sponsor"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginBottom="8dp"
-                                    android:layout_marginLeft="32dp"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="13sp"
-                                    android:textColor="@color/client_list_header_text_color"
-                                    />
-                            </LinearLayout>
-                        </LinearLayout>
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-                <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:layout_below="@id/demographic_details"
-                    android:id="@+id/visits_details"
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginRight="32dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    card_view:cardCornerRadius="0dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <RelativeLayout
-                                android:background="#EEEEEE"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:paddingBottom="8dp"
-                                android:orientation="vertical"
-                                android:layout_height="match_parent">
-                                <ImageView
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginLeft="16dp"
-                                    android:id="@+id/refered_icon"
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp"
-                                    android:src="@drawable/ic_local_hospital_black_24dp"/>
-                                <TextView
-                                    android:layout_alignTop="@id/refered_icon"
-                                    android:layout_toRightOf="@id/refered_icon"
-                                    android:layout_alignBottom="@id/refered_icon"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="20dp"
-                                    android:gravity="center_vertical"
-                                    android:textSize="13sp"
-                                    android:layout_marginLeft="16dp"
-                                    android:textColor="#000"
-                                    android:text="@string/referral_facility"/>
-                            </RelativeLayout>
-
-                            <LinearLayout
-                                android:background="#fff"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:layout_height="match_parent">
-                                <TextView
-                                    android:id="@+id/refered"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginLeft="32dp"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="13sp"
-                                    android:textColor="@color/client_list_header_text_color"
-                                    />
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <RelativeLayout
-                                android:background="#EEEEEE"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:paddingBottom="8dp"
-                                android:orientation="vertical"
-                                android:layout_height="match_parent">
-                                <ImageView
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginLeft="16dp"
-                                    android:id="@+id/date_icon"
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp"
-                                    android:src="@drawable/ic_date_range_black_24dp"/>
-                                <TextView
-                                    android:layout_alignTop="@id/date_icon"
-                                    android:layout_toRightOf="@id/date_icon"
-                                    android:layout_alignBottom="@id/date_icon"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="20dp"
-                                    android:gravity="center_vertical"
-                                    android:textSize="13sp"
-                                    android:layout_marginLeft="16dp"
-                                    android:textColor="#000"
-                                    android:text="@string/referral_date"/>
-                            </RelativeLayout>
-
-                            <LinearLayout
-                                android:background="#fff"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:layout_height="match_parent">
-
-                                <TextView
-                                    android:id="@+id/refered_date"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginLeft="32dp"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="13sp"
-                                    android:textColor="@color/client_list_header_text_color"
-                                    />
-
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <RelativeLayout
-                                android:background="#EEEEEE"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:layout_height="match_parent">
-                                <ImageView
-                                    android:layout_marginLeft="16dp"
-                                    android:id="@+id/reasons_icon"
-                                    android:layout_width="16dp"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="8dp"
-                                    android:src="@drawable/ic_info_black_24dp"/>
-                                <TextView
-                                    android:layout_toRightOf="@id/reasons_icon"
-                                    android:layout_alignTop="@id/reasons_icon"
-                                    android:layout_alignBottom="@id/reasons_icon"
-                                    android:layout_width="wrap_content"
-                                    android:gravity="center_vertical"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="#000"
-                                    android:textSize="13sp"
-                                    android:text="@string/referral_reason"/>
-                            </RelativeLayout>
-
-                            <LinearLayout
-                                android:background="#fff"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:layout_height="match_parent">
-                                <TextView
-                                    android:id="@+id/followUp_reason"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginLeft="32dp"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="13sp"
-                                    android:textColor="@color/client_list_header_text_color"
-                                    />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-                <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:layout_below="@id/visits_details"
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginBottom="32dp"
-                    android:layout_marginRight="32dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    card_view:cardCornerRadius="0dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
                         <RelativeLayout
-                            android:background="#EEEEEE"
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:layout_height="match_parent">
-                            <ImageView
-                                android:layout_marginLeft="16dp"
-                                android:id="@+id/chw_id_icon"
-                                android:layout_width="16dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_height="16dp"
-                                android:src="@drawable/ic_credit_card_black_24dp"/>
+                            android:layout_marginRight="16dp"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="16dp">
+
+
                             <TextView
-                                android:layout_toRightOf="@id/chw_id_icon"
-                                android:layout_alignTop="@id/chw_id_icon"
-                                android:layout_alignBottom="@id/chw_id_icon"
-                                android:layout_width="wrap_content"
-                                android:gravity="center_vertical"
+                                android:layout_width="64dp"
                                 android:layout_height="wrap_content"
-                                android:textColor="#000"
-                                android:layout_marginLeft="16dp"
-                                android:textSize="13sp"
-                                android:text="@string/referral_feedback"/>
-                            <ImageView
-                                android:layout_marginLeft="16dp"
-                                android:id="@+id/note_icon"
-                                android:layout_below="@id/chw_id_icon"
-                                android:layout_width="16dp"
+                                android:text="@string/client_age"
                                 android:layout_marginTop="8dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp"
-                                android:src="@drawable/ic_date_range_black_24dp"/>
+                                android:textSize="14sp"
+                                android:id="@+id/client_age_title"
+                                android:textColor="@color/card_grid_text"/>
+
                             <TextView
-                                android:layout_toRightOf="@id/note_icon"
-                                android:layout_alignTop="@id/note_icon"
-                                android:layout_alignBottom="@id/note_icon"
                                 android:layout_width="wrap_content"
-                                android:gravity="center_vertical"
-                                android:layout_marginLeft="16dp"
                                 android:layout_height="wrap_content"
-                                android:textColor="#000"
-                                android:textSize="13sp"
-                                android:text="@string/visit_date_label"/>
+                                android:textColor="@color/card_grid_text"
+                                android:layout_marginLeft="8dp"
+                                android:textSize="14sp"
+                                android:id="@+id/client_age_value"
+                                android:text="18 years"
+                                android:layout_marginTop="8dp"
+                                android:layout_toRightOf="@id/client_age_title"
+                                android:layout_alignBottom="@+id/client_age_title" />
+
+
+
+                            <TextView
+                                android:layout_width="64dp"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:id="@+id/veo_name_title"
+                                android:textColor="@color/card_grid_text"
+                                android:text="@string/client_veo"
+                                android:layout_alignBaseline="@+id/veo_name_value"
+                                android:layout_alignBottom="@+id/veo_name_value"
+                                android:layout_alignParentStart="true" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/veo_name_value"
+                                android:layout_below="@id/client_age_value"
+                                android:layout_marginTop="8dp"
+                                android:textSize="14sp"
+                                android:layout_toRightOf="@id/veo_name_title"
+                                android:layout_marginLeft="8dp"
+                                android:textColor="@color/card_grid_text"
+                                android:text="Mwenelu Mpechu"/>
+
+                        </RelativeLayout>
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/card_separator"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginRight="16dp"/>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:paddingBottom="16dp"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="72dp"
+                                android:layout_height="wrap_content"
+                                android:text="Ward"
+                                android:textSize="14sp"
+                                android:id="@+id/client_ward_title"
+                                android:textColor="@color/card_grid_text"
+                                android:layout_alignBaseline="@+id/client_ward_value"
+                                android:layout_alignBottom="@+id/client_ward_value"
+                                android:layout_alignParentStart="true" />
+
+                            <TextView
+                                android:layout_width="72dp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/card_grid_text"
+                                android:textSize="14sp"
+                                android:id="@+id/client_ward_value"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_toRightOf="@id/client_ward_title"
+                                android:text="Msolwa"/>
+
+                            <TextView
+                                android:layout_width="72dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/label_village"
+                                android:layout_below="@id/client_ward_title"
+                                android:textSize="14sp"
+                                android:layout_marginTop="8dp"
+                                android:id="@+id/client_village_title"
+                                android:textColor="@color/card_grid_text"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/card_grid_text"
+                                android:layout_marginLeft="8dp"
+                                android:textSize="14sp"
+                                android:layout_marginTop="8dp"
+                                android:id="@+id/client_village_value"
+                                android:layout_below="@id/client_ward_value"
+                                android:layout_toRightOf="@id/client_village_title"
+                                android:text="Mbelwa"/>
+
+
+                            <TextView
+                                android:layout_width="72dp"
+                                android:layout_height="wrap_content"
+                                android:text="Map Cue"
+                                android:layout_marginTop="8dp"
+                                android:textSize="14sp"
+                                android:layout_below="@id/client_village_value"
+                                android:id="@+id/client_kitongoji_title"
+                                android:textColor="@color/card_grid_text"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/card_grid_text"
+                                android:textSize="14sp"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginTop="8dp"
+                                android:id="@+id/client_kitongoji_value"
+                                android:layout_toRightOf="@id/client_kitongoji_title"
+                                android:layout_below="@id/client_village_value"
+                                android:text="Mkesemani"/>
+
+                        </RelativeLayout>
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/card_separator"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginRight="16dp"/>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:paddingLeft="16dp"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/card_title_text"
+                                android:textSize="14sp"
+                                android:layout_marginTop="8dp"
+                                android:id="@+id/helper_name_title"
+                                android:text="@string/helper_name"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/helper_name_title"
+                                android:id="@+id/helper_name_value"
+                                android:layout_marginTop="4dp"
+                                android:textColor="@color/card_title_text"
+                                android:textSize="14sp"
+                                android:text="Kinjekitile Ngwale" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/card_title_text"
+                                android:textSize="14sp"
+                                android:layout_below="@id/helper_name_value"
+                                android:layout_marginTop="8dp"
+                                android:id="@+id/helper_phone_number_title"
+                                android:text="@string/helper_name"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/helper_phone_number_title"
+                                android:id="@+id/helper_phone_number_value"
+                                android:layout_marginTop="4dp"
+                                android:textColor="@color/card_title_text"
+                                android:textSize="14sp"
+                                android:layout_marginBottom="16dp"
+                                android:text="Kinjekitile Ngwale" />
+
                         </RelativeLayout>
 
+                    </LinearLayout>
+
+                    <View
+                        android:visibility="invisible"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/cyan_100"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:id="@+id/referer_title"
+                        android:text="@string/referral_information"
+                        android:textColor="@color/card_title_text"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="8dp"/>
+
+                    <View
+                        android:layout_width="60dp"
+                        android:layout_height="5dp"
+                        android:id="@+id/strip_two"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/card_separator"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@color/white"
+                        android:layout_marginLeft="16dp"
+                        android:padding="16dp">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_marginRight="16dp"
+                            android:background="@color/white"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/referral_reason"
+                                android:id="@+id/sababu_ya_rufaa_title"
+                                android:textColor="@color/card_title_text"
+                                android:textSize="14sp"/>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/sababu_ya_rufaa_title">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/card_grid_text"
+                                    android:textSize="14sp"
+                                    android:id="@+id/followUp_reason"/>
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/card_separator"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginRight="16dp"/>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/clinical_information_title"
+                                android:textSize="14sp"
+                                android:text="@string/other_info"
+                                android:textColor="@color/card_title_text"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/clinical_information_title"
+                                android:layout_marginTop="8dp"
+                                android:id="@+id/other_clinical_inforamtion_value"
+                                android:textSize="14sp"
+                                android:text="N/A"
+                                android:textColor="@color/card_title_text"/>
+
+                        </RelativeLayout>
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/card_separator"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginRight="16dp"/>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/card_title_text"
+                                android:textSize="14sp"
+                                android:id="@+id/referer_name_title"
+                                android:text="@string/referral_issued_by_label"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/referer_name_title"
+                                android:id="@+id/referer_name_value"
+                                android:layout_marginTop="4dp"
+                                android:textColor="@color/card_title_text"
+                                android:textSize="14sp"
+                                android:text="Kinjekitile Ngwale" />
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/card_separator"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/feedback_title"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="16dp"
+                        android:textSize="16sp"
+                        android:textColor="@color/card_title_text"
+                        android:text="@string/referral_feedback"/>
+
+
+                    <View
+                        android:layout_width="90dp"
+                        android:layout_height="5dp"
+                        android:id="@+id/strip_three"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/card_separator"/>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:id="@+id/service_given_container">
+
                         <LinearLayout
-                            android:background="#fff"
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:layout_height="match_parent">
-                            <TextView
-                                android:id="@+id/feedback"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginLeft="32dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="13sp"
-                                android:text=" - "
-                                android:textColor="@color/client_list_header_text_color"
-                                />
-                            <TextView
-                                android:id="@+id/visitDate"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginLeft="32dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="13sp"
-                                android:text=" - "
-                                android:textColor="@color/client_list_header_text_color"
-                                />
-                        </LinearLayout>
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:padding="16dp"
+                            android:orientation="vertical">
 
-            </RelativeLayout>
-        </android.support.percent.PercentRelativeLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/service_offered_title"
+                                android:text="@string/hint_missing_reasons"
+                                android:textSize="18sp"
+                                android:textColor="@color/card_title_text"/>
+                            <RelativeLayout
+                                android:background="@drawable/border_one"
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="8dp"
+                                android:layout_height="96dp">
+                                <fr.ganfra.materialspinner.MaterialSpinner
+                                    android:id="@+id/spinnerClientAvailable"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="16dp"
+                                    android:layout_weight="0.5"
+                                    android:layout_marginLeft="16dp"
+                                    android:layout_centerInParent="true"
+                                    app:ms_arrowColor="@color/colorPrimary"
+                                    app:ms_arrowSize="14dp"
+                                    app:ms_baseColor="@color/colorPrimary"
+                                    app:ms_enableFloatingLabel="false"
+                                    app:ms_hint="@string/hint_missing_reasons"
+                                    app:ms_hintColor="@color/hint_text"
+                                    app:ms_multiline="true"
+                                    app:ms_thickness="1dp"
+                                    app:paddingStart="0dp"/>
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:orientation="vertical"
+                            android:padding="16dp"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:id="@+id/service_advice_title"
+                                android:text="@string/client_condition"
+                                android:textSize="18sp"
+                                android:textColor="@color/card_title_text"/>
+
+                            <EditText
+                                android:id="@+id/client_condition"
+                                android:layout_width="match_parent"
+                                android:layout_height="96dp"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/border_one"
+                                android:gravity="start"
+                                android:minLines="4"
+                                android:padding="8dp"
+                                android:textColor="@color/card_grid_text"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp">
+
+                        <Button
+                            android:layout_width="200dp"
+                            android:layout_height="60dp"
+                            android:id="@+id/save_button"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/border_one"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="16dp"
+                            android:textColor="@color/card_title_text"
+                            android:text="@string/button_save"/>
+
+                        <Button
+                            android:layout_width="200dp"
+                            android:layout_height="60dp"
+                            android:layout_toLeftOf="@id/save_button"
+                            android:layout_marginRight="16dp"
+                            android:text="Issue Referral"
+                            android:layout_centerVertical="true"
+                            android:id="@+id/referal_button"
+                            android:textColor="@color/card_title_text"
+                            android:background="@drawable/border_one"/>
+
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+
+        </LinearLayout>
+
     </ScrollView>
 
 
-
 </RelativeLayout>
-
-

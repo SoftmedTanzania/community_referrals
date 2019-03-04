@@ -70,7 +70,7 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
     private Toolbar toolbar;
     private EditText textPhone;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-    private String formName = "client_referral_form";
+    private String formName = "client_registration_form";
     private String wardId = "";
     private Client client;
     private Gson gson = new Gson();

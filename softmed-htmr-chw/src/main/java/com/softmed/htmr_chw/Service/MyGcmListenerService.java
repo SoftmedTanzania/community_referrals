@@ -129,7 +129,7 @@ public class MyGcmListenerService extends GcmListenerService {
                 clientFollowup.setFacility_id(  referral.getString("fromFacilityId"));
                 clientFollowup.setReferral_status( referral.getString("referralStatus"));
                 clientFollowup.setReferral_reason( referral.getString("referralReason"));
-//                clientFollowup.setService_provider_uiid( referral.getString("serviceProviderUIID"));
+//                clientFollowup.setService_provider_uuid( referral.getString("serviceProviderUIID"));
                 clientFollowup.setReferral_date(Long.valueOf(referral.getString("referralDate")));
                 clientFollowup.setVisit_date(0);
             } catch (JSONException e) {

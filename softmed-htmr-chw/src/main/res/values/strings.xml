@@ -55,7 +55,7 @@
     <string name="health_facility">Health Facility</string>
     <string name="button_save">Save</string>
     <string name="button_delete">Delete</string>
-    <string name="hint_met_client">have you found the client?</string>
+    <string name="hint_met_client">Have you found the client?</string>
     <string name="hint_missing_reasons">Reasons for missing the appointment</string>
     <string name="client_condition">Client\'s condition during visit</string>
     <string name="client_middlename">Middle Name</string>
@@ -141,4 +141,5 @@ Aenean quis ex dictum, porttitor nunc id, viverra urna. Suspendisse posuere ex a
     <string name="helper_name">Care Taker Name</string>
     <string name="helper_phone_number">Care Taker Phone Number</string>
     <string name="gender">Gender</string>
+    <string name="referral_issued_by_label">Referral Issued by</string>
 </resources>

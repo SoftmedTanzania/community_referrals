@@ -18,7 +18,7 @@
         sending the fetched token to the server or subscribing to the PubSub topic. Please try
         running the sample again.</string>
     <string name="app_name_htmr">TRCMIS</string>
-    <string name="page_title">New Client Registration Form</string>
+    <string name="page_title">Registered Clients List</string>
     <string name="title_cbhs_number">CBHS #</string>
     <string name="referral_information">Referral Information</string>
     <string name="visit_facility">Visit Facility</string>
@@ -54,7 +54,7 @@
     <string name="health_facility">Health Facility</string>
     <string name="button_save">Save</string>
     <string name="button_delete">Delete</string>
-    <string name="hint_met_client">have you found the client?</string>
+    <string name="hint_met_client">Have you found the client?</string>
     <string name="hint_missing_reasons">Reasons for missing the appointment</string>
     <string name="client_condition">Client\'s condition during visit</string>
     <string name="client_middlename">Middle Name</string>

@@ -82,18 +82,18 @@ public class FollowupReferralDetailsActivity extends SecuredNativeSmartRegisterA
 
         clientFollowupPersonObject = (ClientFollowup) bundle.getSerializable("client_followup");
 
-
-        name = (TextView) findViewById(com.softmed.htmr_chw.R.id.name);
-        contacts = (TextView)   findViewById(com.softmed.htmr_chw.R.id.contacts);
-        sponsor = (TextView)   findViewById(com.softmed.htmr_chw.R.id.sponsor);
-        residence = (TextView)   findViewById(com.softmed.htmr_chw.R.id.residence);
-        age = (TextView)   findViewById(com.softmed.htmr_chw.R.id.age);
-        gender = (TextView)   findViewById(com.softmed.htmr_chw.R.id.gender);
-        facility = (TextView)   findViewById(com.softmed.htmr_chw.R.id.refered);
-        referedDate = (TextView)   findViewById(com.softmed.htmr_chw.R.id.refered_date);
-        referedReason = (TextView)   findViewById(com.softmed.htmr_chw.R.id.followUp_reason);
-        feedback = (TextView)   findViewById(com.softmed.htmr_chw.R.id.feedback);
-        visitDate = (TextView)   findViewById(com.softmed.htmr_chw.R.id.visitDate);
+//
+//        name = (TextView) findViewById(com.softmed.htmr_chw.R.id.name);
+//        contacts = (TextView)   findViewById(com.softmed.htmr_chw.R.id.contacts);
+//        sponsor = (TextView)   findViewById(com.softmed.htmr_chw.R.id.sponsor);
+//        residence = (TextView)   findViewById(com.softmed.htmr_chw.R.id.residence);
+//        age = (TextView)   findViewById(com.softmed.htmr_chw.R.id.age);
+//        gender = (TextView)   findViewById(com.softmed.htmr_chw.R.id.gender);
+//        facility = (TextView)   findViewById(com.softmed.htmr_chw.R.id.refered);
+//        referedDate = (TextView)   findViewById(com.softmed.htmr_chw.R.id.refered_date);
+//        referedReason = (TextView)   findViewById(com.softmed.htmr_chw.R.id.followUp_reason);
+//        feedback = (TextView)   findViewById(com.softmed.htmr_chw.R.id.feedback);
+//        visitDate = (TextView)   findViewById(com.softmed.htmr_chw.R.id.visitDate);
 
 //TODO uncomment this
 //        String reg_date = dateFormat.format(clientFollowupPersonObject.getDate_of_birth());

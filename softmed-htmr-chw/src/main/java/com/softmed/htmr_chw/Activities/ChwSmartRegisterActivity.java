@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -207,8 +208,9 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 tabsLayout.removeAllViews();
                 LinearLayout tabLinearLayout2 = (LinearLayout) LayoutInflater.from(ChwSmartRegisterActivity.this).inflate(R.layout.custom_tab, null);
                 TextView tabContent2 = (TextView) tabLinearLayout2.findViewById(R.id.tabContent);
+                ImageView tabImage =  tabLinearLayout2.findViewById(R.id.tabImage);
                 tabContent2.setText(R.string.page_title);
-                tabContent2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_trending_up_white_24dp, 0, 0, 0);
+                tabImage.setImageDrawable(getResources().getDrawable(R.drawable.baseline_person_white_48dp));
                 tabsLayout.addView(tabLinearLayout2);
 
                 isOnTheMainMenu = false;
@@ -231,8 +233,9 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 tabsLayout.removeAllViews();
                 LinearLayout tabLinearLayout2 = (LinearLayout) LayoutInflater.from(ChwSmartRegisterActivity.this).inflate(R.layout.custom_tab, null);
                 TextView tabContent2 = (TextView) tabLinearLayout2.findViewById(R.id.tabContent);
+                ImageView tabImage =  tabLinearLayout2.findViewById(R.id.tabImage);
                 tabContent2.setText(R.string.sent_referrals_label);
-                tabContent2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_trending_up_white_24dp, 0, 0, 0);
+                tabImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_up_white_24dp));
                 tabsLayout.addView(tabLinearLayout2);
 
                 isOnTheMainMenu = false;
@@ -254,8 +257,9 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 tabsLayout.removeAllViews();
                 LinearLayout tabLinearLayout1 = (LinearLayout) LayoutInflater.from(ChwSmartRegisterActivity.this).inflate(R.layout.custom_tab, null);
                 TextView tabContent1 = (TextView) tabLinearLayout1.findViewById(R.id.tabContent);
+                ImageView tabImage =  tabLinearLayout1.findViewById(R.id.tabImage);
                 tabContent1.setText(R.string.received_referrals_label);
-                tabContent1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_trending_down_white_24dp, 0, 0, 0);
+                tabImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_down_white_24dp));
                 tabsLayout.addView(tabLinearLayout1);
 
                 isOnTheMainMenu = false;
@@ -280,8 +284,9 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 tabsLayout.removeAllViews();
                 LinearLayout tabLinearLayout3 = (LinearLayout) LayoutInflater.from(ChwSmartRegisterActivity.this).inflate(R.layout.custom_tab, null);
                 TextView tabContent3 = (TextView) tabLinearLayout3.findViewById(R.id.tabContent);
+                ImageView tabImage =  tabLinearLayout3.findViewById(R.id.tabImage);
                 tabContent3.setText(R.string.reports_label);
-                tabContent3.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_event_note_white_24dp, 0, 0, 0);
+                tabImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_event_note_white_24dp));
                 tabsLayout.addView(tabLinearLayout3);
 
                 ReportFragment newFragment = new ReportFragment();
@@ -307,11 +312,13 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
 
         LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-
+        ImageView tabImage =  tabLinearLayout.findViewById(R.id.tabImage);
         TextView tabContent = (TextView) tabLinearLayout.findViewById(R.id.tabContent);
-        tabContent.setText(R.string.main_menu_label);
-        tabContent.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sharp_menu_white_48dp, 0, 0, 0);
+        tabContent.setText(getResources().getString(R.string.main_menu_label));
+
+        tabImage.setImageDrawable(getResources().getDrawable(R.drawable.sharp_menu_white_48dp));
         tabsLayout.addView(tabLinearLayout);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         toolbar.inflateMenu(R.menu.menu_main);
@@ -999,9 +1006,11 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
             tabsLayout.removeAllViews();
             LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
+            ImageView tabImage =  tabLinearLayout.findViewById(R.id.tabImage);
             TextView tabContent = (TextView) tabLinearLayout.findViewById(R.id.tabContent);
             tabContent.setText(getResources().getString(R.string.main_menu_label));
-            tabContent.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sharp_menu_white_48dp, 0, 0, 0);
+
+            tabImage.setImageDrawable(getResources().getDrawable(R.drawable.sharp_menu_white_48dp));
             tabsLayout.addView(tabLinearLayout);
 
 

@@ -93,6 +93,18 @@
         },
         {
           "name": "services_given_to_patient"
+        },
+        {
+          "name": "referral_type"
+        },
+        {
+          "name": "service_provider_uuid"
+        },
+        {
+          "name": "referral_feedback"
+        },
+        {
+          "name": "referral_uuid"
         }
       ]
     },
@@ -121,38 +133,6 @@
         },
         {
           "name": "indicators"
-        }
-      ]
-    },
-    {
-      "name": "followup_client",
-      "columns": [
-        {
-          "name": "client_id"
-        },
-        {
-          "name": "referral_date"
-        },
-        {
-          "name": "visit_date"
-        },
-        {
-          "name": "facility_id"
-        },
-        {
-          "name": "referral_reason"
-        },
-        {
-          "name": "referral_feedback"
-        },
-        {
-          "name": "referral_status"
-        },
-        {
-          "name": "service_provider_uuid"
-        },
-        {
-          "name": "is_valid"
         }
       ]
     }

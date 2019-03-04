@@ -70,7 +70,7 @@ public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorA
 
         commonRepository = context().commonrepository(ReferralRepository.TABLE_NAME);
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + ReferralRepository.TABLE_NAME+
-                " INNER JOIN "+ ClientRepository.TABLE_NAME+" ON "+ ReferralRepository.TABLE_NAME+"."+ ReferralRepository.CLIENT_ID+" = "+ClientRepository.TABLE_NAME+"."+ClientRepository.CLIENT_ID+" WHERE "+ReferralRepository.REFERRAL_TYPE+" = 4");
+                " INNER JOIN "+ ClientRepository.TABLE_NAME+" ON "+ ReferralRepository.TABLE_NAME+"."+ ReferralRepository.CLIENT_ID+" = "+ClientRepository.TABLE_NAME+"."+ClientRepository.CLIENT_ID+" WHERE "+ReferralRepository.REFERRAL_TYPE+" = 1");
 
         clientReferrals  = Utils.convertToClientReferralObjectList(cursor);
 

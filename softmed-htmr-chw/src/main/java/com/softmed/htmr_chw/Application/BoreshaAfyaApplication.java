@@ -237,7 +237,6 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
             referral.setReferral_status(referralStatus);
             referral.setOther_notes(feedback);
             referral.setServices_given_to_patient(serviceGiven);
-            referral.setTest_results(testResult);
 
             ContentValues values = new ReferralRepository().createValuesUpdateValues(referral);
             commonRepository.customUpdate(values, id);

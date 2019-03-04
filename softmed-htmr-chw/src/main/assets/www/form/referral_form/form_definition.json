@@ -2,7 +2,7 @@
     "form_data_definition_version": "4",
     "form": {
         "bind_type": "referral",
-        "default_bind_path": "/model/instance/client_referral_form/",
+        "default_bind_path": "/model/instance/referral_form/",
         "fields": [
             {
                 "name": "id",
@@ -42,22 +42,22 @@
                 "name": "other_notes"
             },
             {
-                "name": "test_results"
-            },
-            {
                 "name": "is_emergency"
             },
             {
                 "name": "appointment_date"
             },
             {
-                "name": "service_provider_uiid"
+                "name": "referral_type"
             },
             {
-                "name": "service_provider_group"
+                "name": "service_provider_uuid"
             },
             {
-                "name": "service_provider_mobile_number"
+                "name": "referral_feedback"
+            },
+            {
+                "name": "referral_uuid"
             }
         ]
     }

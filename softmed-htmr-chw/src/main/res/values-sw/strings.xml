@@ -18,7 +18,7 @@
         sending the fetched token to the server or subscribing to the PubSub topic. Please try
         running the sample again.</string>
     <string name="app_name_htmr">TRCMIS</string>
-    <string name="page_title">New Client Registration Form</string>
+    <string name="page_title">Orodha ya Wateja</string>
     <string name="title_cbhs_number">CBHS #</string>
     <string name="referral_information">Referral Information</string>
     <string name="visit_facility">Kituo cha afya cha kutembelea</string>
@@ -141,6 +141,7 @@
     <string name="helper_phone_number">Care Taker Phone Number</string>
     <string name="gender">Jinsi</string>
     <string name="client_list_desc">Wateja waliosajiliwa (Tumia sehemu hii kuchagua mteha na kutuma rufaa).</string>
+    <string name="referral_issued_by_label">Rufaa imetolewa na</string>
 
 
 </resources>

@@ -2,6 +2,7 @@ package org.ei.opensrp.repository;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -32,6 +33,9 @@ public class ReferralRepository extends DrishtiRepository {
             "other_notes VARCHAR, " +
             "services_given_to_patient VARCHAR, " +
             "referral_type INTEGER, " +
+            "service_provider_uuid VARCHAR, " +
+            "referral_feedback VARCHAR, " +
+            "referral_uuid VARCHAR, " +
             "details VARCHAR)";
     public static final String TABLE_NAME = "referral";
     public static final String ID_COLUMN = "id";
@@ -49,8 +53,11 @@ public class ReferralRepository extends DrishtiRepository {
     public static final String OTHER_NOTES = "other_notes";
     public static final String SERVICES_GIVEN_TO_PATIENTS = "services_given_to_patient";
     public static final String REFERRAL_TYPE = "referral_type";
+    public static final String SERVICE_PROVIDER_UUID = "service_provider_uuid";
+    public static final String REFERRAL_FEEDBACK = "referral_feedback";
+    public static final String REFERRAL_UUID = "referral_uuid";
     public static final String DETAILS_COLUMN = "details";
-    public static final String[] CLIENT_REFERRAL_TABLE_COLUMNS = {ID_COLUMN, RELATIONAL_ID, CLIENT_ID, ReferralDate,AppointmentDate, ReferralFacility, ReferralReason, Service, ReferralStatus, IsEmergency,IS_VALID,INDICATOR_IDS,OTHER_NOTES,SERVICES_GIVEN_TO_PATIENTS,REFERRAL_TYPE,DETAILS_COLUMN};
+    public static final String[] CLIENT_REFERRAL_TABLE_COLUMNS = {ID_COLUMN, RELATIONAL_ID, CLIENT_ID, ReferralDate,AppointmentDate, ReferralFacility, ReferralReason, Service, ReferralStatus, IsEmergency,IS_VALID,INDICATOR_IDS,OTHER_NOTES,SERVICES_GIVEN_TO_PATIENTS,REFERRAL_TYPE, SERVICE_PROVIDER_UUID,REFERRAL_FEEDBACK,REFERRAL_UUID,DETAILS_COLUMN};
     
 
     @Override
@@ -157,7 +164,7 @@ public class ReferralRepository extends DrishtiRepository {
         ContentValues values = new ContentValues();
         values.put(ID_COLUMN, referral.getId());
         values.put(RELATIONAL_ID, referral.getRelationalid());
-        values.put(CLIENT_ID, referral.getClientId());
+        values.put(CLIENT_ID, referral.getClient_id());
         values.put(ReferralDate, referral.getReferral_date());
         values.put(AppointmentDate, referral.getAppointment_date());
         values.put(ReferralFacility, referral.getFacility_id());
@@ -170,6 +177,8 @@ public class ReferralRepository extends DrishtiRepository {
         values.put(OTHER_NOTES, referral.getOther_notes());
         values.put(REFERRAL_TYPE, referral.getReferral_type());
         values.put(SERVICES_GIVEN_TO_PATIENTS, referral.getServices_given_to_patient());
+        values.put(REFERRAL_FEEDBACK, referral.getReferral_feedback());
+        values.put(REFERRAL_UUID, referral.getReferral_uuid());
         values.put(DETAILS_COLUMN, new Gson().toJson(referral));
         return values;
     }
@@ -202,7 +211,10 @@ public class ReferralRepository extends DrishtiRepository {
                     cursor.getString(12),
                     cursor.getString(13),
                     cursor.getInt(14),
-                    cursor.getString(15))
+                    cursor.getString(15),
+                    cursor.getString(16),
+                    cursor.getString(17),
+                    cursor.getString(18))
             );
             cursor.moveToNext();
         }
@@ -238,6 +250,9 @@ public class ReferralRepository extends DrishtiRepository {
                 getColumnValueByAlias(cursor, TABLE_NAME, OTHER_NOTES),
                 getColumnValueByAlias(cursor, TABLE_NAME, SERVICES_GIVEN_TO_PATIENTS),
                 Integer.parseInt(getColumnValueByAlias(cursor, TABLE_NAME, REFERRAL_TYPE)),
+                getColumnValueByAlias(cursor, TABLE_NAME, SERVICES_GIVEN_TO_PATIENTS),
+                getColumnValueByAlias(cursor, TABLE_NAME, REFERRAL_FEEDBACK),
+                getColumnValueByAlias(cursor, TABLE_NAME, REFERRAL_UUID),
                 getColumnValueByAlias(cursor, TABLE_NAME, DETAILS_COLUMN));
 
     }
@@ -254,5 +269,12 @@ public class ReferralRepository extends DrishtiRepository {
     public void delete(String childId) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
         database.delete(TABLE_NAME, ID_COLUMN + "= ?", new String[]{childId});
+    }
+
+    public Cursor RawQuery(String query) {
+        Log.i(getClass().getName(), query);
+        SQLiteDatabase database = masterRepository.getReadableDatabase();
+        Cursor cursor = database.rawQuery(query, null);
+        return cursor;
     }
 }

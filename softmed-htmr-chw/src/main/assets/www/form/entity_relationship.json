@@ -1,24 +1,16 @@
 [
     {
         "parent": "facility",
-        "child": "client_referral",
-        "field": "client referral",
+        "child": "client",
+        "field": "facility_id",
         "kind": "one_to_many",
         "from": "facility.id",
         "to": "client_referral.facility_id"
     },
     {
-        "parent": "facility",
-        "child": "followup_client",
-        "field": "client follow up",
-        "kind": "one_to_many",
-        "from": "facility.id",
-        "to": "followup_client.facility_id"
-    },
-    {
-        "parent": "facility",
-        "child": "followup_client",
-        "field": "client follow up",
+        "parent": "client",
+        "child": "referral",
+        "field": "client_id",
         "kind": "one_to_many",
         "from": "facility.id",
         "to": "followup_client.facility_id"

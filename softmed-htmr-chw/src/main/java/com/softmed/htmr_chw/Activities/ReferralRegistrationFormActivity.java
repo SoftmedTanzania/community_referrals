@@ -93,7 +93,7 @@ public class ReferralRegistrationFormActivity extends SecuredNativeSmartRegister
     private List<String> facilityList = new ArrayList<String>();
     private List<String> serviceList = new ArrayList<String>();
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-    private String formName = "client_referral_form";
+    private String formName = "referral_form";
     private Referral referral;
     private Gson gson = new Gson();
     private JSONObject fieldOverides = new JSONObject();
@@ -175,7 +175,7 @@ public class ReferralRegistrationFormActivity extends SecuredNativeSmartRegister
 
         List<FormField> formFields = new ArrayList<>();
         formFields.add(new FormField("id", referral.getId(), ReferralRepository.TABLE_NAME + "." + "id"));
-        formFields.add(new FormField("relationalid", referral.getClientId(), ReferralRepository.TABLE_NAME + "." + "relationalid"));
+        formFields.add(new FormField("relationalid", referral.getClient_id(), ReferralRepository.TABLE_NAME + "." + "relationalid"));
 
         FormData formData;
         FormInstance formInstance;
@@ -188,20 +188,15 @@ public class ReferralRegistrationFormActivity extends SecuredNativeSmartRegister
 
         for (String key : details.keySet()) {
             Log.d(TAG, "key = " + key);
-            if (key.equals("facility_id")) {
-                FormField f = new FormField(key, details.get(key), "facility.id");
-                formFields.add(f);
-            } else {
-                FormField f = new FormField(key, details.get(key), ReferralRepository.TABLE_NAME + "." + key);
-                formFields.add(f);
-            }
+            FormField f = new FormField(key, details.get(key), ReferralRepository.TABLE_NAME + "." + key);
+            formFields.add(f);
         }
 
         Log.d(TAG, "form field = " + new Gson().toJson(formFields));
         Log.d(TAG, "am in tb");
-        formData = new FormData("client_referral", "/model/instance/client_referral_form/", formFields, null);
+        formData = new FormData("referral", "/model/instance/referral_form/", formFields, null);
         formInstance = new FormInstance(formData, "1");
-        submission = new FormSubmission(generateRandomUUIDString(), id, "client_referral_form", new Gson().toJson(formInstance), "4", SyncStatus.PENDING, "4");
+        submission = new FormSubmission(generateRandomUUIDString(), id, "referral_form", new Gson().toJson(formInstance), "4", SyncStatus.PENDING, "4");
         context().formDataRepository().saveFormSubmission(submission);
 
 
@@ -470,11 +465,10 @@ public class ReferralRegistrationFormActivity extends SecuredNativeSmartRegister
         referral.setFacility_id(getFacilityId(facilitytextView.getText().toString()));
         referral.setReferral_reason(editTextReferralReason.getText().toString());
         referral.setReferral_service_id(getReferralServiceId(spinnerService.getSelectedItem().toString()));
-        referral.setTest_results(false);
         referral.setServices_given_to_patient("");
         referral.setOther_notes("");
-        referral.setClientId(bundle.getString("clientId"));
-        referral.setService_provider_uiid(((BoreshaAfyaApplication)getApplication()).getCurrentUserID());
+        referral.setClient_id(bundle.getString("clientId"));
+        referral.setService_provider_uuid(((BoreshaAfyaApplication)getApplication()).getCurrentUserID());
         referral.setReferral_type(1);
 
         List<String> indicatorIds = new ArrayList<String>();

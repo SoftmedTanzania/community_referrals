@@ -176,6 +176,7 @@
                                         android:layout_marginLeft="-4dp"
                                         android:layout_below="@+id/facility_titleview"
                                         android:id="@+id/autocomplete_facility"
+                                        android:hint="@string/visit_facility_hint"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"/>
 

@@ -10,10 +10,9 @@ public class Referral implements Serializable {
 
     private String id, relationalid, details, referral_feedback, other_notes,
             services_given_to_patient, referral_uuid, facility_id,
-            referral_reason, is_valid, service_provider_uiid,
-            referral_service_id, referral_status,is_emergency,clientId;
+            referral_reason, is_valid, service_provider_uuid,
+            referral_service_id, referral_status,is_emergency, client_id;
     private long  referral_date,appointment_date,referral_type;
-    private boolean test_results;
     private String indicator_ids;
 
     public Referral() {
@@ -22,7 +21,7 @@ public class Referral implements Serializable {
 
     public Referral(String id,
                     String relationalId,
-                    String clientId,
+                    String client_id,
                     Long referral_date,
                     Long appointment_date,
                     String facility_id,
@@ -35,11 +34,14 @@ public class Referral implements Serializable {
                     String other_notes,
                     String services_given_to_patient,
                     int referral_type,
+                    String service_provider_uuid,
+                    String referral_feedback,
+                    String referral_uuid,
                     String details
     ) {
         this.details = details;
         this.id = id;
-        this.clientId = clientId;
+        this.client_id = client_id;
         this.referral_status = referral_status;
         this.relationalid = relationalId;
         this.referral_date = referral_date;
@@ -53,6 +55,9 @@ public class Referral implements Serializable {
         this.services_given_to_patient=services_given_to_patient;
         this.referral_type=referral_type;
         this.indicator_ids = indicator_ids;
+        this.referral_feedback = referral_feedback;
+        this.service_provider_uuid = service_provider_uuid;
+        this.referral_uuid = referral_uuid;
     }
 
     public String getId() {
@@ -135,12 +140,12 @@ public class Referral implements Serializable {
         this.is_valid = is_valid;
     }
 
-    public String getService_provider_uiid() {
-        return service_provider_uiid;
+    public String getService_provider_uuid() {
+        return service_provider_uuid;
     }
 
-    public void setService_provider_uiid(String service_provider_uiid) {
-        this.service_provider_uiid = service_provider_uiid;
+    public void setService_provider_uuid(String service_provider_uuid) {
+        this.service_provider_uuid = service_provider_uuid;
     }
 
     public String getReferral_service_id() {
@@ -167,12 +172,12 @@ public class Referral implements Serializable {
         this.is_emergency = is_emergency;
     }
 
-    public String getClientId() {
-        return clientId;
+    public String getClient_id() {
+        return client_id;
     }
 
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
+    public void setClient_id(String client_id) {
+        this.client_id = client_id;
     }
 
     public long getReferral_date() {
@@ -189,14 +194,6 @@ public class Referral implements Serializable {
 
     public void setAppointment_date(long appointment_date) {
         this.appointment_date = appointment_date;
-    }
-
-    public boolean isTest_results() {
-        return test_results;
-    }
-
-    public void setTest_results(boolean test_results) {
-        this.test_results = test_results;
     }
 
     public String getIndicator_ids() {
