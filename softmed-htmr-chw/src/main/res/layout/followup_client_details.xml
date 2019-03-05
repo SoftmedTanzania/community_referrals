@@ -588,7 +588,7 @@
                             android:layout_centerVertical="true"
                             android:background="@drawable/border_one"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="16dp"
+                            android:layout_marginRight="32dp"
                             android:textColor="@color/card_title_text"
                             android:text="@string/button_save"/>
 

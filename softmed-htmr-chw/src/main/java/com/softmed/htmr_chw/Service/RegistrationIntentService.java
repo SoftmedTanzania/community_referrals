@@ -22,11 +22,9 @@ import java.io.IOException;
 import java.util.Random;
 
 public class RegistrationIntentService extends IntentService {
-
+    public static final String REGISTRATION_COMPLETE = "registrationComplete";
     private static final String TAG = "RegIntentService";
     private static final String[] TOPICS = {"global"};
-    private  final int MAX_ATTEMPTS = 5;
-    private  final int BACKOFF_MILLI_SECONDS = 2000;
     private  final Random random = new Random();
     public RegistrationIntentService() {
         super(TAG);
@@ -47,14 +45,8 @@ public class RegistrationIntentService extends IntentService {
 
             // Subscribe to topic channels
             subscribeTopics(token);
-
-            // You should store a boolean that indicates whether the generated token has been
-            // sent to your server. If the boolean is false, send the token to your server,
-            // otherwise your server should have already received the token.            // [END register_for_gcm]
         } catch (Exception e) {
             Log.d(TAG, "Failed to complete token refresh", e);
-            // If an exception happens while fetching the new token or updating our registration data
-            // on a third-party server, this ensures that we'll attempt the update at a later time.
         }
         // Notify UI that registration has completed, so the progress indicator can be hidden.
         Intent registrationComplete = new Intent(QuickstartPreferences.REGISTRATION_COMPLETE);

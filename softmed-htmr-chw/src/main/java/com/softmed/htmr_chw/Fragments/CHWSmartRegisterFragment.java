@@ -20,28 +20,26 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.Activities.LoginActivity;
-import com.softmed.htmr_chw.util.NavigationController;
-import com.softmed.htmr_chw.R;
+import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.Domain.LocationSelectorDialogFragment;
-import com.softmed.htmr_chw.Adapters.CHWPagerAdapter;
-import com.softmed.htmr_chw.Adapters.SecuredNativeSmartRegisterCursorAdapterFragment;
+import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.util.FitDoughnut;
+import com.softmed.htmr_chw.util.NavigationController;
+
+import org.ei.opensrp.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.service.PendingFormSubmissionService;
 import org.ei.opensrp.sync.SyncAfterFetchListener;
 import org.ei.opensrp.sync.SyncProgressIndicator;
 import org.ei.opensrp.sync.UpdateActionsTask;
-import org.ei.opensrp.view.activity.SecuredActivity;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
-import org.json.JSONObject;
 
 import static android.os.Looper.getMainLooper;
 import static android.widget.Toast.LENGTH_SHORT;
@@ -52,31 +50,52 @@ import static org.ei.opensrp.event.Event.SYNC_COMPLETED;
 import static org.ei.opensrp.event.Event.SYNC_STARTED;
 
 public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
-    SecuredActivity securedActivity;
     private static final String TAG = CHWSmartRegisterFragment.class.getSimpleName();
+    private static boolean isOnTheMainMenu;
     private String locationDialogTAG = "locationDialogTAG";
-    private JSONObject fieldOverides = new JSONObject();
     private TabLayout tabs;
-    private LayoutInflater inflater;
     private ImageButton imageButton;
-    private CHWPagerAdapter adapter;
     private Toolbar toolbar;
     private View v;
     private TextView pending;
-    TextView successView, unsuccessView;
-    Long success = (long) 0;
-    Long unsuccess = (long) 0;
+    private TextView successView, unsuccessView;
     private FitDoughnut donutChart;
-
-    private android.content.Context context;
     private MenuItem updateMenuItem;
-    private MenuItem remainingFormsToSyncMenuItem;
     private PendingFormSubmissionService pendingFormSubmissionService;
-    static final String DATABASE_NAME = "drishti.db";
-    RelativeLayout pendingForm;
-    private LinearLayout mainMenu;
+    private RelativeLayout pendingForm;
+    private ScrollView mainMenu;
     private View fragmentsView;
-    private static boolean isOnTheMainMenu;
+    private Listener<Boolean> onSyncCompleteListener = new Listener<Boolean>() {
+        @Override
+        public void onEvent(Boolean data) {
+            updateRemainingFormsToSyncCount();
+            if (updateMenuItem != null) {
+                updateMenuItem.setActionView(null);
+            }
+            updateRegisterCounts();
+            refreshListView();
+        }
+    };
+    private Listener<String> onFormSubmittedListener = new Listener<String>() {
+        @Override
+        public void onEvent(String instanceId) {
+            updateRegisterCounts();
+        }
+    };
+    private Listener<String> updateANMDetailsListener = new Listener<String>() {
+        @Override
+        public void onEvent(String data) {
+            updateRegisterCounts();
+        }
+    };
+    private Listener<Boolean> onSyncStartListener = new Listener<Boolean>() {
+        @Override
+        public void onEvent(Boolean data) {
+            if (updateMenuItem != null) {
+                updateMenuItem.setActionView(R.layout.progress);
+            }
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,24 +109,22 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
         navigationController = new NavigationController(getActivity(), anmController);
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        this.inflater = inflater;
         v = inflater.inflate(R.layout.activity_chwregister, container, false);
         onInitialization();
         setHasOptionsMenu(true);
 
+        final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
         imageButton = (ImageButton) v.findViewById(R.id.register_client);
 
 
-        final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-
         isOnTheMainMenu = true;
-        mainMenu = (LinearLayout)v.findViewById(R.id.main_menu);
+        mainMenu = (ScrollView) v.findViewById(R.id.main_menu);
         fragmentsView = v.findViewById(R.id.fragments);
-        View referralRegistration  = mainMenu.findViewById(R.id.referral_registration_card);
-        View issuedReferrals  = mainMenu.findViewById(R.id.issued_referral_list_card);
-        View receivedReferralList  = mainMenu.findViewById(R.id.received_referrals_list_card);
-        View reports  = mainMenu.findViewById(R.id.reports);
+        View referralRegistration = mainMenu.findViewById(R.id.referral_registration_card);
+        View issuedReferrals = mainMenu.findViewById(R.id.issued_referral_list_card);
+        View receivedReferralList = mainMenu.findViewById(R.id.received_referrals_list_card);
+        View reports = mainMenu.findViewById(R.id.reports);
 
         referralRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +139,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                 isOnTheMainMenu = false;
                 ReferralsListFragment newFragment = new ReferralsListFragment();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragments, newFragment,"tag");
+                transaction.replace(R.id.fragments, newFragment, "tag");
                 transaction.addToBackStack(null);
                 transaction.commit();
 
@@ -165,8 +182,6 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         });
 
 
-
-
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -185,7 +200,6 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         tabContent.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_trending_down_white_24dp, 0, 0, 0);
 
 
-
         LinearLayout tabLinearLayout2 = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
         TextView tabContent2 = (TextView) tabLinearLayout2.findViewById(R.id.tabContent);
         tabContent2.setText(R.string.sent_referrals_label);
@@ -196,8 +210,6 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         TextView tabContent3 = (TextView) tabLinearLayout3.findViewById(R.id.tabContent);
         tabContent3.setText(R.string.reports_label);
         tabContent3.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_event_note_white_24dp, 0, 0, 0);
-
-
 
 
         final int colorWhite = ContextCompat.getColor(getActivity(), android.R.color.white);
@@ -249,9 +261,9 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         TextView username = (TextView) v.findViewById(R.id.toolbar_user_name);
         pendingForm = (RelativeLayout) v.findViewById(R.id.key_three);
         pending = (TextView) v.findViewById(R.id.count_three);
-        username.setText(getResources().getString(R.string.logged_user)+" "+((BoreshaAfyaApplication)getActivity().getApplication()).getUsername());
-        successView =  (TextView) v.findViewById(R.id.count_one);
-        unsuccessView =  (TextView) v.findViewById(R.id.count_two);
+        username.setText(getResources().getString(R.string.logged_user) + " " + ((BoreshaAfyaApplication) getActivity().getApplication()).getUsername());
+        successView = (TextView) v.findViewById(R.id.count_one);
+        unsuccessView = (TextView) v.findViewById(R.id.count_two);
 
         donutChart = (FitDoughnut) v.findViewById(R.id.donutChart);
         donutChart.startAnimateLoading();
@@ -259,8 +271,6 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
         return v;
     }
-
-
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
@@ -287,33 +297,6 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         updateRegisterCounts();
     }
 
-    private Listener<Boolean> onSyncCompleteListener = new Listener<Boolean>() {
-        @Override
-        public void onEvent(Boolean data) {
-            //#TODO: RemainingFormsToSyncCount cannot be updated from a back ground thread!!
-            updateRemainingFormsToSyncCount();
-            if (updateMenuItem != null) {
-                updateMenuItem.setActionView(null);
-            }
-            updateRegisterCounts();
-            refreshListView();
-        }
-    };
-
-    private Listener<String> onFormSubmittedListener = new Listener<String>() {
-        @Override
-        public void onEvent(String instanceId) {
-            updateRegisterCounts();
-        }
-    };
-
-    private Listener<String> updateANMDetailsListener = new Listener<String>() {
-        @Override
-        public void onEvent(String data) {
-            updateRegisterCounts();
-        }
-    };
-
     protected void onResumption() {
         updateRegisterCounts();
         updateSyncIndicator();
@@ -326,16 +309,16 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
             @Override
             public void run() {
 
-                final long successfullCount =  context().allBeneficiaries().successCount();
-                final long unsuccessfullCount =  context().allBeneficiaries().unsuccessCount();
+                final long successfullCount = context().allBeneficiaries().successCount();
+                final long unsuccessfullCount = context().allBeneficiaries().unsuccessCount();
 
                 Handler mainHandler = new Handler(getMainLooper());
 
                 Runnable myRunnable = new Runnable() {
                     @Override
                     public void run() {
-                        successView =  (TextView) v.findViewById(R.id.count_one);
-                        unsuccessView =  (TextView) v.findViewById(R.id.count_two);
+                        successView = (TextView) v.findViewById(R.id.count_one);
+                        unsuccessView = (TextView) v.findViewById(R.id.count_two);
                         successView.setText(valueOf(successfullCount));
                         unsuccessView.setText(valueOf(unsuccessfullCount));
 
@@ -343,12 +326,12 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                         float v = 0.0f;
                         try {
                             v = (successfullCount * 1.0f) / (successfullCount + unsuccessfullCount);
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
-                        Log.d(TAG,"donutchart value = "+v);
-                        donutChart.stopAnimateLoading(v*100);
+                        Log.d(TAG, "donutchart value = " + v);
+                        donutChart.stopAnimateLoading(v * 100);
                     }
                 };
                 mainHandler.post(myRunnable);
@@ -357,38 +340,25 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         }).start();
     }
 
-
     @Override
-    public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Do something that differs the Activity's menu here
         inflater.inflate(R.menu.menu_main, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
     }
 
-
     public void onPrepareOptionsMenu(Menu menu) {
-        Log.d(TAG,"am in preparationOptionMenu");
+        Log.d(TAG, "am in preparationOptionMenu");
         super.onPrepareOptionsMenu(menu);
         updateMenuItem = menu.findItem(R.id.updateMenuItem);
-        remainingFormsToSyncMenuItem = menu.findItem(R.id.remainingFormsToSyncMenuItem);
-
         updateRemainingFormsToSyncCount();
 
     }
 
-    private Listener<Boolean> onSyncStartListener = new Listener<Boolean>() {
-        @Override
-        public void onEvent(Boolean data) {
-            if (updateMenuItem != null) {
-                updateMenuItem.setActionView(R.layout.progress);
-            }
-        }
-    };
-
     public void updateFromServer() {
         UpdateActionsTask updateActionsTask = new UpdateActionsTask(
-                context, context().actionService(), context().formSubmissionSyncService(),
+                getActivity(), context().actionService(), context().formSubmissionSyncService(),
                 new SyncProgressIndicator(), context().allFormVersionSyncService());
         updateActionsTask.updateFromServer(new SyncAfterFetchListener());
 
@@ -427,7 +397,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
             } else {
                 pendingForm.setVisibility(View.GONE);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -456,10 +426,11 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     @Override
     public void refreshListView() {
         try {
-            ReferralsListFragment referralsListFragment = (ReferralsListFragment) getFragmentManager().findFragmentByTag("tag");;
+            ReferralsListFragment referralsListFragment = (ReferralsListFragment) getFragmentManager().findFragmentByTag("tag");
+            ;
             referralsListFragment.populateData();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -467,13 +438,11 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
             FollowupReferralsFragment followupReferralsFragment = (FollowupReferralsFragment) getFragmentManager().findFragmentByTag("tag");
             followupReferralsFragment.populateData();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-
-
 
 
     @Override
@@ -484,11 +453,12 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
                 updateMenuItem = item;
                 updateFromServer();
                 if (context().allSharedPreferences().fetchIsSyncInProgress()) {
-                    Log.d(TAG,"am in sync progress");
+                    Log.d(TAG, "am in sync progress");
                     item.setActionView(R.layout.progress);
-                } else{
+                } else {
                     item.setActionView(null);
-                    Log.d(TAG,"am in sync progress after");}
+                    Log.d(TAG, "am in sync progress after");
+                }
 
                 return true;
 
@@ -497,7 +467,7 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 //                return true;
 
             case R.id.logout:
-                ((BoreshaAfyaApplication)getActivity().getApplication()).logoutCurrentUser();
+                ((BoreshaAfyaApplication) getActivity().getApplication()).logoutCurrentUser();
 
                 return true;
             case R.id.switchLanguageMenuItem:
@@ -512,10 +482,9 @@ public class CHWSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     }
 
     public boolean onBackPressed() {
-
-        Log.d(TAG,"BackPressed");
-        if(!isOnTheMainMenu){
-            Log.d(TAG,"BackPressed true");
+        Log.d(TAG, "BackPressed");
+        if (!isOnTheMainMenu) {
+            Log.d(TAG, "BackPressed true");
             v.findViewById(R.id.main_menu).setVisibility(View.VISIBLE);
             mainMenu.setVisibility(View.GONE);
             fragmentsView.setVisibility(View.GONE);

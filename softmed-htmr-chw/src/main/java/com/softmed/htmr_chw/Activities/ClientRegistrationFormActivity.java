@@ -181,17 +181,6 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
         formInstance = new FormInstance(formData, "1");
         submission = new FormSubmission(generateRandomUUIDString(), id, "client_registration_form", new Gson().toJson(formInstance), "4", SyncStatus.PENDING, "4");
         context().formDataRepository().saveFormSubmission(submission);
-
-        new com.softmed.htmr_chw.util.AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                if (!client.getPhone_number().equals(""))
-                    Utils.sendRegistrationAlert(client.getPhone_number());
-                return null;
-            }
-        }.execute();
-
-
     }
 
     private void setupviews() {

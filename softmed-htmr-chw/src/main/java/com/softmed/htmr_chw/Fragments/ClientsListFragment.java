@@ -3,6 +3,7 @@ package com.softmed.htmr_chw.Fragments;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,8 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -21,10 +22,10 @@ import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Domain.LocationSelectorDialogFragment;
 import com.softmed.htmr_chw.Adapters.ClientsListAdapter;
-import com.softmed.htmr_chw.Adapters.SecuredNativeSmartRegisterCursorAdapterFragment;
 import com.softmed.htmr_chw.util.AsyncTask;
 import com.softmed.htmr_chw.util.DividerItemDecoration;
 
+import org.ei.opensrp.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.domain.Client;
 import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
@@ -54,6 +55,7 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
     private MaterialSpinner spinnerType;
     private RecyclerView recyclerView;
     private ClientsListAdapter clientsListAdapter;
+    private Typeface robotoRegular, sansBold;
 
     public ClientsListFragment() {
     }
@@ -75,20 +77,16 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
         // Inflate the layout for this fragment
 
         View v = inflater.inflate(R.layout.fragment_registered_clients, container, false);
-
-        recyclerView = (RecyclerView) v.findViewById(R.id.clients_recycler);
+        setupviews(v);
 
         clientRepository = context().clientRepository();
         clients = clientRepository.all();
 
-
-
         clientsListAdapter = new ClientsListAdapter(getActivity(), clients);
         Log.d(TAG, "repo count = " + clients.size());
 
-        spinnerType = (MaterialSpinner) v.findViewById(R.id.spin_status);
         FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
-        Button filter = (Button) v.findViewById(R.id.filter_button);
+        View filter = v.findViewById(R.id.filter_button);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,11 +118,6 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
                 }
             }
         });
-
-        fname = (EditText) v.findViewById(R.id.client_name_et);
-        othername = (EditText) v.findViewById(R.id.client_last_name_et);
-        phoneNumber = (EditText) v.findViewById(R.id.client_ctc_number_et);
-
 
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -336,5 +329,29 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
 
             }
         }
+    }
+
+    private void setupviews(View v) {
+        recyclerView = (RecyclerView) v.findViewById(R.id.clients_recycler);
+        fname = (EditText) v.findViewById(R.id.client_name_et);
+        othername = (EditText) v.findViewById(R.id.client_last_name_et);
+        phoneNumber = (EditText) v.findViewById(R.id.client_ctc_number_et);
+        spinnerType = (MaterialSpinner) v.findViewById(R.id.spin_status);
+
+        TextView clientName = v.findViewById(R.id.client_name);
+        TextView gender = v.findViewById(R.id.gender);
+        TextView phoneNumber = v.findViewById(R.id.phone_number);
+        TextView village = v.findViewById(R.id.village);
+
+
+        robotoRegular = Typeface.createFromAsset(getActivity().getAssets(), "roboto_regular.ttf");
+        sansBold = Typeface.createFromAsset(getActivity().getAssets(), "google_sans_bold.ttf");
+
+        clientName.setTypeface(sansBold);
+        gender.setTypeface(sansBold);
+        phoneNumber.setTypeface(sansBold);
+        village.setTypeface(sansBold);
+
+
     }
 }

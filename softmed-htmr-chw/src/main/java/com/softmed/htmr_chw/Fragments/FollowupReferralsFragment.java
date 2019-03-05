@@ -15,11 +15,11 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Adapters.FollowupClintsRecyclerAdapter;
-import com.softmed.htmr_chw.Adapters.SecuredNativeSmartRegisterCursorAdapterFragment;
 import com.softmed.htmr_chw.Domain.ClientReferral;
 import com.softmed.htmr_chw.util.Utils;
 
 import org.ei.opensrp.commonregistry.CommonRepository;
+import org.ei.opensrp.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.domain.ClientFollowup;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.ClientRepository;
@@ -83,8 +83,7 @@ public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorA
 
         commonRepository = context().commonrepository(ReferralRepository.TABLE_NAME);
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + ReferralRepository.TABLE_NAME+
-                " INNER JOIN "+ ClientRepository.TABLE_NAME+" ON "+ ReferralRepository.TABLE_NAME+"."+ ReferralRepository.CLIENT_ID+" = "+ClientRepository.TABLE_NAME+"."+ClientRepository.CLIENT_ID+" WHERE "+ReferralRepository.REFERRAL_TYPE+" = 1 LIMIT 0,1b");
-
+                " INNER JOIN "+ ClientRepository.TABLE_NAME+" ON "+ ReferralRepository.TABLE_NAME+"."+ ReferralRepository.CLIENT_ID+" = "+ClientRepository.TABLE_NAME+"."+ClientRepository.CLIENT_ID+" WHERE "+ReferralRepository.REFERRAL_TYPE+" = 1 LIMIT 0,1");
         clientReferrals  = Utils.convertToClientReferralObjectList(cursor);
 
         try {

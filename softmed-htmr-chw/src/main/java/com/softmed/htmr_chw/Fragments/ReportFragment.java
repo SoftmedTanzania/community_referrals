@@ -1,7 +1,9 @@
 package com.softmed.htmr_chw.Fragments;
+
 import android.app.Activity;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -34,18 +37,19 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.Adapters.SecuredNativeSmartRegisterCursorAdapterFragment;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
 import org.ei.opensrp.commonregistry.CommonRepository;
+import org.ei.opensrp.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.repository.ClientRepository;
-import org.ei.opensrp.repository.FollowupReferralRepository;
 import org.ei.opensrp.repository.ReferralRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -60,22 +64,24 @@ public class ReportFragment extends SecuredNativeSmartRegisterCursorAdapterFragm
     static final String TAG = ReportFragment.class.getSimpleName(), TABLE_NAME = "referral";
     ;
     private static final String ARG_POSITION = "position";
+    private DatePickerDialog fromDatePicker = new DatePickerDialog();
+    private DatePickerDialog toDatePicker = new DatePickerDialog();
     private TableLayout defaultersTable;
     private LinearLayout dataView;
     private View metDOBFrom, metDOBTo;
     private TextView dateRangeFromText, dateRangeToText;
     private long toDateTimestamp, fromDateTimestamp;
-    final DatePickerDialog fromDatePicker = new DatePickerDialog();
-    final DatePickerDialog toDatePicker = new DatePickerDialog();
     private LinearLayout dateFromLayout, dateToLayout;
     private Button applyDateRangeButton;
     private CommonRepository commonRepository;
-
     private ReferralRepository referralRepository;
     private TableLayout servicesTable;
     private PieChart mChart1;
     private BarChart mChart2;
     private String preferredLocale;
+    private List<String> categoryNames = new ArrayList<>();
+    private List<Integer> sizes = new ArrayList<>();
+    private Typeface robotoRegular, sansBold;
 
     public ReportFragment() {
     }
@@ -102,18 +108,40 @@ public class ReportFragment extends SecuredNativeSmartRegisterCursorAdapterFragm
         metDOBTo = rowview.findViewById(R.id.range_to);
 
 
+        robotoRegular = Typeface.createFromAsset(getActivity().getAssets(), "roboto_regular.ttf");
+        sansBold = Typeface.createFromAsset(getActivity().getAssets(), "google_sans_bold.ttf");
+
+        TextView receivedClientsFollowupSummary = rowview.findViewById(R.id.received_clients_followup_summary);
+        TextView completedReferralSummary = rowview.findViewById(R.id.completed_referral_summary);
+        TextView issuedReferralsSummaryTitle = rowview.findViewById(R.id.issued_referrals_summary_title);
+        TextView snTitle = rowview.findViewById(R.id.sn_title);
+        TextView serviceNamesTitle = rowview.findViewById(R.id.service_names_title);
+        TextView facilityNameTitle = rowview.findViewById(R.id.facility_name_title);
+        TextView totalTitle = rowview.findViewById(R.id.total_title);
+        TextView maleTitle = rowview.findViewById(R.id.male_title);
+        TextView femaleTitle = rowview.findViewById(R.id.female_title);
+
+        receivedClientsFollowupSummary.setTypeface(sansBold);
+        completedReferralSummary.setTypeface(sansBold);
+        issuedReferralsSummaryTitle.setTypeface(sansBold);
+        snTitle.setTypeface(sansBold);
+        serviceNamesTitle.setTypeface(sansBold);
+        facilityNameTitle.setTypeface(sansBold);
+        totalTitle.setTypeface(sansBold);
+        maleTitle.setTypeface(sansBold);
+        femaleTitle.setTypeface(sansBold);
+
+
         //Styling date picker dialogues
         fromDatePicker.setOkColor(ContextCompat.getColor(getActivity(), android.R.color.holo_blue_light));
         fromDatePicker.setCancelColor(ContextCompat.getColor(getActivity(), android.R.color.holo_red_light));
         fromDatePicker.setVersion(DatePickerDialog.Version.VERSION_1);
         fromDatePicker.setAccentColor(ContextCompat.getColor(getActivity(), com.softmed.htmr_chw.R.color.colorPrimary));
 
-
         toDatePicker.setOkColor(ContextCompat.getColor(getActivity(), android.R.color.holo_blue_light));
         toDatePicker.setCancelColor(ContextCompat.getColor(getActivity(), android.R.color.holo_red_light));
         toDatePicker.setVersion(DatePickerDialog.Version.VERSION_1);
         toDatePicker.setAccentColor(ContextCompat.getColor(getActivity(), com.softmed.htmr_chw.R.color.colorPrimary));
-
 
         metDOBTo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -315,7 +343,6 @@ public class ReportFragment extends SecuredNativeSmartRegisterCursorAdapterFragm
 
     }
 
-
     private void loadReportData(final long fromDateTimestamp, final long toDateTimestamp) {
 
         new AsyncTask<Void, String, String>() {
@@ -328,19 +355,19 @@ public class ReportFragment extends SecuredNativeSmartRegisterCursorAdapterFragm
                 Cursor receivedMaleReferralsServicesCursor = null;
                 Cursor receivedFemaleReferralsServicesCursor = null;
 
-                Cursor providedReferralsServicesCursor = referralRepository.RawQuery("select * FROM referral_service INNER JOIN "+ ReferralRepository.TABLE_NAME+" ON  referral_service.id = "+ReferralRepository.TABLE_NAME+".referral_service_id " +
+                Cursor providedReferralsServicesCursor = referralRepository.RawQuery("select * FROM referral_service INNER JOIN " + ReferralRepository.TABLE_NAME + " ON  referral_service.id = " + ReferralRepository.TABLE_NAME + ".referral_service_id " +
                         (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
                         (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : "") +
                         "  GROUP BY referral_service.id");
 
                 try {
-                    receivedMaleReferralsServicesCursor = referralRepository.RawQuery("select * FROM "+ ReferralRepository.TABLE_NAME+
-                            " INNER JOIN "+ ClientRepository.TABLE_NAME+" ON "+ ClientRepository.TABLE_NAME+"."+ClientRepository.CLIENT_ID+"  = "+ReferralRepository.TABLE_NAME+"."+ReferralRepository.CLIENT_ID+
+                    receivedMaleReferralsServicesCursor = referralRepository.RawQuery("select * FROM " + ReferralRepository.TABLE_NAME +
+                            " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID + "  = " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID +
                             " WHERE gender = 'Male' AND referral_type=4 " +
                             (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
                             (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : ""));
-                    receivedFemaleReferralsServicesCursor = referralRepository.RawQuery("select * FROM "+ ReferralRepository.TABLE_NAME+
-                            " INNER JOIN "+ ClientRepository.TABLE_NAME+" ON "+ ClientRepository.TABLE_NAME+"."+ClientRepository.CLIENT_ID+"  = "+ReferralRepository.TABLE_NAME+"."+ReferralRepository.CLIENT_ID+
+                    receivedFemaleReferralsServicesCursor = referralRepository.RawQuery("select * FROM " + ReferralRepository.TABLE_NAME +
+                            " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID + "  = " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID +
                             " WHERE gender = 'Female'  AND referral_type=4 " +
                             (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
                             (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : ""));
@@ -387,12 +414,12 @@ public class ReportFragment extends SecuredNativeSmartRegisterCursorAdapterFragm
                         e.printStackTrace();
                     }
 
-                    Cursor healthFacilityCursor = referralRepository.RawQuery("select "+ReferralRepository.TABLE_NAME+".facility_id,facility.name FROM "+ReferralRepository.TABLE_NAME+
-                            " INNER JOIN referral_service ON  "+ReferralRepository.TABLE_NAME+".referral_service_id = referral_service.id " +
-                            "INNER JOIN facility ON  "+ReferralRepository.TABLE_NAME+".facility_id = facility.id " +
+                    Cursor healthFacilityCursor = referralRepository.RawQuery("select " + ReferralRepository.TABLE_NAME + ".facility_id,facility.name FROM " + ReferralRepository.TABLE_NAME +
+                            " INNER JOIN referral_service ON  " + ReferralRepository.TABLE_NAME + ".referral_service_id = referral_service.id " +
+                            "INNER JOIN facility ON  " + ReferralRepository.TABLE_NAME + ".facility_id = facility.id " +
                             (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
                             (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : "") +
-                            "  GROUP BY "+ReferralRepository.TABLE_NAME+".facility_id,facility.name ");
+                            "  GROUP BY " + ReferralRepository.TABLE_NAME + ".facility_id,facility.name ");
 
                     JSONArray facilityReferrals = new JSONArray();
                     int totalReferrals = 0;
@@ -400,14 +427,14 @@ public class ReportFragment extends SecuredNativeSmartRegisterCursorAdapterFragm
                         healthFacilityCursor.moveToPosition(j);
 
                         Cursor cursorMaleCount = commonRepository.RawCustomQueryForAdapter("select count(*) as c FROM " + TABLE_NAME +
-                                " INNER JOIN "+ ClientRepository.TABLE_NAME+" ON "+ ClientRepository.TABLE_NAME+"."+ClientRepository.CLIENT_ID+"  = "+ReferralRepository.TABLE_NAME+"."+ReferralRepository.CLIENT_ID+
-                                " WHERE "+ReferralRepository.TABLE_NAME+".facility_id = '" + healthFacilityCursor.getString(0) + "' AND referral_service_id = " + serviveId + " AND  referral_status<>2 AND  gender = 'Male' " +
+                                " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID + "  = " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID +
+                                " WHERE " + ReferralRepository.TABLE_NAME + ".facility_id = '" + healthFacilityCursor.getString(0) + "' AND referral_service_id = " + serviveId + " AND  referral_status<>2 AND  gender = 'Male' " +
                                 (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
                                 (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : ""));
                         cursorMaleCount.moveToFirst();
                         Cursor cursorFemaleCount = commonRepository.RawCustomQueryForAdapter("select count(*) as c FROM " + TABLE_NAME +
-                                " INNER JOIN "+ ClientRepository.TABLE_NAME+" ON "+ ClientRepository.TABLE_NAME+"."+ClientRepository.CLIENT_ID+"  = "+ReferralRepository.TABLE_NAME+"."+ReferralRepository.CLIENT_ID+
-                                " WHERE "+ReferralRepository.TABLE_NAME+".facility_id = '" + healthFacilityCursor.getString(0) + "' AND referral_service_id = " + serviveId + " AND  referral_status<>2 AND gender = 'Female' " +
+                                " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID + "  = " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID +
+                                " WHERE " + ReferralRepository.TABLE_NAME + ".facility_id = '" + healthFacilityCursor.getString(0) + "' AND referral_service_id = " + serviveId + " AND  referral_status<>2 AND gender = 'Female' " +
                                 (fromDateTimestamp != 0 ? " AND referral_date > " + fromDateTimestamp : "") +
                                 (toDateTimestamp != 0 ? " AND referral_date < " + toDateTimestamp : ""));
                         cursorFemaleCount.moveToFirst();
@@ -616,9 +643,6 @@ public class ReportFragment extends SecuredNativeSmartRegisterCursorAdapterFragm
 //        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), 32, s.length(), 0);
         return s;
     }
-
-    private List<String> categoryNames = new ArrayList<>();
-    private List<Integer> sizes = new ArrayList<>();
 
     private void setData() {
         ArrayList<PieEntry> entries = new ArrayList<PieEntry>();

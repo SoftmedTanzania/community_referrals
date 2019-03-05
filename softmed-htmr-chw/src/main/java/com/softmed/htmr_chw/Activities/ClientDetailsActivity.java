@@ -32,20 +32,22 @@ import java.util.List;
 import java.util.Locale;
 
 public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
+    public static final int SUCCESSFULLY_REFERED_A_CLIENT = 192;
     private static final String TAG = ClientDetailsActivity.class.getSimpleName();
     private ReferralRepository referralRepository;
     private CommonRepository commonRepository;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-
-    public static final int SUCCESSFULLY_REFERED_A_CLIENT = 192;
     private Client client;
     private Typeface robotoBold;
-
+    private MaterialEditText gender, regDob, village, villageLeader, cbhs, ctcNumber, phone, helperName, helperPhoneNumber;
+    private TextView clientName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_details);
+
+        setupviews();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -53,24 +55,11 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
         Bundle bundle = intent.getExtras();
 
         client = (Client) bundle.getSerializable("client");
-        TextView clientName = (TextView) findViewById(R.id.client_name);
-        MaterialEditText gender = (MaterialEditText) findViewById(R.id.gender);
-        MaterialEditText regDob = (MaterialEditText) findViewById(R.id.reg_dob);
-        MaterialEditText village = (MaterialEditText) findViewById(R.id.editTextKijiji);
-        MaterialEditText villageLeader = (MaterialEditText) findViewById(R.id.editTextVillageLeader);
-        MaterialEditText cbhs = (MaterialEditText) findViewById(R.id.cbhs);
-        MaterialEditText ctcNumber = (MaterialEditText) findViewById(R.id.ctc_number);
-        MaterialEditText phone = (MaterialEditText) findViewById(R.id.edittextPhone);
-        MaterialEditText helperName = (MaterialEditText) findViewById(R.id.helper_name);
-        MaterialEditText helperPhoneNumber = (MaterialEditText) findViewById(R.id.helper_phone_number);
-
-        robotoBold = Typeface.createFromAsset(getAssets(), "roboto_bold.ttf");
-
-        ((TextView) findViewById(R.id.client_name)).setTypeface(robotoBold);
         clientName.setText(client.getFirst_name() + " " + client.getMiddle_name() + " " + client.getSurname());
 
         Date date = new Date();
         date.setTime(client.getDate_of_birth());
+
         gender.setText(client.getGender());
         village.setText(client.getVillage());
         villageLeader.setText(client.getVillage_leader());
@@ -94,7 +83,7 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
 
         referralRepository = context().referralRepository();
 
-        Log.d(TAG,"Client ID = "+client.getClient_id());
+        Log.d(TAG, "Client ID = " + client.getClient_id());
         setReferralHistory();
 
     }
@@ -124,7 +113,7 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
 
     }
 
-    public void setReferralHistory(){
+    public void setReferralHistory() {
         List<Referral> referrals = referralRepository.findByClientId(client.getClient_id());
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.referral_history);
         linearLayout.removeAllViews();
@@ -158,7 +147,7 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
     }
 
     public String getFacilityName(String id) {
-        Log.d(TAG,"Facility Id = "+id);
+        Log.d(TAG, "Facility Id = " + id);
         commonRepository = context().commonrepository("facility");
         Cursor cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility where id ='" + id + "'");
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "facility");
@@ -178,8 +167,8 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
             view.removeAllViewsInLayout();
 
             for (int m = 0; m < indicatorsArray.length(); m++) {
-                View v  =  getLayoutInflater().inflate(R.layout.indicator_item,null);
-                TextView indicatorName =v.findViewById(R.id.indicator_name);
+                View v = getLayoutInflater().inflate(R.layout.indicator_item, null);
+                TextView indicatorName = v.findViewById(R.id.indicator_name);
                 indicatorName.setText(getIndicatorName(indicatorsArray.getString(m)));
                 indicatorName.setPadding(0, 10, 10, 0);
                 view.addView(v);
@@ -198,7 +187,7 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
             List<Indicator> indicators = indicatorRepository.findServiceByCaseIds(id);
 
             return indicators.get(0).getIndicatorName();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "";
@@ -207,9 +196,26 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(resultCode == RESULT_OK){
+        if (resultCode == RESULT_OK) {
             setReferralHistory();
         }
+
+    }
+
+    private void setupviews() {
+        clientName = (TextView) findViewById(R.id.client_name);
+        gender = (MaterialEditText) findViewById(R.id.gender);
+        regDob = (MaterialEditText) findViewById(R.id.reg_dob);
+        village = (MaterialEditText) findViewById(R.id.editTextKijiji);
+        villageLeader = (MaterialEditText) findViewById(R.id.editTextVillageLeader);
+        cbhs = (MaterialEditText) findViewById(R.id.cbhs);
+        ctcNumber = (MaterialEditText) findViewById(R.id.ctc_number);
+        phone = (MaterialEditText) findViewById(R.id.edittextPhone);
+        helperName = (MaterialEditText) findViewById(R.id.helper_name);
+        helperPhoneNumber = (MaterialEditText) findViewById(R.id.helper_phone_number);
+
+        robotoBold = Typeface.createFromAsset(getAssets(), "roboto_bold.ttf");
+        ((TextView) findViewById(R.id.client_name)).setTypeface(robotoBold);
 
     }
 }

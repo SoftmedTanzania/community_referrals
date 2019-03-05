@@ -14,12 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.Adapters.SecuredNativeSmartRegisterCursorAdapterFragment;
 import com.softmed.htmr_chw.Domain.ClientReferral;
+import com.softmed.htmr_chw.R;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
+import org.ei.opensrp.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
@@ -32,18 +32,18 @@ import java.util.Locale;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
 public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
-    public static final String CLIENT_FOLLOWUP = "item_id";
+    private static final String CLIENT_FOLLOWUP = "item_id";
     private static final String TAG = FollowupClientDetailFragment.class.getSimpleName();
-    public ClientReferral clientReferral;
+    private ClientReferral clientReferral;
     private CommonRepository commonRepository;
     private Cursor cursor;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-    private Typeface robotoRegular,sansBold;
     private Gson gson = new Gson();
-    private TextView name, age,veo,ward,mapCue,village,refererName, gender, phoneNumber, feedback, otherInformation, referedReason, helperName, referedDate, helperPhoneNumber;
+    private TextView name, age, veo, ward, mapCue, village, refererName, gender, phoneNumber, feedback, otherInformation, referedReason, helperName, referedDate, helperPhoneNumber;
     private MaterialSpinner spinnerReason;
+    private Typeface robotoRegular, sansBold;
     private int reasonSelection = -1;
-    private   Button save;
+    private Button save;
 
     public FollowupClientDetailFragment() {
     }
@@ -73,80 +73,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.followup_client_details, container, false);
-
-
-        robotoRegular = Typeface.createFromAsset(getActivity().getAssets(), "roboto_regular.ttf");
-        sansBold = Typeface.createFromAsset(getActivity().getAssets(), "google_sans_bold.ttf");
-
-        TextView heading = rootView.findViewById(R.id.heading);
-        TextView referralDateTitle = rootView.findViewById(R.id.referral_date_title);
-        TextView clientAgeTitle = rootView.findViewById(R.id.client_age_title);
-        TextView veoNameTitle = rootView.findViewById(R.id.veo_name_title);
-        TextView clientWardTitle = rootView.findViewById(R.id.client_ward_title);
-        TextView clientVillageTitle = rootView.findViewById(R.id.client_village_title);
-        TextView refererNameTitle = rootView.findViewById(R.id.referer_name_title);
-        TextView client_kitongoji_title = rootView.findViewById(R.id.client_kitongoji_title);
-        TextView refererTitle = rootView.findViewById(R.id.referer_title);
-        TextView referralReasonTitle = rootView.findViewById(R.id.sababu_ya_rufaa_title);
-        TextView clinicalInformationTitle = rootView.findViewById(R.id.clinical_information_title);
-        TextView feedbackTitle = rootView.findViewById(R.id.feedback_title);
-        TextView helperPhoneNumberTitle = rootView.findViewById(R.id.helper_phone_number_title);
-        TextView helperNameTitle = rootView.findViewById(R.id.helper_name_title);
-        TextView service_offered_title = rootView.findViewById(R.id.service_offered_title);
-        TextView service_advice_title = rootView.findViewById(R.id.service_advice_title);
-        save = (Button) rootView.findViewById(R.id.save_button);
-
-        spinnerReason = (MaterialSpinner) rootView.findViewById(R.id.spinnerClientAvailable);
-
-
-        name = rootView.findViewById(R.id.client_name);
-
-
-        phoneNumber = (TextView) rootView.findViewById(R.id.phone_number);
-        village = (TextView) rootView.findViewById(R.id.client_village_value);
-        age = (TextView) rootView.findViewById(R.id.client_age_value);
-        veo = (TextView) rootView.findViewById(R.id.veo_name_value);
-        ward = (TextView) rootView.findViewById(R.id.client_ward_value);
-        refererName = (TextView) rootView.findViewById(R.id.referer_name_value);
-        mapCue = (TextView) rootView.findViewById(R.id.client_kitongoji_value);
-        helperName = (TextView) rootView.findViewById(R.id.helper_name_value);
-        helperPhoneNumber = (TextView) rootView.findViewById(R.id.helper_phone_number_value);
-        gender = (TextView) rootView.findViewById(R.id.gender);
-        otherInformation = (TextView) rootView.findViewById(R.id.other_clinical_inforamtion_value);
-        referedDate = (TextView) rootView.findViewById(R.id.referral_date);
-        referedReason = (TextView) rootView.findViewById(R.id.followUp_reason);
-        feedback = (TextView) rootView.findViewById(R.id.client_condition);
-
-
-        heading.setTypeface(sansBold);
-        refererTitle.setTypeface(sansBold);
-        helperPhoneNumberTitle.setTypeface(sansBold);
-        helperNameTitle.setTypeface(sansBold);
-        clientVillageTitle.setTypeface(sansBold);
-        feedbackTitle.setTypeface(sansBold);
-        referralReasonTitle.setTypeface(sansBold);
-        clinicalInformationTitle.setTypeface(sansBold);
-        referralDateTitle.setTypeface(sansBold);
-        client_kitongoji_title.setTypeface(sansBold);
-        refererNameTitle.setTypeface(sansBold);
-        clientAgeTitle.setTypeface(sansBold);
-        veoNameTitle.setTypeface(sansBold);
-        clientWardTitle.setTypeface(sansBold);
-        name.setTypeface(sansBold);
-        referedDate.setTypeface(sansBold);
-
-
-        age.setTypeface(robotoRegular);
-        service_offered_title.setTypeface(robotoRegular);
-        service_advice_title.setTypeface(robotoRegular);
-        veo.setTypeface(robotoRegular);
-        ward.setTypeface(robotoRegular);
-        village.setTypeface(robotoRegular);
-        refererName.setTypeface(robotoRegular);
-        mapCue.setTypeface(robotoRegular);
-        referedReason.setTypeface(robotoRegular);
-        otherInformation.setTypeface(robotoRegular);
-
+        setupviews(rootView);
         setDetails(clientReferral);
 
         return rootView;
@@ -195,7 +122,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
     private void setDetails(final ClientReferral clientReferral) {
 
         String reg_date = dateFormat.format(clientReferral.getDate_of_birth());
-        Log.d(TAG,"Date of Birth : "+clientReferral.getDate_of_birth() );
+        Log.d(TAG, "Date of Birth : " + clientReferral.getDate_of_birth());
         String ageS = "";
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
@@ -224,29 +151,29 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         referedDate.setText(dateFormat.format(clientReferral.getReferral_date()));
 
 
-        try{
+        try {
             village.setText(clientReferral.getVillage());
             ward.setText(clientReferral.getWard());
             mapCue.setText(clientReferral.getKijitongoji());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         try {
             helperName.setText(clientReferral.getHelper_name());
             helperPhoneNumber.setText(clientReferral.getHelper_phone_number());
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         try {
             feedback.setText(clientReferral.getReferral_feedback());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-        final String[] ITEMS = {getString(R.string.followup_feedback_patient_moved), getString(R.string.followup_feedback_patient_died),getString(R.string.followup_feedback_other_reasons)};
+        final String[] ITEMS = {getString(R.string.followup_feedback_patient_moved), getString(R.string.followup_feedback_patient_died), getString(R.string.followup_feedback_other_reasons)};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, ITEMS);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerReason.setAdapter(adapter);
@@ -267,7 +194,6 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         });
 
 
-
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -275,8 +201,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
                     Toast.makeText(getActivity(), getString(R.string.toast_message_select_reasons_for_missing_appointment), Toast.LENGTH_SHORT).show();
 
                 } else {
-//                        clientReferral.setVisit_date(today.getTimeInMillis());
-                    clientReferral.setReferral_feedback(ITEMS[reasonSelection]+"/n/n"+feedback.getText().toString());
+                    clientReferral.setReferral_feedback(ITEMS[reasonSelection] + "/n/n" + feedback.getText().toString());
 
 //                        context().followupClientRepository().update(followup);
 
@@ -318,5 +243,72 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
             }
         });
 
+    }
+
+    private void setupviews(View rootView) {
+        TextView heading = rootView.findViewById(R.id.heading);
+        TextView referralDateTitle = rootView.findViewById(R.id.referral_date_title);
+        TextView clientAgeTitle = rootView.findViewById(R.id.client_age_title);
+        TextView veoNameTitle = rootView.findViewById(R.id.veo_name_title);
+        TextView clientWardTitle = rootView.findViewById(R.id.client_ward_title);
+        TextView clientVillageTitle = rootView.findViewById(R.id.client_village_title);
+        TextView refererNameTitle = rootView.findViewById(R.id.referer_name_title);
+        TextView client_kitongoji_title = rootView.findViewById(R.id.client_kitongoji_title);
+        TextView refererTitle = rootView.findViewById(R.id.referer_title);
+        TextView referralReasonTitle = rootView.findViewById(R.id.sababu_ya_rufaa_title);
+        TextView clinicalInformationTitle = rootView.findViewById(R.id.clinical_information_title);
+        TextView feedbackTitle = rootView.findViewById(R.id.feedback_title);
+        TextView helperPhoneNumberTitle = rootView.findViewById(R.id.helper_phone_number_title);
+        TextView helperNameTitle = rootView.findViewById(R.id.helper_name_title);
+        TextView service_offered_title = rootView.findViewById(R.id.service_offered_title);
+        TextView service_advice_title = rootView.findViewById(R.id.service_advice_title);
+        save = (Button) rootView.findViewById(R.id.save_button);
+        name = rootView.findViewById(R.id.client_name);
+        phoneNumber = (TextView) rootView.findViewById(R.id.phone_number);
+        village = (TextView) rootView.findViewById(R.id.client_village_value);
+        age = (TextView) rootView.findViewById(R.id.client_age_value);
+        veo = (TextView) rootView.findViewById(R.id.veo_name_value);
+        ward = (TextView) rootView.findViewById(R.id.client_ward_value);
+        refererName = (TextView) rootView.findViewById(R.id.referer_name_value);
+        mapCue = (TextView) rootView.findViewById(R.id.client_kitongoji_value);
+        helperName = (TextView) rootView.findViewById(R.id.helper_name_value);
+        helperPhoneNumber = (TextView) rootView.findViewById(R.id.helper_phone_number_value);
+        gender = (TextView) rootView.findViewById(R.id.gender);
+        otherInformation = (TextView) rootView.findViewById(R.id.other_clinical_inforamtion_value);
+        referedDate = (TextView) rootView.findViewById(R.id.referral_date);
+        referedReason = (TextView) rootView.findViewById(R.id.followUp_reason);
+        feedback = (TextView) rootView.findViewById(R.id.client_condition);
+        spinnerReason = (MaterialSpinner) rootView.findViewById(R.id.spinnerClientAvailable);
+
+        robotoRegular = Typeface.createFromAsset(getActivity().getAssets(), "roboto_regular.ttf");
+        sansBold = Typeface.createFromAsset(getActivity().getAssets(), "google_sans_bold.ttf");
+
+        heading.setTypeface(sansBold);
+        refererTitle.setTypeface(sansBold);
+        helperPhoneNumberTitle.setTypeface(sansBold);
+        helperNameTitle.setTypeface(sansBold);
+        clientVillageTitle.setTypeface(sansBold);
+        feedbackTitle.setTypeface(sansBold);
+        referralReasonTitle.setTypeface(sansBold);
+        clinicalInformationTitle.setTypeface(sansBold);
+        referralDateTitle.setTypeface(sansBold);
+        client_kitongoji_title.setTypeface(sansBold);
+        refererNameTitle.setTypeface(sansBold);
+        clientAgeTitle.setTypeface(sansBold);
+        veoNameTitle.setTypeface(sansBold);
+        clientWardTitle.setTypeface(sansBold);
+        name.setTypeface(sansBold);
+        referedDate.setTypeface(sansBold);
+
+        service_offered_title.setTypeface(robotoRegular);
+        service_advice_title.setTypeface(robotoRegular);
+        age.setTypeface(robotoRegular);
+        veo.setTypeface(robotoRegular);
+        ward.setTypeface(robotoRegular);
+        village.setTypeface(robotoRegular);
+        refererName.setTypeface(robotoRegular);
+        mapCue.setTypeface(robotoRegular);
+        referedReason.setTypeface(robotoRegular);
+        otherInformation.setTypeface(robotoRegular);
     }
 }
