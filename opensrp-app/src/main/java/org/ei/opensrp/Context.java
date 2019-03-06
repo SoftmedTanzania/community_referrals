@@ -20,17 +20,16 @@ import org.ei.opensrp.repository.AllSettings;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.repository.AllTimelineEvents;
 import org.ei.opensrp.repository.ChildRepository;
-import org.ei.opensrp.repository.ReferralRepository;
 import org.ei.opensrp.repository.ClientRepository;
 import org.ei.opensrp.repository.DrishtiRepository;
 import org.ei.opensrp.repository.EligibleCoupleRepository;
 import org.ei.opensrp.repository.FacilityRepository;
-import org.ei.opensrp.repository.FollowupReferralRepository;
 import org.ei.opensrp.repository.FormDataRepository;
 import org.ei.opensrp.repository.FormsVersionRepository;
 import org.ei.opensrp.repository.ImageRepository;
 import org.ei.opensrp.repository.IndicatorRepository;
 import org.ei.opensrp.repository.MotherRepository;
+import org.ei.opensrp.repository.ReferralRepository;
 import org.ei.opensrp.repository.ReferralServiceRepository;
 import org.ei.opensrp.repository.ReportRepository;
 import org.ei.opensrp.repository.Repository;
@@ -111,9 +110,12 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.preference.PreferenceManager.setDefaultValues;
 
 public class Context {
-    private android.content.Context applicationContext;
+    ///////////////////common bindtypes///////////////
+    public static ArrayList<CommonRepositoryInformationHolder> bindtypes;
     private static Context context = new Context();
-
+    private static ImageRepository imageRepository;
+    protected DristhiConfiguration configuration;
+    private android.content.Context applicationContext;
     private Repository repository;
     private EligibleCoupleRepository eligibleCoupleRepository;
     private AlertRepository alertRepository;
@@ -125,7 +127,6 @@ public class Context {
     private FormDataRepository formDataRepository;
     private ServiceProvidedRepository serviceProvidedRepository;
     private FormsVersionRepository formsVersionRepository;
-
     private AllSettings allSettings;
     private AllSharedPreferences allSharedPreferences;
     private AllAlerts allAlerts;
@@ -138,11 +139,7 @@ public class Context {
     private FacilityRepository facilityRepository;
     private ReferralServiceRepository referralServiceRepository;
     private ReferralRepository referralRepository;
-    private FollowupReferralRepository followupReferralRepository;
     private ClientRepository clientRepository;
-    private static ImageRepository imageRepository;
-
-
     private DrishtiService drishtiService;
     private ActionService actionService;
     private FormSubmissionService formSubmissionService;
@@ -158,7 +155,6 @@ public class Context {
     private ServiceProvidedService serviceProvidedService;
     private PendingFormSubmissionService pendingFormSubmissionService;
     private AllFormVersionSyncService allFormVersionSyncService;
-
     private Session session;
     private Cache<String> listCache;
     private Cache<SmartRegisterClients> smartRegisterClientsCache;
@@ -170,10 +166,8 @@ public class Context {
     private Cache<Villages> villagesCache;
     private Cache<Typeface> typefaceCache;
     private Cache<CommonPersonObjectClients> personObjectClientsCache;
-
     private HTTPAgent httpAgent;
     private ZiggyFileLoader ziggyFileLoader;
-
     private FormSubmissionRouter formSubmissionRouter;
     private ECRegistrationHandler ecRegistrationHandler;
     private FPComplicationsHandler fpComplicationsHandler;
@@ -209,22 +203,12 @@ public class Context {
     private IndicatorRepository indicatorRepository;
     private ANMController anmController;
     private ANMLocationController anmLocationController;
-
-    protected DristhiConfiguration configuration;
-
     private CommonFtsObject commonFtsObject;
-
-    ///////////////////common bindtypes///////////////
-    public static ArrayList<CommonRepositoryInformationHolder> bindtypes;
+    private HashMap<String, CommonRepository> MapOfCommonRepository;
 
     /////////////////////////////////////////////////
     protected Context() {
     }
-
-    public android.content.Context applicationContext() {
-        return applicationContext;
-    }
-
 
     public static Context getInstance() {
         if (context == null) {
@@ -236,6 +220,17 @@ public class Context {
     public static Context setInstance(Context context) {
         Context.context = context;
         return context;
+    }
+
+    public static DrishtiRepository imageRepository() {
+        if (imageRepository == null) {
+            imageRepository = new ImageRepository();
+        }
+        return imageRepository;
+    }
+
+    public android.content.Context applicationContext() {
+        return applicationContext;
     }
 
     public BeneficiaryService beneficiaryService() {
@@ -508,7 +503,7 @@ public class Context {
             return null;
         }
         if (repository == null) {
-            Log.d("j4","initializing repos");
+            Log.d("j4", "initializing repos");
             assignbindtypes();
             ArrayList<DrishtiRepository> drishtireposotorylist = new ArrayList<DrishtiRepository>();
             drishtireposotorylist.add(settingsRepository());
@@ -519,7 +514,6 @@ public class Context {
             drishtireposotorylist.add(motherRepository());
             drishtireposotorylist.add(facilityRepository());
             drishtireposotorylist.add(referralRepository());
-            drishtireposotorylist.add(followupClientRepository());
             drishtireposotorylist.add(clientRepository());
             drishtireposotorylist.add(referralServiceRepository());
             drishtireposotorylist.add(reportRepository());
@@ -576,7 +570,7 @@ public class Context {
     public AllBeneficiaries allBeneficiaries() {
         initRepository();
         if (allBeneficiaries == null) {
-            allBeneficiaries = new AllBeneficiaries(motherRepository(), referralRepository() ,childRepository(), alertRepository(), timelineEventRepository());
+            allBeneficiaries = new AllBeneficiaries(motherRepository(), referralRepository(), childRepository(), alertRepository(), timelineEventRepository());
         }
         return allBeneficiaries;
     }
@@ -639,6 +633,7 @@ public class Context {
         }
         return motherRepository;
     }
+
     private ReferralServiceRepository referralServiceRepository() {
         if (referralServiceRepository == null) {
             referralServiceRepository = new ReferralServiceRepository();
@@ -652,17 +647,12 @@ public class Context {
         }
         return facilityRepository;
     }
+
     public ReferralRepository referralRepository() {
         if (referralRepository == null) {
             referralRepository = new ReferralRepository();
         }
         return referralRepository;
-    }
-    public FollowupReferralRepository followupClientRepository() {
-        if (followupReferralRepository == null) {
-            followupReferralRepository = new FollowupReferralRepository();
-        }
-        return followupReferralRepository;
     }
 
     public ClientRepository clientRepository() {
@@ -671,14 +661,13 @@ public class Context {
         }
         return clientRepository;
     }
+
     public IndicatorRepository indicatorRepository() {
         if (indicatorRepository == null) {
             indicatorRepository = new IndicatorRepository();
         }
         return indicatorRepository;
     }
-
-
 
     protected TimelineEventRepository timelineEventRepository() {
         if (timelineEventRepository == null) {
@@ -715,17 +704,10 @@ public class Context {
         return formsVersionRepository;
     }
 
-    public static DrishtiRepository imageRepository() {
-        if (imageRepository == null) {
-            imageRepository = new ImageRepository();
-        }
-        return imageRepository;
-    }
-
     public UserService userService() {
         if (userService == null) {
             Repository repo = initRepository();
-            userService = new UserService(repo, allSettings(), allSharedPreferences(), httpAgent(), session(), configuration(), saveANMLocationTask(), saveUserInfoTask(),savehasReferralServiceInfoTask(),savehasFacilityInfoTask(), saveTeamInfoTask(), saveRegistrationIdInfoTask());
+            userService = new UserService(repo, allSettings(), allSharedPreferences(), httpAgent(), session(), configuration(), saveANMLocationTask(), saveUserInfoTask(), savehasReferralServiceInfoTask(), savehasFacilityInfoTask(), saveTeamInfoTask(), saveRegistrationIdInfoTask());
         }
         return userService;
     }
@@ -736,18 +718,21 @@ public class Context {
         }
         return saveRegistrationIdInfoTask;
     }
+
     private SavehasFacilityInfoTask savehasFacilityInfoTask() {
         if (savehasFacilityInfoTask == null) {
             savehasFacilityInfoTask = new SavehasFacilityInfoTask(allSettings());
         }
         return savehasFacilityInfoTask;
     }
+
     private SaveTeamInfoTask saveTeamInfoTask() {
         if (saveTeamInfoTask == null) {
             saveTeamInfoTask = new SaveTeamInfoTask(allSettings());
         }
         return saveTeamInfoTask;
     }
+
     private SavehasReferralServiceInfoTask savehasReferralServiceInfoTask() {
         if (savehasReferralServiceInfoTask == null) {
             savehasReferralServiceInfoTask = new SavehasReferralServiceInfoTask(allSettings());
@@ -887,6 +872,8 @@ public class Context {
     }
 
     //#TODO: Refactor to use one cache object
+
+    //#TODO: Refactor to use one cache object
     public Cache<FPClients> fpClientsCache() {
         if (fpClientsCache == null) {
             fpClientsCache = new Cache<FPClients>();
@@ -894,8 +881,6 @@ public class Context {
         return fpClientsCache;
 
     }
-
-    //#TODO: Refactor to use one cache object
 
     public Cache<ANCClients> ancClientsCache() {
         if (ancClientsCache == null) {
@@ -941,7 +926,6 @@ public class Context {
         return applicationContext().getResources().getDrawable(id);
     }
 
-
     ///////////////////////////////// common methods ///////////////////////////////
     public Cache<CommonPersonObjectClients> personObjectClientsCache() {
         this.personObjectClientsCache = null;
@@ -954,8 +938,6 @@ public class Context {
         allCommonPersonObjectsRepository = new AllCommonsRepository(commonrepository(tablename), alertRepository(), timelineEventRepository());
         return allCommonPersonObjectsRepository;
     }
-
-    private HashMap<String, CommonRepository> MapOfCommonRepository;
 
     public long countofcommonrepositroy(String tablename) {
         return commonrepository(tablename).count();
@@ -982,7 +964,7 @@ public class Context {
                 CommonRepository commonRepository = new CommonRepository(bindtypes.get(index).getBindtypename(), bindtypes.get(index).getColumnNames());
                 commonRepository.updateMasterRepository(repository);
 
-                MapOfCommonRepository.put(bindtypes.get(index).getBindtypename(),commonRepository);
+                MapOfCommonRepository.put(bindtypes.get(index).getBindtypename(), commonRepository);
             }
         }
         return MapOfCommonRepository.get(tablename);

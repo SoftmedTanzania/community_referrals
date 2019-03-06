@@ -34,10 +34,10 @@
           "name": "is_valid"
         },
         {
-          "name": "helper_name"
+          "name": "care_taker_name"
         },
         {
-          "name": "helper_phone_number"
+          "name": "care_taker_phone_number"
         },
         {
           "name": "status"
@@ -49,7 +49,7 @@
           "name": "village"
         },
         {
-          "name": "village_leader"
+          "name": "veo"
         },
         {
           "name": "ward"

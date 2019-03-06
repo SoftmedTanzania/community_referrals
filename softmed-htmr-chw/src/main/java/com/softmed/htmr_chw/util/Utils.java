@@ -80,8 +80,8 @@ public class Utils {
             clientReferral.setFacility_id(cursor.getString(5));
             clientReferral.setCommunity_based_hiv_service(cursor.getString(cursor.getColumnIndex(ClientRepository.CBHS)));
             clientReferral.setCtc_number(cursor.getString(cursor.getColumnIndex(ClientRepository.CTC_NUMBER)));
-            clientReferral.setHelper_name(cursor.getString(cursor.getColumnIndex(ClientRepository.HELPER_NAME)));
-            clientReferral.setHelper_phone_number(cursor.getString(cursor.getColumnIndex(ClientRepository.HELPER_PHONE_NUMBER)));
+            clientReferral.setHelper_name(cursor.getString(cursor.getColumnIndex(ClientRepository.CARE_TAKER_NAME)));
+            clientReferral.setHelper_phone_number(cursor.getString(cursor.getColumnIndex(ClientRepository.CARE_TAKER_PHONE_NUMBER)));
             clientReferral.setPhone_number(cursor.getString(cursor.getColumnIndex(ClientRepository.PHONE_NUMBER)));
             clientReferral.setReferral_date(cursor.getLong(cursor.getColumnIndex(ReferralRepository.ReferralDate)));
             clientReferral.setAppointment_date(cursor.getLong(cursor.getColumnIndex(ReferralRepository.AppointmentDate)));
@@ -194,29 +194,6 @@ public class Utils {
 
 
         return facilityObjects;
-    }
-
-    public static String convertStandardJSONString(String data_json) {
-
-        data_json = data_json.replaceAll("\\\\r\\\\n", "");
-        data_json = data_json.replace("\"{", "{");
-        data_json = data_json.replace("}\",", "},");
-        data_json = data_json.replace("}\"", "}");
-        data_json = data_json.replace("\\", "");
-        if (data_json.contains("indicator_ids")) {
-            int start = data_json.indexOf("[");
-            int end = data_json.indexOf("]");
-            String indicator = data_json.substring(start, end);
-            String indicator1 = data_json.substring(start, end);
-            Log.d(TAG, "indicator b4 " + indicator);
-            indicator1 = indicator1.replace('\"', '*');
-            indicator1 = indicator1.replace("*", "(+");
-            String indicator2 = indicator1.replace('+', '"');
-            indicator2 = indicator2.replace('(', '\\');
-            Log.d(TAG, "indicator after " + indicator2);
-            data_json = data_json.replace(indicator, indicator2);
-        }
-        return data_json;
     }
 
     public static boolean isTablet(Context context) {

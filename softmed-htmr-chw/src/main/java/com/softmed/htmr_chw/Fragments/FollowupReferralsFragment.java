@@ -11,39 +11,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
-import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Adapters.FollowupClintsRecyclerAdapter;
 import com.softmed.htmr_chw.Domain.ClientReferral;
+import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.util.Utils;
-
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
-import org.ei.opensrp.domain.ClientFollowup;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.ClientRepository;
-import org.ei.opensrp.repository.FollowupReferralRepository;
 import org.ei.opensrp.repository.ReferralRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
-    private FollowupReferralRepository followupReferralRepository;
-    private Gson gson = new Gson();
-    private android.content.Context appContext;
-    private List<ClientFollowup> followupClients = new ArrayList<>();
+    private static final String TAG = FollowupReferralsFragment.class.getSimpleName();
     private Cursor cursor;
     private boolean mTwoPane;
     private View v;
     private RecyclerView recyclerView;
     private List<ClientReferral> clientReferrals = new ArrayList<>();
-    private static final String TAG = FollowupReferralsFragment.class.getSimpleName(),
-            TABLE_NAME = "followup_client";
-
     private CommonRepository commonRepository;
 
 
@@ -69,7 +57,7 @@ public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorA
         v = inflater.inflate(R.layout.fragment_chwregistration, container, false);
 
         recyclerView = (RecyclerView) v.findViewById(R.id.item_list);
-        TextView followupDetailsLabel =  v.findViewById(R.id.followup_details_label);
+        TextView followupDetailsLabel = v.findViewById(R.id.followup_details_label);
         TextView followupDesccLael = v.findViewById(R.id.followup_descc_lael);
 
 
@@ -79,19 +67,15 @@ public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorA
         followupDetailsLabel.setTypeface(sansBold);
         followupDesccLael.setTypeface(robotoRegular);
 
-
-
         commonRepository = context().commonrepository(ReferralRepository.TABLE_NAME);
-        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + ReferralRepository.TABLE_NAME+
-                " INNER JOIN "+ ClientRepository.TABLE_NAME+" ON "+ ReferralRepository.TABLE_NAME+"."+ ReferralRepository.CLIENT_ID+" = "+ClientRepository.TABLE_NAME+"."+ClientRepository.CLIENT_ID+" WHERE "+ReferralRepository.REFERRAL_TYPE+" = 1 LIMIT 0,1");
-        clientReferrals  = Utils.convertToClientReferralObjectList(cursor);
+        cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + ReferralRepository.TABLE_NAME +
+                " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID + " = " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID + " WHERE " + ReferralRepository.REFERRAL_TYPE + " = 4 ");
+        clientReferrals = Utils.convertToClientReferralObjectList(cursor);
 
         try {
-
             FollowupClintsRecyclerAdapter followupClintsRecyclerAdapter = new FollowupClintsRecyclerAdapter(getActivity(), clientReferrals);
 
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-
 
             if (v.findViewById(R.id.item_detail_container) != null) {
                 // The detail container view will be present only in the
@@ -146,10 +130,10 @@ public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorA
 
     public void populateData() {
         commonRepository = context().commonrepository(ReferralRepository.TABLE_NAME);
-        Cursor cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + ReferralRepository.TABLE_NAME+
-                " INNER JOIN "+ ClientRepository.TABLE_NAME+" ON "+ ReferralRepository.TABLE_NAME+"."+ ReferralRepository.CLIENT_ID+" = "+ClientRepository.TABLE_NAME+"."+ClientRepository.CLIENT_ID+" WHERE "+ReferralRepository.REFERRAL_TYPE+" = 4");
+        Cursor cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + ReferralRepository.TABLE_NAME +
+                " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID + " = " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID + " WHERE " + ReferralRepository.REFERRAL_TYPE + " = 4");
 
-        clientReferrals  = Utils.convertToClientReferralObjectList(cursor);
+        clientReferrals = Utils.convertToClientReferralObjectList(cursor);
         cursor.close();
 
         FollowupClintsRecyclerAdapter followupClintsRecyclerAdapter = new FollowupClintsRecyclerAdapter(getActivity(), clientReferrals);

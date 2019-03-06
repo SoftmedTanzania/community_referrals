@@ -29,12 +29,12 @@ public class ClientRepository extends DrishtiRepository {
             "ctc_number VARCHAR, " +
             "facility_id VARCHAR, " +
             "is_valid VARCHAR, " +
-            "helper_name VARCHAR, " +
-            "helper_phone_number VARCHAR, " +
+            "care_taker_name VARCHAR, " +
+            "care_taker_phone_number VARCHAR, " +
             "status VARCHAR, " +
             "phone_number VARCHAR, " +
             "village VARCHAR, " +
-            "village_leader VARCHAR, " +
+            "veo VARCHAR, " +
             "ward VARCHAR, " +
             "details VARCHAR)";
     public static final String TABLE_NAME = "client";
@@ -49,16 +49,16 @@ public class ClientRepository extends DrishtiRepository {
     public static final String CBHS = "community_based_hiv_service";
     public static final String CTC_NUMBER = "ctc_number";
     public static final String FACILITY_ID = "facility_id";
-    public static final String HELPER_NAME = "helper_name";
-    public static final String HELPER_PHONE_NUMBER = "helper_phone_number";
+    public static final String CARE_TAKER_NAME = "care_taker_name";
+    public static final String CARE_TAKER_PHONE_NUMBER = "care_taker_phone_number";
     public static final String PHONE_NUMBER = "phone_number";
     public static final String IS_VALID = "is_valid";
     public static final String STATUS = "status";
     public static final String VILLAGE = "village";
     public static final String WARD = "ward";
-    public static final String VILLAGE_LEADER = "village_leader";
+    public static final String VEO = "veo";
     public static final String DETAILS_COLUMN = "details";
-    public static final String[] CLIENT_TABLE_COLUMNS = {ID_COLUMN, Relational_ID, CLIENT_ID, FIRST_NAME, MIDDLE_NAME, SURNAME, DOB,GENDER, CBHS, CTC_NUMBER, FACILITY_ID, IS_VALID,HELPER_NAME, HELPER_PHONE_NUMBER, STATUS,PHONE_NUMBER,VILLAGE,VILLAGE_LEADER,WARD,DETAILS_COLUMN};
+    public static final String[] CLIENT_TABLE_COLUMNS = {ID_COLUMN, Relational_ID, CLIENT_ID, FIRST_NAME, MIDDLE_NAME, SURNAME, DOB,GENDER, CBHS, CTC_NUMBER, FACILITY_ID, IS_VALID, CARE_TAKER_NAME, CARE_TAKER_PHONE_NUMBER, STATUS,PHONE_NUMBER,VILLAGE, VEO,WARD,DETAILS_COLUMN};
     
 
     @Override
@@ -84,7 +84,7 @@ public class ClientRepository extends DrishtiRepository {
 
     public Client find(String caseId) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
-        Cursor cursor = database.query(TABLE_NAME, CLIENT_TABLE_COLUMNS, ID_COLUMN + " = ?", new String[]{caseId}, null, null, null, null);
+        Cursor cursor = database.query(TABLE_NAME, CLIENT_TABLE_COLUMNS, CLIENT_ID + " = ?", new String[]{caseId}, null, null, null, null);
         List<Client> children = readAll(cursor);
 
         if (children.isEmpty()) {
@@ -128,12 +128,12 @@ public class ClientRepository extends DrishtiRepository {
         values.put(CTC_NUMBER, client.getCtc_number());
         values.put(FACILITY_ID, client.getFacility_id());
         values.put(IS_VALID, client.getIs_valid());
-        values.put(HELPER_NAME, client.getHelper_name());
-        values.put(HELPER_PHONE_NUMBER, client.getHelper_phone_number());
+        values.put(CARE_TAKER_NAME, client.getCare_taker_name());
+        values.put(CARE_TAKER_PHONE_NUMBER, client.getCare_taker_phone_number());
         values.put(FACILITY_ID, client.getFacility_id());
         values.put(GENDER, client.getGender());
         values.put(VILLAGE, client.getVillage());
-        values.put(VILLAGE_LEADER, client.getVillage_leader());
+        values.put(VEO, client.getVeo());
         values.put(PHONE_NUMBER, client.getPhone_number());
         values.put(WARD, client.getWard());
         values.put(DETAILS_COLUMN, new Gson().toJson(client));
@@ -187,6 +187,7 @@ public class ClientRepository extends DrishtiRepository {
         Log.i(getClass().getName(), query);
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.rawQuery(query, null);
+        cursor.moveToFirst();
 
         List<Client> clients = new ArrayList<Client>();
         while (!cursor.isAfterLast()) {
@@ -233,12 +234,12 @@ public class ClientRepository extends DrishtiRepository {
                 getColumnValueByAlias(cursor, TABLE_NAME, CTC_NUMBER),
                 getColumnValueByAlias(cursor, TABLE_NAME, FACILITY_ID),
                 getColumnValueByAlias(cursor, TABLE_NAME, IS_VALID),
-                getColumnValueByAlias(cursor, TABLE_NAME, HELPER_NAME),
-                getColumnValueByAlias(cursor, TABLE_NAME, HELPER_PHONE_NUMBER),
+                getColumnValueByAlias(cursor, TABLE_NAME, CARE_TAKER_NAME),
+                getColumnValueByAlias(cursor, TABLE_NAME, CARE_TAKER_PHONE_NUMBER),
                 Long.parseLong(getColumnValueByAlias(cursor, TABLE_NAME, STATUS)),
                 getColumnValueByAlias(cursor, TABLE_NAME, PHONE_NUMBER),
                 getColumnValueByAlias(cursor, TABLE_NAME, VILLAGE),
-                getColumnValueByAlias(cursor, TABLE_NAME, VILLAGE_LEADER),
+                getColumnValueByAlias(cursor, TABLE_NAME, VEO),
                 getColumnValueByAlias(cursor, TABLE_NAME, WARD),
                 getColumnValueByAlias(cursor, TABLE_NAME, DETAILS_COLUMN));
 

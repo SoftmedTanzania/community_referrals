@@ -26,7 +26,6 @@ import com.google.gson.reflect.TypeToken;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.util.Utils;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import org.ei.opensrp.domain.Client;
 import org.ei.opensrp.domain.SyncStatus;
@@ -349,13 +348,13 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
             client.setGender("Female");
         else
             client.setGender("Male");
-        client.setVillage_leader(editTextVillageLeader.getText().toString());
-        client.setHelper_name(helperName.getText().toString());
-        client.setHelper_phone_number(helperPhoneNumber.getText().toString());
+        client.setVeo(editTextVillageLeader.getText().toString());
+        client.setCare_taker_name(helperName.getText().toString());
+        client.setCare_taker_phone_number(helperPhoneNumber.getText().toString());
         client.setWard(wardId);
         client.setCtc_number(editTextCTCNumber.getText().toString());
 
-        client.setService_provider_uiid(((BoreshaAfyaApplication) getApplication()).getCurrentUserID());
+        client.setService_provider_uuid(((BoreshaAfyaApplication) getApplication()).getCurrentUserID());
         return client;
     }
 

@@ -90,7 +90,8 @@ public class ReferralsListFragment extends SecuredNativeSmartRegisterCursorAdapt
 
         commonRepository = context().commonrepository(ReferralRepository.TABLE_NAME);
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + ReferralRepository.TABLE_NAME +
-                " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID + " = " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID + " WHERE " + ReferralRepository.REFERRAL_TYPE + " = 1");
+                " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID + " = " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID +
+                " WHERE " + ReferralRepository.REFERRAL_TYPE + " = 1");
         clientReferrals = Utils.convertToClientReferralObjectList(cursor);
 
         clientsListAdapter = new ReferredClientsListAdapter(getActivity(), this.clientReferrals, commonRepository);
@@ -123,34 +124,33 @@ public class ReferralsListFragment extends SecuredNativeSmartRegisterCursorAdapt
 
         recyclerView.setAdapter(clientsListAdapter);
 
-        //TODO fix this
-//        filter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (isQueryInitializationOk()) {
-//                    StringBuilder queryBuilder = new StringBuilder("SELECT * FROM ");
-//                    queryBuilder.append(TABLE_NAME);
-//                    new QueryTask().execute(
-//                            queryBuilder.toString(),
-//                            TABLE_NAME,
-//                            getFname(), getOthername(), getCTCNumber(), getFromDate(), getToDate(), isDateRangeSet());
-//
-//                } else {
-//                    Log.d(TAG, "am in false else");
-//                    cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + TABLE_NAME + " where is_valid ='true'");
-//                    List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, TABLE_NAME);
-//                    Log.d(TAG, "commonPersonList = " + gson.toJson(commonPersonObjectList));
-//                    ReferralsListFragment.this.clientReferrals = Utils.convertToClientReferralObjectList(commonPersonObjectList);
-//                    ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), ReferralsListFragment.this.clientReferrals, commonRepository);
-//                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-//                    recyclerView.setLayoutManager(mLayoutManager);
-//                    recyclerView.setItemAnimator(new DefaultItemAnimator());
-//                    recyclerView.addItemDecoration(
-//                            new DividerItemDecoration(getActivity(), null));
-//                    recyclerView.setAdapter(pager);
-//                }
-//            }
-//        });
+
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isQueryInitializationOk()) {
+                    StringBuilder queryBuilder = new StringBuilder("SELECT * FROM ");
+                    queryBuilder.append(ReferralRepository.TABLE_NAME +
+                            " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID + " = " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID +
+                            " WHERE " + ReferralRepository.REFERRAL_TYPE + " = 1");
+
+                    new QueryTask().execute(
+                            queryBuilder.toString(),
+                            ReferralRepository.TABLE_NAME,
+                            getFname(), getOthername(), getCTCNumber(), getFromDate(), getToDate(), isDateRangeSet());
+
+                } else {
+                    Log.d(TAG, "am in false else");
+                    cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + ReferralRepository.TABLE_NAME +
+                            " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID + " = " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID +
+                            " WHERE " + ReferralRepository.REFERRAL_TYPE + " = 1");
+
+                    clientReferrals = Utils.convertToClientReferralObjectList(cursor);
+                    clientsListAdapter = new ReferredClientsListAdapter(getActivity(),clientReferrals, commonRepository);
+                    recyclerView.setAdapter(clientsListAdapter);
+                }
+            }
+        });
 
         return v;
     }
@@ -338,10 +338,10 @@ public class ReferralsListFragment extends SecuredNativeSmartRegisterCursorAdapt
 
     }
 
-    private class QueryTask extends AsyncTask<String, Void, List<Referral>> {
+    private class QueryTask extends AsyncTask<String, Void, List<ClientReferral>> {
 
         @Override
-        protected List<Referral> doInBackground(String... params) {
+        protected List<ClientReferral> doInBackground(String... params) {
             publishProgress();
             String query = params[0];
             String tableName = params[1];
@@ -351,61 +351,48 @@ public class ReferralsListFragment extends SecuredNativeSmartRegisterCursorAdapt
             String sdate = params[5];
             String edate = params[6];
             String daterange = params[7];
+
             Log.d(TAG, "query = " + query);
             Log.d(TAG, "tableName = " + tableName + ", parameter = " + fName + ", rangeisset = " + daterange);
 
-            Context context = Context.getInstance().updateApplicationContext(getActivity().getApplicationContext());
-            Cursor cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + tableName);
-
-            List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, tableName);
-
+            Cursor cursor = commonRepository.RawCustomQueryForAdapter(query);
+            clientReferrals = Utils.convertToClientReferralObjectList(cursor);
+            cursor.close();
 
             // obtains client from result
-            Referral client = null;
-            List<Referral> referrals = new ArrayList<>();
+            List<ClientReferral> referrals = new ArrayList<>();
 
             SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
             formatter.setLenient(false);
-
             try {
-                for (CommonPersonObject commonPersonObject : commonPersonObjectList) {
-
-                    // get anc mothers from query result and add them to list
-
-                    // convert and add to list
-//                        if (!FIRST_NAME.isEmpty()) {
-//                            client = getclientReferral(commonPersonObject);
-//                            if ((client.getFirst_name().toLowerCase()).contains((fname.getText().toString()).toLowerCase()))
-//                                ClientReferrals.add(client);
-//                        } else if (!other_name.isEmpty()) {
-//                            client = getclientReferral(commonPersonObject);
-//                            if ((client.getMiddle_name().toLowerCase()).contains(other_name.toLowerCase())||(client.getSurname().toLowerCase()).contains(other_name.toLowerCase()))
-//                                ClientReferrals.add(client);
-//                        } else if (!ctc_number.isEmpty()) {
-//                            client = getclientReferral(commonPersonObject);
-//                            if ((client.getCtc_number().toLowerCase()).contains(ctc_number.toLowerCase()))
-//                                ClientReferrals.add(client);
-//                        } else if (!sdate.isEmpty()) {
-//                            client = getclientReferral(commonPersonObject);
-//                            if (startDate <= client.getReferral_date())
-//                                ClientReferrals.add(client);
-//                        } else if (!edate.isEmpty()) {
-//                            Log.d(TAG, "am in enddate");
-//                            client = getclientReferral(commonPersonObject);
-//                            if (endDate >= client.getReferral_date())
-//                                ClientReferrals.add(client);
-//                        }
-
-                    cursor.moveToNext();
+                for (ClientReferral clientReferral : clientReferrals) {
+                        if (!fName.isEmpty()) {
+                            if ((clientReferral.getFirst_name().toLowerCase()).contains((fname.getText().toString()).toLowerCase()))
+                                referrals.add(clientReferral);
+                        } else if (!other_name.isEmpty()) {
+                            if ((clientReferral.getMiddle_name().toLowerCase()).contains(other_name.toLowerCase())||(clientReferral.getSurname().toLowerCase()).contains(other_name.toLowerCase()))
+                                referrals.add(clientReferral);
+                        } else if (!ctc_number.isEmpty()) {
+                            if ((clientReferral.getCtc_number().toLowerCase()).contains(ctc_number.toLowerCase()))
+                                referrals.add(clientReferral);
+                        } else if (!sdate.isEmpty()) {
+                            if (startDate <= clientReferral.getReferral_date())
+                                referrals.add(clientReferral);
+                        } else if (!edate.isEmpty()) {
+                            Log.d(TAG, "am in enddate");
+                            if (endDate >= clientReferral.getReferral_date())
+                                referrals.add(clientReferral);
+                        }
                 }
 
-                Log.d(TAG, "result client referral size" + referrals.size());
+                Log.d(TAG, "result client referral size = " + referrals.size());
                 // check date range
                 if (daterange.equals("yes")) {
                     Log.d(TAG, "am in the date range");
-                    for (Referral clients : referrals) {
+                    for (ClientReferral clients : referrals) {
                         if (clients.getReferral_date() < startDate || clients.getReferral_date() > endDate)
                             referrals.remove(clients); // remove client referral
+                        Log.d(TAG,"Removing client");
                     }
                 }
 
@@ -426,41 +413,23 @@ public class ReferralsListFragment extends SecuredNativeSmartRegisterCursorAdapt
         }
 
         @Override
-        protected void onPostExecute(List<Referral> resultList) {
+        protected void onPostExecute(List<ClientReferral> resultList) {
             super.onPostExecute(resultList);
-            //TODO fix this
-//
-//            if (resultList == null) {
-//                Log.d(TAG, "Query failed!");
-//            } else if (resultList.size() > 0) {
-//                Log.d(TAG, "resultList " + resultList.size() + "items");
-//                Log.d(TAG, "resultList " + new Gson().toJson(resultList));
-//
-//                clientReferrals = resultList;
-//                ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferrals, commonRepository);
-//                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-//                recyclerView.setLayoutManager(mLayoutManager);
-//                recyclerView.setItemAnimator(new DefaultItemAnimator());
-//
-//                recyclerView.addItemDecoration(
-//                        new DividerItemDecoration(getActivity(), null));
-//                recyclerView.setAdapter(pager);
-//
-//
-//            } else {
-//                Log.d(TAG, "Query result is empty!");
-//                message = "hakuna taarifa yoyote";
-//                makeToast();
-//                clientReferrals = resultList;
-//                ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferrals, commonRepository);
-//                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-//                recyclerView.setLayoutManager(mLayoutManager);
-//                recyclerView.setItemAnimator(new DefaultItemAnimator());
-//                recyclerView.addItemDecoration(
-//                        new DividerItemDecoration(getActivity(), null));
-//                recyclerView.setAdapter(pager);
-//
-//            }
+            if (resultList.size() > 0) {
+                clientReferrals = resultList;
+                ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferrals, commonRepository);
+                recyclerView.setAdapter(pager);
+
+
+            }else {
+                Log.d(TAG, "Query result is empty!");
+                message = getResources().getString(R.string.no_clients_found);
+                makeToast();
+                clientReferrals = resultList;
+                ReferredClientsListAdapter pager = new ReferredClientsListAdapter(getActivity(), clientReferrals, commonRepository);
+                recyclerView.setAdapter(pager);
+
+            }
         }
     }
 }

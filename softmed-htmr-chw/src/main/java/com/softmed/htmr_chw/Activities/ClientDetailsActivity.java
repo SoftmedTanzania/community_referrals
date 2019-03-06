@@ -62,12 +62,12 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
 
         gender.setText(client.getGender());
         village.setText(client.getVillage());
-        villageLeader.setText(client.getVillage_leader());
+        villageLeader.setText(client.getVeo());
         cbhs.setText(client.getCommunity_based_hiv_service());
         ctcNumber.setText(client.getCtc_number());
         phone.setText(client.getPhone_number());
         regDob.setText(date.toString());
-        helperName.setText(client.getHelper_name());
+        helperName.setText(client.getCare_taker_name());
         helperPhoneNumber.setText(client.getPhone_number());
 
         Button fab = (Button) findViewById(R.id.referal_button);
@@ -128,7 +128,11 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
             MaterialEditText appointmentDate = (MaterialEditText) v.findViewById(R.id.appointment_date);
 
             LinearLayout indicatorsLayout = (LinearLayout) v.findViewById(R.id.indicators);
-            setIndicators(indicatorsLayout, referral.getIndicator_ids());
+            try {
+                setIndicators(indicatorsLayout, referral.getIndicator_ids());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
             try {
                 service_label.setText(getReferralServiceName(referral.getReferral_service_id()));

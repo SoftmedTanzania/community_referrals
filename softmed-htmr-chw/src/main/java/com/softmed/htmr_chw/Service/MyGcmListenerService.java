@@ -17,15 +17,20 @@ import android.util.Log;
 import com.google.android.gms.gcm.GcmListenerService;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 
-import org.ei.opensrp.domain.ClientFollowup;
+import org.ei.opensrp.domain.Client;
+import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.view.activity.LoginActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
+
     public MyGcmListenerService() {
     }
 
@@ -47,73 +52,71 @@ public class MyGcmListenerService extends GcmListenerService {
 
         org.ei.opensrp.Context context = org.ei.opensrp.Context.getInstance().updateApplicationContext(this.getApplicationContext());
 
-        Log.d(TAG,"username = "+context.allSharedPreferences().fetchRegisteredANM());
-        Log.d(TAG,"password = "+context.allSharedPreferences().fetchRegisteredANMPassword());
+        Log.d(TAG, "username = " + context.allSharedPreferences().fetchRegisteredANM());
+        Log.d(TAG, "password = " + context.allSharedPreferences().fetchRegisteredANMPassword());
 
         context.userService().isValidLocalLogin(context.allSharedPreferences().fetchRegisteredANM(), context.allSettings().fetchANMPassword());
 
-        String type= data.getString("type");
-        if(type.equals("PatientReferral")){
+        String type = data.getString("type");
+        if (type.equals("PatientReferral")) {
             message = "New Followup Client Referral Received";
-            Log.d(TAG,"patientsDTO = "+data.getString("patientsDTO"));
+            Log.d(TAG, "patientsDTO = " + data.getString("patientsDTO"));
+            String clientId = "";
 
-            ClientFollowup clientFollowup = new ClientFollowup();
+            Client client = new Client();
 
             try {
                 JSONObject object = new JSONObject(data.getString("patientsDTO"));
 
-//                clientFollowup.setFirst_name(object.getString("firstName"));
-//                clientFollowup.setMiddle_name(object.getString("middleName"));
-//                clientFollowup.setSurname( object.getString("surname"));
-//                clientFollowup.setGender( object.getString("gender"));
-//                clientFollowup.setPhone_number(object.getString("phoneNumber"));
-//
-//                try {
-//                    clientFollowup.setMap_cue(object.getString("village"));
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//
-//                try {
-//                    clientFollowup.setWard( object.getString("ward"));
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//
-//                try {
-//                    clientFollowup.setHelper_name( object.getString("careTakerName"));
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//
-//                try {
-//                    clientFollowup.setCare_taker_name_phone_number( object.getString("careTakerPhoneNumber"));
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//
-//                try {
-//                    clientFollowup.setCtc_number(object.getString("ctcNumber"));
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//
-//                try {
-//                    clientFollowup.setDate_of_birth(Long.valueOf(object.getString("dateOfBirth")));
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//
-//                try {
-//                    clientFollowup.setCare_taker_relationship( object.getString("careTakerRelationship"));
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//                try {
-//                    clientFollowup.setCommunity_based_hiv_service( object.getString("communityBasedHivService"));
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
+                clientId = object.getString("patientId");
+                client.setClient_id(clientId);
+                client.setFirst_name(object.getString("firstName"));
+                client.setMiddle_name(object.getString("middleName"));
+                client.setSurname(object.getString("surname"));
+                client.setGender(object.getString("gender"));
+                client.setPhone_number(object.getString("phoneNumber"));
+
+                try {
+                    client.setVillage(object.getString("village"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    client.setWard(object.getString("ward"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    client.setCare_taker_name(object.getString("careTakerName"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    client.setCare_taker_phone_number(object.getString("careTakerPhoneNumber"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    client.setCtc_number(object.getString("ctcNumber"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    client.setDate_of_birth(Long.valueOf(object.getString("dateOfBirth")));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    client.setCommunity_based_hiv_service(object.getString("communityBasedHivService"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
 
             } catch (JSONException e) {
@@ -121,35 +124,60 @@ public class MyGcmListenerService extends GcmListenerService {
             }
 
 
-            JSONObject referral = null;
+            List<Referral> referralList = new ArrayList<>();
+            JSONObject referralObject = null;
             try {
-                referral = new JSONArray(data.getString("patientReferralsList")).getJSONObject(0);
+                referralObject = new JSONArray(data.getString("patientReferralsList")).getJSONObject(0);
+                Referral referral = new Referral();
 
-                clientFollowup.setId(referral.getString("referralId"));
-                clientFollowup.setFacility_id(  referral.getString("fromFacilityId"));
-                clientFollowup.setReferral_status( referral.getString("referralStatus"));
-                clientFollowup.setReferral_reason( referral.getString("referralReason"));
-//                clientFollowup.setService_provider_uuid( referral.getString("serviceProviderUIID"));
-                clientFollowup.setReferral_date(Long.valueOf(referral.getString("referralDate")));
-                clientFollowup.setVisit_date(0);
+                referral.setId(referralObject.getString("referralId"));
+                referral.setFacility_id(referralObject.getString("fromFacilityId"));
+                referral.setReferral_status(referralObject.getString("referralStatus"));
+                referral.setReferral_reason(referralObject.getString("referralReason"));
+                referral.setService_provider_uuid(referralObject.getString("serviceProviderUIID"));
+                referral.setReferral_date(Long.valueOf(referralObject.getString("referralDate")));
+                referral.setReferral_type(4);
+                referral.setClient_id(clientId);
+
+                referralList.add(referral);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
+            ((BoreshaAfyaApplication) getApplication()).insertFollowup(client, referralList);
 
-
-
-            ((BoreshaAfyaApplication)getApplication()).insertFollowup(clientFollowup);
-
-        }else if(type.equals("ReferralFeedback") || type.equals("FailedReferrals")){
+        } else if (type.equals("ReferralFeedback") || type.equals("FailedReferrals")) {
             message = "successful referral feedback";
-            String client_id= data.getString("referralUUID");
-            String feedback= data.getString("otherNotes");
-            String serviceGivenToPatient= data.getString("serviceGivenToPatient");
-            boolean testResult= Boolean.parseBoolean(data.getString("testResults"));
-            String referralStatus= data.getString("referralStatus");
+            String client_id = data.getString("referralUUID");
+            String feedback = data.getString("otherNotes");
+            String serviceGivenToPatient = data.getString("serviceGivenToPatient");
+            boolean testResult = Boolean.parseBoolean(data.getString("testResults"));
+            String referralStatus = data.getString("referralStatus");
 
-            ((BoreshaAfyaApplication)getApplication()).updateReferralStatus(client_id,feedback,serviceGivenToPatient,testResult,referralStatus);
+            ((BoreshaAfyaApplication) getApplication()).updateReferralStatus(client_id, feedback, serviceGivenToPatient, testResult, referralStatus);
+
+
+        } else if (type.equals("UpdateClientId")) {
+
+            JSONObject object = null;
+            try {
+                object = new JSONObject(data.getString("map"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            message = "";
+            String client_id = null;
+            String temp_id = null;
+            try {
+                client_id = object.getString("GENERATED_CLIENT_ID");
+                temp_id = object.getString("TEMP_CLIENT_ID");
+
+                Log.d(TAG,"ClientId = "+client_id);
+                Log.d(TAG,"Temp Id = "+temp_id);
+                ((BoreshaAfyaApplication) getApplication()).updateClientId(client_id, temp_id);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
 
         }
@@ -159,7 +187,7 @@ public class MyGcmListenerService extends GcmListenerService {
 
     /**
      * Method called on Receiving a new message from GCM server
-     * */
+     */
     @Override
     public void onMessageSent(String s) {
 
@@ -168,7 +196,7 @@ public class MyGcmListenerService extends GcmListenerService {
 
     /**
      * Method called on receiving a deleted message
-     * */
+     */
     @Override
     public void onDeletedMessages() {
 
@@ -182,7 +210,7 @@ public class MyGcmListenerService extends GcmListenerService {
 
     /**
      * Method called on Error
-     * */
+     */
     @Override
     public void onSendError(String s1, String errorId) {
 

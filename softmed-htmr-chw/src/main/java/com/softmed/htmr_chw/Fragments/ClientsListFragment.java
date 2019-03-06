@@ -2,7 +2,6 @@ package com.softmed.htmr_chw.Fragments;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,15 +18,14 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
-import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.Domain.LocationSelectorDialogFragment;
 import com.softmed.htmr_chw.Adapters.ClientsListAdapter;
+import com.softmed.htmr_chw.Domain.LocationSelectorDialogFragment;
+import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.util.AsyncTask;
 import com.softmed.htmr_chw.util.DividerItemDecoration;
 
 import org.ei.opensrp.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.ei.opensrp.domain.Client;
-import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.ClientRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
@@ -41,17 +39,15 @@ import fr.ganfra.materialspinner.MaterialSpinner;
 
 
 public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+    private static final String TAG = ClientsListFragment.class.getSimpleName();
+    public String message = "";
     private ClientRepository clientRepository;
     private List<Client> clients = new ArrayList<>();
-    private Cursor cursor;
     private String locationDialogTAG = "locationDialogTAG";
-    private static final String TAG = ClientsListFragment.class.getSimpleName(),
-            TABLE_NAME = "client";
     private long startDate = 0, endDate = 0;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private Gson gson = new Gson();
     private EditText fname, othername, phoneNumber;
-    public String message = "";
     private MaterialSpinner spinnerType;
     private RecyclerView recyclerView;
     private ClientsListAdapter clientsListAdapter;
@@ -98,23 +94,20 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
             public void onClick(View view) {
                 if (isQueryInitializationOk()) {
                     StringBuilder queryBuilder = new StringBuilder("SELECT * FROM ");
-                    queryBuilder.append(TABLE_NAME);
-                    new QueryTask().execute(
-                            queryBuilder.toString(),
-                            TABLE_NAME,
-                            getFname(), getOthername(), getPhoneNumber(), isDateRangeSet());
+                    queryBuilder.append(ClientRepository.TABLE_NAME);
+                    new QueryTask().execute(queryBuilder.toString(),
+                            ClientRepository.TABLE_NAME,
+                            getFname(),
+                            getOthername(),
+                            getPhoneNumber(),
+                            isDateRangeSet());
 
                 } else {
                     Log.d(TAG, "am in false else");
-                    List<Client> clients = clientRepository.RawCustomQueryForAdapter("select * FROM " + ClientRepository.TABLE_NAME + " where is_valid ='true'");
+                    List<Client> clients = clientRepository.RawCustomQueryForAdapter("select * FROM " + ClientRepository.TABLE_NAME);
 
-                    ClientsListAdapter pager = new ClientsListAdapter(getActivity(), clients);
-                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-                    recyclerView.setLayoutManager(mLayoutManager);
-                    recyclerView.setItemAnimator(new DefaultItemAnimator());
-                    recyclerView.addItemDecoration(
-                            new DividerItemDecoration(getActivity(), null));
-                    recyclerView.setAdapter(pager);
+                    clientsListAdapter = new ClientsListAdapter(getActivity(), clients);
+                    recyclerView.setAdapter(clientsListAdapter);
                 }
             }
         });
@@ -211,9 +204,6 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
     }
 
     public void populateData() {
-
-        Log.d(TAG,"am in refresh list view");
-
         List<Client> clients = clientRepository.all();
 
         ClientsListAdapter pager = new ClientsListAdapter(getActivity(), clients);
@@ -233,6 +223,30 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
             return "yes";
     }
 
+    private void setupviews(View v) {
+        recyclerView = (RecyclerView) v.findViewById(R.id.clients_recycler);
+        fname = (EditText) v.findViewById(R.id.client_name_et);
+        othername = (EditText) v.findViewById(R.id.client_last_name_et);
+        phoneNumber = (EditText) v.findViewById(R.id.client_phone_number);
+        spinnerType = (MaterialSpinner) v.findViewById(R.id.spin_status);
+
+        TextView clientName = v.findViewById(R.id.client_name);
+        TextView gender = v.findViewById(R.id.gender);
+        TextView phoneNumber = v.findViewById(R.id.phone_number);
+        TextView village = v.findViewById(R.id.village);
+
+
+        robotoRegular = Typeface.createFromAsset(getActivity().getAssets(), "roboto_regular.ttf");
+        sansBold = Typeface.createFromAsset(getActivity().getAssets(), "google_sans_bold.ttf");
+
+        clientName.setTypeface(sansBold);
+        gender.setTypeface(sansBold);
+        phoneNumber.setTypeface(sansBold);
+        village.setTypeface(sansBold);
+
+
+    }
+
     private class QueryTask extends AsyncTask<String, Void, List<Client>> {
 
         @Override
@@ -243,46 +257,38 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
             String fName = params[2];
             String other_name = params[3];
             String phone_number = params[4];
-            String daterange = params[7];
             Log.d(TAG, "query = " + query);
 
-            List<Client> commonPersonObjectList = clientRepository.RawCustomQueryForAdapter("select * FROM "+tableName);;
+            List<Client> commonPersonObjectList = clientRepository.RawCustomQueryForAdapter(query);
 
 
             // obtains client from result
-            Referral client = null;
             List<Client> receivedClients = new ArrayList<>();
 
             SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
             formatter.setLenient(false);
 
             try {
-                for (Client commonPersonObject : commonPersonObjectList) {
-
-                        // convert and add to list
-                        if (!fName.isEmpty()) {
-                            if ((commonPersonObject.getFirst_name().toLowerCase()).contains((fname.getText().toString()).toLowerCase()))
-                                receivedClients.add(commonPersonObject);
-                        } else if (!other_name.isEmpty()) {
-                            if ((commonPersonObject.getMiddle_name().toLowerCase()).contains(other_name.toLowerCase())||(commonPersonObject.getSurname().toLowerCase()).contains(other_name.toLowerCase()))
-                                receivedClients.add(commonPersonObject);
-                        } else if (!phone_number.isEmpty()) {
-                            if ((commonPersonObject.getCtc_number().toLowerCase()).contains(phone_number.toLowerCase()))
-                                receivedClients.add(commonPersonObject);
-                        }
-
-                        cursor.moveToNext();
+                for (Client client : commonPersonObjectList) {
+                    // convert and add to list
+                    if (!fName.isEmpty()) {
+                        if ((client.getFirst_name().toLowerCase()).contains((fname.getText().toString()).toLowerCase()))
+                            receivedClients.add(client);
+                    } else if (!other_name.isEmpty()) {
+                        if ((client.getMiddle_name().toLowerCase()).contains(other_name.toLowerCase()) || (client.getSurname().toLowerCase()).contains(other_name.toLowerCase()))
+                            receivedClients.add(client);
+                    } else if (!phone_number.isEmpty()) {
+                        if ((client.getCtc_number().toLowerCase()).contains(phone_number.toLowerCase()))
+                            receivedClients.add(client);
                     }
+                }
 
-                    Log.d(TAG, "result clients size" + receivedClients.size());
+                Log.d(TAG, "result clients size" + receivedClients.size());
 
 
             } catch (Exception e) {
                 Log.d(TAG, "error: " + e.getMessage());
                 return null;
-
-            } finally {
-                cursor.close();
             }
 
             return receivedClients;
@@ -315,7 +321,7 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
 
             } else {
                 Log.d(TAG, "Query result is empty!");
-                message = "hakuna taarifa yoyote";
+                message = getString(R.string.no_clients_found);
                 makeToast();
 
                 ClientsListAdapter pager = new ClientsListAdapter(getActivity(), resultList);
@@ -329,29 +335,5 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
 
             }
         }
-    }
-
-    private void setupviews(View v) {
-        recyclerView = (RecyclerView) v.findViewById(R.id.clients_recycler);
-        fname = (EditText) v.findViewById(R.id.client_name_et);
-        othername = (EditText) v.findViewById(R.id.client_last_name_et);
-        phoneNumber = (EditText) v.findViewById(R.id.client_ctc_number_et);
-        spinnerType = (MaterialSpinner) v.findViewById(R.id.spin_status);
-
-        TextView clientName = v.findViewById(R.id.client_name);
-        TextView gender = v.findViewById(R.id.gender);
-        TextView phoneNumber = v.findViewById(R.id.phone_number);
-        TextView village = v.findViewById(R.id.village);
-
-
-        robotoRegular = Typeface.createFromAsset(getActivity().getAssets(), "roboto_regular.ttf");
-        sansBold = Typeface.createFromAsset(getActivity().getAssets(), "google_sans_bold.ttf");
-
-        clientName.setTypeface(sansBold);
-        gender.setTypeface(sansBold);
-        phoneNumber.setTypeface(sansBold);
-        village.setTypeface(sansBold);
-
-
     }
 }

@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.PowerManager;
@@ -18,24 +17,23 @@ import com.google.gson.Gson;
 import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.Activities.LoginActivity;
 import com.softmed.htmr_chw.R;
-import com.softmed.htmr_chw.util.Utils;
 
+import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 import org.ei.opensrp.Context;
 import org.ei.opensrp.commonregistry.CommonFtsObject;
-import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.domain.ClientFollowup;
-import org.ei.opensrp.domain.Referral;
+import org.ei.opensrp.domain.Client;
 import org.ei.opensrp.domain.Facility;
 import org.ei.opensrp.domain.Indicator;
+import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.domain.ReferralServiceDataModel;
 import org.ei.opensrp.domain.Response;
-import org.ei.opensrp.repository.FollowupReferralRepository;
-import org.ei.opensrp.repository.ReferralRepository;
+import org.ei.opensrp.repository.ClientRepository;
 import org.ei.opensrp.repository.FacilityRepository;
 import org.ei.opensrp.repository.IndicatorRepository;
+import org.ei.opensrp.repository.ReferralRepository;
 import org.ei.opensrp.repository.ReferralServiceRepository;
 import org.ei.opensrp.sync.DrishtiSyncScheduler;
 import org.ei.opensrp.view.activity.DrishtiApplication;
@@ -80,7 +78,6 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     public String currentUserID, team_uuid, phone_number, team_name, team_location_id, registration_id = "";
     public Context context;
     private ReferralServiceRepository serviceRepository;
-    private FollowupReferralRepository followupReferralRepository;
     private int userType = 0;//0=CHW and 1=Facility health care worker
     private CommonRepository commonRepository1, commonRepository, commonRepository2;
     private IndicatorRepository indicatorRepository;
@@ -240,14 +237,46 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
 
             ContentValues values = new ReferralRepository().createValuesUpdateValues(referral);
             commonRepository.customUpdate(values, id);
-            Log.d(TAG, "updated values = " + values.toString());
+            Log.d(TAG, "updating referral feedback with values = " + values.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void insertFollowup(ClientFollowup clientFollowup) {
-        followupReferralRepository.add(clientFollowup);
+    public void updateClientId(String clientId, String tempClientId) {
+        ClientRepository clientRepository = context.clientRepository();
+
+        Client client = clientRepository.find(tempClientId);
+
+        try {
+            client.setClient_id(clientId);
+            clientRepository.update(client);
+            Log.d(TAG, "updating client Id to = " + clientId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ReferralRepository referralRepository = context.referralRepository();
+
+        List<Referral> referrals = referralRepository.findByClientId(tempClientId);
+        for (Referral referral : referrals) {
+            referral.setClient_id(clientId);
+            try {
+                referralRepository.update(referral);
+                Log.d(TAG, "updating Referral Client Id to = " + clientId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void insertFollowup(Client clientFollowup, List<Referral> referrals) {
+        context.clientRepository().add(clientFollowup);
+
+        for (Referral referral : referrals) {
+            context.referralRepository().add(referral);
+            Log.d(TAG, "saving followup referral");
+        }
     }
 
     public void getFacilities() {
@@ -409,12 +438,6 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         if (serviceRepository == null) {
             serviceRepository = new ReferralServiceRepository();
         }
-
-
-        if (followupReferralRepository == null) {
-            followupReferralRepository = context.followupClientRepository();
-        }
-
 
         initializeReferralService();
         initializeHasFacilities();

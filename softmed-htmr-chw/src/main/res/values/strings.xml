@@ -145,4 +145,5 @@ Aenean quis ex dictum, porttitor nunc id, viverra urna. Suspendisse posuere ex a
     <string name="follow_up_client_details">Follow up Client Details</string>
     <string name="select_a_client_to_view_the_follow_up_referral_details">Select a client to view the follow up referral details</string>
     <string name="clients_list">Clients List</string>
+    <string name="no_clients_found">No clients were found</string>
 </resources>

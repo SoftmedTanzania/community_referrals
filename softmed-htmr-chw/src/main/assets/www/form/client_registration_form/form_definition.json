@@ -48,19 +48,22 @@
                 "name": "village"
             },
             {
-                "name": "village_leader"
+                "name": "veo"
             },
             {
                 "name": "care_taker_name"
             },
             {
-                "name": "care_taker_name_phone_number"
+                "name": "care_taker_phone_number"
             },
             {
                 "name": "care_taker_relationship"
             },
             {
                 "name": "service_provider_mobile_number"
+            },
+            {
+                "name": "service_provider_uuid"
             }
         ]
     }
