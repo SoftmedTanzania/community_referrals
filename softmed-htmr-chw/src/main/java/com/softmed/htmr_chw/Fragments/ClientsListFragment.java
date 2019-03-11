@@ -148,6 +148,7 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
         if (!(phoneNumber.getText().toString()).isEmpty()) {
             value = phoneNumber.getText().toString();
         }
+        Log.d(TAG,"Received phone number = "+value);
         return value;
     }
 

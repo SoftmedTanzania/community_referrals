@@ -383,7 +383,7 @@
                                 android:layout_marginTop="8dp"
                                 android:text="@string/referral_history_label"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="18sp" />
+                                android:textSize="24sp" />
 
                             <View
                                 android:layout_width="60dp"
@@ -413,7 +413,8 @@
                                     android:layout_centerVertical="true"
                                     android:layout_marginRight="16dp"
                                     android:text="@string/button_refer_client"
-                                    android:textColor="@color/card_title_text" />
+                                    android:background="@color/colorPrimary"
+                                    android:textColor="@color/white" />
 
 
                             </RelativeLayout>

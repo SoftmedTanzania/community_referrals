@@ -496,7 +496,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@color/blue_100">
+                            android:background="@color/blue_050">
 
                             <ImageView
                                 android:id="@+id/tb_refered_clients_icon"
@@ -621,7 +621,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@color/blue_100">
+                            android:background="@color/blue_050">
 
                             <ImageView
                                 android:id="@+id/refered_clients_icon"

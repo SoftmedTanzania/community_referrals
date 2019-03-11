@@ -468,7 +468,7 @@ public class ReferralRegistrationFormActivity extends SecuredNativeSmartRegister
         referral.setServices_given_to_patient("");
         referral.setOther_notes("");
         referral.setClient_id(bundle.getString("clientId"));
-        referral.setService_provider_uuid(((BoreshaAfyaApplication)getApplication()).getCurrentUserID());
+        referral.setService_provider_uiid(((BoreshaAfyaApplication)getApplication()).getCurrentUserID());
         referral.setReferral_type(1);
 
         List<String> indicatorIds = new ArrayList<String>();

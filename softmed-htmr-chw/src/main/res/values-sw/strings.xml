@@ -146,6 +146,7 @@
     <string name="select_a_client_to_view_the_follow_up_referral_details">Chagua mteja kutoka kwenye orodha ili kuona taarifa zaidi</string>
     <string name="clients_list">Orodha ya wateja</string>
     <string name="no_clients_found">hakuna taarifa yoyote</string>
+    <string name="follow_up_referral">Rufaa ya kufwatilia</string>
 
 
 </resources>

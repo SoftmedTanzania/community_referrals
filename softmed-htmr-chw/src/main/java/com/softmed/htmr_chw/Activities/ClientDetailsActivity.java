@@ -38,7 +38,7 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
     private CommonRepository commonRepository;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private Client client;
-    private Typeface robotoBold;
+    private Typeface robotoBold,sansBold;
     private MaterialEditText gender, regDob, village, villageLeader, cbhs, ctcNumber, phone, helperName, helperPhoneNumber;
     private TextView clientName;
 
@@ -119,33 +119,51 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
         linearLayout.removeAllViews();
 
         for (Referral referral : referrals) {
-            View v = getLayoutInflater().inflate(R.layout.view_referral_history, null);
+            View v = null;
+            if (referral.getReferral_type() == 1) {
+                v = getLayoutInflater().inflate(R.layout.view_referral_history, null);
+                MaterialEditText appointmentDate = (MaterialEditText) v.findViewById(R.id.appointment_date);
+                TextView serviceLabel = (TextView) v.findViewById(R.id.service_label);
+                TextView serviceBackground = (TextView) v.findViewById(R.id.service_background);
+                serviceLabel.setTypeface(sansBold);
+                serviceBackground.setTypeface(sansBold);
+
+                LinearLayout indicatorsLayout = (LinearLayout) v.findViewById(R.id.indicators);
+                try {
+                    setIndicators(indicatorsLayout, referral.getIndicator_ids());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    serviceLabel.setText(getReferralServiceName(referral.getReferral_service_id()));
+                    serviceBackground.setText(getReferralServiceName(referral.getReferral_service_id()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                appointmentDate.setText(dateFormat.format(referral.getAppointment_date()));
+                serviceLabel.setTypeface(robotoBold);
+
+            } else {
+                v = getLayoutInflater().inflate(R.layout.view_followup_referral_history, null);
+                TextView otherInfo = (TextView) v.findViewById(R.id.other_info);
+                otherInfo.setText(referral.getServices_given_to_patient());
+                ((TextView) v.findViewById(R.id.service_label)).setTypeface(sansBold);
+            }
+
             TextView referralDate = (TextView) v.findViewById(R.id.referral_date);
-            TextView service = (TextView) v.findViewById(R.id.service);
-            TextView service_label = (TextView) v.findViewById(R.id.service_label);
             TextView facility = (TextView) v.findViewById(R.id.facility_name);
             TextView reasonForReferral = (TextView) v.findViewById(R.id.reason_for_referral);
-            MaterialEditText appointmentDate = (MaterialEditText) v.findViewById(R.id.appointment_date);
 
-            LinearLayout indicatorsLayout = (LinearLayout) v.findViewById(R.id.indicators);
-            try {
-                setIndicators(indicatorsLayout, referral.getIndicator_ids());
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-
-            try {
-                service_label.setText(getReferralServiceName(referral.getReferral_service_id()));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            ((TextView) v.findViewById(R.id.facility_titleview)).setTypeface(sansBold);
+            ((TextView) v.findViewById(R.id.clinical_information_title)).setTypeface(sansBold);
+            ((TextView) v.findViewById(R.id.flags_title)).setTypeface(sansBold);
 
             referralDate.setText(dateFormat.format(referral.getReferral_date()));
-            appointmentDate.setText(dateFormat.format(referral.getAppointment_date()));
-            service_label.setTypeface(robotoBold);
-
             reasonForReferral.setText(referral.getReferral_reason());
             facility.setText(getFacilityName(referral.getFacility_id()));
+
             linearLayout.addView(v);
         }
     }
@@ -219,7 +237,10 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
         helperPhoneNumber = (MaterialEditText) findViewById(R.id.helper_phone_number);
 
         robotoBold = Typeface.createFromAsset(getAssets(), "roboto_bold.ttf");
-        ((TextView) findViewById(R.id.client_name)).setTypeface(robotoBold);
+        sansBold = Typeface.createFromAsset(getAssets(), "google_sans_bold.ttf");
+        ((TextView) findViewById(R.id.client_name)).setTypeface(sansBold);
+        ((TextView) findViewById(R.id.initial_information_title)).setTypeface(sansBold);
+        ((TextView) findViewById(R.id.referral_details_heading)).setTypeface(sansBold);
 
     }
 }

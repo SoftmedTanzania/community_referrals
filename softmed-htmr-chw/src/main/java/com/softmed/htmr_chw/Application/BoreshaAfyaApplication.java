@@ -235,9 +235,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
             referral.setOther_notes(feedback);
             referral.setServices_given_to_patient(serviceGiven);
 
-            ContentValues values = new ReferralRepository().createValuesUpdateValues(referral);
-            commonRepository.customUpdate(values, id);
-            Log.d(TAG, "updating referral feedback with values = " + values.toString());
+            referralRepository.update(referral);
         } catch (Exception e) {
             e.printStackTrace();
         }

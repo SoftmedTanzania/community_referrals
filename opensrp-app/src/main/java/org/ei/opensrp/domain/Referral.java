@@ -10,7 +10,7 @@ public class Referral implements Serializable {
 
     private String id, relationalid, details, referral_feedback, other_notes,
             services_given_to_patient, referral_uuid, facility_id,
-            referral_reason, is_valid, service_provider_uuid,
+            referral_reason, is_valid, service_provider_uiid,
             referral_service_id, referral_status,is_emergency, client_id;
     private long  referral_date,appointment_date,referral_type;
     private String indicator_ids;
@@ -34,7 +34,7 @@ public class Referral implements Serializable {
                     String other_notes,
                     String services_given_to_patient,
                     int referral_type,
-                    String service_provider_uuid,
+                    String service_provider_uiid,
                     String referral_feedback,
                     String referral_uuid,
                     String details
@@ -56,7 +56,7 @@ public class Referral implements Serializable {
         this.referral_type=referral_type;
         this.indicator_ids = indicator_ids;
         this.referral_feedback = referral_feedback;
-        this.service_provider_uuid = service_provider_uuid;
+        this.service_provider_uiid = service_provider_uiid;
         this.referral_uuid = referral_uuid;
     }
 
@@ -140,12 +140,12 @@ public class Referral implements Serializable {
         this.is_valid = is_valid;
     }
 
-    public String getService_provider_uuid() {
-        return service_provider_uuid;
+    public String getService_provider_uiid() {
+        return service_provider_uiid;
     }
 
-    public void setService_provider_uuid(String service_provider_uuid) {
-        this.service_provider_uuid = service_provider_uuid;
+    public void setService_provider_uiid(String service_provider_uiid) {
+        this.service_provider_uiid = service_provider_uiid;
     }
 
     public String getReferral_service_id() {

@@ -5,65 +5,74 @@
     android:layout_height="wrap_content"
     android:background="@color/card"
     android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:background="@color/white"
         android:orientation="vertical">
+
         <TextView
+            android:id="@+id/referral_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
             android:paddingTop="16dp"
-            android:id="@+id/referral_date"
             android:text="18th November 2019"
             android:textSize="18sp"
             android:textStyle="bold" />
+
         <View
             android:layout_width="60dp"
             android:layout_height="3dp"
-            android:layout_marginLeft="32dp"
             android:layout_below="@id/service_title"
+            android:layout_marginLeft="32dp"
             android:layout_marginTop="8dp"
             android:background="@color/card_separator" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="16dp">
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp">
+
                 <TextView
                     android:id="@+id/service_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:visibility="gone"
                     android:text="@string/referral_services"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
                 <View
                     android:id="@+id/divider_one"
                     android:layout_width="60dp"
                     android:layout_height="3dp"
-                    android:visibility="gone"
                     android:layout_below="@id/service_title"
                     android:layout_marginTop="8dp"
-                    android:background="@color/card_separator" />
+                    android:background="@color/card_separator"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/service"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:layout_below="@id/divider_one"
                     android:layout_marginTop="8dp"
-                    android:hint="@string/referral_services" />
+                    android:hint="@string/referral_services"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/facility_titleview"
@@ -71,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/service"
                     android:layout_marginTop="8dp"
-                    android:text="@string/visit_facility"
+                    android:text="@string/from_facility"
                     android:textColor="@color/colorPrimary" />
 
                 <View
@@ -96,6 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_below="@id/facility_name"
+                    android:layout_marginRight="16dp"
                     android:layout_marginTop="16dp"
                     android:clickable="false"
                     android:editable="false"
@@ -104,7 +114,7 @@
                     android:inputType="date"
                     android:textColor="@color/text_black"
                     android:textSize="14sp"
-                    android:layout_marginRight="16dp"
+                    android:visibility="gone"
                     app:met_floatingLabel="normal"
                     app:met_floatingLabelText="Appointment Date"
                     app:met_floatingLabelTextColor="@color/colorPrimary"
@@ -129,7 +139,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/other_info"
+                    android:text="@string/referral_reason"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 
@@ -183,7 +193,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/danger_signs"
+                    android:text="@string/other_info"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 
@@ -195,14 +205,19 @@
                     android:layout_marginTop="8dp"
                     android:background="@color/card_separator" />
 
-                <LinearLayout
-                    android:id="@+id/indicators"
+                <TextView
+                    android:id="@+id/other_info"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_below="@id/strip_four"
-                    android:layout_marginBottom="16dp"
-                    android:gravity="left"
-                    android:orientation="vertical" />
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="0.5"
+                    android:hint=" - "
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/hint_text"
+                    android:textSize="14sp" />
 
             </RelativeLayout>
 
@@ -212,36 +227,41 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/service_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/divider"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="32dp"
         android:layout_marginLeft="32dp"
-        android:paddingTop="16dp"
-        android:id="@+id/service_label"
         android:layout_marginRight="32dp"
-        android:layout_alignParentRight="true"
+        android:paddingTop="16dp"
+        android:text="@string/follow_up_referral"
         android:textSize="24sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/service_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:alpha="0.4"
+        android:rotation="-45"
+        android:text="@string/follow_up_referral"
+        android:textColor="@color/light_blue_050"
+        android:textSize="100sp"
         android:textStyle="bold" />
 
     <View
         android:id="@+id/divider"
-        android:layout_below="@id/details"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_below="@id/details"
+        android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
         android:background="#000" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/service_background"
-        android:textColor="@color/light_blue_050"
-        android:alpha="0.5"
-        android:layout_centerInParent="true"
-        android:rotation="-45"
-        android:textSize="100sp"
-        android:textStyle="bold"
-        android:text="OTHER"/>
 
 </RelativeLayout>

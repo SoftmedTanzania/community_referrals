@@ -543,10 +543,15 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         Log.d(TAG, "facility id = " + clientReferral.getFacility_id());
 
         facility.setText(getFacilityName(clientReferral.getFacility_id()));
-        if (!clientReferral.getCtc_number().isEmpty())
-            ctc_number.setText(clientReferral.getCtc_number());
-        else
-            ctc_number.setText("-");
+
+        try {
+            if (!clientReferral.getCtc_number().isEmpty())
+                ctc_number.setText(clientReferral.getCtc_number());
+            else
+                ctc_number.setText("-");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         referral_reason.setText(clientReferral.getReferral_reason());
         phoneNumber.setText(clientReferral.getPhone_number());
         villageleader.setText(clientReferral.getVillage_leader());

@@ -22,6 +22,7 @@
     <string name="title_cbhs_number">CBHS #</string>
     <string name="referral_information">Referral Information</string>
     <string name="visit_facility">Visit Facility</string>
+    <string name="from_facility">From Facility</string>
     <string name="other_info">Other Information</string>
     <string name="danger_signs">Danger Signs</string>
     <string name="button_refer_client">Refer Client</string>
@@ -146,4 +147,5 @@ Aenean quis ex dictum, porttitor nunc id, viverra urna. Suspendisse posuere ex a
     <string name="select_a_client_to_view_the_follow_up_referral_details">Select a client to view the follow up referral details</string>
     <string name="clients_list">Clients List</string>
     <string name="no_clients_found">No clients were found</string>
+    <string name="follow_up_referral">Follow up</string>
 </resources>
