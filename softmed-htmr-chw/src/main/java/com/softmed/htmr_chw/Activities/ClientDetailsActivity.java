@@ -68,7 +68,7 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
         phone.setText(client.getPhone_number());
         regDob.setText(date.toString());
         helperName.setText(client.getCare_taker_name());
-        helperPhoneNumber.setText(client.getPhone_number());
+        helperPhoneNumber.setText(client.getCare_taker_phone_number());
 
         Button fab = (Button) findViewById(R.id.referal_button);
         fab.setOnClickListener(new View.OnClickListener() {

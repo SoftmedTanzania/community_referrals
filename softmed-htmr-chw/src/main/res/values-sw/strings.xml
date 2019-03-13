@@ -56,9 +56,9 @@
     <string name="button_delete">Futa</string>
     <string name="button_cancel">ONDOKA</string>
     <string name="hint_met_client">Umempata mteja?</string>
-    <string name="hint_missing_reasons">Reasons for missing the appointment</string>
+    <string name="hint_missing_reasons">Sababu za kukosa miadi </string>
     <string name="client_condition">Hali ya mteja wakati wa ufwatiliaji</string>
-    <string name="client_middlename">JIna la kati</string>
+    <string name="client_middlename">Jina la kati</string>
     <string name="client_birthday">Tarehe ya kuzaliwa</string>
     <string name="button_search">Tafuta</string>
     <string name="client_name">Jina</string>
@@ -76,7 +76,7 @@
     <string name="referral_details">Taarifa za rufaa</string>
     <string name="title_success">Imefanikiwa</string>
     <string name="title_unsuccessful">Inasubiri</string>
-    <string name="not_synced">Not Synced</string>
+    <string name="not_synced">Hazijaoanishwa</string>
     <string name="logged_user">Umeingia kama</string>
     <string name="wrong_facility">Tafadhali chagua jina sahihi la kituo cha afya</string>
     <string name="missing_facility">Tafadhali jaza jina la kituo cha afya</string>
@@ -99,8 +99,6 @@
     <string name="incorrect_phone_number">Tafadhali jaza namba ya simu sahihi</string>
     <string name="other_notes_title">Taarifa nyingine/Ushauri</string>
     <string name="initial_information">Taarifa za Awali</string>
-
-
     <string name="yes_button_label">Ndio</string>
     <string name="no_button_label">Hapana</string>
     <string name="followup_qn_met_with_client">Je, Umemkutana na  mteja?</string>
@@ -109,12 +107,11 @@
     <string name="folloup_feedback_moved_to_another_facility">Amefariki</string>
     <string name="followup_feedback_other_reasons">Sababu nyinginezo</string>
     <string name="followup_thankyou_note_part_one">Asante kwa kumtembelea </string>
-
     <string name="followup_clint_not_found_responce">Tafadhali hakikisha unamtafuta tena kumjulia hali</string>
     <string name="issued_referrals_summary_report">Ripoti fupi ya rufaa zilizotolewa</string>
     <string name="followup_not_conducted">Mteja bado hajafwatiliwa</string>
     <string name="main_menu_label">Menyu kuu</string>
-    <string name="referred_clients_list_label">Ordha ya Rufaa zilizotumwa</string>
+    <string name="referred_clients_list_label">Orodha ya Rufaa zilizotumwa</string>
     <string name="reports_label">Ripoti</string>
     <string name="emergency_referral_title_label">Rufaa za Dharura</string>
     <string name="completed_referrals_summary_title_label">Ufupisho wa rufaa zote</string>
@@ -125,13 +122,13 @@
     <string name="facility_name_label">Jina la Kituo</string>
     <string name="total_label">Jumla</string>
     <string name="completed_referrals_label">Rufaa Zilizokamilika</string>
-    <string name="referred_clients_desc">Ordha ya wateja waliyopewa rufaa (tumia sehemu hii kuona orodha za rufaa zote ulizotuma)</string>
+    <string name="referred_clients_desc">Orodha ya wateja waliyopewa rufaa (tumia sehemu hii kuona orodha za rufaa zote ulizotuma)</string>
     <string name="received_referrals_desc">Rufaa zilizotumwa tumia sehemu hii kuona wateja waliotumwa na kituo cha afya kwajili ya ufatiliayi wa karibu na kurudisha mrejesho</string>
     <string name="use_this_section_to_visualize_summary_reports">Ripoti (tumia sehemu hii kuona muktasari wa repoti).</string>
     <string name="register_clients_desc">Sajili mteja (tumia sehemu hii kusajili mteja mpya na kutuma rufaa).</string>
     <string name="followup_feedback_patient_moved">Mteja amehamiya kituo cha kutoa huduma cha afya</string>
     <string name="followup_feedback_patient_died">Mteja amefariki</string>
-    <string name="appointment_date_label">Appointment Date</string>
+    <string name="appointment_date_label">Tarehe ya Miadi</string>
     <string name="followup_referrals_chart_key_label">Ufupisho wa rufaa za ufatiliaji</string>
     <string name="visit_date_label">Tarehe ya Kumtembelea</string>
     <string name="register_clients_title">Sajili Mteja</string>

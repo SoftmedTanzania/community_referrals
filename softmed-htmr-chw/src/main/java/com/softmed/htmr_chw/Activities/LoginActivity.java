@@ -260,9 +260,6 @@ public class LoginActivity extends AppCompatActivity {
         userNameEditText = (EditText) findViewById(com.softmed.htmr_chw.R.id.editTextUsername);
         passwordEditText = (EditText) findViewById(com.softmed.htmr_chw.R.id.editTextPassword);
 
-        //TODO clear this hardcoded password for testing purposes
-        passwordEditText.setText("Berega2018.");
-
         loginButton = (Button) findViewById(com.softmed.htmr_chw.R.id.buttonSignIn);
 
         loginButton.setOnClickListener(new View.OnClickListener() {

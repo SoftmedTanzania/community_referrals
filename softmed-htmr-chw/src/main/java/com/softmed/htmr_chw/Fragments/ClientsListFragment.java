@@ -256,8 +256,8 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
             String query = params[0];
             String tableName = params[1];
             String fName = params[2];
-            String other_name = params[3];
-            String phone_number = params[4];
+            String otherName = params[3];
+            String phoneNumber = params[4];
             Log.d(TAG, "query = " + query);
 
             List<Client> commonPersonObjectList = clientRepository.RawCustomQueryForAdapter(query);
@@ -275,11 +275,11 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
                     if (!fName.isEmpty()) {
                         if ((client.getFirst_name().toLowerCase()).contains((fname.getText().toString()).toLowerCase()))
                             receivedClients.add(client);
-                    } else if (!other_name.isEmpty()) {
-                        if ((client.getMiddle_name().toLowerCase()).contains(other_name.toLowerCase()) || (client.getSurname().toLowerCase()).contains(other_name.toLowerCase()))
+                    } else if (!otherName.isEmpty()) {
+                        if ((client.getMiddle_name().toLowerCase()).contains(otherName.toLowerCase()) || (client.getSurname().toLowerCase()).contains(otherName.toLowerCase()))
                             receivedClients.add(client);
-                    } else if (!phone_number.isEmpty()) {
-                        if ((client.getCtc_number().toLowerCase()).contains(phone_number.toLowerCase()))
+                    } else if (!phoneNumber.isEmpty()) {
+                        if ((client.getCtc_number().toLowerCase()).contains(phoneNumber.toLowerCase()))
                             receivedClients.add(client);
                     }
                 }
