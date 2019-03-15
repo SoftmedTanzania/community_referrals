@@ -5,16 +5,13 @@ import android.database.Cursor;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import net.sqlcipher.database.SQLiteDatabase;
 import org.apache.commons.lang3.StringUtils;
-import org.ei.opensrp.domain.Indicator;
-import org.ei.opensrp.domain.ReferralServiceDataModel;
+import org.ei.opensrp.domain.ReferralService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static net.sqlcipher.DatabaseUtils.longForQuery;
 import static org.apache.commons.lang3.StringUtils.repeat;
@@ -39,27 +36,27 @@ public class ReferralServiceRepository extends DrishtiRepository {
         database.execSQL(CHILD_SQL);
     }
 
-    public void add(ReferralServiceDataModel referralServiceDataModel) {
+    public void add(ReferralService referralService) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
-        database.insert(REFERRAL_SERVICE, null, createValuesFor(referralServiceDataModel));
+        database.insert(REFERRAL_SERVICE, null, createValuesFor(referralService));
         Log.d(TAG,"data base created successfully");
     }
 
-    public void update(ReferralServiceDataModel referralServiceDataModel) {
+    public void update(ReferralService referralService) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
-        database.update(REFERRAL_SERVICE, createValuesFor(referralServiceDataModel), ID_COLUMN + " = ?", new String[]{referralServiceDataModel.getId()});
+        database.update(REFERRAL_SERVICE, createValuesFor(referralService), ID_COLUMN + " = ?", new String[]{referralService.getId()});
     }
 
-    public List<ReferralServiceDataModel> all() {
+    public List<ReferralService> all() {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.query(REFERRAL_SERVICE, REFERRAL_SERVICE_TABLE_COLUMNS, null, null, null, null, null);
         return readAll(cursor);
     }
 
-    public ReferralServiceDataModel find(String caseId) {
+    public ReferralService find(String caseId) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.query(REFERRAL_SERVICE, REFERRAL_SERVICE_TABLE_COLUMNS, ID_COLUMN + " = ?", new String[]{caseId}, null, null, null, null);
-        List<ReferralServiceDataModel> children = readAll(cursor);
+        List<ReferralService> children = readAll(cursor);
 
         if (children.isEmpty()) {
             return null;
@@ -67,7 +64,7 @@ public class ReferralServiceRepository extends DrishtiRepository {
         return children.get(0);
     }
 
-    public List<ReferralServiceDataModel> findServiceByCaseIds(String... caseIds) {
+    public List<ReferralService> findServiceByCaseIds(String... caseIds) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.rawQuery(String.format("SELECT * FROM %s WHERE %s IN (%s)", REFERRAL_SERVICE, ID_COLUMN, insertPlaceholdersForInClause(caseIds.length)), caseIds);
         return readAll(cursor);
@@ -80,11 +77,11 @@ public class ReferralServiceRepository extends DrishtiRepository {
         database.update(REFERRAL_SERVICE, values, ID_COLUMN + " = ?", new String[]{caseId});
     }
 
-    public ReferralServiceDataModel findByServiceName(String name) {
+    public ReferralService findByServiceName(String name) {
 
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.query(REFERRAL_SERVICE, REFERRAL_SERVICE_TABLE_COLUMNS, NAME + " = ?", new String[]{name}, null, null, null, null);
-        List<ReferralServiceDataModel> children = readAll(cursor);
+        List<ReferralService> children = readAll(cursor);
 
         if (children.isEmpty()) {
             return null;
@@ -112,25 +109,25 @@ public class ReferralServiceRepository extends DrishtiRepository {
 
 
 
-    public ContentValues createValuesFor(ReferralServiceDataModel referralServiceDataModel) {
+    public ContentValues createValuesFor(ReferralService referralService) {
         ContentValues values = new ContentValues();
-        values.put(ID_COLUMN, referralServiceDataModel.getId());
-        values.put(RELATIONAL_COLUMN, referralServiceDataModel.getId());
-        values.put(NAME, referralServiceDataModel.getServiceName());
-        values.put(NAME_SW, referralServiceDataModel.getServiceNameSw());
-        values.put(CATEGORY, referralServiceDataModel.getCategory());
-        values.put(IS_VALID, referralServiceDataModel.getIsActive());
-        values.put(DETAILS_COLUMN, new Gson().toJson(referralServiceDataModel));
+        values.put(ID_COLUMN, referralService.getId());
+        values.put(RELATIONAL_COLUMN, referralService.getId());
+        values.put(NAME, referralService.getServiceName());
+        values.put(NAME_SW, referralService.getServiceNameSw());
+        values.put(CATEGORY, referralService.getCategory());
+        values.put(IS_VALID, referralService.getIsActive());
+        values.put(DETAILS_COLUMN, new Gson().toJson(referralService));
         Log.d(TAG,"values"+values);
         return values;
     }
 
-    private List<ReferralServiceDataModel> readAll(Cursor cursor) {
+    private List<ReferralService> readAll(Cursor cursor) {
         cursor.moveToFirst();
-        List<ReferralServiceDataModel> referralServicesListDataModel = new ArrayList<ReferralServiceDataModel>();
+        List<ReferralService> referralServicesListDataModel = new ArrayList<ReferralService>();
         while (!cursor.isAfterLast()) {
 
-            referralServicesListDataModel.add(new ReferralServiceDataModel(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),cursor.getString(4)));
+            referralServicesListDataModel.add(new ReferralService(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),cursor.getString(4)));
 
             cursor.moveToNext();
         }
@@ -138,9 +135,9 @@ public class ReferralServiceRepository extends DrishtiRepository {
         return referralServicesListDataModel;
     }
 
-    private List<ReferralServiceDataModel> readAllChildren(Cursor cursor) {
+    private List<ReferralService> readAllChildren(Cursor cursor) {
         cursor.moveToFirst();
-        List<ReferralServiceDataModel> children = new ArrayList<ReferralServiceDataModel>();
+        List<ReferralService> children = new ArrayList<ReferralService>();
         while (!cursor.isAfterLast()) {
             children.add(serviceFromCursor(cursor));
             cursor.moveToNext();
@@ -149,8 +146,8 @@ public class ReferralServiceRepository extends DrishtiRepository {
         return children;
     }
 
-    private ReferralServiceDataModel serviceFromCursor(Cursor cursor) {
-        return new ReferralServiceDataModel(
+    private ReferralService serviceFromCursor(Cursor cursor) {
+        return new ReferralService(
                 getColumnValueByAlias(cursor, REFERRAL_SERVICE, ID_COLUMN),
                 getColumnValueByAlias(cursor, REFERRAL_SERVICE, NAME),
                 getColumnValueByAlias(cursor, REFERRAL_SERVICE, NAME_SW),

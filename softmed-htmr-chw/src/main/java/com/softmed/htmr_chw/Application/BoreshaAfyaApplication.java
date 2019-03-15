@@ -18,7 +18,6 @@ import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.Activities.LoginActivity;
 import com.softmed.htmr_chw.R;
 
-import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 import org.ei.opensrp.Context;
@@ -28,13 +27,17 @@ import org.ei.opensrp.domain.Client;
 import org.ei.opensrp.domain.Facility;
 import org.ei.opensrp.domain.Indicator;
 import org.ei.opensrp.domain.Referral;
-import org.ei.opensrp.domain.ReferralServiceDataModel;
+import org.ei.opensrp.domain.ReferralFeedback;
+import org.ei.opensrp.domain.ReferralService;
+import org.ei.opensrp.domain.RegistrationReasons;
 import org.ei.opensrp.domain.Response;
 import org.ei.opensrp.repository.ClientRepository;
 import org.ei.opensrp.repository.FacilityRepository;
 import org.ei.opensrp.repository.IndicatorRepository;
+import org.ei.opensrp.repository.ReferralFeedbackRepository;
 import org.ei.opensrp.repository.ReferralRepository;
 import org.ei.opensrp.repository.ReferralServiceRepository;
+import org.ei.opensrp.repository.RegistrationReasonsRepository;
 import org.ei.opensrp.sync.DrishtiSyncScheduler;
 import org.ei.opensrp.view.activity.DrishtiApplication;
 import org.ei.opensrp.view.activity.SecuredActivity;
@@ -54,7 +57,9 @@ import io.fabric.sdk.android.Fabric;
 import static org.ei.opensrp.AllConstants.DRISHTI_BASE_PATH;
 import static org.ei.opensrp.AllConstants.GSM_SERVER_URL;
 import static org.ei.opensrp.AllConstants.OPENSRP_FACILITY_URL_PATH;
+import static org.ei.opensrp.AllConstants.OPENSRP_REFERRAL_FEEDBACK_URL_PATH;
 import static org.ei.opensrp.AllConstants.OPENSRP_REFERRAL_SERVICES_URL_PATH;
+import static org.ei.opensrp.AllConstants.OPENSRP_REGISTRATION_REASONS_URL_PATH;
 import static org.ei.opensrp.util.Log.logInfo;
 
 /**
@@ -137,8 +142,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         final String result = null;
 
         Response<String> stringResponse = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl, "sean", "Admin123");
-        ReferralServiceDataModel service;
-        Log.d(TAG, "referral service failure is " + stringResponse.isFailure());
+        ReferralService service;
         JSONArray jsonArray = new JSONArray();
         try {
             jsonArray = new JSONArray(stringResponse.payload());
@@ -168,7 +172,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
                 }
 
 
-                service = new ReferralServiceDataModel(explrObject.getString("serviceId"), explrObject.getString("serviceName"), explrObject.getString("serviceNameSw"), explrObject.getString("category"), explrObject.getString("isActive"));
+                service = new ReferralService(explrObject.getString("serviceId"), explrObject.getString("serviceName"), explrObject.getString("serviceNameSw"), explrObject.getString("category"), explrObject.getString("isActive"));
                 if (service.getId().equals("")) {
                     Log.d(TAG, "service table is empty");
 
@@ -190,6 +194,64 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
             }
         }
         setHasService(true);
+    }
+
+    public void setReferralFeedback() {
+        ReferralFeedbackRepository referralFeedbackRepository = context.referralFeedbackRepository();
+        //String to place our result in
+        final String myUrl = DRISHTI_BASE_PATH + OPENSRP_REFERRAL_FEEDBACK_URL_PATH;
+
+        Response<String> stringResponse = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl, "username", "password");
+        JSONArray jsonArray = new JSONArray();
+        try {
+            jsonArray = new JSONArray(stringResponse.payload());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject feedbackObj = null;
+            try {
+                feedbackObj = jsonArray.getJSONObject(i);
+                ReferralFeedback referralFeedback = new ReferralFeedback(feedbackObj.getString("id"),feedbackObj.getString("desc"),feedbackObj.getString("descSw"),feedbackObj.getJSONObject("referralType").getString("referralTypeId"));
+                if (referralFeedback.getId().equals("")) {
+                    Log.d(TAG, "service is empty");
+
+                } else {
+                    referralFeedbackRepository.add(referralFeedback);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void setRegistrationReasons() {
+        RegistrationReasonsRepository registrationReasonsRepository = context.registrationReasonsRepository();
+        //String to place our result in
+        final String myUrl = DRISHTI_BASE_PATH + OPENSRP_REGISTRATION_REASONS_URL_PATH;
+
+        Response<String> stringResponse = Context.getInstance().getHttpAgent().fetchWithCredentials(myUrl, "username", "password");
+        JSONArray jsonArray = new JSONArray();
+        try {
+            jsonArray = new JSONArray(stringResponse.payload());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject registrationReasonsObj = null;
+            try {
+                registrationReasonsObj = jsonArray.getJSONObject(i);
+                RegistrationReasons registrationReasons = new RegistrationReasons(registrationReasonsObj.getString("registrationId"),registrationReasonsObj.getString("descEn"),registrationReasonsObj.getString("descSw"),registrationReasonsObj.getString("active"));
+                if (registrationReasons.getId().equals("")) {
+                    Log.d(TAG, "registration reason is empty");
+
+                } else {
+                    registrationReasonsRepository.add(registrationReasons);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void initializeReferralService() {

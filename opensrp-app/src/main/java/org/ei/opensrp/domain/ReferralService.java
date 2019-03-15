@@ -1,33 +1,23 @@
 package org.ei.opensrp.domain;
 
-import android.util.Log;
-
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Martha on 1/1/18.
  */
 
-public class ReferralServiceDataModel {
+public class ReferralService {
 
-    private static final String TAG = ReferralServiceDataModel.class.getSimpleName();
+    private static final String TAG = ReferralService.class.getSimpleName();
     private String serviceName,serviceNameSw, id,relationalid,category,isActive;
 
     private Map<String, String> details;
 
-    public ReferralServiceDataModel() {
+    public ReferralService() {
 
     }
 
-    public ReferralServiceDataModel(String id, String serviceName,String serviceNameSw, String category,String isActive) {
+    public ReferralService(String id, String serviceName, String serviceNameSw, String category, String isActive) {
         this.id = id;
         this.serviceName = serviceName;
         this.serviceNameSw = serviceNameSw;

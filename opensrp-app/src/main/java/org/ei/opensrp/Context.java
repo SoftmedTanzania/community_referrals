@@ -29,8 +29,10 @@ import org.ei.opensrp.repository.FormsVersionRepository;
 import org.ei.opensrp.repository.ImageRepository;
 import org.ei.opensrp.repository.IndicatorRepository;
 import org.ei.opensrp.repository.MotherRepository;
+import org.ei.opensrp.repository.ReferralFeedbackRepository;
 import org.ei.opensrp.repository.ReferralRepository;
 import org.ei.opensrp.repository.ReferralServiceRepository;
+import org.ei.opensrp.repository.RegistrationReasonsRepository;
 import org.ei.opensrp.repository.ReportRepository;
 import org.ei.opensrp.repository.Repository;
 import org.ei.opensrp.repository.ServiceProvidedRepository;
@@ -138,6 +140,8 @@ public class Context {
     private AllCommonsRepository allCommonPersonObjectsRepository;
     private FacilityRepository facilityRepository;
     private ReferralServiceRepository referralServiceRepository;
+    private ReferralFeedbackRepository referralFeedbackRepository;
+    private RegistrationReasonsRepository registrationReasonsRepository;
     private ReferralRepository referralRepository;
     private ClientRepository clientRepository;
     private DrishtiService drishtiService;
@@ -516,6 +520,8 @@ public class Context {
             drishtireposotorylist.add(referralRepository());
             drishtireposotorylist.add(clientRepository());
             drishtireposotorylist.add(referralServiceRepository());
+            drishtireposotorylist.add(referralFeedbackRepository());
+            drishtireposotorylist.add(registrationReasonsRepository());
             drishtireposotorylist.add(reportRepository());
             drishtireposotorylist.add(formDataRepository());
             drishtireposotorylist.add(serviceProvidedRepository());
@@ -634,11 +640,23 @@ public class Context {
         return motherRepository;
     }
 
-    private ReferralServiceRepository referralServiceRepository() {
+    public ReferralServiceRepository referralServiceRepository() {
         if (referralServiceRepository == null) {
             referralServiceRepository = new ReferralServiceRepository();
         }
         return referralServiceRepository;
+    }
+    public ReferralFeedbackRepository referralFeedbackRepository() {
+        if (referralFeedbackRepository == null) {
+            referralFeedbackRepository = new ReferralFeedbackRepository();
+        }
+        return referralFeedbackRepository;
+    }
+    public RegistrationReasonsRepository registrationReasonsRepository() {
+        if (registrationReasonsRepository == null) {
+            registrationReasonsRepository = new RegistrationReasonsRepository();
+        }
+        return registrationReasonsRepository;
     }
 
     private FacilityRepository facilityRepository() {

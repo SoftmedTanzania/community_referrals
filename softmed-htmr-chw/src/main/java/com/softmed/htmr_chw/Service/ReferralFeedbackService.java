@@ -8,16 +8,16 @@ import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 
 
 /**
- * Created by Kency  on 12/21/17.
+ * Created by Coze  on 03/15/19.
  */
-public class ReferralService extends IntentService {
-    private static final String TAG = ReferralService.class.getSimpleName();
+public class ReferralFeedbackService extends IntentService {
+    private static final String TAG = ReferralFeedbackService.class.getSimpleName();
 
-    public ReferralService() {
+    public ReferralFeedbackService() {
         super("ReferralService");
     }
 
-    public ReferralService(String name) {
+    public ReferralFeedbackService(String name) {
         super(name);
     }
 
@@ -25,6 +25,6 @@ public class ReferralService extends IntentService {
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         android.util.Log.d(TAG, "Facility Referral Services on handle intent");
-        ((BoreshaAfyaApplication) getApplication()).setReferralService();
+        ((BoreshaAfyaApplication) getApplication()).setReferralFeedback();
     }
 }

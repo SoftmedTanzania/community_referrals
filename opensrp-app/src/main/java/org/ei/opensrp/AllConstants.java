@@ -2,7 +2,7 @@ package org.ei.opensrp;
 
 public class AllConstants {
     public static final String DRISHTI_BASE_URL = "DRISHTI_BASE_URL";
-    public static final String DRISHTI_BASE_PATH = "http://45.56.90.103:8080/opensrp";
+    public static final String DRISHTI_BASE_PATH = "http://23.92.25.157:8080/opensrp";
     public static final String GSM_SERVER_URL = "/save-push-notification-token";
     public static final String PROFILE_IMAGES_DOWNLOAD_PATH = "/multimedia/profileimage";
     public static final String PROFILE_IMAGES_UPLOAD_PATH = "/multimedia-file";
@@ -36,6 +36,8 @@ public class AllConstants {
     public static final String OPENSRP_AUTH_USER_URL_PATH = "/security/authenticate";
     public static final String OPENSRP_LOCATION_URL_PATH = "/location/location-children-tree";
     public static final String OPENSRP_REFERRAL_SERVICES_URL_PATH = "/boresha-afya-services";
+    public static final String OPENSRP_REFERRAL_FEEDBACK_URL_PATH = "/referral-feedback";
+    public static final String OPENSRP_REGISTRATION_REASONS_URL_PATH = "/registration-reasons";
     public static final String OPENSRP_FACILITY_URL_PATH = "/get-district-health-facilities/";
 
     public static final String FORM_NAME_PARAM = "formName";
