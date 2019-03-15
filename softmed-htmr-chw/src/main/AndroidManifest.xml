@@ -85,14 +85,20 @@
         </service>
         <service
             android:name=".Service.RegistrationIntentService"
-            android:exported="false"></service>
+            android:exported="false"/>
         <service
             android:name=".Service.FacilityService"
-            android:enabled="true"></service>
+            android:enabled="true"/>
         <service
             android:name=".Service.ReferralService"
-            android:enabled="true"></service>
+            android:enabled="true"/>
 
+        <service
+            android:name=".Service.ReferralFeedbackService"
+            android:enabled="true"/>
+        <service
+            android:name=".Service.RegistrationReasonsService"
+            android:enabled="true"/>
         <activity
             android:name=".Activities.LoginActivity"
             android:label="@string/app_name"

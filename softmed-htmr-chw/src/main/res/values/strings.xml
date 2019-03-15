@@ -148,4 +148,5 @@ Aenean quis ex dictum, porttitor nunc id, viverra urna. Suspendisse posuere ex a
     <string name="clients_list">Clients List</string>
     <string name="no_clients_found">No clients were found</string>
     <string name="follow_up_referral">Follow up</string>
+    <string name="str_set_cbhs_number">Set CBHS Number</string>
 </resources>

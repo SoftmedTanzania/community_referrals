@@ -366,7 +366,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
             for (int i = 0; i < jsonArray.length(); i++) {
                 Facility facility;
                 JSONObject explrObject = jsonArray.getJSONObject(i);
-                facility = new Facility(explrObject.getString("facilityName"), explrObject.getString("openMRSUIID"));
+                facility = new Facility(explrObject.getString("facilityName"), explrObject.getString("openMRSUUID"));
                 if (facility.getOpenMRSUIID().equals("") || facility.getOpenMRSUIID() == null || facility.getFacilityName().equals("") || facility.getFacilityName() == null) {
                     Log.d(TAG, "facility is empty");
 

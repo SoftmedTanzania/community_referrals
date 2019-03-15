@@ -1,8 +1,10 @@
 package com.softmed.htmr_chw.Fragments;
 
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,16 +22,23 @@ import com.softmed.htmr_chw.R;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
+import org.ei.opensrp.domain.ReferralFeedback;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
+import org.ei.opensrp.repository.AllSharedPreferences;
+import org.ei.opensrp.repository.ReferralFeedbackRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
+
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static org.ei.opensrp.AllConstants.ENGLISH_LOCALE;
 
 public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     private static final String CLIENT_FOLLOWUP = "item_id";
@@ -43,7 +52,9 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
     private MaterialSpinner spinnerReason;
     private Typeface robotoRegular, sansBold;
     private int reasonSelection = -1;
+    private List<String> referralFeedbacksNames = new ArrayList<>();
     private Button save;
+    private String preferredLocale;
 
     public FollowupClientDetailFragment() {
     }
@@ -73,6 +84,11 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.followup_client_details, container, false);
+
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(org.ei.opensrp.Context.getInstance().applicationContext()));
+        preferredLocale = allSharedPreferences.fetchLanguagePreference();
+        setLanguage();
+
         setupviews(rootView);
         setDetails(clientReferral);
 
@@ -117,6 +133,25 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         } else {
             return "";
         }
+    }
+
+    public List<ReferralFeedback> getReferralFeedbacks() {
+        ReferralFeedbackRepository feedbackRepository = context().referralFeedbackRepository();
+
+
+        List<ReferralFeedback> referralFeedbacks =  feedbackRepository.findFeedbackByReferralType("1");
+        referralFeedbacksNames.clear();
+        for(ReferralFeedback referralFeedback :referralFeedbacks){
+
+            if (preferredLocale.equals(ENGLISH_LOCALE))
+                referralFeedbacksNames.add(referralFeedback.getDesc());
+            else {
+                referralFeedbacksNames.add(referralFeedback.getDescSw());
+            }
+
+
+        }
+        return  referralFeedbacks;
     }
 
     private void setDetails(final ClientReferral clientReferral) {
@@ -173,8 +208,8 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         }
 
 
-        final String[] ITEMS = {getString(R.string.followup_feedback_patient_moved), getString(R.string.followup_feedback_patient_died), getString(R.string.followup_feedback_other_reasons)};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, ITEMS);
+        getReferralFeedbacks();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, referralFeedbacksNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerReason.setAdapter(adapter);
 
@@ -201,12 +236,11 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
                     Toast.makeText(getActivity(), getString(R.string.toast_message_select_reasons_for_missing_appointment), Toast.LENGTH_SHORT).show();
 
                 } else {
-                    clientReferral.setReferral_feedback(ITEMS[reasonSelection] + "/n/n" + feedback.getText().toString());
 
 //                        context().followupClientRepository().update(followup);
 
                     //TODO finish up sending of referral feedbacks of the followup
-
+//                    clientReferral.setReferral_feedback();
 //                        final String uuid = generateRandomUUIDString();
 //                        context().referralRepository().update(clientReferral);
 //                        List<FormField> formFields = new ArrayList<>();
@@ -310,5 +344,17 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         mapCue.setTypeface(robotoRegular);
         referedReason.setTypeface(robotoRegular);
         otherInformation.setTypeface(robotoRegular);
+    }
+
+    private void setLanguage() {
+        Log.d(TAG, "set Locale : " + preferredLocale);
+
+        Resources res = org.ei.opensrp.Context.getInstance().applicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(preferredLocale);
+        res.updateConfiguration(conf, dm);
+
     }
 }

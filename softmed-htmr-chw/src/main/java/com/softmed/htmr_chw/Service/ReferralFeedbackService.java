@@ -14,7 +14,7 @@ public class ReferralFeedbackService extends IntentService {
     private static final String TAG = ReferralFeedbackService.class.getSimpleName();
 
     public ReferralFeedbackService() {
-        super("ReferralService");
+        super("ReferralFeedbackService");
     }
 
     public ReferralFeedbackService(String name) {
@@ -24,7 +24,7 @@ public class ReferralFeedbackService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        android.util.Log.d(TAG, "Facility Referral Services on handle intent");
+        android.util.Log.d(TAG, "Facility Referral Feedback on handle intent");
         ((BoreshaAfyaApplication) getApplication()).setReferralFeedback();
     }
 }

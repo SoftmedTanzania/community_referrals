@@ -20,8 +20,8 @@ public class ReferralFeedbackRepository extends DrishtiRepository {
     private static final String TAG = ReferralFeedbackRepository.class.getSimpleName();
     private static final String CHILD_SQL = "CREATE TABLE referral_feedback(id VARCHAR PRIMARY KEY," +
             "relationalid VARCHAR," +
-            "desc VARCHAR," +
-            "descSw VARCHAR," +
+            "desc_en VARCHAR," +
+            "desc_sw VARCHAR," +
             "referralType VARCHAR)";
     private static final String ID_COLUMN = "id";
     private static final String DESC_COLUMN = "desc_en";
@@ -38,6 +38,7 @@ public class ReferralFeedbackRepository extends DrishtiRepository {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
         database.insert(TABLE_NAME, null, createValuesFor(referralFeedback));
         Log.d(TAG, "data base created successfully");
+        Log.d(TAG, "data added successfully");
     }
 
     public void update(ReferralFeedback referralFeedback) {
@@ -60,6 +61,17 @@ public class ReferralFeedbackRepository extends DrishtiRepository {
             return null;
         }
         return children.get(0);
+    }
+
+    public List<ReferralFeedback> findFeedbackByReferralType(String caseId) {
+        SQLiteDatabase database = masterRepository.getReadableDatabase();
+        Cursor cursor = database.query(TABLE_NAME, REFERRAL_FEEDBACK_TABLE_COLUMNS, REFERRAL_TYPE + " = ?", new String[]{caseId}, null, null, null, null);
+        List<ReferralFeedback> children = readAll(cursor);
+
+        if (children.isEmpty()) {
+            return null;
+        }
+        return children;
     }
 
     public List<ReferralFeedback> findServiceByCaseIds(String... caseIds) {
@@ -89,7 +101,7 @@ public class ReferralFeedbackRepository extends DrishtiRepository {
         values.put(DESC_COLUMN, referralFeedback.getDesc());
         values.put(DESC_SW_COLUMN, referralFeedback.getDescSw());
         values.put(REFERRAL_TYPE, referralFeedback.getReferralType());
-        Log.d(TAG, "values" + values);
+        Log.d(TAG, "values for referral feedback" + values.toString());
         return values;
     }
 
@@ -98,7 +110,7 @@ public class ReferralFeedbackRepository extends DrishtiRepository {
         List<ReferralFeedback> referralServicesListDataModel = new ArrayList<ReferralFeedback>();
         while (!cursor.isAfterLast()) {
 
-            referralServicesListDataModel.add(new ReferralFeedback(cursor.getString(0), cursor.getString(2), cursor.getString(3), cursor.getString(4)));
+            referralServicesListDataModel.add(new ReferralFeedback(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3)));
 
             cursor.moveToNext();
         }
