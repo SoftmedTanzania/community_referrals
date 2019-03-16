@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:id="@+id/banner"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:background="@color/colorPrimaryDark">
+        <TextView
+            android:id="@+id/client_name"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:text="@string/str_set_cbhs_number"
+            android:textColor="@color/white"
+            android:textSize="48sp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_below="@id/banner"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="56dp"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_marginTop="32dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cbhs_number"
+            android:textSize="36sp"
+            android:text="Enter your CBHS number"/>
+    </RelativeLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_save"
+        android:id="@+id/button_save"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>

@@ -336,6 +336,9 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                                 Toast.makeText(ChwSmartRegisterActivity.this, "Language preference set to " + newLanguagePreference + ". Please restart the application.", LENGTH_SHORT).show();
                                 recreate();
                                 return true;
+                            case com.softmed.htmr_chw.R.id.setCBHSnumberMenuItem:
+                                showSetCBHSNumberDialog();
+                                return true;
                             default:
                                 return onOptionsItemSelected(item);
                         }
@@ -567,6 +570,33 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             e.printStackTrace();
         }
         setIndicators(((LinearLayout)dialogView.findViewById(R.id.flags_layout)), clientReferral.getIndicator_ids());
+    }
+
+    public void showSetCBHSNumberDialog() {
+
+        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_set_cbhs_number_dialogue, null);
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
+        dialogBuilder.setView(dialogView)
+                .setCancelable(true);
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+        dialog.getWindow().setLayout(1000, 650);
+
+
+        TextView textName = (TextView) dialogView.findViewById(R.id.client_name);
+        TextView textAge = (TextView) dialogView.findViewById(R.id.agevalue);
+        TextView cbhs = (TextView) dialogView.findViewById(R.id.cbhs_number_value);
+        TextView referral_service = (TextView) dialogView.findViewById(R.id.viewService);
+        TextView facility = (TextView) dialogView.findViewById(R.id.viewFacility);
+        TextView ctc_number = (TextView) dialogView.findViewById(R.id.ctc_number);
+        TextView referral_reason = (TextView) dialogView.findViewById(R.id.reason_for_referral);
+        TextView gender = (TextView) dialogView.findViewById(R.id.gendervalue);
+        TextView phoneNumber = (TextView) dialogView.findViewById(R.id.viewPhone);
+        TextView physicalAddress = (TextView) dialogView.findViewById(R.id.editTextKijiji);
+        TextView villageleader = (TextView) dialogView.findViewById(R.id.viewVillageLeader);
+
+
     }
 
     private void makeToast() {

@@ -45,6 +45,9 @@
                 "name": "ward"
             },
             {
+                "name": "registration_reason_id"
+            },
+            {
                 "name": "village"
             },
             {

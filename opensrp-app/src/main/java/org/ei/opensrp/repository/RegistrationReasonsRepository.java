@@ -24,8 +24,8 @@ public class RegistrationReasonsRepository extends DrishtiRepository {
     private static final String TAG = RegistrationReasonsRepository.class.getSimpleName();
     private static final String CHILD_SQL = "CREATE TABLE registration_reasons(id VARCHAR PRIMARY KEY," +
             "relationalid VARCHAR," +
-            "desc VARCHAR," +
-            "descSw VARCHAR," +
+            "desc_en VARCHAR," +
+            "desc_sw VARCHAR," +
             "active VARCHAR)";
     private static final String ID_COLUMN = "id";
     private static final String DESC_COLUMN = "desc_en";
@@ -41,7 +41,7 @@ public class RegistrationReasonsRepository extends DrishtiRepository {
     public void add(RegistrationReasons registrationReasons) {
         SQLiteDatabase database = masterRepository.getWritableDatabase();
         database.insert(TABLE_NAME, null, createValuesFor(registrationReasons));
-        Log.d(TAG, "data base created successfully");
+        Log.d(TAG, "adding registration reasons");
     }
 
     public void update(RegistrationReasons registrationReasons) {
@@ -102,7 +102,7 @@ public class RegistrationReasonsRepository extends DrishtiRepository {
         List<RegistrationReasons> referralServicesListDataModel = new ArrayList<RegistrationReasons>();
         while (!cursor.isAfterLast()) {
 
-            referralServicesListDataModel.add(new RegistrationReasons(cursor.getString(0), cursor.getString(2), cursor.getString(3), cursor.getString(4)));
+            referralServicesListDataModel.add(new RegistrationReasons(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3)));
 
             cursor.moveToNext();
         }

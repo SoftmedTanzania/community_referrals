@@ -13,6 +13,10 @@
         android:title="@string/str_switch_language"
         android:icon="@drawable/ic_menu_edit"/>
     <item
+        android:id="@+id/setCBHSnumberMenuItem"
+        android:title="@string/str_set_cbhs_number"
+        android:icon="@drawable/ic_menu_edit"/>
+    <item
         android:id="@+id/logout"
         android:title="@string/logout_text"
         android:icon="@drawable/ic_menu_edit"/>

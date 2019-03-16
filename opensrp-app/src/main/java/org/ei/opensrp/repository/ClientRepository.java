@@ -36,6 +36,7 @@ public class ClientRepository extends DrishtiRepository {
             "village VARCHAR, " +
             "veo VARCHAR, " +
             "ward VARCHAR, " +
+            "registration_reason_id VARCHAR, " +
             "details VARCHAR)";
     public static final String TABLE_NAME = "client";
     public static final String ID_COLUMN = "id";
@@ -56,9 +57,10 @@ public class ClientRepository extends DrishtiRepository {
     public static final String STATUS = "status";
     public static final String VILLAGE = "village";
     public static final String WARD = "ward";
+    public static final String REGISTRATION_REASON_ID = "registration_reason_id";
     public static final String VEO = "veo";
     public static final String DETAILS_COLUMN = "details";
-    public static final String[] CLIENT_TABLE_COLUMNS = {ID_COLUMN, Relational_ID, CLIENT_ID, FIRST_NAME, MIDDLE_NAME, SURNAME, DOB,GENDER, CBHS, CTC_NUMBER, FACILITY_ID, IS_VALID, CARE_TAKER_NAME, CARE_TAKER_PHONE_NUMBER, STATUS,PHONE_NUMBER,VILLAGE, VEO,WARD,DETAILS_COLUMN};
+    public static final String[] CLIENT_TABLE_COLUMNS = {ID_COLUMN, Relational_ID, CLIENT_ID, FIRST_NAME, MIDDLE_NAME, SURNAME, DOB,GENDER, CBHS, CTC_NUMBER, FACILITY_ID, IS_VALID, CARE_TAKER_NAME, CARE_TAKER_PHONE_NUMBER, STATUS,PHONE_NUMBER,VILLAGE, VEO,WARD,REGISTRATION_REASON_ID,DETAILS_COLUMN};
     
 
     @Override
@@ -136,6 +138,7 @@ public class ClientRepository extends DrishtiRepository {
         values.put(VEO, client.getVeo());
         values.put(PHONE_NUMBER, client.getPhone_number());
         values.put(WARD, client.getWard());
+        values.put(REGISTRATION_REASON_ID, client.getRegistration_reason_id());
         values.put(DETAILS_COLUMN, new Gson().toJson(client));
         return values;
     }
@@ -163,7 +166,8 @@ public class ClientRepository extends DrishtiRepository {
                     cursor.getString(16),
                     cursor.getString(17),
                     cursor.getString(18),
-                    cursor.getString(19))
+                    cursor.getString(19),
+                    cursor.getString(20))
 
             );
             cursor.moveToNext();
@@ -210,7 +214,8 @@ public class ClientRepository extends DrishtiRepository {
                     cursor.getString(16),
                     cursor.getString(17),
                     cursor.getString(18),
-                    cursor.getString(19))
+                    cursor.getString(19),
+                    cursor.getString(20))
 
             );
             cursor.moveToNext();
@@ -241,6 +246,7 @@ public class ClientRepository extends DrishtiRepository {
                 getColumnValueByAlias(cursor, TABLE_NAME, VILLAGE),
                 getColumnValueByAlias(cursor, TABLE_NAME, VEO),
                 getColumnValueByAlias(cursor, TABLE_NAME, WARD),
+                getColumnValueByAlias(cursor, TABLE_NAME, REGISTRATION_REASON_ID),
                 getColumnValueByAlias(cursor, TABLE_NAME, DETAILS_COLUMN));
 
     }

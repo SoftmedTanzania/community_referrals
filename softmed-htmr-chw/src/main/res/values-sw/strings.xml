@@ -38,7 +38,7 @@
     <string name="button_details">Maelezo Zaidi</string>
     <string name="button_follow_up">Fuatilia</string>
     <string name="title_register_client">Fomu ya usajili ya rufaa mpya</string>
-    <string name="client_sex">Jinsia</string>
+    <string name="client_sex">Jinsi</string>
     <string name="client_phone">Namba ya simu</string>
     <string name="client_age">Umri</string>
     <string name="client_address">Anapokaa</string>
@@ -146,6 +146,8 @@
     <string name="follow_up_referral">Rufaa ya kufwatilia</string>
 
     <string name="str_set_cbhs_number">Hifadhi namba yako ya CBHS</string>
+    <string name="client_registration_reason">Sababu za usajili</string>
+    <string name="missing_registration_reason">Tafadhali chagua sababu ya usajili wa mteja</string>
 
 
 </resources>

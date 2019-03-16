@@ -387,12 +387,29 @@
                                             android:hint="@string/title_ctc_number"
                                             android:imeOptions="actionNext"
                                             android:inputType="text"
+                                            android:visibility="gone"
                                             android:textColor="@color/primary_text"
                                             android:textColorHint="@color/hint_text"
                                             android:textSize="14sp"
                                             app:met_floatingLabel="normal"
                                             app:met_floatingLabelText="Namba ya CTC"
                                             app:met_floatingLabelTextColor="@color/colorPrimary" />
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/registration_reasons_spinner"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="16dp"
+                                            android:layout_marginTop="16dp"
+                                            android:layout_weight="0.5"
+                                            app:ms_arrowColor="@color/colorPrimary"
+                                            app:ms_arrowSize="14dp"
+                                            app:ms_baseColor="@color/colorPrimary"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_hint="@string/client_registration_reason"
+                                            app:ms_hintColor="@color/hint_text"
+                                            app:ms_multiline="true"
+                                            app:ms_thickness="1dp" />
 
 
                                     </LinearLayout>
@@ -462,7 +479,8 @@
                                     android:layout_centerVertical="true"
                                     android:layout_marginRight="16dp"
                                     android:text="@string/register_clients_button_label"
-                                    android:textColor="@color/card_title_text" />
+                                    android:textColor="@color/white"
+                                    android:background="@color/colorPrimary"/>
 
 
                             </RelativeLayout>

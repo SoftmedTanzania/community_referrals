@@ -266,9 +266,9 @@
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="16dp"
                                             android:layout_weight="0.5"
-                                            app:ms_arrowColor="@color/accent"
+                                            app:ms_arrowColor="@color/colorPrimary"
                                             app:ms_arrowSize="14dp"
-                                            app:ms_baseColor="@color/accent"
+                                            app:ms_baseColor="@color/colorPrimary"
                                             app:ms_enableFloatingLabel="false"
                                             app:ms_hint="@string/client_sex"
                                             app:ms_hintColor="@color/hint_text"
@@ -361,8 +361,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="8dp">
+                                        android:layout_height="wrap_content">
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
                                             android:id="@+id/editTextDiscountId"
@@ -383,7 +382,9 @@
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
                                             android:id="@+id/editTextOthers"
+                                            android:visibility="gone"
                                             android:layout_width="0dp"
+                                            android:layout_marginTop="8dp"
                                             android:layout_weight="0.5"
                                             android:layout_height="wrap_content"
                                             android:hint="@string/title_ctc_number"
@@ -395,6 +396,22 @@
                                             app:met_floatingLabel="normal"
                                             app:met_floatingLabelText="Namba ya CTC"
                                             app:met_floatingLabelTextColor="@color/colorPrimary" />
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/registration_reasons_spinner"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginRight="16dp"
+                                            android:layout_weight="0.5"
+                                            app:ms_arrowColor="@color/colorPrimary"
+                                            app:ms_arrowSize="14dp"
+                                            android:spinnerMode="dialog"
+                                            app:ms_baseColor="@color/colorPrimary"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_hint="@string/client_registration_reason"
+                                            app:ms_hintColor="@color/hint_text"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="1dp" />
 
 
                                     </LinearLayout>
@@ -472,11 +489,13 @@
                                     android:id="@+id/referal_button"
                                     android:layout_width="200dp"
                                     android:layout_height="48dp"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_centerVertical="true"
                                     android:layout_marginRight="16dp"
                                     android:text="@string/register_clients_button_label"
-                                    android:textColor="@color/card_title_text" />
+                                    android:background="@color/colorPrimary"
+                                    android:textColor="@color/white"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginEnd="16dp" />
 
 
                             </RelativeLayout>

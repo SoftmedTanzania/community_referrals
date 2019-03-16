@@ -241,6 +241,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
             JSONObject registrationReasonsObj = null;
             try {
                 registrationReasonsObj = jsonArray.getJSONObject(i);
+                Log.d(TAG,"Registration Reason = "+registrationReasonsObj);
                 RegistrationReasons registrationReasons = new RegistrationReasons(registrationReasonsObj.getString("registrationId"),registrationReasonsObj.getString("descEn"),registrationReasonsObj.getString("descSw"),registrationReasonsObj.getString("active"));
                 if (registrationReasons.getId().equals("")) {
                     Log.d(TAG, "registration reason is empty");

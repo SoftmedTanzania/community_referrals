@@ -10,7 +10,7 @@ public class Client implements Serializable {
 
     private String id, relationalid, client_id,details, first_name, middle_name, surname, facility_id,
             is_valid, service_provider_mobile_number, ward, village, Kijitongoji, care_taker_name, care_taker_phone_number,
-            veo, service_provider_uuid, phone_number, gender, community_based_hiv_service, ctc_number;
+            veo, service_provider_uuid, phone_number, gender, community_based_hiv_service, ctc_number,registration_reason_id;
     private long date_of_birth,status;
     public Client() {
 
@@ -35,6 +35,7 @@ public class Client implements Serializable {
                   String village,
                   String veo,
                   String ward,
+                  String registration_reason_id,
                   String details
     ) {
         this.details = details;
@@ -58,6 +59,7 @@ public class Client implements Serializable {
         this.status=status;
         this.phone_number = phone_number;
         this.date_of_birth = date_of_birth;
+        this.registration_reason_id = registration_reason_id;
     }
 
     public String getId() {
@@ -242,5 +244,13 @@ public class Client implements Serializable {
 
     public void setStatus(long status) {
         this.status = status;
+    }
+
+    public String getRegistration_reason_id() {
+        return registration_reason_id;
+    }
+
+    public void setRegistration_reason_id(String registration_reason_id) {
+        this.registration_reason_id = registration_reason_id;
     }
 }

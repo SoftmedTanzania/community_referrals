@@ -28,6 +28,8 @@ import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.R;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import org.ei.opensrp.domain.Client;
+import org.ei.opensrp.domain.ReferralFeedback;
+import org.ei.opensrp.domain.RegistrationReasons;
 import org.ei.opensrp.domain.SyncStatus;
 import org.ei.opensrp.domain.form.FormData;
 import org.ei.opensrp.domain.form.FormField;
@@ -36,6 +38,8 @@ import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.repository.ClientRepository;
+import org.ei.opensrp.repository.ReferralFeedbackRepository;
+import org.ei.opensrp.repository.RegistrationReasonsRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
@@ -49,6 +53,7 @@ import java.util.regex.Pattern;
 import fr.ganfra.materialspinner.MaterialSpinner;
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static com.softmed.htmr_chw.util.Utils.generateRandomUUIDString;
+import static org.ei.opensrp.AllConstants.ENGLISH_LOCALE;
 
 /**
  * Created by coze on 11/17/17.
@@ -60,7 +65,7 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
     public EditText editTextfName, editTextmName, editTextlName, editTextVillageLeader, editTextCTCNumber,
             editTextDiscountId, editTextKijiji, editTextReferralReason, helperName, helperPhoneNumber;
     public Button button;
-    public MaterialSpinner spinnerGender;
+    public MaterialSpinner spinnerGender,registrationReasonsSpinner;
     public String message = "";
     public Context context;
     public int genderSelection = -1;
@@ -78,6 +83,9 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
     private MaterialEditText dobTextView;
     private String preferredLocale;
     private Typeface robotoBold, robotoCondenced;
+    private List<String> registrationReasonsNames = new ArrayList<>();
+    private List<RegistrationReasons> registrationReasons = new ArrayList<>();
+    private String registrationReasonId ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -125,10 +133,6 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
                     // convert to json
                     String gsonReferral = gson.toJson(client);
                     saveFormSubmission(gsonReferral, client.getClient_id(), formName, getFormFieldsOverrides());
-//                    Intent resultIntent = new Intent();
-//                    resultIntent.putExtra("status", true);
-//                    setResult(Activity.RESULT_OK, resultIntent);
-//                    finish();
 
                     Intent intent1 = new Intent(ClientRegistrationFormActivity.this, ClientDetailsActivity.class);
 
@@ -202,6 +206,25 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
         button = (Button) findViewById(com.softmed.htmr_chw.R.id.referal_button);
 
 
+        registrationReasons = getRegistrationReasons();
+        registrationReasonsSpinner = (MaterialSpinner) findViewById(com.softmed.htmr_chw.R.id.registration_reasons_spinner);
+        ArrayAdapter<String> registrationReasonsAdapter = new ArrayAdapter<String>(this, R.layout.simple_spinner_item, registrationReasonsNames);
+        registrationReasonsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        registrationReasonsSpinner.setAdapter(registrationReasonsAdapter);
+        registrationReasonsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                registrationReasonId = registrationReasons.get(i).getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
         String[] ITEMS = getResources().getStringArray(com.softmed.htmr_chw.R.array.gender);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ITEMS);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -213,7 +236,7 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i >= 0) {
-                    spinnerGender.setFloatingLabelText("Chagua Jinsia");
+                    spinnerGender.setFloatingLabelText(getResources().getString(R.string.client_sex));
                     genderSelection = i;
                 }
 
@@ -307,6 +330,12 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
             makeToast();
             return false;
 
+        } else if (registrationReasonsSpinner.getSelectedItemPosition() == 0) {
+            message = getString(R.string.missing_registration_reason);
+            spinnerGender.setError(message);
+            makeToast();
+            return false;
+
         } else if (TextUtils.isEmpty(editTextKijiji.getText())) {
             message = getResources().getString(com.softmed.htmr_chw.R.string.missing_physical_address);
             editTextKijiji.setError(message);
@@ -353,6 +382,7 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
         client.setCare_taker_phone_number(helperPhoneNumber.getText().toString());
         client.setWard(wardId);
         client.setCtc_number(editTextCTCNumber.getText().toString());
+        client.setRegistration_reason_id(registrationReasonId);
 
         client.setService_provider_uuid(((BoreshaAfyaApplication) getApplication()).getCurrentUserID());
         return client;
@@ -378,6 +408,26 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
         conf.locale = new Locale(preferredLocale);
         res.updateConfiguration(conf, dm);
 
+    }
+
+
+    public List<RegistrationReasons> getRegistrationReasons() {
+        RegistrationReasonsRepository registrationReasonsRepository = context().registrationReasonsRepository();
+
+
+        List<RegistrationReasons> registrationReasons =  registrationReasonsRepository.all();
+        registrationReasonsNames.clear();
+        for(RegistrationReasons registrationReason :registrationReasons){
+
+            if (preferredLocale.equals(ENGLISH_LOCALE))
+                registrationReasonsNames.add(registrationReason.getDescEn());
+            else {
+                registrationReasonsNames.add(registrationReason.getDescSw());
+            }
+
+
+        }
+        return  registrationReasons;
     }
 
 }
