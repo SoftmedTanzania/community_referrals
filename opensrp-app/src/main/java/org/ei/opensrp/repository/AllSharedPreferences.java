@@ -9,6 +9,7 @@ public class AllSharedPreferences {
     public static final String ANM_PASSWORD = "anmp";
     private static final String HOST = "HOST";
     private static final String PORT = "PORT";
+    private static final String CBHS_NUMBER = "CBHS_NUMBER";
     private SharedPreferences preferences;
 
     public AllSharedPreferences(SharedPreferences preferences) {
@@ -68,5 +69,13 @@ public class AllSharedPreferences {
 
     public void savePort(Integer port){
         preferences.edit().putString(PORT,String.valueOf(port)).commit();
+    }
+
+    public String fetchCBHS(){
+        return  preferences.getString(CBHS_NUMBER,"");
+    }
+
+    public void saveCBHS(String cbhsNo){
+        preferences.edit().putString(CBHS_NUMBER,cbhsNo).commit();
     }
 }

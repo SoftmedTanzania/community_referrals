@@ -3,12 +3,12 @@
     <PreferenceCategory android:title="Server">
 
         <EditTextPreference
-            android:key="DRISHTI_BASE_URL"
-            android:title="OpenSRP base URL"
-            android:summary="Defines the base server url that handles requests"
-            android:dialogTitle="OpenSRP base URL"
-            android:dialogMessage="Enter Base Server Url"
-            android:defaultValue="http://23.92.25.157:8080/opensrp"
+            android:key="CBHS_NUMBER"
+            android:title="CBHS number"
+            android:summary="Defines your CBHS number"
+            android:dialogTitle="CHW CBHS number"
+            android:dialogMessage="Enter your CBHS number"
+            android:defaultValue=""
             android:persistent="true"/>
 
     </PreferenceCategory>

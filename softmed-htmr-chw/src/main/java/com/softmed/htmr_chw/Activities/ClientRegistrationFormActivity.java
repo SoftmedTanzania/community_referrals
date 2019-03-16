@@ -21,14 +21,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.R;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
 import org.ei.opensrp.domain.Client;
-import org.ei.opensrp.domain.ReferralFeedback;
 import org.ei.opensrp.domain.RegistrationReasons;
 import org.ei.opensrp.domain.SyncStatus;
 import org.ei.opensrp.domain.form.FormData;
@@ -38,10 +39,10 @@ import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.repository.ClientRepository;
-import org.ei.opensrp.repository.ReferralFeedbackRepository;
 import org.ei.opensrp.repository.RegistrationReasonsRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -50,7 +51,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import fr.ganfra.materialspinner.MaterialSpinner;
+
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static com.softmed.htmr_chw.util.Utils.generateRandomUUIDString;
 import static org.ei.opensrp.AllConstants.ENGLISH_LOCALE;
@@ -65,7 +68,7 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
     public EditText editTextfName, editTextmName, editTextlName, editTextVillageLeader, editTextCTCNumber,
             editTextDiscountId, editTextKijiji, editTextReferralReason, helperName, helperPhoneNumber;
     public Button button;
-    public MaterialSpinner spinnerGender,registrationReasonsSpinner;
+    public MaterialSpinner spinnerGender, registrationReasonsSpinner;
     public String message = "";
     public Context context;
     public int genderSelection = -1;
@@ -85,7 +88,7 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
     private Typeface robotoBold, robotoCondenced;
     private List<String> registrationReasonsNames = new ArrayList<>();
     private List<RegistrationReasons> registrationReasons = new ArrayList<>();
-    private String registrationReasonId ;
+    private String registrationReasonId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -214,7 +217,8 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
         registrationReasonsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                registrationReasonId = registrationReasons.get(i).getId();
+                if (i >= 0)
+                    registrationReasonId = registrationReasons.get(i).getId();
             }
 
             @Override
@@ -222,7 +226,6 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
 
             }
         });
-
 
 
         String[] ITEMS = getResources().getStringArray(com.softmed.htmr_chw.R.array.gender);
@@ -415,9 +418,9 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
         RegistrationReasonsRepository registrationReasonsRepository = context().registrationReasonsRepository();
 
 
-        List<RegistrationReasons> registrationReasons =  registrationReasonsRepository.all();
+        List<RegistrationReasons> registrationReasons = registrationReasonsRepository.all();
         registrationReasonsNames.clear();
-        for(RegistrationReasons registrationReason :registrationReasons){
+        for (RegistrationReasons registrationReason : registrationReasons) {
 
             if (preferredLocale.equals(ENGLISH_LOCALE))
                 registrationReasonsNames.add(registrationReason.getDescEn());
@@ -427,7 +430,7 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
 
 
         }
-        return  registrationReasons;
+        return registrationReasons;
     }
 
 }
