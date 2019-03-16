@@ -1,73 +1,73 @@
 {
-    "form_data_definition_version": "4",
-    "form": {
-        "bind_type": "client",
-        "default_bind_path": "/model/instance/client_registration_form/",
-        "fields": [
-            {
-                "name": "id",
-                "shouldLoadValue": true
-            },
-            {
-                "name": "relationalid"
-            },
-            {
-                "name": "first_name"
-            },
-            {
-                "name": "middle_name"
-            },
-            {
-                "name": "surname"
-            },
-            {
-                "name": "date_of_birth"
-            },
-            {
-                "name": "community_based_hiv_service"
-            },
-            {
-                "name": "ctc_number"
-            },
-            {
-                "name": "is_valid"
-            },
-            {
-                "name": "facility_id"
-            },
-            {
-                "name": "gender"
-            },
-            {
-                "name": "phone_number"
-            },
-            {
-                "name": "ward"
-            },
-            {
-                "name": "registration_reason_id"
-            },
-            {
-                "name": "village"
-            },
-            {
-                "name": "veo"
-            },
-            {
-                "name": "care_taker_name"
-            },
-            {
-                "name": "care_taker_phone_number"
-            },
-            {
-                "name": "care_taker_relationship"
-            },
-            {
-                "name": "service_provider_mobile_number"
-            },
-            {
-                "name": "service_provider_uuid"
-            }
-        ]
-    }
+  "form_data_definition_version": "4",
+  "form": {
+    "bind_type": "client",
+    "default_bind_path": "/model/instance/client_registration_form/",
+    "fields": [
+      {
+        "name": "id",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "relationalid"
+      },
+      {
+        "name": "first_name"
+      },
+      {
+        "name": "middle_name"
+      },
+      {
+        "name": "surname"
+      },
+      {
+        "name": "date_of_birth"
+      },
+      {
+        "name": "community_based_hiv_service"
+      },
+      {
+        "name": "ctc_number"
+      },
+      {
+        "name": "is_valid"
+      },
+      {
+        "name": "facility_id"
+      },
+      {
+        "name": "gender"
+      },
+      {
+        "name": "phone_number"
+      },
+      {
+        "name": "ward"
+      },
+      {
+        "name": "registration_reason_id"
+      },
+      {
+        "name": "village"
+      },
+      {
+        "name": "veo"
+      },
+      {
+        "name": "care_taker_name"
+      },
+      {
+        "name": "care_taker_phone_number"
+      },
+      {
+        "name": "care_taker_relationship"
+      },
+      {
+        "name": "service_provider_mobile_number"
+      },
+      {
+        "name": "service_provider_uuid"
+      }
+    ]
+  }
 }
