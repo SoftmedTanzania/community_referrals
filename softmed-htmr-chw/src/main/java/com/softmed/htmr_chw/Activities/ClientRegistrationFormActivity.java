@@ -19,6 +19,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -85,7 +87,7 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
     private ClientRepository clientRepository;
     private MaterialEditText dobTextView;
     private String preferredLocale;
-    private Typeface robotoBold, robotoCondenced;
+    private Typeface robotoBold, sansBold;
     private List<String> registrationReasonsNames = new ArrayList<>();
     private List<RegistrationReasons> registrationReasons = new ArrayList<>();
     private String registrationReasonId;
@@ -98,7 +100,7 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
         preferredLocale = allSharedPreferences.fetchLanguagePreference();
 
         robotoBold = Typeface.createFromAsset(getAssets(), "roboto_bold.ttf");
-        robotoCondenced = Typeface.createFromAsset(getAssets(), "roboto_condensed.ttf");
+        sansBold = Typeface.createFromAsset(getAssets(), "google_sans_bold.ttf");
 
         setLanguage();
 
@@ -258,6 +260,38 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
                 // pick date
                 pickDate(com.softmed.htmr_chw.R.id.reg_dob);
             }
+        });
+
+        TextView isACbhsClient = (TextView) findViewById(com.softmed.htmr_chw.R.id.is_a_cbhs_client);
+        isACbhsClient.setTypeface(sansBold);
+
+
+        TextView prefix = (TextView) findViewById(com.softmed.htmr_chw.R.id.prefix);
+        prefix.setTypeface(sansBold);
+        try {
+            prefix.setText(context().allSharedPreferences().fetchCBHS()+"/");
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
+        final LinearLayout cbhsLayout = (LinearLayout)findViewById(R.id.cbhs_layout);
+
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.is_cbhs_client);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // find which radio button is selected
+                if(checkedId == R.id.yes) {
+                    cbhsLayout.setVisibility(View.VISIBLE);
+                } else if(checkedId == R.id.no) {
+                    cbhsLayout.setVisibility(View.GONE);
+                } else {
+
+                }
+            }
+
         });
 
     }

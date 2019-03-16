@@ -151,4 +151,7 @@ Aenean quis ex dictum, porttitor nunc id, viverra urna. Suspendisse posuere ex a
     <string name="str_set_cbhs_number">Set CBHS Number</string>
     <string name="client_registration_reason">Client Registration Reason</string>
     <string name="missing_registration_reason">Please select client registration reason</string>
+    <string name="is_a_cbhs_client">Client Type</string>
+    <string name="cbhs_client">CBHS Client</string>
+    <string name="referral_client">Referral client</string>
 </resources>

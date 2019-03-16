@@ -148,6 +148,9 @@
     <string name="str_set_cbhs_number">Hifadhi namba yako ya CBHS</string>
     <string name="client_registration_reason">Sababu za usajili</string>
     <string name="missing_registration_reason">Tafadhali chagua sababu ya usajili wa mteja</string>
+    <string name="is_a_cbhs_client">Aina ya Mteja</string>
+    <string name="cbhs_client">Mteja wa CBHS</string>
+    <string name="referral_client">Mteja wa rufaa</string>
 
 
 </resources>

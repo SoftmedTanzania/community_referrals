@@ -124,5 +124,6 @@
     <string name="gender">Gender</string>
     <string name="client_registration_reason">Client Registration Reason</string>
     <string name="missing_registration_reason">Please select client registration reason</string>
+    <string name="is_a_cbhs_client">Client Type</string>
 
 </resources>

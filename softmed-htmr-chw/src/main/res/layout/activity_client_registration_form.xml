@@ -341,53 +341,38 @@
 
                             </LinearLayout>
 
+
                             <LinearLayout
+                                android:layout_height="80dp"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
                                 android:background="@color/card_separator_third"
                                 android:orientation="horizontal"
                                 android:paddingLeft="32dp"
                                 android:paddingRight="32dp">
 
                                 <RelativeLayout
+                                    android:layout_gravity="center_vertical"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="16dp"
-                                    android:layout_weight="0.5"
-                                    android:paddingBottom="16dp">
+                                    android:layout_weight="0.5">
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginTop="8dp">
-
-                                        <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/editTextDiscountId"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginRight="16dp"
-                                            android:layout_weight="0.5"
-                                            android:hint="@string/title_cbhs_number"
-                                            android:imeOptions="actionNext"
-                                            android:inputType="text"
-                                            android:textColor="@color/primary_text"
-                                            android:textColorHint="@color/black_translucent"
-                                            android:textSize="14sp"
-                                            app:met_floatingLabel="normal"
-                                            app:met_floatingLabelText="@string/title_cbhs_number"
-                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
+                                        android:layout_alignParentTop="true"
+                                        android:layout_alignParentStart="true">
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
                                             android:id="@+id/editTextOthers"
+                                            android:visibility="gone"
                                             android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginBottom="16dp"
-                                            android:layout_marginRight="16dp"
+                                            android:layout_marginTop="8dp"
                                             android:layout_weight="0.5"
+                                            android:layout_height="wrap_content"
                                             android:hint="@string/title_ctc_number"
                                             android:imeOptions="actionNext"
                                             android:inputType="text"
-                                            android:visibility="gone"
                                             android:textColor="@color/primary_text"
                                             android:textColorHint="@color/hint_text"
                                             android:textSize="14sp"
@@ -399,16 +384,16 @@
                                             android:id="@+id/registration_reasons_spinner"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginLeft="16dp"
-                                            android:layout_marginTop="16dp"
+                                            android:layout_gravity="bottom"
                                             android:layout_weight="0.5"
+                                            android:spinnerMode="dialog"
                                             app:ms_arrowColor="@color/colorPrimary"
                                             app:ms_arrowSize="14dp"
                                             app:ms_baseColor="@color/colorPrimary"
                                             app:ms_enableFloatingLabel="false"
                                             app:ms_hint="@string/client_registration_reason"
                                             app:ms_hintColor="@color/hint_text"
-                                            app:ms_multiline="true"
+                                            app:ms_multiline="false"
                                             app:ms_thickness="1dp" />
 
 
@@ -422,6 +407,7 @@
                                     android:layout_weight="0.5"
                                     android:paddingBottom="16dp">
 
+
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content" >
@@ -431,8 +417,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="0dp"
                                             android:layout_marginRight="0dp"
-                                            android:layout_weight="0.2"
-                                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                            android:layout_weight="1"
                                             android:focusable="true"
                                             android:hint="@string/helper_name"
                                             android:imeOptions="actionNext"
@@ -444,24 +429,143 @@
                                             app:met_floatingLabelText="@string/helper_name"
                                             app:met_floatingLabelTextColor="@color/colorPrimary" />
 
+
+
                                         <com.rengwuxian.materialedittext.MaterialEditText
                                             android:id="@+id/helper_phone_number"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="16dp"
-                                            android:layout_weight="0.2"
-                                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                            android:layout_weight="1"
                                             android:hint="@string/helper_phone_number"
                                             android:imeOptions="actionNext"
-                                            android:inputType="textCapWords|textPersonName"
+                                            android:inputType="phone"
+                                            android:maxLength="10"
                                             android:textColor="@color/primary_text"
                                             android:textColorHint="@color/hint_text"
-                                            android:textSize="16sp"
+                                            android:textSize="14sp"
                                             app:met_floatingLabel="normal"
                                             app:met_floatingLabelText="@string/helper_phone_number"
                                             app:met_floatingLabelTextColor="@color/colorPrimary" />
                                     </LinearLayout>
 
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/is_a_cbhs_client"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="32dp"
+                                android:inputType="numberDecimal"
+                                android:textColor="@color/colorPrimary"
+                                android:text="@string/is_a_cbhs_client"
+                                android:textSize="18sp" />
+                            <View
+                                android:id="@+id/strip4"
+                                android:layout_marginLeft="32dp"
+                                android:layout_width="60dp"
+                                android:layout_height="5dp"
+                                android:layout_below="@id/initial_information_title"
+                                android:layout_marginTop="8dp"
+                                android:background="@color/card_separator" />
+                            <LinearLayout
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:background="@color/card_separator_third"
+                                android:orientation="horizontal"
+                                android:paddingLeft="32dp"
+                                android:paddingRight="32dp">
+
+                                <RelativeLayout
+                                    android:layout_marginTop="8dp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="16dp"
+                                    android:layout_weight="0.5"
+                                    android:paddingBottom="16dp">
+
+                                    <LinearLayout
+                                        android:layout_centerVertical="true"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+                                        <RadioGroup
+                                            android:layout_marginLeft="16dp"
+                                            android:layout_width="0dp"
+                                            android:layout_weight="1"
+                                            android:id="@+id/is_cbhs_client"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+                                            <RadioButton
+                                                android:id="@+id/yes"
+                                                android:layout_weight="1"
+                                                android:layout_width="0dp"
+                                                android:checked="true"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/cbhs_client"/>
+                                            <RadioButton
+                                                android:layout_weight="1"
+                                                android:id="@+id/no"
+                                                android:layout_marginLeft="16dp"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/referral_client"/>
+                                        </RadioGroup>
+
+                                    </LinearLayout>
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="16dp"
+                                    android:layout_weight="0.5"
+                                    android:paddingBottom="16dp">
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+                                        <LinearLayout
+                                            android:id="@+id/cbhs_layout"
+                                            android:orientation="horizontal"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.5" >
+                                            <TextView
+                                                android:id="@+id/prefix"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:textSize="18sp"/>
+
+                                            <com.rengwuxian.materialedittext.MaterialEditText
+                                                android:id="@+id/editTextDiscountId"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="8dp"
+                                                android:layout_marginRight="16dp"
+                                                android:hint="@string/title_cbhs_number"
+                                                android:inputType="numberDecimal"
+                                                android:imeOptions="actionNext"
+                                                android:textColor="@color/primary_text"
+                                                android:textColorHint="@color/black_translucent"
+                                                android:textSize="14sp"
+                                                app:met_floatingLabel="normal"
+                                                app:met_floatingLabelText="@string/title_cbhs_number"
+                                                app:met_floatingLabelTextColor="@color/colorPrimary" />
+
+
+                                        </LinearLayout>
+
+
+                                        <View
+                                            android:layout_width="0dp"
+                                            android:layout_weight="0.5"
+                                            android:layout_height="wrap_content"/>
+
+                                    </LinearLayout>
                                 </RelativeLayout>
 
                             </LinearLayout>
