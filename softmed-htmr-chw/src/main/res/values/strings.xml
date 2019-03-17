@@ -154,4 +154,6 @@ Aenean quis ex dictum, porttitor nunc id, viverra urna. Suspendisse posuere ex a
     <string name="is_a_cbhs_client">Client Type</string>
     <string name="cbhs_client">CBHS Client</string>
     <string name="referral_client">Referral client</string>
+    <string name="cbhs_clients_label">My CBHS Clients</string>
+    <string name="referral_clients_label">Referral Clients</string>
 </resources>

@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -33,14 +34,14 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
-import com.softmed.htmr_chw.Fragments.CHWSmartRegisterFragment;
-import com.softmed.htmr_chw.Fragments.FollowupReferralsFragment;
-import com.softmed.htmr_chw.Fragments.ReferralsListFragment;
-import com.softmed.htmr_chw.Fragments.ClientsListFragment;
-import com.softmed.htmr_chw.Fragments.ReportFragment;
-import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.Domain.ClientReferral;
 import com.softmed.htmr_chw.Domain.LocationSelectorDialogFragment;
+import com.softmed.htmr_chw.Fragments.CHWSmartRegisterFragment;
+import com.softmed.htmr_chw.Fragments.ClientsFragment;
+import com.softmed.htmr_chw.Fragments.FollowupReferralsFragment;
+import com.softmed.htmr_chw.Fragments.ReferralsListFragment;
+import com.softmed.htmr_chw.Fragments.ReportFragment;
+import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.util.FitDoughnut;
 import com.softmed.htmr_chw.util.NavigationController;
 
@@ -88,16 +89,19 @@ import static org.ei.opensrp.event.Event.SYNC_COMPLETED;
 import static org.ei.opensrp.event.Event.SYNC_STARTED;
 
 public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener {
-    private String locationDialogTAG = "locationDialogTAG";
     static final String DATABASE_NAME = "drishti.db";
     private static final String TAG = ChwSmartRegisterActivity.class.getSimpleName();
     public static MaterialSpinner spinnerReason, spinnerClientAvailable;
     public static int availableSelection = -1, reasonSelection = -1;
+    public static TabLayout myTabLayout;
+    private static boolean isOnTheMainMenu;
     @Bind(R.id.view_pager)
     public OpenSRPViewPager mPager;
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-    String message = "";
-    Calendar today = Calendar.getInstance();
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+    private String message = "";
+    private RelativeLayout pendingForm;
+    private TextView successView, unsuccessView;
+    private String locationDialogTAG = "locationDialogTAG";
     private JSONObject fieldOverides = new JSONObject();
     private FragmentPagerAdapter mPagerAdapter;
     private int currentPage;
@@ -109,17 +113,46 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private SecuredActivity securedActivity;
     private LinearLayout flags_layout;
     private Toolbar toolbar;
-    RelativeLayout pendingForm;
     private ScrollView mainMenu;
     private ImageButton imageButton;
-    private static boolean isOnTheMainMenu;
     private View fragmentsView;
     private TextView pending;
-    TextView successView, unsuccessView;
     private FitDoughnut donutChart;
     private MenuItem updateMenuItem;
     private PendingFormSubmissionService pendingFormSubmissionService;
     private LinearLayout tabsLayout;
+    private Listener<Boolean> onSyncCompleteListener = new Listener<Boolean>() {
+        @Override
+        public void onEvent(Boolean data) {
+            //#TODO: RemainingFormsToSyncCount cannot be updated from a back ground thread!!
+            updateRemainingFormsToSyncCount();
+            if (updateMenuItem != null) {
+                updateMenuItem.setActionView(null);
+            }
+            updateRegisterCounts();
+            refreshListView();
+        }
+    };
+    private Listener<Boolean> onSyncStartListener = new Listener<Boolean>() {
+        @Override
+        public void onEvent(Boolean data) {
+            if (updateMenuItem != null) {
+                updateMenuItem.setActionView(R.layout.progress);
+            }
+        }
+    };
+    private Listener<String> onFormSubmittedListener = new Listener<String>() {
+        @Override
+        public void onEvent(String instanceId) {
+            updateRegisterCounts();
+        }
+    };
+    private Listener<String> updateANMDetailsListener = new Listener<String>() {
+        @Override
+        public void onEvent(String data) {
+            updateRegisterCounts();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,8 +160,8 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         setContentView(R.layout.activity_chwregister);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         String cbhsNumber = context().allSharedPreferences().fetchCBHS();
-        if(cbhsNumber==null || cbhsNumber.equals("")){
-            startActivity(new Intent(ChwSmartRegisterActivity.this,SettingsActivity.class));
+        if (cbhsNumber == null || cbhsNumber.equals("")) {
+            startActivity(new Intent(ChwSmartRegisterActivity.this, SettingsActivity.class));
         }
         securedActivity = new SecuredActivity() {
             @Override
@@ -153,13 +186,13 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         tabsLayout = (LinearLayout) findViewById(R.id.tabs);
 
         isOnTheMainMenu = true;
-        mainMenu = (ScrollView)findViewById(R.id.main_menu);
+        mainMenu = (ScrollView) findViewById(R.id.main_menu);
         fragmentsView = findViewById(R.id.fragments);
-        View clientRegistration  = mainMenu.findViewById(R.id.referral_registration_card);
-        View clientList  = mainMenu.findViewById(R.id.client_list_card);
-        View issuedReferrals  = mainMenu.findViewById(R.id.issued_referral_list_card);
-        View receivedReferralList  = mainMenu.findViewById(R.id.received_referrals_list_card);
-        View reports  = mainMenu.findViewById(R.id.reports);
+        View clientRegistration = mainMenu.findViewById(R.id.referral_registration_card);
+        View clientList = mainMenu.findViewById(R.id.client_list_card);
+        View issuedReferrals = mainMenu.findViewById(R.id.issued_referral_list_card);
+        View receivedReferralList = mainMenu.findViewById(R.id.received_referrals_list_card);
+        View reports = mainMenu.findViewById(R.id.reports);
 
         Typeface robotoBold = Typeface.createFromAsset(getAssets(), "roboto_bold.ttf");
         Typeface rosarioRegular = Typeface.createFromAsset(getAssets(), "rosario_regular.ttf");
@@ -190,12 +223,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         referedClientsDesc.setTypeface(rosarioRegular);
 
 
-
-
-
-
-
-
         final FragmentManager fragmentManager = this.getSupportFragmentManager();
         clientRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,19 +236,18 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             public void onClick(View view) {
 
                 tabsLayout.removeAllViews();
-                LinearLayout tabLinearLayout2 = (LinearLayout) LayoutInflater.from(ChwSmartRegisterActivity.this).inflate(R.layout.custom_tab, null);
-                TextView tabContent2 = (TextView) tabLinearLayout2.findViewById(R.id.tabContent);
-                ImageView tabImage =  tabLinearLayout2.findViewById(R.id.tabImage);
-                tabContent2.setText(R.string.page_title);
-                tabImage.setImageDrawable(getResources().getDrawable(R.drawable.baseline_person_white_48dp));
-                tabsLayout.addView(tabLinearLayout2);
+
+                View tabs = getLayoutInflater().inflate(R.layout.tab_layout, null);
+                myTabLayout = tabs.findViewById(R.id.tabs);
+                tabsLayout.addView(tabs);
 
                 isOnTheMainMenu = false;
-                ClientsListFragment newFragment = new ClientsListFragment();
+                ClientsFragment newFragment = new ClientsFragment();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragments, newFragment,"tag");
+                transaction.replace(R.id.fragments, newFragment, "tag");
                 transaction.addToBackStack(null);
                 transaction.commit();
+
 
                 mainMenu.setVisibility(View.GONE);
                 fragmentsView.setVisibility(View.VISIBLE);
@@ -236,7 +262,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 tabsLayout.removeAllViews();
                 LinearLayout tabLinearLayout2 = (LinearLayout) LayoutInflater.from(ChwSmartRegisterActivity.this).inflate(R.layout.custom_tab, null);
                 TextView tabContent2 = (TextView) tabLinearLayout2.findViewById(R.id.tabContent);
-                ImageView tabImage =  tabLinearLayout2.findViewById(R.id.tabImage);
+                ImageView tabImage = tabLinearLayout2.findViewById(R.id.tabImage);
                 tabContent2.setText(R.string.sent_referrals_label);
                 tabImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_up_white_24dp));
                 tabsLayout.addView(tabLinearLayout2);
@@ -244,7 +270,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 isOnTheMainMenu = false;
                 ReferralsListFragment newFragment = new ReferralsListFragment();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragments, newFragment,"tag");
+                transaction.replace(R.id.fragments, newFragment, "tag");
                 transaction.addToBackStack(null);
                 transaction.commit();
 
@@ -260,7 +286,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 tabsLayout.removeAllViews();
                 LinearLayout tabLinearLayout1 = (LinearLayout) LayoutInflater.from(ChwSmartRegisterActivity.this).inflate(R.layout.custom_tab, null);
                 TextView tabContent1 = (TextView) tabLinearLayout1.findViewById(R.id.tabContent);
-                ImageView tabImage =  tabLinearLayout1.findViewById(R.id.tabImage);
+                ImageView tabImage = tabLinearLayout1.findViewById(R.id.tabImage);
                 tabContent1.setText(R.string.received_referrals_label);
                 tabImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_down_white_24dp));
                 tabsLayout.addView(tabLinearLayout1);
@@ -287,7 +313,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 tabsLayout.removeAllViews();
                 LinearLayout tabLinearLayout3 = (LinearLayout) LayoutInflater.from(ChwSmartRegisterActivity.this).inflate(R.layout.custom_tab, null);
                 TextView tabContent3 = (TextView) tabLinearLayout3.findViewById(R.id.tabContent);
-                ImageView tabImage =  tabLinearLayout3.findViewById(R.id.tabImage);
+                ImageView tabImage = tabLinearLayout3.findViewById(R.id.tabImage);
                 tabContent3.setText(R.string.reports_label);
                 tabImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_event_note_white_24dp));
                 tabsLayout.addView(tabLinearLayout3);
@@ -304,8 +330,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
 
 
-
-
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -315,7 +339,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         });
 
         LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-        ImageView tabImage =  tabLinearLayout.findViewById(R.id.tabImage);
+        ImageView tabImage = tabLinearLayout.findViewById(R.id.tabImage);
         TextView tabContent = (TextView) tabLinearLayout.findViewById(R.id.tabContent);
         tabContent.setText(getResources().getString(R.string.main_menu_label));
 
@@ -340,7 +364,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                                 recreate();
                                 return true;
                             case com.softmed.htmr_chw.R.id.setCBHSnumberMenuItem:
-                                startActivity(new Intent(ChwSmartRegisterActivity.this,SettingsActivity.class));
+                                startActivity(new Intent(ChwSmartRegisterActivity.this, SettingsActivity.class));
                                 return true;
                             default:
                                 return onOptionsItemSelected(item);
@@ -351,14 +375,13 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         TextView username = (TextView) findViewById(R.id.toolbar_user_name);
         pendingForm = (RelativeLayout) findViewById(R.id.key_three);
         pending = (TextView) findViewById(R.id.count_three);
-        username.setText(getResources().getString(R.string.logged_user)+" "+((BoreshaAfyaApplication)this.getApplication()).getUsername());
-        successView =  (TextView) findViewById(R.id.count_one);
-        unsuccessView =  (TextView) findViewById(R.id.count_two);
+        username.setText(getResources().getString(R.string.logged_user) + " " + ((BoreshaAfyaApplication) this.getApplication()).getUsername());
+        successView = (TextView) findViewById(R.id.count_one);
+        unsuccessView = (TextView) findViewById(R.id.count_two);
 
         donutChart = (FitDoughnut) findViewById(R.id.donutChart);
         donutChart.startAnimateLoading();
         updateFromServer();
-
 
 
     }
@@ -368,19 +391,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         LoginActivity.setLanguage();
     }
 
-    private Listener<Boolean> onSyncCompleteListener = new Listener<Boolean>() {
-        @Override
-        public void onEvent(Boolean data) {
-            //#TODO: RemainingFormsToSyncCount cannot be updated from a back ground thread!!
-            updateRemainingFormsToSyncCount();
-            if (updateMenuItem != null) {
-                updateMenuItem.setActionView(null);
-            }
-            updateRegisterCounts();
-            refreshListView();
-        }
-    };
-
     protected void onResumption() {
         LoginActivity.setLanguage();
         updateRegisterCounts();
@@ -389,13 +399,13 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         refreshListView();
     }
 
-
     public void refreshListView() {
         try {
-            ReferralsListFragment referralsListFragment = (ReferralsListFragment) getSupportFragmentManager().findFragmentByTag("tag");;
+            ReferralsListFragment referralsListFragment = (ReferralsListFragment) getSupportFragmentManager().findFragmentByTag("tag");
+            ;
             referralsListFragment.populateData();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -403,7 +413,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             FollowupReferralsFragment followupReferralsFragment = (FollowupReferralsFragment) getSupportFragmentManager().findFragmentByTag("tag");
             followupReferralsFragment.populateData();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -420,7 +430,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             } else {
                 pendingForm.setVisibility(View.GONE);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -441,16 +451,16 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void run() {
 
-                final long successfullCount =  context().allBeneficiaries().successCount();
-                final long unsuccessfullCount =  context().allBeneficiaries().unsuccessCount();
+                final long successfullCount = context().allBeneficiaries().successCount();
+                final long unsuccessfullCount = context().allBeneficiaries().unsuccessCount();
 
                 Handler mainHandler = new Handler(getMainLooper());
 
                 Runnable myRunnable = new Runnable() {
                     @Override
                     public void run() {
-                        successView =  (TextView) findViewById(R.id.count_one);
-                        unsuccessView =  (TextView) findViewById(R.id.count_two);
+                        successView = (TextView) findViewById(R.id.count_one);
+                        unsuccessView = (TextView) findViewById(R.id.count_two);
                         successView.setText(valueOf(successfullCount));
                         unsuccessView.setText(valueOf(unsuccessfullCount));
 
@@ -458,12 +468,12 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                         float v = 0.0f;
                         try {
                             v = (successfullCount * 1.0f) / (successfullCount + unsuccessfullCount);
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
-                        Log.d(TAG,"donutchart value = "+v);
-                        donutChart.stopAnimateLoading(v*100);
+                        Log.d(TAG, "donutchart value = " + v);
+                        donutChart.stopAnimateLoading(v * 100);
                     }
                 };
                 mainHandler.post(myRunnable);
@@ -521,7 +531,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 referralFeedback.setVisibility(VISIBLE);
                 referralFeedback.setText(clientReferral.getServices_given_to_patient());
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -542,7 +552,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         try {
             referral_service.setText(getReferralServiceName(clientReferral.getReferral_service_id()));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -555,7 +565,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 ctc_number.setText(clientReferral.getCtc_number());
             else
                 ctc_number.setText("-");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         referral_reason.setText(clientReferral.getReferral_reason());
@@ -569,10 +579,10 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             } else {
                 gender.setText(getResources().getString(R.string.male));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        setIndicators(((LinearLayout)dialogView.findViewById(R.id.flags_layout)), clientReferral.getIndicator_ids());
+        setIndicators(((LinearLayout) dialogView.findViewById(R.id.flags_layout)), clientReferral.getIndicator_ids());
     }
 
     private void makeToast() {
@@ -583,7 +593,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     public String getFacilityName(String id) {
 
-        Log.d(TAG,"Facility Id = "+id);
+        Log.d(TAG, "Facility Id = " + id);
         commonRepository = context().commonrepository("facility");
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM facility where id ='" + id + "'");
 
@@ -610,8 +620,8 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             view.removeAllViewsInLayout();
 
             for (int m = 0; m < indicatorsArray.length(); m++) {
-                View v  =  getLayoutInflater().inflate(R.layout.indicator_item,null);
-                TextView indicatorName =v.findViewById(R.id.indicator_name);
+                View v = getLayoutInflater().inflate(R.layout.indicator_item, null);
+                TextView indicatorName = v.findViewById(R.id.indicator_name);
                 indicatorName.setText(getIndicatorName(indicatorsArray.getString(m)));
                 indicatorName.setPadding(0, 10, 10, 0);
                 view.addView(v);
@@ -621,10 +631,9 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         }
     }
 
-
     public String getIndicatorName(String id) {
 
-        Log.d(TAG,"indicatorId = "+id);
+        Log.d(TAG, "indicatorId = " + id);
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM indicator where referralServiceIndicatorId ='" + id + "'");
 
         List<CommonPersonObject> commonPersonObjectList = commonRepository.readAllcommonForField(cursor, "indicator");
@@ -636,11 +645,10 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public void showFollowUpFormDialog(final ClientReferral clientReferral) {
 
 
-
         final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
         final EditText client_condition = (EditText) dialogView.findViewById(R.id.client_status);
 
-        String[] ITEMS = {getString(R.string.followup_feedback_patient_moved), getString(R.string.followup_feedback_patient_died),getString(R.string.followup_feedback_other_reasons)};
+        String[] ITEMS = {getString(R.string.followup_feedback_patient_moved), getString(R.string.followup_feedback_patient_died), getString(R.string.followup_feedback_other_reasons)};
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ITEMS);
@@ -828,34 +836,10 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         updateRegisterCounts();
     }
 
-    private Listener<Boolean> onSyncStartListener = new Listener<Boolean>() {
-        @Override
-        public void onEvent(Boolean data) {
-            if (updateMenuItem != null) {
-                updateMenuItem.setActionView(R.layout.progress);
-            }
-        }
-    };
-
-    private Listener<String> onFormSubmittedListener = new Listener<String>() {
-        @Override
-        public void onEvent(String instanceId) {
-            updateRegisterCounts();
-        }
-    };
-
-    private Listener<String> updateANMDetailsListener = new Listener<String>() {
-        @Override
-        public void onEvent(String data) {
-            updateRegisterCounts();
-        }
-    };
-
-
     @Override
     public void startRegistration() {
         Log.d(TAG, "starting registrations");
-        android.app.FragmentTransaction ft =getFragmentManager().beginTransaction();
+        android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
         android.app.Fragment prev = getFragmentManager().findFragmentByTag(locationDialogTAG);
         if (prev != null) {
             ft.remove(prev);
@@ -1009,15 +993,14 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     @Override
     public void onBackPressed() {
-        Log.d(TAG,"BackPressed");
+        Log.d(TAG, "BackPressed");
 
 
-
-        if(!isOnTheMainMenu){
+        if (!isOnTheMainMenu) {
 
             tabsLayout.removeAllViews();
             LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-            ImageView tabImage =  tabLinearLayout.findViewById(R.id.tabImage);
+            ImageView tabImage = tabLinearLayout.findViewById(R.id.tabImage);
             TextView tabContent = (TextView) tabLinearLayout.findViewById(R.id.tabContent);
             tabContent.setText(getResources().getString(R.string.main_menu_label));
 
@@ -1025,14 +1008,14 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             tabsLayout.addView(tabLinearLayout);
 
 
-            Log.d(TAG,"BackPressed true");
+            Log.d(TAG, "BackPressed true");
             mainMenu.setVisibility(View.VISIBLE);
             getSupportFragmentManager().beginTransaction().
                     remove(getSupportFragmentManager().findFragmentById(R.id.fragments)).commit();
 
             fragmentsView.setVisibility(View.GONE);
 
-        }else {
+        } else {
             super.onBackPressed(); // allow back key only if we are
         }
     }
@@ -1045,11 +1028,12 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 updateMenuItem = item;
                 updateFromServer();
                 if (context().allSharedPreferences().fetchIsSyncInProgress()) {
-                    Log.d(TAG,"am in sync progress");
+                    Log.d(TAG, "am in sync progress");
                     item.setActionView(R.layout.progress);
-                } else{
+                } else {
                     item.setActionView(null);
-                    Log.d(TAG,"am in sync progress after");}
+                    Log.d(TAG, "am in sync progress after");
+                }
 
                 return true;
 
@@ -1058,7 +1042,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //                return true;
 
             case R.id.logout:
-                ((BoreshaAfyaApplication)getApplication()).logoutCurrentUser();
+                ((BoreshaAfyaApplication) getApplication()).logoutCurrentUser();
 
                 return true;
             case R.id.switchLanguageMenuItem:

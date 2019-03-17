@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
-import com.softmed.htmr_chw.Adapters.ClientsListAdapter;
+import com.softmed.htmr_chw.Adapters.ReferralClientsListAdapter;
 import com.softmed.htmr_chw.Domain.LocationSelectorDialogFragment;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.util.AsyncTask;
@@ -38,8 +38,8 @@ import java.util.Locale;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
 
-public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
-    private static final String TAG = ClientsListFragment.class.getSimpleName();
+public class ReferralClientsListFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+    private static final String TAG = ReferralClientsListFragment.class.getSimpleName();
     public String message = "";
     private ClientRepository clientRepository;
     private List<Client> clients = new ArrayList<>();
@@ -50,14 +50,14 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
     private EditText fname, othername, phoneNumber;
     private MaterialSpinner spinnerType;
     private RecyclerView recyclerView;
-    private ClientsListAdapter clientsListAdapter;
+    private ReferralClientsListAdapter referralClientsListAdapter;
     private Typeface robotoRegular, sansBold;
 
-    public ClientsListFragment() {
+    public ReferralClientsListFragment() {
     }
 
-    public static ClientsListFragment newInstance() {
-        ClientsListFragment fragment = new ClientsListFragment();
+    public static ReferralClientsListFragment newInstance() {
+        ReferralClientsListFragment fragment = new ReferralClientsListFragment();
 
         return fragment;
     }
@@ -72,13 +72,13 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v = inflater.inflate(R.layout.fragment_registered_clients, container, false);
+        View v = inflater.inflate(R.layout.fragment_registered_referral_clients, container, false);
         setupviews(v);
 
         clientRepository = context().clientRepository();
         clients = clientRepository.all();
 
-        clientsListAdapter = new ClientsListAdapter(getActivity(), clients);
+        referralClientsListAdapter = new ReferralClientsListAdapter(getActivity(), clients);
         Log.d(TAG, "repo count = " + clients.size());
 
         FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
@@ -106,8 +106,8 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
                     Log.d(TAG, "am in false else");
                     List<Client> clients = clientRepository.RawCustomQueryForAdapter("select * FROM " + ClientRepository.TABLE_NAME);
 
-                    clientsListAdapter = new ClientsListAdapter(getActivity(), clients);
-                    recyclerView.setAdapter(clientsListAdapter);
+                    referralClientsListAdapter = new ReferralClientsListAdapter(getActivity(), clients);
+                    recyclerView.setAdapter(referralClientsListAdapter);
                 }
             }
         });
@@ -120,7 +120,7 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
         recyclerView.addItemDecoration(
                 new DividerItemDecoration(getActivity(), null));
 
-        recyclerView.setAdapter(clientsListAdapter);
+        recyclerView.setAdapter(referralClientsListAdapter);
 
         populateData();
 
@@ -207,7 +207,7 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
     public void populateData() {
         List<Client> clients = clientRepository.all();
 
-        ClientsListAdapter pager = new ClientsListAdapter(getActivity(), clients);
+        ReferralClientsListAdapter pager = new ReferralClientsListAdapter(getActivity(), clients);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -310,7 +310,7 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
                 Log.d(TAG, "resultList " + resultList.size() + "items");
                 Log.d(TAG, "resultList " + new Gson().toJson(resultList));
 
-                ClientsListAdapter pager = new ClientsListAdapter(getActivity(), resultList);
+                ReferralClientsListAdapter pager = new ReferralClientsListAdapter(getActivity(), resultList);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -325,7 +325,7 @@ public class ClientsListFragment extends SecuredNativeSmartRegisterCursorAdapter
                 message = getString(R.string.no_clients_found);
                 makeToast();
 
-                ClientsListAdapter pager = new ClientsListAdapter(getActivity(), resultList);
+                ReferralClientsListAdapter pager = new ReferralClientsListAdapter(getActivity(), resultList);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());

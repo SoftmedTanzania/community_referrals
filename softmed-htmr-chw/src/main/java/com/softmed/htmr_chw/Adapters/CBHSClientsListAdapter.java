@@ -23,15 +23,15 @@ import java.util.List;
  * Created by Coze on 2/10/19.
  */
 
-public class ClientsListAdapter extends
-        RecyclerView.Adapter<ClientsListAdapter.ViewHolder> {
-    private static String TAG = ClientsListAdapter.class.getSimpleName();
+public class CBHSClientsListAdapter extends
+        RecyclerView.Adapter<CBHSClientsListAdapter.ViewHolder> {
+    private static String TAG = CBHSClientsListAdapter.class.getSimpleName();
     private CommonRepository commonRepository;
     private List<Client> clients = new ArrayList<>();
     ;
     private Context mContext;
 
-    public ClientsListAdapter(Context context, List<Client> client) {
+    public CBHSClientsListAdapter(Context context, List<Client> client) {
         clients = client;
         mContext = context;
 
@@ -44,7 +44,7 @@ public class ClientsListAdapter extends
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View contactView = inflater.inflate(R.layout.client_list_item, parent, false);
+        View contactView = inflater.inflate(R.layout.referral_client_list_item, parent, false);
         return new ViewHolder(contactView);
     }
 
@@ -56,6 +56,7 @@ public class ClientsListAdapter extends
         viewHolder.phoneNumber.setText(client.getPhone_number());
         viewHolder.village.setText(client.getVillage());
         viewHolder.gender.setText(client.getGender());
+        viewHolder.cbhsNo.setText(client.getCommunity_based_hiv_service());
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +79,7 @@ public class ClientsListAdapter extends
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView nameTextView, phoneNumber, gender, village;
+        public TextView nameTextView, phoneNumber, gender,cbhsNo, village;
         public View itemView;
 
         public ViewHolder(View itemView) {
@@ -87,6 +88,7 @@ public class ClientsListAdapter extends
             phoneNumber = itemView.findViewById(R.id.phone_number);
             gender = itemView.findViewById(R.id.gender);
             village = itemView.findViewById(R.id.village);
+            cbhsNo = itemView.findViewById(R.id.cbhs_no);
             this.itemView = itemView;
 
         }

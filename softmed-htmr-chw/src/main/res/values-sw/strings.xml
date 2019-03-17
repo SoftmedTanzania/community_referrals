@@ -151,6 +151,8 @@
     <string name="is_a_cbhs_client">Aina ya Mteja</string>
     <string name="cbhs_client">Mteja wa CBHS</string>
     <string name="referral_client">Mteja wa rufaa</string>
+    <string name="cbhs_clients_label">My CBHS Clients</string>
+    <string name="referral_clients_label">Referral Clients</string>
 
 
 </resources>
