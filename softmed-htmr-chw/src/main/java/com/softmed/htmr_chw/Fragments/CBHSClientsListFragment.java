@@ -77,7 +77,9 @@ public class CBHSClientsListFragment extends SecuredNativeSmartRegisterCursorAda
         setupviews(v);
 
         clientRepository = context().clientRepository();
-        clients = clientRepository.all();
+
+        List<Client> clients = clientRepository.RawCustomQueryForAdapter("select * FROM " + ClientRepository.TABLE_NAME+
+                " WHERE "+ ClientRepository.CBHS+" LIKE '"+context().allSharedPreferences().fetchCBHS()+"%'");
 
         cbhsClientsListAdapter = new CBHSClientsListAdapter(getActivity(), clients);
         Log.d(TAG, "repo count = " + clients.size());
@@ -96,6 +98,7 @@ public class CBHSClientsListFragment extends SecuredNativeSmartRegisterCursorAda
                 if (isQueryInitializationOk()) {
                     StringBuilder queryBuilder = new StringBuilder("SELECT * FROM ");
                     queryBuilder.append(ClientRepository.TABLE_NAME);
+                    queryBuilder.append(" WHERE "+ClientRepository.CBHS+" LIKE '"+context().allSharedPreferences().fetchCBHS()+"%'");
                     new QueryTask().execute(queryBuilder.toString(),
                             ClientRepository.TABLE_NAME,
                             getFname(),
@@ -105,7 +108,10 @@ public class CBHSClientsListFragment extends SecuredNativeSmartRegisterCursorAda
 
                 } else {
                     Log.d(TAG, "am in false else");
-                    List<Client> clients = clientRepository.RawCustomQueryForAdapter("select * FROM " + ClientRepository.TABLE_NAME);
+                    List<Client> clients = clientRepository.RawCustomQueryForAdapter("select * FROM " +
+                            ClientRepository.TABLE_NAME+
+                            " WHERE "+
+                            ClientRepository.CBHS+"  LIKE '"+context().allSharedPreferences().fetchCBHS()+"%'");
 
                     cbhsClientsListAdapter = new CBHSClientsListAdapter(getActivity(), clients);
                     recyclerView.setAdapter(cbhsClientsListAdapter);
@@ -122,8 +128,6 @@ public class CBHSClientsListFragment extends SecuredNativeSmartRegisterCursorAda
                 new DividerItemDecoration(getActivity(), null));
 
         recyclerView.setAdapter(cbhsClientsListAdapter);
-
-        populateData();
 
         return v;
     }
@@ -203,19 +207,6 @@ public class CBHSClientsListFragment extends SecuredNativeSmartRegisterCursorAda
     @Override
     protected void onInitialization() {
 
-    }
-
-    public void populateData() {
-        List<Client> clients = clientRepository.all();
-
-        ReferralClientsListAdapter pager = new ReferralClientsListAdapter(getActivity(), clients);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        recyclerView.addItemDecoration(
-                new DividerItemDecoration(getActivity(), null));
-        recyclerView.setAdapter(pager);
     }
 
     private String isDateRangeSet() {

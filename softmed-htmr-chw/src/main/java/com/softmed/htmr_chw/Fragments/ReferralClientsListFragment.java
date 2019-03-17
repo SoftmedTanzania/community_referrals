@@ -76,10 +76,15 @@ public class ReferralClientsListFragment extends SecuredNativeSmartRegisterCurso
         setupviews(v);
 
         clientRepository = context().clientRepository();
-        clients = clientRepository.all();
 
-        referralClientsListAdapter = new ReferralClientsListAdapter(getActivity(), clients);
+        List<Client> clients = clientRepository.RawCustomQueryForAdapter("select * FROM " +
+                ClientRepository.TABLE_NAME+
+                " WHERE "+
+                ClientRepository.CBHS+" NOT LIKE '"+context().allSharedPreferences().fetchCBHS()+"%'");
+
+
         Log.d(TAG, "repo count = " + clients.size());
+        referralClientsListAdapter = new ReferralClientsListAdapter(getActivity(), clients);
 
         FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
         View filter = v.findViewById(R.id.filter_button);
@@ -95,6 +100,7 @@ public class ReferralClientsListFragment extends SecuredNativeSmartRegisterCurso
                 if (isQueryInitializationOk()) {
                     StringBuilder queryBuilder = new StringBuilder("SELECT * FROM ");
                     queryBuilder.append(ClientRepository.TABLE_NAME);
+                    queryBuilder.append(" WHERE "+ClientRepository.CBHS+" NOT LIKE '"+context().allSharedPreferences().fetchCBHS()+"%'");
                     new QueryTask().execute(queryBuilder.toString(),
                             ClientRepository.TABLE_NAME,
                             getFname(),
@@ -104,7 +110,10 @@ public class ReferralClientsListFragment extends SecuredNativeSmartRegisterCurso
 
                 } else {
                     Log.d(TAG, "am in false else");
-                    List<Client> clients = clientRepository.RawCustomQueryForAdapter("select * FROM " + ClientRepository.TABLE_NAME);
+                    List<Client> clients = clientRepository.RawCustomQueryForAdapter("select * FROM " +
+                            ClientRepository.TABLE_NAME+
+                            " WHERE "+
+                            ClientRepository.CBHS+" NOT LIKE '"+context().allSharedPreferences().fetchCBHS()+"%'");
 
                     referralClientsListAdapter = new ReferralClientsListAdapter(getActivity(), clients);
                     recyclerView.setAdapter(referralClientsListAdapter);
@@ -121,8 +130,6 @@ public class ReferralClientsListFragment extends SecuredNativeSmartRegisterCurso
                 new DividerItemDecoration(getActivity(), null));
 
         recyclerView.setAdapter(referralClientsListAdapter);
-
-        populateData();
 
         return v;
     }
@@ -202,19 +209,6 @@ public class ReferralClientsListFragment extends SecuredNativeSmartRegisterCurso
     @Override
     protected void onInitialization() {
 
-    }
-
-    public void populateData() {
-        List<Client> clients = clientRepository.all();
-
-        ReferralClientsListAdapter pager = new ReferralClientsListAdapter(getActivity(), clients);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        recyclerView.addItemDecoration(
-                new DividerItemDecoration(getActivity(), null));
-        recyclerView.setAdapter(pager);
     }
 
     private String isDateRangeSet() {

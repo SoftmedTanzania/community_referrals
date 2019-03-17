@@ -55,6 +55,11 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
         Bundle bundle = intent.getExtras();
 
         client = (Client) bundle.getSerializable("client");
+        String type = bundle.getString("type");
+
+
+
+
         clientName.setText(client.getFirst_name() + " " + client.getMiddle_name() + " " + client.getSurname());
 
         Date date = new Date();

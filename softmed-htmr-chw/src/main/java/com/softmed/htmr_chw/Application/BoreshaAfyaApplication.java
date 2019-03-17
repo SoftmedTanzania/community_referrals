@@ -12,7 +12,7 @@ import android.support.multidex.MultiDex;
 import android.util.Log;
 import android.util.Pair;
 
-import com.crashlytics.android.Crashlytics;
+//import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.Activities.LoginActivity;
@@ -52,7 +52,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
-import io.fabric.sdk.android.Fabric;
+//import io.fabric.sdk.android.Fabric;
 
 import static org.ei.opensrp.AllConstants.DRISHTI_BASE_PATH;
 import static org.ei.opensrp.AllConstants.GSM_SERVER_URL;
@@ -95,7 +95,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     public static void setCrashlyticsUser(Context context) {
         if (context != null && context.userService() != null
                 && context.allSharedPreferences() != null) {
-            Crashlytics.setUserName(context.allSharedPreferences().fetchRegisteredANM());
+//            Crashlytics.setUserName(context.allSharedPreferences().fetchRegisteredANM());
         }
     }
 
@@ -485,7 +485,7 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     public void onCreate() {
         DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
         super.onCreate();
-        Fabric.with(this, new Crashlytics());
+//        Fabric.with(this, new Crashlytics());
 //        ACRA.init(this);
 
         DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);

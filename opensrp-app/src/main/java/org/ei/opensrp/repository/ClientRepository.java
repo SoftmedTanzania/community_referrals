@@ -95,6 +95,23 @@ public class ClientRepository extends DrishtiRepository {
         return children.get(0);
     }
 
+    public List<Client> findCBHSClients(String caseId) {
+        SQLiteDatabase database = masterRepository.getReadableDatabase();
+        Cursor cursor = database.query(TABLE_NAME, CLIENT_TABLE_COLUMNS, CBHS + " LIKE ?", new String[]{caseId+"%"}, null, null, null, null);
+        List<Client> children = readAll(cursor);
+
+        return children;
+    }
+
+
+    public List<Client> findReferrallients(String caseId) {
+        SQLiteDatabase database = masterRepository.getReadableDatabase();
+        Cursor cursor = database.query(TABLE_NAME, CLIENT_TABLE_COLUMNS, CBHS + " NOT LIKE ?", new String[]{caseId+"%"}, null, null, null, null);
+        List<Client> children = readAll(cursor);
+
+        return children;
+    }
+
     public List<Client> findClientReferralByCaseIds(String... caseIds) {
         SQLiteDatabase database = masterRepository.getReadableDatabase();
         Cursor cursor = database.rawQuery(String.format("SELECT * FROM %s WHERE %s IN (%s)", TABLE_NAME, ID_COLUMN, insertPlaceholdersForInClause(caseIds.length)), caseIds);

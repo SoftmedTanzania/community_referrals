@@ -401,7 +401,7 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
 
     public Client getClient() {
         Client client = new Client();
-        client.setCommunity_based_hiv_service(editTextDiscountId.getText().toString());
+        client.setCommunity_based_hiv_service(context().allSharedPreferences().fetchCBHS()+"/"+editTextDiscountId.getText().toString());
         client.setFirst_name(editTextfName.getText().toString());
         client.setMiddle_name(editTextmName.getText().toString());
         client.setSurname(editTextlName.getText().toString());

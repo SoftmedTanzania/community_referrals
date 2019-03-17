@@ -44,7 +44,7 @@ public class CBHSClientsListAdapter extends
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View contactView = inflater.inflate(R.layout.referral_client_list_item, parent, false);
+        View contactView = inflater.inflate(R.layout.cbhs_client_list_item, parent, false);
         return new ViewHolder(contactView);
     }
 
@@ -65,6 +65,7 @@ public class CBHSClientsListAdapter extends
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("client", client);
+                bundle.putString("type", "CBHS");
 
                 intent1.putExtras(bundle);
                 mContext.startActivity(intent1);

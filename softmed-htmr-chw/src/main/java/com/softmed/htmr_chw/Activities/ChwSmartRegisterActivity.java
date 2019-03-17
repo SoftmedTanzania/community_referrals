@@ -36,9 +36,10 @@ import com.google.gson.Gson;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
 import com.softmed.htmr_chw.Domain.ClientReferral;
 import com.softmed.htmr_chw.Domain.LocationSelectorDialogFragment;
+import com.softmed.htmr_chw.Fragments.CBHSClientsListFragment;
 import com.softmed.htmr_chw.Fragments.CHWSmartRegisterFragment;
-import com.softmed.htmr_chw.Fragments.ClientsFragment;
 import com.softmed.htmr_chw.Fragments.FollowupReferralsFragment;
+import com.softmed.htmr_chw.Fragments.ReferralClientsListFragment;
 import com.softmed.htmr_chw.Fragments.ReferralsListFragment;
 import com.softmed.htmr_chw.Fragments.ReportFragment;
 import com.softmed.htmr_chw.R;
@@ -189,7 +190,8 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         mainMenu = (ScrollView) findViewById(R.id.main_menu);
         fragmentsView = findViewById(R.id.fragments);
         View clientRegistration = mainMenu.findViewById(R.id.referral_registration_card);
-        View clientList = mainMenu.findViewById(R.id.client_list_card);
+        View clientList = mainMenu.findViewById(R.id.referral_clients_list_card);
+        View cbhsClientsList = mainMenu.findViewById(R.id.cbhs_clients_list_card);
         View issuedReferrals = mainMenu.findViewById(R.id.issued_referral_list_card);
         View receivedReferralList = mainMenu.findViewById(R.id.received_referrals_list_card);
         View reports = mainMenu.findViewById(R.id.reports);
@@ -199,6 +201,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         TextView registerClientTitle = (TextView) findViewById(R.id.register_client_title);
         TextView clientListTitle = (TextView) findViewById(R.id.client_list_title);
+        TextView referralclientListTitle = (TextView) findViewById(R.id.referral_client_list_title);
         TextView referalListTitle = (TextView) findViewById(R.id.referal_list_title);
         TextView referralsListTitle = (TextView) findViewById(R.id.referrals_list_title);
         TextView referedClientsTitle = (TextView) findViewById(R.id.refered_clients_title);
@@ -206,12 +209,14 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         TextView registerClientDesc = (TextView) findViewById(R.id.register_client_desc);
         TextView clientListDesc = (TextView) findViewById(R.id.client_list_desc);
+        TextView referralClientListDesc = (TextView) findViewById(R.id.referral_client_list_desc);
         TextView referalListDesc = (TextView) findViewById(R.id.referal_list_desc);
         TextView referralsListDesc = (TextView) findViewById(R.id.referrals_list_desc);
         TextView referedClientsDesc = (TextView) findViewById(R.id.refered_clients_desc);
 
         registerClientTitle.setTypeface(robotoBold);
         clientListTitle.setTypeface(robotoBold);
+        referralclientListTitle.setTypeface(robotoBold);
         referalListTitle.setTypeface(robotoBold);
         referralsListTitle.setTypeface(robotoBold);
         referedClientsTitle.setTypeface(robotoBold);
@@ -219,6 +224,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         registerClientDesc.setTypeface(rosarioRegular);
         clientListDesc.setTypeface(rosarioRegular);
         referalListDesc.setTypeface(rosarioRegular);
+        referralClientListDesc.setTypeface(rosarioRegular);
         referralsListDesc.setTypeface(rosarioRegular);
         referedClientsDesc.setTypeface(rosarioRegular);
 
@@ -228,6 +234,29 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             @Override
             public void onClick(View view) {
                 startRegistration();
+            }
+        });
+
+        cbhsClientsList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                tabsLayout.removeAllViews();
+
+                View tabs = getLayoutInflater().inflate(R.layout.tab_layout, null);
+                myTabLayout = tabs.findViewById(R.id.tabs);
+                tabsLayout.addView(tabs);
+
+                isOnTheMainMenu = false;
+                CBHSClientsListFragment clientsFragment = new CBHSClientsListFragment();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragments, clientsFragment, "tag");
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+
+                mainMenu.setVisibility(View.GONE);
+                fragmentsView.setVisibility(View.VISIBLE);
             }
         });
 
@@ -242,9 +271,9 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 tabsLayout.addView(tabs);
 
                 isOnTheMainMenu = false;
-                ClientsFragment newFragment = new ClientsFragment();
+                ReferralClientsListFragment clientsFragment = new ReferralClientsListFragment();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragments, newFragment, "tag");
+                transaction.replace(R.id.fragments, clientsFragment, "tag");
                 transaction.addToBackStack(null);
                 transaction.commit();
 
@@ -270,7 +299,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
                 isOnTheMainMenu = false;
                 ReferralsListFragment newFragment = new ReferralsListFragment();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragments, newFragment, "tag");
+                transaction.replace(R.id.fragments, newFragment, "tag1");
                 transaction.addToBackStack(null);
                 transaction.commit();
 
