@@ -153,6 +153,8 @@
     <string name="referral_client">Mteja wa rufaa</string>
     <string name="cbhs_clients_label">CBHS Clients</string>
     <string name="referral_clients_label">Referral Clients</string>
+    <string name="test_results_positive">Hasi</string>
+    <string name="test_results_negative">Chanya</string>
 
 
 </resources>

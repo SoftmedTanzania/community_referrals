@@ -53,200 +53,214 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="wrap_content">
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="16dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp">
-                <RelativeLayout
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/testStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/genderTitle"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="right"
-                            android:textStyle="bold"
-                            android:layout_marginRight="16dp"
-                            android:layout_weight="1"
-                            android:focusable="true"
-                            android:text="@string/client_sex"
-                            android:textColor="@color/card_title_text"
-                            android:textColorHint="@color/hint_text"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:id="@+id/gendervalue"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_weight="1"
-                            android:hint="@string/client_middlename"
-                            android:imeOptions="actionNext"
-                            android:inputType="textCapWords|textPersonName"
-                            android:textColor="@color/primary_text"
-                            android:textSize="16sp" />
-
-                    </LinearLayout>
-
-
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/textphoneNumber"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="right"
-                            android:layout_marginRight="16dp"
-                            android:text="@string/client_phone"
-                            android:textStyle="bold"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:id="@+id/viewPhone"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_weight="1"
-                            android:hint="@string/client_phone"
-                            android:inputType="number"
-                            android:textColor="@color/primary_text"
-                            android:textColorHint="@color/hint_text"
-                            android:textSize="14sp"/>
-
-
-                    </LinearLayout>
-
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_marginBottom="8dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/age"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.5"
-                            android:text="@string/client_age"
-                            android:textStyle="bold"
-                            android:gravity="right"
-                            android:layout_marginRight="16dp"
-                            app:paddingEnd="16dp"
-                            app:paddingStart="16dp" />
-
-
-                        <TextView
-                            android:id="@+id/agevalue"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_weight="0.5"
-                            android:clickable="true"
-                            android:editable="false"
-                            android:focusable="false"
-                            android:hint="@string/client_age"
-                            android:inputType="date"
-                            android:textColor="@color/text_black"
-                            android:textSize="14sp"/>
-
-
-                    </LinearLayout>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_marginBottom="8dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.5"
-                            android:text="@string/client_address"
-                            android:textStyle="bold"
-                            android:gravity="right"
-                            android:layout_marginRight="16dp"
-                            app:paddingEnd="16dp"
-                            app:paddingStart="16dp" />
-
-
-                        <TextView
-                            android:id="@+id/editTextKijiji"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_weight="0.5"
-                            android:clickable="true"
-                            android:editable="false"
-                            android:focusable="false"
-                            android:hint="@string/client_birthday"
-                            android:inputType="date"
-                            android:textColor="@color/text_black"
-                            android:textSize="14sp"/>
-
-
-                    </LinearLayout>
-                </RelativeLayout>
-                <RelativeLayout
+                    android:text="+VE"
                     android:visibility="gone"
-                    android:layout_marginBottom="8dp"
+                    android:textStyle="bold"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="32dp"
+                    android:layout_centerVertical="true"
+                    android:textSize="48sp"/>
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/genderTitle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="right"
+                                android:textStyle="bold"
+                                android:layout_marginRight="16dp"
+                                android:layout_weight="1"
+                                android:focusable="true"
+                                android:text="@string/client_sex"
+                                android:textColor="@color/card_title_text"
+                                android:textColorHint="@color/hint_text"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/gendervalue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_weight="1"
+                                android:hint="@string/client_middlename"
+                                android:imeOptions="actionNext"
+                                android:inputType="textCapWords|textPersonName"
+                                android:textColor="@color/primary_text"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/textphoneNumber"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:layout_marginRight="16dp"
+                                android:text="@string/client_phone"
+                                android:textStyle="bold"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/viewPhone"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_weight="1"
+                                android:hint="@string/client_phone"
+                                android:inputType="number"
+                                android:textColor="@color/primary_text"
+                                android:textColorHint="@color/hint_text"
+                                android:textSize="14sp"/>
+
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_marginBottom="8dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.5"
-                            android:text="@string/client_veo"
-                            android:textStyle="bold"
-                            android:gravity="right"
-                            android:layout_marginRight="16dp"
-                            app:paddingEnd="16dp"
-                            app:paddingStart="16dp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/age"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:text="@string/client_age"
+                                android:textStyle="bold"
+                                android:gravity="right"
+                                android:layout_marginRight="16dp"
+                                app:paddingEnd="16dp"
+                                app:paddingStart="16dp" />
 
 
-                        <TextView
-                            android:id="@+id/viewVillageLeader"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_weight="0.5"
-                            android:clickable="true"
-                            android:editable="false"
-                            android:focusable="false"
-                            android:hint="@string/client_veo"
-                            android:textColor="@color/primary_text"
-                            android:textSize="14sp"/>
+                            <TextView
+                                android:id="@+id/agevalue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_weight="0.5"
+                                android:clickable="true"
+                                android:editable="false"
+                                android:focusable="false"
+                                android:hint="@string/client_age"
+                                android:inputType="date"
+                                android:textColor="@color/text_black"
+                                android:textSize="14sp"/>
 
 
-                    </LinearLayout>
-                </RelativeLayout>
-            </LinearLayout>
+                        </LinearLayout>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_marginBottom="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:text="@string/client_address"
+                                android:textStyle="bold"
+                                android:gravity="right"
+                                android:layout_marginRight="16dp"
+                                app:paddingEnd="16dp"
+                                app:paddingStart="16dp" />
+
+
+                            <TextView
+                                android:id="@+id/editTextKijiji"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_weight="0.5"
+                                android:clickable="true"
+                                android:editable="false"
+                                android:focusable="false"
+                                android:hint="@string/client_birthday"
+                                android:inputType="date"
+                                android:textColor="@color/text_black"
+                                android:textSize="14sp"/>
+
+
+                        </LinearLayout>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:visibility="gone"
+                        android:layout_marginBottom="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:text="@string/client_veo"
+                                android:textStyle="bold"
+                                android:gravity="right"
+                                android:layout_marginRight="16dp"
+                                app:paddingEnd="16dp"
+                                app:paddingStart="16dp" />
+
+
+                            <TextView
+                                android:id="@+id/viewVillageLeader"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_weight="0.5"
+                                android:clickable="true"
+                                android:editable="false"
+                                android:focusable="false"
+                                android:hint="@string/client_veo"
+                                android:textColor="@color/primary_text"
+                                android:textSize="14sp"/>
+
+
+                        </LinearLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+            </RelativeLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

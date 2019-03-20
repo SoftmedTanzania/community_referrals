@@ -129,6 +129,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private MenuItem updateMenuItem;
     private PendingFormSubmissionService pendingFormSubmissionService;
     private LinearLayout tabsLayout;
+    private Typeface robotoBold, sansBold;
     private Listener<Boolean> onSyncCompleteListener = new Listener<Boolean>() {
         @Override
         public void onEvent(Boolean data) {
@@ -171,6 +172,11 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         if (cbhsNumber == null || cbhsNumber.equals("")) {
             startActivity(new Intent(ChwSmartRegisterActivity.this, SettingsActivity.class));
         }
+
+
+        robotoBold = Typeface.createFromAsset(getAssets(), "roboto_bold.ttf");
+        sansBold = Typeface.createFromAsset(getAssets(), "google_sans_bold.ttf");
+
         securedActivity = new SecuredActivity() {
             @Override
             protected void onCreation() {
@@ -560,8 +566,21 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         TextView phoneNumber = (TextView) dialogView.findViewById(R.id.viewPhone);
         TextView physicalAddress = (TextView) dialogView.findViewById(R.id.editTextKijiji);
         TextView villageleader = (TextView) dialogView.findViewById(R.id.viewVillageLeader);
+        TextView testStatus = (TextView) dialogView.findViewById(R.id.testStatus);
+        testStatus.setTypeface(sansBold);
 
-        Log.d(TAG,"referral feedback id = "+clientReferral.getReferral_feedback());
+        if(clientReferral.getTest_results()!=null && !clientReferral.getTest_results().equals("")){
+            testStatus.setVisibility(VISIBLE);
+            if(clientReferral.getTest_results().equals("1")){
+                testStatus.setText(R.string.test_results_positive);
+                testStatus.setTextColor(getResources().getColor(R.color.green_500));
+            }else{
+                testStatus.setText(R.string.test_results_negative);
+                testStatus.setTextColor(getResources().getColor(R.color.red_500));
+            }
+        }
+
+        Log.d(TAG,"referral test results = "+clientReferral.getTest_results());
         try {
             if (clientReferral.getReferral_status().equals("1") && !clientReferral.getReferral_feedback().equals("")) {
                 dialogView.findViewById(R.id.referral_feedback_title).setVisibility(VISIBLE);

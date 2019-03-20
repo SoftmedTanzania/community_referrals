@@ -12,7 +12,7 @@ public class ClientReferral implements Serializable {
             village_leader, service_provider_uiid, phone_number, gender, community_based_hiv_service, ctc_number, referral_feedback, other_notes,
             services_given_to_patient, referral_uuid, referral_reason, referral_service_id, referral_status, is_emergency, clientId,indicator_ids,referral_id;
     private long referral_date, appointment_date,date_of_birth, status;
-    private boolean test_results;
+    private String test_results;
 
     public String getId() {
         return id;
@@ -294,11 +294,11 @@ public class ClientReferral implements Serializable {
         this.status = status;
     }
 
-    public boolean isTest_results() {
+    public String getTest_results() {
         return test_results;
     }
 
-    public void setTest_results(boolean test_results) {
+    public void setTest_results(String test_results) {
         this.test_results = test_results;
     }
 
