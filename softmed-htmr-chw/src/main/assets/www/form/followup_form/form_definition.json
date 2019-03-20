@@ -1,0 +1,31 @@
+{
+    "form_data_definition_version": "4",
+    "form": {
+        "bind_type": "followup",
+        "default_bind_path": "/model/instance/followup_form/",
+        "fields": [
+            {
+                "name": "id",
+                "shouldLoadValue": true
+            },
+            {
+                "name": "relationalid"
+            },
+            {
+                "name": "referral_id"
+            },
+            {
+                "name": "client_id"
+            },
+            {
+                "name": "referral_feedback_id"
+            },
+            {
+                "name": "other_notes"
+            },
+            {
+                "name": "followup_date"
+            }
+        ]
+    }
+}

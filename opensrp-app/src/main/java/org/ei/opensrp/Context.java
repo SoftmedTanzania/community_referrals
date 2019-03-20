@@ -24,6 +24,7 @@ import org.ei.opensrp.repository.ClientRepository;
 import org.ei.opensrp.repository.DrishtiRepository;
 import org.ei.opensrp.repository.EligibleCoupleRepository;
 import org.ei.opensrp.repository.FacilityRepository;
+import org.ei.opensrp.repository.FollowupRepository;
 import org.ei.opensrp.repository.FormDataRepository;
 import org.ei.opensrp.repository.FormsVersionRepository;
 import org.ei.opensrp.repository.ImageRepository;
@@ -143,6 +144,7 @@ public class Context {
     private ReferralFeedbackRepository referralFeedbackRepository;
     private RegistrationReasonsRepository registrationReasonsRepository;
     private ReferralRepository referralRepository;
+    private FollowupRepository followupRepository;
     private ClientRepository clientRepository;
     private DrishtiService drishtiService;
     private ActionService actionService;
@@ -518,6 +520,7 @@ public class Context {
             drishtireposotorylist.add(motherRepository());
             drishtireposotorylist.add(facilityRepository());
             drishtireposotorylist.add(referralRepository());
+            drishtireposotorylist.add(followupRepository());
             drishtireposotorylist.add(clientRepository());
             drishtireposotorylist.add(referralServiceRepository());
             drishtireposotorylist.add(referralFeedbackRepository());
@@ -671,6 +674,13 @@ public class Context {
             referralRepository = new ReferralRepository();
         }
         return referralRepository;
+    }
+
+    public FollowupRepository followupRepository() {
+        if (followupRepository == null) {
+            followupRepository = new FollowupRepository();
+        }
+        return followupRepository;
     }
 
     public ClientRepository clientRepository() {

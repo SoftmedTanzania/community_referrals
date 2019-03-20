@@ -10,7 +10,7 @@ public class ClientReferral implements Serializable {
     private String id, relationalid, client_id, details, first_name, middle_name, surname, facility_id,
             is_valid, service_provider_mobile_number, ward, village, Kijitongoji, helper_name, helper_phone_number,
             village_leader, service_provider_uiid, phone_number, gender, community_based_hiv_service, ctc_number, referral_feedback, other_notes,
-            services_given_to_patient, referral_uuid, referral_reason, referral_service_id, referral_status, is_emergency, clientId,indicator_ids;
+            services_given_to_patient, referral_uuid, referral_reason, referral_service_id, referral_status, is_emergency, clientId,indicator_ids,referral_id;
     private long referral_date, appointment_date,date_of_birth, status;
     private boolean test_results;
 
@@ -300,5 +300,13 @@ public class ClientReferral implements Serializable {
 
     public void setTest_results(boolean test_results) {
         this.test_results = test_results;
+    }
+
+    public String getReferral_id() {
+        return referral_id;
+    }
+
+    public void setReferral_id(String referral_id) {
+        this.referral_id = referral_id;
     }
 }

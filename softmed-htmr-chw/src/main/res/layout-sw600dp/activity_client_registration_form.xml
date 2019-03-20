@@ -513,6 +513,7 @@
                                                 android:id="@+id/yes"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
+                                                android:checked="true"
                                                 android:text="@string/cbhs_client" />
 
                                             <RadioButton

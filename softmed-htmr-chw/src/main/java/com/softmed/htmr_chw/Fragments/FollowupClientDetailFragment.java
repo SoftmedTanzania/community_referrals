@@ -16,15 +16,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.softmed.htmr_chw.Domain.ClientReferral;
 import com.softmed.htmr_chw.R;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
+import org.ei.opensrp.domain.Followup;
+import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.domain.ReferralFeedback;
+import org.ei.opensrp.domain.SyncStatus;
+import org.ei.opensrp.domain.form.FormData;
+import org.ei.opensrp.domain.form.FormField;
+import org.ei.opensrp.domain.form.FormInstance;
+import org.ei.opensrp.domain.form.FormSubmission;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.repository.AllSharedPreferences;
+import org.ei.opensrp.repository.FollowupRepository;
 import org.ei.opensrp.repository.ReferralFeedbackRepository;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
@@ -34,10 +43,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static com.softmed.htmr_chw.util.Utils.generateRandomUUIDString;
 import static org.ei.opensrp.AllConstants.ENGLISH_LOCALE;
 
 public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
@@ -89,6 +100,8 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         preferredLocale = allSharedPreferences.fetchLanguagePreference();
         setLanguage();
 
+        Log.d(TAG,"CLient Referral ID = "+clientReferral.getReferral_id());
+
         setupviews(rootView);
         setDetails(clientReferral);
 
@@ -139,9 +152,9 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         ReferralFeedbackRepository feedbackRepository = context().referralFeedbackRepository();
 
 
-        List<ReferralFeedback> referralFeedbacks =  feedbackRepository.findFeedbackByReferralType("1");
+        List<ReferralFeedback> referralFeedbacks = feedbackRepository.findFeedbackByReferralType("1");
         referralFeedbacksNames.clear();
-        for(ReferralFeedback referralFeedback :referralFeedbacks){
+        for (ReferralFeedback referralFeedback : referralFeedbacks) {
 
             if (preferredLocale.equals(ENGLISH_LOCALE))
                 referralFeedbacksNames.add(referralFeedback.getDesc());
@@ -151,7 +164,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
 
 
         }
-        return  referralFeedbacks;
+        return referralFeedbacks;
     }
 
     private void setDetails(final ClientReferral clientReferral) {
@@ -237,38 +250,54 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
 
                 } else {
 
-//                        context().followupClientRepository().update(followup);
+                    Referral referral = context().referralRepository().find(clientReferral.getReferral_id());
+                    referral.setReferral_status("1");
 
-                    //TODO finish up sending of referral feedbacks of the followup
-//                    clientReferral.setReferral_feedback();
-//                        final String uuid = generateRandomUUIDString();
-//                        context().referralRepository().update(clientReferral);
-//                        List<FormField> formFields = new ArrayList<>();
-//
-//
-//                        formFields.add(new FormField("id", followup.getId(), commonRepository.TABLE_NAME + "." + "id"));
-//                        formFields.add(new FormField("relationalid", followup.getId(), commonRepository.TABLE_NAME + "." + "relationalid"));
-//
-//                        for (String key : followup.getDetails().keySet()) {
-//                            Log.d(TAG, "key = " + key);
-//                            FormField f = null;
-//                            if (!key.equals("facility_id")) {
-//                                f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
-//                            } else {
-//                                f = new FormField(key, c.getDetails().get(key), "facility.id");
-//                            }
-//                            formFields.add(f);
-//                        }
-//
-//
-//                        Log.d(TAG, "form field = " + new Gson().toJson(formFields));
-//
-//                        FormData formData = new FormData("follow_up", "/model/instance/Follow_Up_Form/", formFields, null);
-//                        FormInstance formInstance = new FormInstance(formData, "1");
-//                        FormSubmission submission = new FormSubmission(generateRandomUUIDString(), uuid, "client_referral", new Gson().toJson(formInstance), "4", SyncStatus.PENDING, "4");
-//                        context().formDataRepository().saveFormSubmission(submission);
-//
-//                        Log.d(TAG, "submission content = " + new Gson().toJson(submission));
+                    //updating referral status
+                    context().referralRepository().update(referral);
+
+                    //Saving referral followup
+                    Followup followup = new Followup();
+
+                    String uuid = generateRandomUUIDString();
+                    followup.setId(uuid);
+                    followup.setRelationalid(uuid);
+                    followup.setClient_id(Long.parseLong(clientReferral.getClient_id()));
+                    followup.setReferral_id(Long.parseLong(clientReferral.getReferral_id()));
+                    followup.setReferral_feedback_id(reasonSelection);
+                    followup.setOther_notes(feedback.getText().toString());
+
+                    FollowupRepository followupRepository = context().followupRepository();
+                    followupRepository.add(followup);
+
+                    Followup savedFollowup = followupRepository.find(followup.getId());
+
+
+                    List<FormField> formFields = new ArrayList<>();
+
+
+                    formFields.add(new FormField("id", savedFollowup.getId(), FollowupRepository.TABLE_NAME + "." + "id"));
+                    formFields.add(new FormField("relationalid", savedFollowup.getId(), FollowupRepository.TABLE_NAME + "." + "relationalid"));
+
+                    Map<String, String> details = new Gson().<Map<String, String>>fromJson(savedFollowup.getDetails(), new TypeToken<Map<String, String>>() {
+                    }.getType());
+
+                    for (String key : details.keySet()) {
+                        Log.d(TAG, "key = " + key);
+                        FormField f = null;
+                        f = new FormField(key, details.get(key), FollowupRepository.TABLE_NAME + "." + key);
+                        formFields.add(f);
+                    }
+
+
+                    Log.d(TAG, "form field = " + new Gson().toJson(formFields));
+
+                    FormData formData = new FormData("followup", "/model/instance/followup_form/", formFields, null);
+                    FormInstance formInstance = new FormInstance(formData, "1");
+                    FormSubmission submission = new FormSubmission(generateRandomUUIDString(), uuid, "client_referral", new Gson().toJson(formInstance), "4", SyncStatus.PENDING, "4");
+                    context().formDataRepository().saveFormSubmission(submission);
+
+                    Log.d(TAG, "submission content = " + new Gson().toJson(submission));
 
 
                     Toast.makeText(getActivity(), getString(R.string.followup_thankyou_note_part_one) + clientReferral.getFirst_name() + " " + clientReferral.getSurname(), Toast.LENGTH_SHORT).show();

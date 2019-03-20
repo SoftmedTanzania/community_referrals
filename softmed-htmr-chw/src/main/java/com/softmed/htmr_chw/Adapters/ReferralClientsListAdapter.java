@@ -64,6 +64,7 @@ public class ReferralClientsListAdapter extends
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("client", client);
+                bundle.putString("type", "REFERRAL");
 
                 intent1.putExtras(bundle);
                 mContext.startActivity(intent1);

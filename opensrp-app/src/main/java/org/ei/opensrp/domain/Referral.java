@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class Referral implements Serializable {
 
-    private String id, relationalid, details, referral_feedback, other_notes,
+    private String id, relationalid, details, referral_feedback_id, other_notes,
             services_given_to_patient, referral_uuid, facility_id,
             referral_reason, is_valid, service_provider_uiid,
             referral_service_id, referral_status,is_emergency, client_id;
@@ -35,7 +35,7 @@ public class Referral implements Serializable {
                     String services_given_to_patient,
                     int referral_type,
                     String service_provider_uiid,
-                    String referral_feedback,
+                    String referral_feedback_id,
                     String referral_uuid,
                     String details
     ) {
@@ -55,7 +55,7 @@ public class Referral implements Serializable {
         this.services_given_to_patient=services_given_to_patient;
         this.referral_type=referral_type;
         this.indicator_ids = indicator_ids;
-        this.referral_feedback = referral_feedback;
+        this.referral_feedback_id = referral_feedback_id;
         this.service_provider_uiid = service_provider_uiid;
         this.referral_uuid = referral_uuid;
     }
@@ -84,12 +84,12 @@ public class Referral implements Serializable {
         this.details = details;
     }
 
-    public String getReferral_feedback() {
-        return referral_feedback;
+    public String getReferral_feedback_id() {
+        return referral_feedback_id;
     }
 
-    public void setReferral_feedback(String referral_feedback) {
-        this.referral_feedback = referral_feedback;
+    public void setReferral_feedback_id(String referral_feedback_id) {
+        this.referral_feedback_id = referral_feedback_id;
     }
 
     public String getOther_notes() {

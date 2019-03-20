@@ -93,19 +93,20 @@
                                     android:layout_marginTop="32dp"
                                     android:text="@string/title_register_client"
                                     android:textColor="@color/black"
-                                    android:textSize="42sp" />
+                                    android:textSize="34sp" />
 
                                 <View
+                                    android:id="@+id/strip_one"
                                     android:layout_width="200dp"
                                     android:layout_height="5dp"
-                                    android:id="@+id/strip_one"
+                                    android:layout_below="@id/client_name"
                                     android:layout_marginLeft="32dp"
                                     android:layout_marginTop="8dp"
-                                    android:layout_below="@id/client_name"
-                                    android:background="@color/card_separator"/>
+                                    android:background="@color/card_separator" />
 
 
                             </RelativeLayout>
+
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -116,19 +117,100 @@
                                     android:id="@+id/initial_information_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="16sp"
                                     android:layout_marginTop="16dp"
+                                    android:text="@string/initial_information"
                                     android:textColor="@color/colorPrimary"
-                                    android:text="@string/initial_information"/>
+                                    android:textSize="16sp" />
+
                                 <View
-                                    android:layout_below="@id/initial_information_title"
+                                    android:id="@+id/strip"
                                     android:layout_width="60dp"
                                     android:layout_height="5dp"
-                                    android:id="@+id/strip"
+                                    android:layout_below="@id/initial_information_title"
                                     android:layout_marginTop="8dp"
-                                    android:background="@color/card_separator"/>
+                                    android:background="@color/card_separator" />
                             </RelativeLayout>
 
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/card_separator_third"
+                                android:orientation="horizontal"
+                                android:paddingLeft="32dp"
+                                android:paddingRight="32dp">
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="16dp"
+                                    android:layout_weight="0.5"
+                                    android:paddingBottom="16dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="8dp">
+
+
+                                        <com.rengwuxian.materialedittext.MaterialEditText
+                                            android:id="@+id/gender"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:clickable="false"
+                                            android:editable="false"
+                                            android:focusable="false"
+                                            android:hint="@string/gender"
+                                            android:inputType="date"
+                                            android:textColor="@color/text_black"
+                                            android:textSize="14sp"
+                                            app:met_floatingLabel="normal"
+                                            app:met_floatingLabelText="@string/gender"
+                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
+
+
+                                        <com.rengwuxian.materialedittext.MaterialEditText
+                                            android:id="@+id/reg_dob"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="16dp"
+                                            android:layout_weight="1"
+                                            android:clickable="false"
+                                            android:editable="false"
+                                            android:focusable="false"
+                                            android:hint="@string/client_birthday"
+                                            android:textColor="@color/text_black"
+                                            android:textSize="14sp"
+                                            app:met_floatingLabel="normal"
+                                            app:met_floatingLabelText="@string/client_birthday"
+                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
+
+                                        <com.rengwuxian.materialedittext.MaterialEditText
+                                            android:id="@+id/editTextKijiji"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="16dp"
+                                            android:layout_weight="1"
+                                            android:clickable="false"
+                                            android:editable="false"
+                                            android:focusable="false"
+                                            android:gravity="center_vertical"
+                                            android:hint="@string/client_address"
+                                            android:imeOptions="actionNext"
+                                            android:textColor="@color/primary_text"
+                                            android:textColorHint="@color/hint_text"
+                                            android:textSize="14sp"
+                                            app:met_floatingLabel="normal"
+                                            app:met_floatingLabelText="@string/client_address"
+                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
+
+
+                                    </LinearLayout>
+                                </RelativeLayout>
+
+
+                            </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -151,203 +233,143 @@
                                         android:layout_marginTop="8dp">
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/gender"
+                                            android:id="@+id/helper_name"
                                             android:layout_width="0dp"
-                                            android:layout_weight="1"
                                             android:layout_height="wrap_content"
+                                            android:layout_weight="1"
                                             android:clickable="false"
                                             android:editable="false"
                                             android:focusable="false"
-                                            android:hint="@string/gender"
-                                            android:inputType="date"
-                                            android:textColor="@color/text_black"
-                                            android:textSize="14sp"
-                                            app:met_floatingLabel="normal"
-                                            app:met_floatingLabelText="@string/gender"
-                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
-
-                                        <TextView
-                                            android:id="@+id/reg_dob"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_weight="0.5"
-                                            android:hint="@string/client_birthday"
-                                            android:textColor="@color/text_black"
-                                            android:textSize="14sp" />
-
-
-                                    </LinearLayout>
-                                </RelativeLayout>
-
-                                <RelativeLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_weight="0.5"
-                                    android:paddingBottom="16dp">
-
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
-
-                                        <TextView
-                                            android:id="@+id/editTextKijiji"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginTop="8dp"
-                                            android:layout_weight="1"
-                                            android:hint="@string/client_address"
                                             android:gravity="center_vertical"
-                                            android:imeOptions="actionNext"
-                                            android:textColor="@color/primary_text"
-                                            android:textColorHint="@color/hint_text"
-                                            android:textSize="14sp" />
-
-
-                                        <TextView
-                                            android:id="@+id/editTextVillageLeader"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginLeft="16dp"
-                                            android:layout_marginTop="8dp"
-                                            android:layout_weight="1"
-                                            android:hint="@string/client_veo"
-                                            android:textColor="@color/primary_text"
-                                            android:textColorHint="@color/hint_text"
-                                            android:textSize="14sp" />
-                                    </LinearLayout>
-
-                                </RelativeLayout>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@color/card_separator_third"
-                                android:orientation="horizontal"
-                                android:paddingLeft="32dp"
-                                android:paddingRight="32dp">
-
-                                <RelativeLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_weight="0.5"
-                                    android:paddingBottom="16dp">
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="8dp">
-
-                                        <TextView
-                                            android:id="@+id/editTextDiscountId"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_weight="0.5"
-                                            android:hint="@string/title_cbhs_number"
+                                            android:hint="@string/helper_name"
                                             android:imeOptions="actionNext"
                                             android:inputType="text"
-                                            android:gravity="center_vertical"
                                             android:textColor="@color/primary_text"
                                             android:textColorHint="@color/black_translucent"
-                                            android:textSize="14sp" />
+                                            android:textSize="14sp"
+                                            app:met_floatingLabel="normal"
+                                            app:met_floatingLabelText="@string/helper_name"
+                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
 
-                                        <TextView
-                                            android:id="@+id/editTextOthers"
+                                        <com.rengwuxian.materialedittext.MaterialEditText
+                                            android:id="@+id/helper_phone_number"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="16dp"
-                                            android:layout_weight="0.5"
+                                            android:layout_weight="1"
+                                            android:clickable="false"
+                                            android:editable="false"
+                                            android:focusable="false"
                                             android:gravity="center_vertical"
-                                            android:hint="@string/title_ctc_number"
+                                            android:hint="@string/helper_phone_number"
                                             android:textColor="@color/primary_text"
                                             android:textColorHint="@color/hint_text"
-                                            android:textSize="14sp" />
+                                            android:textSize="14sp"
+                                            app:met_floatingLabel="normal"
+                                            app:met_floatingLabelText="@string/helper_phone_number"
+                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
 
 
-                                    </LinearLayout>
-                                </RelativeLayout>
-
-                                <RelativeLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_weight="0.5"
-                                    android:paddingBottom="16dp">
-
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_marginTop="8dp"
-                                        android:layout_height="wrap_content">
-
-                                        <TextView
+                                        <com.rengwuxian.materialedittext.MaterialEditText
                                             android:id="@+id/edittextPhone"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
+                                            android:layout_marginLeft="16dp"
                                             android:layout_weight="1"
-                                            android:hint="@string/client_phone"
+                                            android:clickable="false"
+                                            android:editable="false"
+                                            android:focusable="false"
                                             android:gravity="center_vertical"
+                                            android:hint="@string/client_phone"
                                             android:imeOptions="actionNext"
                                             android:inputType="number"
                                             android:maxLength="10"
                                             android:textColor="@color/primary_text"
                                             android:textColorHint="@color/hint_text"
-                                            android:textSize="14sp" />
+                                            android:textSize="14sp"
+                                            app:met_floatingLabel="normal"
+                                            app:met_floatingLabelText="@string/client_phone"
+                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
 
-                                        <View
-                                            android:layout_width="0dp"
-                                            android:layout_weight="1"
-                                            android:layout_height="match_parent" />
+
                                     </LinearLayout>
-
                                 </RelativeLayout>
 
-                            </LinearLayout><LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/card_separator_third"
-                            android:orientation="horizontal"
-                            android:layout_marginBottom="8dp"
-                            android:paddingLeft="32dp"
-                            android:paddingRight="32dp">
+                            </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp">
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/card_separator_third"
+                                android:orientation="horizontal"
+                                android:paddingLeft="32dp"
+                                android:paddingRight="32dp">
 
-                                <TextView
-                                    android:id="@+id/helper_name"
-                                    android:layout_width="0dp"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:hint="@string/helper_name"
-                                    android:imeOptions="actionNext"
-                                    android:inputType="text"
-                                    android:gravity="center_vertical"
-                                    android:textColor="@color/primary_text"
-                                    android:textColorHint="@color/black_translucent"
-                                    android:textSize="14sp" />
+                                    android:layout_marginTop="8dp">
 
-                                <TextView
-                                    android:id="@+id/helper_phone_number"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="32dp"
-                                    android:layout_weight="0.5"
-                                    android:gravity="center_vertical"
-                                    android:hint="@string/helper_phone_number"
-                                    android:textColor="@color/primary_text"
-                                    android:textColorHint="@color/hint_text"
-                                    android:textSize="14sp" />
+                                    <com.rengwuxian.materialedittext.MaterialEditText
+                                        android:id="@+id/editTextVillageLeader"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="16dp"
+                                        android:layout_weight="1"
+                                        android:clickable="false"
+                                        android:editable="false"
+                                        android:focusable="false"
+                                        android:hint="@string/client_veo"
+                                        android:textColor="@color/primary_text"
+                                        android:textColorHint="@color/hint_text"
+                                        android:textSize="14sp"
+                                        app:met_floatingLabel="normal"
+                                        app:met_floatingLabelText="@string/client_veo"
+                                        app:met_floatingLabelTextColor="@color/colorPrimary" />
 
+                                    <com.rengwuxian.materialedittext.MaterialEditText
+                                        android:id="@+id/cbhs"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:clickable="false"
+                                        android:editable="false"
+                                        android:focusable="false"
+                                        android:gravity="center_vertical"
+                                        android:hint="@string/title_cbhs_number"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text"
+                                        android:textColor="@color/primary_text"
+                                        android:textColorHint="@color/black_translucent"
+                                        android:textSize="14sp"
+                                        app:met_floatingLabel="normal"
+                                        app:met_floatingLabelText="@string/title_cbhs_number"
+                                        app:met_floatingLabelTextColor="@color/colorPrimary" />
+
+                                    <com.rengwuxian.materialedittext.MaterialEditText
+                                        android:id="@+id/ctc_number"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="16dp"
+                                        android:layout_weight="1"
+                                        android:clickable="false"
+                                        android:editable="false"
+                                        android:focusable="false"
+                                        android:gravity="center_vertical"
+                                        android:hint="@string/title_ctc_number"
+                                        android:textColor="@color/primary_text"
+                                        android:textColorHint="@color/hint_text"
+                                        android:textSize="14sp"
+                                        android:visibility="invisible"
+                                        app:met_floatingLabel="normal"
+                                        app:met_floatingLabelText="@string/title_ctc_number"
+                                        app:met_floatingLabelTextColor="@color/colorPrimary" />
+
+
+                                </LinearLayout>
 
                             </LinearLayout>
-
-                        </LinearLayout>
 
                             <View
                                 android:layout_width="match_parent"
@@ -365,33 +387,27 @@
                                 android:layout_marginTop="8dp"
                                 android:text="@string/referral_history_label"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="14sp" />
+                                android:textSize="16sp" />
 
                             <View
-                                android:layout_width="60dp"
-                                android:layout_height="5dp"
                                 android:id="@+id/strip_two"
+                                android:layout_width="60dp"
+                                android:layout_height="8dp"
                                 android:layout_marginLeft="32dp"
                                 android:layout_marginTop="8dp"
-                                android:background="@color/card_separator"/>
+                                android:background="@color/card_separator" />
 
                             <LinearLayout
                                 android:id="@+id/referral_history"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@color/white"
-                                android:orientation="vertical">
-
-                                <include layout="@layout/view_referral_history"/>
-                                <include layout="@layout/view_referral_history"/>
-
-
-                            </LinearLayout>
+                                android:orientation="vertical" />
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
-                                android:background="@color/card_separator_third"
-                                android:layout_height="84dp">
+                                android:layout_height="84dp"
+                                android:background="@color/white">
 
                                 <Button
                                     android:id="@+id/referal_button"
@@ -400,8 +416,9 @@
                                     android:layout_alignParentRight="true"
                                     android:layout_centerVertical="true"
                                     android:layout_marginRight="16dp"
+                                    android:background="@color/colorPrimary"
                                     android:text="@string/button_refer_client"
-                                    android:textColor="@color/card_title_text" />
+                                    android:textColor="@color/white" />
 
 
                             </RelativeLayout>

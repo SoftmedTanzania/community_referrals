@@ -235,6 +235,7 @@
 
                             </LinearLayout>
 
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -254,202 +255,142 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="8dp">
-
-                                        <fr.ganfra.materialspinner.MaterialSpinner
-                                            android:id="@+id/spinnerGender"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginRight="16dp"
-                                            android:layout_weight="0.5"
-                                            app:ms_arrowColor="@color/accent"
-                                            app:ms_arrowSize="14dp"
-                                            app:ms_baseColor="@color/accent"
-                                            app:ms_enableFloatingLabel="false"
-                                            app:ms_hint="@string/client_sex"
-                                            app:ms_hintColor="@color/hint_text"
-                                            app:ms_multiline="false"
-                                            app:ms_thickness="1dp"
-                                            app:paddingEnd="16dp"
-                                            app:paddingStart="16dp" />
-
-
-                                        <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/reg_dob"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginLeft="16dp"
-                                            android:layout_weight="0.5"
-                                            android:clickable="true"
-                                            android:editable="false"
-                                            android:focusable="false"
-                                            android:hint="@string/client_birthday"
-                                            android:inputType="date"
-                                            android:textColor="@color/text_black"
-                                            android:textSize="14sp"
-                                            app:met_floatingLabel="normal"
-                                            app:met_floatingLabelText="Date of birth"
-                                            app:met_floatingLabelTextColor="@color/colorPrimary"
-                                            app:met_iconRight="@drawable/ic_calendar_today" />
-
-
-                                    </LinearLayout>
-                                </RelativeLayout>
-
-                                <RelativeLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_weight="0.5"
-                                    android:paddingBottom="16dp">
-
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
-
-                                        <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/editTextKijiji"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginTop="8dp"
-                                            android:layout_weight="1"
-                                            android:hint="@string/client_address"
-                                            android:imeOptions="actionNext"
-                                            android:textColor="@color/primary_text"
-                                            android:textColorHint="@color/hint_text"
-                                            android:textSize="14sp"
-                                            app:met_floatingLabelText="Mahali anapokaa"
-                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
-
-
-                                        <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/editTextVillageLeader"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginLeft="16dp"
-                                            android:layout_marginTop="8dp"
-                                            android:layout_weight="1"
-                                            android:hint="@string/client_veo"
-                                            android:textColor="@color/primary_text"
-                                            android:textColorHint="@color/hint_text"
-                                            android:textSize="14sp"
-                                            app:met_floatingLabelText="Mahali anapokaa"
-                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
-                                    </LinearLayout>
-
-                                </RelativeLayout>
-
-                            </LinearLayout>
-
-
-                            <LinearLayout
-                                android:layout_height="80dp"
-                                android:layout_width="match_parent"
-                                android:background="@color/card_separator_third"
-                                android:orientation="horizontal"
-                                android:paddingLeft="32dp"
-                                android:paddingRight="32dp">
-
-                                <RelativeLayout
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_weight="0.5">
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignParentTop="true"
-                                        android:layout_alignParentStart="true">
-
-                                        <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/editTextOthers"
-                                            android:visibility="gone"
-                                            android:layout_width="0dp"
-                                            android:layout_marginTop="8dp"
-                                            android:layout_weight="0.5"
-                                            android:layout_height="wrap_content"
-                                            android:hint="@string/title_ctc_number"
-                                            android:imeOptions="actionNext"
-                                            android:inputType="text"
-                                            android:textColor="@color/primary_text"
-                                            android:textColorHint="@color/hint_text"
-                                            android:textSize="14sp"
-                                            app:met_floatingLabel="normal"
-                                            app:met_floatingLabelText="Namba ya CTC"
-                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
-
-                                        <fr.ganfra.materialspinner.MaterialSpinner
-                                            android:id="@+id/registration_reasons_spinner"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="bottom"
-                                            android:layout_weight="0.5"
-                                            android:spinnerMode="dialog"
-                                            app:ms_arrowColor="@color/colorPrimary"
-                                            app:ms_arrowSize="14dp"
-                                            app:ms_baseColor="@color/colorPrimary"
-                                            app:ms_enableFloatingLabel="false"
-                                            app:ms_hint="@string/client_registration_reason"
-                                            app:ms_hintColor="@color/hint_text"
-                                            app:ms_multiline="false"
-                                            app:ms_thickness="1dp" />
-
-
-                                    </LinearLayout>
-                                </RelativeLayout>
-
-                                <RelativeLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_weight="0.5"
-                                    android:paddingBottom="16dp">
-
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content" >
                                         <com.rengwuxian.materialedittext.MaterialEditText
                                             android:id="@+id/helper_name"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginLeft="0dp"
-                                            android:layout_marginRight="0dp"
                                             android:layout_weight="1"
-                                            android:focusable="true"
+                                            android:clickable="false"
+                                            android:editable="false"
+                                            android:focusable="false"
+                                            android:gravity="center_vertical"
                                             android:hint="@string/helper_name"
                                             android:imeOptions="actionNext"
-                                            android:inputType="textCapWords|textPersonName"
+                                            android:inputType="text"
                                             android:textColor="@color/primary_text"
-                                            android:textColorHint="@color/hint_text"
+                                            android:textColorHint="@color/black_translucent"
                                             android:textSize="14sp"
                                             app:met_floatingLabel="normal"
                                             app:met_floatingLabelText="@string/helper_name"
                                             app:met_floatingLabelTextColor="@color/colorPrimary" />
 
+                                        <com.rengwuxian.materialedittext.MaterialEditText
+                                            android:id="@+id/helper_phone_number"
+                                            android:layout_marginLeft="16dp"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:gravity="center_vertical"
+                                            android:hint="@string/helper_phone_number"
+                                            android:textColor="@color/primary_text"
+                                            android:textColorHint="@color/hint_text"
+                                            android:textSize="14sp"
+                                            android:editable="false"
+                                            android:clickable="false"
+                                            android:focusable="false"
+                                            app:met_floatingLabel="normal"
+                                            app:met_floatingLabelText="@string/helper_phone_number"
+                                            app:met_floatingLabelTextColor="@color/colorPrimary"/>
+
 
 
                                         <com.rengwuxian.materialedittext.MaterialEditText
-                                            android:id="@+id/helper_phone_number"
+                                            android:layout_marginLeft="16dp"
+                                            android:id="@+id/edittextPhone"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginLeft="16dp"
                                             android:layout_weight="1"
-                                            android:hint="@string/helper_phone_number"
+                                            android:hint="@string/client_phone"
+                                            android:gravity="center_vertical"
                                             android:imeOptions="actionNext"
-                                            android:inputType="phone"
+                                            android:inputType="number"
                                             android:maxLength="10"
                                             android:textColor="@color/primary_text"
                                             android:textColorHint="@color/hint_text"
                                             android:textSize="14sp"
+                                            android:editable="false"
+                                            android:clickable="false"
+                                            android:focusable="false"
                                             app:met_floatingLabel="normal"
-                                            app:met_floatingLabelText="@string/helper_phone_number"
-                                            app:met_floatingLabelTextColor="@color/colorPrimary" />
-                                    </LinearLayout>
+                                            app:met_floatingLabelText="@string/client_phone"
+                                            app:met_floatingLabelTextColor="@color/colorPrimary"/>
 
+
+                                    </LinearLayout>
                                 </RelativeLayout>
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/card_separator_third"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="8dp"
+                                android:paddingLeft="32dp"
+                                android:paddingRight="32dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp">
+
+                                    <com.rengwuxian.materialedittext.MaterialEditText
+                                        android:id="@+id/editTextVillageLeader"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="16dp"
+                                        android:layout_weight="1"
+                                        android:hint="@string/client_veo"
+                                        android:textColor="@color/primary_text"
+                                        android:textColorHint="@color/hint_text"
+                                        android:textSize="14sp"
+                                        android:editable="false"
+                                        android:clickable="false"
+                                        android:focusable="false"
+                                        app:met_floatingLabel="normal"
+                                        app:met_floatingLabelText="@string/client_veo"
+                                        app:met_floatingLabelTextColor="@color/colorPrimary"/>
+
+                                    <com.rengwuxian.materialedittext.MaterialEditText
+                                        android:id="@+id/cbhs"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:hint="@string/title_cbhs_number"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text"
+                                        android:gravity="center_vertical"
+                                        android:textColor="@color/primary_text"
+                                        android:textColorHint="@color/black_translucent"
+                                        android:textSize="14sp"
+                                        android:editable="false"
+                                        android:clickable="false"
+                                        android:focusable="false"
+                                        app:met_floatingLabel="normal"
+                                        app:met_floatingLabelText="@string/title_cbhs_number"
+                                        app:met_floatingLabelTextColor="@color/colorPrimary"/>
+
+                                    <com.rengwuxian.materialedittext.MaterialEditText
+                                        android:id="@+id/ctc_number"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="16dp"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:hint="@string/title_ctc_number"
+                                        android:textColor="@color/primary_text"
+                                        android:textColorHint="@color/hint_text"
+                                        android:textSize="14sp"
+                                        android:editable="false"
+                                        android:visibility="invisible"
+                                        android:clickable="false"
+                                        android:focusable="false"
+                                        app:met_floatingLabel="normal"
+                                        app:met_floatingLabelText="@string/title_ctc_number"
+                                        app:met_floatingLabelTextColor="@color/colorPrimary"/>
+
+
+                                </LinearLayout>
 
                             </LinearLayout>
 

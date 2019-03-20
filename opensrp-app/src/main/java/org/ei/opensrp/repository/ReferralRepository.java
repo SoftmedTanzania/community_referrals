@@ -34,7 +34,7 @@ public class ReferralRepository extends DrishtiRepository {
             "services_given_to_patient VARCHAR, " +
             "referral_type INTEGER, " +
             "service_provider_uuid VARCHAR, " +
-            "referral_feedback VARCHAR, " +
+            "referral_feedback_id VARCHAR, " +
             "referral_uuid VARCHAR, " +
             "details VARCHAR)";
     public static final String TABLE_NAME = "referral";
@@ -54,10 +54,10 @@ public class ReferralRepository extends DrishtiRepository {
     public static final String SERVICES_GIVEN_TO_PATIENTS = "services_given_to_patient";
     public static final String REFERRAL_TYPE = "referral_type";
     public static final String SERVICE_PROVIDER_UUID = "service_provider_uuid";
-    public static final String REFERRAL_FEEDBACK = "referral_feedback";
+    public static final String REFERRAL_FEEDBACK_ID = "referral_feedback_id";
     public static final String REFERRAL_UUID = "referral_uuid";
     public static final String DETAILS_COLUMN = "details";
-    public static final String[] CLIENT_REFERRAL_TABLE_COLUMNS = {ID_COLUMN, RELATIONAL_ID, CLIENT_ID, ReferralDate,AppointmentDate, ReferralFacility, ReferralReason, Service, ReferralStatus, IsEmergency,IS_VALID,INDICATOR_IDS,OTHER_NOTES,SERVICES_GIVEN_TO_PATIENTS,REFERRAL_TYPE, SERVICE_PROVIDER_UUID,REFERRAL_FEEDBACK,REFERRAL_UUID,DETAILS_COLUMN};
+    public static final String[] CLIENT_REFERRAL_TABLE_COLUMNS = {ID_COLUMN, RELATIONAL_ID, CLIENT_ID, ReferralDate,AppointmentDate, ReferralFacility, ReferralReason, Service, ReferralStatus, IsEmergency,IS_VALID,INDICATOR_IDS,OTHER_NOTES,SERVICES_GIVEN_TO_PATIENTS,REFERRAL_TYPE, SERVICE_PROVIDER_UUID, REFERRAL_FEEDBACK_ID,REFERRAL_UUID,DETAILS_COLUMN};
     
 
     @Override
@@ -177,7 +177,7 @@ public class ReferralRepository extends DrishtiRepository {
         values.put(OTHER_NOTES, referral.getOther_notes());
         values.put(REFERRAL_TYPE, referral.getReferral_type());
         values.put(SERVICES_GIVEN_TO_PATIENTS, referral.getServices_given_to_patient());
-        values.put(REFERRAL_FEEDBACK, referral.getReferral_feedback());
+        values.put(REFERRAL_FEEDBACK_ID, referral.getReferral_feedback_id());
         values.put(REFERRAL_UUID, referral.getReferral_uuid());
         values.put(DETAILS_COLUMN, new Gson().toJson(referral));
         return values;
@@ -251,7 +251,7 @@ public class ReferralRepository extends DrishtiRepository {
                 getColumnValueByAlias(cursor, TABLE_NAME, SERVICES_GIVEN_TO_PATIENTS),
                 Integer.parseInt(getColumnValueByAlias(cursor, TABLE_NAME, REFERRAL_TYPE)),
                 getColumnValueByAlias(cursor, TABLE_NAME, SERVICES_GIVEN_TO_PATIENTS),
-                getColumnValueByAlias(cursor, TABLE_NAME, REFERRAL_FEEDBACK),
+                getColumnValueByAlias(cursor, TABLE_NAME, REFERRAL_FEEDBACK_ID),
                 getColumnValueByAlias(cursor, TABLE_NAME, REFERRAL_UUID),
                 getColumnValueByAlias(cursor, TABLE_NAME, DETAILS_COLUMN));
 

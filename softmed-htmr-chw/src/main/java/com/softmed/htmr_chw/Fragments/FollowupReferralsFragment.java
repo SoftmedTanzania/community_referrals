@@ -7,10 +7,13 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 import com.softmed.htmr_chw.Adapters.FollowupClintsRecyclerAdapter;
 import com.softmed.htmr_chw.Domain.ClientReferral;
 import com.softmed.htmr_chw.R;
@@ -69,8 +72,10 @@ public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorA
 
         commonRepository = context().commonrepository(ReferralRepository.TABLE_NAME);
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + ReferralRepository.TABLE_NAME +
-                " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID + " = " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID + " WHERE " + ReferralRepository.REFERRAL_TYPE + " = 1 ");
+                " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID + " = " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID + " WHERE " + ReferralRepository.REFERRAL_TYPE + " = 4 AND "+ReferralRepository.ReferralStatus+" = '0' ");
         clientReferrals = Utils.convertToClientReferralObjectList(cursor);
+
+        Log.d(TAG,"CLient Referral ID = "+new Gson().toJson(clientReferrals));
 
         try {
             FollowupClintsRecyclerAdapter followupClintsRecyclerAdapter = new FollowupClintsRecyclerAdapter(getActivity(), clientReferrals);

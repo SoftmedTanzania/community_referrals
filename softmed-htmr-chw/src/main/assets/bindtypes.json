@@ -104,10 +104,32 @@
           "name": "service_provider_uiid"
         },
         {
-          "name": "referral_feedback"
+          "name": "referral_feedback_id"
         },
         {
           "name": "referral_uuid"
+        }
+      ]
+    },{
+      "name": "followup",
+      "columns": [
+        {
+          "name": "client_id"
+        },
+        {
+          "name": "referral_id"
+        },
+        {
+          "name": "client_id"
+        },
+        {
+          "name": "referral_feedback_id"
+        },
+        {
+          "name": "other_notes"
+        },
+        {
+          "name": "followup_date"
         }
       ]
     },

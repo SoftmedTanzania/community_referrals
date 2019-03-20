@@ -31,6 +31,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static android.view.View.GONE;
+
 public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
     public static final int SUCCESSFULLY_REFERED_A_CLIENT = 192;
     private static final String TAG = ClientDetailsActivity.class.getSimpleName();
@@ -57,13 +59,13 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
         client = (Client) bundle.getSerializable("client");
         String type = bundle.getString("type");
 
-
-
+        if(type.equals("REFERRAL")){
+            cbhs.setVisibility(View.INVISIBLE);
+        }
 
         clientName.setText(client.getFirst_name() + " " + client.getMiddle_name() + " " + client.getSurname());
 
-        Date date = new Date();
-        date.setTime(client.getDate_of_birth());
+        String dobDateString = dateFormat.format(client.getDate_of_birth());
 
         gender.setText(client.getGender());
         village.setText(client.getVillage());
@@ -71,7 +73,7 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
         cbhs.setText(client.getCommunity_based_hiv_service());
         ctcNumber.setText(client.getCtc_number());
         phone.setText(client.getPhone_number());
-        regDob.setText(date.toString());
+        regDob.setText(dobDateString);
         helperName.setText(client.getCare_taker_name());
         helperPhoneNumber.setText(client.getCare_taker_phone_number());
 

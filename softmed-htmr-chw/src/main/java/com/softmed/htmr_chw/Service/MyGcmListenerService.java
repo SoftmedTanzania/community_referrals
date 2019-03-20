@@ -135,6 +135,7 @@ public class MyGcmListenerService extends GcmListenerService {
                 referral.setReferral_status(referralObject.getString("referralStatus"));
                 referral.setReferral_reason(referralObject.getString("referralReason"));
                 referral.setOther_notes(referralObject.getString("otherClinicalInformation"));
+                referral.setReferral_uuid(referralObject.getString("referralUUID"));
                 referral.setService_provider_uiid(referralObject.getString("serviceProviderUIID"));
                 referral.setReferral_date(Long.valueOf(referralObject.getString("referralDate")));
                 referral.setReferral_type(4);

@@ -91,6 +91,7 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
     private List<String> registrationReasonsNames = new ArrayList<>();
     private List<RegistrationReasons> registrationReasons = new ArrayList<>();
     private String registrationReasonId;
+    private boolean isCBHSClient = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -269,12 +270,12 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
         TextView prefix = (TextView) findViewById(com.softmed.htmr_chw.R.id.prefix);
         prefix.setTypeface(sansBold);
         try {
-            prefix.setText(context().allSharedPreferences().fetchCBHS()+"/");
-        }catch (NullPointerException e){
+            prefix.setText(context().allSharedPreferences().fetchCBHS() + "/");
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
 
-        final LinearLayout cbhsLayout = (LinearLayout)findViewById(R.id.cbhs_layout);
+        final LinearLayout cbhsLayout = (LinearLayout) findViewById(R.id.cbhs_layout);
 
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.is_cbhs_client);
 
@@ -283,10 +284,12 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 // find which radio button is selected
-                if(checkedId == R.id.yes) {
+                if (checkedId == R.id.yes) {
                     cbhsLayout.setVisibility(View.VISIBLE);
-                } else if(checkedId == R.id.no) {
+                    isCBHSClient=true;
+                } else if (checkedId == R.id.no) {
                     cbhsLayout.setVisibility(View.GONE);
+                    isCBHSClient=false;
                 } else {
 
                 }
@@ -401,7 +404,10 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
 
     public Client getClient() {
         Client client = new Client();
-        client.setCommunity_based_hiv_service(context().allSharedPreferences().fetchCBHS()+"/"+editTextDiscountId.getText().toString());
+        if (isCBHSClient)
+            client.setCommunity_based_hiv_service(context().allSharedPreferences().fetchCBHS() + "/" + editTextDiscountId.getText().toString());
+        else
+            client.setCommunity_based_hiv_service("");
         client.setFirst_name(editTextfName.getText().toString());
         client.setMiddle_name(editTextmName.getText().toString());
         client.setSurname(editTextlName.getText().toString());
@@ -420,6 +426,7 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
         client.setWard(wardId);
         client.setCtc_number(editTextCTCNumber.getText().toString());
         client.setRegistration_reason_id(registrationReasonId);
+        client.setDate_of_birth(dob);
 
         client.setService_provider_uuid(((BoreshaAfyaApplication) getApplication()).getCurrentUserID());
         return client;

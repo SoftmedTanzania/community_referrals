@@ -54,7 +54,7 @@
                 "name": "service_provider_uiid"
             },
             {
-                "name": "referral_feedback"
+                "name": "referral_feedback_id"
             },
             {
                 "name": "referral_uuid"
