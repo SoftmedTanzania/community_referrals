@@ -294,7 +294,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
 
                     FormData formData = new FormData("followup", "/model/instance/followup_form/", formFields, null);
                     FormInstance formInstance = new FormInstance(formData, "1");
-                    FormSubmission submission = new FormSubmission(generateRandomUUIDString(), uuid, "client_referral", new Gson().toJson(formInstance), "4", SyncStatus.PENDING, "4");
+                    FormSubmission submission = new FormSubmission(generateRandomUUIDString(), uuid, "followup_form", new Gson().toJson(formInstance), "4", SyncStatus.PENDING, "4");
                     context().formDataRepository().saveFormSubmission(submission);
 
                     Log.d(TAG, "submission content = " + new Gson().toJson(submission));

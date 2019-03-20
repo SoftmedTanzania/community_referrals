@@ -108,6 +108,9 @@
         },
         {
           "name": "referral_uuid"
+        },
+        {
+          "name": "test_results"
         }
       ]
     },{

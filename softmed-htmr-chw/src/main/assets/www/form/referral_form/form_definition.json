@@ -51,13 +51,16 @@
                 "name": "referral_type"
             },
             {
-                "name": "service_provider_uiid"
+                "name": "service_provider_uuid"
             },
             {
                 "name": "referral_feedback_id"
             },
             {
                 "name": "referral_uuid"
+            },
+            {
+                "name": "test_results"
             }
         ]
     }

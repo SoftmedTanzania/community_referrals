@@ -3,6 +3,7 @@ package com.softmed.htmr_chw.Activities;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -46,11 +48,14 @@ import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.util.FitDoughnut;
 import com.softmed.htmr_chw.util.NavigationController;
 
+import org.ei.opensrp.Context;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
+import org.ei.opensrp.domain.ReferralFeedback;
 import org.ei.opensrp.event.Listener;
 import org.ei.opensrp.provider.SmartRegisterClientsProvider;
+import org.ei.opensrp.repository.AllSharedPreferences;
 import org.ei.opensrp.service.PendingFormSubmissionService;
 import org.ei.opensrp.sync.SyncAfterFetchListener;
 import org.ei.opensrp.sync.SyncProgressIndicator;
@@ -81,8 +86,10 @@ import java.util.Locale;
 import butterknife.Bind;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.View.VISIBLE;
 import static android.widget.Toast.LENGTH_SHORT;
+import static com.softmed.htmr_chw.Activities.LoginActivity.ENGLISH_LOCALE;
 import static java.lang.String.valueOf;
 import static org.ei.opensrp.event.Event.ACTION_HANDLED;
 import static org.ei.opensrp.event.Event.FORM_SUBMITTED;
@@ -513,7 +520,10 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     public void showPreRegistrationDetailsDialog(ClientReferral clientReferral) {
 
-        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwregistration_details, null);
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(org.ei.opensrp.Context.getInstance().applicationContext()));
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+
+        final View dialogView = getLayoutInflater().inflate(R.layout.view_referral_summary, null);
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
         dialogBuilder.setView(dialogView)
@@ -551,14 +561,24 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         TextView physicalAddress = (TextView) dialogView.findViewById(R.id.editTextKijiji);
         TextView villageleader = (TextView) dialogView.findViewById(R.id.viewVillageLeader);
 
+        Log.d(TAG,"referral feedback id = "+clientReferral.getReferral_feedback());
         try {
-            if (clientReferral.getReferral_status().equals("1") && !clientReferral.getServices_given_to_patient().equals("")) {
+            if (clientReferral.getReferral_status().equals("1") && !clientReferral.getReferral_feedback().equals("")) {
                 dialogView.findViewById(R.id.referral_feedback_title).setVisibility(VISIBLE);
                 dialogView.findViewById(R.id.referral_feedback).setVisibility(VISIBLE);
                 dialogView.findViewById(R.id.strip_six).setVisibility(VISIBLE);
                 TextView referralFeedback = (TextView) dialogView.findViewById(R.id.referral_feedback);
                 referralFeedback.setVisibility(VISIBLE);
-                referralFeedback.setText(clientReferral.getServices_given_to_patient());
+
+                ReferralFeedback feedback = context().referralFeedbackRepository().find(clientReferral.getReferral_feedback());
+
+                if(feedback!=null) {
+                    if (ENGLISH_LOCALE.equals(preferredLocale)) {
+                        referralFeedback.setText(feedback.getDesc());
+                    } else {
+                        referralFeedback.setText(feedback.getDescSw());
+                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -572,6 +592,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             otherNotes.setVisibility(VISIBLE);
             otherNotes.setText(clientReferral.getOther_notes());
         }
+
 
 
         textName.setText(clientReferral.getFirst_name() + " " + clientReferral.getMiddle_name() + " " + clientReferral.getSurname());

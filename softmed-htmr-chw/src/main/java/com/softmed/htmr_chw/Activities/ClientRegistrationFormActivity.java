@@ -145,6 +145,11 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("client", client);
 
+                    if(isCBHSClient)
+                        bundle.putString("type", "CBHS");
+                    else
+                        bundle.putString("type", "REFERRAL");
+
                     intent1.putExtras(bundle);
                     startActivity(intent1);
                     finish();

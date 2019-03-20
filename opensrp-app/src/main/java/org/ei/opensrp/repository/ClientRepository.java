@@ -19,7 +19,7 @@ import static org.apache.commons.lang3.StringUtils.repeat;
 public class ClientRepository extends DrishtiRepository {
     private static final String CHILD_SQL = "CREATE TABLE client(id VARCHAR PRIMARY KEY, " +
             "relationalid VARCHAR, " +
-            "client_id VARCHAR, " +
+            "client_id VARCHAR UNIQUE, " +
             "first_name VARCHAR, " +
             "middle_name VARCHAR, " +
             "surname VARCHAR," +

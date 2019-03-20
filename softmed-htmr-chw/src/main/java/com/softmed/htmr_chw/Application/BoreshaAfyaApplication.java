@@ -289,14 +289,16 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
         Log.d(TAG, "message = " + value);
     }
 
-    public void updateReferralStatus(String id, String feedback, String serviceGiven, boolean testResult, String referralStatus) {
+    public void updateReferralStatus(String id, String feedback, String feedbackId, String testResult, String referralStatus) {
         ReferralRepository referralRepository = context.referralRepository();
         Referral referral = referralRepository.find(id);
 
         try {
             referral.setReferral_status(referralStatus);
             referral.setOther_notes(feedback);
-            referral.setServices_given_to_patient(serviceGiven);
+            referral.setReferral_feedback_id(feedbackId);
+
+            referral.setTest_results(testResult);
 
             referralRepository.update(referral);
         } catch (Exception e) {

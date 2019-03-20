@@ -91,6 +91,7 @@ public class Utils {
             clientReferral.setReferral_reason(cursor.getString(cursor.getColumnIndex(ReferralRepository.ReferralReason)));
             clientReferral.setIndicator_ids(cursor.getString(cursor.getColumnIndex(ReferralRepository.INDICATOR_IDS)));
             clientReferral.setOther_notes(cursor.getString(cursor.getColumnIndex(ReferralRepository.OTHER_NOTES)));
+            clientReferral.setReferral_feedback(cursor.getString(cursor.getColumnIndex(ReferralRepository.REFERRAL_FEEDBACK_ID)));
             clientReferral.setServices_given_to_patient(cursor.getString(cursor.getColumnIndex(ReferralRepository.SERVICES_GIVEN_TO_PATIENTS)));
             clientReferral.setVillage(cursor.getString(cursor.getColumnIndex(ClientRepository.VILLAGE)));
             clientReferral.setWard(cursor.getString(cursor.getColumnIndex(ClientRepository.WARD)));
