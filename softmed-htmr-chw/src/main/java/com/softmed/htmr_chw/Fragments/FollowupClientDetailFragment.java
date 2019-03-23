@@ -359,7 +359,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
 
         Client client = context().clientRepository().find(clientReferral.getClient_id());
 
-        if(!client.getCommunity_based_hiv_service().equals(""))
+        if(client.getCommunity_based_hiv_service()!=null&&!client.getCommunity_based_hiv_service().equals(""))
             cbhs.setVisibility(View.GONE);
 
         TextView cbhsTitle = rootView.findViewById(R.id.cbhs_title);
