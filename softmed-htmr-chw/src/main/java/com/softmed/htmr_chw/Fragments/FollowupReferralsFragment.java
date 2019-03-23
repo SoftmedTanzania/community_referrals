@@ -75,7 +75,7 @@ public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorA
                 " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID + " = " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID + " WHERE " + ReferralRepository.REFERRAL_TYPE + " = 4 AND "+ReferralRepository.ReferralStatus+" = '0' ");
         clientReferrals = Utils.convertToClientReferralObjectList(cursor);
 
-        Log.d(TAG,"CLient Referral ID = "+new Gson().toJson(clientReferrals));
+        Log.d(TAG,"Client Referral ID = "+new Gson().toJson(clientReferrals));
 
         try {
             FollowupClintsRecyclerAdapter followupClintsRecyclerAdapter = new FollowupClintsRecyclerAdapter(getActivity(), clientReferrals);
@@ -136,7 +136,7 @@ public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorA
     public void populateData() {
         commonRepository = context().commonrepository(ReferralRepository.TABLE_NAME);
         Cursor cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + ReferralRepository.TABLE_NAME +
-                " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID + " = " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID + " WHERE " + ReferralRepository.REFERRAL_TYPE + " = 4");
+                " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID + " = " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID + " WHERE " + ReferralRepository.REFERRAL_TYPE + " = 4 AND "+ReferralRepository.ReferralStatus+" = '0'");
 
         clientReferrals = Utils.convertToClientReferralObjectList(cursor);
         cursor.close();

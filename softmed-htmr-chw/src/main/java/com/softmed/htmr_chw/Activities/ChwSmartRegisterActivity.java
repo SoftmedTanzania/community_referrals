@@ -337,7 +337,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
                 FollowupReferralsFragment newFragment = new FollowupReferralsFragment();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragments, newFragment);
+                transaction.replace(R.id.fragments, newFragment,"followup_fragment");
                 transaction.addToBackStack(null);
                 transaction.commit();
 
@@ -569,8 +569,11 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         TextView testStatus = (TextView) dialogView.findViewById(R.id.testStatus);
         testStatus.setTypeface(sansBold);
 
-        if(clientReferral.getTest_results()!=null && !clientReferral.getTest_results().equals("")){
+        //TODO remove this hardcoding of services
+        if(clientReferral.getReferral_service_id().equals("1")||clientReferral.getReferral_service_id().equals("2"))
             testStatus.setVisibility(VISIBLE);
+
+        if(clientReferral.getTest_results()!=null && !clientReferral.getTest_results().equals("")){
             if(clientReferral.getTest_results().equals("1")){
                 testStatus.setText(R.string.test_results_positive);
                 testStatus.setTextColor(getResources().getColor(R.color.green_500));

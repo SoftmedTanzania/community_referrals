@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,17 +13,22 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.softmed.htmr_chw.Domain.ClientReferral;
 import com.softmed.htmr_chw.R;
 
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
 import org.ei.opensrp.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
+import org.ei.opensrp.domain.Client;
 import org.ei.opensrp.domain.Followup;
 import org.ei.opensrp.domain.Referral;
 import org.ei.opensrp.domain.ReferralFeedback;
@@ -66,6 +72,8 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
     private List<String> referralFeedbacksNames = new ArrayList<>();
     private Button save;
     private String preferredLocale;
+    private MaterialEditText cbhsNumber;
+    private boolean saveCBHS=false;
 
     public FollowupClientDetailFragment() {
     }
@@ -100,7 +108,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         preferredLocale = allSharedPreferences.fetchLanguagePreference();
         setLanguage();
 
-        Log.d(TAG,"CLient Referral ID = "+clientReferral.getReferral_id());
+        Log.d(TAG, "CLient Referral ID = " + clientReferral.getReferral_id());
 
         setupviews(rootView);
         setDetails(clientReferral);
@@ -248,7 +256,15 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
                 if (spinnerReason.getSelectedItemPosition() <= 0) {
                     Toast.makeText(getActivity(), getString(R.string.toast_message_select_reasons_for_missing_appointment), Toast.LENGTH_SHORT).show();
 
+                } else if (clientReferral.getReferral_id() == null) {
+                    Toast.makeText(getActivity(), "Referral ID is null", Toast.LENGTH_SHORT).show();
                 } else {
+
+                    if(saveCBHS && !cbhsNumber.getText().toString().equals("")){
+                        Client client = context().clientRepository().find(clientReferral.getClient_id());
+                        client.setCommunity_based_hiv_service(cbhsNumber.getText().toString());
+                        context().clientRepository().update(client);
+                    }
 
                     Referral referral = context().referralRepository().find(clientReferral.getReferral_id());
                     referral.setReferral_status("1");
@@ -265,7 +281,13 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
                     followup.setClient_id(Long.parseLong(clientReferral.getClient_id()));
                     followup.setReferral_id(Long.parseLong(clientReferral.getReferral_id()));
                     followup.setReferral_feedback_id(reasonSelection);
-                    followup.setOther_notes(feedback.getText().toString());
+
+                    if (!feedback.getText().toString().equals(""))
+                        followup.setOther_notes(feedback.getText().toString());
+                    else
+                        followup.setOther_notes("N/A");
+
+                    Log.d(TAG, "client Referral ID  = " + clientReferral.getReferral_id());
 
                     FollowupRepository followupRepository = context().followupRepository();
                     followupRepository.add(followup);
@@ -299,8 +321,14 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
 
                     Log.d(TAG, "submission content = " + new Gson().toJson(submission));
 
-
                     Toast.makeText(getActivity(), getString(R.string.followup_thankyou_note_part_one) + clientReferral.getFirst_name() + " " + clientReferral.getSurname(), Toast.LENGTH_SHORT).show();
+
+                    ((FollowupReferralsFragment)getActivity().getSupportFragmentManager().findFragmentByTag("followup_fragment")).populateData();
+
+                    ((FragmentActivity) getActivity()).getSupportFragmentManager().beginTransaction().remove(FollowupClientDetailFragment.this)
+                            .commit();
+
+
                 }
 
             }
@@ -325,6 +353,39 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         TextView helperNameTitle = rootView.findViewById(R.id.helper_name_title);
         TextView service_offered_title = rootView.findViewById(R.id.service_offered_title);
         TextView service_advice_title = rootView.findViewById(R.id.service_advice_title);
+        LinearLayout cbhs = rootView.findViewById(R.id.cbhs);
+
+        Log.d(TAG,"CBHS Number = "+clientReferral.getCommunity_based_hiv_service());
+
+        Client client = context().clientRepository().find(clientReferral.getClient_id());
+
+        if(!client.getCommunity_based_hiv_service().equals(""))
+            cbhs.setVisibility(View.GONE);
+
+        TextView cbhsTitle = rootView.findViewById(R.id.cbhs_title);
+        TextView prefix = rootView.findViewById(R.id.prefix);
+        Switch cbhsSwitch = rootView.findViewById(R.id.cbhs_switch);
+        final LinearLayout cbhsLayout = rootView.findViewById(R.id.cbhs_layout);
+        cbhsNumber = rootView.findViewById(R.id.cbhs_number);
+
+        prefix.setText(context().allSharedPreferences().fetchCBHS() + "/");
+
+        cbhsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                saveCBHS = b;
+                if(b){
+                    cbhsLayout.setVisibility(View.VISIBLE);
+                }else{
+                    cbhsLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
+
+
+
+
         save = (Button) rootView.findViewById(R.id.save_button);
         name = rootView.findViewById(R.id.client_name);
         phoneNumber = (TextView) rootView.findViewById(R.id.phone_number);
@@ -347,6 +408,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         sansBold = Typeface.createFromAsset(getActivity().getAssets(), "google_sans_bold.ttf");
 
         heading.setTypeface(sansBold);
+        cbhsTitle.setTypeface(sansBold);
         refererTitle.setTypeface(sansBold);
         helperPhoneNumberTitle.setTypeface(sansBold);
         helperNameTitle.setTypeface(sansBold);
@@ -363,6 +425,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         name.setTypeface(sansBold);
         referedDate.setTypeface(sansBold);
 
+        prefix.setTypeface(robotoRegular);
         service_offered_title.setTypeface(robotoRegular);
         service_advice_title.setTypeface(robotoRegular);
         age.setTypeface(robotoRegular);
