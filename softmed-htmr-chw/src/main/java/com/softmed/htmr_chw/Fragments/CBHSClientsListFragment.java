@@ -2,12 +2,14 @@ package com.softmed.htmr_chw.Fragments;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +55,7 @@ public class CBHSClientsListFragment extends SecuredNativeSmartRegisterCursorAda
     private RecyclerView recyclerView;
     private CBHSClientsListAdapter cbhsClientsListAdapter;
     private Typeface robotoRegular, sansBold;
+    private String preferredLocale;
 
     public CBHSClientsListFragment() {
     }
@@ -75,6 +78,8 @@ public class CBHSClientsListFragment extends SecuredNativeSmartRegisterCursorAda
 
         View v = inflater.inflate(R.layout.fragment_registered_cbhs_clients, container, false);
         setupviews(v);
+
+        setLanguage();
 
         clientRepository = context().clientRepository();
 
@@ -328,5 +333,17 @@ public class CBHSClientsListFragment extends SecuredNativeSmartRegisterCursorAda
 
             }
         }
+    }
+
+    private void setLanguage() {
+        android.util.Log.d(TAG, "set Locale : " + preferredLocale);
+
+        Resources res = org.ei.opensrp.Context.getInstance().applicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(preferredLocale);
+        res.updateConfiguration(conf, dm);
+
     }
 }

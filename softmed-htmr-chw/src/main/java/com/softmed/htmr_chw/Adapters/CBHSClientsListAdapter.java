@@ -18,6 +18,8 @@ import org.ei.opensrp.domain.Client;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.ei.opensrp.AllConstants.ENGLISH_LOCALE;
+
 
 /**
  * Created by Coze on 2/10/19.
@@ -28,7 +30,6 @@ public class CBHSClientsListAdapter extends
     private static String TAG = CBHSClientsListAdapter.class.getSimpleName();
     private CommonRepository commonRepository;
     private List<Client> clients = new ArrayList<>();
-    ;
     private Context mContext;
 
     public CBHSClientsListAdapter(Context context, List<Client> client) {
@@ -55,6 +56,13 @@ public class CBHSClientsListAdapter extends
         viewHolder.nameTextView.setText(client.getFirst_name() + " " + client.getMiddle_name() + " " + client.getSurname());
         viewHolder.phoneNumber.setText(client.getPhone_number());
         viewHolder.village.setText(client.getVillage());
+
+        if(client.getGender().equalsIgnoreCase("male")){
+            viewHolder.gender.setText(mContext.getString(R.string.male));
+        }else{
+            viewHolder.gender.setText(mContext.getString(R.string.female));
+        }
+
         viewHolder.gender.setText(client.getGender());
         viewHolder.cbhsNo.setText(client.getCommunity_based_hiv_service());
 

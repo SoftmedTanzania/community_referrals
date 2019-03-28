@@ -24,6 +24,9 @@ public class ReferralService extends IntentService {
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         android.util.Log.d(TAG, "Facility Referral Services on handle intent");
+        ((BoreshaAfyaApplication)getApplication()).getFacilities();
         ((BoreshaAfyaApplication) getApplication()).setReferralService();
+        ((BoreshaAfyaApplication) getApplication()).setReferralFeedback();
+        ((BoreshaAfyaApplication) getApplication()).setRegistrationReasons();
     }
 }

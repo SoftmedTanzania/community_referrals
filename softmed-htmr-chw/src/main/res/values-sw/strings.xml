@@ -96,6 +96,7 @@
     <string name="unsuccessful_label">Haijafanikiwa</string>
     <string name="received_referrals_label">Rufaa zilizopokelewa</string>
     <string name="pending_label">Inasubiri</string>
+    <string name="label_village">Kijiji</string>
     <string name="incorrect_phone_number">Tafadhali jaza namba ya simu sahihi</string>
     <string name="other_notes_title">Taarifa nyingine/Ushauri</string>
     <string name="initial_information">Taarifa za Awali</string>

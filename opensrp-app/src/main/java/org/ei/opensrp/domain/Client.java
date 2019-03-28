@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Client implements Serializable {
 
     private String id, relationalid, client_id,details, first_name, middle_name, surname, facility_id,
-            is_valid, service_provider_mobile_number, ward, village, Kijitongoji, care_taker_name, care_taker_phone_number,
+            is_valid, service_provider_mobile_number, ward, village, care_taker_name, care_taker_phone_number,
             veo, service_provider_uuid, phone_number, gender, community_based_hiv_service, ctc_number,registration_reason_id;
     private long date_of_birth,status;
     public Client() {
@@ -56,7 +56,6 @@ public class Client implements Serializable {
         this.village=village;
         this.ward=ward;
         this.veo = veo;
-        this.status=status;
         this.phone_number = phone_number;
         this.date_of_birth = date_of_birth;
         this.registration_reason_id = registration_reason_id;
@@ -156,14 +155,6 @@ public class Client implements Serializable {
 
     public void setVillage(String village) {
         this.village = village;
-    }
-
-    public String getKijitongoji() {
-        return Kijitongoji;
-    }
-
-    public void setKijitongoji(String kijitongoji) {
-        Kijitongoji = kijitongoji;
     }
 
     public String getCare_taker_name() {
