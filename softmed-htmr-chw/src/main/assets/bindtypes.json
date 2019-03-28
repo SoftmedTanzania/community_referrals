@@ -56,6 +56,12 @@
         },
         {
           "name": "registration_reason_id"
+        },
+        {
+          "name": "client_id"
+        },
+        {
+          "name": "status"
         }
       ]
     },{

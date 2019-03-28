@@ -32,11 +32,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.gson.Gson;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
-import com.softmed.htmr_chw.Service.FacilityService;
-import com.softmed.htmr_chw.Service.ReferralFeedbackService;
 import com.softmed.htmr_chw.Service.ReferralService;
 import com.softmed.htmr_chw.Service.RegistrationIntentService;
-import com.softmed.htmr_chw.Service.RegistrationReasonsService;
 import com.softmed.htmr_chw.util.AsyncTask;
 import com.softmed.htmr_chw.util.SmallDiagonalCutPathDrawable;
 
@@ -434,10 +431,7 @@ public class LoginActivity extends AppCompatActivity {
         BoreshaAfyaApplication.setCrashlyticsUser(context);
 
         startActivity(new Intent(this, ChwSmartRegisterActivity.class));
-        startService(new Intent(this, FacilityService.class));
         startService(new Intent(this, ReferralService.class));
-        startService(new Intent(this, ReferralFeedbackService.class));
-        startService(new Intent(this, RegistrationReasonsService.class));
 
         final String regId = context.allSettings().fetchRegistartionId();
         Log.logDebug("registration token " + regId);

@@ -369,6 +369,11 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
             editTextlName.setError(message);
             makeToast();
             return false;
+        } else if (isCBHSClient && TextUtils.isEmpty(editTextDiscountId.getText())) {
+            message = getResources().getString(com.softmed.htmr_chw.R.string.unfilled_information);
+            editTextDiscountId.setError(message);
+            makeToast();
+            return false;
         } else if (spinnerGender.getSelectedItemPosition() == 0) {
             message = getResources().getString(com.softmed.htmr_chw.R.string.missing_gender);
             spinnerGender.setError(message);
