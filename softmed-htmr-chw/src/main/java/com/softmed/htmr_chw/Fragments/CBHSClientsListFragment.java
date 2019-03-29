@@ -79,8 +79,6 @@ public class CBHSClientsListFragment extends SecuredNativeSmartRegisterCursorAda
         View v = inflater.inflate(R.layout.fragment_registered_cbhs_clients, container, false);
         setupviews(v);
 
-        setLanguage();
-
         clientRepository = context().clientRepository();
 
         List<Client> clients = clientRepository.RawCustomQueryForAdapter("select * FROM " + ClientRepository.TABLE_NAME+
@@ -333,17 +331,5 @@ public class CBHSClientsListFragment extends SecuredNativeSmartRegisterCursorAda
 
             }
         }
-    }
-
-    private void setLanguage() {
-        android.util.Log.d(TAG, "set Locale : " + preferredLocale);
-
-        Resources res = org.ei.opensrp.Context.getInstance().applicationContext().getResources();
-        // Change locale settings in the app.
-        DisplayMetrics dm = res.getDisplayMetrics();
-        android.content.res.Configuration conf = res.getConfiguration();
-        conf.locale = new Locale(preferredLocale);
-        res.updateConfiguration(conf, dm);
-
     }
 }
