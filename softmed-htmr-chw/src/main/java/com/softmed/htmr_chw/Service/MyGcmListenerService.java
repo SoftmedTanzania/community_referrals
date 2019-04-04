@@ -104,6 +104,7 @@ public class MyGcmListenerService extends GcmListenerService {
                     client.setCtc_number(object.getString("ctcNumber"));
                 } catch (Exception e) {
                     e.printStackTrace();
+                    client.setCtc_number("");
                 }
 
                 try {
@@ -116,6 +117,7 @@ public class MyGcmListenerService extends GcmListenerService {
                     client.setCommunity_based_hiv_service(object.getString("communityBasedHivService"));
                 } catch (Exception e) {
                     e.printStackTrace();
+                    client.setCommunity_based_hiv_service("");
                 }
 
 
@@ -134,7 +136,7 @@ public class MyGcmListenerService extends GcmListenerService {
                 referral.setFacility_id(referralObject.getString("fromFacilityId"));
                 referral.setReferral_status(referralObject.getString("referralStatus"));
                 referral.setReferral_reason(referralObject.getString("referralReason"));
-                referral.setOther_notes(referralObject.getString("otherClinicalInformation"));
+                referral.setOther_notes(referralObject.getString("otherNotes"));
                 referral.setReferral_uuid(referralObject.getString("referralUUID"));
                 referral.setService_provider_uiid(referralObject.getString("serviceProviderUIID"));
                 referral.setReferral_date(Long.valueOf(referralObject.getString("referralDate")));

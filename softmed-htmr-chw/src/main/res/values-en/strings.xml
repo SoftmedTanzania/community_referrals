@@ -120,7 +120,7 @@
     <string name="register_clients_button_label">Registered Clients</string>
     <string name="referral_history_label">Referral History</string>
     <string name="helper_name">Treatment Supporter\'s Name</string>
-    <string name="helper_phone_number">Treatment Supporter\'s Phone Number</string>
+    <string name="helper_phone_number">Treatment Supporter\'s Contacts</string>
     <string name="gender">Gender</string>
     <string name="client_registration_reason">Client Registration Reason</string>
     <string name="missing_registration_reason">Please select client registration reason</string>

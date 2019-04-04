@@ -78,12 +78,12 @@ public class ReferralClientsListFragment extends SecuredNativeSmartRegisterCurso
         clientRepository = context().clientRepository();
 
         List<Client> clients = clientRepository.RawCustomQueryForAdapter("select * FROM " +
-                ClientRepository.TABLE_NAME+
-                " WHERE "+
-                ClientRepository.CBHS+" NOT LIKE '"+context().allSharedPreferences().fetchCBHS()+"%'");
+                ClientRepository.TABLE_NAME
+                + " WHERE "+ ClientRepository.CBHS+" NOT LIKE '"+context().allSharedPreferences().fetchCBHS()+"%'"
+        );
 
 
-        Log.d(TAG, "repo count = " + clients.size());
+        Log.d(TAG, "repo data = " + new Gson().toJson(clients));
         referralClientsListAdapter = new ReferralClientsListAdapter(getActivity(), clients);
 
         FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);

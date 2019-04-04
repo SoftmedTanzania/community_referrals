@@ -315,7 +315,7 @@
                                 android:layout_below="@id/helper_name_value"
                                 android:layout_marginTop="8dp"
                                 android:id="@+id/helper_phone_number_title"
-                                android:text="@string/helper_name"/>
+                                android:text="@string/helper_phone_number"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -325,8 +325,7 @@
                                 android:layout_marginTop="4dp"
                                 android:textColor="@color/card_title_text"
                                 android:textSize="14sp"
-                                android:layout_marginBottom="16dp"
-                                android:text="Kinjekitile Ngwale" />
+                                android:layout_marginBottom="16dp" />
 
                         </RelativeLayout>
 
