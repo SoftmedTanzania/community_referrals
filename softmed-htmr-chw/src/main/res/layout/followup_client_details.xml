@@ -90,8 +90,11 @@
                             android:layout_alignParentRight="true"
                             android:textSize="14sp"
                             android:textStyle="bold"
+                            android:visibility="gone"
                             android:layout_marginRight="32dp"
                             android:id="@+id/phone_number"
+                            android:drawablePadding="8dp"
+                            android:drawableStart="@drawable/round_call_black_48dp"
                             android:textColor="@color/colorPrimary"/>
 
                         <TextView
