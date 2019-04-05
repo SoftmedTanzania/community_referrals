@@ -334,11 +334,19 @@ public class BoreshaAfyaApplication extends DrishtiApplication {
     }
 
     public void insertFollowup(Client clientFollowup, List<Referral> referrals) {
-        context.clientRepository().add(clientFollowup);
+        try {
+            context.clientRepository().add(clientFollowup);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         for (Referral referral : referrals) {
-            context.referralRepository().add(referral);
-            Log.d(TAG, "saving followup referral");
+            try {
+                context.referralRepository().add(referral);
+                Log.d(TAG, "saving followup referral");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 

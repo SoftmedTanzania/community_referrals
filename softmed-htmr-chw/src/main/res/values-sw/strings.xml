@@ -136,7 +136,7 @@
     <string name="register_clients_button_label">Sajili Mteja</string>
     <string name="referral_history_label">Rufaa zilizopita</string>
     <string name="helper_name">Jina la Msaidizi</string>
-    <string name="helper_phone_number">Namba ya simu ya Msaidizi</string>
+    <string name="helper_phone_number">Mawasiliano ya Msaidizi</string>
     <string name="gender">Jinsi</string>
     <string name="client_list_desc">Wateja waliosajiliwa (Tumia sehemu hii kuchagua mteha na kutuma rufaa).</string>
     <string name="referral_issued_by_label">Rufaa imetolewa na</string>

@@ -140,7 +140,7 @@ Aenean quis ex dictum, porttitor nunc id, viverra urna. Suspendisse posuere ex a
     <string name="referral_history_label">Referral History</string>
     <string name="title_activity_client_details">ClientDetails</string>
     <string name="helper_name">Care Taker Name</string>
-    <string name="helper_phone_number">Care Taker Phone Number</string>
+    <string name="helper_phone_number">Care Taker Contacts</string>
     <string name="gender">Gender</string>
     <string name="referral_issued_by_label">Referral Issued by</string>
     <string name="follow_up_client_details">Follow up Client Details</string>

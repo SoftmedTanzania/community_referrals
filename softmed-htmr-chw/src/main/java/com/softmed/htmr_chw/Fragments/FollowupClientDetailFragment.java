@@ -1,10 +1,17 @@
 package com.softmed.htmr_chw.Fragments;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +29,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.softmed.htmr_chw.Activities.ClientDetailsActivity;
 import com.softmed.htmr_chw.Domain.ClientReferral;
 import com.softmed.htmr_chw.R;
 
@@ -74,6 +82,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
     private String preferredLocale;
     private MaterialEditText cbhsNumber;
     private boolean saveCBHS=false;
+    private final int REQUEST_PERMISSION_PHONE_STATE=1;
 
     public FollowupClientDetailFragment() {
     }
@@ -203,6 +212,28 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         age.setText(ageS + " years");
         name.setText(clientReferral.getFirst_name() + " " + clientReferral.getMiddle_name() + ", " + clientReferral.getSurname());
         phoneNumber.setText(clientReferral.getPhone_number());
+
+
+        phoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!clientReferral.getPhone_number().equals("")) {
+                    Intent intent = new Intent(Intent.ACTION_CALL);
+
+                    intent.setData(Uri.parse("tel:" + clientReferral.getPhone_number()));
+                    if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        showPhonePermission();
+                        return;
+                    }
+                    startActivity(intent);
+                }
+            }
+        });
+
+        if(!clientReferral.getPhone_number().equals(""))
+            phoneNumber.setVisibility(View.VISIBLE);
+        
+        
         referedReason.setText(clientReferral.getReferral_reason());
         referedDate.setText(dateFormat.format(clientReferral.getReferral_date()));
 
@@ -217,6 +248,23 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         try {
             helperName.setText(clientReferral.getHelper_name());
             helperPhoneNumber.setText(clientReferral.getHelper_phone_number());
+
+            helperPhoneNumber.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (!clientReferral.getHelper_phone_number().equals("")) {
+                        Intent intent = new Intent(Intent.ACTION_CALL);
+
+                        intent.setData(Uri.parse("tel:" + clientReferral.getHelper_phone_number()));
+                        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            showPhonePermission();
+                            return;
+                        }
+                        startActivity(intent);
+                    }
+                }
+            });
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -448,5 +496,50 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         conf.locale = new Locale(preferredLocale);
         res.updateConfiguration(conf, dm);
 
+    }
+
+    private void showPhonePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                Manifest.permission.CALL_PHONE)) {
+            showExplanation("Permission Needed", "Rationale", Manifest.permission.CALL_PHONE, REQUEST_PERMISSION_PHONE_STATE);
+        } else {
+            requestPermission(Manifest.permission.CALL_PHONE, REQUEST_PERMISSION_PHONE_STATE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(
+            int requestCode,
+            String permissions[],
+            int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_PERMISSION_PHONE_STATE:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getActivity(), "Permission Granted!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "Permission Denied!", Toast.LENGTH_SHORT).show();
+                }
+        }
+    }
+
+    private void showExplanation(String title,
+                                 String message,
+                                 final String permission,
+                                 final int permissionRequestCode) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        requestPermission(permission, permissionRequestCode);
+                    }
+                });
+        builder.create().show();
+    }
+
+    private void requestPermission(String permissionName, int permissionRequestCode) {
+        ActivityCompat.requestPermissions(getActivity(),
+                new String[]{permissionName}, permissionRequestCode);
     }
 }

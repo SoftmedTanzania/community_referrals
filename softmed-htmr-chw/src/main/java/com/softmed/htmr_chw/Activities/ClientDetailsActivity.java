@@ -1,15 +1,22 @@
 package com.softmed.htmr_chw.Activities;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.softmed.htmr_chw.R;
@@ -40,9 +47,10 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
     private CommonRepository commonRepository;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private Client client;
-    private Typeface robotoBold,sansBold;
+    private Typeface robotoBold, sansBold;
     private MaterialEditText gender, regDob, village, villageLeader, cbhs, ctcNumber, phone, helperName, helperPhoneNumber;
     private TextView clientName;
+    private final int REQUEST_PERMISSION_PHONE_STATE=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +67,7 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
         client = (Client) bundle.getSerializable("client");
         String type = bundle.getString("type");
 
-        if(type.equals("REFERRAL")){
+        if (type.equals("REFERRAL")) {
             cbhs.setVisibility(View.INVISIBLE);
         }
 
@@ -73,9 +81,41 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
         cbhs.setText(client.getCommunity_based_hiv_service());
         ctcNumber.setText(client.getCtc_number());
         phone.setText(client.getPhone_number());
+
+        phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!client.getPhone_number().equals("")) {
+                    Intent intent = new Intent(Intent.ACTION_CALL);
+
+                    intent.setData(Uri.parse("tel:" + client.getPhone_number()));
+                    if (ActivityCompat.checkSelfPermission(ClientDetailsActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        showPhonePermission();
+                        return;
+                    }
+                    startActivity(intent);
+                }
+            }
+        });
+
         regDob.setText(dobDateString);
         helperName.setText(client.getCare_taker_name());
         helperPhoneNumber.setText(client.getCare_taker_phone_number());
+        helperPhoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!client.getCare_taker_phone_number().equals("")) {
+                    Intent intent = new Intent(Intent.ACTION_CALL);
+
+                    intent.setData(Uri.parse("tel:" + client.getCare_taker_phone_number()));
+                    if (ActivityCompat.checkSelfPermission(ClientDetailsActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        showPhonePermission();
+                        return;
+                    }
+                    startActivity(intent);
+                }
+            }
+        });
 
         Button fab = (Button) findViewById(R.id.referal_button);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -249,5 +289,50 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
         ((TextView) findViewById(R.id.initial_information_title)).setTypeface(sansBold);
         ((TextView) findViewById(R.id.referral_details_heading)).setTypeface(sansBold);
 
+    }
+
+    private void showPhonePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.CALL_PHONE)) {
+            showExplanation("Permission Needed", "Rationale", Manifest.permission.CALL_PHONE, REQUEST_PERMISSION_PHONE_STATE);
+        } else {
+            requestPermission(Manifest.permission.CALL_PHONE, REQUEST_PERMISSION_PHONE_STATE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(
+            int requestCode,
+            String permissions[],
+            int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_PERMISSION_PHONE_STATE:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(ClientDetailsActivity.this, "Permission Granted!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ClientDetailsActivity.this, "Permission Denied!", Toast.LENGTH_SHORT).show();
+                }
+        }
+    }
+
+    private void showExplanation(String title,
+                                 String message,
+                                 final String permission,
+                                 final int permissionRequestCode) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        requestPermission(permission, permissionRequestCode);
+                    }
+                });
+        builder.create().show();
+    }
+
+    private void requestPermission(String permissionName, int permissionRequestCode) {
+        ActivityCompat.requestPermissions(this,
+                new String[]{permissionName}, permissionRequestCode);
     }
 }
