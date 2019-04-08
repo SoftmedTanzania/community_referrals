@@ -234,7 +234,7 @@ public class MyGcmListenerService extends GcmListenerService {
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(org.ei.opensrp.R.drawable.ic_htmr)
-                .setContentTitle("TRCMIS Notification")
+                .setContentTitle("Comprehensive Community Mobile Application Notification")
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)

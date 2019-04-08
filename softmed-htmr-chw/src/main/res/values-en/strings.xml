@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TRCMIS</string>
+    <string name="app_name">CCmApp</string>
     <string-array name="gender">
         <item>Male</item>
         <item>Female</item>
@@ -17,7 +17,7 @@
     <string name="token_error_message">An error occurred while either fetching the InstanceID token,
         sending the fetched token to the server or subscribing to the PubSub topic. Please try
         running the sample again.</string>
-    <string name="app_name_htmr">TRCMIS</string>
+    <string name="app_name_htmr">Comprehensive Community </string>
     <string name="page_title">Registered Clients List</string>
     <string name="title_cbhs_number">CBHS #</string>
     <string name="referral_information">Referral Information</string>
@@ -29,7 +29,7 @@
     <string name="button_sign_in">Sign In</string>
     <string name="powered_bt">Powered by OpenSRP</string>
     <string name="page_title_htmr">htmr</string>
-    <string name="page_title_referral">Referral \nApplication</string>
+    <string name="page_title_referral">Mobile \nApplication</string>
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="button_login">Login</string>
