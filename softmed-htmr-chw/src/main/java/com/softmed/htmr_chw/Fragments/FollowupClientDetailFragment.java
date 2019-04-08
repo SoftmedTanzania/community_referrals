@@ -310,7 +310,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
 
                     if(saveCBHS && !cbhsNumber.getText().toString().equals("")){
                         Client client = context().clientRepository().find(clientReferral.getClient_id());
-                        client.setCommunity_based_hiv_service(cbhsNumber.getText().toString());
+                        client.setCommunity_based_hiv_service(context().allSharedPreferences().fetchCBHS() + "/" +cbhsNumber.getText().toString());
                         context().clientRepository().update(client);
                     }
 

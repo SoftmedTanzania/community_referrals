@@ -74,8 +74,9 @@ public class ClientRepository extends DrishtiRepository {
     }
 
     public void update(Client client) {
+        Log.d("client","client = "+new Gson().toJson(client));
         SQLiteDatabase database = masterRepository.getWritableDatabase();
-        database.update(TABLE_NAME, createValuesFor(client), ID_COLUMN + " = ?", new String[]{client.getId()});
+        database.update(TABLE_NAME, createValuesFor(client), CLIENT_ID + " = ?", new String[]{client.getClient_id()});
     }
 
     public List<Client> all() {
