@@ -92,7 +92,7 @@
     <string name="sent_referrals_label">Sent Referrals</string>
     <string name="suceessful_label">Successful</string>
     <string name="unsuccessful_label">Unsuccessful</string>
-    <string name="received_referrals_label">Received Referrals</string>
+    <string name="received_referrals_label">Follow up Referrals</string>
     <string name="pending_label">Pending</string>
     <string name="incorrect_phone_number">Please enter a valid Phone Number</string>
     <string name="other_notes_title">Other Information/Medical Advice</string>
@@ -107,7 +107,7 @@
     <string name="issued_referrals_summary_report">Issued Referrals Summary Report</string>
     <string name="followup_not_conducted">Followup has not yet been conducted</string>
     <string name="main_menu_label">Main Menu</string>
-    <string name="referred_clients_list_label">Referred Clients List</string>
+    <string name="referred_clients_list_label">Issued Referrals</string>
     <string name="emergency_referral_title_label">Emergency Referral</string>
     <string name="completed_referrals_summary_title_label">Completed Referrals Summary</string>
     <string name="received_clients_followup_summary">Received Clients Followup Summary</string>
@@ -116,7 +116,6 @@
     <string name="facility_name_label">Facility Name</string>
     <string name="total_label">Total</string>
     <string name="completed_referrals_label">Completed Referrals</string>
-    <string name="referred_clients_desc">Use this section to view all referrals issued with their status check</string>
     <string name="register_clients_button_label">Registered Clients</string>
     <string name="referral_history_label">Referral History</string>
     <string name="helper_name">Treatment Supporter\'s Name</string>

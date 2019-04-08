@@ -94,7 +94,7 @@
     <string name="no_internet_connectivity">No internet connection. Please ensure data connectivity</string>
     <string name="sent_referrals_label">Sent Referrals</string>
     <string name="reports_label">Reports</string>
-    <string name="received_referrals_label">Received Referrals</string>
+    <string name="received_referrals_label">Follow up Referrals</string>
     <string name="suceessful_label">Successful</string>
     <string name="unsuccessful_label">Unsuccessful</string>
     <string name="pending_label">Pending</string>
@@ -117,7 +117,7 @@ Aenean quis ex dictum, porttitor nunc id, viverra urna. Suspendisse posuere ex a
     <string name="issued_referrals_summary_report">Issued Referrals Summary Report</string>
     <string name="followup_not_conducted">Followup has not yet been conducted</string>
     <string name="main_menu_label">Main Menu</string>
-    <string name="referred_clients_list_label">Referred Clients List</string>
+    <string name="referred_clients_list_label">Issued Referrals.</string>
     <string name="emergency_referral_title_label">Emergency Referral</string>
     <string name="completed_referrals_summary_title_label">Completed Referrals Summary</string>
     <string name="received_clients_followup_summary">Received Clients Followup Summary</string>
@@ -127,11 +127,12 @@ Aenean quis ex dictum, porttitor nunc id, viverra urna. Suspendisse posuere ex a
     <string name="facility_name_label">Facility Name</string>
     <string name="total_label">Total</string>
     <string name="completed_referrals_label">Completed Referrals</string>
-    <string name="referred_clients_desc">Use this section to view all referrals issued with their status check</string>
-    <string name="received_referrals_desc">Use this section to view all clients referred back for close follow up and update all necessary followup information</string>
-    <string name="use_this_section_to_visualize_summary_reports">Use this section to visualize summary reports.</string>
+    <string name="referred_clients_desc">Use this section to view all clients referral issued with their status check.</string>
+    <string name="received_referrals_desc">Use this section to view all (LTF) clients refrred back for follow up &amp; clients that need community health services.</string>
+    <string name="use_this_section_to_visualize_summary_reports">Use this section to visualize summary performance report.</string>
     <string name="register_clients_desc">Use this section to register new clients.</string>
-    <string name="client_list_desc">Use this section to view all registered clients and issue referrals.</string>
+    <string name="client_list_desc">Use this section view all registered clients for referral purpose only.</string>
+    <string name="cbhs_client_list_desc">Use this section view all reigistered clients with CBHS number for continous follow up.</string>
     <string name="appointment_date_label">Appointment Date</string>
     <string name="followup_referrals_chart_key_label">Followup referrals performed</string>
     <string name="visit_date_label">Visit Date</string>
