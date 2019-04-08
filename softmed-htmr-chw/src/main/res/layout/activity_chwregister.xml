@@ -61,7 +61,7 @@
 
                 </LinearLayout>
 
-                <com.softmed.htmr_chw.util.FitDoughnut
+                <com.softmed.ccm_chw.util.FitDoughnut
                     android:id="@+id/donutChart"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
