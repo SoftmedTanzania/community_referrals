@@ -102,7 +102,7 @@
         android:layout_marginTop="64dp"
         android:scaleType="centerCrop"
         android:id="@+id/login_screen_logo"
-        android:src="@drawable/ic_logo_white"/>
+        android:src="@drawable/egpaf"/>
 
     <TextView
         android:layout_width="wrap_content"
