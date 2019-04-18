@@ -425,7 +425,7 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
         client.setIs_valid("true");
         client.setPhone_number(textPhone.getText().toString());
 
-        client.setFacility_id(context().allSettings().fetchANMLocation());
+        client.setFacility_id(((BoreshaAfyaApplication)getApplication()).getTeam_location_id());
         if (spinnerGender.getSelectedItem().toString().equalsIgnoreCase("female") || spinnerGender.getSelectedItem().toString().contains("ke"))
             client.setGender("Female");
         else
