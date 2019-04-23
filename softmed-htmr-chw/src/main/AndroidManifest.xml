@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.softmed.htmr_chw">
+    package="com.softmed.htmr_chw_staging">
 
     <compatible-screens>
         <screen
@@ -58,7 +58,7 @@
     </receiver>
 
     <application
-        android:name=".Application.BoreshaAfyaApplication"
+        android:name="com.softmed.htmr_chw_staging.Application.BoreshaAfyaApplication"
         android:allowBackup="true"
         android:label="@string/app_name">
         <meta-data android:name="firebase_analytics_collection_deactivated" android:value="true" />
@@ -77,21 +77,21 @@
         </receiver>
 
         <service
-            android:name=".Service.MyGcmListenerService"
+            android:name="com.softmed.htmr_chw_staging.Service.MyGcmListenerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
         <service
-            android:name=".Service.RegistrationIntentService"
+            android:name="com.softmed.htmr_chw_staging.Service.RegistrationIntentService"
             android:exported="false"/>
         <service
-            android:name=".Service.ReferralService"
+            android:name="com.softmed.htmr_chw_staging.Service.ReferralService"
             android:enabled="true"/>
 
         <activity
-            android:name=".Activities.LoginActivity"
+            android:name="com.softmed.htmr_chw_staging.Activities.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.MaterialDesign.TranslucentStatus">
             <intent-filter>
@@ -101,7 +101,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.ChwSmartRegisterActivity"
+            android:name="com.softmed.htmr_chw_staging.Activities.ChwSmartRegisterActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
 
@@ -110,23 +110,23 @@
             android:value="ee4140a3b1692ec32e688110a280538c7b44e10e" />
 
         <activity
-            android:name=".Activities.ClientRegistrationFormActivity"
+            android:name="com.softmed.htmr_chw_staging.Activities.ClientRegistrationFormActivity"
             android:exported="true"
             android:theme="@style/AppTheme.MaterialDesign.NoActionBar" />
 
         <activity
-            android:name=".Activities.ReferralRegistrationFormActivity"
+            android:name="com.softmed.htmr_chw_staging.Activities.ReferralRegistrationFormActivity"
             android:label="@string/title_item_detail"
             android:theme="@style/AppTheme.NoActionBar" />
 
 
         <activity
-            android:name=".Activities.ClientDetailsActivity"
+            android:name="com.softmed.htmr_chw_staging.Activities.ClientDetailsActivity"
             android:label="@string/title_activity_client_details"
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
-            android:name=".Activities.SettingsActivity"/>
+            android:name="com.softmed.htmr_chw_staging.Activities.SettingsActivity"/>
     </application>
 
 </manifest>

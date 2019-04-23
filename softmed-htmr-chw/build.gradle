@@ -63,7 +63,7 @@ android {
     buildToolsVersion androidBuildToolsVersion
 
     defaultConfig {
-        applicationId "com.softmed.htmr_chw"
+        applicationId "com.softmed.htmr_chw_staging"
         minSdkVersion 18
         targetSdkVersion 26
 
