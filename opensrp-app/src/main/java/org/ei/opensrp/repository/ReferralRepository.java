@@ -33,7 +33,7 @@ public class ReferralRepository extends DrishtiRepository {
             "other_notes VARCHAR, " +
             "services_given_to_patient VARCHAR, " +
             "referral_type INTEGER, " +
-            "service_provider_uuid VARCHAR, " +
+            "service_provider_uiid VARCHAR, " +
             "referral_feedback_id VARCHAR, " +
             "referral_uuid VARCHAR, " +
             "test_results VARCHAR, " +
