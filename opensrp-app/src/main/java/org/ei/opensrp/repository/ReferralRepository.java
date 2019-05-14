@@ -54,7 +54,7 @@ public class ReferralRepository extends DrishtiRepository {
     public static final String OTHER_NOTES = "other_notes";
     public static final String SERVICES_GIVEN_TO_PATIENTS = "services_given_to_patient";
     public static final String REFERRAL_TYPE = "referral_type";
-    public static final String SERVICE_PROVIDER_UUID = "service_provider_uuid";
+    public static final String SERVICE_PROVIDER_UUID = "service_provider_uiid";
     public static final String REFERRAL_FEEDBACK_ID = "referral_feedback_id";
     public static final String REFERRAL_UUID = "referral_uuid";
     public static final String TEST_RESULTS = "test_results";
