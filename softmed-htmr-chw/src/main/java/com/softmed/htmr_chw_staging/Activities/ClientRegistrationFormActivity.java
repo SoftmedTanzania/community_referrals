@@ -163,9 +163,8 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
     public void saveFormSubmission(String formSubmission, final String id, String formName, JSONObject fieldOverrides) {
         // save the form
         final Client client = gson.fromJson(formSubmission, Client.class);
-        client.setId(id);
         Log.d(TAG, "values = " + gson.toJson(client));
-
+        client.setId(id);
         clientRepository.add(client);
 
         Client c = clientRepository.find(id);
