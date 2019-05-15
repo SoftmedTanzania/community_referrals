@@ -3,7 +3,7 @@ package com.softmed.htmr_chw.Activities;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.res.Resources;
+import android.content.pm.PackageInfo;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -12,20 +12,14 @@ import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,6 +30,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
+import com.softmed.htmr_chw.BuildConfig;
 import com.softmed.htmr_chw.Domain.ClientReferral;
 import com.softmed.htmr_chw.Domain.LocationSelectorDialogFragment;
 import com.softmed.htmr_chw.Fragments.CBHSClientsListFragment;
@@ -48,7 +43,6 @@ import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.util.FitDoughnut;
 import com.softmed.htmr_chw.util.NavigationController;
 
-import org.ei.opensrp.Context;
 import org.ei.opensrp.adapter.SmartRegisterPaginatedAdapter;
 import org.ei.opensrp.commonregistry.CommonPersonObject;
 import org.ei.opensrp.commonregistry.CommonRepository;
@@ -61,7 +55,6 @@ import org.ei.opensrp.sync.SyncAfterFetchListener;
 import org.ei.opensrp.sync.SyncProgressIndicator;
 import org.ei.opensrp.sync.UpdateActionsTask;
 import org.ei.opensrp.util.FormUtils;
-import org.ei.opensrp.view.activity.SecuredActivity;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import org.ei.opensrp.view.dialog.DialogOption;
 import org.ei.opensrp.view.dialog.DialogOptionModel;
@@ -101,28 +94,21 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private static final String TAG = ChwSmartRegisterActivity.class.getSimpleName();
     public static MaterialSpinner spinnerReason, spinnerClientAvailable;
     public static int availableSelection = -1, reasonSelection = -1;
-    public static TabLayout myTabLayout;
     private static boolean isOnTheMainMenu;
+    public TabLayout myTabLayout;
     @Bind(R.id.view_pager)
     public OpenSRPViewPager mPager;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     private String message = "";
     private RelativeLayout pendingForm;
     private TextView successView, unsuccessView;
-    private String locationDialogTAG = "locationDialogTAG";
-    private JSONObject fieldOverides = new JSONObject();
-    private FragmentPagerAdapter mPagerAdapter;
-    private int currentPage;
     private String[] formNames = new String[]{};
     private Fragment mBaseFragment;
     private Gson gson = new Gson();
     private CommonRepository commonRepository;
     private Cursor cursor;
-    private SecuredActivity securedActivity;
-    private LinearLayout flags_layout;
     private Toolbar toolbar;
     private ScrollView mainMenu;
-    private ImageButton imageButton;
     private View fragmentsView;
     private TextView pending;
     private FitDoughnut donutChart;
@@ -177,16 +163,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         robotoBold = Typeface.createFromAsset(getAssets(), "roboto_bold.ttf");
         sansBold = Typeface.createFromAsset(getAssets(), "google_sans_bold.ttf");
 
-        securedActivity = new SecuredActivity() {
-            @Override
-            protected void onCreation() {
-            }
-
-            @Override
-            protected void onResumption() {
-
-            }
-        };
         setValuesInBoreshaAfya();
         formNames = this.buildFormNameList();
         mBaseFragment = new CHWSmartRegisterFragment();
@@ -196,7 +172,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         onInitialization();
 
-        imageButton = (ImageButton) findViewById(R.id.register_client);
+        ImageButton imageButton = (ImageButton) findViewById(R.id.register_client);
         tabsLayout = (LinearLayout) findViewById(R.id.tabs);
 
         isOnTheMainMenu = true;
@@ -240,6 +216,24 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         referralClientListDesc.setTypeface(rosarioRegular);
         referralsListDesc.setTypeface(rosarioRegular);
         referedClientsDesc.setTypeface(rosarioRegular);
+
+
+
+        try {
+            Log.d(TAG, "Setting build date");
+            Date buildDate = BuildConfig.BUILD_TIME;
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            TextView buildDateTextView = (TextView) findViewById(R.id.build_date);
+            buildDateTextView.setText(getString(R.string.build_on_label) + dateFormat.format(buildDate));
+
+
+            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            String version = pInfo.versionName;
+            TextView versionTextView = (TextView) findViewById(R.id.version);
+            versionTextView.setText(getString(R.string.version_label) + version);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         final FragmentManager fragmentManager = this.getSupportFragmentManager();
@@ -337,7 +331,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
                 FollowupReferralsFragment newFragment = new FollowupReferralsFragment();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragments, newFragment,"followup_fragment");
+                transaction.replace(R.id.fragments, newFragment, "followup_fragment");
                 transaction.addToBackStack(null);
                 transaction.commit();
 
@@ -547,7 +541,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             Calendar today = Calendar.getInstance();
             cal.setTime(d);
             int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
-            Integer ageInt = new Integer(age);
+            Integer ageInt = age;
             ageS = ageInt.toString();
 
 
@@ -570,20 +564,20 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         testStatus.setTypeface(sansBold);
 
         //TODO remove this hardcoding of services
-        if(clientReferral.getReferral_service_id().equals("1")||clientReferral.getReferral_service_id().equals("2"))
+        if (clientReferral.getReferral_service_id().equals("1") || clientReferral.getReferral_service_id().equals("2"))
             testStatus.setVisibility(VISIBLE);
 
-        if(clientReferral.getTest_results()!=null && !clientReferral.getTest_results().equals("")){
-            if(clientReferral.getTest_results().equals("1")){
+        if (clientReferral.getTest_results() != null && !clientReferral.getTest_results().equals("")) {
+            if (clientReferral.getTest_results().equals("1")) {
                 testStatus.setText(R.string.test_results_positive);
                 testStatus.setTextColor(getResources().getColor(R.color.green_500));
-            }else{
+            } else {
                 testStatus.setText(R.string.test_results_negative);
                 testStatus.setTextColor(getResources().getColor(R.color.red_500));
             }
         }
 
-        Log.d(TAG,"referral test results = "+clientReferral.getTest_results());
+        Log.d(TAG, "referral test results = " + clientReferral.getTest_results());
         try {
             if (clientReferral.getReferral_status().equals("1") && !clientReferral.getReferral_feedback().equals("")) {
                 dialogView.findViewById(R.id.referral_feedback_title).setVisibility(VISIBLE);
@@ -594,7 +588,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
                 ReferralFeedback feedback = context().referralFeedbackRepository().find(clientReferral.getReferral_feedback());
 
-                if(feedback!=null) {
+                if (feedback != null) {
                     if (ENGLISH_LOCALE.equals(preferredLocale)) {
                         referralFeedback.setText(feedback.getDesc());
                     } else {
@@ -614,7 +608,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             otherNotes.setVisibility(VISIBLE);
             otherNotes.setText(clientReferral.getOther_notes());
         }
-
 
 
         textName.setText(clientReferral.getFirst_name() + " " + clientReferral.getMiddle_name() + " " + clientReferral.getSurname());
@@ -714,151 +707,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         return commonPersonObjectList.get(0).getColumnmaps().get("indicatorName");
     }
 
-    public void showFollowUpFormDialog(final ClientReferral clientReferral) {
-
-
-        final View dialogView = getLayoutInflater().inflate(R.layout.fragment_chwfollow_visit_details, null);
-        final EditText client_condition = (EditText) dialogView.findViewById(R.id.client_status);
-
-        String[] ITEMS = {getString(R.string.followup_feedback_patient_moved), getString(R.string.followup_feedback_patient_died), getString(R.string.followup_feedback_other_reasons)};
-
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ITEMS);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerReason = (MaterialSpinner) dialogView.findViewById(R.id.spinnerReason);
-        spinnerReason.setAdapter(adapter);
-
-        String[] options = {getResources().getString(R.string.yes_button_label), getResources().getString(R.string.no_button_label)};
-
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, options);
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerClientAvailable = (MaterialSpinner) dialogView.findViewById(R.id.spinnerClientAvailable);
-        spinnerClientAvailable.setAdapter(adapter1);
-
-        spinnerClientAvailable.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i >= 0) {
-                    availableSelection = i;
-                }
-
-                if (spinnerClientAvailable.getSelectedItem().toString().equals(getString(R.string.yes_button_label))) {
-                    spinnerReason.setVisibility(VISIBLE);
-                    client_condition.setVisibility(VISIBLE);
-//                    view.setVisibility(View.GONE);
-                } else {
-                    spinnerReason.setVisibility(View.GONE);
-                    client_condition.setVisibility(View.GONE);
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-        spinnerReason.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i >= 0) {
-                    spinnerReason.setFloatingLabelText(getString(R.string.followup_qn_reasons_for_not_visiting_clinic));
-                    reasonSelection = i;
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-
-        spinnerReason.setSelection(reasonSelection);
-        spinnerClientAvailable.setSelection(availableSelection);
-
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChwSmartRegisterActivity.this);
-        dialogBuilder.setView(dialogView)
-                .setCancelable(false);
-        final AlertDialog dialog = dialogBuilder.create();
-        dialog.show();
-
-        Button cancel = (Button) dialogView.findViewById(R.id.cancel_button);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-        Button save = (Button) dialogView.findViewById(R.id.tuma_button);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (spinnerClientAvailable.getSelectedItem().toString().equals(getString(R.string.yes_button_label))) {
-                    if (spinnerReason.getSelectedItemPosition() <= 0) {
-                        // no radio checked
-                        message = getString(R.string.toast_message_select_reasons_for_missing_appointment);
-                        makeToast();
-                    } else {
-//                        clientReferral.setVisit_date(today.getTimeInMillis());
-                        clientReferral.setReferral_feedback(client_condition.getText().toString());
-
-//                        context().followupClientRepository().update(followup);
-
-                        //TODO finish up sending of referral feedbacks of the followup
-
-//                        final String uuid = generateRandomUUIDString();
-//                        context().referralRepository().update(clientReferral);
-//                        List<FormField> formFields = new ArrayList<>();
-//
-//
-//                        formFields.add(new FormField("id", followup.getId(), commonRepository.TABLE_NAME + "." + "id"));
-//                        formFields.add(new FormField("relationalid", followup.getId(), commonRepository.TABLE_NAME + "." + "relationalid"));
-//
-//                        for (String key : followup.getDetails().keySet()) {
-//                            Log.d(TAG, "key = " + key);
-//                            FormField f = null;
-//                            if (!key.equals("facility_id")) {
-//                                f = new FormField(key, c.getDetails().get(key), commonRepository.TABLE_NAME + "." + key);
-//                            } else {
-//                                f = new FormField(key, c.getDetails().get(key), "facility.id");
-//                            }
-//                            formFields.add(f);
-//                        }
-//
-//
-//                        Log.d(TAG, "form field = " + new Gson().toJson(formFields));
-//
-//                        FormData formData = new FormData("follow_up", "/model/instance/Follow_Up_Form/", formFields, null);
-//                        FormInstance formInstance = new FormInstance(formData, "1");
-//                        FormSubmission submission = new FormSubmission(generateRandomUUIDString(), uuid, "client_referral", new Gson().toJson(formInstance), "4", SyncStatus.PENDING, "4");
-//                        context().formDataRepository().saveFormSubmission(submission);
-//
-//                        Log.d(TAG, "submission content = " + new Gson().toJson(submission));
-
-
-                        Toast.makeText(ChwSmartRegisterActivity.this, getString(R.string.followup_thankyou_note_part_one) + clientReferral.getFirst_name() + " " + clientReferral.getSurname(), Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }
-                } else {
-                    Toast.makeText(ChwSmartRegisterActivity.this, getString(R.string.followup_clint_not_found_responce) + clientReferral.getFirst_name() + " " + clientReferral.getSurname(), Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                }
-
-            }
-        });
-
-        TextView textName = (TextView) dialogView.findViewById(R.id.patient_name);
-        textName.setText(clientReferral.getFirst_name() + " " + clientReferral.getMiddle_name() + " " + clientReferral.getSurname());
-
-        TextView facility = (TextView) dialog.findViewById(R.id.textview_facility);
-        facility.setText(getFacilityName(clientReferral.getFacility_id()));
-
-        TextView referral_reason = (TextView) dialog.findViewById(R.id.textview_followupreason);
-        referral_reason.setText(clientReferral.getReferral_reason());
-
-    }
-
     private String[] buildFormNameList() {
         List<String> formNames = new ArrayList<String>();
         formNames.add("main_form");
@@ -912,6 +760,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     public void startRegistration() {
         Log.d(TAG, "starting registrations");
         android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+        String locationDialogTAG = "locationDialogTAG";
         android.app.Fragment prev = getFragmentManager().findFragmentByTag(locationDialogTAG);
         if (prev != null) {
             ft.remove(prev);
@@ -1126,30 +975,6 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    public Fragment findFragmentByPosition(int position) {
-        FragmentPagerAdapter fragmentPagerAdapter = mPagerAdapter;
-        return getSupportFragmentManager().findFragmentByTag("android:switcher:" + mPager.getId() + ":" + fragmentPagerAdapter.getItemId(position));
-    }
-
-    public Fragment getDisplayFormFragmentAtIndex(int index) {
-
-        try {
-            return findFragmentByPosition(index);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return findFragmentByPosition(index);
-    }
-
-    public void retrieveAndSaveUnsubmittedFormData() {
-        if (currentActivityIsShowingForm()) {
-        }
-    }
-
-    private boolean currentActivityIsShowingForm() {
-        return currentPage != 0;
     }
 
     @Override
