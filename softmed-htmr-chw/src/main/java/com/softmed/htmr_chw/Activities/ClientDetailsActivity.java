@@ -75,7 +75,14 @@ public class ClientDetailsActivity extends SecuredNativeSmartRegisterActivity {
 
         String dobDateString = dateFormat.format(client.getDate_of_birth());
 
-        gender.setText(client.getGender());
+        if ((client.getGender()).equalsIgnoreCase("female")) {
+            gender.setText(getResources().getString(R.string.female));
+        } else {
+            gender.setText(getResources().getString(R.string.male));
+        }
+
+
+
         village.setText(client.getVillage());
         villageLeader.setText(client.getVeo());
         cbhs.setText(client.getCommunity_based_hiv_service());

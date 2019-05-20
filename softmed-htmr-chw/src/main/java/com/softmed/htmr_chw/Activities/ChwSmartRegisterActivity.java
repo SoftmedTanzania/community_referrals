@@ -639,7 +639,7 @@ public class ChwSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         physicalAddress.setText(clientReferral.getVillage());
 
         try {
-            if ((clientReferral.getGender()).equals(getResources().getString(R.string.female))) {
+            if ((clientReferral.getGender()).equalsIgnoreCase("female")) {
                 gender.setText(getResources().getString(R.string.female));
             } else {
                 gender.setText(getResources().getString(R.string.male));
