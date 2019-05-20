@@ -159,4 +159,6 @@ Aenean quis ex dictum, porttitor nunc id, viverra urna. Suspendisse posuere ex a
     <string name="referral_clients_label">Referral Clients</string>
     <string name="test_results_positive">Positive</string>
     <string name="test_results_negative">Negative</string>
+    <string name="build_on_label">Built on </string>
+    <string name="version_label">Version </string>
 </resources>

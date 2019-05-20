@@ -127,14 +127,6 @@ public class FollowupClintsRecyclerAdapter extends
             phoneNumberTextView.setTypeface(sansBold);
             CBHSTextView.setTypeface(robotoRegular);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ((ChwSmartRegisterActivity) mContext).showFollowUpFormDialog(clients.get(getAdapterPosition()));
-                }
-            });
-
-
         }
 
     }

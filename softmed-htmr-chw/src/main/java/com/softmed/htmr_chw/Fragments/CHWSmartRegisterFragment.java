@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.Activities.LoginActivity;
 import com.softmed.htmr_chw.Application.BoreshaAfyaApplication;
+import com.softmed.htmr_chw.BuildConfig;
 import com.softmed.htmr_chw.Domain.LocationSelectorDialogFragment;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.util.FitDoughnut;
@@ -40,6 +41,8 @@ import org.ei.opensrp.sync.SyncAfterFetchListener;
 import org.ei.opensrp.sync.SyncProgressIndicator;
 import org.ei.opensrp.sync.UpdateActionsTask;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
+
+import java.util.Date;
 
 import static android.os.Looper.getMainLooper;
 import static android.widget.Toast.LENGTH_SHORT;
