@@ -67,8 +67,8 @@ android {
         minSdkVersion 18
         targetSdkVersion 26
 
-        versionCode 41
-        versionName "0.1.31"
+        versionCode 43
+        versionName "1.0.0"
 
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -80,7 +80,11 @@ android {
 
     }
     buildTypes {
+        debug {
+            buildConfigField "java.util.Date", "BUILD_TIME", "new java.util.Date(" + System.currentTimeMillis() + "L)"
+        }
         release {
+            buildConfigField "java.util.Date", "BUILD_TIME", "new java.util.Date(" + System.currentTimeMillis() + "L)"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

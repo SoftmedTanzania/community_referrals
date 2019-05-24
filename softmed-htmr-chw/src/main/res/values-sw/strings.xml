@@ -57,7 +57,7 @@
     <string name="button_cancel">ONDOKA</string>
     <string name="hint_met_client">Umempata mteja?</string>
     <string name="hint_missing_reasons">Sababu za kukosa miadi </string>
-    <string name="client_condition">Hali ya mteja wakati wa ufwatiliaji</string>
+    <string name="client_condition">Hali ya mteja wakati wa ufuatiliaji</string>
     <string name="client_middlename">Jina la kati</string>
     <string name="client_birthday">Tarehe ya kuzaliwa</string>
     <string name="button_search">Tafuta</string>
@@ -123,8 +123,8 @@
     <string name="facility_name_label">Jina la Kituo</string>
     <string name="total_label">Jumla</string>
     <string name="completed_referrals_label">Rufaa Zilizokamilika</string>
-    <string name="referred_clients_desc">Tumia sehemu hii kujuwa idadi ya rufaa zilizotumwa kituo cha afya na sambaba na mrejesho.</string>
-    <string name="received_referrals_desc">Tumi sehemu hii kujuwa idadi ya wateja wa ufwatiliaji kutoka kituo cha afya.</string>
+    <string name="referred_clients_desc">Tumia sehemu hii kujua idadi ya rufaa zilizotumwa kituo cha afya na sambaba na mrejesho.</string>
+    <string name="received_referrals_desc">Tumi sehemu hii kujua idadi ya wateja wa ufuatiliaji kutoka kituo cha afya.</string>
     <string name="use_this_section_to_visualize_summary_reports">Tumia sehemu hi kuona muktasari wa ripoti mbalimbali na kujipima utendaji kazi.</string>
     <string name="register_clients_desc">Tumia sehemu hii kusajili mteja.</string>
     <string name="followup_feedback_patient_moved">Mteja amehamiya kituo cha kutoa huduma cha afya</string>
@@ -138,8 +138,8 @@
     <string name="helper_name">Jina la Msaidizi</string>
     <string name="helper_phone_number">Mawasiliano ya Msaidizi</string>
     <string name="gender">Jinsi</string>
-    <string name="client_list_desc">Tumia sehemu hii kujuwa idadi ya wateja uliowasajili kwa ajili ya rufaa katika ngazi ya jami.</string>
-    <string name="cbhs_client_list_desc">Tumia sehemu hii kujua idadi ya wateja wenye naba za uwanyu kwa ajili ya ufwatiliaji wa mara kwa mara nakutuma rufaa endapo itahitajika.</string>
+    <string name="client_list_desc">Tumia sehemu hii kujua idadi ya wateja uliowasajili kwa ajili ya rufaa katika ngazi ya jami.</string>
+    <string name="cbhs_client_list_desc">Tumia sehemu hii kujua idadi ya wateja wenye naba za uwanyu kwa ajili ya ufuatiliaji wa mara kwa mara nakutuma rufaa endapo itahitajika.</string>
     <string name="referral_issued_by_label">Rufaa imetolewa na</string>
     <string name="follow_up_client_details">Taarifa za mteja wa kumfwatilila</string>
     <string name="select_a_client_to_view_the_follow_up_referral_details">Chagua mteja kutoka kwenye orodha ili kuona taarifa zaidi</string>
@@ -152,10 +152,12 @@
     <string name="is_a_cbhs_client">Aina ya Mteja</string>
     <string name="cbhs_client">Mteja wa CBHS</string>
     <string name="referral_client">Mteja wa rufaa</string>
-    <string name="cbhs_clients_label">Wajeta wa ufwatiliaji</string>
+    <string name="cbhs_clients_label">Wajeta wa ufuatiliaji</string>
     <string name="referral_clients_label">Wateja wa rufaa</string>
     <string name="test_results_positive">Hasi</string>
     <string name="test_results_negative">Chanya</string>
+    <string name="build_on_label">Imetolewa Tarehe </string>
+    <string name="version_label">Toleo </string>
 
 
 </resources>

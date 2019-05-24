@@ -41,6 +41,8 @@ import org.ei.opensrp.sync.SyncProgressIndicator;
 import org.ei.opensrp.sync.UpdateActionsTask;
 import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 
+import java.util.Date;
+
 import static android.os.Looper.getMainLooper;
 import static android.widget.Toast.LENGTH_SHORT;
 import static java.lang.String.valueOf;

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:customviews="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
+
         <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/toolbar"
             android:layout_width="fill_parent"
@@ -19,16 +18,18 @@
             android:focusableInTouchMode="true"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
             <RelativeLayout
                 android:id="@+id/register_nav_bar_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <ImageView
                     android:id="@+id/toolbar_logo"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_logo_white"/>
+                    android:src="@drawable/ic_logo_white" />
 
                 <LinearLayout
                     android:id="@+id/title"
@@ -47,7 +48,7 @@
                         android:layout_marginRight="16dp"
                         android:text="@string/app_name_htmr"
                         android:textColor="@color/white"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/toolbar_user_name"
@@ -57,7 +58,7 @@
                         android:layout_marginRight="16dp"
                         android:text="@string/logged_user"
                         android:textColor="@color/white"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -70,7 +71,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_toRightOf="@id/title"
                     app:fdColorPrimary="#00FF00"
-                    app:fdColorSecondary="#ffaa00"/>
+                    app:fdColorSecondary="#ffaa00" />
 
                 <RelativeLayout
                     android:id="@+id/key_one"
@@ -80,6 +81,7 @@
                     android:layout_marginLeft="32dp"
                     android:layout_marginTop="8dp"
                     android:layout_toRightOf="@id/donutChart">
+
                     <View
                         android:id="@+id/indicator_one"
                         android:layout_width="2dp"
@@ -87,14 +89,16 @@
                         android:layout_marginBottom="2dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginTop="2dp"
-                        android:background="#00FF00"/>
+                        android:background="#00FF00" />
+
                     <TextView
                         android:id="@+id/count_one"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/indicator_one"
                         android:textColor="@color/mdtp_white"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -102,7 +106,7 @@
                         android:layout_toRightOf="@id/indicator_one"
                         android:text="@string/title_success"
                         android:textColor="@color/mdtp_white"
-                        android:textSize="10sp"/>
+                        android:textSize="10sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -113,6 +117,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_toRightOf="@id/key_one">
+
                     <View
                         android:id="@+id/indicator_two"
                         android:layout_width="2dp"
@@ -120,14 +125,16 @@
                         android:layout_marginBottom="2dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginTop="2dp"
-                        android:background="#ffaa00"/>
+                        android:background="#ffaa00" />
+
                     <TextView
                         android:id="@+id/count_two"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/indicator_two"
                         android:textColor="@color/mdtp_white"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -135,8 +142,9 @@
                         android:layout_toRightOf="@id/indicator_two"
                         android:text="@string/title_unsuccessful"
                         android:textColor="@color/mdtp_white"
-                        android:textSize="10sp"/>
+                        android:textSize="10sp" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/key_three"
                     android:layout_width="wrap_content"
@@ -145,6 +153,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_toRightOf="@id/key_two">
+
                     <View
                         android:id="@+id/indicator_three"
                         android:layout_width="2dp"
@@ -152,14 +161,16 @@
                         android:layout_marginBottom="2dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginTop="2dp"
-                        android:background="#ff1100"/>
+                        android:background="#ff1100" />
+
                     <TextView
                         android:id="@+id/count_three"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/indicator_three"
                         android:textColor="@color/mdtp_white"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -167,7 +178,7 @@
                         android:layout_toRightOf="@id/indicator_three"
                         android:text="@string/not_synced"
                         android:textColor="@color/mdtp_white"
-                        android:textSize="10sp"/>
+                        android:textSize="10sp" />
                 </RelativeLayout>
 
                 <ImageButton
@@ -301,16 +312,19 @@
 
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
+
         <android.support.percent.PercentRelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:paddingTop="8dp">
-            <View android:layout_width="match_parent"
+
+            <View
+                android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="148dp"
-                android:background="@color/cyan_200"/>
+                android:background="@color/cyan_200" />
         </android.support.percent.PercentRelativeLayout>
 
         <LinearLayout
@@ -324,7 +338,7 @@
             app:tabIndicatorColor="@color/cyan_200"
             app:tabIndicatorHeight="2dp"
             app:tabMaxWidth="0dp"
-            app:tabMode="fixed"/>
+            app:tabMode="fixed" />
     </android.support.design.widget.AppBarLayout>
 
     <RelativeLayout
@@ -407,8 +421,8 @@
                                     android:layout_marginRight="16dp"
                                     android:layout_marginTop="4dp"
                                     android:maxLines="5"
-                                    android:textSize="14sp"
-                                    android:text="@string/register_clients_desc" />
+                                    android:text="@string/register_clients_desc"
+                                    android:textSize="14sp" />
                             </LinearLayout>
 
 
@@ -432,7 +446,7 @@
 
                             <ImageView
                                 android:id="@+id/tb_referals_icon"
-                                  android:layout_width="80dp"
+                                android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_centerVertical="true"
                                 android:layout_marginLeft="32dp"
@@ -466,8 +480,8 @@
                                     android:layout_marginRight="8dp"
                                     android:layout_marginTop="4dp"
                                     android:maxLines="5"
-                                    android:textSize="14sp"
-                                    android:text="@string/cbhs_client_list_desc" />
+                                    android:text="@string/cbhs_client_list_desc"
+                                    android:textSize="14sp" />
                             </LinearLayout>
 
 
@@ -534,8 +548,8 @@
                                     android:layout_marginRight="8dp"
                                     android:layout_marginTop="4dp"
                                     android:maxLines="5"
-                                    android:textSize="14sp"
-                                    android:text="@string/client_list_desc" />
+                                    android:text="@string/client_list_desc"
+                                    android:textSize="14sp" />
                             </LinearLayout>
 
 
@@ -657,10 +671,10 @@
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginLeft="16dp"
                                     android:layout_marginRight="8dp"
-                                    android:textSize="14sp"
                                     android:layout_marginTop="4dp"
                                     android:maxLines="5"
-                                    android:text="@string/received_referrals_desc" />
+                                    android:text="@string/received_referrals_desc"
+                                    android:textSize="14sp" />
 
                             </LinearLayout>
 
@@ -725,12 +739,32 @@
                     </android.support.v7.widget.CardView>
 
 
-
                 </LinearLayout>
 
             </LinearLayout>
         </ScrollView>
 
+
+
+        <TextView
+            android:id="@+id/build_date"
+            android:layout_marginLeft="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="3344343434"
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="2dp" />
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="2dp"
+            android:layout_toLeftOf="@id/build_date"
+            android:layout_marginRight="2dp" />
 
     </RelativeLayout>
 
