@@ -94,7 +94,7 @@
     <string name="sent_referrals_label">Rufaa zilizotumwa</string>
     <string name="suceessful_label">Imefanikiwa</string>
     <string name="unsuccessful_label">Haijafanikiwa</string>
-    <string name="received_referrals_label">Rufaa za ufwatiliaji kutoka kituo cha Afya</string>
+    <string name="received_referrals_label">Rufaa za ufuatiliaji kutoka kituo cha Afya</string>
     <string name="pending_label">Inasubiri</string>
     <string name="label_village">Kijiji</string>
     <string name="incorrect_phone_number">Tafadhali jaza namba ya simu sahihi</string>
@@ -145,14 +145,14 @@
     <string name="select_a_client_to_view_the_follow_up_referral_details">Chagua mteja kutoka kwenye orodha ili kuona taarifa zaidi</string>
     <string name="clients_list">Orodha ya wateja</string>
     <string name="no_clients_found">hakuna taarifa yoyote</string>
-    <string name="follow_up_referral">Rufaa ya kufwatilia</string>
+    <string name="follow_up_referral">Rufaa ya kufuatilia</string>
     <string name="str_set_cbhs_number">Hifadhi namba yako ya CBHS</string>
     <string name="client_registration_reason">Sababu za usajili</string>
     <string name="missing_registration_reason">Tafadhali chagua sababu ya usajili wa mteja</string>
     <string name="is_a_cbhs_client">Aina ya Mteja</string>
     <string name="cbhs_client">Mteja wa CBHS</string>
     <string name="referral_client">Mteja wa rufaa</string>
-    <string name="cbhs_clients_label">Wajeta wa ufuatiliaji</string>
+    <string name="cbhs_clients_label">Wateja wa ufuatiliaji</string>
     <string name="referral_clients_label">Wateja wa rufaa</string>
     <string name="test_results_positive">Hasi</string>
     <string name="test_results_negative">Chanya</string>
