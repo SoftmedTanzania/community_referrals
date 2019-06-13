@@ -152,7 +152,7 @@
     <string name="is_a_cbhs_client">Aina ya Mteja</string>
     <string name="cbhs_client">Mteja wa CBHS</string>
     <string name="referral_client">Mteja wa rufaa</string>
-    <string name="cbhs_clients_label">Wajeta wa ufwatiliaji</string>
+    <string name="cbhs_clients_label">Wateja wa ufwatiliaji</string>
     <string name="referral_clients_label">Wateja wa rufaa</string>
     <string name="test_results_positive">Hasi</string>
     <string name="test_results_negative">Chanya</string>
