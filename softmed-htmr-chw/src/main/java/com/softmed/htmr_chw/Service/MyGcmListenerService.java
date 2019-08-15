@@ -120,6 +120,13 @@ public class MyGcmListenerService extends GcmListenerService {
                     client.setCommunity_based_hiv_service("");
                 }
 
+                try {
+                    client.setVeo(object.getString("veo"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    client.setVeo("");
+                }
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
