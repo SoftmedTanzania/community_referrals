@@ -1,4 +1,10 @@
-[![Dristhi](opensrp-app/res/drawable-mdpi/login_logo.png)](https://smartregister.atlassian.net/wiki/dashboard.action)
+Tanzanian Referral and Case Management Information System - Community client application
+========================================================================================
+
+This app enables community health workers to refer clients to health facilities for testing, checkups, follow-up recovery and treatment. The application includes registration utility, offline mode, synchronization utility, event notifications and client SMS reminders.
+
+This application depends on availability of a back-end server. This mobile application and the server back-end are builds of OpenSRP(mobile and server).
+
 
 To run this project, you need to do this:
 ========================================
@@ -20,5 +26,3 @@ Login (for demo server):
 =================================
 login-username - demotest,
 login-password - Demot123
-
-Check app.properties file in "drishti-app/asset/" folder to change the demo server url to your own instance of opensrp server. 
