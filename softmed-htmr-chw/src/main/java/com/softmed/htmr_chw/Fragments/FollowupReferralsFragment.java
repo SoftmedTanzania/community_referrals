@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.softmed.htmr_chw.Adapters.FollowupClintsRecyclerAdapter;
+import com.softmed.htmr_chw.Adapters.FollowupClientsRecyclerAdapter;
 import com.softmed.htmr_chw.Domain.ClientReferral;
 import com.softmed.htmr_chw.R;
 import com.softmed.htmr_chw.util.Utils;
@@ -72,13 +72,13 @@ public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorA
 
         commonRepository = context().commonrepository(ReferralRepository.TABLE_NAME);
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + ReferralRepository.TABLE_NAME +
-                " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID + " = " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID + " WHERE " + ReferralRepository.REFERRAL_TYPE + " = 4 AND "+ReferralRepository.ReferralStatus+" = '0' ");
+                " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID + " = " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID + " WHERE " + ReferralRepository.REFERRAL_TYPE + " = 4 AND "+ReferralRepository.ReferralStatus+" = '0' ORDER BY  "+ReferralRepository.AppointmentDate+" DESC");
         clientReferrals = Utils.convertToClientReferralObjectList(cursor);
 
         Log.d(TAG,"Client Referral ID = "+new Gson().toJson(clientReferrals));
 
         try {
-            FollowupClintsRecyclerAdapter followupClintsRecyclerAdapter = new FollowupClintsRecyclerAdapter(getActivity(), clientReferrals);
+            FollowupClientsRecyclerAdapter followupClientsRecyclerAdapter = new FollowupClientsRecyclerAdapter(getActivity(), clientReferrals);
 
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 
@@ -89,8 +89,8 @@ public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorA
                 // activity should be in two-pane mode.
                 mTwoPane = true;
 
-                followupClintsRecyclerAdapter.setIsInTwoPane(mTwoPane);
-                followupClintsRecyclerAdapter.notifyDataSetChanged();
+                followupClientsRecyclerAdapter.setIsInTwoPane(mTwoPane);
+                followupClientsRecyclerAdapter.notifyDataSetChanged();
 
                 recyclerView.setLayoutManager(mLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -100,7 +100,7 @@ public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorA
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
             }
 
-            recyclerView.setAdapter(followupClintsRecyclerAdapter);
+            recyclerView.setAdapter(followupClientsRecyclerAdapter);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -141,7 +141,7 @@ public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorA
         clientReferrals = Utils.convertToClientReferralObjectList(cursor);
         cursor.close();
 
-        FollowupClintsRecyclerAdapter followupClintsRecyclerAdapter = new FollowupClintsRecyclerAdapter(getActivity(), clientReferrals);
+        FollowupClientsRecyclerAdapter followupClientsRecyclerAdapter = new FollowupClientsRecyclerAdapter(getActivity(), clientReferrals);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 
@@ -153,8 +153,8 @@ public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorA
             // activity should be in two-pane mode.
             mTwoPane = true;
 
-            followupClintsRecyclerAdapter.setIsInTwoPane(mTwoPane);
-            followupClintsRecyclerAdapter.notifyDataSetChanged();
+            followupClientsRecyclerAdapter.setIsInTwoPane(mTwoPane);
+            followupClientsRecyclerAdapter.notifyDataSetChanged();
 
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -164,7 +164,7 @@ public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorA
             recyclerView.setItemAnimator(new DefaultItemAnimator());
         }
 
-        recyclerView.setAdapter(followupClintsRecyclerAdapter);
+        recyclerView.setAdapter(followupClientsRecyclerAdapter);
     }
 
 
