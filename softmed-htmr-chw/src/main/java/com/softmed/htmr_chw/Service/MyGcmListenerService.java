@@ -148,10 +148,7 @@ public class MyGcmListenerService extends GcmListenerService {
                 referral.setService_provider_uiid(referralObject.getString("serviceProviderUIID"));
                 referral.setReferral_date(Long.valueOf(referralObject.getString("referralDate")));
 
-                if(referral.getReferral_reason().equals("Lost follow up"))
-                    referral.setReferral_type(5);
-                else
-                    referral.setReferral_type(6);
+                referral.setReferral_type(4);
 
                 referral.setClient_id(clientId);
 
