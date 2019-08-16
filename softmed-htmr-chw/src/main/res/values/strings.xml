@@ -11,9 +11,9 @@
     <string name="title_item_detail">Item Detail</string>
     <string name="gcm_send_message">Token retrieved and sent to server! You can now use gcmsender to
         send downstream messages to this app.</string>
-    <string name="registering_message">Generating InstanceID token...</string>
+    <string name="registering_message">Generating InstanceID token…</string>
     <string name="unregistered_message">Instace token unregistered</string>
-    <string name="registered_message">Instace token registered</string>
+    <string name="registered_message">Instance token registered</string>
     <string name="token_error_message">An error occurred while either fetching the InstanceID token,
         sending the fetched token to the server or subscribing to the PubSub topic. Please try
         running the sample again.</string>
@@ -34,7 +34,7 @@
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="button_login">Login</string>
-    <string name="process_logging_in">Logging in...</string>
+    <string name="process_logging_in">Logging in…</string>
     <string name="title_login_description">Enter username and password</string>
     <string name="button_details">Details</string>
     <string name="button_follow_up">Follow up</string>
@@ -100,7 +100,7 @@
     <string name="pending_label">Pending</string>
     <string name="other_notes_title">Other Notes</string>
 
-    <string name="button_cancel">CANCEL</string>
+    <string name="button_cancel">Cancel</string>
     <string name="initial_information">Initial Information</string>
     <string name="followup_qn_met_with_client">Have you met with the client?</string>
     <string name="followup_qn_reasons_for_not_visiting_clinic">Reasons for not attending the appointment</string>
@@ -128,10 +128,11 @@ Aenean quis ex dictum, porttitor nunc id, viverra urna. Suspendisse posuere ex a
     <string name="total_label">Total</string>
     <string name="completed_referrals_label">Completed Referrals</string>
     <string name="referred_clients_desc">Use this section to view all clients referral issued with their status check.</string>
+    <string name="received_referrals_desc">Use this section to view all clients referred back for follow up &amp; clients that need community health services.</string>
     <string name="use_this_section_to_visualize_summary_reports">Use this section to visualize summary performance report.</string>
     <string name="register_clients_desc">Use this section to register new clients.</string>
     <string name="client_list_desc">Use this section view all registered clients for referral purpose only.</string>
-    <string name="cbhs_client_list_desc">Use this section view all reigistered clients with CBHS number for continous follow up.</string>
+    <string name="cbhs_client_list_desc">Use this section view all registered clients with CBHS number for continuous follow up.</string>
     <string name="appointment_date_label">Appointment Date</string>
     <string name="followup_referrals_chart_key_label">Followup referrals performed</string>
     <string name="visit_date_label">Visit Date</string>

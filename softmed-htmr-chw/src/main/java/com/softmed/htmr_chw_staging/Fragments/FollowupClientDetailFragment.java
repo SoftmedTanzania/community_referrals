@@ -186,20 +186,18 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
 
     private void setDetails(final ClientReferral clientReferral) {
 
-        String reg_date = dateFormat.format(clientReferral.getDate_of_birth());
         Log.d(TAG, "Date of Birth : " + clientReferral.getDate_of_birth());
         String ageS = "";
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-            Date d = dateFormat.parse(reg_date);
+
             Calendar cal = Calendar.getInstance();
-            Calendar today = Calendar.getInstance();
-            cal.setTime(d);
 
-            int age = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
-            Integer ageInt = new Integer(age);
-            ageS = ageInt.toString();
+            long diff = cal.getTimeInMillis() - clientReferral.getDate_of_birth();
 
+            Calendar c = Calendar.getInstance();
+            c.setTimeInMillis(diff);
+            int ageValue = c.get(Calendar.YEAR)-1970;
+            ageS = String.valueOf(ageValue);
 
         } catch (Exception e) {
             e.printStackTrace();
