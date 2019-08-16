@@ -164,7 +164,6 @@
                                 android:layout_marginLeft="8dp"
                                 android:textSize="14sp"
                                 android:id="@+id/client_age_value"
-                                android:text="18 years"
                                 android:layout_marginTop="8dp"
                                 android:layout_toRightOf="@id/client_age_title"
                                 android:layout_alignBottom="@+id/client_age_title" />
@@ -191,8 +190,7 @@
                                 android:textSize="14sp"
                                 android:layout_toRightOf="@id/veo_name_title"
                                 android:layout_marginLeft="8dp"
-                                android:textColor="@color/card_grid_text"
-                                android:text="Mwenelu Mpechu"/>
+                                android:textColor="@color/card_grid_text"/>
 
                         </RelativeLayout>
                         <View
