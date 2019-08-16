@@ -72,7 +72,7 @@ public class FollowupReferralsFragment extends SecuredNativeSmartRegisterCursorA
 
         commonRepository = context().commonrepository(ReferralRepository.TABLE_NAME);
         cursor = commonRepository.RawCustomQueryForAdapter("select * FROM " + ReferralRepository.TABLE_NAME +
-                " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID + " = " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID + " WHERE " + ReferralRepository.REFERRAL_TYPE + " = 4 AND "+ReferralRepository.ReferralStatus+" = '0' ");
+                " INNER JOIN " + ClientRepository.TABLE_NAME + " ON " + ReferralRepository.TABLE_NAME + "." + ReferralRepository.CLIENT_ID + " = " + ClientRepository.TABLE_NAME + "." + ClientRepository.CLIENT_ID + " WHERE " + ReferralRepository.REFERRAL_TYPE + " = 4 AND "+ReferralRepository.ReferralStatus+" = '0' ORDER BY  "+ReferralRepository.AppointmentDate+" DESC");
         clientReferrals = Utils.convertToClientReferralObjectList(cursor);
 
         Log.d(TAG,"Client Referral ID = "+new Gson().toJson(clientReferrals));
