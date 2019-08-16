@@ -47,6 +47,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -345,6 +346,8 @@ public class ClientRegistrationFormActivity extends SecuredNativeSmartRegisterAc
         // dialog
         DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
                 onDateSetListener);
+
+        datePickerDialog.setMaxDate(Calendar.getInstance());
 
         datePickerDialog.setOkColor(ContextCompat.getColor(getApplicationContext(), android.R.color.holo_blue_light));
         datePickerDialog.setCancelColor(ContextCompat.getColor(getApplicationContext(), android.R.color.holo_red_light));
