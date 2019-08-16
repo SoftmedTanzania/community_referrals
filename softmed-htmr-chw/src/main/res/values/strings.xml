@@ -94,6 +94,7 @@
     <string name="no_internet_connectivity">No internet connection. Please ensure data connectivity</string>
     <string name="sent_referrals_label">Sent Referrals</string>
     <string name="reports_label">Reports</string>
+    <string name="missed_appointment_label">Missed Appointments Referrals</string>
     <string name="received_referrals_label">Follow up Referrals</string>
     <string name="suceessful_label">Successful</string>
     <string name="unsuccessful_label">Unsuccessful</string>
@@ -128,7 +129,8 @@ Aenean quis ex dictum, porttitor nunc id, viverra urna. Suspendisse posuere ex a
     <string name="total_label">Total</string>
     <string name="completed_referrals_label">Completed Referrals</string>
     <string name="referred_clients_desc">Use this section to view all clients referral issued with their status check.</string>
-    <string name="received_referrals_desc">Use this section to view all (LTF) clients refrred back for follow up &amp; clients that need community health services.</string>
+    <string name="received_referrals_desc">Use this section to view all (LTF) clients referred back for follow up &amp; clients that need community health services.</string>
+    <string name="received_missed_appointment_referrals_desc">Use this section to view all clients with missed appointments referred back for follow up &amp; clients that need community health services.</string>
     <string name="use_this_section_to_visualize_summary_reports">Use this section to visualize summary performance report.</string>
     <string name="register_clients_desc">Use this section to register new clients.</string>
     <string name="client_list_desc">Use this section view all registered clients for referral purpose only.</string>
