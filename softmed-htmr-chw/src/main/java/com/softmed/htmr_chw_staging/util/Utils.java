@@ -80,6 +80,7 @@ public class Utils {
             clientReferral.setFacility_id(cursor.getString(5));
             clientReferral.setReferral_id(cursor.getString(0));
             clientReferral.setCommunity_based_hiv_service(cursor.getString(cursor.getColumnIndex(ClientRepository.CBHS)));
+            clientReferral.setVillage_leader(cursor.getString(cursor.getColumnIndex(ClientRepository.VEO)));
             clientReferral.setCtc_number(cursor.getString(cursor.getColumnIndex(ClientRepository.CTC_NUMBER)));
             clientReferral.setHelper_name(cursor.getString(cursor.getColumnIndex(ClientRepository.CARE_TAKER_NAME)));
             clientReferral.setHelper_phone_number(cursor.getString(cursor.getColumnIndex(ClientRepository.CARE_TAKER_PHONE_NUMBER)));

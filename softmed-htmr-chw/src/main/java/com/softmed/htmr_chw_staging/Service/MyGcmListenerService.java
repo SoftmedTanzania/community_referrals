@@ -120,6 +120,13 @@ public class MyGcmListenerService extends GcmListenerService {
                     client.setCommunity_based_hiv_service("");
                 }
 
+                try {
+                    client.setVeo(object.getString("veo"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    client.setVeo("");
+                }
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -140,7 +147,9 @@ public class MyGcmListenerService extends GcmListenerService {
                 referral.setReferral_uuid(referralObject.getString("referralUUID"));
                 referral.setService_provider_uiid(referralObject.getString("serviceProviderUIID"));
                 referral.setReferral_date(Long.valueOf(referralObject.getString("referralDate")));
+
                 referral.setReferral_type(4);
+
                 referral.setClient_id(clientId);
 
                 referralList.add(referral);

@@ -13,39 +13,47 @@
         card_view:cardCornerRadius="0dp">
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:id="@+id/referral_layout"
             android:layout_height="wrap_content"
-            android:background="#fff">
-
-            <org.ei.opensrp.view.customControls.CustomFontTextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
+            android:background="#FF0000">
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:textSize="18sp" />
+                android:layout_marginRight="8dp"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:background="#FFF">
+                <org.ei.opensrp.view.customControls.CustomFontTextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:textSize="18sp" />
 
-            <org.ei.opensrp.view.customControls.CustomFontTextView
-                android:id="@+id/phone_number"
-                android:layout_width="96dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_alignLeft="@id/name"
-                android:layout_below="@id/name"
-                android:layout_marginTop="4dp"
-                android:gravity="center_vertical"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
+                <org.ei.opensrp.view.customControls.CustomFontTextView
+                    android:id="@+id/phone_number"
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_alignLeft="@id/name"
+                    android:layout_below="@id/name"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
 
-            <org.ei.opensrp.view.customControls.CustomFontTextView
-                android:id="@+id/community_based_hiv_service"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/name"
-                android:layout_toRightOf="@+id/phone_number"
-                android:layout_marginTop="4dp"
-                android:textSize="14sp" />
+                <org.ei.opensrp.view.customControls.CustomFontTextView
+                    android:id="@+id/community_based_hiv_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/name"
+                    android:layout_toRightOf="@+id/phone_number"
+                    android:layout_marginTop="4dp"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+
 
             <LinearLayout
                 android:visibility="gone"

@@ -57,6 +57,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 
@@ -210,6 +211,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         }
         age.setText(ageS + " years");
         name.setText(clientReferral.getFirst_name() + " " + clientReferral.getMiddle_name() + ", " + clientReferral.getSurname());
+        veo.setText(clientReferral.getVillage_leader());
         phoneNumber.setText(clientReferral.getPhone_number());
 
 
@@ -234,6 +236,20 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         
         
         referedReason.setText(clientReferral.getReferral_reason());
+
+        try {
+            long diff = Calendar.getInstance().getTimeInMillis() - clientReferral.getAppointment_date();
+            long daysSinceAppointment = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+            if(daysSinceAppointment>28 && clientReferral.getReferral_reason().equals("Missed Appointment")){
+                clientReferral.setReferral_reason("Lost follow up");
+                referedReason.setText("Lost follow up");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
         referedDate.setText(dateFormat.format(clientReferral.getReferral_date()));
 
 

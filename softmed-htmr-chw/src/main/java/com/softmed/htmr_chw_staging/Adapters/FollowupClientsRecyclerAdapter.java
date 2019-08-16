@@ -19,8 +19,10 @@ import com.softmed.htmr_chw_staging.R;
 import com.softmed.htmr_chw_staging.Domain.ClientReferral;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -81,6 +83,29 @@ public class FollowupClientsRecyclerAdapter extends
                 CBHS.setText("CBHS : " + client.getCommunity_based_hiv_service());
         }
 
+
+        try {
+            long diff = Calendar.getInstance().getTimeInMillis() - client.getAppointment_date();
+
+            long daysSinceAppointment = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+            if (daysSinceAppointment > 28) {
+                viewHolder.statusColor.setBackgroundColor(mContext.getResources().getColor(R.color.red_900));
+            } else if (daysSinceAppointment > 22) {
+                viewHolder.statusColor.setBackgroundColor(mContext.getResources().getColor(R.color.red_700));
+            } else if (daysSinceAppointment > 19) {
+                viewHolder.statusColor.setBackgroundColor(mContext.getResources().getColor(R.color.red_600));
+            } else if (daysSinceAppointment > 14) {
+                viewHolder.statusColor.setBackgroundColor(mContext.getResources().getColor(R.color.red_400));
+            } else if (daysSinceAppointment > 9) {
+                viewHolder.statusColor.setBackgroundColor(mContext.getResources().getColor(R.color.red_200));
+            } else if (daysSinceAppointment > 6) {
+                viewHolder.statusColor.setBackgroundColor(mContext.getResources().getColor(R.color.red_050));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +138,7 @@ public class FollowupClientsRecyclerAdapter extends
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView nameTextView, phoneNumberTextView, CBHSTextView;
-        View itemView;
+        View itemView,statusColor;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -121,6 +146,7 @@ public class FollowupClientsRecyclerAdapter extends
             nameTextView = (TextView) itemView.findViewById(R.id.name);
             phoneNumberTextView = (TextView) itemView.findViewById(R.id.phone_number);
             CBHSTextView = (TextView) itemView.findViewById(R.id.community_based_hiv_service);
+            statusColor = itemView.findViewById(R.id.referral_layout);
 
             nameTextView.setTypeface(sansBold);
             phoneNumberTextView.setTypeface(sansBold);
