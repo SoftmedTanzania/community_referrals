@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.softmed.htmr_chw.Activities.ChwSmartRegisterActivity;
 import com.softmed.htmr_chw.Activities.FollowupReferralDetailsActivity;
 import com.softmed.htmr_chw.Fragments.FollowupClientDetailFragment;
 import com.softmed.htmr_chw.R;
@@ -28,16 +27,16 @@ import java.util.Locale;
  * Created by martha on 8/22/17.
  */
 
-public class FollowupClintsRecyclerAdapter extends
-        RecyclerView.Adapter<FollowupClintsRecyclerAdapter.ViewHolder> {
+public class FollowupClientsRecyclerAdapter extends
+        RecyclerView.Adapter<FollowupClientsRecyclerAdapter.ViewHolder> {
 
-    private static String TAG = FollowupClintsRecyclerAdapter.class.getSimpleName();
+    private static String TAG = FollowupClientsRecyclerAdapter.class.getSimpleName();
     private List<ClientReferral> clients;
     private Context mContext;
     private boolean mTwoPane = true;
     private Typeface robotoRegular,sansBold;
 
-    public FollowupClintsRecyclerAdapter(Context context, List<ClientReferral> clients) {
+    public FollowupClientsRecyclerAdapter(Context context, List<ClientReferral> clients) {
         this.clients = clients;
         this.mContext = context;
 
