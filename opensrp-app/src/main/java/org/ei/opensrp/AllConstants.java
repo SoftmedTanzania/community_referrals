@@ -2,7 +2,7 @@ package org.ei.opensrp;
 
 public class AllConstants {
     public static final String DRISHTI_BASE_URL = "DRISHTI_BASE_URL";
-    public static final String DRISHTI_BASE_PATH = "http://172.105.84.28:8080/opensrp";
+    public static final String DRISHTI_BASE_PATH = "http://192.81.128.241:8080/opensrp";
     public static final String GSM_SERVER_URL = "/save-push-notification-token";
     public static final String PROFILE_IMAGES_DOWNLOAD_PATH = "/multimedia/profileimage";
     public static final String PROFILE_IMAGES_UPLOAD_PATH = "/multimedia-file";
