@@ -212,6 +212,10 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         veo.setText(clientReferral.getVillage_leader());
         phoneNumber.setText(clientReferral.getPhone_number());
 
+        if(!clientReferral.getService_provider_uiid().contains("-")) {
+            refererName.setText(clientReferral.getService_provider_uiid());
+        }
+
 
         phoneNumber.setOnClickListener(new View.OnClickListener() {
             @Override
