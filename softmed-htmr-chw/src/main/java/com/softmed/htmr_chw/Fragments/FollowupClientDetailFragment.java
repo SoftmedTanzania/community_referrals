@@ -29,7 +29,6 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.rengwuxian.materialedittext.MaterialEditText;
-import com.softmed.htmr_chw.Activities.ClientDetailsActivity;
 import com.softmed.htmr_chw.Domain.ClientReferral;
 import com.softmed.htmr_chw.R;
 
@@ -54,7 +53,6 @@ import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -69,6 +67,7 @@ import static org.ei.opensrp.AllConstants.ENGLISH_LOCALE;
 public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     private static final String CLIENT_FOLLOWUP = "item_id";
     private static final String TAG = FollowupClientDetailFragment.class.getSimpleName();
+    private final int REQUEST_PERMISSION_PHONE_STATE = 1;
     private ClientReferral clientReferral;
     private CommonRepository commonRepository;
     private Cursor cursor;
@@ -82,8 +81,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
     private Button save;
     private String preferredLocale;
     private MaterialEditText cbhsNumber;
-    private boolean saveCBHS=false;
-    private final int REQUEST_PERMISSION_PHONE_STATE=1;
+    private boolean saveCBHS = false;
 
     public FollowupClientDetailFragment() {
     }
@@ -197,7 +195,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
 
             Calendar c = Calendar.getInstance();
             c.setTimeInMillis(diff);
-            int ageValue = c.get(Calendar.YEAR)-1970;
+            int ageValue = c.get(Calendar.YEAR) - 1970;
             ageS = String.valueOf(ageValue);
 
         } catch (Exception e) {
@@ -212,6 +210,9 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         name.setText(clientReferral.getFirst_name() + " " + clientReferral.getMiddle_name() + ", " + clientReferral.getSurname());
         veo.setText(clientReferral.getVillage_leader());
         phoneNumber.setText(clientReferral.getPhone_number());
+
+        if (!clientReferral.getService_provider_uiid().contains("-")) { 
+            refererName.setText(clientReferral.getService_provider_uiid()); }
 
 
         phoneNumber.setOnClickListener(new View.OnClickListener() {
@@ -230,21 +231,21 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
             }
         });
 
-        if(!clientReferral.getPhone_number().equals(""))
+        if (!clientReferral.getPhone_number().equals(""))
             phoneNumber.setVisibility(View.VISIBLE);
-        
-        
+
+
         referedReason.setText(clientReferral.getReferral_reason());
 
         try {
             long diff = Calendar.getInstance().getTimeInMillis() - clientReferral.getAppointment_date();
             long daysSinceAppointment = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 
-            if(daysSinceAppointment>28 && clientReferral.getReferral_reason().equals("Missed Appointment")){
+            if (daysSinceAppointment > 28 && clientReferral.getReferral_reason().equals("Missed Appointment")) {
                 clientReferral.setReferral_reason("Lost follow up");
                 referedReason.setText("Lost follow up");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -322,9 +323,9 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
                     Toast.makeText(getActivity(), "Referral ID is null", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    if(saveCBHS && !cbhsNumber.getText().toString().equals("")){
+                    if (saveCBHS && !cbhsNumber.getText().toString().equals("")) {
                         Client client = context().clientRepository().find(clientReferral.getClient_id());
-                        client.setCommunity_based_hiv_service(context().allSharedPreferences().fetchCBHS() + "/" +cbhsNumber.getText().toString());
+                        client.setCommunity_based_hiv_service(context().allSharedPreferences().fetchCBHS() + "/" + cbhsNumber.getText().toString());
                         context().clientRepository().update(client);
                     }
 
@@ -385,7 +386,7 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
 
                     Toast.makeText(getActivity(), getString(R.string.followup_thankyou_note_part_one) + clientReferral.getFirst_name() + " " + clientReferral.getSurname(), Toast.LENGTH_SHORT).show();
 
-                    ((FollowupReferralsFragment)getActivity().getSupportFragmentManager().findFragmentByTag("followup_fragment")).populateData();
+                    ((FollowupReferralsFragment) getActivity().getSupportFragmentManager().findFragmentByTag("followup_fragment")).populateData();
 
                     ((FragmentActivity) getActivity()).getSupportFragmentManager().beginTransaction().remove(FollowupClientDetailFragment.this)
                             .commit();
@@ -417,11 +418,11 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
         TextView service_advice_title = rootView.findViewById(R.id.service_advice_title);
         LinearLayout cbhs = rootView.findViewById(R.id.cbhs);
 
-        Log.d(TAG,"CBHS Number = "+clientReferral.getCommunity_based_hiv_service());
+        Log.d(TAG, "CBHS Number = " + clientReferral.getCommunity_based_hiv_service());
 
         Client client = context().clientRepository().find(clientReferral.getClient_id());
 
-        if(client.getCommunity_based_hiv_service()!=null&&!client.getCommunity_based_hiv_service().equals(""))
+        if (client.getCommunity_based_hiv_service() != null && !client.getCommunity_based_hiv_service().equals(""))
             cbhs.setVisibility(View.GONE);
 
         TextView cbhsTitle = rootView.findViewById(R.id.cbhs_title);
@@ -436,16 +437,13 @@ public class FollowupClientDetailFragment extends SecuredNativeSmartRegisterCurs
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 saveCBHS = b;
-                if(b){
+                if (b) {
                     cbhsLayout.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     cbhsLayout.setVisibility(View.GONE);
                 }
             }
         });
-
-
-
 
 
         save = (Button) rootView.findViewById(R.id.save_button);
