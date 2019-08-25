@@ -1,39 +1,37 @@
 {
   "project_info": {
-    "project_number": "830479277284",
-    "firebase_url": "https://htm-referrals.firebaseio.com",
-    "project_id": "htm-referrals",
-    "storage_bucket": "htm-referrals.appspot.com"
+    "project_number": "918491548286",
+    "firebase_url": "https://htmr-staging.firebaseio.com",
+    "project_id": "htmr-staging",
+    "storage_bucket": "htmr-staging.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:830479277284:android:b82628c29e5b6012",
+        "mobilesdk_app_id": "1:918491548286:android:ff1af4bd62d39d74",
         "android_client_info": {
           "package_name": "com.softmed.htmr_chw_staging"
         }
       },
       "oauth_client": [
         {
-          "client_id": "830479277284-cv3n5lfstti6n7ogpn88847t2i35f05o.apps.googleusercontent.com",
+          "client_id": "918491548286-k1akk7ar29hhera0jt3vu7vurjqj46f0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB2HBe_Sdyie5sCoaY0SCM1RPa0ssYtYgs"
+          "current_key": "AIzaSyAyh9vQx1BgtjhtScbOGkvNNc2FUmedQGY"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "918491548286-k1akk7ar29hhera0jt3vu7vurjqj46f0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
