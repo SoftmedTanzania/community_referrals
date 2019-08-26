@@ -97,7 +97,9 @@ public class Utils {
             clientReferral.setServices_given_to_patient(cursor.getString(cursor.getColumnIndex(ReferralRepository.SERVICES_GIVEN_TO_PATIENTS)));
             clientReferral.setVillage(cursor.getString(cursor.getColumnIndex(ClientRepository.VILLAGE)));
             clientReferral.setWard(cursor.getString(cursor.getColumnIndex(ClientRepository.WARD)));
-             clientReferral.setService_provider_uiid(cursor.getString(cursor.getColumnIndex(ReferralRepository.SERVICE_PROVIDER_UUID)));
+            clientReferral.setService_provider_uiid(cursor.getString(cursor.getColumnIndex(ReferralRepository.SERVICE_PROVIDER_UUID)));
+
+
 
             Log.d(TAG,"CLient Referral ID = "+clientReferral.getReferral_id());
             return clientReferral;
