@@ -80,6 +80,7 @@ public class Utils {
             clientReferral.setFacility_id(cursor.getString(5));
             clientReferral.setReferral_id(cursor.getString(0));
             clientReferral.setCommunity_based_hiv_service(cursor.getString(cursor.getColumnIndex(ClientRepository.CBHS)));
+            clientReferral.setVillage_leader(cursor.getString(cursor.getColumnIndex(ClientRepository.VEO)));
             clientReferral.setCtc_number(cursor.getString(cursor.getColumnIndex(ClientRepository.CTC_NUMBER)));
             clientReferral.setHelper_name(cursor.getString(cursor.getColumnIndex(ClientRepository.CARE_TAKER_NAME)));
             clientReferral.setHelper_phone_number(cursor.getString(cursor.getColumnIndex(ClientRepository.CARE_TAKER_PHONE_NUMBER)));
@@ -96,6 +97,8 @@ public class Utils {
             clientReferral.setServices_given_to_patient(cursor.getString(cursor.getColumnIndex(ReferralRepository.SERVICES_GIVEN_TO_PATIENTS)));
             clientReferral.setVillage(cursor.getString(cursor.getColumnIndex(ClientRepository.VILLAGE)));
             clientReferral.setWard(cursor.getString(cursor.getColumnIndex(ClientRepository.WARD)));
+
+            clientReferral.setService_provider_uiid(cursor.getString(cursor.getColumnIndex(ReferralRepository.SERVICE_PROVIDER_UUID)));
 
             Log.d(TAG,"CLient Referral ID = "+clientReferral.getReferral_id());
             return clientReferral;

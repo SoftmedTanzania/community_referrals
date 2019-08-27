@@ -182,6 +182,7 @@ public class ReferralRepository extends DrishtiRepository {
         values.put(REFERRAL_FEEDBACK_ID, referral.getReferral_feedback_id());
         values.put(REFERRAL_UUID, referral.getReferral_uuid());
         values.put(TEST_RESULTS, referral.getTest_results());
+        values.put(SERVICE_PROVIDER_UUID, referral.getService_provider_uiid());
         values.put(DETAILS_COLUMN, new Gson().toJson(referral));
         return values;
     }
