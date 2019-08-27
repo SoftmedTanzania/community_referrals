@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "149645665910",
-    "firebase_url": "https://trcmis-community-application.firebaseio.com",
-    "project_id": "trcmis-community-application",
-    "storage_bucket": "trcmis-community-application.appspot.com"
+    "project_number": "973393922396",
+    "firebase_url": "https://trcmis-project.firebaseio.com",
+    "project_id": "trcmis-project",
+    "storage_bucket": "trcmis-project.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:149645665910:android:8008678d95ba83d2",
+        "mobilesdk_app_id": "1:973393922396:android:8008678d95ba83d2",
         "android_client_info": {
           "package_name": "com.softmed.htmr_chw"
         }
       },
       "oauth_client": [
         {
-          "client_id": "149645665910-1kl1msfsnqb7loa24gnnd9s3vb3rskvf.apps.googleusercontent.com",
+          "client_id": "973393922396-aoltsvsnvdo09s7dv4rkoq41f6b6f6co.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC7zwKu9gUsi75aZMv_VGMvh9C2M6bJLaA"
+          "current_key": "AIzaSyCgR66NFMJljG84IuTHv-eeoKLZ2gQZkCU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "149645665910-1kl1msfsnqb7loa24gnnd9s3vb3rskvf.apps.googleusercontent.com",
+              "client_id": "973393922396-aoltsvsnvdo09s7dv4rkoq41f6b6f6co.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
