@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.softmed.ccm_chw.Adapters.FollowupClintsRecyclerAdapter;
+import com.softmed.ccm_chw.Adapters.FollowupClientsRecyclerAdapter;
 import com.softmed.ccm_chw.Domain.ClientReferral;
 import com.softmed.ccm_chw.R;
 import com.softmed.ccm_chw.util.Utils;
