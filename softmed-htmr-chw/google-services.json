@@ -1,39 +1,37 @@
 {
   "project_info": {
-    "project_number": "830479277284",
-    "firebase_url": "https://htm-referrals.firebaseio.com",
-    "project_id": "htm-referrals",
-    "storage_bucket": "htm-referrals.appspot.com"
+    "project_number": "149645665910",
+    "firebase_url": "https://trcmis-community-application.firebaseio.com",
+    "project_id": "trcmis-community-application",
+    "storage_bucket": "trcmis-community-application.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:830479277284:android:b82628c29e5b6012",
+        "mobilesdk_app_id": "1:149645665910:android:8008678d95ba83d2",
         "android_client_info": {
           "package_name": "com.softmed.htmr_chw"
         }
       },
       "oauth_client": [
         {
-          "client_id": "830479277284-cv3n5lfstti6n7ogpn88847t2i35f05o.apps.googleusercontent.com",
+          "client_id": "149645665910-1kl1msfsnqb7loa24gnnd9s3vb3rskvf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB2HBe_Sdyie5sCoaY0SCM1RPa0ssYtYgs"
+          "current_key": "AIzaSyC7zwKu9gUsi75aZMv_VGMvh9C2M6bJLaA"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "149645665910-1kl1msfsnqb7loa24gnnd9s3vb3rskvf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
